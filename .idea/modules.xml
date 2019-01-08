@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/meldekort-cra-ts.iml" filepath="$PROJECT_DIR$/.idea/meldekort-cra-ts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meldekort.iml" filepath="$PROJECT_DIR$/meldekort.iml" />
     </modules>
   </component>
 </project>

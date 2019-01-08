@@ -1,0 +1,27 @@
+#'jeg vil ikke ha hjelp fra pus'
+#default memory request og appdynamics feiler nå fra pus
+image: docker.adeo.no:5000/arbeid/meldekort
+team: "arbeid"
+name: meldekort
+replicas:
+  min: 2
+  max: 4
+  cpuThresholdPercentage: 50
+port: 8080
+healthcheck:
+  liveness:
+    path: health/isAlive
+  readiness:
+    path: health/isAlive
+prometheus:
+  enabled: true
+  path: internal/metrics
+ingress:
+  enabled: true
+resources:
+  limits:
+    cpu: 3
+fasitResources:
+  used:
+    - alias: appres.cms
+      resourceType: baseUrl
