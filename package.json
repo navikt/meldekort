@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@types/react-collapse": "^4.0.2",
+    "@types/redux": "^3.6.0",
     "ajv": "^6.6.2",
     "classnames": "^2.2.6",
+    "connected-react-router": "^6.2.1",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron": "^1.0.6",
     "nav-frontend-chevron-style": "^0.3.4",
