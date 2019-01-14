@@ -4,12 +4,12 @@ import { Sidetittel } from 'nav-frontend-typografi';
 
 import './banner.less';
 
-export interface IBannerProps {
+export interface BannerProps {
     tittel: string;
     mindre?: boolean;
 }
 
-const Banner: React.StatelessComponent<IBannerProps> = (props) => {
+const Banner: React.StatelessComponent<BannerProps> = (props) => {
     const bannerClass = 'banner-content ' + (props.mindre ? ' mindre-banner' : '');
     return (
         <div className="banner-container">
