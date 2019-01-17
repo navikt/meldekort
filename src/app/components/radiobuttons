@@ -1,0 +1,43 @@
+import * as React from 'react';
+
+const Radiobuttons: React.StatelessComponent<Props> = (props) => {
+    return (
+        <div>
+            <form>
+                <div className="form-check">
+                    <label>
+                        <input
+                            type="radio"
+                            name="react-tips"
+                            value="option1"
+                            checked={true}
+                            className="form-check-input"
+                        />
+                        Option 1
+                    </label>
+                </div>
+
+                <div className="form-check">
+                    <label>
+                        <input
+                            type="radio"
+                            name="react-tips"
+                            value="option2"
+                            className="form-check-input"
+                        />
+                        Option 2
+                    </label>
+                </div>
+
+                <div className="form-group">
+                    <button className="btn btn-primary mt-2" type="submit">
+                        Save
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    );
+};
+
+export default Radiobuttons;

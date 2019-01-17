@@ -9,6 +9,7 @@
     "ajv": "^6.6.2",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
+    "install": "^0.12.2",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron": "^1.0.6",
     "nav-frontend-chevron-style": "^0.3.4",
@@ -18,10 +19,13 @@
     "nav-frontend-js-utils": "^1.0.6",
     "nav-frontend-paneler": "^1.0.10",
     "nav-frontend-paneler-style": "^0.3.11",
+    "nav-frontend-skjema": "^1.0.52",
+    "nav-frontend-skjema-style": "^1.0.33",
     "nav-frontend-tabs": "0.0.24",
     "nav-frontend-tabs-style": "0.0.13",
     "nav-frontend-typografi": "^2.0.6",
     "nav-frontend-typografi-style": "^1.0.10",
+    "npm": "^6.5.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-collapse": "^4.0.3",
@@ -43,6 +47,7 @@
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
+    "typesafe-actions": "^3.0.0",
     "typescript": "^3.2.2"
   }
 }
