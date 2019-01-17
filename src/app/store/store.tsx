@@ -1,11 +1,10 @@
-// Redux Store
-
+import createBrowserHistory from 'history/createBrowserHistory';
 import { combineReducers, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { demoReducer } from '../reducers/demoReducer';
 import { DemoState } from '../types/demo';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { MeldekortState } from '../reducers/meldekortReducer';
 import { meldekortReducer } from '../reducers/meldekortReducer';
+import { MeldekortState } from '../types/meldekort';
 
 export const history = createBrowserHistory({
     basename: '/'
@@ -22,8 +21,11 @@ const rootReducer = combineReducers<RootState>({
         demo: demoReducer,
         meldekort: meldekortReducer
 });
-
-const store = createStore(rootReducer);
+/* eslint-disable no-underscore-dangle */
+// applyMiddleware skl være inni composeWithDevTools
+const store = createStore(
+    rootReducer, composeWithDevTools());
+/* eslint-enable */
 
 export default store;
 // eksporterer store som default,

@@ -1,8 +1,8 @@
 import { action } from 'typesafe-actions';
-import { Constants } from '../types/meldekort';
+import { Constants, Meldekort } from '../types/meldekort';
 
-export function leggTilMeldekort(item: string) {
+export function leggTilMeldekort(mk: Meldekort) {
     return action(Constants.LEGG_TIL_MELDEKORT, {
-        item
+        mk
     });
 }

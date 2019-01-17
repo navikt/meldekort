@@ -1,16 +1,13 @@
 import * as React from 'react';
-import * as asyncactions from './actions/async-actions';
 
 import { connect } from 'react-redux';
 import { DemoActions } from './types/demo';
-import { MeldekortActions } from './types/meldekort';
 import { Dispatch } from 'redux';
 import { RootState } from './store/store';
-
+import { addItemToList } from './actions/demo';
 import Banner from './components/banner/banner';
 import './App.less';
 import { Meldekort } from './types/meldekort';
-
 // import { ConnectedRouter } from 'connected-react-router';
 // import { Route, Switch } from 'react-router-dom';
 
@@ -21,12 +18,12 @@ type ReduxType =
 interface State {
     inputText: string;
     meldekort: Meldekort;
-    id:string;
-    arbeidet:boolean;
+    id: string;
+    arbeidet: boolean;
 }
 
 class App extends React.Component<ReduxType, State> {
-    public state: State = { inputText: '', meldekort:{id:'0', arbeidet:true}, id:'1', arbeidet:false};
+    public state: State = { inputText: '', meldekort: {id: '0', arbeidet: true}, id: '1', arbeidet: false};
 
     public onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({inputText: e.target.value});
@@ -35,11 +32,6 @@ class App extends React.Component<ReduxType, State> {
     public onAddClick = () => {
         this.props.addItem(this.state.inputText);
         this.setState({inputText: ''});
-    }
-
-    public onAddClickMK = () => {
-        this.props.leggTilMeldekort(this.state.meldekort);
-        this.setState({this.props.meldekort.id: ''});
     }
 
     public handleOptionChange = (changeEvent: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,8 +87,7 @@ class App extends React.Component<ReduxType, State> {
                   </label>
               </div>
           </form>
-          <input value={this.state.id} onChange={this.onInputChangeID}/>
-          <button onClick={this.onAddClickMK}>Legg til Meldekort</button>
+          <button onClick={this.onAddClick}>Legg til Meldekort</button>
       </div>
     );
   }
@@ -111,10 +102,11 @@ const mapStateToProps = ({demo}: RootState) => {
 const mapDispatcherToProps = (dispatch: Dispatch<DemoActions>) => {
     return {
         addItem: (item: string) =>
-            asyncactions.addItemAsync(dispatch, item)
-        leggTilMeldekort: (mk: Meldekort) =>
-
+            dispatch(addItemToList(item))
     };
 };
+/*const mapDispatcherToProps = {
+    leggTilMK: leggTilMeldekort
+}*/
 
 export default connect(mapStateToProps, mapDispatcherToProps)(App);

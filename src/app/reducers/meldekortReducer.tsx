@@ -1,14 +1,8 @@
-import { Constants, Meldekort, MeldekortActions } from '../types/meldekort';
-
-// STATE
-// A simple one field 'list' to store list of string in our state
-export interface MeldekortState {
-    meldekort: Meldekort;
-}
+import { Constants, MeldekortState, MeldekortActions } from '../types/meldekort';
 
 // defining inital state
-const initalState = {
-    meldekort: {id:'00', arbeidet: true}
+const initalState: MeldekortState = {
+    meldekort: []
 };
 
 // when called for the first time, it will return initial state.
@@ -20,8 +14,13 @@ export function meldekortReducer(
     switch (action.type) {
 
         case Constants.LEGG_TIL_MELDEKORT:
-            return { ...state, ...action.payload};
-
+            // Logikk bak legg til meldekort action
+            // return { ..state, meldekort: [id: ]}
+            return {
+                ...state, meldekort: [
+                    ...state.meldekort, action.payload.mk
+                ]
+            };
         default:
             return state;
     }

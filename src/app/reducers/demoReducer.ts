@@ -17,6 +17,7 @@ export function demoReducer(state: DemoState = init,
     switch (action.type) {
 
         case Constants.ADD_ITEM:
+            console.log('suuumthin');
             return { ...state, list: [...state.list, action.payload.item]};
 
         case Constants.SET_LOADING:
