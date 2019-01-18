@@ -21,11 +21,10 @@ const rootReducer = combineReducers<RootState>({
         demo: demoReducer,
         meldekort: meldekortReducer
 });
-/* eslint-disable no-underscore-dangle */
+
 // applyMiddleware skl være inni composeWithDevTools
 const store = createStore(
     rootReducer, composeWithDevTools());
-/* eslint-enable */
 
 export default store;
 // eksporterer store som default,
