@@ -1,16 +1,27 @@
-# ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
-image: docker.adeo.no:5000/sbl/meldekort
+#'jeg vil ikke ha hjelp fra pus'
+#default memory request og appdynamics feiler nå fra pus
+image: docker.adeo.no:5000/arbeid/meldekort
+team: "arbeid"
+name: meldekort
 replicas:
-  min: 1
-  max: 2
+  min: 2
+  max: 4
   cpuThresholdPercentage: 50
 port: 8080
 healthcheck:
   liveness:
-    path: meldekort/selftest/alive.txt
+    path: health/isAlive
   readiness:
-    path: meldekort/selftest/ready.txt
+    path: health/isAlive
+prometheus:
+  enabled: true
+  path: internal/metrics
+ingress:
+  enabled: true
+resources:
+  limits:
+    cpu: 3
 fasitResources:
   used:
-  - alias: appres.cms
-    resourceType: baseUrl
+    - alias: appres.cms
+      resourceType: baseUrl

@@ -1,9 +1,10 @@
-#Meldekort
+# Meldekort
 Meldekort er et webgrensesnitt for brukere å sende inn utfylte meldekort-skjema til NAV.
 Meldekort tilbyr påloggende arbeidssøkere å se sin meldekorthistorikk samt å fylle ut og sende inn meldekort.
 
 ## Dokumentasjon
-Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/display/TA/Meldekort).
+Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/display/TA/Meldekort). Dokumentasjonen gjelder for den 
+gamle JBoss/Wicket-applikasjonen, men vil bli oppdatert forløpende under utviklingen av denne nye versjonen.
 
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjekt rettes mot:
