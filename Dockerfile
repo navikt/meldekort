@@ -1,7 +1,7 @@
 FROM docker.adeo.no:5000/pus/node as builder
-WORKDIR /usr/src/app
-COPY . ./
+COPY . /source
 
+WORKDIR /source
 RUN npm install && npm run build
 ENV NODE_ENV production
 
@@ -10,4 +10,4 @@ CMD ["npm", "run", "server"]
 
 FROM docker.adeo.no:5000/pus/decorator
 ENV APPLICATION_NAME=meldekort
-COPY --from=builder /build /app
+COPY --from=builder /source/build /app
