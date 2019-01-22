@@ -7,6 +7,7 @@ class SendMeldekort extends React.Component<any, any> {
     }
 
     render() {
+
         return(
             <div className="sendMeldekort-innhold">
                 <Innholdstittel> Send Meldekort siden </Innholdstittel>

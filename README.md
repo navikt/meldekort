@@ -24,6 +24,12 @@ Interne henvendelser kan sendes via Slack i kanalen #team-arbeid / #meldekort
 
 2. Kjør `npm start`. Appen starter da på [http://localhost:3000](http://localhost:3000).
 
+
+For de som utvikler på tynnklienten, må disse to linjer med kode settes øverst i .npmrc-filen før npm install fungerer.
+* `proxy=http://155.55.60.117:8088/` 
+* `https-proxy=http://155.55.60.117:8088/`
+
+
 ### Andre tilgjengelige kommandoer
 
 * `npm test` kjører testene.
