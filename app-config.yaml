@@ -10,9 +10,9 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: health/isAlive
+    path: meldekort/selftest/alive.txt
   readiness:
-    path: health/isAlive
+    path: meldekort/selftest/ready.txt
 prometheus:
   enabled: true
   path: internal/metrics
