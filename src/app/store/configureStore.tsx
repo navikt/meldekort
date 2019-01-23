@@ -6,9 +6,7 @@ import { DemoState } from '../types/demo';
 import { meldekortReducer } from '../reducers/meldekortReducer';
 import { MeldekortState } from '../types/meldekort';
 
-export const history = createBrowserHistory({
-    basename: '/'
-});
+export const history = createBrowserHistory();
 
 // Rootstate kan bli importert fordi det står export foran. import {RootState}
 // Kan legge inn flere reducerStates når det trengts.
@@ -23,9 +21,7 @@ const rootReducer = combineReducers<RootState>({
 });
 
 // applyMiddleware skl være inni composeWithDevTools
-const store = createStore(
+const configureStore = createStore(
     rootReducer, composeWithDevTools());
 
-export default store;
-// eksporterer store som default,
-// import hvilkensomhelsttekst fra denne klassen vil returnere store funksjonen.
+export default configureStore;

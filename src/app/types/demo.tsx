@@ -6,7 +6,7 @@ import { ActionType } from 'typesafe-actions';
 export type DemoActions = ActionType<typeof actions>;
 
 // STATE
-// A simple one field 'list' to store list of string in our state
+// A simple one field 'list' to configureStore list of string in our state
 export interface DemoState {
     list: string[];
     loading: boolean;
