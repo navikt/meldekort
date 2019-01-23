@@ -5,15 +5,19 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
-import configureStore from './app/store/configureStore';
+import { store } from './app/store/configureStore';
 
-const render = () => {
+const rootElement = document.getElementById('root');
+
+const render = (Component: React.ComponentType<{}>) => {
     ReactDOM.render(
-        <Provider store={configureStore}><App /></Provider>,
-        document.getElementById('root') as HTMLElement
+        <Provider store={store}>
+            <Component />
+        </Provider>,
+        rootElement
     );
 };
 
-render();
+render(App);
 
 registerServiceWorker();
