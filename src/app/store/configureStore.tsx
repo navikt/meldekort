@@ -1,7 +1,6 @@
 import { createBrowserHistory } from 'history';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { routerMiddleware, RouterState, connectRouter } from 'connected-react-router';
-
 import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import demoReducer, { DemoState } from '../reducers/demoReducer';
 
@@ -16,6 +15,7 @@ export interface RootState {
     meldekort: MeldekortState;
     router: RouterState;
 }
+
 const rootReducer = combineReducers<RootState>({
     demo: demoReducer,
     meldekort: meldekortReducer,
@@ -33,15 +33,3 @@ const store = createStore(
 );
 
 export { store };
-
-/*
-const rootReducer = combineReducers<RootState>({
-        demo: demoReducer,
-        meldekort: meldekortReducer
-});
-
-// applyMiddleware skl være inni composeWithDevTools
- configureStore = createStore(
-    rootReducer, composeWithDevTools());
-
-export default configureStore;*/
