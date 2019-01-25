@@ -8,7 +8,7 @@ class TidligereMeldekort extends React.Component<any, any> {
 
     render() {
         return(
-            <div className="tidligereMeldekort-innhold">
+            <div className="sideinnhold">
                 <Innholdstittel> Tidligere meldekort</Innholdstittel>
             </div>
         );

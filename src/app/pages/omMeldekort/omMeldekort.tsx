@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
-class SendMeldekort extends React.Component<any, any> {
+class OmMeldekort extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
     }
 
     render() {
-
         return(
             <div className="sideinnhold">
-                <Innholdstittel> Send Meldekort siden </Innholdstittel>
+                <Innholdstittel> Om meldekort</Innholdstittel>
             </div>
         );
     }
 }
 
-export default SendMeldekort;
+export default OmMeldekort;

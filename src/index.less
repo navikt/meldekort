@@ -5,9 +5,58 @@
 @import "~nav-frontend-core/less/core";
 @import "~nav-frontend-tabs-style";
 @import "~nav-frontend-typografi-style";
+@import "~nav-frontend-grid-style";
 
 // Komponenter
-@import "./app/app.less";
 @import "./app/components/banner/banner.less";
 @import "app/components/Meny/tabsmeny.less";
+
+// GENERELL STYLING
+.sideinnhold {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2rem 0 2rem 0;
+
+  .seksjon {
+    margin-bottom: 2rem;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+    .item {
+      margin-bottom: 2rem ;
+
+      &:first-child {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}
+
+.sentrert {
+  text-align: center;
+}
+
+@media all and (max-width: @screen-sm) {
+
+  .sideinnhold {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+
+    .seksjon {
+      margin-bottom: 1rem;
+
+      &:last-child:after {
+        margin-bottom: 0rem;
+      }
+      .item {
+        margin-bottom: 1.5rem;
+
+        &:first-child {
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
+}
 

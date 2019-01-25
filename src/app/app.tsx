@@ -7,29 +7,33 @@ import NavTabs from './components/Meny/tabsmeny';
 import Demo from './components/demo/demo';
 import SendMeldekort from './pages/sendMeldekort/sendMeldekort';
 import TidligereMeldekort from './pages/tidligereMeldekort/tidligereMeldekort';
+import Container from 'nav-frontend-grid/lib/container';
+import OmMeldekort from './pages/omMeldekort/omMeldekort';
+import OfteStilteSporsmal from './pages/ofteStilteSporsmal/ofteStilteSporsmal';
 
 class App extends React.Component<{}> {
 
     public render() {
 
         return(
-            <div className="app">
-                <div className="app-container">
-                    <Banner tittel="Meldekort"/>
-                    <NavTabs/>
-                    <main className="app-container main">
+            <div>
+                <Banner tittel="Meldekort"/>
+                <NavTabs/>
+                <main>
+                    <Container>
                         <ConnectedRouter history={history}>
                             <Switch>
                                 <Route exact={true} path="/send-meldekort" component={SendMeldekort} />
                                 <Route path="/tidligere-meldekort" component={TidligereMeldekort} />
                                 <Route  path="/demo" component={Demo}/>
+                                <Route path="/om-meldekort" component={OmMeldekort} />
+                                <Route path="/ofte-stilte-sporsmal" component={OfteStilteSporsmal} />
                                 <Route path="/404" component={() => <div />} />
-                                <Route path="/send-meldekort" component={SendMeldekort} />
                                 <Redirect exact={true} from="/" to="/send-meldekort"/>
                             </Switch>
                         </ConnectedRouter>
-                    </main>
-                </div>
+                    </Container>
+                </main>
             </div>
         );
     }

@@ -26,11 +26,10 @@ export const hentTabConfig = () => {
                 tittel: 'Om meldekort',
                 urlparam: '/om-meldekort',
                 disabled: false,
-            }
-            ,
+            },
             {
                 tittel: 'Ofte stilte spørsmål',
-                urlparam: '/faq',
+                urlparam: '/ofte-stilte-sporsmal',
                 disabled: false,
             }
         ];

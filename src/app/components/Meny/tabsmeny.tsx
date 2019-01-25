@@ -22,14 +22,13 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
     constructor (props: TabsProps) {
         super(props);
         this.state = {
-            tabsobjekter: hentTabConfig(),
+            tabsobjekter: hentTabConfig().filter(obj => !obj.disabled),
             windowSize: window.innerWidth
         };
     }
 
     lagTabs = (tabsobjekter: Tab[], kompakt: boolean) => {
         const tablabels = tabsobjekter
-            .filter(obj => !obj.disabled)
             .map(obj => this.lagTab(obj));
 
         return (
