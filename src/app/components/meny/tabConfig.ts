@@ -23,6 +23,11 @@ export const hentTabConfig = () => {
                 disabled: true,
             },
             {
+                tittel: 'Endre meldeform',
+                urlparam: '/endre-meldeform',
+                disabled: true,
+            },
+            {
                 tittel: 'Om meldekort',
                 urlparam: '/om-meldekort',
                 disabled: false,
