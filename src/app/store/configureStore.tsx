@@ -3,22 +3,25 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { routerMiddleware, RouterState, connectRouter } from 'connected-react-router';
 import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import demoReducer, { DemoState } from '../reducers/demoReducer';
+import { LocalesState, default as localesReducer } from '../reducers/localesReducer';
+// import { intlReducer } from 'react-intl-redux';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
 });
 
-// Rootstate kan bli importert fordi det står export foran. import {RootState}
-// Kan legge inn flere reducerStates når det trengts.
 export interface RootState {
     demo: DemoState;
     meldekort: MeldekortState;
+    locales: LocalesState;
     router: RouterState;
 }
 
 const rootReducer = combineReducers<RootState>({
     demo: demoReducer,
     meldekort: meldekortReducer,
+    // intl: intlReducer,
+    locales: localesReducer,
     router: connectRouter(history),
 });
 
