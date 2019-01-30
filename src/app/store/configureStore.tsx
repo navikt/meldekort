@@ -9,7 +9,7 @@ export const history = createBrowserHistory({
 });
 
 // Rootstate kan bli importert fordi det står export foran. import {RootState}
-// Kan legge inn flere reducerStates når det trengts.
+// Kan legge inn flere reducerStates når det trengts.t
 export interface RootState {
     demo: DemoState;
     meldekort: MeldekortState;

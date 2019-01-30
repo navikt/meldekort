@@ -31,6 +31,11 @@ export const hentTabConfig = () => {
                 tittel: 'Ofte stilte spørsmål',
                 urlparam: '/ofte-stilte-sporsmal',
                 disabled: false,
+            },
+            {
+                tittel: 'Endre meldeform',
+                urlparam: '/endre-meldeform',
+                disabled: true,
             }
         ];
     return tabConfig;
