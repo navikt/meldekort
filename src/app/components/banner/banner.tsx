@@ -1,4 +1,3 @@
-import './banner.less';
 import * as React from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 

@@ -1,4 +1,11 @@
-import { Constants, DemoActions, DemoState } from '../types/demo';
+import { Constants, DemoActions } from '../types/demo';
+
+// STATE
+// A simple one field 'list' to configureStore list of string in our state
+export interface DemoState {
+    list: string[];
+    loading: boolean;
+}
 
 // defining inital state
 const init: DemoState = {
@@ -7,8 +14,8 @@ const init: DemoState = {
 };
 
 // when called for the first time, it will return initial state.
-export function demoReducer(state: DemoState = init,
-                            action: DemoActions): DemoState {
+const demoReducer = (state: DemoState = init,
+                     action: DemoActions): DemoState => {
 
     // man har vanligvis en switch/case ../default for å route til riktig action.
     // Fungerer som en slags if-setning.
@@ -26,4 +33,6 @@ export function demoReducer(state: DemoState = init,
         default:
             return state;
     }
-}
+};
+
+export default demoReducer;

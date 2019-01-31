@@ -1,4 +1,9 @@
-import { Constants, MeldekortState, MeldekortActions } from '../types/meldekort';
+import { Constants, MeldekortActions, Meldekort } from '../types/meldekort';
+
+// state
+export interface MeldekortState {
+    meldekort: Meldekort[];
+}
 
 // defining inital state
 const initalState: MeldekortState = {
@@ -6,9 +11,9 @@ const initalState: MeldekortState = {
 };
 
 // when called for the first time, it will return initial state.
-export function meldekortReducer(
+const meldekortReducer = (
     state: MeldekortState = initalState,
-    action: MeldekortActions): MeldekortState {
+    action: MeldekortActions): MeldekortState  => {
 
     // If case, action type = ADD_ITEM, add item from actions payload to state field list
     switch (action.type) {
@@ -24,4 +29,6 @@ export function meldekortReducer(
         default:
             return state;
     }
-}
+};
+
+export default meldekortReducer;

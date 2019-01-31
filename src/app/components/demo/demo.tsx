@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
-import { RootState } from '../../store/store';
+import { RootState } from '../../store/configureStore';
 import { DemoActions } from '../../types/demo';
 import { addItemToList } from '../../actions/demo';
 import { connect } from 'react-redux';
