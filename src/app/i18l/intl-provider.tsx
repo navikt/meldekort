@@ -1,8 +1,8 @@
-import * as React from 'react';
+/*import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import nb from 'react-intl/locale-data/nb';
-import tekster from './messages';
+// import  tekster  from './messages';
 
 interface IntlProviderState {
     locale: string;
@@ -33,4 +33,4 @@ class IntlProvider extends React.Component<{}, IntlProviderState> {
     }
 }
 
-export default IntlProvider;
+export default IntlProvider;*/
