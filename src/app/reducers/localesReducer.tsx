@@ -1,17 +1,17 @@
 import { Constants, LocalesActions } from '../types/locales';
 
 export interface LocalesState {
-    locale: string;
-    messages: {
-        'app.greeting': 'Ciao',
-    };
+    no: {};
+    en: {};
 }
 
 const initialState: LocalesState = {
-    locale: 'it',
-    messages: {
-        'app.greeting': 'Ciao',
-    }
+    no: {
+        'app.greeting': 'Hei!',
+    },
+    en: {
+        'app.greeting': 'Hello!',
+    },
 };
 
 const localesReducer = (state: LocalesState = initialState,
@@ -19,7 +19,7 @@ const localesReducer = (state: LocalesState = initialState,
 
     switch (action.type) {
         case Constants.UPDATE_LOCALES:
-            console.log('Locale action works!');
+            console.log('update Locales', action.payload);
             return { ...state,  ...action.payload };
 
         default:

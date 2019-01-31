@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Tabs from 'nav-frontend-tabs';
 import { connect } from 'react-redux';
-import { history, RootState } from '../../store/configureStore';
+import { history, RootState, store } from '../../store/configureStore';
 
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
@@ -47,6 +47,7 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
 
     handleOnChange = ( event: React.SyntheticEvent<EventTarget>, index: number ) => {
         const pathname = this.props.router.location.pathname;
+        console.log(store.getState());
         pathname !== this.state.tabsobjekter[index].urlparam && history.push(this.state.tabsobjekter[index].urlparam);
     }
 

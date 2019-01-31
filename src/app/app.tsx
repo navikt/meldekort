@@ -9,8 +9,35 @@ import SendMeldekort from './pages/sendMeldekort/sendMeldekort';
 import TidligereMeldekort from './pages/tidligereMeldekort/tidligereMeldekort';
 import OmMeldekort from './pages/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from './pages/ofteStilteSporsmal/ofteStilteSporsmal';
+import { addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import no from 'react-intl/locale-data/no';
+
+addLocaleData([...no, ...en]);
+
+// const UPDATE_LOCALES = 'UPDATE_LOCALES';
 
 class App extends React.Component<{}> {
+
+   /* handleLoadlLocales = () => {
+        store.dispatch({
+            type: UPDATE_LOCALES,
+            payload: {
+                no: {
+                    'app.greeting': 'Hallo!',
+                },
+                en: {
+                    'app.greeting': 'Hello Engihs!',
+                }
+            },
+        });
+    }
+                <Hilsen />
+                <p>
+                    <button type="button" onClick={this.handleLoadlLocales}>
+                        Local locales
+                    </button>{' '}
+                </p>*/
 
     public render() {
 

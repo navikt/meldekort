@@ -1,40 +1,65 @@
 import * as React from 'react';
-import { Select } from 'nav-frontend-skjema';
-import { RootState } from '../../store/configureStore';
 import { Dispatch } from 'redux';
-import { LocalesActions } from '../../types/locales';
-import { updateLocale } from '../../actions/locales';
+import { RootState } from '../../store/configureStore';
+import { Select } from 'nav-frontend-skjema';
+import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 
 type ReduxType =
     ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatcherToProps>;
 
-const Sprakvelger: React.StatelessComponent<ReduxType> = (props) => {
+class Sprakvelger extends React.Component<ReduxType> {
 
-    return(
-        <div className="sprakvelger-container">
-            <Select label="">
-                <option value="no" key="norsk">
-                    Norsk
-                </option>
-                <option value="it" key="italian">
-                    Italian
-                </option>
-            </Select>
-        </div>
-    );
+    /*handleLoadlLocales = () => {
+        store.dispatch({
+            type: Constants.UPDATE_LOCALES,
+            payload: {
+                no: {
+                    'app.greeting': 'Hei!',
+                },
+                en: {
+                    'app.greeting': 'Hello!',
+                },
+            },
+        });
+    }*/
+   handleOnChange = (event: React.SyntheticEvent<EventTarget>) => {
+
+       // this.props.updateIntl(event.target.value);
+       this.props.updateIntl({locale: 'no'});
+    }
+
+    render() {
+        return (
+            <div className="sprakvelger-container">
+                <Select
+                    label=""
+                    value="velgSprak"
+                    onChange={this.handleOnChange}
+                >
+                    <option value="no" key="norsk">
+                        Norsk
+                    </option>
+                    <option value="en" key="english" >
+                        English
+                    </option>
+                </Select>
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = ({ intl }: RootState) => {
+    const { locale, messages } = intl;
+    return { locale, messages };
 };
 
-const mapStateToProps = ({locales}: RootState) => {
-    const { locale } = locales;
-    return { locale };
-};
-
-const mapDispatcherToProps = (dispatch: Dispatch<LocalesActions>) => {
+const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {
     return {
-        updateLocale: (locale: string) =>
-            dispatch(updateLocale(locale))
+
+        updateIntl: (locale: any) =>
+            dispatch(updateIntl(locale))
     };
 };
 

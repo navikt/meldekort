@@ -33,7 +33,7 @@ class Demo extends React.Component<ReduxType, State> {
                 <input value={this.state.inputText} onChange={this.onInputChange}/>
                 <button onClick={this.onAddClick}>Add</button>
                 <ul>
-                    {list.map(l => <li key={l}>{l}</li>)}
+                    {list.map((l: any) => <li key={l}>{l}</li>)}
                 </ul>
                 {loading && <div>Loading...</div>}
             </div>
