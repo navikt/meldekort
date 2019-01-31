@@ -11,23 +11,11 @@ type ReduxType =
 
 class Sprakvelger extends React.Component<ReduxType> {
 
-    /*handleLoadlLocales = () => {
-        store.dispatch({
-            type: Constants.UPDATE_LOCALES,
-            payload: {
-                no: {
-                    'app.greeting': 'Hei!',
-                },
-                en: {
-                    'app.greeting': 'Hello!',
-                },
-            },
-        });
-    }*/
    handleOnChange = (event: React.SyntheticEvent<EventTarget>) => {
+       // handle on change sånn at man tar event.target.value
+       // og setter den som locale & tilhørende messages.
 
-       // this.props.updateIntl(event.target.value);
-       this.props.updateIntl({locale: 'no'});
+       this.props.updateIntl('no' , { 'app.greeting' : 'xake'});
     }
 
     render() {
@@ -58,8 +46,8 @@ const mapStateToProps = ({ intl }: RootState) => {
 const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {
     return {
 
-        updateIntl: (locale: any) =>
-            dispatch(updateIntl(locale))
+        updateIntl: (locale: any, messages: any) =>
+            dispatch(updateIntl({ locale, messages }))
     };
 };
 

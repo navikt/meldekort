@@ -10,40 +10,6 @@ export const history = createBrowserHistory({
     basename: '/meldekort'
 });
 
-/*
-// Const & types
-const UPDATE_LOCALES = 'UPDATE_LOCALES';
-
-export type LocalesActions = ActionType<typeof actions>;
-
-// LocalesState
-export interface LocalesState {
-    locale: LocaleEnum;
-    messages: {};
-}
-
-const initialState: LocalesState = {
-    locale: LocaleEnum.no,
-    messages: {
-        'app.greeting': 'Ciao',
-    }
-};
-
-// LocalesReducer
-function localesReducer(state: LocalesState = initialState,
-                        action: LocalesActions) {
-    switch (action.type) {
-        case UPDATE_LOCALES:
-            console.log('Locale action works!', action.payload);
-            return {
-                ...state,
-                ...action.payload,
-            };
-        default:
-            return state;
-    }
-} */
-
 export interface RootState {
     demo: DemoState;
     meldekort: MeldekortState;
