@@ -1,17 +1,15 @@
 import { Constants, LocalesActions } from '../types/locales';
+import { hentNbTekster } from '../tekster/tekster_nb';
+import { hentEnTekster } from '../tekster/tekster_en';
 
 export interface LocalesState {
-    no: {};
+    nb: {};
     en: {};
 }
 
 const initialState: LocalesState = {
-    no: {
-        'app.greeting': 'Hei!',
-    },
-    en: {
-        'app.greeting': 'Hello!',
-    },
+    nb: hentNbTekster(),
+    en: hentEnTekster(),
 };
 
 const localesReducer = (state: LocalesState = initialState,

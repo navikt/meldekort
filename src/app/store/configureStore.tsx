@@ -5,6 +5,7 @@ import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import demoReducer, { DemoState } from '../reducers/demoReducer';
 import { LocalesState, default as localesReducer } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
+import { hentNbTekster } from '../tekster/tekster_nb';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -12,10 +13,8 @@ export const history = createBrowserHistory({
 
 const initialState = {
     intl: {
-        locale: 'no',
-        messages: {
-            'app.greeting': 'Ciao!',
-        }
+        locale: 'nb',
+        messages: hentNbTekster()
     }
 };
 

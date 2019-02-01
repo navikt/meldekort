@@ -9,5 +9,5 @@ export enum Constants {
 
 export enum LocaleEnum {
     en = 'en',
-    no = 'no'
+    nb = 'nb'
 }

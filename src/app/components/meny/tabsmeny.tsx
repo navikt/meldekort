@@ -25,6 +25,7 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
             tabsobjekter: hentTabConfig().filter(obj => !obj.disabled),
             windowSize: window.innerWidth
         };
+        console.log(this.state.tabsobjekter);
     }
 
     lagTabs = (tabsobjekter: Tab[], kompakt: boolean) => {
