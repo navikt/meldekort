@@ -25,12 +25,13 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
     "acceptance-tests",
-    "webpack",
+    "build",
     "jest",
-    "src/setupTests.ts"
+    "node_modules",
+    "scripts",
+    "src/setupTests.ts",
+    "webpack"
+
   ]
 }

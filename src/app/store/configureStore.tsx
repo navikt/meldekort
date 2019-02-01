@@ -10,6 +10,15 @@ export const history = createBrowserHistory({
     basename: '/meldekort'
 });
 
+const initialState = {
+    intl: {
+        locale: 'no',
+        messages: {
+            'app.greeting': 'Ciao!',
+        }
+    }
+};
+
 export interface RootState {
     demo: DemoState;
     meldekort: MeldekortState;
@@ -30,8 +39,9 @@ const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSI
 
 const store = createStore(
     rootReducer,
+    initialState as any,
     composeEnhancer(applyMiddleware(routerMiddleware(history))
     )
 );
 
-export { store };
+export {store};

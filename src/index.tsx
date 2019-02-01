@@ -17,7 +17,7 @@ const rootElement = document.getElementById('root');
 const render = (Component: React.ComponentType<{}>) => {
     ReactDOM.render(
         <Provider store={store}>
-            <IntlProvider defaultLocale="no">
+            <IntlProvider locale="no" defaultLocale="no">
             <Component />
             </IntlProvider>
         </Provider>,

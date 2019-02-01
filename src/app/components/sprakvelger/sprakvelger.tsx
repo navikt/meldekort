@@ -10,42 +10,20 @@ type ReduxType =
     ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatcherToProps>;
 
-interface SprakvelgerState {
-    // locales: LocalesState;
-}
-
-class Sprakvelger extends React.Component<ReduxType, SprakvelgerState> {
+class Sprakvelger extends React.Component<ReduxType> {
     constructor(props: ReduxType) {
         super(props);
-        const locales = Object.assign(this.props.en, this.props.no);
-        console.log(locales);
-        /*this.state = {
-            locales: locales
-        }*/
     }
 
-   handleOnChange = (event: React.SyntheticEvent<EventTarget>) => {
-       // handle on change sånn at man tar event.target.value
-       // og setter den som locale & tilhørende messages.
-       /*this.props.updateIntl(
-           event.target, {
-           messages: locales[event.target]});*/
-
-       this.props.updateIntl('no' , { 'app.greeting' : 'xake'});
+   handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(this.props.locs[event.target.value]);
+        this.props.updateIntl(
+           event.target.value, this.props.locs[event.target.value]
+           );
     }
-
-                    /*
-                    <option value="no" key="norsk">
-                        Norsk
-                    </option>
-                    <option value="en" key="english" >
-                        English
-                    </option>
-                    */
 
     render() {
        const currentLocale = this.props.locale;
-       const locales = Object.assign(this.props.en, this.props.no);
 
        return (
             <div className="sprakvelger-container">
@@ -54,7 +32,7 @@ class Sprakvelger extends React.Component<ReduxType, SprakvelgerState> {
                     value={currentLocale}
                     onChange={this.handleOnChange}
                 >
-                    {Object.keys(locales).map(locale => (
+                    {Object.keys(this.props.locs).map(locale => (
                         <option key={locale}>{locale}</option>
                     ))}
                 </Select>
@@ -65,8 +43,8 @@ class Sprakvelger extends React.Component<ReduxType, SprakvelgerState> {
 
 const mapStateToProps = ({ intl, locales }: RootState) => {
     const { locale, messages } = intl;
-    const { no, en } = locales;
-    return { locale, messages, no, en};
+    const locs = locales;
+    return { locale, messages, locs};
 };
 
 const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {

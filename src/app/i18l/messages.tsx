@@ -1,8 +1,5 @@
-export const messages = {
-    no: {
-        GREETING: 'Bonjour {name}'
-    },
-    en: {
-        GREETING: 'Hello {name}'
-    }
-};
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+
+});
