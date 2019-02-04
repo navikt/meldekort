@@ -47,7 +47,7 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "exit 0",
-    "eject": "react-scripts-ts eject",
+    "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
     "@navikt/create-react-app-typescript-less": "^1.0.0-beta.16",
@@ -64,5 +64,11 @@
     "redux-devtools-extension": "^2.13.7",
     "typesafe-actions": "^3.0.0",
     "typescript": "^3.2.2"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
