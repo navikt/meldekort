@@ -18,7 +18,7 @@ const fetchJson = (url) => {
     return p;
 };
 
-const fetchMeldekort = fetchJson('https://meldekort2-q4.nais.oera-q.local/meldekort2/api/person/12345678910/historiskemeldekort');
+const fetchMeldekort = fetchJson('https://meldekort-api-q4.nais.oera-q.local/meldekort-api/api/person/12345678910/historiskemeldekort');
 
 export default {
     fetchMeldekort,
