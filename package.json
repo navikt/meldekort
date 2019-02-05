@@ -44,10 +44,12 @@
     "redux-saga": "^0.16.2"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
-    "test": "exit 0",
-    "eject": "react-scripts-ts eject"
+    "build:tekster": "node ./src/app/utils/build-tekster.js",
+    "eject": "react-scripts-ts eject",
+    "start": "react-scripts-ts start",
+    "start:tekster": "npm run build:tekster",
+    "test": "exit 0"
   },
   "devDependencies": {
     "@navikt/create-react-app-typescript-less": "^1.0.0-beta.16",
@@ -64,11 +66,5 @@
     "redux-devtools-extension": "^2.13.7",
     "typesafe-actions": "^3.0.0",
     "typescript": "^3.2.2"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }

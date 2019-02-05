@@ -16,7 +16,6 @@ class Sprakvelger extends React.Component<ReduxType> {
     }
 
    handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(this.props.locs[event.target.value]);
         this.props.updateIntl(
            event.target.value, this.props.locs[event.target.value]
            );

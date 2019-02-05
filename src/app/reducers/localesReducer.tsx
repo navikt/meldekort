@@ -1,6 +1,7 @@
 import { Constants, LocalesActions } from '../types/locales';
-import { hentNbTekster } from '../tekster/tekster_nb';
-import { hentEnTekster } from '../tekster/tekster_en';
+import tekster from '../tekster/alle-tekster';
+
+// console.log(tekster);
 
 export interface LocalesState {
     nb: {};
@@ -8,8 +9,8 @@ export interface LocalesState {
 }
 
 const initialState: LocalesState = {
-    nb: hentNbTekster(),
-    en: hentEnTekster(),
+    nb: tekster.nb,
+    en: tekster.en,
 };
 
 const localesReducer = (state: LocalesState = initialState,
