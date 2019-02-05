@@ -17,7 +17,7 @@ Gyldige OPTIONS:
 
 # Default verdier
 v=${versjon}
-IMAGE_NAME="meldekort"
+IMAGE_NAME="meldekort-frontend"
 DOCKER_REGISTRY="docker.adeo.no:5000"
 DOCKER_REPOSITORY="arbeid"
 TAG="${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${IMAGE_NAME}:${v:="unversioned"}"

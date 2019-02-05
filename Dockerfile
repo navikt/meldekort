@@ -9,5 +9,5 @@ EXPOSE 8080
 CMD ["npm", "run", "server"]
 
 FROM docker.adeo.no:5000/pus/decorator
-ENV APPLICATION_NAME=meldekort
+ENV APPLICATION_NAME=meldekort-frontend
 COPY --from=builder /source/build /app
