@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './app/app';
 import './index.less';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
 import { store } from './app/store/configureStore';
@@ -20,4 +20,4 @@ const render = (Component: React.ComponentType<{}>) => {
 
 render(App);
 
-registerServiceWorker();
+serviceWorker.unregister();
