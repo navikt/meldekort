@@ -9,9 +9,9 @@ const Environment = () => {
     }
 
     return {
-        apiUrl: 'https://tjenester.nav.no/personopplysninger-api/personalia',
-        loginUrl: 'https://loginservice.nav.no/login',
-        logoutUrl: 'https://loginservice.nav.no/slo',
+        apiUrl: 'http://meldekort-api-q4.nais.oera-q.local/meldekort-api/api/',
+        loginUrl: 'https://loginservice-q.nav.no/login',
+        logoutUrl: 'https://loginservice-q.nav.no/slo',
     };
 };
 

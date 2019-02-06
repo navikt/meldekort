@@ -10,17 +10,23 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: meldekort/selftest/alive.txt
+    path: meldekort/internal/isAlive
+    initialDelay: 60
   readiness:
-    path: meldekort/selftest/ready.txt
+    path: meldekort/selftest/isReady
+    initialDelay: 60
 prometheus:
   enabled: true
-  path: internal/metrics
+  path: meldekort/internal/metrics
 ingress:
   enabled: true
 resources:
   limits:
     cpu: 3
+    memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 512Mi
 fasitResources:
   used:
     - alias: appres.cms
