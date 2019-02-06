@@ -1,25 +1,39 @@
+import Environment from '../utils/env';
+import Konstanter from '../utils/consts'
 
-const fetchJson = (url) => {
+function sjekkAuthOgRedirect(res) {
+    if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
+        window.location.assign(`${Environment().loginUrl}?redirect=${window.location.href}`);
+        return false;
+    }
+    return true;
+}
+
+const fetchJSONAndCheckForErrors = (url) => {
     const p = new Promise((res, rej) => {
-        fetch(url)
-            .then((r) => {
-                if(r.status !== 200) {
-                    rej(new Error("Noe gikk galt med fetch. Status: " + r.status))
-                }
-                if(!r.ok) {
-                    rej(new Error('Error happened on requesting a resource'));
-                }
-                res(r.json())
-            })
+        fetch(`${Environment().apiUrl}` + url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+            },
+            credentials: 'include',
+        }).then((response) => {
+            sjekkAuthOgRedirect(response);
+            if (response.status === 200) {
+                res(response.json());
+            } else {
+                res({ status: response.status });
+            }
+        })
             .catch((e) => {
-                rej(e)
-            })
+                rej(e);
+            });
     });
     return p;
 };
 
-const fetchMeldekort = fetchJson('https://meldekort-api-q4.nais.oera-q.local/meldekort-api/api/person/12345678910/historiskemeldekort');
-
-export default {
-    fetchMeldekort,
-};
+export const hentMeldekort = () => fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
+export const hentHistoriskeMeldekort = () => fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
+export const hentMeldekortdetaljer = (id) => fetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id)}`);
+export const hentPersonstatus = () => fetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
+export const hentKorrigertId = (id) => fetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id)}`);

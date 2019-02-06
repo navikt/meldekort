@@ -12,12 +12,10 @@ import OmMeldekort from './pages/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from './pages/ofteStilteSporsmal/ofteStilteSporsmal';
 import EndreMeldeform from './pages/endreMeldeform/endreMeldeform';
 import EtterregistrerMeldekort from './pages/etterregistrerMeldekort/etterregistrerMeldekort';
-import fetchMeldekort from './api/api';
 
 class App extends React.Component<{}> {
 
     public render() {
-        console.log(fetchMeldekort);
 
         return(
             <div>
