@@ -7,15 +7,11 @@ class SendMeldekort extends React.Component<any, any> {
         super(props);
     }
 
-    hentMeldekortForBruker() {
-        return hentMeldekort();
-    }
-
     render() {
-        console.log(this.hentMeldekortForBruker());
         return(
             <div className="sideinnhold">
                 <Innholdstittel> Send Meldekort siden </Innholdstittel>
+                <span>{hentMeldekort()}</span>
             </div>
         );
     }
