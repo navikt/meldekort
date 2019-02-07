@@ -20,7 +20,7 @@ class SendMeldekort extends React.Component<any, any> {
                     De eldste meldekortene må fylles ut før du kan gå videre til de nyere. Klikk på "Start utfylling" nedenfor for å begynne nederst i bunken.
                 </AlertStripe>
 
-                <FormattedHTMLMessage id="annetFravaer.Required" defaultMessage="Hallois!" />
+                <FormattedHTMLMessage id="forklaring.sporsmal.forhindret" defaultMessage="Hallois!" />
 
             </div>
         );

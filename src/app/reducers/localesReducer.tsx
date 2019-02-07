@@ -1,7 +1,5 @@
 import { Constants, LocalesActions } from '../types/locales';
-import tekster from '../tekster/alle-tekster';
-
-// console.log(tekster);
+import tekster from '../tekster/kompilerte-tekster';
 
 export interface LocalesState {
     nb: {};

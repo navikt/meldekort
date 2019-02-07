@@ -8,7 +8,6 @@ function readFile(dir, file) {
         console.log('Error:', e.stack);
     }
 }
-
 function createJson(katalog) {
     const tekster = getNbAndEnTexts(katalog);
     return '/*tslint:disable*/export default {\'nb\':{' + tekster[0] + '},\'en\':{' + tekster[1] + '}};';
@@ -19,33 +18,29 @@ function getNbAndEnTexts(dir) {
 }
 
 function read(dir, nb, en) {
-    let filename = "";
     fs.readdirSync(dir)
         .forEach((file) => {
             if (fs.statSync(path.join(dir, file)).isDirectory()) {
                 [nb, en] = read(path.join(dir, file), nb, en);
             }
             else {
-                if ( file.slice(-4) === '.txt') {
-                    filename = "'" + file.split('_en.txt'|| '_nb.txt')[0] + "'" + ':' + "'" + readFile(dir, file).trim().replace(/\n|\r|\r\n/, ' ') + "',";
-                    file.split('_')[1] === ('nb.txt' || 'AAP_nb.txt') ?
-                        nb = nb + filename : en = en + filename;
-                } else if (file.slice(-5) === '.html' && file.split('_nb.html')[0] === 'forklaring.sporsmal.aktivitet_arbeid_aap') {
-                    console.log(file, ' ====== vår testfiler');
-
-                }
-                // Hvis ikke .txt, så html-fil.
-                else {
-                    console.log(file, ' er en html-fil.');
-                }
+                (file.split('_')[1] === ('nb.txt')) ?
+                    nb = nb + skrivFilTilSprak(file, dir, '_nb.txt') :
+                    en = en + skrivFilTilSprak(file, dir, '_en.txt');
             }
         });
 
     return [nb, en]
 }
 
+function skrivFilTilSprak( fil, dir, splitStr) {
+    filename = "'" + fil.split(splitStr)[0] + "'" + ':' + "'"
+        + readFile(dir, fil).trim().replace(/(\r\n|\n|\r)/gm, " ") + "',";
+    return filename;
+}
+
 try{
-    fs.writeFileSync('./src/app/tekster/alle-tekster.ts', createJson('./src/app/tekster/hjelpetekster'));
+    fs.writeFileSync('./src/app/tekster/kompilerte-tekster.ts', createJson('./src/app/tekster/hjelpetekster'));
 }catch (e){
     console.log("Kunne ikke skrive fil ", e);
 }

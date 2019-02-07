@@ -5,7 +5,7 @@ import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import demoReducer, { DemoState } from '../reducers/demoReducer';
 import { LocalesState, default as localesReducer } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
-import tekster from '../tekster/alle-tekster';
+import tekster from '../tekster/kompilerte-tekster';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
