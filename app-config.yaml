@@ -1,5 +1,3 @@
-#'jeg vil ikke ha hjelp fra pus'
-#default memory request og appdynamics feiler nå fra pus
 image: docker.adeo.no:5000/arbeid/meldekort-frontend
 team: meldekort
 name: meldekort-frontend
