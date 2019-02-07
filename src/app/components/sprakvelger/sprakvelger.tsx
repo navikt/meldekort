@@ -4,7 +4,6 @@ import { RootState } from '../../store/configureStore';
 import { Select } from 'nav-frontend-skjema';
 import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
-// import { LocalesState } from '../../reducers/localesReducer';
 
 type ReduxType =
     ReturnType<typeof mapStateToProps> &

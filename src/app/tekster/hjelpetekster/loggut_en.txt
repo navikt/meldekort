@@ -1,1 +1,1 @@
-Logg ut
+Log out
