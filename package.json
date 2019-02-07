@@ -8,7 +8,6 @@
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
-    "install": "^0.12.2",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^1.0.29",
     "nav-frontend-alertstriper-style": "^0.2.50",
@@ -29,7 +28,6 @@
     "nav-frontend-tabs-style": "0.0.13",
     "nav-frontend-typografi": "^2.0.7",
     "nav-frontend-typografi-style": "^1.0.11",
-    "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-collapse": "^4.0.3",
     "react-dom": "^16.7.0",
@@ -66,5 +64,8 @@
     "redux-devtools-extension": "^2.13.7",
     "typesafe-actions": "^3.0.0",
     "typescript": "^3.2.2"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.2.7"
   }
 }
