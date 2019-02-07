@@ -3,14 +3,14 @@ const Environment = () => {
     if (window.location.hostname.indexOf('www-q0.nav.no') > -1) {
         return {
             apiUrl: 'https://meldekort-api-q0.nais.oera-q.local/meldekort-api/api/',
-            loginUrl: 'https://loginservice-q.nav.no/login',
+            loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
         };
     }
 
     return {
         apiUrl: 'http://meldekort-api-q4.nais.oera-q.local/meldekort-api/api/',
-        loginUrl: 'https://loginservice-q.nav.no/login',
+        loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
         logoutUrl: 'https://loginservice-q.nav.no/slo',
     };
 };
