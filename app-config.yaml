@@ -1,6 +1,6 @@
-image: docker.adeo.no:5000/arbeid/meldekort-frontend
+image: docker.adeo.no:5000/arbeid/meldekort
 team: meldekort
-name: meldekort-frontend
+name: meldekort
 replicas:
   min: 2
   max: 4
