@@ -3,7 +3,7 @@ import Konstanter from '../utils/consts'
 
 function sjekkAuthOgRedirect(res) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
-        window.location.assign(`${Environment().loginUrl}?redirect=${window.location.href}`);
+        window.location.assign(`${Environment().loginUrl}&redirect=${window.location.href}`);
         return false;
     }
     return true;
