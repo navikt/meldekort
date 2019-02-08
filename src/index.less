@@ -11,6 +11,7 @@
 @import "./app/components/banner/banner.less";
 @import "app/components/meny/tabsmeny.less";
 @import "app/components/sprakvelger/sprakvelger.less";
+@import "app/pages/sendMeldekort/sendMeldekort.less";
 
 // GENERELL STYLING
 
@@ -31,12 +32,21 @@
       flex-direction: column;
       padding: 2rem 0 2rem 0;
 
+      .flex-innhold {
+        display: flex;
+
+        &.sentrert {
+          justify-content: center;
+        }
+      }
       .seksjon {
         margin-bottom: 2rem;
+
 
         &:last-child {
           margin-bottom: 0;
         }
+
         .item {
           margin-bottom: 2rem;
 
@@ -49,7 +59,7 @@
   }
 }
 
-.sentrert {
+.sentrert-tekst {
   text-align: center;
 }
 
