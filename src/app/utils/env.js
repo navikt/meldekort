@@ -9,7 +9,7 @@ const Environment = () => {
     }
 
     return {
-        apiUrl: 'http://meldekort-api-q4.nais.oera-q.local/meldekort-api/api/',
+        apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
         loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
         logoutUrl: 'https://loginservice-q.nav.no/slo',
     };

@@ -8,10 +8,11 @@ class SendMeldekort extends React.Component<any, any> {
     }
 
     render() {
+        const mk = hentMeldekort();
         return(
             <div className="sideinnhold">
                 <Innholdstittel> Send Meldekort siden </Innholdstittel>
-                <span>{hentMeldekort()}</span>
+                {/*<span>{mk}</span>*/console.log(mk)}
             </div>
         );
     }
