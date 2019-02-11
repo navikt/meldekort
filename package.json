@@ -2,7 +2,7 @@
   "name": "meldekort-cra-ts",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/meldekort",
+  "homepage": "/app",
   "dependencies": {
     "@types/react-collapse": "^4.0.2",
     "@types/react-redux": "^6.0.12",
