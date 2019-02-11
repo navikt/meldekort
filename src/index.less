@@ -10,65 +10,70 @@
 // Komponenter
 @import "./app/components/banner/banner.less";
 @import "app/components/meny/tabsmeny.less";
+@import "app/components/tabell/tabell.less";
 @import "app/components/sprakvelger/sprakvelger.less";
 @import "app/pages/sendMeldekort/sendMeldekort.less";
 
 // GENERELL STYLING
 
-#root {
-  margin-right: auto;
-  margin-left: auto;
+body {
+  font-family: 'Source Sans Pro', sans-serif;
 
-  .main-container {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-left: auto;
+  #root {
     margin-right: auto;
-    max-width: @screen-md;
-    padding-top: 2rem;
+    margin-left: auto;
 
-    .sideinnhold {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 0 2rem 0;
+    .main-container {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: @screen-md;
+      padding-top: 2rem;
 
-      .flex-innhold {
+      .sideinnhold {
         display: flex;
+        flex-direction: column;
+        padding: 2rem 0 2rem 0;
 
-        &.sentrert {
-          justify-content: center;
+        .flex-innhold {
+          display: flex;
+
+          &.sentrert {
+            justify-content: center;
+          }
         }
-      }
-      .seksjon {
-        margin-bottom: 2rem;
-
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-
-        .item {
+        .seksjon {
           margin-bottom: 2rem;
 
-          &:first-child {
-            margin-top: 1.5rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .item {
+            margin-bottom: 2rem;
+
+            &:first-child {
+              margin-top: 1.5rem;
+            }
           }
         }
       }
     }
   }
-}
 
-.sentrert-tekst {
-  text-align: center;
-}
+  .sentrert-tekst {
+    text-align: center;
+  }
 
-@media (max-width: @screen-md) {
-  #root {
+  @media (max-width: @screen-md) {
+    #root {
 
-    .main-container {
-      margin-left: 5px;
-      margin-right: 5px;
+      .main-container {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
     }
   }
 }
