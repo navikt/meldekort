@@ -1,33 +1,38 @@
 .tabell {
 
-  table {
+  .jsonTable {
     border-spacing: 0;
     table-layout: fixed;
-    min-width: 80%;
-    max-width: 100%;
     border-collapse: collapse;
-  }
-  .jsonRow {
-    background: lightpink;
-    padding: 1rem;
-  }
+    width: 100%;
 
-  td, th {
-    padding: 0.75rem;
-    text-align: left;
-  }
+    thead {
+      border-bottom: 1px solid @navMorkGra;
+    }
 
-  .jsonOdd {
-    // background: #eee;
+    td, th {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .jsonRow {
+      background: #f8f8f8;
+
+      tr, td {
+        border-bottom: 1px solid #B7B1A9;
+      }
+    }
+    .jsonOdd {
+      background: #eee;
+    }
   }
 }
 
-@media (max-width: @screen-md) {
-  #root {
+@media (max-width: @screen-sm) {
+  .tabell {
 
-    .main-container {
-      margin-left: 5px;
-      margin-right: 5px;
+    td, th {
+      padding: 0.5rem;
     }
   }
 }
