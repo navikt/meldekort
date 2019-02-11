@@ -1,0 +1,19 @@
+Click <strong>Yes </strong> if you have worked and the payment is pensionable income.
+<br>
+<ul>
+<li> as employee </li>
+<li> as contractor </li>
+<li> as recipient of cash benefits for care </li>
+<li> as self-employed</li>
+</ul>
+<br>
+This applies to all days of the week, including Saturday and Sunday, regardless if it is day, evening or night.
+<br>
+<br>
+In some employment schemes you receive payment. You and NAV must agree upon which hours you should register. This also applies to cash benefits for care.
+<br>
+<br>
+Click <strong>No</strong> if you have not worked and earned pensionable income.
+<br>
+<br>
+Please register the specific hours you have worked on the next page.
