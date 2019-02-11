@@ -20,7 +20,6 @@ class SendMeldekort extends React.Component<any, any> {
                     <FormattedHTMLMessage id="sendMeldekort.alert.forklaring"/>
                 </AlertStripe>
 
-
             </div>
         );
     }
