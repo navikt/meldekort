@@ -1,5 +1,6 @@
 // Denne fargen er brukt som bakgrunn for banner, men finnes ikke i nav-frontend
 @panelBakgrunn: #f1f1f1;
+@width-container: 800px;
 
 // nav-frontend
 @import "~nav-frontend-core/less/core";
@@ -28,7 +29,7 @@ body {
       box-sizing: border-box;
       margin-left: auto;
       margin-right: auto;
-      max-width: @screen-md;
+      max-width: @width-container;
       padding-top: 2rem;
 
       .sideinnhold {
@@ -66,7 +67,7 @@ body {
     text-align: center;
   }
 
-  @media (max-width: @screen-md) {
+  @media (max-width: (@width-container + 10 )) {
     #root {
 
       .main-container {
