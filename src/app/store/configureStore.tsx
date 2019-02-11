@@ -5,7 +5,7 @@ import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import demoReducer, { DemoState } from '../reducers/demoReducer';
 
 export const history = createBrowserHistory({
-    basename: '/app'
+    basename: '/meldekort'
 });
 
 // Rootstate kan bli importert fordi det står export foran. import {RootState}

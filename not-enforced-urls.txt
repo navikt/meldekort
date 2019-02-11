@@ -1,2 +1,2 @@
-https://${DomainName}/app/*
-https://${DomainName}/app
+https://${DomainName}/meldekort/*
+https://${DomainName}/meldekort/
