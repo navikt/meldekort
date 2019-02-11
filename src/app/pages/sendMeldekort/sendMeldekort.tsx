@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import { hentMeldekort } from '../../api/api';
 
 class SendMeldekort extends React.Component<any, any> {
@@ -12,10 +16,16 @@ class SendMeldekort extends React.Component<any, any> {
         return(
             <div className="sideinnhold">
                 <Innholdstittel> Send Meldekort siden </Innholdstittel>
-                {/*<span>{mk}</span>*/console.log(mk)}
+                <Sprakvelger/>
+                <FormattedMessage id="annetFravaer.Required_AAP" defaultMessage="Hallois!" />
+                <AlertStripe type="info" solid={true}>
+                    <FormattedHTMLMessage id="sendMeldekort.alert.forklaring"/>
+                </AlertStripe>
+
+                {console.log(mk)}
             </div>
         );
     }
 }
 
-export default SendMeldekort;
+export default connect()(SendMeldekort);

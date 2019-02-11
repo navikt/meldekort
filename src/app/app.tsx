@@ -3,11 +3,10 @@ import { Redirect, Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './store/configureStore';
 import Banner from './components/banner/banner';
-import NavTabs from './components/Meny/tabsmeny';
+import NavTabs from './components/meny/tabsmeny';
 import Demo from './components/demo/demo';
 import SendMeldekort from './pages/sendMeldekort/sendMeldekort';
 import TidligereMeldekort from './pages/tidligereMeldekort/tidligereMeldekort';
-import Container from 'nav-frontend-grid/lib/container';
 import OmMeldekort from './pages/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from './pages/ofteStilteSporsmal/ofteStilteSporsmal';
 import EndreMeldeform from './pages/endreMeldeform/endreMeldeform';
@@ -22,7 +21,7 @@ class App extends React.Component<{}> {
                 <Banner tittel="Meldekort"/>
                 <NavTabs/>
                 <main>
-                    <Container>
+                    <div className="main-container">
                         <ConnectedRouter history={history}>
                             <Switch>
                                 <Route exact={true} path="/send-meldekort" component={SendMeldekort} />
@@ -36,7 +35,7 @@ class App extends React.Component<{}> {
                                 <Redirect exact={true} from="/" to="/send-meldekort"/>
                             </Switch>
                         </ConnectedRouter>
-                    </Container>
+                    </div>
                 </main>
             </div>
         );

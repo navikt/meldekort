@@ -1,0 +1,20 @@
+Du skal svare <strong>Ja</strong> hvis du har gjennomført den aktiviteten du har avtalt med NAV. 
+<br>
+<br>
+Aktiviteten kan være 
+<ul>
+<li> arbeidsrettede tiltak </li>
+<li> medisinsk behandling </li>
+<li> utdanning </li>
+<li> annen aktivitet </li> 
+</ul>
+Du skal svare <strong>Ja</strong> hvis du deltar på aktiviteter du ikke har avtalt med NAV. Dette kan være
+<ul>
+<li> kurs </li>
+<li> utdanning </li>
+<li> selvstudium </li>
+</ul>
+Du skal svare <strong>Nei</strong> hvis du ikke har gjennomført den aktiviteten som du avtalte med NAV.
+<br>
+<br>
+Du skal svare <strong>Nei</strong> hvis du ikke har avtalt noen aktivitet med NAV. 

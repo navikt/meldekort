@@ -1,0 +1,12 @@
+Du skal svare <strong>Ja</strong> hvis du har vært forhindret fra å ta arbeid eller gjennomføre den aktiviteten du har avtalt med NAV fordi du har vært for syk.
+<br>
+<br>
+Med aktivitet mener vi
+<ul>
+<li> arbeid </li>
+<li> arbeidsrettede tiltak </li>
+<li> medisinsk behandling </li>
+<li> kurs/utdanning/selvstudium </li>
+<li> annen aktivitet </li>
+</ul>
+Du skal svare <strong>Nei</strong> hvis du ikke har hatt fravær på grunn av sykdom.

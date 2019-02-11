@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { hentHistoriskeMeldekort } from '../../api/api';
 
 class TidligereMeldekort extends React.Component<any, any> {
@@ -12,6 +13,7 @@ class TidligereMeldekort extends React.Component<any, any> {
         return(
             <div className="sideinnhold">
                 <Innholdstittel> Tidligere meldekort</Innholdstittel>
+                <Sprakvelger/>
             </div>
         );
     }
