@@ -1,7 +1,3 @@
-// Denne fargen er brukt som bakgrunn for banner, men finnes ikke i nav-frontend
-@panelBakgrunn: #f1f1f1;
-@width-container: 800px;
-
 // nav-frontend
 @import "~nav-frontend-core/less/core";
 @import "~nav-frontend-tabs-style";
@@ -15,6 +11,9 @@
 @import "app/components/sprakvelger/sprakvelger.less";
 @import "app/pages/sendMeldekort/sendMeldekort.less";
 
+// Variabler
+@import "app/variabler.less";
+
 // GENERELL STYLING
 
 body {
@@ -27,10 +26,8 @@ body {
     .main-container {
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      margin-left: auto;
-      margin-right: auto;
+      margin: @margin-tabs-and-main-md;
       max-width: @width-container;
-      padding-top: 2rem;
 
       .sideinnhold {
         display: flex;
@@ -52,10 +49,10 @@ body {
           }
 
           .item {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
 
-            &:first-child {
-              margin-top: 1.5rem;
+            &:last-child {
+              margin-bottom: 0;
             }
           }
         }
@@ -68,11 +65,42 @@ body {
   }
 
   @media (max-width: (@width-container + 10 )) {
-    #root {
+    .main-container {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      .sideinnhold {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0 0.5rem 0;
 
-      .main-container {
-        margin-left: 5px;
-        margin-right: 5px;
+        .seksjon {
+          margin-bottom: 2rem;
+
+          .item {
+            margin-bottom: 1rem;
+
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: (@screen-sm-max)) {
+    .main-container {
+      margin: @margin-tabs-and-main-sm;
+      .sideinnhold {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0 0.5rem 0;
+
+        .seksjon {
+          margin-bottom: 2rem;
+
+          .item {
+            margin-bottom: 1rem;
+
+          }
+        }
       }
     }
   }

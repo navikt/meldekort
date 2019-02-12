@@ -13,6 +13,7 @@ class SendMeldekort extends React.Component<any, any> {
     }
 
     // bruker sitt antall meldekort må hentes fra store (etter at vi har fått koblet sammen back2front)
+    // TODO: Info varierer basert på antall mk
 
     render() {
 
@@ -33,14 +34,22 @@ class SendMeldekort extends React.Component<any, any> {
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">
-                    <Tabell
-                        rows={rows}
-                        columns={columns}
-                    />
+                    <div className="item">
+                        <FormattedHTMLMessage id="sendMeldekort.info.kanSende"/>
+                    </div>
+                    <div className="item">
+                        <Tabell
+                            rows={rows}
+                            columns={columns}
+                        />
+                    </div>
                 </section>
                 <section className="seksjon">
                     <AlertStripe type="info" solid={true}>
-                        <FormattedHTMLMessage id="sendMeldekort.alert.forklaring"/>
+                        <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/>
+                        <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/>
+                        <br/>
+                        <FormattedHTMLMessage id="sendMeldekort.info.neste"/>
                     </AlertStripe>
                 </section>
                 <section className="seksjon flex-innhold sentrert">

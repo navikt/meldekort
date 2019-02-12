@@ -23,7 +23,7 @@ class TidligereMeldekort extends React.Component<any, any> {
 
         return(
             <div className="sideinnhold">
-                <Innholdstittel className="seksjon"> Tidligere meldekort </Innholdstittel>
+                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.tidligereMeldekort" /></Innholdstittel>
                 <section className="seksjon">
                     <Sprakvelger/>
                 </section>
@@ -37,7 +37,7 @@ class TidligereMeldekort extends React.Component<any, any> {
                     <Tabell
                         rows={rows}
                         columns={columns}
-                        
+
                     />
                 </section>
             </div>
