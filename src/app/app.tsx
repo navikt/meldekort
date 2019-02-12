@@ -20,23 +20,21 @@ class App extends React.Component<{}> {
             <div>
                 <Banner tittel="Meldekort"/>
                 <NavTabs/>
-                <main>
-                    <div className="main-container">
-                        <ConnectedRouter history={history}>
-                            <Switch>
-                                <Route exact={true} path="/send-meldekort" component={SendMeldekort} />
-                                <Route path="/tidligere-meldekort" component={TidligereMeldekort} />
-                                <Route path="/demo" component={Demo}/>
-                                <Route path="/om-meldekort" component={OmMeldekort} />
-                                <Route path="/ofte-stilte-sporsmal" component={OfteStilteSporsmal} />
-                                <Route path="/endre-meldeform" component={EndreMeldeform} />
-                                <Route path="/etterregistrer-meldekort" component={EtterregistrerMeldekort} />
-                                <Route path="/404" component={() => <div />} />
-                                <Redirect exact={true} from="/" to="/send-meldekort"/>
-                            </Switch>
-                        </ConnectedRouter>
-                    </div>
-                </main>
+                <div className="main-container">
+                    <ConnectedRouter history={history}>
+                        <Switch>
+                            <Route exact={true} path="/send-meldekort" component={SendMeldekort} />
+                            <Route path="/tidligere-meldekort" component={TidligereMeldekort} />
+                            <Route path="/demo" component={Demo}/>
+                            <Route path="/om-meldekort" component={OmMeldekort} />
+                            <Route path="/ofte-stilte-sporsmal" component={OfteStilteSporsmal} />
+                            <Route path="/endre-meldeform" component={EndreMeldeform} />
+                            <Route path="/etterregistrer-meldekort" component={EtterregistrerMeldekort} />
+                            <Route path="/404" component={() => <div />} />
+                            <Redirect exact={true} from="/" to="/send-meldekort"/>
+                        </Switch>
+                    </ConnectedRouter>
+                </div>
             </div>
         );
     }

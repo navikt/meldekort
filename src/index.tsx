@@ -12,7 +12,7 @@ import { store } from './app/store/configureStore';
 
 addLocaleData([...nbLocaleData, ...enLocaleData]);
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('meldekort-root');
 
 const render = (Component: React.ComponentType<{}>) => {
     ReactDOM.render(

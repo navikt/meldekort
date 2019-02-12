@@ -11,8 +11,9 @@
 -----------------------------------------
 */
 @width-container: @screen-desktop;
-@margin-tabs-and-main-md: 0 1rem 0 1rem;
-@margin-tabs-and-main-sm: 0 0.5rem 0 0.5rem;
+
+@padding-vertical-md: 0 1rem 0 1rem;
+@padding-vertical-sm: 0 0.5rem 0 0.5rem;
 
 /*
 -----------------------------
@@ -29,6 +30,6 @@
 @sm-max: (@md-min - 1);
 @md-max: (@lg-min - 1);
 
-@phone:   ~"only screen and (min-width: @{xs-min}) and (max-width: @{xs-max})";
+@phone:   ~"only screen and (max-width: @{xs-max})";
 @tablet:  ~"only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})";
 @desktop: ~"only screen and (min-width: @{md-min})";
