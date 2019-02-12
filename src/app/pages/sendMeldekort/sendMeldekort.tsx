@@ -4,6 +4,7 @@ import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { hentMeldekort } from '../../api/api';
 
 class SendMeldekort extends React.Component<any, any> {
     constructor(props: any) {
@@ -11,6 +12,7 @@ class SendMeldekort extends React.Component<any, any> {
     }
 
     render() {
+        const mk = hentMeldekort();
         return(
             <div className="sideinnhold">
                 <Innholdstittel> Send Meldekort siden </Innholdstittel>
@@ -20,6 +22,7 @@ class SendMeldekort extends React.Component<any, any> {
                     <FormattedHTMLMessage id="sendMeldekort.alert.forklaring"/>
                 </AlertStripe>
 
+                {console.log(mk)}
             </div>
         );
     }
