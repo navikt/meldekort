@@ -5,6 +5,7 @@
   "homepage": "/meldekort",
   "dependencies": {
     "ajv": "^6.6.2",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
@@ -39,7 +40,9 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-devtools": "^3.5.0",
-    "redux-saga": "^0.16.2"
+    "redux-observable": "^1.0.0",
+    "redux-saga": "^0.16.2",
+    "rxjs": "^6.4.0"
   },
   "scripts": {
     "build": "react-scripts-ts build",

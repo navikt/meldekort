@@ -5,8 +5,16 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { hentMeldekort } from '../../api/api';
+import { Dispatch } from 'redux';
+import { PersonActions } from '../../actions/person';
 
-class SendMeldekort extends React.Component<any, any> {
+interface MapDispatchToProps {
+    hentPerson: () => void;
+}
+
+type Props = MapDispatchToProps;
+
+class SendMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
     }
@@ -28,4 +36,12 @@ class SendMeldekort extends React.Component<any, any> {
     }
 }
 
-export default connect()(SendMeldekort);
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+                    return {
+                        hentPerson: () => dispatch(PersonActions.hentPerson.request()),
+                    };
+};
+
+export default connect(
+    mapDispatchToProps
+)(SendMeldekort);
