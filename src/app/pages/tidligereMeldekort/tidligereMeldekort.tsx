@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import { hentHistoriskeMeldekort } from '../../api/api';
 import Tabell from '../../components/tabell/tabell';
 import EtikettBase from 'nav-frontend-etiketter';
 import Lenke from 'nav-frontend-lenker';
@@ -12,6 +13,8 @@ class TidligereMeldekort extends React.Component<any, any> {
     }
 
     render() {
+        console.log(hentHistoriskeMeldekort());
+
         // Hentes fra store når ting er sammenkoblet.
         const rows = [
             {

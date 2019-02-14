@@ -6,6 +6,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import KnappBase from 'nav-frontend-knapper';
 import Tabell from '../../components/tabell/tabell';
+import { hentMeldekort } from '../../api/api';
 
 class SendMeldekort extends React.Component<any, any> {
     constructor(props: any) {
@@ -16,6 +17,7 @@ class SendMeldekort extends React.Component<any, any> {
     // TODO: Info varierer basert på antall mk
 
     render() {
+        const mk = hentMeldekort();
 
         const rows = [
             {'periode': 'uke 31-32', 'dato': '30. jul 2018 - 13. aug 2018'},
@@ -57,6 +59,7 @@ class SendMeldekort extends React.Component<any, any> {
                         <FormattedMessage id="sendMeldekort.knapp.startUtfylling" />
                     </KnappBase>
                 </section>
+                {console.log(mk)}
             </main>
         );
     }
