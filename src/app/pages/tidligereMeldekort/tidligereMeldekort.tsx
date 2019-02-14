@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Tabell from '../../components/tabell/tabell';
 import EtikettBase from 'nav-frontend-etiketter';
+import Lenke from 'nav-frontend-lenker';
 
 class TidligereMeldekort extends React.Component<any, any> {
     constructor(props: any) {
@@ -38,6 +39,7 @@ class TidligereMeldekort extends React.Component<any, any> {
                 'detaljer': 'Detaljer >'
             },
         ];
+
         // TODO: Endres når vi vet mer om fargekodene.
         const finnRiktigEtikettType = (statustekst: any) => {
             if (statustekst === 'Til beregning' || statustekst === 'Til manuell') {
@@ -49,9 +51,6 @@ class TidligereMeldekort extends React.Component<any, any> {
             }
         };
 
-        const settPaLenke = () => {
-
-        };
         const columns = [
             {key: 'periode', label: 'Periode', cell: 'periode'},
             {key: 'dato', label: 'Dato', cell: 'dato'},
@@ -60,7 +59,9 @@ class TidligereMeldekort extends React.Component<any, any> {
                 return <EtikettBase type={finnRiktigEtikettType(row.status)}> {row.status} </EtikettBase>;
                 }},
             {key: 'bruttobelop', label: 'Bruttobelop', cell: 'bruttobelop'},
-            {key: 'detaljer', label: 'Detaljer', cell: 'detaljer'}
+            {key: 'detaljer', label: 'Detaljer', cell: function( row: any, columnKey: any) {
+                    return <Lenke href=""> {row.detaljer} </Lenke>;
+                }}
         ];
 
         return(
