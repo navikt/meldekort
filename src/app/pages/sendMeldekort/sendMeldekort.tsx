@@ -8,7 +8,6 @@ import { Dispatch } from 'redux';
 import { PersonActions } from '../../actions/person';
 import KnappBase from 'nav-frontend-knapper';
 import Tabell from '../../components/tabell/tabell';
-import { hentMeldekort } from '../../api/api';
 
 interface MapDispatchToProps {
     hentPerson: () => void;
@@ -27,7 +26,6 @@ class SendMeldekort extends React.Component<Props> {
     // TODO: Info varierer basert på antall mk
 
     render() {
-        const mk = hentMeldekort();
 
         const rows = [
             {'periode': 'uke 31-32', 'dato': '30. jul 2018 - 13. aug 2018'},
@@ -69,7 +67,6 @@ class SendMeldekort extends React.Component<Props> {
                         <FormattedMessage id="sendMeldekort.knapp.startUtfylling" />
                     </KnappBase>
                 </section>
-                {console.log(mk)}
             </main>
         );
     }
