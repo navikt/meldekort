@@ -8,7 +8,6 @@ interface TabellProps {
 
 const Tabell: React.StatelessComponent<TabellProps> = (props) => {
     const JsonTable = require('ts-react-json-table');
-    console.log(props.columns.map( col => col));
 
     return (
         <div className="tabell">

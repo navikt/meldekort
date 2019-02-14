@@ -46,6 +46,8 @@ class TidligereMeldekort extends React.Component<any, any> {
                 return 'fokus';
             } else if (statustekst === 'Beregnet') {
                 return 'suksess';
+            } else if (statustekst === 'Ingen beregning') {
+                return 'info';
             } else {
                 return 'info';
             }
