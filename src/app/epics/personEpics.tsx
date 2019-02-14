@@ -13,7 +13,7 @@ const hentPerson: AppEpic = action$ =>
             from(hentMeldekort()).pipe(
                 map(PersonActions.hentPerson.success),
                 catchError(error =>
-                    of(PersonActions.hentPerson.failure())
+                    of(PersonActions.hentPerson.failure(error))
                 )
             )
         )

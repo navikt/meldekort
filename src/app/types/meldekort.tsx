@@ -10,14 +10,6 @@ export enum Constants {
     LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT'
 }
 
-// TYPE
-export interface Meldekort {
-    id: string;
-    arbeidet: boolean;
-}
-
-// Ved kall til hentHistoriskeMeldekort kommer det en liste med Meldekort.
-// I hentMeldekort får man tilbake Person som også inneholder to lister med Meldekort
 export interface Meldekort {
     meldekortId: bigint;
     kortType: KortType;
@@ -30,11 +22,12 @@ export interface Meldekort {
     korrigerbart: boolean;
 }
 
+// hentMeldekortDetaljer
 export interface Meldekortdetaljer {
     id: string;
-    personId: bigint;
+    personId: number;
     fodselsnr: string;
-    meldekortId: bigint;
+    meldekortId: number;
     meldeperiode: string;
     arkivnokkel: string;
     kortType: string;

@@ -1,22 +1,43 @@
 import { Meldekort } from './meldekort';
 
-// Denne får man tilbake ved kall til hentMeldekort
+// hentMeldekort
 export interface Person {
     personId: number;
     etternavn: string;
     fornavn: string;
     maalformkode: string;
-    meldeform: string;
+    meldeform: MeldeForm;
     meldekort: Meldekort[];
-    etterregistrerteMeldekort: [];
-    fravaer: [];
+    etterregistrerteMeldekort: Meldekort[];
+    fravaer: Fravaer[];
     id: string;
     antallGjenstaaendeFeriedager: number;
 }
 
-// Denne får man tilbake ved kall til hentPersonstatus
+// hentPersonstatus
 export interface PersonStatus {
     id: string;
     statusArbeidsoker: string;
     statusYtelse: string;
+}
+
+export enum MeldeForm {
+    ELEKTRONISK = 'EMELD',
+    PAPIR = 'PAPIR',
+    MANUELL = 'MANU',
+    AUTO = 'AUTO',
+    IKKE_SATT = 'IKKE SATT'
+}
+
+export interface Fravaer {
+    fraDato: Date;
+    tilDato: Date;
+    type: FravaerType;
+}
+
+export enum FravaerType {
+    KURS_UTDANNING = 'K',
+    SYKDOM = 'S',
+    ANNET_FRAVAER = 'X',
+    ARBEIDS_FRAVAER = 'F'
 }
