@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Tabs from 'nav-frontend-tabs';
-import { connect } from 'react-redux';
-import { history, RootState, store } from '../../store/configureStore';
 
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { history, RootState, store } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Tab, hentTabConfig } from './tabConfig';
@@ -27,14 +28,14 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
         };
     }
 
-    lagTabs = (tabsobjekter: Tab[], kompakt: boolean) => {
-        const tablabels = tabsobjekter
-            .map(obj => this.lagTab(obj));
+    lagTabs = (tabsobjekter: Tab[], aktivTab: string, kompakt: boolean) => {
+        const tablabels = tabsobjekter.map(obj => this.lagTab(obj));
+        const aktivTabIndex = tabsobjekter.findIndex( obj => obj.urlparam === aktivTab);
 
         return (
             <Tabs
-                defaultAktiv={0}
                 onChange={this.handleOnChange}
+                defaultAktiv={aktivTabIndex}
                 tabs={tablabels}
                 kompakt={kompakt}
             />
@@ -42,7 +43,8 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
     }
 
     lagTab = (obj: Tab) => {
-        return({'label': obj.tittel});
+        const formattedTabLabel = <FormattedMessage id={obj.tittel}/>;
+        return({'label': formattedTabLabel});
     }
 
     handleOnChange = ( event: React.SyntheticEvent<EventTarget>, index: number ) => {
@@ -73,7 +75,7 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
 
         return(
             <nav className="tabsmeny">
-                {this.lagTabs(this.state.tabsobjekter, trengerKompakt)}
+                {this.lagTabs(this.state.tabsobjekter, this.props.router.location.pathname, trengerKompakt)}
             </nav>
         );
     }

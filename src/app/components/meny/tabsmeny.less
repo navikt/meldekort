@@ -6,8 +6,12 @@
     justify-content: center;
 
     &__tab-list {
-      width: @screen-md;
-      margin: 0 5px 0 5px;
+      width: @width-container;
+      margin: @padding-vertical-md;
+
+      @media @tablet {
+        margin: @padding-vertical-sm;
+      }
     }
   }
 }

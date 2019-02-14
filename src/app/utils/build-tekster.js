@@ -35,7 +35,7 @@ function read(dir, nb, en) {
 
 function skrivFilTilSprak( fil, dir, splitStr) {
     filename = "'" + fil.split(splitStr)[0] + "'" + ':' + "'"
-        + readFile(dir, fil).trim().replace(/(\r\n|\n|\r)/gm, " ") + "',";
+        + readFile(dir, fil).trim().replace(/(\r\n|\n|\r)/gm, " ") + " ',";
     return filename;
 }
 

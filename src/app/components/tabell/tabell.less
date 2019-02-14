@@ -1,0 +1,42 @@
+.tabell {
+
+  .jsonTable {
+    border-spacing: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+
+    thead {
+      border-bottom: 1px solid @navMorkGra;
+    }
+
+    td, th {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .jsonRow {
+      background: #f8f8f8;
+
+      tr, td {
+        border-bottom: 1px solid #B7B1A9;
+
+        .blaEtikett {
+          background-color: #A3DFF3;
+        }
+      }
+    }
+    .jsonOdd {
+      background: #eee;
+    }
+  }
+}
+
+@media (max-width: @screen-sm) {
+  .tabell {
+
+    td, th {
+      padding: 0.5rem;
+    }
+  }
+}

@@ -1,6 +1,3 @@
-// Denne fargen er brukt som bakgrunn for banner, men finnes ikke i nav-frontend
-@panelBakgrunn: #f1f1f1;
-
 // nav-frontend
 @import "~nav-frontend-core/less/core";
 @import "~nav-frontend-tabs-style";
@@ -10,55 +7,100 @@
 // Komponenter
 @import "./app/components/banner/banner.less";
 @import "app/components/meny/tabsmeny.less";
+@import "app/components/tabell/tabell.less";
 @import "app/components/sprakvelger/sprakvelger.less";
+@import "app/pages/sendMeldekort/sendMeldekort.less";
+
+// Variabler
+@import "app/variabler.less";
 
 // GENERELL STYLING
 
-#root {
-  margin-right: auto;
-  margin-left: auto;
+body {
+  font-family: 'Source Sans Pro', sans-serif;
 
-  .main-container {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-left: auto;
+  #meldekort-root {
     margin-right: auto;
-    max-width: @screen-md;
-    padding-top: 2rem;
+    margin-left: auto;
 
-    .sideinnhold {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 0 2rem 0;
+    .main-container {
+      -webkit-box-sizing: border-box;
+      background: @white;
+      box-sizing: border-box;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: @width-container;
 
-      .seksjon {
-        margin-bottom: 2rem;
+      .sideinnhold {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 0 3rem 0;
 
-        &:last-child {
-          margin-bottom: 0;
+        .flex-innhold {
+          display: flex;
+
+          &.sentrert {
+            justify-content: center;
+          }
         }
-        .item {
+        .seksjon {
           margin-bottom: 2rem;
 
-          &:first-child {
-            margin-top: 1.5rem;
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .item {
+            margin-bottom: 1rem;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
           }
         }
       }
     }
   }
-}
+  .sentrert-tekst {
+    text-align: center;
+  }
 
-.sentrert {
-  text-align: center;
-}
+  @media @tablet {
+    #meldekort-root {
+      .main-container {
+        padding: @padding-vertical-md;
 
-@media (max-width: @screen-md) {
-  #root {
+        .sideinnhold {
+          padding: 2rem 0 2rem 0;
 
-    .main-container {
-      margin-left: 5px;
-      margin-right: 5px;
+          .seksjon {
+            margin-bottom: 1.5rem;
+
+            .item {
+              margin-bottom: 1rem;
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media @phone {
+    #meldekort-root {
+      .main-container {
+        padding: @padding-vertical-sm;
+
+        .sideinnhold {
+          .seksjon {
+            margin-bottom: 1rem;
+
+            .item {
+              margin-bottom: 0.75rem;
+            }
+          }
+        }
+      }
     }
   }
 }
