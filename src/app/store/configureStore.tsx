@@ -4,12 +4,15 @@ import { routerMiddleware, connectRouter, RouterState } from 'connected-react-ro
 import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import demoReducer, { DemoState } from '../reducers/demoReducer';
 import { LocalesState, default as localesReducer } from '../reducers/localesReducer';
-import { Person } from '../types/person';
-import { default as personReducer } from '../reducers/personReducer';
+
 import { intlReducer, IntlState } from 'react-intl-redux';
 import tekster from '../tekster/kompilerte-tekster';
 import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
+
+import personReducer, { PersonState } from '../reducers/personReducer';
+import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import personEpics from '../epics/personEpics';
+import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -28,7 +31,8 @@ export interface RootState {
     intl: IntlState;
     locales: LocalesState;
     router: RouterState;
-    person: Person;
+    person: PersonState;
+    historiskeMeldekort: HistoriskeMeldekortState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -40,6 +44,7 @@ const rootReducer = combineReducers({
     locales: localesReducer,
     router: connectRouter(history),
     person: personReducer,
+    historiskeMeldekort: historiskeMeldekortReducer,
 });
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
@@ -57,7 +62,8 @@ const store = createStore(
 
 epicMiddleware.run(
     combineEpics(
-        personEpics
+        personEpics,
+        historiskeMeldekortEpics,
     )
 );
 

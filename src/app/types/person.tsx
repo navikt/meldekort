@@ -1,6 +1,6 @@
 import { Meldekort } from './meldekort';
 
-// hentMeldekort
+// fetchMeldekort
 export interface Person {
     personId: number;
     etternavn: string;

@@ -22,6 +22,10 @@ export interface Meldekort {
     korrigerbart: boolean;
 }
 
+export interface HistoriskeMeldekort {
+    historiskeMeldekort: Meldekort[];
+}
+
 // hentMeldekortDetaljer
 export interface Meldekortdetaljer {
     id: string;
