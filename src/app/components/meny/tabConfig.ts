@@ -8,39 +8,34 @@ export const hentTabConfig = () => {
     const tabConfig: Tab[] =
         [
             {
-                tittel: 'Send meldekort',
+                tittel: 'sekundarmeny.send',
                 urlparam: '/send-meldekort',
                 disabled: false,
             },
             {
-                tittel: 'Tidligere meldekort',
+                tittel: 'sekundarmeny.tidligere',
                 urlparam: '/tidligere-meldekort',
                 disabled: false,
             },
             {
-                tittel: 'Etterregistrering av meldekort',
+                tittel: 'sekundarmeny.etterregistrer',
                 urlparam: '/etterregistrering',
                 disabled: true,
             },
             {
-                tittel: 'Endre meldeform',
+                tittel: 'sekundarmeny.endreMeldeform',
                 urlparam: '/endre-meldeform',
                 disabled: true,
             },
             {
-                tittel: 'Om meldekort',
+                tittel: 'sekundarmeny.omMeldekort',
                 urlparam: '/om-meldekort',
                 disabled: false,
             },
             {
-                tittel: 'Ofte stilte spørsmål',
+                tittel: 'sekundarmeny.faq',
                 urlparam: '/ofte-stilte-sporsmal',
                 disabled: false,
-            },
-            {
-                tittel: 'Endre meldeform',
-                urlparam: '/endre-meldeform',
-                disabled: true,
             }
         ];
     return tabConfig;
