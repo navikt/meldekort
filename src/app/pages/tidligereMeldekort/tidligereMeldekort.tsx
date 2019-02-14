@@ -38,6 +38,14 @@ class TidligereMeldekort extends React.Component<any, any> {
                 'bruttobelop': '9 270,00',
                 'detaljer': 'Detaljer >'
             },
+            {
+                'periode': 'uke 27-28',
+                'dato': '2. jul 2018 - 16. jul 2018',
+                'mottatt': '16.06.2018',
+                'status': 'Ingen beregning',
+                'bruttobelop': '9 270,00',
+                'detaljer': 'Detaljer >'
+            },
         ];
 
         // TODO: Endres når vi vet mer om fargekodene.
@@ -46,11 +54,17 @@ class TidligereMeldekort extends React.Component<any, any> {
                 return 'fokus';
             } else if (statustekst === 'Beregnet') {
                 return 'suksess';
-            } else if (statustekst === 'Ingen beregning') {
-                return 'info';
             } else {
                 return 'info';
             }
+        };
+
+        const HvisIngenBeregningSettBlaEtikett = (statustekst: any) => {
+          if (statustekst === 'Ingen beregning')  {
+              return 'blaEtikett';
+          } else {
+              return '';
+          }
         };
 
         const columns = [
@@ -58,7 +72,13 @@ class TidligereMeldekort extends React.Component<any, any> {
             {key: 'dato', label: 'Dato', cell: 'dato'},
             {key: 'mottatt', label: 'Mottatt', cell: 'mottatt'},
             {key: 'status', label: 'Status', cell: function( row: any, columnKey: any) {
-                return <EtikettBase type={finnRiktigEtikettType(row.status)}> {row.status} </EtikettBase>;
+                return (
+                    <EtikettBase
+                        type={finnRiktigEtikettType(row.status)}
+                        className={HvisIngenBeregningSettBlaEtikett(row.status)}
+                    > {row.status}
+                    </EtikettBase>
+                    );
                 }},
             {key: 'bruttobelop', label: 'Bruttobelop', cell: 'bruttobelop'},
             {key: 'detaljer', label: 'Detaljer', cell: function( row: any, columnKey: any) {
