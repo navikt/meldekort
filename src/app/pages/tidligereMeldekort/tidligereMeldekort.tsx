@@ -2,54 +2,63 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import { hentHistoriskeMeldekort } from '../../api/api';
+import { Dispatch } from 'redux';
+import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
+import { connect } from 'react-redux';
 import Tabell from '../../components/tabell/tabell';
 import EtikettBase from 'nav-frontend-etiketter';
 import Lenke from 'nav-frontend-lenker';
+import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
+import { RootState } from '../../store/configureStore';
+import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 
-class TidligereMeldekort extends React.Component<any, any> {
+interface MapStateToProps {
+    historiskeMeldekort: HistoriskeMeldekortState;
+}
+
+interface MapDispatchToProps {
+    hentHistoriskeMeldekort: () => void;
+}
+
+interface HistoriskeMeldekortRad {
+    periode: string;
+    dato: string;
+    mottatt: string;
+    status: string;
+    bruttobelop: string;
+    detaljer: string;
+}
+
+type Props = MapDispatchToProps&MapStateToProps;
+
+class TidligereMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
+
+        this.props.hentHistoriskeMeldekort();
+    }
+
+    hentRaderFraHistoriskeMeldekort = () => {
+        let historiskeMeldekortListe = this.props.historiskeMeldekort.historiskeMeldekort;
+        let radliste = [];
+        for (let i = 0; i < historiskeMeldekortListe.length; i++) {
+            let rad: HistoriskeMeldekortRad = {
+                periode: hentUkePeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
+                dato: hentDatoPeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
+                mottatt: formaterDato(historiskeMeldekortListe[i].mottattDato),
+                status: historiskeMeldekortListe[i].kortStatus,
+                bruttobelop: `${historiskeMeldekortListe[i].bruttoBelop.toString()} kr`,
+                detaljer: 'Detaljer >'
+            };
+            radliste.push(rad);
+        }
+        return radliste;
     }
 
     render() {
-        console.log(hentHistoriskeMeldekort());
+        console.log(this.props.historiskeMeldekort.historiskeMeldekort);
 
-        // Hentes fra store når ting er sammenkoblet.
-        const rows = [
-            {
-                'periode': 'uke 31-32',
-                'dato': '30. jul 2018 - 13. aug 2018',
-                'mottatt': '02.09.2018',
-                'status': 'Til beregning',
-                'bruttobelop': '9 270,00',
-                'detaljer': 'Detaljer >'
-            },
-            {
-                'periode': 'uke 29-30',
-                'dato': '16. jul 2018 - 30. jul 2018',
-                'mottatt': '30.07.2018',
-                'status': 'Til manuell',
-                'bruttobelop': '9 270,00',
-                'detaljer': 'Detaljer >'
-            },
-            {
-                'periode': 'uke 27-28',
-                'dato': '2. jul 2018 - 16. jul 2018',
-                'mottatt': '16.06.2018',
-                'status': 'Beregnet',
-                'bruttobelop': '9 270,00',
-                'detaljer': 'Detaljer >'
-            },
-            {
-                'periode': 'uke 27-28',
-                'dato': '2. jul 2018 - 16. jul 2018',
-                'mottatt': '16.06.2018',
-                'status': 'Ingen beregning',
-                'bruttobelop': '9 270,00',
-                'detaljer': 'Detaljer >'
-            },
-        ];
+        const rows = this.hentRaderFraHistoriskeMeldekort();
 
         // TODO: Endres når vi vet mer om fargekodene.
         const finnRiktigEtikettType = (statustekst: any) => {
@@ -112,4 +121,19 @@ class TidligereMeldekort extends React.Component<any, any> {
     }
 }
 
-export default TidligereMeldekort;
+const mapStateToProps = (historiskeMeldekort: RootState): MapStateToProps => {
+    return {
+        historiskeMeldekort: historiskeMeldekort.historiskeMeldekort,
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        hentHistoriskeMeldekort: () => dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (TidligereMeldekort);

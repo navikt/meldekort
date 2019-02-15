@@ -32,8 +32,8 @@ const fetchJSONAndCheckForErrors = (url) => {
     return p;
 };
 
-export const hentMeldekort = () => fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
-export const hentHistoriskeMeldekort = () => fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
+export const fetchMeldekort = () => fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
+export const fetchHistoriskeMeldekort = () => fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
 export const hentMeldekortdetaljer = (id) => fetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id)}`);
 export const hentPersonstatus = () => fetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
 export const hentKorrigertId = (id) => fetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id)}`);

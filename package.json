@@ -5,11 +5,13 @@
   "homepage": "/meldekort",
   "dependencies": {
     "ajv": "^6.6.2",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
     "lodash.throttle": "^4.1.1",
+    "moment": "^2.24.0",
     "nav-frontend-alertstriper": "^1.0.29",
     "nav-frontend-alertstriper-style": "^0.2.50",
     "nav-frontend-chevron": "^1.0.6",
@@ -47,7 +49,9 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-devtools": "^3.5.0",
+    "redux-observable": "^1.0.0",
     "redux-saga": "^0.16.2",
+    "rxjs": "^6.4.0",
     "ts-react-json-table": "^0.1.1"
   },
   "scripts": {
