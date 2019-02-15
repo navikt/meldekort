@@ -70,19 +70,19 @@ export enum Meldegruppe {
 }
 
 export enum KortStatus {
-    OPPRE,
-    SENDT,
-    SLETT,
-    REGIS,
-    FMOPP,
-    FUOPP,
-    KLAR,
-    KAND,
-    IKKE,
-    OVERM,
-    NYKTR,
-    FERDI,
-    FEIL,
-    VENTE,
-    OPPF
+    OPPRE = 'OPPRE',
+    SENDT = 'SENDT',
+    SLETT = 'SLETT',
+    REGIS = 'REGIS' ,
+    FMOPP = 'FMOPP',
+    FUOPP = 'FUOPP',
+    KLAR = 'KLAR',
+    KAND = 'KAND',
+    IKKE = 'IKKE',
+    OVERM = 'OVERM',
+    NYKTR = 'NYKTR',
+    FERDI = 'FERDI',
+    FEIL = 'FEIL',
+    VENTE = 'VENTE',
+    OPPF = 'OPPF'
 }
