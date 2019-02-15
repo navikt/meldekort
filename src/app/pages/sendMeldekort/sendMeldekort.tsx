@@ -11,8 +11,7 @@ import Tabell from '../../components/tabell/tabell';
 import { PersonState } from '../../reducers/personReducer';
 import { RootState } from '../../store/configureStore';
 import { KortStatus } from '../../types/meldekort';
-
-const moment = require('moment');
+import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 
 interface MapStateToProps {
    person: PersonState;
@@ -21,7 +20,7 @@ interface MapDispatchToProps {
     hentPerson: () => void;
 }
 
-interface Rad {
+interface MeldekortRad {
     periode: string;
     dato: string;
 }
@@ -35,18 +34,14 @@ class SendMeldekort extends React.Component<Props> {
         this.props.hentPerson();
     }
 
-    hentRaderFraPerson = () => {
+    hentMeldekortRaderFraPerson = () => {
         let meldekortListe = this.props.person.person.meldekort;
         let radliste = [];
         for (let i = 0; i < meldekortListe.length; i++) {
             if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
-                let meldeperiode = meldekortListe[i].meldeperiode;
-                let fra = moment(meldeperiode.fra);
-                let til = moment(meldeperiode.til);
-
-                let rad: Rad = {
-                    periode: `Uke ${fra.isoWeek()} - ${til.isoWeek()}`,
-                    dato: `${fra.format('DD.MM.YYYY').toString()} - ${til.format('DD.MM.YYYY').toString()}`,
+                let rad: MeldekortRad = {
+                    periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                    dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
                 };
                 radliste.push(rad);
             }
@@ -58,7 +53,7 @@ class SendMeldekort extends React.Component<Props> {
     // TODO: Info varierer basert på antall mk
 
     render() {
-        const rows = this.hentRaderFraPerson();
+        const rows = this.hentMeldekortRaderFraPerson();
         const columns = [
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
@@ -98,6 +93,7 @@ class SendMeldekort extends React.Component<Props> {
         );
     }
 }
+
 const mapStateToProps = (person: RootState): MapStateToProps => {
     return {
         person: person.person,
