@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import KnappBase from 'nav-frontend-knapper';
 import Tabell from '../../components/tabell/tabell';
 import { hentMeldekort } from '../../api/api';
+import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 
 class SendMeldekort extends React.Component<any, any> {
     constructor(props: any) {
@@ -29,7 +29,7 @@ class SendMeldekort extends React.Component<any, any> {
             {key: 'dato', label: 'Dato'}
         ];
 
-        return(
+        return (
             <main className="sideinnhold">
                 <Innholdstittel className="seksjon"> [X] meldekort klar for innsending </Innholdstittel>
                 <section className="seksjon">
@@ -50,14 +50,15 @@ class SendMeldekort extends React.Component<any, any> {
                     <AlertStripe type="info" solid={true}>
                         <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/>
                         <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/>
-                        <br/>
                         <FormattedHTMLMessage id="sendMeldekort.info.neste"/>
                     </AlertStripe>
                 </section>
                 <section className="seksjon flex-innhold sentrert">
-                    <KnappBase type="hoved">
-                        <FormattedMessage id="sendMeldekort.knapp.startUtfylling" />
-                    </KnappBase>
+                    <NavKnapp
+                        type={knappTyper.hoved}
+                        nestePath={'/innsending'}
+                        tekstid={'sendMeldekort.knapp.startUtfylling'}
+                    />
                 </section>
                 {console.log(mk)}
             </main>

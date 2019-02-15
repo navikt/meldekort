@@ -4,7 +4,7 @@ import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 
 // <> props inside
-class Kvittering extends React.Component<any,any> {
+class Kvittering extends React.Component<any, any> {
 
     // Functions & Methods
 
@@ -21,11 +21,18 @@ class Kvittering extends React.Component<any,any> {
                 <section className="seksjon">
                     <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
                 </section>
-
+                <section className="seksjon flex-innhold sentrert">
+                    <a
+                        className="knapp knapp--hoved"
+                        href=""
+                    >
+                        <FormattedMessage id="sendMeldekort.knapp.startUtfylling"/>
+                    </a>
+                </section>
             </div>
         );
 
     }
-};
+}
 
 export default Kvittering;

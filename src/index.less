@@ -34,9 +34,19 @@ body {
 
         .flex-innhold {
           display: flex;
+          flex-wrap: wrap;
 
           &.sentrert {
             justify-content: center;
+
+            .navigasjonsknapp {
+              margin-right: 2rem;
+              margin-bottom: 2rem;
+
+              &:last-child {
+                margin-left: 0;
+              }
+            }
           }
         }
         .seksjon {

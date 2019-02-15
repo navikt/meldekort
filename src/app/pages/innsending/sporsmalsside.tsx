@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
+import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 
 // <> props inside
-class Sporsmalsside extends React.Component<any,any> {
+class Sporsmalsside extends React.Component<any, any> {
 
     // Functions & Methods 
 
@@ -20,6 +21,14 @@ class Sporsmalsside extends React.Component<any,any> {
                 </section>
                 <section className="seksjon">
                     <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
+                </section>
+                <section className="seksjon flex-innhold sentrert">
+                    <NavKnapp
+                        type={knappTyper.hoved}
+                        nestePath={'/utfylling'}
+                        tekstid={'naviger.neste'}
+                        className={'navigasjonsknapp'}
+                    />
                 </section>
 
             </div>
