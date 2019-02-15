@@ -24,6 +24,7 @@ interface HistoriskeMeldekortRad {
     periode: string;
     dato: string;
     mottatt: string;
+    status: string;
     bruttobelop: string;
     detaljer: string;
 }
@@ -38,14 +39,15 @@ class TidligereMeldekort extends React.Component<Props> {
     }
 
     hentRaderFraHistoriskeMeldekort = () => {
-        let historiskeMeldekortListe = this.props.historiskeMeldekort.historiskeMeldekort.historiskeMeldekort;
+        let historiskeMeldekortListe = this.props.historiskeMeldekort.historiskeMeldekort;
         let radliste = [];
         for (let i = 0; i < historiskeMeldekortListe.length; i++) {
             let rad: HistoriskeMeldekortRad = {
                 periode: hentUkePeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
                 dato: hentDatoPeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
                 mottatt: formaterDato(historiskeMeldekortListe[i].mottattDato),
-                bruttobelop: historiskeMeldekortListe[i].bruttoBelop.toString(),
+                status: historiskeMeldekortListe[i].kortStatus,
+                bruttobelop: `${historiskeMeldekortListe[i].bruttoBelop.toString()} kr`,
                 detaljer: 'Detaljer >'
             };
             radliste.push(rad);
@@ -54,8 +56,8 @@ class TidligereMeldekort extends React.Component<Props> {
     }
 
     render() {
-        console.log(this.props.historiskeMeldekort.historiskeMeldekort.historiskeMeldekort);
-        // Hentes fra store når ting er sammenkoblet.
+        console.log(this.props.historiskeMeldekort.historiskeMeldekort);
+
         const rows = this.hentRaderFraHistoriskeMeldekort();
 
         // TODO: Endres når vi vet mer om fargekodene.

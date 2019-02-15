@@ -1,15 +1,13 @@
-import { HistoriskeMeldekort } from '../types/meldekort';
+import { Meldekort } from '../types/meldekort';
 import { getType } from 'typesafe-actions';
 import { HistoriskeMeldekortActions, HistoriskeMeldekortActionTypes } from '../actions/historiskeMeldekort';
 
 export interface HistoriskeMeldekortState {
-    historiskeMeldekort: HistoriskeMeldekort;
+    historiskeMeldekort: Meldekort[];
 }
 
 const initalState: HistoriskeMeldekortState = {
-    historiskeMeldekort: {
-        historiskeMeldekort: []
-    },
+    historiskeMeldekort: []
 };
 
 const historiskeMeldekortReducer = (state: HistoriskeMeldekortState = initalState,

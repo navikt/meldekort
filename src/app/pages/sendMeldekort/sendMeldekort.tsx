@@ -49,9 +49,6 @@ class SendMeldekort extends React.Component<Props> {
         return radliste;
     }
 
-    // bruker sitt antall meldekort må hentes fra store (etter at vi har fått koblet sammen back2front)
-    // TODO: Info varierer basert på antall mk
-
     render() {
         const rows = this.hentMeldekortRaderFraPerson();
         const columns = [

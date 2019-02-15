@@ -11,7 +11,7 @@ export enum Constants {
 }
 
 export interface Meldekort {
-    meldekortId: bigint;
+    meldekortId: number;
     kortType: KortType;
     meldeperiode: Meldeperiode;
     meldegruppe: Meldegruppe;
@@ -22,9 +22,11 @@ export interface Meldekort {
     korrigerbart: boolean;
 }
 
+/*
 export interface HistoriskeMeldekort {
     historiskeMeldekort: Meldekort[];
 }
+*/
 
 // hentMeldekortDetaljer
 export interface Meldekortdetaljer {

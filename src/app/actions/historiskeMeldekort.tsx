@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { ActionType, createAsyncAction } from 'typesafe-actions';
-import { HistoriskeMeldekort } from '../types/meldekort';
+import { Meldekort } from '../types/meldekort';
 
 export enum HistoriskeMeldekortTypeKeys {
     HENT_HISTORISKE = 'HENT_HISTORISKE',
@@ -13,7 +13,7 @@ export const HistoriskeMeldekortActions = {
         HistoriskeMeldekortTypeKeys.HENT_HISTORISKE,
         HistoriskeMeldekortTypeKeys.HENT_HISTORISKE_OK,
         HistoriskeMeldekortTypeKeys.HENT_HISTORISKE_FEILET
-    )<void, HistoriskeMeldekort, AxiosError>(),
+    )<void, Meldekort[], AxiosError>(),
 };
 
 export type HistoriskeMeldekortActionTypes = ActionType<typeof HistoriskeMeldekortActions>;
