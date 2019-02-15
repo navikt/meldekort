@@ -31,13 +31,11 @@ const NavKnapp: React.StatelessComponent<NavKnappProps> = (props) => {
             onClick={() => {
                 const currentPath =  props.router.location.pathname;
                 let newPath;
-                if (currentPath.slice(0, 11) !== '/innsending') {
+                if (currentPath.slice(0, 11) === '/innsending') {
                     newPath = props.nestePath;
                 } else {
-                    newPath = currentPath + props.nestePath;
+                    newPath = props.nestePath;
                 }
-                console.log('cp:', currentPath);
-                console.log('np:', newPath);
                 history.push(newPath);
             }}
             className={props.className}

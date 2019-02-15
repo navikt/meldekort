@@ -25,7 +25,7 @@ class Sporsmalsside extends React.Component<any, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/utfylling'}
+                        nestePath={'/innsending/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                     />

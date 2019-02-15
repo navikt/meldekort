@@ -25,13 +25,13 @@ class Bekreftelse extends React.Component<any, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
-                        nestePath={'/sporsmal'}
+                        nestePath={'/innsending/utfylling'}
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/bekreftelse'}
+                        nestePath={'/innsending/kvittering'}
                         tekstid={'naviger.send'}
                         className={'navigasjonsknapp'}
                     />

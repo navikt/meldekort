@@ -6,7 +6,10 @@ import SendMeldekort from '../sendMeldekort/sendMeldekort';
 import EtterregistrerMeldekort from '../etterregistrerMeldekort/etterregistrerMeldekort';
 import OmMeldekort from '../omMeldekort/omMeldekort';
 import TidligereMeldekort from '../tidligereMeldekort/tidligereMeldekort';
-import InnsendingRoutes from './innsendingRoutes';
+import Sporsmalsside from '../innsending/sporsmalsside';
+import Utfylling from '../innsending/utfylling';
+import Bekreftelse from '../innsending/bekreftelse';
+import Kvittering from '../innsending/kvittering';
 
 const MeldekortRoutes = () => {
     return (
@@ -18,8 +21,13 @@ const MeldekortRoutes = () => {
                 <Route path="/etterregistrer-meldekort" component={EtterregistrerMeldekort} />
                 <Route path="/om-meldekort" component={OmMeldekort} />
                 <Route path="/ofte-stilte-sporsmal" component={OfteStilteSporsmal} />
-                <Route path="/innsending" component={InnsendingRoutes} />
+                <Route exact={true} path="/innsending/sporsmal" component={Sporsmalsside} />
+                <Route path="/innsending/utfylling" component={Utfylling} />
+                <Route path="/innsending/bekreftelse" component={Bekreftelse}/>
+                <Route path="/innsending/kvittering" component={Kvittering} />
+                <Route path="/send-meldekort" component={SendMeldekort} />
                 <Route path="/404" component={() => <div />} />
+                <Redirect exact={true} from="/innsending" to="/innsending/sporsmal"/>
                 <Redirect exact={true} from="/" to="/send-meldekort"/>
             </Switch>
         </div>
