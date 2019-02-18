@@ -1,3 +1,5 @@
+import {erLocalhost, erMock} from "../mock/utils";
+
 const Environment = () => {
 
     if (window.location.hostname.indexOf('www-q0.nav.no') > -1) {
@@ -6,14 +8,15 @@ const Environment = () => {
             loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
         };
-    } else if (window.location.hostname.indexOf('localhost') > -1) {
+    } else if (erMock() || erLocalhost()) {
         return {
-            apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
+            apiUrl: '',
             loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
             logoutUrl: 'https://loginservice-q.nav.no/slo',
         };
     }
     return {
+        //TODO: Her skal prod-urler inn
         apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
         loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
         logoutUrl: 'https://loginservice-q.nav.no/slo',

@@ -56,8 +56,6 @@ class TidligereMeldekort extends React.Component<Props> {
     }
 
     render() {
-        console.log(this.props.historiskeMeldekort.historiskeMeldekort);
-
         const rows = this.hentRaderFraHistoriskeMeldekort();
 
         // TODO: Endres når vi vet mer om fargekodene.

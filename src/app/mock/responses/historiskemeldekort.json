@@ -1,0 +1,66 @@
+[
+  {
+    "meldekortId": 1111111111,
+    "kortType": "ELEKTRONISK",
+    "meldeperiode": {
+      "fra": "2018-12-03T12:00:00+01:00",
+      "til": "2018-12-16T12:00:00+01:00",
+      "kortKanSendesFra": "2018-12-15T12:00:00+01:00",
+      "periodeKode": "201849"
+    },
+    "meldegruppe": "DAGP",
+    "kortStatus": "FERDI",
+    "bruttoBelop": 6715,
+    "erForskuddsPeriode": false,
+    "mottattDato": "2018-12-15T12:00:00+01:00",
+    "korrigerbart": true
+  },
+  {
+    "meldekortId": 2222222222,
+    "kortType": "ELEKTRONISK",
+    "meldeperiode": {
+      "fra": "2018-12-17T12:00:00+01:00",
+      "til": "2018-12-30T12:00:00+01:00",
+      "kortKanSendesFra": "2018-12-26T12:00:00+01:00",
+      "periodeKode": "201851"
+    },
+    "meldegruppe": "DAGP",
+    "kortStatus": "FERDI",
+    "bruttoBelop": 13430,
+    "erForskuddsPeriode": false,
+    "mottattDato": "2018-12-26T12:00:00+01:00",
+    "korrigerbart": true
+  },
+  {
+    "meldekortId": 3333333333,
+    "kortType": "ELEKTRONISK",
+    "meldeperiode": {
+      "fra": "2018-12-31T12:00:00+01:00",
+      "til": "2019-01-13T12:00:00+01:00",
+      "kortKanSendesFra": "2019-01-12T12:00:00+01:00",
+      "periodeKode": "201901"
+    },
+    "meldegruppe": "DAGP",
+    "kortStatus": "FERDI",
+    "bruttoBelop": 10,
+    "erForskuddsPeriode": false,
+    "mottattDato": "2019-01-12T12:00:00+01:00",
+    "korrigerbart": false
+  },
+  {
+    "meldekortId": 4444444444,
+    "kortType": "KORRIGERT_ELEKTRONISK",
+    "meldeperiode": {
+      "fra": "2018-12-31T12:00:00+01:00",
+      "til": "2019-01-13T12:00:00+01:00",
+      "kortKanSendesFra": "2019-01-12T12:00:00+01:00",
+      "periodeKode": "201901"
+    },
+    "meldegruppe": "DAGP",
+    "kortStatus": "FERDI",
+    "bruttoBelop": 13430,
+    "erForskuddsPeriode": false,
+    "mottattDato": "2019-01-12T12:00:00+01:00",
+    "korrigerbart": false
+  }
+]
