@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Bekreftelse from '../innsending/bekreftelse';
-import Kvittering from '../innsending/kvittering';
-import Utfylling from '../innsending/utfylling';
-import Sporsmalsside from '../innsending/sporsmalsside';
+import Bekreftelse from '../pages/innsending/bekreftelse';
+import Kvittering from '../pages/innsending/kvittering';
+import Utfylling from '../pages/innsending/utfylling';
+import Sporsmalsside from '../pages/innsending/sporsmalsside';
+import MeldekortRoutes from './meldekortRoutes';
 
 const InnsendingRoutes = () => {
     return (
@@ -13,7 +14,7 @@ const InnsendingRoutes = () => {
                 <Route path="/innsending/utfylling" component={Utfylling} />
                 <Route path="/innsending/bekreftelse" component={Bekreftelse}/>
                 <Route path="/innsending/kvittering" component={Kvittering} />
-                <Route path="/404" component={() => <div />} />
+                <Route path="/send-meldekort" component={MeldekortRoutes}/>
                 <Redirect exact={true} from="/innsending" to="/innsending/sporsmal"/>
             </Switch>
         </div>

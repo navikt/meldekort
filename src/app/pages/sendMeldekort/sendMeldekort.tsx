@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedHTMLMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import Tabell from '../../components/tabell/tabell';
-import { hentMeldekort } from '../../api/api';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import Tabell from '../../components/tabell/tabell';
+import { connect } from 'react-redux';
+import { FormattedHTMLMessage } from 'react-intl';
+import { hentMeldekort } from '../../api/api';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 class SendMeldekort extends React.Component<any, any> {
     constructor(props: any) {

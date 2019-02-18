@@ -1,26 +1,35 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import AlertStripe from 'nav-frontend-alertstriper';
+import SporsmalsGruppe from '../../components/sporsmal/sporsmalsGruppe';
 
 // <> props inside
 class Sporsmalsside extends React.Component<any, any> {
 
-    // Functions & Methods 
+    // Functions & Methods
 
     render() {
         return(
             <div className="sideinnhold">
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">
-                    <FormattedMessage id="tidligereMeldekort.forklaring" />
+                    <AlertStripe solid={true} type="info">
+                        <FormattedMessage id="sporsmal.alertstripe.sporsmalstegn" />
+                    </AlertStripe>
                 </section>
                 <section className="seksjon">
-                    <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
+                    <SporsmalsGruppe/>
+                </section>
+                <section className="seksjon">
+                    <AlertStripe solid={true} type="info">
+                        <FormattedHTMLMessage id="sporsmal.alertstripe.hvisDuSvarerNei" />
+                    </AlertStripe>
                 </section>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp

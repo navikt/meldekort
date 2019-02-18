@@ -11,7 +11,7 @@ class Kvittering extends React.Component<any, any> {
 
     render() {
 
-        // TODO: Må endre nestePath til der man kom fra da man startet innsending.
+        // TODO: Må endre nestePath til der man kom fra da man startet innsending (send-meldekort, korrigering).
 
         return(
             <div className="sideinnhold">
@@ -28,13 +28,13 @@ class Kvittering extends React.Component<any, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
-                        nestePath={'/send-melding'}
+                        nestePath={'/send-meldekort'}
                         tekstid={'naviger.avbryt'}
                         className={'navigasjonsknapp'}
                     />
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/send-melding'}
+                        nestePath={'/send-meldekort'}
                         tekstid={'overskrift.nesteMeldekort'}
                         className={'navigasjonsknapp'}
                     />

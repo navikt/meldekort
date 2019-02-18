@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from './store/configureStore';
 import Banner from './components/banner/banner';
 import NavTabs from './components/meny/tabsmeny';
-import MeldekortRoutes from './pages/routes/meldekortRoutes';
+import MeldekortRoutes from './routes/meldekortRoutes';
 
 class App extends React.Component<{}> {
 
