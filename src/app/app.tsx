@@ -11,6 +11,12 @@ import OmMeldekort from './pages/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from './pages/ofteStilteSporsmal/ofteStilteSporsmal';
 import EndreMeldeform from './pages/endreMeldeform/endreMeldeform';
 import EtterregistrerMeldekort from './pages/etterregistrerMeldekort/etterregistrerMeldekort';
+import { erLocalhost, erMock } from './mock/utils';
+import setupMock from './mock/setup-mock';
+
+if (erMock() || erLocalhost()) {
+    setupMock();
+}
 
 class App extends React.Component<{}> {
 
