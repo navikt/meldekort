@@ -40,14 +40,14 @@ export function fetchHistoriskeMeldekort() {
     return getFetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
 }
 
-export const hentMeldekortdetaljer = (id: number) => {
-    getFetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
-};
+export function fetchMeldekortdetaljer(id: number) {
+    return getFetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
+}
 
-export const hentPersonstatus = () => {
-    getFetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
-};
+export function fetchPersonstatus() {
+    return getFetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
+}
 
-export const hentKorrigertId = (id: number) => {
-    getFetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
-};
+export function fetchKorrigertId(id: number) {
+    return getFetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
+}

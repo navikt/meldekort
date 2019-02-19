@@ -46,59 +46,59 @@ export interface Meldeperiode {
 }
 
 export interface MeldekortdetaljerInnsending {
-    meldekortId: number,
-    kortType: KortType,
-    meldegruppe: Meldegruppe,
-    mottattDato: Date,
-    meldeperiode: Meldeperiode,
-    erArbeidssokerNestePeriode: boolean,
-    bruttoBelop: number,
-    fravaersdager: Fravaer[],
-    korrigerbart: boolean,
-    begrunnelse: string,
+    meldekortId: number;
+    kortType: KortType;
+    meldegruppe: Meldegruppe;
+    mottattDato: Date;
+    meldeperiode: Meldeperiode;
+    erArbeidssokerNestePeriode: boolean;
+    bruttoBelop: number;
+    fravaersdager: Fravaer[];
+    korrigerbart: boolean;
+    begrunnelse: string;
 
-    fnr: string,
-    personId: number,
-    ipAdresse: string,
-    sessjonsId: string
+    fnr: string;
+    personId: number;
+    ipAdresse: string;
+    sessjonsId: string;
 }
 
 export interface Fravaer {
-    dag: Date,
-    type: FravaerType,
-    arbeidTimer: number
+    dag: Date;
+    type: FravaerType;
+    arbeidTimer: number;
 }
 
 export interface ValideringsResultat {
-    meldekortId: number,
-    status: string,
-    arsakskoder: Arsakskode[],
-    meldekortdager: MeldekortDag[]
+    meldekortId: number;
+    status: string;
+    arsakskoder: Arsakskode[];
+    meldekortdager: MeldekortDag[];
 }
 
 export interface Arsakskode {
-    kode: string,
-    tekst: string
+    kode: string;
+    tekst: string;
 }
 
 export interface Sporsmal {
-    arbeidssoker: boolean,
-    arbeidet: boolean,
-    syk: boolean,
-    annetFravaer: boolean,
-    kurs: boolean,
-    forskudd: boolean,
-    signatur: boolean,
-    meldekortDager: MeldekortDag[]
+    arbeidssoker: boolean;
+    arbeidet: boolean;
+    syk: boolean;
+    annetFravaer: boolean;
+    kurs: boolean;
+    forskudd: boolean;
+    signatur: boolean;
+    meldekortDager: MeldekortDag[];
 }
 
 export interface MeldekortDag {
-    dag: number,
-    arbeidetTimerSum: number,
-    syk: boolean,
-    annetFravaer: boolean,
-    kurs: boolean,
-    meldegruppe: string
+    dag: number;
+    arbeidetTimerSum: number;
+    syk: boolean;
+    annetFravaer: boolean;
+    kurs: boolean;
+    meldegruppe: string;
 }
 
 /* ENUMS */
@@ -142,8 +142,8 @@ export enum KortStatus {
 }
 
 export enum FravaerType {
-    KURS_UTDANNING = "K",
-    SYKDOM = "S",
-    ANNET_FRAVAER = "X",
-    ARBEIDS_FRAVAER = "A"
+    KURS_UTDANNING = 'K',
+    SYKDOM = 'S',
+    ANNET_FRAVAER = 'X',
+    ARBEIDS_FRAVAER = 'A'
 }
