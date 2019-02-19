@@ -15,6 +15,8 @@ import personEpics from '../epics/personEpics';
 import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
 import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
 import personStatusEpics from '../epics/personStatusEpics';
+import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
+import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -36,6 +38,7 @@ export interface RootState {
     person: PersonState;
     personStatus: PersonStatusState;
     historiskeMeldekort: HistoriskeMeldekortState;
+    meldekortdetaljer: MeldekortdetaljerState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -49,6 +52,7 @@ const rootReducer = combineReducers({
     person: personReducer,
     personStatus: personStatusReducer,
     historiskeMeldekort: historiskeMeldekortReducer,
+    meldekortdetaljer: meldekortdetaljerReducer,
 });
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
@@ -69,6 +73,7 @@ epicMiddleware.run(
         personEpics,
         personStatusEpics,
         historiskeMeldekortEpics,
+        meldekortdetaljerEpics,
     )
 );
 
