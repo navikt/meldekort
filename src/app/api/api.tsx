@@ -1,7 +1,7 @@
 import Environment from '../utils/env';
-import Konstanter from '../utils/consts'
+import Konstanter from '../utils/consts';
 
-function sjekkAuthOgRedirect(res) {
+function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
         window.location.assign(`${Environment().loginUrl}&redirect=${window.location.origin}` + '/meldekort');
         return false;
@@ -9,7 +9,7 @@ function sjekkAuthOgRedirect(res) {
     return true;
 }
 
-const fetchJSONAndCheckForErrors = (url) => {
+const fetchJSONAndCheckForErrors = (url: string) => {
     const p = new Promise((res, rej) => {
         fetch(`${Environment().apiUrl}` + url, {
             method: 'GET',
@@ -32,8 +32,22 @@ const fetchJSONAndCheckForErrors = (url) => {
     return p;
 };
 
-export const hentMeldekort = () => fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
-export const hentHistoriskeMeldekort = () => fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
-export const hentMeldekortdetaljer = (id) => fetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id)}`);
-export const hentPersonstatus = () => fetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
-export const hentKorrigertId = (id) => fetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id)}`);
+export function fetchMeldekort() {
+    return fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
+}
+
+export function fetchHistoriskeMeldekort() {
+    return fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
+}
+
+export const hentMeldekortdetaljer = (id: number) => {
+    fetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
+};
+
+export const hentPersonstatus = () => {
+    fetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
+};
+
+export const hentKorrigertId = (id: number) => {
+    fetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
+};

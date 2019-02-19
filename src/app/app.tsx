@@ -3,8 +3,14 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './store/configureStore';
 import Banner from './components/banner/banner';
-import NavTabs from './components/meny/tabsmeny';
 import MeldekortRoutes from './routes/meldekortRoutes';
+import NavTabs from './components/meny/tabsmeny';
+import setupMock from './mock/setup-mock';
+import { erLocalhost, erMock } from './mock/utils';
+
+if (erMock() || erLocalhost()) {
+    setupMock();
+}
 
 class App extends React.Component<{}> {
 

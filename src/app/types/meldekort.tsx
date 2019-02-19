@@ -10,8 +10,81 @@ export enum Constants {
     LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT'
 }
 
-// TYPE
 export interface Meldekort {
+    meldekortId: number;
+    kortType: KortType;
+    meldeperiode: Meldeperiode;
+    meldegruppe: Meldegruppe;
+    kortStatus: KortStatus;
+    bruttoBelop: bigint;
+    erForskuddsPeriode: boolean;
+    mottattDato: Date;
+    korrigerbart: boolean;
+}
+
+/*
+export interface HistoriskeMeldekort {
+    historiskeMeldekort: Meldekort[];
+}
+*/
+
+// hentMeldekortDetaljer
+export interface Meldekortdetaljer {
     id: string;
-    arbeidet: boolean;
+    personId: number;
+    fodselsnr: string;
+    meldekortId: number;
+    meldeperiode: string;
+    arkivnokkel: string;
+    kortType: string;
+    meldeDato: Date;
+    lestDato: Date;
+    sporsmal: [];
+    begrunnelse: string;
+}
+
+export enum KortType {
+    ORDINAER = '01',
+    ERSTATNING = '03',
+    RETUR = '04',
+    ELEKTRONISK = '05',
+    AAP = '06',
+    ORDINAER_MANUELL = '07',
+    MASKINELT_OPPDATERT = '08',
+    MANUELL_ARENA = '09',
+    KORRIGERT_ELEKTRONISK = '10'
+}
+
+export interface Meldeperiode {
+    fra: Date;
+    til: Date;
+    kortKanSendesFra: Date;
+    periodeKode: string;
+}
+
+export enum Meldegruppe {
+    ATTF,
+    DAGP,
+    INDIV,
+    ARBS,
+    FY,
+    NULL
+}
+
+export enum KortStatus {
+    OPPRE = 'OPPRE',
+    SENDT = 'SENDT',
+    SLETT = 'SLETT',
+    REGIS = 'REGIS' ,
+    FMOPP = 'FMOPP',
+    FUOPP = 'FUOPP',
+    KLAR = 'KLAR',
+    KAND = 'KAND',
+    IKKE = 'IKKE',
+    OVERM = 'OVERM',
+    NYKTR = 'NYKTR',
+    FERDI = 'FERDI',
+    FEIL = 'FEIL',
+    VENTE = 'VENTE',
+    OPPF = 'OPPF'
 }

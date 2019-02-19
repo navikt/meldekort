@@ -1,0 +1,119 @@
+{
+  "personId": 123456,
+  "fodselsnr": "11111111111",
+  "meldekortId": 1011121314,
+  "meldeperiode": "201851",
+  "arkivnokkel": "1-ELEKTRONISK",
+  "kortType": "05",
+  "meldeDato": "2018-12-26T12:00:00+01:00",
+  "lestDato": "2018-12-26T12:00:00+01:00",
+  "sporsmal": {
+    "arbeidssoker": true,
+    "arbeidet": false,
+    "syk": false,
+    "annetFravaer": false,
+    "kurs": false,
+    "forskudd": false,
+    "signatur": true,
+    "meldekortDager": [
+      {
+        "dag": 1,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": true
+      },
+      {
+        "dag": 2,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": true,
+        "kurs": false
+      },
+      {
+        "dag": 3,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 4,
+        "arbeidetTimerSum": 3,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 5,
+        "arbeidetTimerSum": 5,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 6,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 7,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 8,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": true,
+        "kurs": false
+      },
+      {
+        "dag": 9,
+        "arbeidetTimerSum": 7.5,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 10,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": true
+      },
+      {
+        "dag": 11,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 12,
+        "arbeidetTimerSum": 7.5,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 13,
+        "arbeidetTimerSum": 0,
+        "syk": false,
+        "annetFravaer": false,
+        "kurs": false
+      },
+      {
+        "dag": 14,
+        "arbeidetTimerSum": 0,
+        "syk": true,
+        "annetFravaer": false,
+        "kurs": false
+      }
+    ]
+  }
+}

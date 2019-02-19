@@ -23,7 +23,7 @@ class Sporsmalsside extends React.Component<any, any> {
                         <FormattedMessage id="sporsmal.alertstripe.sporsmalstegn" />
                     </AlertStripe>
                 </section>
-                
+
                 <section className="seksjon">
                     <AlertStripe solid={true} type="info">
                         <FormattedHTMLMessage id="sporsmal.alertstripe.hvisDuSvarerNei" />

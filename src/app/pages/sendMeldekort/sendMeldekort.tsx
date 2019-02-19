@@ -1,35 +1,62 @@
 import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
-import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import Tabell from '../../components/tabell/tabell';
-import { connect } from 'react-redux';
-import { FormattedHTMLMessage } from 'react-intl';
-import { hentMeldekort } from '../../api/api';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { FormattedHTMLMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { PersonActions } from '../../actions/person';
+import Tabell from '../../components/tabell/tabell';
+import { PersonState } from '../../reducers/personReducer';
+import { RootState } from '../../store/configureStore';
+import { KortStatus } from '../../types/meldekort';
+import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
+import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 
-class SendMeldekort extends React.Component<any, any> {
+interface MapStateToProps {
+   person: PersonState;
+}
+interface MapDispatchToProps {
+    hentPerson: () => void;
+}
+
+interface MeldekortRad {
+    periode: string;
+    dato: string;
+}
+
+type Props = MapDispatchToProps&MapStateToProps;
+
+class SendMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
+
+        this.props.hentPerson();
     }
 
-    // bruker sitt antall meldekort må hentes fra store (etter at vi har fått koblet sammen back2front)
-    // TODO: Info varierer basert på antall mk
+    hentMeldekortRaderFraPerson = () => {
+        let meldekortListe = this.props.person.person.meldekort;
+        let radliste = [];
+        for (let i = 0; i < meldekortListe.length; i++) {
+            if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
+                let rad: MeldekortRad = {
+                    periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                    dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                };
+                radliste.push(rad);
+            }
+        }
+        return radliste;
+    }
 
     render() {
-        const mk = hentMeldekort();
-
-        const rows = [
-            {'periode': 'uke 31-32', 'dato': '30. jul 2018 - 13. aug 2018'},
-            {'periode': 'uke 29-30', 'dato': '16. jul 2018 - 30. jul 2018'},
-            {'periode': 'uke 27-28', 'dato': '2. jul 2018 - 16. jul 2018'},
-        ];
+        const rows = this.hentMeldekortRaderFraPerson();
         const columns = [
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
         ];
 
-        return (
+        return(
             <main className="sideinnhold">
                 <Innholdstittel className="seksjon"> [X] meldekort klar for innsending </Innholdstittel>
                 <section className="seksjon">
@@ -60,10 +87,24 @@ class SendMeldekort extends React.Component<any, any> {
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
                     />
                 </section>
-                {console.log(mk)}
             </main>
         );
     }
 }
 
-export default connect()(SendMeldekort);
+const mapStateToProps = (person: RootState): MapStateToProps => {
+    return {
+        person: person.person,
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        hentPerson: () => dispatch(PersonActions.hentPerson.request()),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SendMeldekort);

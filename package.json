@@ -12,6 +12,7 @@
     "connected-react-router": "6.0.0",
     "kleur": "^3.0.2",
     "lodash.throttle": "^4.1.1",
+    "moment": "^2.24.0",
     "nav-frontend-alertstriper": "^1.0.29",
     "nav-frontend-alertstriper-style": "^0.2.50",
     "nav-frontend-chevron": "^1.0.6",
@@ -53,8 +54,11 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-devtools": "^3.5.0",
+    "redux-observable": "^1.0.0",
     "redux-saga": "^0.16.2",
-    "ts-react-json-table": "^0.1.1"
+    "rxjs": "^6.4.0",
+    "ts-react-json-table": "^0.1.1",
+    "yet-another-fetch-mock": "^2.4.1"
   },
   "scripts": {
     "build": "react-scripts-ts build",
@@ -62,7 +66,8 @@
     "eject": "react-scripts-ts eject",
     "start": "react-scripts-ts start",
     "start:tekster": "npm run build:tekster",
-    "test": "exit 0"
+    "test": "exit 0",
+    "start-mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
   },
   "devDependencies": {
     "@navikt/create-react-app-typescript-less": "^1.0.0-beta.16",
