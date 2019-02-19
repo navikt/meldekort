@@ -9,7 +9,7 @@ function sjekkAuthOgRedirect(res: any) {
     return true;
 }
 
-const fetchJSONAndCheckForErrors = (url: string) => {
+const getFetchJSONAndCheckForErrors = (url: string) => {
     const p = new Promise((res, rej) => {
         fetch(`${Environment().apiUrl}` + url, {
             method: 'GET',
@@ -33,21 +33,21 @@ const fetchJSONAndCheckForErrors = (url: string) => {
 };
 
 export function fetchMeldekort() {
-    return fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
+    return getFetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
 }
 
 export function fetchHistoriskeMeldekort() {
-    return fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
+    return getFetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
 }
 
 export const hentMeldekortdetaljer = (id: number) => {
-    fetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
+    getFetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
 };
 
 export const hentPersonstatus = () => {
-    fetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
+    getFetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
 };
 
 export const hentKorrigertId = (id: number) => {
-    fetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
+    getFetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
 };

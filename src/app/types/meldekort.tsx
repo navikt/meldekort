@@ -34,7 +34,7 @@ export interface Meldekortdetaljer {
     kortType: string;
     meldeDato: Date;
     lestDato: Date;
-    sporsmal: [];
+    sporsmal: Sporsmal[];
     begrunnelse: string;
 }
 
@@ -67,6 +67,38 @@ export interface Fravaer {
     dag: Date,
     type: FravaerType,
     arbeidTimer: number
+}
+
+export interface ValideringsResultat {
+    meldekortId: number,
+    status: string,
+    arsakskoder: Arsakskode[],
+    meldekortdager: MeldekortDag[]
+}
+
+export interface Arsakskode {
+    kode: string,
+    tekst: string
+}
+
+export interface Sporsmal {
+    arbeidssoker: boolean,
+    arbeidet: boolean,
+    syk: boolean,
+    annetFravaer: boolean,
+    kurs: boolean,
+    forskudd: boolean,
+    signatur: boolean,
+    meldekortDager: MeldekortDag[]
+}
+
+export interface MeldekortDag {
+    dag: number,
+    arbeidetTimerSum: number,
+    syk: boolean,
+    annetFravaer: boolean,
+    kurs: boolean,
+    meldegruppe: string
 }
 
 /* ENUMS */
