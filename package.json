@@ -83,7 +83,17 @@
     "test": "craco test --env=jsdom",
     "start-mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
+<<<<<<< Updated upstream
+=======
+    "@types/history": "^4.7.2",
+>>>>>>> Stashed changes
     "@types/jest": "^23.3.12",
     "cross-env": "^5.2.0",
     "tslint": "^5.12.1",
