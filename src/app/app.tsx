@@ -11,6 +11,7 @@ import { PersonStatusState } from './reducers/personStatusReducer';
 import { Dispatch } from 'redux';
 import { PersonStatusActions } from './actions/personStatus';
 import { connect } from 'react-redux';
+import Feilside from './components/feilside/feilside';
 
 if (erMock() || erLocalhost()) {
     setupMock();
@@ -33,11 +34,15 @@ class App extends React.Component<Props> {
         this.props.hentPersonStatus();
     }
 
-    public render() {
+    erBrukerRegistrertIArena = (): boolean => {
+        let arbeidssokerStatus = this.props.personStatus.personStatus.statusArbeidsoker;
+        return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
+    }
 
-        return(
-            <div>
-                <Banner tittel="Meldekort"/>
+    setInnhold = () => {
+        if (this.erBrukerRegistrertIArena()) {
+            return (
+                <div>
                 <NavTabs/>
                 <div className="main-container">
                     <ConnectedRouter history={history}>
@@ -46,6 +51,23 @@ class App extends React.Component<Props> {
                         </Switch>
                     </ConnectedRouter>
                 </div>
+                </div>
+            );
+        } else {
+             return (
+                 <div className="main-container">
+                    <Feilside/>
+                 </div>
+             );
+        }
+    }
+
+    public render() {
+
+        return(
+            <div>
+                <Banner tittel="Meldekort"/>
+                {this.setInnhold()}
             </div>
         );
     }
