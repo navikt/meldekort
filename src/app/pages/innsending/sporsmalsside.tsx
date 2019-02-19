@@ -4,7 +4,7 @@ import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
-import SporsmalsGruppe from '../../components/sporsmal/sporsmalsGruppe';
+// import SporsmalsGruppe from '../../components/sporsmal/sporsmalsGruppe';
 
 // <> props inside
 class Sporsmalsside extends React.Component<any, any> {
@@ -23,9 +23,7 @@ class Sporsmalsside extends React.Component<any, any> {
                         <FormattedMessage id="sporsmal.alertstripe.sporsmalstegn" />
                     </AlertStripe>
                 </section>
-                <section className="seksjon">
-                    <SporsmalsGruppe/>
-                </section>
+                
                 <section className="seksjon">
                     <AlertStripe solid={true} type="info">
                         <FormattedHTMLMessage id="sporsmal.alertstripe.hvisDuSvarerNei" />

@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
@@ -50,4 +51,4 @@ const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
     );
 };
 
-export default Sporsmal;
+export default Sporsmal; */
