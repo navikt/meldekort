@@ -40,7 +40,9 @@ class App extends React.Component<Props> {
     }
 
     setInnhold = () => {
-        if (this.erBrukerRegistrertIArena()) {
+        if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
+            return null;
+        }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
                 <NavTabs/>
