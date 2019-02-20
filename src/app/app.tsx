@@ -6,14 +6,14 @@ import Banner from './components/banner/banner';
 import MeldekortRoutes from './routes/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
-import { erLocalhost, erMock } from './mock/utils';
+import { erMock } from './mock/utils';
 import { PersonStatusState } from './reducers/personStatusReducer';
 import { Dispatch } from 'redux';
 import { PersonStatusActions } from './actions/personStatus';
 import { connect } from 'react-redux';
 import Feilside from './components/feilside/feilside';
 
-if (erMock() || erLocalhost()) {
+if (erMock()) {
     setupMock();
 }
 

@@ -7,7 +7,8 @@ export type MeldekortActions = ActionType<typeof actions>;
 
 // CONSTANTS / Action?
 export enum Constants {
-    LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT'
+    LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT',
+    LEGG_TIL_AKTIVT_MELDEKORT = 'LEGG_TIL_AKTIVT_MELDEKORT'
 }
 
 /* INTERFACES */

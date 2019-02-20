@@ -11,7 +11,7 @@ const hentMeldekortdetaljer: AppEpic = (action$, state$) =>
         filter(isActionOf([MeldekortdetaljerActions.hentMeldekortdetaljer.request])),
         withLatestFrom(state$),
         switchMap(([action, state]) =>
-            from(fetchMeldekortdetaljer(state.person.person.meldekort[0].meldekortId)).pipe(
+            from(fetchMeldekortdetaljer(state.aktivtMeldekort.meldekortId)).pipe(
                 map(MeldekortdetaljerActions.hentMeldekortdetaljer.success),
                 catchError(error =>
                     of(MeldekortdetaljerActions.hentMeldekortdetaljer.failure(error))

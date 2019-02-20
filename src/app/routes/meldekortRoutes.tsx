@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import Detaljer from '../pages/tidligereMeldekort/detaljer/detaljer';
 import OfteStilteSporsmal from '../pages/ofteStilteSporsmal/ofteStilteSporsmal';
 import EndreMeldeform from '../pages/endreMeldeform/endreMeldeform';
 import SendMeldekort from '../pages/sendMeldekort/sendMeldekort';
@@ -20,6 +21,7 @@ const MeldekortRoutes = () => {
                 <Route path="/ofte-stilte-sporsmal" component={OfteStilteSporsmal} />
                 <Route path="/404" component={() => <div />} />
                 <Route path="/innsending" component={InnsendingRoutes}/>
+                <Route path="/detaljer" component={Detaljer}/>
                 <Redirect exact={true} from="/" to="/send-meldekort"/>
 
             </Switch>

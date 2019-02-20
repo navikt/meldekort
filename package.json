@@ -10,6 +10,7 @@
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
+    "cross-env": "^5.2.0",
     "kleur": "^3.0.2",
     "lodash.throttle": "^4.1.1",
     "moment": "^2.24.0",
@@ -67,7 +68,7 @@
     "start": "react-scripts-ts start",
     "start:tekster": "npm run build:tekster",
     "test": "exit 0",
-    "start-mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
+    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
   },
   "devDependencies": {
     "@navikt/create-react-app-typescript-less": "^1.0.0-beta.16",

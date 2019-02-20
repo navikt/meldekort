@@ -2,12 +2,13 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import Komponentlenke from '../../components/komponentlenke/komponentlenke';
 import { Dispatch } from 'redux';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { connect } from 'react-redux';
 import Tabell from '../../components/tabell/tabell';
 import EtikettBase from 'nav-frontend-etiketter';
-import Lenke from 'nav-frontend-lenker';
+// import Lenke from 'nav-frontend-lenker';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { RootState } from '../../store/configureStore';
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
@@ -21,6 +22,7 @@ interface MapDispatchToProps {
 }
 
 interface HistoriskeMeldekortRad {
+    meldekortId: number;
     periode: string;
     dato: string;
     mottatt: string;
@@ -43,6 +45,7 @@ class TidligereMeldekort extends React.Component<Props> {
         let radliste = [];
         for (let i = 0; i < historiskeMeldekortListe.length; i++) {
             let rad: HistoriskeMeldekortRad = {
+                meldekortId: historiskeMeldekortListe[i].meldekortId,
                 periode: hentUkePeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
                 dato: hentDatoPeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
                 mottatt: formaterDato(historiskeMeldekortListe[i].mottattDato),
@@ -92,7 +95,7 @@ class TidligereMeldekort extends React.Component<Props> {
                 }},
             {key: 'bruttobelop', label: 'Bruttobelop', cell: 'bruttobelop'},
             {key: 'detaljer', label: 'Detaljer', cell: function( row: any, columnKey: any) {
-                    return <Lenke href=""> {row.detaljer} </Lenke>;
+                    return <Komponentlenke lenketekst={row.detaljer} rute="/detaljer" meldekortId={row.meldekortId}/>;
                 }}
         ];
 

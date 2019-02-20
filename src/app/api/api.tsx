@@ -1,5 +1,6 @@
 import Environment from '../utils/env';
 import Konstanter from '../utils/consts';
+import { erMock } from '../mock/utils';
 
 function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
@@ -33,21 +34,29 @@ const getFetchJSONAndCheckForErrors = (url: string) => {
 };
 
 export function fetchMeldekort() {
-    return getFetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
+    return getFetchJSONAndCheckForErrors( Konstanter().hentMeldekortApiUri);
 }
 
 export function fetchHistoriskeMeldekort() {
-    return getFetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
+    return getFetchJSONAndCheckForErrors(Konstanter().hentHistoriskeMeldekortApiUri);
 }
 
 export function fetchMeldekortdetaljer(id: number) {
-    return getFetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
+    // TODO: Legge på feilmelding her hvis id er tom eller 0.
+    return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
 }
 
 export function fetchPersonstatus() {
-    return getFetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
+    return getFetchJSONAndCheckForErrors(Konstanter().hentPersonStatusApiUri);
 }
 
 export function fetchKorrigertId(id: number) {
-    return getFetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
+    return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+}
+
+function addIdToUrlIfNotMock(url: string, id: number): string {
+    if (!erMock()) {
+        return url.replace('{id}', id.toString());
+    }
+    return url;
 }
