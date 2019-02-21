@@ -10,23 +10,18 @@ export enum Constants {
     LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT'
 }
 
+/* INTERFACES */
 export interface Meldekort {
     meldekortId: number;
     kortType: KortType;
     meldeperiode: Meldeperiode;
     meldegruppe: Meldegruppe;
     kortStatus: KortStatus;
-    bruttoBelop: bigint;
+    bruttoBelop: number;
     erForskuddsPeriode: boolean;
     mottattDato: Date;
     korrigerbart: boolean;
 }
-
-/*
-export interface HistoriskeMeldekort {
-    historiskeMeldekort: Meldekort[];
-}
-*/
 
 // hentMeldekortDetaljer
 export interface Meldekortdetaljer {
@@ -39,10 +34,74 @@ export interface Meldekortdetaljer {
     kortType: string;
     meldeDato: Date;
     lestDato: Date;
-    sporsmal: [];
+    sporsmal: Sporsmal[];
     begrunnelse: string;
 }
 
+export interface Meldeperiode {
+    fra: Date;
+    til: Date;
+    kortKanSendesFra: Date;
+    periodeKode: string;
+}
+
+export interface MeldekortdetaljerInnsending {
+    meldekortId: number;
+    kortType: KortType;
+    meldegruppe: Meldegruppe;
+    mottattDato: Date;
+    meldeperiode: Meldeperiode;
+    erArbeidssokerNestePeriode: boolean;
+    bruttoBelop: number;
+    fravaersdager: Fravaer[];
+    korrigerbart: boolean;
+    begrunnelse: string;
+
+    fnr: string;
+    personId: number;
+    ipAdresse: string;
+    sessjonsId: string;
+}
+
+export interface Fravaer {
+    dag: Date;
+    type: FravaerType;
+    arbeidTimer: number;
+}
+
+export interface ValideringsResultat {
+    meldekortId: number;
+    status: string;
+    arsakskoder: Arsakskode[];
+    meldekortdager: MeldekortDag[];
+}
+
+export interface Arsakskode {
+    kode: string;
+    tekst: string;
+}
+
+export interface Sporsmal {
+    arbeidssoker: boolean;
+    arbeidet: boolean;
+    syk: boolean;
+    annetFravaer: boolean;
+    kurs: boolean;
+    forskudd: boolean;
+    signatur: boolean;
+    meldekortDager: MeldekortDag[];
+}
+
+export interface MeldekortDag {
+    dag: number;
+    arbeidetTimerSum: number;
+    syk: boolean;
+    annetFravaer: boolean;
+    kurs: boolean;
+    meldegruppe: string;
+}
+
+/* ENUMS */
 export enum KortType {
     ORDINAER = '01',
     ERSTATNING = '03',
@@ -53,13 +112,6 @@ export enum KortType {
     MASKINELT_OPPDATERT = '08',
     MANUELL_ARENA = '09',
     KORRIGERT_ELEKTRONISK = '10'
-}
-
-export interface Meldeperiode {
-    fra: Date;
-    til: Date;
-    kortKanSendesFra: Date;
-    periodeKode: string;
 }
 
 export enum Meldegruppe {
@@ -87,4 +139,11 @@ export enum KortStatus {
     FEIL = 'FEIL',
     VENTE = 'VENTE',
     OPPF = 'OPPF'
+}
+
+export enum FravaerType {
+    KURS_UTDANNING = 'K',
+    SYKDOM = 'S',
+    ANNET_FRAVAER = 'X',
+    ARBEIDS_FRAVAER = 'A'
 }
