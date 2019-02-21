@@ -1,37 +1,37 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "alwaysStrict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "importHelpers": true,
-    "jsx": "react",
-    "lib": ["es6", "dom"],
+    "isolatedModules": true,
+    "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "outDir": "build/dist",
-    "rootDir": "src",
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "es5",
-    "typeRoots": [
-      "./node_modules/@types/"
-    ]
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [
-    "acceptance-tests",
-    "build",
-    "jest",
     "node_modules",
+    "build",
     "scripts",
-    "src/setupTests.ts",
-    "webpack"
-
+    "jest",
+    "src/app/mocks",
+    "src/app/utils/build-tekster.js"
+  ],
+  "include": [
+    "src"
   ]
 }

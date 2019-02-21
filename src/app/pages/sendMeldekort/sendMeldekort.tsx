@@ -2,16 +2,16 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { PersonActions } from '../../actions/person';
-import KnappBase from 'nav-frontend-knapper';
 import Tabell from '../../components/tabell/tabell';
 import { PersonState } from '../../reducers/personReducer';
 import { RootState } from '../../store/configureStore';
 import { KortStatus } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
+import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 
 interface MapStateToProps {
    person: PersonState;
@@ -77,14 +77,15 @@ class SendMeldekort extends React.Component<Props> {
                     <AlertStripe type="info" solid={true}>
                         <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/>
                         <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/>
-                        <br/>
                         <FormattedHTMLMessage id="sendMeldekort.info.neste"/>
                     </AlertStripe>
                 </section>
                 <section className="seksjon flex-innhold sentrert">
-                    <KnappBase type="hoved">
-                        <FormattedMessage id="sendMeldekort.knapp.startUtfylling" />
-                    </KnappBase>
+                    <NavKnapp
+                        type={knappTyper.hoved}
+                        nestePath={'/innsending'}
+                        tekstid={'sendMeldekort.knapp.startUtfylling'}
+                    />
                 </section>
             </main>
         );

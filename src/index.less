@@ -1,32 +1,76 @@
-// nav-frontend
+/*
+-----------------------------------------
+      NAV FRONTEND IMPORTS
+-----------------------------------------
+*/
 @import "~nav-frontend-core/less/core";
 @import "~nav-frontend-tabs-style";
 @import "~nav-frontend-typografi-style";
 @import "~nav-frontend-grid-style";
+@import "~nav-frontend-alertstriper-style";
+@import "~nav-frontend-etiketter-style";
 
-// Komponenter
+/*
+-----------------------------------------
+     MELDEKORT IMPORTS
+-----------------------------------------
+*/
 @import "./app/components/banner/banner.less";
 @import "app/components/meny/tabsmeny.less";
+@import "app/components/sporsmal/sporsmal.less";
 @import "app/components/tabell/tabell.less";
 @import "app/components/sprakvelger/sprakvelger.less";
 @import "app/pages/sendMeldekort/sendMeldekort.less";
 
-// Variabler
-@import "app/variabler.less";
+/*
+-----------------------------------------
+  FARGER (som ikke finnes i nav frontend)
+-----------------------------------------
+*/
+@panelBakgrunn: #f1f1f1;
 
-// GENERELL STYLING
+/*
+-----------------------------------------
+   CONTAINER, MARGIN, PADDING
+-----------------------------------------
+*/
+@width-container: @screen-desktop;
+
+@padding-vertical-md: 0 1rem 0 1rem;
+@padding-vertical-sm: 0 0.5rem 0 0.5rem;
+
+/*
+-----------------------------
+   BREKKPUNKTER & SETUP
+-----------------------------
+*/
+
+@xs-min: 480px;
+@sm-min: 768px;
+@md-min: 992px;
+@lg-min: 1200px;
+
+@xs-max: (@sm-min - 1);
+@sm-max: (@md-min - 1);
+@md-max: (@lg-min - 1);
+
+@phone:   ~"only screen and (max-width: @{xs-max})";
+@tablet:  ~"only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})";
+@desktop: ~"only screen and (min-width: @{md-min})";
+
+/*
+-----------------------------
+   GENERELL STYLING
+-----------------------------
+*/
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
 
   #meldekort-root {
-    margin-right: auto;
-    margin-left: auto;
+    background-color: white;
 
     .main-container {
-      -webkit-box-sizing: border-box;
-      background: @white;
-      box-sizing: border-box;
       margin-right: auto;
       margin-left: auto;
       max-width: @width-container;
@@ -38,9 +82,24 @@ body {
 
         .flex-innhold {
           display: flex;
+          flex-wrap: wrap;
+
+          &.tittel-sprakvelger {
+            justify-content: space-between;
+            align-items: center;
+          }
 
           &.sentrert {
             justify-content: center;
+
+            .navigasjonsknapp {
+              margin-right: 2rem;
+              margin-bottom: 2rem;
+
+              &:last-child {
+                margin-left: 0;
+              }
+            }
           }
         }
         .seksjon {
