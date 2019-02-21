@@ -35,7 +35,7 @@ export interface Meldekortdetaljer {
     kortType: string;
     meldeDato: Date;
     lestDato: Date;
-    sporsmal: Sporsmal[];
+    sporsmal: Sporsmal;
     begrunnelse: string;
 }
 
@@ -88,7 +88,6 @@ export interface Sporsmal {
     syk: boolean;
     annetFravaer: boolean;
     kurs: boolean;
-    forskudd: boolean;
     signatur: boolean;
     meldekortDager: MeldekortDag[];
 }

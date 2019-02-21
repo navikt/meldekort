@@ -17,7 +17,15 @@ const initialState: MeldekortdetaljerState = {
         kortType: '',
         meldeDato: Date.prototype,
         lestDato: Date.prototype,
-        sporsmal: [],
+        sporsmal: {
+            annetFravaer: false,
+            arbeidet: false,
+            arbeidssoker: false,
+            syk: false,
+            kurs: false,
+            signatur: false,
+            meldekortDager: []
+        },
         begrunnelse: ''
     }
 };

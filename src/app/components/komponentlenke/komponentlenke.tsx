@@ -1,11 +1,13 @@
 import * as React from 'react';
 import 'nav-frontend-lenker-style';
-import { Redirect } from 'react-router';
-import { RootState } from '../../store/configureStore';
+import { history, RootState } from '../../store/configureStore';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
+import { selectRouter } from '../../selectors/router';
+import { Router } from '../../types/router';
+import { hentTabConfig, Tab } from '../meny/tabConfig';
 
 interface KomponentlenkeProps {
     lenketekst: string;
@@ -15,20 +17,28 @@ interface KomponentlenkeProps {
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
+    router: Router;
 }
 
 interface MapDispatcherToProps {
     leggTilAktivtMeldekort: (meldekortId: number) => void;
 }
 
+interface TabsState {
+    tabsobjekter: Tab[];
+    // windowSize: number;
+}
+
 type ReduxType =
     KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
-class Komponentlenke extends React.Component<ReduxType, {redirect: any}> {
+class Komponentlenke extends React.Component<ReduxType, TabsState> {
 
     constructor(props: any) {
         super(props);
-        this.state = {redirect: null};
+        this.state = {
+            tabsobjekter: hentTabConfig().filter(obj => ! obj.disabled)
+        };
     }
 
     clickHandler = () => {
@@ -40,16 +50,15 @@ class Komponentlenke extends React.Component<ReduxType, {redirect: any}> {
             this.props.leggTilAktivtMeldekort(this.props.meldekortId);
         }
 
-        this.setState({
-            redirect: <Redirect to={this.props.rute}/>
-        });
+        const pathname = this.props.router.location.pathname;
+        console.log(pathname);
+        pathname !== this.props.rute && history.push(this.props.rute);
     }
 
     render() {
         return (
             <div>
                 <a className="lenke" onClick={this.clickHandler}> <span>{this.props.lenketekst}</span> </a>
-                {this.state.redirect}
             </div>
         );
     }
@@ -60,7 +69,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
             meldekortId: state.aktivtMeldekort.meldekortId
         };
         return {
-            aktivtMeldekort: meldekort
+            aktivtMeldekort: meldekort,
+            router: selectRouter(state)
         };
 };
 

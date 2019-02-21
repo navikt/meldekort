@@ -12,7 +12,7 @@ function sjekkAuthOgRedirect(res: any) {
 
 const getFetchJSONAndCheckForErrors = (url: string) => {
     const p = new Promise((res, rej) => {
-        fetch(`${Environment().apiUrl}` + url, {
+         fetch(`${Environment().apiUrl}` + url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',

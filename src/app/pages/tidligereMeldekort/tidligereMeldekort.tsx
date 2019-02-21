@@ -95,7 +95,7 @@ class TidligereMeldekort extends React.Component<Props> {
                 }},
             {key: 'bruttobelop', label: 'Bruttobelop', cell: 'bruttobelop'},
             {key: 'detaljer', label: 'Detaljer', cell: function( row: any, columnKey: any) {
-                    return <Komponentlenke lenketekst={row.detaljer} rute="/detaljer" meldekortId={row.meldekortId}/>;
+                    return <Komponentlenke lenketekst={row.detaljer} rute="/tidligere-meldekort/detaljer" meldekortId={row.meldekortId}/>;
                 }}
         ];
 

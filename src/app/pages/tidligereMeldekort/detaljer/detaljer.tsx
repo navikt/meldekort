@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { connect } from 'react-redux';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -22,20 +23,12 @@ class Detaljer extends React.Component<Props> {
         this.props.hentMeldekortdetaljer();
     }
 
-    visMeldekortdetaljer = () => {
-        if (this.props.meldekortdetaljer.meldekortdetaljer.id !== '') {
-            return <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/>;
-        }
-        return null;
-    }
-
     render() {
-        console.log('Inne i detaljer!');
-        console.log(this.props);
         return(
-            <div>
-                <p>Hei!</p>
-                {this.visMeldekortdetaljer()}
+            <div className="sideinnhold">
+                <Innholdstittel>Hei</Innholdstittel>
+                { this.props.meldekortdetaljer.meldekortdetaljer.id !== '' ?
+                    <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> : null }
             </div>
         );
     }
