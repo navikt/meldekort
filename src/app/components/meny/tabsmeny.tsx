@@ -30,6 +30,7 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
 
     lagTabs = (tabsobjekter: Tab[], aktivTab: string, kompakt: boolean) => {
         const tablabels = tabsobjekter.map(obj => this.lagTab(obj));
+        console.log(tablabels);
         const aktivTabIndex = tabsobjekter.findIndex( obj => obj.urlparam === aktivTab);
 
         return (

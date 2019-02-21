@@ -1,78 +1,92 @@
-/*
 import * as React from 'react';
 
+import Sporsmal from './sporsmal';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { IntlAction } from 'react-intl-redux';
 import { RootState } from '../../store/configureStore';
-import { IntlAction, updateIntl } from 'react-intl-redux';
-import { Dispatch } from 'redux';
-
-type SporsmalsGruppeProps = MapStateToProps & MapDispatchToProps;
+import { Sporsmal as Spm, hentSporsmalConfig } from './sporsmalConfig';
 
 interface MapStateToProps {
 
 }
+
 interface MapDispatchToProps {
 
 }
 
-// <> props inside
-class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
+interface Props {
+    AAP: boolean;
+}
+
+interface SporsmalsGruppeState {
+    sporsmalobjekter: Spm[];
+}
+
+type SporsmalsGruppeProps =
+    MapStateToProps &
+    MapDispatchToProps &
+    Props &
+    InjectedIntlProps;
+
+class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGruppeState> {
     constructor( props: SporsmalsGruppeProps ) {
         super(props);
+        this.state = {
+            sporsmalobjekter: hentSporsmalConfig()
+        };
     }
 
-    // Functions & Methods
-    // onChange fn som
-
+    // TODO: mellomlagre sporsmalsvar > beregne & sett inn i fravarsdager variabel
     sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>) => {
-
+        console.log('Sporsmal clicked!');
     }
 
-    lagRadioKnapper() {
+    lagSporsmal = (sporsmalsobj: Spm) => {
+        const tekstendelse = (this.props.AAP) ? '-AAP' : '';
 
-    }
-
-    handleOnChange = () => {
-
-    }
-
-    lagRadioKnapp () {
-
-    }/*
-           /* <Sporsmal
-                AAP={false}
-                id="1"
-                sporsmal="sporsmal.arbeid"
-                svarJa="svar.arbeid.ja"
-                svarNei="svar.arbeid.nei"
-                hjelpetekst="forklaring.sporsmal.arbeid"
-                sporsmalOnChange={this.sporsmalOnChange}
-            />*/
-
-    /*render() {
-        // Lag en liste med tekstid'er for AAP og dagpenger.
-        // Map gjennom alle spm & returner dem.
-
+        const finnesIntlId = (id: string) => {
+            if (this.props.intl.formatMessage({id: id}) !== id) {
+                console.log('ID EXISTS..', id);
+                return id;
+            } else {
+                console.log('ID DOES NOT EXIST', id);
+                return id.slice(0, -4);
+            }
+        };
         return(
-            <div></div>
+            <Sporsmal
+                id={sporsmalsobj.kategori + tekstendelse}
+                sporsmal={finnesIntlId(sporsmalsobj.sporsmal + tekstendelse)}
+                jaSvar={finnesIntlId(sporsmalsobj.ja + tekstendelse)}
+                neiSvar={finnesIntlId(sporsmalsobj.nei + tekstendelse)}
+                hjelpetekst={finnesIntlId(sporsmalsobj.forklaring + tekstendelse)}
+                sporsmalOnChange={this.sporsmalOnChange}
+            />
         );
     }
-}*/
+
+    render() {
+        // Lag en liste med tekstid'er for AAP og dagpenger.
+        // Map gjennom alle spm & returner dem.
+        const sporsmalsgruppe = this.state.sporsmalobjekter
+            .map( sporsmalobj => this.lagSporsmal(sporsmalobj));
+
+        return(
+            <div>
+                {sporsmalsgruppe}
+            </div>
+        );
+    }
+}
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
-/*const mapStateToProps = ({ intl, locales }: RootState) => {
-    const { locale, messages } = intl;
-    const locs = locales;
-    return { locale, messages, locs};
+const mapStateToProps = ({}: RootState) => {
+    return {};
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {
-    return {
+const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) =>
+    bindActionCreators({}, dispatch);
 
-        updateIntl: (locale: any, messages: any) =>
-            dispatch(updateIntl({ locale, messages }))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatcherToProps)(SporsmalsGruppe);
-*/
+export default injectIntl(connect(mapStateToProps, mapDispatcherToProps)(SporsmalsGruppe));

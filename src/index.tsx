@@ -18,7 +18,7 @@ const render = (Component: React.ComponentType<{}>) => {
     ReactDOM.render(
         <Provider store={store}>
             <IntlProvider locale="nb" defaultLocale="nb">
-            <Component />
+                <Component />
             </IntlProvider>
         </Provider>,
         rootElement
