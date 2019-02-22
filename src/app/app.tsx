@@ -14,6 +14,8 @@ if (erMock() || erLocalhost()) {
 
 class App extends React.Component<{}> {
 
+    // TODO: Flytt koden fra NavTabs inn her, enten skal NavTabs vises eller stegindikator.
+
     public render() {
 
         return(

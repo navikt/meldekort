@@ -12,6 +12,7 @@ interface SporsmalProps {
     jaSvar: string;
     neiSvar: string;
     hjelpetekst: string;
+    checked: string | undefined;
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
 }
 
@@ -40,7 +41,7 @@ const Sporsmal: React.StatelessComponent<SporsmalProps & InjectedIntlProps> = (p
                         value: 'nei'
                     }
                 ]}
-                checked="false"
+                checked={props.checked}
                 onChange={props.sporsmalOnChange}
             />
 

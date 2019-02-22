@@ -58,8 +58,8 @@ class SendMeldekort extends React.Component<Props> {
 
         return(
             <main className="sideinnhold">
-                <Innholdstittel className="seksjon"> [X] meldekort klar for innsending </Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel> [X] meldekort klar for innsending </Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">

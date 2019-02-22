@@ -11,7 +11,7 @@ class Bekreftelse extends React.Component<any, any> {
 
     render() {
         return(
-            <div className="sideinnhold">
+            <main>
                 <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg3" /></Innholdstittel>
                 <section className="seksjon">
                     <Sprakvelger/>
@@ -36,7 +36,7 @@ class Bekreftelse extends React.Component<any, any> {
                         className={'navigasjonsknapp'}
                     />
                 </section>
-            </div>
+            </main>
         );
     }
 }

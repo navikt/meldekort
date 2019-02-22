@@ -5,15 +5,29 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import SporsmalsGruppe from '../../components/sporsmal/sporsmalsGruppe';
+import { connect } from 'react-redux';
+import { RootState } from '../../store/configureStore';
+import { bindActionCreators, Dispatch } from 'redux';
+import { IntlAction } from 'react-intl-redux';
 
-// <> props inside
-class Sporsmalsside extends React.Component<any, any> {
+interface MapStateToProps {
 
-    // Functions & Methods
+}
+
+interface MapDispatchToProps {
+
+}
+
+type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
+
+class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
+    constructor(props: SporsmalssideProps) {
+        super(props);
+    }
 
     render() {
         return(
-            <div className="sideinnhold">
+            <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>
@@ -41,10 +55,18 @@ class Sporsmalsside extends React.Component<any, any> {
                     />
                 </section>
 
-            </div>
+            </main>
         );
 
     }
 }
 
-export default Sporsmalsside;
+// TODO: Bytt til å hente meldekortDetaljer fra Store
+const mapStateToProps = ({}: RootState) => {
+    return {};
+};
+
+const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) =>
+    bindActionCreators({}, dispatch);
+
+export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);

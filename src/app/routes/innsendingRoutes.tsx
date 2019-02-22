@@ -5,10 +5,14 @@ import Kvittering from '../pages/innsending/kvittering';
 import Utfylling from '../pages/innsending/utfylling';
 import Sporsmalsside from '../pages/innsending/sporsmalsside';
 import MeldekortRoutes from './meldekortRoutes';
+import Stegbanner from '../components/stegindikator/stegbanner';
 
 const InnsendingRoutes = () => {
     return (
-        <div>
+        <div className="sideinnhold">
+            <section className="seksjon">
+                <Stegbanner/>
+            </section>
             <Switch>
                 <Route exact={true} path="/innsending/sporsmal" component={Sporsmalsside} />
                 <Route path="/innsending/utfylling" component={Utfylling} />

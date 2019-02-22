@@ -98,8 +98,8 @@ class TidligereMeldekort extends React.Component<Props> {
 
         return(
             <div className="sideinnhold">
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.tidligereMeldekort" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel><FormattedMessage id="overskrift.tidligereMeldekort" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">
