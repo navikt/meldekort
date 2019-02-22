@@ -38,8 +38,6 @@ export default () => {
         ...personstatus
     });
 
-    fetchMock.get(Konstanter().hentKorrigertMeldekortIdApiUri, {
-        ...korrigertid
-    });
+    fetchMock.get(Konstanter().hentKorrigertMeldekortIdApiUri, korrigertid);
 
 };

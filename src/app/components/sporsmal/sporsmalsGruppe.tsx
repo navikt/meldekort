@@ -1,4 +1,3 @@
-/*
 import * as React from 'react';
 
 import { connect } from 'react-redux';
@@ -38,7 +37,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
     lagRadioKnapp () {
 
-    }/*
+    }
            /* <Sporsmal
                 AAP={false}
                 id="1"
@@ -49,7 +48,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 sporsmalOnChange={this.sporsmalOnChange}
             />*/
 
-    /*render() {
+    render() {
         // Lag en liste med tekstid'er for AAP og dagpenger.
         // Map gjennom alle spm & returner dem.
 
@@ -57,10 +56,10 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
             <div></div>
         );
     }
-}*/
+}
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
-/*const mapStateToProps = ({ intl, locales }: RootState) => {
+const mapStateToProps = ({ intl, locales }: RootState) => {
     const { locale, messages } = intl;
     const locs = locales;
     return { locale, messages, locs};
@@ -75,4 +74,3 @@ const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {
 };
 
 export default connect(mapStateToProps, mapDispatcherToProps)(SporsmalsGruppe);
-*/

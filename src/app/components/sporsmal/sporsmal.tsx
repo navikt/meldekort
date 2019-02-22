@@ -1,4 +1,3 @@
-/*
 import * as React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
@@ -18,11 +17,11 @@ interface SporsmalProps {
 
 const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
 
-    const svarsalternativer = {[
+    /*const svarsalternativer = {[
             { label: props.svarJa, value: props.svarJa },
     {}
 
-            ]};
+            ]};*/
 
     return (
         <section className="seksjon sporsmal">
@@ -51,4 +50,4 @@ const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
     );
 };
 
-export default Sporsmal; */
+export default Sporsmal;
