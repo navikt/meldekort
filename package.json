@@ -81,7 +81,7 @@
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
-    "start-mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
+    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
   },
   "browserslist": [
     ">0.2%",
