@@ -1,4 +1,4 @@
-import { Meldekortdetaljer } from '../types/meldekort';
+import { KortType, Meldekortdetaljer } from '../types/meldekort';
 import { MeldekortdetaljerActions, MeldekortdetaljerActionTypes } from '../actions/meldekortdetaljer';
 import { getType } from 'typesafe-actions';
 
@@ -14,7 +14,7 @@ const initialState: MeldekortdetaljerState = {
         meldekortId: 0,
         meldeperiode: '',
         arkivnokkel: '',
-        kortType: '',
+        kortType: KortType.KORRIGERT_ELEKTRONISK,
         meldeDato: Date.prototype,
         lestDato: Date.prototype,
         sporsmal: {

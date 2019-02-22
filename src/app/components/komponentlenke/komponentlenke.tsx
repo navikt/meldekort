@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { selectRouter } from '../../selectors/router';
 import { Router } from '../../types/router';
-import { hentTabConfig, Tab } from '../meny/tabConfig';
+import { Meldekort } from '../../types/meldekort';
 
 interface KomponentlenkeProps {
     lenketekst: string;
     rute: string;
-    meldekortId?: number;
+    meldekort?: Meldekort;
 }
 
 interface MapStateToProps {
@@ -21,37 +21,24 @@ interface MapStateToProps {
 }
 
 interface MapDispatcherToProps {
-    leggTilAktivtMeldekort: (meldekortId: number) => void;
-}
-
-interface TabsState {
-    tabsobjekter: Tab[];
-    // windowSize: number;
+    leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
 type ReduxType =
     KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
-class Komponentlenke extends React.Component<ReduxType, TabsState> {
+class Komponentlenke extends React.Component<ReduxType> {
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            tabsobjekter: hentTabConfig().filter(obj => ! obj.disabled)
-        };
     }
 
     clickHandler = () => {
-        console.log('Click fired!');
-        console.log(this.props);
-
-        if (this.props.meldekortId) {
-            console.log('Legger til aktivtMeldekort');
-            this.props.leggTilAktivtMeldekort(this.props.meldekortId);
+        if (this.props.meldekort) {
+            this.props.leggTilAktivtMeldekort(this.props.meldekort);
         }
 
         const pathname = this.props.router.location.pathname;
-        console.log(pathname);
         pathname !== this.props.rute && history.push(this.props.rute);
     }
 
@@ -66,7 +53,7 @@ class Komponentlenke extends React.Component<ReduxType, TabsState> {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
         let meldekort: AktivtMeldekortState = {
-            meldekortId: state.aktivtMeldekort.meldekortId
+            meldekort: state.aktivtMeldekort.meldekort
         };
         return {
             aktivtMeldekort: meldekort,
@@ -76,8 +63,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
     return {
-        leggTilAktivtMeldekort: (meldekortId: number) =>
-            dispatch(oppdaterAktivtMeldekort(meldekortId))
+        leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
     };
 };
 

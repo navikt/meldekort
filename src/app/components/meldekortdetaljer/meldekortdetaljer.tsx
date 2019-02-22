@@ -3,8 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
 import { MeldekortDag } from '../../types/meldekort';
+import { hentNestePeriodeMedUkerOgDato, hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../utils/dates';
+import { RootState } from '../../store/configureStore';
+import { connect } from 'react-redux';
 
-const Meldekortdetaljer: React.FunctionComponent<MeldekortdetaljerState> = (props) => {
+type Props = MeldekortdetaljerState & ReturnType<typeof mapStateToProps>;
+
+const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
     let ukedager = [
         <FormattedMessage key={1} id="ukedag.mandag"/>,
@@ -16,14 +21,13 @@ const Meldekortdetaljer: React.FunctionComponent<MeldekortdetaljerState> = (prop
         <FormattedMessage key={7} id="ukedag.sondag"/>
     ];
 
-    const hentUkeListe = (meldekortdager: MeldekortDag[]) => {
-        console.log(meldekortdager);
-        const ukeListe = [];
+    const hentDagListe = (meldekortdager: MeldekortDag[]) => {
+        const dagListe = [];
         for (let i = 0; i < meldekortdager.length; i++) {
             let meldekortDag = meldekortdager[i];
             if (meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.annetFravaer || meldekortDag.syk) {
                 let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
-                ukeListe.push(
+                dagListe.push(
                     <li key={i}>
                         {ukedag}
                         {
@@ -56,7 +60,35 @@ const Meldekortdetaljer: React.FunctionComponent<MeldekortdetaljerState> = (prop
                 );
             }
         }
-        return ukeListe;
+        return dagListe;
+    };
+
+    const uke1 = () => {
+        let uke = hentDagListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(0, 7));
+
+        if (uke.length > 0) {
+            return (
+                <div>
+                    <p>{hentNummerOgDatoForForsteUke(props.aktivtMeldekort.meldekort.meldeperiode.fra)}</p>
+                    <ul>{uke}</ul>
+                </div>
+            );
+        }
+        return null;
+    };
+
+    const uke2 = () => {
+        let uke = hentDagListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(7, 14));
+
+        if (uke.length > 0) {
+            return (
+                <div>
+                    <p>{hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldekort.meldeperiode.til)}</p>
+                    <ul>{uke}</ul>
+                </div>
+            );
+        }
+        return null;
     };
 
     const hentTekstForSvar = (svar: boolean) => {
@@ -87,15 +119,22 @@ const Meldekortdetaljer: React.FunctionComponent<MeldekortdetaljerState> = (prop
                 </section>
                 <section className="seksjon">
                     <FormattedMessage id="sporsmal.registrert"/>
+                    <span>
+                        {hentNestePeriodeMedUkerOgDato(props.aktivtMeldekort.meldekort.meldeperiode.fra, props.aktivtMeldekort.meldekort.meldeperiode.til)}
+                    </span>
                     <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.arbeidssoker)} </span>
                 </section>
             </div>
-            <p>Uke 1</p>
-            <ul> {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(0, 7))} </ul>
-            <p>Uke 2</p>
-            <ul> {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(7, 14))} </ul>
+            {uke1()}
+            {uke2()}
         </div>
     );
 };
 
-export default Meldekortdetaljer;
+const mapStateToProps = (state: RootState) => {
+    return {
+        aktivtMeldekort: state.aktivtMeldekort
+    };
+};
+
+export default connect(mapStateToProps, null)(Meldekortdetaljer);

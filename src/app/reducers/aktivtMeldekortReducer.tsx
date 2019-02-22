@@ -1,12 +1,27 @@
 import { AktivtMeldekortActions } from '../actions/aktivtMeldekort';
-import { Constants } from '../types/meldekort';
+import { Constants, KortStatus, KortType, Meldegruppe, Meldekort } from '../types/meldekort';
 
 export interface AktivtMeldekortState {
-    meldekortId: number;
+    meldekort: Meldekort;
 }
 
 const initialState: AktivtMeldekortState = {
-    meldekortId: 0,
+    meldekort: {
+        meldekortId: 0,
+        kortType: KortType.RETUR,
+        meldeperiode: {
+            til: Date.prototype,
+            fra: Date.prototype,
+            kortKanSendesFra: Date.prototype,
+            periodeKode: ''
+        },
+        meldegruppe: Meldegruppe.NULL,
+        kortStatus: KortStatus.VENTE,
+        bruttoBelop: 0,
+        mottattDato: Date.prototype,
+        korrigerbart: false
+
+    }
 };
 
 const aktivtMeldekortReducer = (state: AktivtMeldekortState = initialState,

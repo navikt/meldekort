@@ -8,10 +8,12 @@ import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { connect } from 'react-redux';
 import Tabell from '../../components/tabell/tabell';
 import EtikettBase from 'nav-frontend-etiketter';
-// import Lenke from 'nav-frontend-lenker';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { RootState } from '../../store/configureStore';
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
+import { Meldekort } from '../../types/meldekort';
+import { mapKortStatusTilTekst } from '../../utils/mapper';
+import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../utils/statusEtikettUtil';
 
 interface MapStateToProps {
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -22,7 +24,7 @@ interface MapDispatchToProps {
 }
 
 interface HistoriskeMeldekortRad {
-    meldekortId: number;
+    meldekort: Meldekort;
     periode: string;
     dato: string;
     mottatt: string;
@@ -45,11 +47,11 @@ class TidligereMeldekort extends React.Component<Props> {
         let radliste = [];
         for (let i = 0; i < historiskeMeldekortListe.length; i++) {
             let rad: HistoriskeMeldekortRad = {
-                meldekortId: historiskeMeldekortListe[i].meldekortId,
+                meldekort: historiskeMeldekortListe[i],
                 periode: hentUkePeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
                 dato: hentDatoPeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
                 mottatt: formaterDato(historiskeMeldekortListe[i].mottattDato),
-                status: historiskeMeldekortListe[i].kortStatus,
+                status: mapKortStatusTilTekst(historiskeMeldekortListe[i].kortStatus),
                 bruttobelop: `${historiskeMeldekortListe[i].bruttoBelop.toString()} kr`,
                 detaljer: 'Detaljer >'
             };
@@ -60,25 +62,6 @@ class TidligereMeldekort extends React.Component<Props> {
 
     render() {
         const rows = this.hentRaderFraHistoriskeMeldekort();
-
-        // TODO: Endres når vi vet mer om fargekodene.
-        const finnRiktigEtikettType = (statustekst: any) => {
-            if (statustekst === 'Til beregning' || statustekst === 'Til manuell') {
-                return 'fokus';
-            } else if (statustekst === 'Beregnet') {
-                return 'suksess';
-            } else {
-                return 'info';
-            }
-        };
-
-        const HvisIngenBeregningSettBlaEtikett = (statustekst: any) => {
-          if (statustekst === 'Ingen beregning')  {
-              return 'blaEtikett';
-          } else {
-              return '';
-          }
-        };
 
         const columns = [
             {key: 'periode', label: 'Periode', cell: 'periode'},
@@ -95,7 +78,7 @@ class TidligereMeldekort extends React.Component<Props> {
                 }},
             {key: 'bruttobelop', label: 'Bruttobelop', cell: 'bruttobelop'},
             {key: 'detaljer', label: 'Detaljer', cell: function( row: any, columnKey: any) {
-                    return <Komponentlenke lenketekst={row.detaljer} rute="/tidligere-meldekort/detaljer" meldekortId={row.meldekortId}/>;
+                    return <Komponentlenke lenketekst={row.detaljer} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort}/>;
                 }}
         ];
 

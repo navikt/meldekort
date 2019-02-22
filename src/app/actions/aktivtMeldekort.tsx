@@ -1,9 +1,9 @@
-import { Constants } from '../types/meldekort';
+import { Constants, Meldekort } from '../types/meldekort';
 import { action, ActionType } from 'typesafe-actions';
 
-export function oppdaterAktivtMeldekort(meldekortId: number) {
+export function oppdaterAktivtMeldekort(meldekort: Meldekort) {
     return action(Constants.LEGG_TIL_AKTIVT_MELDEKORT, {
-        meldekortId
+        meldekort
     });
 }
 

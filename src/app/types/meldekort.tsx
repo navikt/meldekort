@@ -19,7 +19,6 @@ export interface Meldekort {
     meldegruppe: Meldegruppe;
     kortStatus: KortStatus;
     bruttoBelop: number;
-    erForskuddsPeriode: boolean;
     mottattDato: Date;
     korrigerbart: boolean;
 }
@@ -32,7 +31,7 @@ export interface Meldekortdetaljer {
     meldekortId: number;
     meldeperiode: string;
     arkivnokkel: string;
-    kortType: string;
+    kortType: KortType;
     meldeDato: Date;
     lestDato: Date;
     sporsmal: Sporsmal;

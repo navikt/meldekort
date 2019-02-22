@@ -25,7 +25,7 @@
       "periodeKode": "201851"
     },
     "meldegruppe": "DAGP",
-    "kortStatus": "FERDI",
+    "kortStatus": "FMOPP",
     "bruttoBelop": 13430,
     "erForskuddsPeriode": false,
     "mottattDato": "2018-12-26T12:00:00+01:00",
@@ -41,7 +41,7 @@
       "periodeKode": "201901"
     },
     "meldegruppe": "DAGP",
-    "kortStatus": "FERDI",
+    "kortStatus": "IKKE",
     "bruttoBelop": 10,
     "erForskuddsPeriode": false,
     "mottattDato": "2019-01-12T12:00:00+01:00",
