@@ -6,6 +6,7 @@ import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface SporsmalProps {
+    key: string;
     id: string;
     sporsmal: string;
     jaSvar: string;

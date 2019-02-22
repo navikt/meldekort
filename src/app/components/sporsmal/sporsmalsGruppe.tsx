@@ -34,7 +34,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
     constructor( props: SporsmalsGruppeProps ) {
         super(props);
         this.state = {
-            sporsmalobjekter: hentSporsmalConfig()
+            sporsmalobjekter: hentSporsmalConfig(),
         };
     }
 
@@ -43,25 +43,31 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
         console.log('Sporsmal clicked!');
     }
 
-    lagSporsmal = (sporsmalsobj: Spm) => {
-        const tekstendelse = (this.props.AAP) ? '-AAP' : '';
+    finnesIntlId = (id: string) => {
+        if (this.props.intl.formatMessage({id: id}) !== id) {
+            return id;
+        } else {
+            return id.slice(0, -4);
+        }
+    }
 
-        const finnesIntlId = (id: string) => {
-            if (this.props.intl.formatMessage({id: id}) !== id) {
-                console.log('ID EXISTS..', id);
-                return id;
-            } else {
-                console.log('ID DOES NOT EXIST', id);
-                return id.slice(0, -4);
+    lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean) => {
+
+        const tekstendelse = (erAAP) ? '-AAP' : '';
+        for (let key in sporsmalsobj) {
+            if (sporsmalsobj[key] !== sporsmalsobj.kategori) {
+                sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             }
-        };
+        }
+
         return(
             <Sporsmal
-                id={sporsmalsobj.kategori + tekstendelse}
-                sporsmal={finnesIntlId(sporsmalsobj.sporsmal + tekstendelse)}
-                jaSvar={finnesIntlId(sporsmalsobj.ja + tekstendelse)}
-                neiSvar={finnesIntlId(sporsmalsobj.nei + tekstendelse)}
-                hjelpetekst={finnesIntlId(sporsmalsobj.forklaring + tekstendelse)}
+                id={sporsmalsobj.kategori}
+                key={sporsmalsobj.kategori}
+                sporsmal={sporsmalsobj.sporsmal}
+                jaSvar={sporsmalsobj.ja}
+                neiSvar={sporsmalsobj.nei}
+                hjelpetekst={sporsmalsobj.forklaring}
                 sporsmalOnChange={this.sporsmalOnChange}
             />
         );
@@ -71,7 +77,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
         // Lag en liste med tekstid'er for AAP og dagpenger.
         // Map gjennom alle spm & returner dem.
         const sporsmalsgruppe = this.state.sporsmalobjekter
-            .map( sporsmalobj => this.lagSporsmal(sporsmalobj));
+            .map( sporsmalobj => this.lagSporsmal(sporsmalobj, this.props.AAP));
 
         return(
             <div>
