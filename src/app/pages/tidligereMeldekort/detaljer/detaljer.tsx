@@ -5,11 +5,11 @@ import { Dispatch } from 'redux';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { connect } from 'react-redux';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Ingress, Innholdstittel, Element, Normaltekst } from 'nav-frontend-typografi';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { FormattedMessage } from 'react-intl';
 import Tabell from '../../../components/tabell/tabell';
-import { formaterDato, formaterUkeOgDatoPeriode } from '../../../utils/dates';
+import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../../utils/dates';
 import { mapKortTypeTilTekst, mapKortStatusTilTekst } from '../../../utils/mapper';
 import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
@@ -70,11 +70,16 @@ class Detaljer extends React.Component<Props> {
             {key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype"/>}
         ];
         return(
-            <div className="sideinnhold">
-                <FormattedMessage id="meldekort.for.perioden"/>
-                <Innholdstittel>{formaterUkeOgDatoPeriode(meldeperiode.fra, meldeperiode.til)}</Innholdstittel>
+            <div className="sideinnhold innhold-detaljer">
+                <Ingress className="ingress-detaljer flex-innhold sentrert">
+                    <FormattedMessage id="meldekort.for.perioden"/>
+                </Ingress>
+                <Innholdstittel className="flex-innhold sentrert">
+                    {hentUkePeriode(meldeperiode.fra, meldeperiode.til)}
+                </Innholdstittel>
+                <Normaltekst className="flex-innhold sentrert">{hentDatoPeriode(meldeperiode.fra, meldeperiode.til)}</Normaltekst>
                 <section className="seksjon">
-                    <div className="item">
+                    <div className="tabell-detaljer">
                         <Tabell rows={rows} columns={columns}/>
                     </div>
                 </section>

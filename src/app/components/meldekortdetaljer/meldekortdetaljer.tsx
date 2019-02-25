@@ -6,6 +6,9 @@ import { MeldekortDag } from '../../types/meldekort';
 import { hentNestePeriodeMedUkerOgDato, hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../utils/dates';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
+import { Undertittel, Element } from 'nav-frontend-typografi';
+
+import checkMark from '../../ikoner/check.svg';
 
 type Props = MeldekortdetaljerState & ReturnType<typeof mapStateToProps>;
 
@@ -29,7 +32,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                 let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
                 dagListe.push(
                     <li key={i}>
-                        {ukedag}
+                        <Element>{ukedag}</Element>
                         {
                             meldekortDag.arbeidetTimerSum > 0 ?
                                 <div>
@@ -63,28 +66,22 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
         return dagListe;
     };
 
-    const uke1 = () => {
-        let uke = hentDagListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(0, 7));
+    const hentUkeListe = (meldekortDager: MeldekortDag[], ukeNr: number) => {
+        let dagListe = hentDagListe(meldekortDager);
 
-        if (uke.length > 0) {
-            return (
-                <div>
-                    <p>{hentNummerOgDatoForForsteUke(props.aktivtMeldekort.meldekort.meldeperiode.fra)}</p>
-                    <ul>{uke}</ul>
-                </div>
-            );
+        let uke: string = '';
+        if (ukeNr === 1) {
+            uke = hentNummerOgDatoForForsteUke(props.aktivtMeldekort.meldekort.meldeperiode.fra);
+        } else if (ukeNr === 2) {
+            uke = hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldekort.meldeperiode.til)
         }
-        return null;
-    };
 
-    const uke2 = () => {
-        let uke = hentDagListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(7, 14));
-
-        if (uke.length > 0) {
+        if (dagListe.length > 0) {
             return (
                 <div>
-                    <p>{hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldekort.meldeperiode.til)}</p>
-                    <ul>{uke}</ul>
+                    <Undertittel className="uketittel flex-innhold sentrert">{uke}</Undertittel>
+                    <hr className="detaljerborder"/>
+                    <ul>{dagListe}</ul>
                 </div>
             );
         }
@@ -102,31 +99,43 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
         <div className="meldekortdetaljer">
             <div className="sporsmal">
                 <section className="seksjon">
-                    <FormattedMessage id="sporsmal.arbeid"/>
+                    <Element><FormattedMessage id="sporsmal.arbeid"/></Element>
+                    <img src={checkMark}/>
                     <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.arbeidet)} </span>
                 </section>
                 <section className="seksjon">
-                    <FormattedMessage id="sporsmal.aktivitetArbeid"/>
+                    <Element><FormattedMessage id="sporsmal.aktivitetArbeid"/></Element>
+                    <img src={checkMark}/>
                     <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.kurs)} </span>
                 </section>
                 <section className="seksjon">
-                    <FormattedMessage id="sporsmal.forhindret"/>
+                    <Element><FormattedMessage id="sporsmal.forhindret"/></Element>
+                    <img src={checkMark}/>
                     <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.syk)} </span>
                 </section>
                 <section className="seksjon">
-                    <FormattedMessage id="sporsmal.ferieFravar"/>
+                    <Element><FormattedMessage id="sporsmal.ferieFravar"/></Element>
+                    <img src={checkMark}/>
                     <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.annetFravaer)} </span>
                 </section>
                 <section className="seksjon">
-                    <FormattedMessage id="sporsmal.registrert"/>
-                    <span>
-                        {hentNestePeriodeMedUkerOgDato(props.aktivtMeldekort.meldekort.meldeperiode.fra, props.aktivtMeldekort.meldekort.meldeperiode.til)}
-                    </span>
+                    <Element><FormattedMessage id="sporsmal.registrert"/>
+                        <span>
+                            {hentNestePeriodeMedUkerOgDato(props.aktivtMeldekort.meldekort.meldeperiode.fra, props.aktivtMeldekort.meldekort.meldeperiode.til)}?
+                        </span>
+                    </Element>
+                    <img src={checkMark}/>
                     <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.arbeidssoker)} </span>
                 </section>
             </div>
-            {uke1()}
-            {uke2()}
+            <div className="ukevisning">
+                <section className="uke seksjon">
+                    {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(0, 7), 1)}
+                </section>
+                <section className="uke seksjon">
+                    {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(7, 14), 2)}
+                </section>
+            </div>
         </div>
     );
 };
