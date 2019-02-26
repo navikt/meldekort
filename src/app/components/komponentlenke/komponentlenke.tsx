@@ -45,7 +45,7 @@ class Komponentlenke extends React.Component<ReduxType> {
     render() {
         return (
             <div>
-                <a className="lenke" onClick={this.clickHandler}> <span>{this.props.lenketekst}</span> </a>
+                <a className="lenke" href="#" onClick={this.clickHandler}> <span>{this.props.lenketekst}</span> </a>
             </div>
         );
     }
