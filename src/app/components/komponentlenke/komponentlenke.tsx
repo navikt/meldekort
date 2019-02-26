@@ -8,6 +8,7 @@ import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { selectRouter } from '../../selectors/router';
 import { Router } from '../../types/router';
 import { Meldekort } from '../../types/meldekort';
+import { HoyreChevron } from 'nav-frontend-chevron';
 
 interface KomponentlenkeProps {
     lenketekst: string;
@@ -45,7 +46,7 @@ class Komponentlenke extends React.Component<ReduxType> {
     render() {
         return (
             <div>
-                <a className="lenke" href="#" onClick={this.clickHandler}> <span>{this.props.lenketekst}</span> </a>
+                <a className="lenke" href="#" onClick={this.clickHandler}> <span>{this.props.lenketekst}<HoyreChevron/></span> </a>
             </div>
         );
     }

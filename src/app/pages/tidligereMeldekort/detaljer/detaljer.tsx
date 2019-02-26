@@ -56,7 +56,7 @@ class Detaljer extends React.Component<Props> {
         const meldeperiode = this.props.aktivtMeldekort.meldekort.meldeperiode;
         const rows = this.setTabellrader();
         const columns = [
-            {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt" />},
+            {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
                     return (
                         <EtikettBase

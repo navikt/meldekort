@@ -14,6 +14,7 @@ import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates
 import { Meldekort } from '../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../utils/mapper';
 import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../utils/statusEtikettUtil';
+import { hentIntl } from '../../utils/intlUtil';
 
 interface MapStateToProps {
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -53,7 +54,7 @@ class TidligereMeldekort extends React.Component<Props> {
                 mottatt: formaterDato(historiskeMeldekortListe[i].mottattDato),
                 status: mapKortStatusTilTekst(historiskeMeldekortListe[i].kortStatus),
                 bruttobelop: `${historiskeMeldekortListe[i].bruttoBelop.toString()} kr`,
-                detaljer: 'Detaljer >'
+                detaljer: hentIntl().formatMessage({id: 'overskrift.detaljer'})
             };
             radliste.push(rad);
         }
@@ -64,10 +65,10 @@ class TidligereMeldekort extends React.Component<Props> {
         const rows = this.hentRaderFraHistoriskeMeldekort();
 
         const columns = [
-            {key: 'periode', label: 'Periode', cell: 'periode'},
-            {key: 'dato', label: 'Dato', cell: 'dato'},
-            {key: 'mottatt', label: 'Mottatt', cell: 'mottatt'},
-            {key: 'status', label: 'Status', cell: function( row: any, columnKey: any) {
+            {key: 'periode', label: <FormattedMessage id="overskrift.periode"/>, cell: 'periode'},
+            {key: 'dato', label: <FormattedMessage id="overskrift.dato"/>, cell: 'dato'},
+            {key: 'mottatt', label: <FormattedMessage id="overskrift.mottatt"/>, cell: 'mottatt'},
+            {key: 'status', label: <FormattedMessage id="overskrift.status" />, cell: function( row: any, columnKey: any) {
                 return (
                     <EtikettBase
                         type={finnRiktigEtikettType(row.status)}
@@ -76,8 +77,8 @@ class TidligereMeldekort extends React.Component<Props> {
                     </EtikettBase>
                     );
                 }},
-            {key: 'bruttobelop', label: 'Bruttobelop', cell: 'bruttobelop'},
-            {key: 'detaljer', label: 'Detaljer', cell: function( row: any, columnKey: any) {
+            {key: 'bruttobelop', label: <FormattedMessage id="overskrift.bruttoBelop" />, cell: 'bruttobelop'},
+            {key: 'detaljer', label: <FormattedMessage id="overskrift.detaljer"/>, cell: function( row: any, columnKey: any) {
                     return <Komponentlenke lenketekst={row.detaljer} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort}/>;
                 }}
         ];
