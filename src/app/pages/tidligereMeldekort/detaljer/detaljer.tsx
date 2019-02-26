@@ -16,6 +16,8 @@ import { selectRouter } from '../../../selectors/router';
 import EtikettBase from 'nav-frontend-etiketter';
 import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../../utils/statusEtikettUtil';
 
+import utklippstavle from '../../../ikoner/utklippstavle.svg';
+
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;
@@ -71,6 +73,7 @@ class Detaljer extends React.Component<Props> {
         ];
         return(
             <div className="sideinnhold innhold-detaljer">
+                <img src={utklippstavle}/>
                 <Ingress className="ingress-detaljer flex-innhold sentrert">
                     <FormattedMessage id="meldekort.for.perioden"/>
                 </Ingress>

@@ -18,7 +18,7 @@ class OmMeldekort extends React.Component<any, any> {
                 <section className="seksjon">
                     <Sprakvelger/>
                 </section>
-                <Veilederpanel type={'plakat'} svg={<img src={veileder}/>}>
+                <Veilederpanel type={'plakat'} kompakt={true} svg={<img src={veileder}/>}>
                     <section className="seksjon">
                         <Normaltekst><FormattedMessage id="genereltOmMeldekort.velkommen" /></Normaltekst>
                         <Normaltekst><FormattedMessage id="genereltOmMeldekort.velge" /></Normaltekst>
