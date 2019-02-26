@@ -9,11 +9,10 @@
   "lestDato": "2018-12-26T12:00:00+01:00",
   "sporsmal": {
     "arbeidssoker": true,
-    "arbeidet": false,
-    "syk": false,
-    "annetFravaer": false,
-    "kurs": false,
-    "forskudd": false,
+    "arbeidet": true,
+    "syk": true,
+    "annetFravaer": true,
+    "kurs": true,
     "signatur": true,
     "meldekortDager": [
       {

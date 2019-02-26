@@ -9,6 +9,7 @@ export interface PersonState {
 const initialState: PersonState = {
     person: {
         personId: 0,
+        fodselsnr: '',
         etternavn: '',
         fornavn: '',
         maalformkode: '',

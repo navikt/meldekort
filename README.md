@@ -24,6 +24,8 @@ Interne henvendelser kan sendes via Slack i kanalen #team-arbeid / #meldekort
 
 2. Kjør `npm start`. Appen starter da på [http://localhost:3000](http://localhost:3000).
 
+3. Hvis man vil kjøre appen i mock-modus (uten meldekort-api kjørende lokalt) starter man appen med `npm run start:mock`
+
 
 For de som utvikler på tynnklienten, må disse to linjer med kode settes øverst i .npmrc-filen før npm install fungerer.
 * `proxy=http://155.55.60.117:8088/` 
