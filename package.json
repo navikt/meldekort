@@ -55,8 +55,12 @@
     "nav-frontend-tabs-style": "0.0.13",
     "nav-frontend-typografi": "^2.0.9",
     "nav-frontend-typografi-style": "^1.0.11",
+    "nav-frontend-veileder": "^2.0.8",
+    "nav-frontend-veileder-style": "^2.0.6",
+    "nav-frontend-veilederpanel": "^0.1.10",
+    "nav-frontend-veilederpanel-style": "0.0.14",
     "prop-types": "^15.7.2",
-    "react": "^16.8.2",
+    "react": "^16.8.3",
     "react-collapse": "^4.0.3",
     "react-dom": "^16.7.0",
     "react-intl": "^2.8.0",
@@ -81,7 +85,7 @@
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
-    "start-mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
+    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
   },
   "browserslist": [
     ">0.2%",
