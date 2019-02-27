@@ -16,7 +16,6 @@ const localesReducer = (state: LocalesState = initialState,
 
     switch (action.type) {
         case Constants.UPDATE_LOCALES:
-            console.log('update Locales', action.payload);
             return { ...state,  ...action.payload };
 
         default:

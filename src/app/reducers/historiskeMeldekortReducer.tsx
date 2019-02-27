@@ -14,7 +14,6 @@ const historiskeMeldekortReducer = (state: HistoriskeMeldekortState = initalStat
                                     action: HistoriskeMeldekortActionTypes): HistoriskeMeldekortState => {
     switch (action.type) {
         case getType(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success):
-            console.log('legger til historiske meldekort', action.payload);
 
             return {
                 historiskeMeldekort: action.payload,

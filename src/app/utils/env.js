@@ -6,20 +6,26 @@ const Environment = () => {
         return {
             apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
             loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-            logoutUrl: 'https://loginservice-q.nav.no/slo',
+            logoutUrl: 'https://loginservice-q.nav.no/slo'
         };
-    } else if (erMock() || erLocalhost()) {
+    } else if (erMock()) {
         return {
             apiUrl: '',
             loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-            logoutUrl: 'https://loginservice-q.nav.no/slo',
+            logoutUrl: 'https://loginservice-q.nav.no/slo'
+        };
+    } else if (erLocalhost()) {
+        return {
+            apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
+            loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
+            logoutUrl: 'https://loginservice-q.nav.no/slo'
         };
     }
     return {
         //TODO: Her skal prod-urler inn
         apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
         loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-        logoutUrl: 'https://loginservice-q.nav.no/slo',
+        logoutUrl: 'https://loginservice-q.nav.no/slo'
     };
 };
 

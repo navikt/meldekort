@@ -7,7 +7,8 @@ export type MeldekortActions = ActionType<typeof actions>;
 
 // CONSTANTS / Action?
 export enum Constants {
-    LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT'
+    LEGG_TIL_MELDEKORT = 'LEGG_TIL_MELDEKORT',
+    LEGG_TIL_AKTIVT_MELDEKORT = 'LEGG_TIL_AKTIVT_MELDEKORT'
 }
 
 /* INTERFACES */
@@ -18,7 +19,6 @@ export interface Meldekort {
     meldegruppe: Meldegruppe;
     kortStatus: KortStatus;
     bruttoBelop: number;
-    erForskuddsPeriode: boolean;
     mottattDato: Date;
     korrigerbart: boolean;
 }
@@ -31,10 +31,10 @@ export interface Meldekortdetaljer {
     meldekortId: number;
     meldeperiode: string;
     arkivnokkel: string;
-    kortType: string;
+    kortType: KortType;
     meldeDato: Date;
     lestDato: Date;
-    sporsmal: Sporsmal[];
+    sporsmal: Sporsmal;
     begrunnelse: string;
 }
 
@@ -87,7 +87,6 @@ export interface Sporsmal {
     syk: boolean;
     annetFravaer: boolean;
     kurs: boolean;
-    forskudd: boolean;
     signatur: boolean;
     meldekortDager: MeldekortDag[];
 }
@@ -146,4 +145,12 @@ export enum FravaerType {
     SYKDOM = 'S',
     ANNET_FRAVAER = 'X',
     ARBEIDS_FRAVAER = 'A'
+}
+
+// Internt bruk
+
+export interface SporsmalOgSvar {
+    sporsmalId: string;
+    svar: boolean;
+    formatertDato?: string;
 }
