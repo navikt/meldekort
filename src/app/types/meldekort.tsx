@@ -146,3 +146,11 @@ export enum FravaerType {
     ANNET_FRAVAER = 'X',
     ARBEIDS_FRAVAER = 'A'
 }
+
+// Internt bruk
+
+export interface SporsmalOgSvar {
+    sporsmalId: string;
+    svar: boolean;
+    formatertDato?: string;
+}
