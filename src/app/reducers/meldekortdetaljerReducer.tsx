@@ -35,7 +35,6 @@ const meldekortdetaljerReducer = (state: MeldekortdetaljerState = initialState,
     switch (action.type) {
         case getType(MeldekortdetaljerActions.hentMeldekortdetaljer.success):
 
-            console.log('legger til meldekortdetaljer', action.payload);
             return {
                 meldekortdetaljer: action.payload,
             };

@@ -19,7 +19,6 @@ const personStatusReducer = (state: PersonStatusState = initialState,
     switch (action.type) {
         case getType(PersonStatusActions.hentPersonStatus.success):
 
-            console.log('legger til personStatus', action.payload);
             return {
                 personStatus: action.payload,
             };
