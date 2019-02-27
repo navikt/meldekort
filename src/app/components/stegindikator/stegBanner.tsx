@@ -14,18 +14,25 @@ type StegBannerProps = InjectedIntlProps & MapStateToProps;
 
 const StegBanner: React.StatelessComponent<StegBannerProps> = (props) => {
 
+    let stegobjekter = [];
+    const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
+    const erAktivRoute = (index: number) => (props.router.location.pathname.split('/')[2] === routes[index - 1]);
+    const aktivtSteg = routes.findIndex( steg => steg === props.router.location.pathname.split('/')[2]);
+
+    for (let i = 1; i < 5; i++) {
+        const stegobj = Object.assign(
+            {
+                'index': i,
+                'label': props.intl.formatMessage({id: 'overskrift.steg' + i}),
+                'disabled': !erAktivRoute(i)
+            });
+        stegobjekter.push(stegobj);
+    }
+
     return (
         <Stegindikator
-            steg={[
-                {'index': 1, 'label': props.intl.formatMessage({id: 'overskrift.steg1'})},
-                {'index': 2, 'label': props.intl.formatMessage({id: 'overskrift.steg2'}), 'aktiv': true},
-                {'index': 3, 'label': props.intl.formatMessage({id: 'overskrift.steg3'})},
-                {'index': 4, 'label': props.intl.formatMessage({id: 'overskrift.steg4'})}
-            ]}
-            onChange={() => {
-                const newPath = props.router.location.pathname;
-                console.log(newPath);
-            }}
+            steg={stegobjekter}
+            aktivtSteg={aktivtSteg}
             kompakt={true}
             visLabel={true}
             autoResponsiv={true}

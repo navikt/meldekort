@@ -9,8 +9,6 @@ import { connect } from 'react-redux';
 import { RootState } from '../../store/configureStore';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IntlAction } from 'react-intl-redux';
-import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
-import StegBanner from '../../components/stegindikator/stegBanner';
 
 interface MapStateToProps {
 
@@ -30,12 +28,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     render() {
         return(
             <main>
-                <section className="seksjon">
-                    <PeriodeBanner meldekortForPerioden="sfdfs" ukePeriode="adsa" datoPeriode="sdffd"/>
-                </section>
-                <section className="seksjon">
-                    <StegBanner/>
-                </section>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>

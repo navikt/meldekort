@@ -5,10 +5,18 @@ import Kvittering from '../pages/innsending/kvittering';
 import Utfylling from '../pages/innsending/utfylling';
 import Sporsmalsside from '../pages/innsending/sporsmalsside';
 import MeldekortRoutes from './meldekortRoutes';
+import StegBanner from '../components/stegindikator/stegBanner';
+import PeriodeBanner from '../components/periodeBanner/periodeBanner';
 
 const InnsendingRoutes = () => {
     return (
         <div className="sideinnhold">
+            <section className="seksjon">
+                <PeriodeBanner meldekortForPerioden="dsajsda" ukePeriode="dssda" datoPeriode="dada"/>
+            </section>
+            <section className="seksjon">
+                <StegBanner/>
+            </section>
             <Switch>
                 <Route exact={true} path="/innsending/sporsmal" component={Sporsmalsside} />
                 <Route path="/innsending/utfylling" component={Utfylling} />
