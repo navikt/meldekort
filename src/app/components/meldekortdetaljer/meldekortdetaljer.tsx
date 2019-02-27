@@ -78,7 +78,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
         if (dagListe.length > 0) {
             return (
-                <div>
+                <div className="uke">
                     <Undertittel className="uketittel flex-innhold sentrert">{uke}</Undertittel>
                     <hr className="detaljerborder"/>
                     <ul>{dagListe}</ul>
@@ -129,10 +129,10 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                 </section>
             </div>
             <div className="ukevisning">
-                <section className="uke seksjon">
+                <section className="seksjon">
                     {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(0, 7), 1)}
                 </section>
-                <section className="uke seksjon">
+                <section className="seksjon">
                     {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(7, 14), 2)}
                 </section>
             </div>
