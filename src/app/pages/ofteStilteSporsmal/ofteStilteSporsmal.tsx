@@ -1,15 +1,43 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { EkspanderbartpanelPure } from 'nav-frontend-ekspanderbartpanel';
 import { hentIntl } from '../../utils/intlUtil';
 
 import sporrende from '../../ikoner/sporrende.svg';
 
-class OfteStilteSporsmal extends React.Component<any, any> {
+interface SporsmalProps {
+    overskriftId: string;
+    tekstId: string;
+    id: number;
+}
+
+interface SporsmalVisningState {
+    valgtSporsmalId: number;
+}
+
+class OfteStilteSporsmal extends React.Component<any, SporsmalVisningState> {
     constructor(props: any) {
         super(props);
+        this.state = {valgtSporsmalId: 0};
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    sporsmal = (): SporsmalProps[] => {
+        return [
+            {overskriftId: 'oss.sende.overskrift', tekstId: 'oss.sende.tekst', id: 1},
+            {overskriftId: 'oss.frist.overskrift', tekstId: 'oss.frist.tekst', id: 2},
+            {overskriftId: 'oss.korrigere.overskrift', tekstId: 'oss.korrigere.tekst', id: 3},
+            {overskriftId: 'oss.pengene.overskrift', tekstId: 'oss.pengene.tekst', id: 4},
+            {overskriftId: 'oss.utbetalt.overskrift', tekstId: 'oss.utbetalt.tekst', id: 5}
+        ];
+    }
+
+    handleClick = (sporsmalId: number) => {
+        this.setState( {
+            valgtSporsmalId: this.state.valgtSporsmalId === sporsmalId ? 0 : sporsmalId
+        });
     }
 
     hentFormatertOverskrift = (id: string): string => {
@@ -25,21 +53,21 @@ class OfteStilteSporsmal extends React.Component<any, any> {
                     <Sprakvelger/>
                 </section>
                 <section className="oss-seksjon seksjon">
-                    <Ekspanderbartpanel tittel={this.hentFormatertOverskrift('oss.sende.overskrift')} border={true}>
-                        <FormattedHTMLMessage id={'oss.sende.tekst'}/>
-                    </Ekspanderbartpanel>
-                    <Ekspanderbartpanel tittel={this.hentFormatertOverskrift('oss.frist.overskrift')} border={true}>
-                        <FormattedHTMLMessage id={'oss.frist.tekst'}/>
-                    </Ekspanderbartpanel>
-                    <Ekspanderbartpanel tittel={this.hentFormatertOverskrift('oss.korrigere.overskrift')} border={true}>
-                        <FormattedHTMLMessage id={'oss.korrigere.tekst'}/>
-                    </Ekspanderbartpanel>
-                    <Ekspanderbartpanel tittel={this.hentFormatertOverskrift('oss.pengene.overskrift')} border={true}>
-                        <FormattedHTMLMessage id={'oss.pengene.tekst'}/>
-                    </Ekspanderbartpanel>
-                    <Ekspanderbartpanel tittel={this.hentFormatertOverskrift('oss.utbetalt.overskrift')} border={true}>
-                        <FormattedHTMLMessage id={'oss.utbetalt.tekst'}/>
-                    </Ekspanderbartpanel>
+                    {
+                        this.sporsmal().map((sporsmal) => {
+                            return (
+                                <EkspanderbartpanelPure
+                                    key={sporsmal.id}
+                                    onClick={() => this.handleClick(sporsmal.id)}
+                                    border={true}
+                                    tittel={this.hentFormatertOverskrift(sporsmal.overskriftId)}
+                                    apen={this.state.valgtSporsmalId === sporsmal.id}
+                                >
+                                    <FormattedHTMLMessage id={sporsmal.tekstId}/>
+                                </EkspanderbartpanelPure>
+                            );
+                        })
+                    }
                 </section>
             </div>
         );
