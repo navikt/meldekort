@@ -3,6 +3,12 @@ import Ingress from 'nav-frontend-typografi/lib/ingress';
 import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { FormattedMessage } from 'react-intl';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
+import { RootState } from '../../store/configureStore';
+import { selectRouter } from '../../selectors/router';
+
+interface MapStateToProps {
+
+}
 
 interface PeriodeBannerProps {
     meldekortForPerioden: string;
@@ -27,4 +33,9 @@ const PeriodeBanner: React.StatelessComponent<PeriodeBannerProps> = (props) => {
     );
 };
 
+const mapStateToProps = (state: RootState): MapStateToProps => {
+    return {
+        router: selectRouter(state),
+    };
+};
 export default PeriodeBanner;
