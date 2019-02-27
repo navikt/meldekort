@@ -10,9 +10,9 @@ interface MapStateToProps {
     router: Router;
 }
 
-type StegbannerProps = InjectedIntlProps & MapStateToProps;
+type StegBannerProps = InjectedIntlProps & MapStateToProps;
 
-const Stegbanner: React.StatelessComponent<StegbannerProps> = (props) => {
+const StegBanner: React.StatelessComponent<StegBannerProps> = (props) => {
 
     return (
         <Stegindikator
@@ -39,4 +39,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     };
 };
 
-export default injectIntl(connect(mapStateToProps)(Stegbanner));
+export default injectIntl(connect(mapStateToProps)(StegBanner));
