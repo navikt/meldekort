@@ -2,13 +2,13 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
-import { MeldekortDag } from '../../types/meldekort';
+import { MeldekortDag, SporsmalOgSvar } from '../../types/meldekort';
 import { hentNestePeriodeMedUkerOgDato, hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../utils/dates';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { Undertittel, Element } from 'nav-frontend-typografi';
 
-import checkMark from '../../ikoner/check.svg';
+import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
 
 type Props = MeldekortdetaljerState & ReturnType<typeof mapStateToProps>;
 
@@ -73,7 +73,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
         if (ukeNr === 1) {
             uke = hentNummerOgDatoForForsteUke(props.aktivtMeldekort.meldekort.meldeperiode.fra);
         } else if (ukeNr === 2) {
-            uke = hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldekort.meldeperiode.til)
+            uke = hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldekort.meldeperiode.til);
         }
 
         if (dagListe.length > 0) {
@@ -88,45 +88,24 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
         return null;
     };
 
-    const hentTekstForSvar = (svar: boolean) => {
-        if (svar) {
-            return <FormattedMessage id="diverse.ja"/>;
-        }
-        return <FormattedMessage id="diverse.nei"/>;
+    const sporsmalOgSvar = (): SporsmalOgSvar[] => {
+        return [
+            {sporsmalId: 'sporsmal.arbeid', svar: props.meldekortdetaljer.sporsmal.arbeidet},
+            {sporsmalId: 'sporsmal.aktivitetArbeid', svar: props.meldekortdetaljer.sporsmal.kurs},
+            {sporsmalId: 'sporsmal.forhindret', svar: props.meldekortdetaljer.sporsmal.syk},
+            {sporsmalId: 'sporsmal.ferieFravar', svar: props.meldekortdetaljer.sporsmal.annetFravaer},
+            {sporsmalId: 'sporsmal.registrert', svar: props.meldekortdetaljer.sporsmal.arbeidssoker,
+                formatertDato: hentNestePeriodeMedUkerOgDato(
+                    props.aktivtMeldekort.meldekort.meldeperiode.fra,
+                    props.aktivtMeldekort.meldekort.meldeperiode.til)
+            }
+        ];
     };
 
     return (
         <div className="meldekortdetaljer">
             <div className="sporsmal">
-                <section className="seksjon">
-                    <Element><FormattedMessage id="sporsmal.arbeid"/></Element>
-                    <img src={checkMark}/>
-                    <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.arbeidet)} </span>
-                </section>
-                <section className="seksjon">
-                    <Element><FormattedMessage id="sporsmal.aktivitetArbeid"/></Element>
-                    <img src={checkMark}/>
-                    <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.kurs)} </span>
-                </section>
-                <section className="seksjon">
-                    <Element><FormattedMessage id="sporsmal.forhindret"/></Element>
-                    <img src={checkMark}/>
-                    <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.syk)} </span>
-                </section>
-                <section className="seksjon">
-                    <Element><FormattedMessage id="sporsmal.ferieFravar"/></Element>
-                    <img src={checkMark}/>
-                    <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.annetFravaer)} </span>
-                </section>
-                <section className="seksjon">
-                    <Element><FormattedMessage id="sporsmal.registrert"/>
-                        <span>
-                            {hentNestePeriodeMedUkerOgDato(props.aktivtMeldekort.meldekort.meldeperiode.fra, props.aktivtMeldekort.meldekort.meldeperiode.til)}?
-                        </span>
-                    </Element>
-                    <img src={checkMark}/>
-                    <span> {hentTekstForSvar(props.meldekortdetaljer.sporsmal.arbeidssoker)} </span>
-                </section>
+                <Sporsmalvisning sporsmalOgSvar={sporsmalOgSvar()}/>
             </div>
             <div className="ukevisning">
                 <section className="seksjon">
