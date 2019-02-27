@@ -1,5 +1,6 @@
 import Environment from '../utils/env';
 import Konstanter from '../utils/consts';
+import { erMock } from '../mock/utils';
 
 function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
@@ -9,9 +10,9 @@ function sjekkAuthOgRedirect(res: any) {
     return true;
 }
 
-const fetchJSONAndCheckForErrors = (url: string) => {
+const getFetchJSONAndCheckForErrors = (url: string) => {
     const p = new Promise((res, rej) => {
-        fetch(`${Environment().apiUrl}` + url, {
+         fetch(`${Environment().apiUrl}` + url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
@@ -33,21 +34,29 @@ const fetchJSONAndCheckForErrors = (url: string) => {
 };
 
 export function fetchMeldekort() {
-    return fetchJSONAndCheckForErrors( `${Konstanter().hentMeldekortApiUri}`);
+    return getFetchJSONAndCheckForErrors( Konstanter().hentMeldekortApiUri);
 }
 
 export function fetchHistoriskeMeldekort() {
-    return fetchJSONAndCheckForErrors(`${Konstanter().hentHistoriskeMeldekortApiUri}`);
+    return getFetchJSONAndCheckForErrors(Konstanter().hentHistoriskeMeldekortApiUri);
 }
 
-export const hentMeldekortdetaljer = (id: number) => {
-    fetchJSONAndCheckForErrors(`${Konstanter().hentMeldekortdetaljerApiUri.replace('{id}', id.toString())}`);
-};
+export function fetchMeldekortdetaljer(id: number) {
+    // TODO: Legge på feilmelding her hvis id er tom eller 0.
+    return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
+}
 
-export const hentPersonstatus = () => {
-    fetchJSONAndCheckForErrors(`${Konstanter().hentPersonStatusApiUri}`);
-};
+export function fetchPersonstatus() {
+    return getFetchJSONAndCheckForErrors(Konstanter().hentPersonStatusApiUri);
+}
 
-export const hentKorrigertId = (id: number) => {
-    fetchJSONAndCheckForErrors(`${Konstanter().hentKorrigertMeldekortIdApiUri.replace('{id}', id.toString())}`);
-};
+export function fetchKorrigertId(id: number) {
+    return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+}
+
+function addIdToUrlIfNotMock(url: string, id: number): string {
+    if (!erMock()) {
+        return url.replace('{id}', id.toString());
+    }
+    return url;
+}

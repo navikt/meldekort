@@ -9,6 +9,7 @@ export interface PersonState {
 const initialState: PersonState = {
     person: {
         personId: 0,
+        fodselsnr: '',
         etternavn: '',
         fornavn: '',
         maalformkode: '',
@@ -26,7 +27,6 @@ const personReducer = (state: PersonState = initialState,
     switch (action.type) {
         case getType(PersonActions.hentPerson.success):
 
-            console.log('legger til person', action.payload);
             return {
                 person: action.payload,
             };

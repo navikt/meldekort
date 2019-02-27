@@ -3,6 +3,7 @@ import { Meldekort } from './meldekort';
 // fetchMeldekort
 export interface Person {
     personId: number;
+    fodselsnr: string;
     etternavn: string;
     fornavn: string;
     maalformkode: string;
