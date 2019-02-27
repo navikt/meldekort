@@ -12,7 +12,7 @@ const InnsendingRoutes = () => {
     return (
         <div className="sideinnhold">
             <section className="seksjon">
-                <PeriodeBanner meldekortForPerioden="dsajsda" ukePeriode="dssda" datoPeriode="dada"/>
+                <PeriodeBanner />
             </section>
             <section className="seksjon">
                 <StegBanner/>

@@ -3,7 +3,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { hentIntl } from '../../utils/intlUtil';
 
 interface SporsmalProps {
     key: string;
@@ -16,7 +16,7 @@ interface SporsmalProps {
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
 }
 
-const Sporsmal: React.StatelessComponent<SporsmalProps & InjectedIntlProps> = (props) => {
+const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
 
     return (
         <section className="seksjon sporsmal">
@@ -33,11 +33,11 @@ const Sporsmal: React.StatelessComponent<SporsmalProps & InjectedIntlProps> = (p
                 legend=""
                 radios={[
                     {
-                        label: props.intl.formatMessage({ id: props.jaSvar }),
+                        label: hentIntl().formatMessage({ id: props.jaSvar }),
                         value: 'ja'
                     },
                     {
-                        label: props.intl.formatMessage({ id: props.neiSvar }),
+                        label: hentIntl().formatMessage({ id: props.neiSvar }),
                         value: 'nei'
                     }
                 ]}
@@ -49,4 +49,4 @@ const Sporsmal: React.StatelessComponent<SporsmalProps & InjectedIntlProps> = (p
     );
 };
 
-export default injectIntl(Sporsmal);
+export default Sporsmal;

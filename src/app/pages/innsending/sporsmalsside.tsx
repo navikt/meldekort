@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../../store/configureStore';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IntlAction } from 'react-intl-redux';
+import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
 
 interface MapStateToProps {
 
@@ -28,6 +29,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     render() {
         return(
             <main>
+                <Stegindikator
+                    steg={[
+                        {"index":1, "label": "Dette steget først", "aktiv": true},
+                        {"index":2, "label": "Og så dette steget"},
+                        {"index":3, "label": "Deretter må du gjøre dette"},
+                        {"index":4, "label": "Konklusjonen"}
+                    ]}
+                    visLabel={true}
+                    kompakt={true}
+                    autoResponsiv={true}
+                />
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>

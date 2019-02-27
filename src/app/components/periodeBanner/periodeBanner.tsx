@@ -3,39 +3,39 @@ import Ingress from 'nav-frontend-typografi/lib/ingress';
 import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { FormattedMessage } from 'react-intl';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
+import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
+import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { RootState } from '../../store/configureStore';
-import { selectRouter } from '../../selectors/router';
+import { connect } from 'react-redux';
 
 interface MapStateToProps {
-
+    aktivtMeldekort: AktivtMeldekortState;
 }
+type Props = MapStateToProps;
 
-interface PeriodeBannerProps {
-    meldekortForPerioden: string;
-    ukePeriode: string;
-    datoPeriode: string;
-}
+const PeriodeBanner: React.StatelessComponent<Props> = (props) => {
 
-const PeriodeBanner: React.StatelessComponent<PeriodeBannerProps> = (props) => {
+    const meldeperiode = props.aktivtMeldekort.meldekort.meldeperiode;
 
     return (
-        <>
+        <section className="seksjon">
             <Ingress className="flex-innhold sentrert">
-                <FormattedMessage id={props.meldekortForPerioden}/>
+                <FormattedMessage id="meldekort.for.perioden"/>
             </Ingress>
             <Innholdstittel className="flex-innhold sentrert">
-                {props.ukePeriode}
+                {hentUkePeriode(meldeperiode.fra, meldeperiode.til )}
             </Innholdstittel>
             <Normaltekst className="flex-innhold sentrert">
-                {props.datoPeriode}
+                {hentDatoPeriode(meldeperiode.fra, meldeperiode.til )}
                 </Normaltekst>
-        </>
+        </section>
     );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        router: selectRouter(state),
+        aktivtMeldekort: state.aktivtMeldekort,
     };
 };
-export default PeriodeBanner;
+
+export default connect(mapStateToProps)(PeriodeBanner);

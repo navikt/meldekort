@@ -1,16 +1,16 @@
 import * as React from 'react';
 import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { RootState } from '../../store/configureStore';
 import { selectRouter } from '../../selectors/router';
 import { connect } from 'react-redux';
 import { Router } from '../../types/router';
+import { hentIntl } from '../../utils/intlUtil';
 
 interface MapStateToProps {
     router: Router;
 }
 
-type StegBannerProps = InjectedIntlProps & MapStateToProps;
+type StegBannerProps =  MapStateToProps;
 
 const StegBanner: React.StatelessComponent<StegBannerProps> = (props) => {
 
@@ -23,7 +23,7 @@ const StegBanner: React.StatelessComponent<StegBannerProps> = (props) => {
         const stegobj = Object.assign(
             {
                 'index': i,
-                'label': props.intl.formatMessage({id: 'overskrift.steg' + i}),
+                'label': hentIntl().formatMessage({id: 'overskrift.steg' + i}),
                 'disabled': !erAktivRoute(i)
             });
         stegobjekter.push(stegobj);
@@ -46,4 +46,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     };
 };
 
-export default injectIntl(connect(mapStateToProps)(StegBanner));
+export default connect(mapStateToProps)(StegBanner);
