@@ -58,7 +58,7 @@ class SendMeldekort extends React.Component<Props> {
 
         return(
             <main className="sideinnhold">
-                <Innholdstittel className="seksjon"> [X] meldekort klar for innsending </Innholdstittel>
+                <Innholdstittel className="seksjon"> {this.props.person.person.meldekort.length} meldekort klar for innsending </Innholdstittel>
                 <section className="seksjon">
                     <Sprakvelger/>
                 </section>
