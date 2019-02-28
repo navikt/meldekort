@@ -3,7 +3,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
-import { hentIntl } from '../../utils/intlUtil';
+import { hentIntl } from '../../../../utils/intlUtil';
 
 interface SporsmalProps {
     key: string;

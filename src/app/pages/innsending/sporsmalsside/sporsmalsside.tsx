@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
-import SporsmalsGruppe from '../../components/sporsmal/sporsmalsGruppe';
+import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import { connect } from 'react-redux';
-import { RootState } from '../../store/configureStore';
+import { RootState } from '../../../store/configureStore';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IntlAction } from 'react-intl-redux';
-import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
-// import StegBanner from '../../components/stegindikator/stegBanner';
 
 interface MapStateToProps {
 
@@ -34,9 +32,14 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <section className="seksjon">
+                <section className="seksjon alert">
                     <AlertStripe solid={true} type="info">
-                        <FormattedMessage id="sporsmal.alertstripe.sporsmalstegn" />
+                        <div className="item">
+                            <FormattedMessage id="sporsmal.lesVeiledning" />
+                        </div>
+                        <div className="item">
+                            <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
+                        </div>
                     </AlertStripe>
                 </section>
 
