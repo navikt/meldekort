@@ -9,9 +9,11 @@ import { PersonActions } from '../../actions/person';
 import Tabell from '../../components/tabell/tabell';
 import { PersonState } from '../../reducers/personReducer';
 import { RootState } from '../../store/configureStore';
-import { KortStatus } from '../../types/meldekort';
+import { KortStatus, Meldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
+import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: PersonState;
@@ -25,7 +27,7 @@ interface MeldekortRad {
     dato: string;
 }
 
-type Props = MapDispatchToProps&MapStateToProps;
+type Props = MapDispatchToProps & MapStateToProps;
 
 class SendMeldekort extends React.Component<Props> {
     constructor(props: any) {
@@ -85,6 +87,7 @@ class SendMeldekort extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={'/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
+                        aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
                     />
                 </section>
             </main>
