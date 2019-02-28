@@ -12,7 +12,7 @@ interface MapStateToProps {
 
 type StegBannerProps =  MapStateToProps;
 
-const StegBanner: React.StatelessComponent<StegBannerProps> = (props) => {
+const StegBanner: React.FunctionComponent<StegBannerProps> = (props) => {
 
     let stegobjekter = [];
     const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];

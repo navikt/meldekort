@@ -5,7 +5,7 @@ import Kvittering from '../pages/innsending/kvittering';
 import Utfylling from '../pages/innsending/utfylling';
 import Sporsmalsside from '../pages/innsending/sporsmalsside/sporsmalsside';
 import MeldekortRoutes from './meldekortRoutes';
-import StegBanner from '../components/stegindikator/stegBanner';
+import StegBanner from '../components/stegBanner/stegBanner';
 import PeriodeBanner from '../components/periodeBanner/periodeBanner';
 
 const InnsendingRoutes = () => {

@@ -13,7 +13,7 @@ interface MapStateToProps {
 }
 type Props = MapStateToProps;
 
-const PeriodeBanner: React.StatelessComponent<Props> = (props) => {
+const PeriodeBanner: React.FunctionComponent<Props> = (props) => {
 
     const meldeperiode = props.aktivtMeldekort.meldekort.meldeperiode;
 
