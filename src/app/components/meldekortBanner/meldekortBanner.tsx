@@ -6,7 +6,7 @@ export interface BannerProps {
     mindre?: boolean;
 }
 
-const Banner: React.StatelessComponent<BannerProps> = (props) => {
+const MeldekortBanner: React.StatelessComponent<BannerProps> = (props) => {
     const bannerClass = 'banner-content ' + (props.mindre ? ' mindre-banner' : '');
     return (
         <div className="banner-container">
@@ -17,5 +17,5 @@ const Banner: React.StatelessComponent<BannerProps> = (props) => {
     );
 };
 
-Banner.displayName = 'Banner';
-export default Banner;
+MeldekortBanner.displayName = 'MeldekortBanner';
+export default MeldekortBanner;

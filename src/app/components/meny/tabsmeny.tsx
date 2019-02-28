@@ -3,7 +3,7 @@ import Tabs from 'nav-frontend-tabs';
 
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { history, RootState, store } from '../../store/configureStore';
+import { history, RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Tab, hentTabConfig } from './tabConfig';

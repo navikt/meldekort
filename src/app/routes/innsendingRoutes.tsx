@@ -11,12 +11,8 @@ import PeriodeBanner from '../components/periodeBanner/periodeBanner';
 const InnsendingRoutes = () => {
     return (
         <div className="sideinnhold">
-            <section className="seksjon">
-                <PeriodeBanner />
-            </section>
-            <section className="seksjon">
-                <StegBanner/>
-            </section>
+            <PeriodeBanner />
+            <StegBanner/>
             <Switch>
                 <Route exact={true} path="/innsending/sporsmal" component={Sporsmalsside} />
                 <Route path="/innsending/utfylling" component={Utfylling} />
