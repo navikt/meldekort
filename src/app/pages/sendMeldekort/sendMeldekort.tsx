@@ -17,9 +17,11 @@ import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: PersonState;
+   aktivtMeldekort: Meldekort;
 }
 interface MapDispatchToProps {
     hentPerson: () => void;
+    leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
 interface MeldekortRad {
@@ -49,6 +51,12 @@ class SendMeldekort extends React.Component<Props> {
             }
         }
         return radliste;
+    }
+
+    onClick = () => {
+        if (this.props.person.person.meldekort) {
+            this.props.leggTilAktivtMeldekort(this.props.person.person.meldekort[0]);
+        }
     }
 
     render() {
@@ -87,7 +95,7 @@ class SendMeldekort extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={'/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
-                        aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
+                        onClick={this.onClick}
                     />
                 </section>
             </main>
@@ -96,14 +104,20 @@ class SendMeldekort extends React.Component<Props> {
 }
 
 const mapStateToProps = (person: RootState): MapStateToProps => {
+    let meldekort: AktivtMeldekortState = {
+        meldekort: person.aktivtMeldekort.meldekort
+    };
     return {
         person: person.person,
+        aktivtMeldekort: meldekort.meldekort,
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
+        leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
     };
 };
 

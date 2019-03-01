@@ -5,18 +5,10 @@ import { FormattedMessage } from 'react-intl';
 import { RootState, history } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
-import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Meldekort } from '../../types/meldekort';
-import { Dispatch } from 'redux';
 
 interface MapStateToProps {
     router: Router;
-    aktivtMeldekort: AktivtMeldekortState;
-}
-
-interface MapDispatcherToProps {
-    leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
 interface NavKnappProps {
@@ -25,6 +17,7 @@ interface NavKnappProps {
     tekstid: string;
     className?: string;
     aktivtMeldekortObjekt?: Meldekort;
+    onClick?: () => void;
 }
 
 export enum knappTyper {
@@ -32,7 +25,7 @@ export enum knappTyper {
     standard = 'standard',
 }
 
-type Props = MapStateToProps & MapDispatcherToProps & NavKnappProps;
+type Props = MapStateToProps & NavKnappProps;
 
 class NavKnapp extends React.Component<Props> {
     constructor(props: any) {
@@ -48,12 +41,10 @@ class NavKnapp extends React.Component<Props> {
             newPath = this.props.nestePath;
         } else {
             newPath = this.props.nestePath;
-
-        }
-        if (this.props.aktivtMeldekortObjekt  && currentPath.slice(0, 15) === '/send-meldekort') {
-            this.props.leggTilAktivtMeldekort(this.props.aktivtMeldekortObjekt);
         }
         history.push(newPath);
+        this.props.onClick;
+
     }
 
     render() {
@@ -70,20 +61,9 @@ class NavKnapp extends React.Component<Props> {
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    let meldekort: AktivtMeldekortState = {
-        meldekort: state.aktivtMeldekort.meldekort
-    };
     return {
-        aktivtMeldekort: meldekort,
-        router: selectRouter(state),
+        router: selectRouter(state)
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
-    return {
-        leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatcherToProps)(NavKnapp);
+export default connect(mapStateToProps)(NavKnapp);
