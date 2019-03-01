@@ -21,6 +21,7 @@ import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
 import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
 import personEpics from '../epics/personEpics';
 import personStatusEpics from '../epics/personStatusEpics';
+import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 
 
 export const history = createBrowserHistory({
@@ -68,9 +69,10 @@ const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSI
 
 const persistConfig = {
     key: 'root',
-    storage: storage,
+    storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    blacklist: ['aktivtMeldekort'],
+    blacklist: ['intl','locales','meldekortdetaljer'],
+    stateReconciler: autoMergeLevel2,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
