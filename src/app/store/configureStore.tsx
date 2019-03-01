@@ -7,7 +7,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
-import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import personReducer, { PersonState } from '../reducers/personReducer';
 import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
 import tekster from '../tekster/kompilerte-tekster';
@@ -21,6 +20,8 @@ import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
 import personEpics from '../epics/personEpics';
 import personStatusEpics from '../epics/personStatusEpics';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
+import innsendingReducer from '../reducers/innsendingReducer';
+import { Innsending } from '../types/innsending';
 
 
 export const history = createBrowserHistory({
@@ -35,29 +36,29 @@ const initialState = {
 };
 
 export interface RootState {
-    meldekort: MeldekortState;
-    intl: IntlState;
     locales: LocalesState;
+    intl: IntlState;
     router: RouterState;
     person: PersonState;
     personStatus: PersonStatusState;
-    historiskeMeldekort: HistoriskeMeldekortState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;
+    historiskeMeldekort: HistoriskeMeldekortState;
+    innsending: Innsending;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
 
 const rootReducer = combineReducers({
-    meldekort: meldekortReducer,
-    intl: intlReducer,
     locales: localesReducer,
+    intl: intlReducer,
     router: connectRouter(history),
     person: personReducer,
     personStatus: personStatusReducer,
-    historiskeMeldekort: historiskeMeldekortReducer,
     meldekortdetaljer: meldekortdetaljerReducer,
     aktivtMeldekort: aktivtMeldekortReducer,
+    historiskeMeldekort: historiskeMeldekortReducer,
+    innsending: innsendingReducer
 });
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
