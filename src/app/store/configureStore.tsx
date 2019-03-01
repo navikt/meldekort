@@ -5,7 +5,6 @@ import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
 
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
-import demoReducer, { DemoState } from '../reducers/demoReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
 import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
@@ -36,7 +35,6 @@ const initialState = {
 };
 
 export interface RootState {
-    demo: DemoState;
     meldekort: MeldekortState;
     intl: IntlState;
     locales: LocalesState;
@@ -51,7 +49,6 @@ export interface RootState {
 export type AppEpic = Epic<Action, Action, RootState>;
 
 const rootReducer = combineReducers({
-    demo: demoReducer,
     meldekort: meldekortReducer,
     intl: intlReducer,
     locales: localesReducer,

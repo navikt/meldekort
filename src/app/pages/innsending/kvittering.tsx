@@ -14,7 +14,7 @@ class Kvittering extends React.Component<any, any> {
         // TODO: Må endre nestePath til der man kom fra da man startet innsending (send-meldekort, korrigering).
 
         return(
-            <div className="sideinnhold">
+            <main>
                 <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg4" /></Innholdstittel>
                 <section className="seksjon">
                     <Sprakvelger/>
@@ -39,7 +39,7 @@ class Kvittering extends React.Component<any, any> {
                         className={'navigasjonsknapp'}
                     />
                 </section>
-            </div>
+            </main>
         );
 
     }
