@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+
+import veileder from '../../ikoner/veileder.svg';
 
 class OmMeldekort extends React.Component<any, any> {
     constructor(props: any) {
@@ -11,13 +14,24 @@ class OmMeldekort extends React.Component<any, any> {
     render() {
         return(
             <div className="sideinnhold">
-                <section className="seksjon  flex-innhold tittel-sprakvelger">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.genereltOmMeldekort" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <section className="seksjon">
-                    <FormattedHTMLMessage id="genereltOmMeldekort.innhold" />
-                </section>
+                <Veilederpanel type={'plakat'} kompakt={true} svg={<img src={veileder}/>}>
+                    <section className="seksjon">
+                        <Normaltekst><FormattedMessage id="genereltOmMeldekort.velkommen" /></Normaltekst>
+                        <Normaltekst><FormattedMessage id="genereltOmMeldekort.velge" /></Normaltekst>
+                        <ul>
+                            <li><FormattedMessage id="genereltOmMeldekort.valg.sende" /></li>
+                            <li><FormattedMessage id="genereltOmMeldekort.valg.tidligere" /></li>
+                            <li><FormattedMessage id="genereltOmMeldekort.valg.endre" /></li>
+                        </ul>
+                        {/* TODO: Fikse lenke i teksten genereltOmMeldekort.om.meldekort */}
+                        <Normaltekst><FormattedHTMLMessage id="genereltOmMeldekort.om.meldekort" /></Normaltekst>
+                        <Normaltekst><FormattedMessage id="genereltOmMeldekort.oss" /></Normaltekst>
+                    </section>
+                </Veilederpanel>
             </div>
         );
     }
