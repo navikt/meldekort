@@ -11,7 +11,6 @@ import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../..
 class Utfyllingsside extends React.Component<any, any> {
 
     hentUkePanel = (datoTittel: string) => {
-        console.log('6');
         return (
             <div className="ukepanel">
                 <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
@@ -24,7 +23,6 @@ class Utfyllingsside extends React.Component<any, any> {
     }
 
     render() {
-        console.log('1');
         return(
             <main>
                 <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
