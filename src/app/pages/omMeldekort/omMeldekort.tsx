@@ -11,8 +11,8 @@ class OmMeldekort extends React.Component<any, any> {
     render() {
         return(
             <div className="sideinnhold">
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.genereltOmMeldekort" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon  flex-innhold tittel-sprakvelger">
+                    <Innholdstittel><FormattedMessage id="overskrift.genereltOmMeldekort" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">

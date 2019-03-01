@@ -3,25 +3,20 @@ import { Undertittel } from 'nav-frontend-typografi';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
+import { hentIntl } from '../../../../utils/intlUtil';
 
-// Sender inn ID til teksten som skal brukes
 interface SporsmalProps {
-    AAP: boolean;
+    key: string;
     id: string;
     sporsmal: string;
-    svarJa: string;
-    svarNei: string;
+    jaSvar: string;
+    neiSvar: string;
     hjelpetekst: string;
+    checked: string | undefined;
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
 }
 
 const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
-
-    /*const svarsalternativer = {[
-            { label: props.svarJa, value: props.svarJa },
-    {}
-
-            ]};*/
 
     return (
         <section className="seksjon sporsmal">
@@ -37,12 +32,16 @@ const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
                 name={props.id}
                 legend=""
                 radios={[
-                    { label: 'Eplejuice', value: 'juice1' },
-                    { label: 'Appelsinjuice', value: 'juice2'},
-                    { label: 'Melk', value: 'melk'},
-                    { label: 'Ananasjuice', value: 'juice3'}
+                    {
+                        label: hentIntl().formatMessage({ id: props.jaSvar }),
+                        value: 'ja'
+                    },
+                    {
+                        label: hentIntl().formatMessage({ id: props.neiSvar }),
+                        value: 'nei'
+                    }
                 ]}
-                checked="false"
+                checked={props.checked}
                 onChange={props.sporsmalOnChange}
             />
 

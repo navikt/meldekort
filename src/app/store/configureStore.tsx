@@ -2,7 +2,6 @@ import { createBrowserHistory } from 'history';
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
 import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
-import demoReducer, { DemoState } from '../reducers/demoReducer';
 import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
 
 import { intlReducer, IntlState } from 'react-intl-redux';
@@ -31,7 +30,6 @@ const initialState = {
 };
 
 export interface RootState {
-    demo: DemoState;
     meldekort: MeldekortState;
     intl: IntlState;
     locales: LocalesState;
@@ -46,7 +44,6 @@ export interface RootState {
 export type AppEpic = Epic<Action, Action, RootState>;
 
 const rootReducer = combineReducers({
-    demo: demoReducer,
     meldekort: meldekortReducer,
     intl: intlReducer,
     locales: localesReducer,
