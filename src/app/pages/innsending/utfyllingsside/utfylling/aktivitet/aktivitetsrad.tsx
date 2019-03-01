@@ -1,19 +1,15 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
-import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
+import { hentUkedagerSomStringListe } from '../../../../../utils/ukedager';
 import { Checkbox } from 'nav-frontend-skjema';
 
 interface AktivitetsradProps {
     tekstId: string;
 }
 
-class Aktivitetsrad extends React.Component<AktivitetsradProps, any> {
+const Aktivitetsrad: React.FunctionComponent<AktivitetsradProps> = (props) => {
 
-    constructor(props: any) {
-        super(props);
-    }
-
-    setFelter = () => {
+    const setFelter = () => {
         return hentUkedagerSomStringListe().map((ukedag) => {
             return (
                 <Checkbox
@@ -25,16 +21,14 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, any> {
         });
     }
 
-    render() {
-        return (
-            <div className="aktivitetsrad">
-                <FormattedHTMLMessage id={this.props.tekstId}/>
-                <div className="inputrad">
-                    {this.setFelter()}
-                </div>
+    return (
+        <div className="aktivitetsrad">
+            <FormattedHTMLMessage id={props.tekstId}/>
+            <div className="inputrad">
+                {setFelter()}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Aktivitetsrad;

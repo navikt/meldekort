@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
+import { hentUkedagerSomStringListe } from '../../../../../utils/ukedager';
 import { FormattedHTMLMessage } from 'react-intl';
 import { guid } from 'nav-frontend-js-utils';
 
-class Arbeidsrad extends React.Component<any, any> {
+const Arbeidsrad: React.FunctionComponent<any> = () => {
 
-    constructor(props: any) {
-        super(props);
-    }
-
-    setFelter = () => {
+    const setFelter = () => {
         return hentUkedagerSomStringListe().map((ukedag) => {
             return (
                 <Input
@@ -21,18 +17,16 @@ class Arbeidsrad extends React.Component<any, any> {
                 />
             );
         });
-    }
+    };
 
-    render() {
-        return (
-            <div className="arbeidsrad">
-                <FormattedHTMLMessage id="utfylling.arbeid"/>
-                <div className="inputrad">
-                    {this.setFelter()}
-                </div>
+    return (
+        <div className="arbeidsrad">
+            <FormattedHTMLMessage id="utfylling.arbeid"/>
+            <div className="inputrad">
+                {setFelter()}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default Arbeidsrad;

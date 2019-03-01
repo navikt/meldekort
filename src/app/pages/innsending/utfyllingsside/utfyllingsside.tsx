@@ -1,37 +1,38 @@
 import * as React from 'react';
 import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
+import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
-import Arbeidsrad from '../../components/utfylling/arbeid/arbeidsrad';
-import Aktivitetsrad from '../../components/utfylling/aktivitet/aktivitetsrad';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import Arbeidsrad from './utfylling/arbeid/arbeidsrad';
+import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
+import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../../utils/dates';
 
 // <> props inside
-class Utfylling extends React.Component<any, any> {
+class Utfyllingsside extends React.Component<any, any> {
 
-    // Functions & Methods 
-    
-    hentUkeRad = (ukeTekst: string) => {
+    hentUkePanel = (datoTittel: string) => {
+        console.log('6');
         return (
-            <div>
-                <Undertittel className="uketittel flex-innhold sentrert">{ukeTekst}</Undertittel>
+            <div className="ukepanel">
+                <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
                 <Arbeidsrad/>
                 <Aktivitetsrad tekstId="utfylling.tiltak"/>
                 <Aktivitetsrad tekstId="utfylling.syk"/>
                 <Aktivitetsrad tekstId="utfylling.ferieFravar"/>
             </div>
         );
-
     }
 
     render() {
+        console.log('1');
         return(
             <main>
                 <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                 <section className="seksjon">
                     <Sprakvelger/>
                 </section>
-                {this.hentUkeRad('Test')}
+                {this.hentUkePanel(hentNummerOgDatoForForsteUke(new Date()))}
+                {this.hentUkePanel(hentNummerOgDatoForAndreUke(new Date()))}
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
@@ -44,7 +45,6 @@ class Utfylling extends React.Component<any, any> {
                         nestePath={'/innsending/bekreftelse'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
-
                     />
                 </section>
             </main>
@@ -53,4 +53,4 @@ class Utfylling extends React.Component<any, any> {
     }
 }
 
-export default Utfylling;
+export default Utfyllingsside;
