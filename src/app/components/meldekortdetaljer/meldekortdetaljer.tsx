@@ -9,20 +9,13 @@ import { connect } from 'react-redux';
 import { Undertittel, Element } from 'nav-frontend-typografi';
 
 import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
+import { hentUkedagerSomElementListe } from '../../utils/ukedager';
 
 type Props = MeldekortdetaljerState & ReturnType<typeof mapStateToProps>;
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
-    let ukedager = [
-        <FormattedMessage key={1} id="ukedag.mandag"/>,
-        <FormattedMessage key={2} id="ukedag.tirsdag"/>,
-        <FormattedMessage key={3} id="ukedag.onsdag"/>,
-        <FormattedMessage key={4} id="ukedag.torsdag"/>,
-        <FormattedMessage key={5} id="ukedag.fredag"/>,
-        <FormattedMessage key={6} id="ukedag.lordag"/>,
-        <FormattedMessage key={7} id="ukedag.sondag"/>
-    ];
+    let ukedager = hentUkedagerSomElementListe();
 
     const hentDagListe = (meldekortdager: MeldekortDag[]) => {
         const dagListe = [];
