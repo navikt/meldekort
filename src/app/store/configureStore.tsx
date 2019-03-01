@@ -71,7 +71,7 @@ const persistConfig = {
     key: 'root',
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    whitelist: ['intl','locales', 'person', 'personStatus', 'historiskeMeldekort', 'meldekortdetaljer', 'aktivtMeldekort'],
+    blacklist: ['intl', 'locales', 'router'],
     stateReconciler: autoMergeLevel2,
 };
 
