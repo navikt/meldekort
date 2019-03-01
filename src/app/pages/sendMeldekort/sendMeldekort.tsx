@@ -87,7 +87,7 @@ class SendMeldekort extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={'/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
-                        aktivtMeldekortObjekt={this.props.person.person.meldekort[3]}
+                        aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
                     />
                 </section>
             </main>
