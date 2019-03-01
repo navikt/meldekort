@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
-import Banner from './components/banner/banner';
+import MeldekortBanner from './components/meldekortBanner/meldekortBanner';
 import MeldekortRoutes from './routes/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
@@ -68,7 +68,7 @@ class App extends React.Component<Props> {
 
         return(
             <div>
-                <Banner tittel="Meldekort"/>
+                <MeldekortBanner tittel="Meldekort"/>
                 {this.setInnhold()}
             </div>
         );

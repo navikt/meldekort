@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
-import { history, RootState } from '../../../store/configureStore';
-import { Dispatch } from 'redux';
-import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
-import { connect } from 'react-redux';
+import EtikettBase from 'nav-frontend-etiketter';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { Ingress, Innholdstittel, Element, Normaltekst } from 'nav-frontend-typografi';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { FormattedMessage } from 'react-intl';
+import PeriodeBanner from '../../../components/periodeBanner/periodeBanner';
 import Tabell from '../../../components/tabell/tabell';
-import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../../utils/dates';
+import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../../utils/statusEtikettUtil';
+import { formaterDato } from '../../../utils/dates';
+import { FormattedMessage } from 'react-intl';
+import { history, RootState } from '../../../store/configureStore';
 import { mapKortTypeTilTekst, mapKortStatusTilTekst } from '../../../utils/mapper';
+import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
+import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
-import EtikettBase from 'nav-frontend-etiketter';
-import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../../utils/statusEtikettUtil';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -53,7 +53,6 @@ class Detaljer extends React.Component<Props> {
     }
 
     render() {
-        const meldeperiode = this.props.aktivtMeldekort.meldekort.meldeperiode;
         const rows = this.setTabellrader();
         const columns = [
             {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
@@ -71,13 +70,7 @@ class Detaljer extends React.Component<Props> {
         ];
         return(
             <div className="sideinnhold innhold-detaljer">
-                <Ingress className="ingress-detaljer flex-innhold sentrert">
-                    <FormattedMessage id="meldekort.for.perioden"/>
-                </Ingress>
-                <Innholdstittel className="flex-innhold sentrert">
-                    {hentUkePeriode(meldeperiode.fra, meldeperiode.til)}
-                </Innholdstittel>
-                <Normaltekst className="flex-innhold sentrert">{hentDatoPeriode(meldeperiode.fra, meldeperiode.til)}</Normaltekst>
+                <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">
                         <Tabell rows={rows} columns={columns}/>

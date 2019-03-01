@@ -26,7 +26,7 @@ class Utfylling extends React.Component<any, any> {
 
     render() {
         return(
-            <div className="sideinnhold">
+            <main>
                 <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                 <section className="seksjon">
                     <Sprakvelger/>
@@ -47,7 +47,7 @@ class Utfylling extends React.Component<any, any> {
 
                     />
                 </section>
-            </div>
+            </main>
         );
 
     }

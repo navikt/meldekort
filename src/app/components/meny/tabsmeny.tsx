@@ -3,7 +3,7 @@ import Tabs from 'nav-frontend-tabs';
 
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { history, RootState, store } from '../../store/configureStore';
+import { history, RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Tab, hentTabConfig } from './tabConfig';
@@ -49,7 +49,6 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
 
     handleOnChange = ( event: React.SyntheticEvent<EventTarget>, index: number ) => {
         const pathname = this.props.router.location.pathname;
-        console.log(store.getState());
         pathname !== this.state.tabsobjekter[index].urlparam && history.push(this.state.tabsobjekter[index].urlparam);
     }
 

@@ -3,12 +3,16 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Bekreftelse from '../pages/innsending/bekreftelse';
 import Kvittering from '../pages/innsending/kvittering';
 import Utfylling from '../pages/innsending/utfylling';
-import Sporsmalsside from '../pages/innsending/sporsmalsside';
+import Sporsmalsside from '../pages/innsending/sporsmalsside/sporsmalsside';
 import MeldekortRoutes from './meldekortRoutes';
+import StegBanner from '../components/stegBanner/stegBanner';
+import PeriodeBanner from '../components/periodeBanner/periodeBanner';
 
 const InnsendingRoutes = () => {
     return (
-        <div>
+        <div className="sideinnhold">
+            <PeriodeBanner />
+            <StegBanner/>
             <Switch>
                 <Route exact={true} path="/innsending/sporsmal" component={Sporsmalsside} />
                 <Route path="/innsending/utfylling" component={Utfylling} />
