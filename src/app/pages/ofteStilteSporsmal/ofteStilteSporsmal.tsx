@@ -49,10 +49,10 @@ class OfteStilteSporsmal extends React.Component<any, SporsmalVisningState> {
             <div className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.ofteStilteSporsmal" /></Innholdstittel>
-                <img className="oss-ikon" src={sporrende}/>
-                <section className="seksjon">
                     <Sprakvelger/>
                 </section>
+
+                <img className="oss-ikon" src={sporrende}/>
                 <section className="oss-seksjon seksjon">
                     {
                         this.sporsmal().map((sporsmal) => {
