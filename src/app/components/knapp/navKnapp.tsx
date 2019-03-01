@@ -27,37 +27,26 @@ export enum knappTyper {
 
 type Props = MapStateToProps & NavKnappProps;
 
-class NavKnapp extends React.Component<Props> {
-    constructor(props: any) {
-        super(props);
-    }
+const NavKnapp: React.FC<Props> = (props) => {
 
-    clickHandler = () => {
-
-        const currentPath = this.props.router.location.pathname;
+    const clickHandler = () => {
+        const currentPath = props.router.location.pathname;
         const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
         let newPath;
-        if (erPaInnsending) {
-            newPath = this.props.nestePath;
-        } else {
-            newPath = this.props.nestePath;
-        }
+        (erPaInnsending)? newPath = props.nestePath : newPath = props.nestePath;
         history.push(newPath);
-        this.props.onClick;
-
+        props.onClick;
     }
 
-    render() {
-        return (
-            <KnappBase
-                type={this.props.type}
-                onClick={this.clickHandler}
-                className={this.props.className}
-            >
-                <FormattedMessage id={this.props.tekstid}/>
-            </KnappBase>
-        );
-    }
+    return (
+        <KnappBase
+            type={props.type}
+            onClick={clickHandler}
+            className={props.className}
+        >
+            <FormattedMessage id={props.tekstid}/>
+        </KnappBase>
+    );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
