@@ -9,9 +9,11 @@ import { connect } from 'react-redux';
 import { RootState } from '../../../store/configureStore';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IntlAction } from 'react-intl-redux';
+import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
+import { Meldegruppe } from '../../../types/meldekort';
 
 interface MapStateToProps {
-
+    aktivtMeldekort: AktivtMeldekortState;
 }
 
 interface MapDispatchToProps {
@@ -26,6 +28,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     render() {
+
+        const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
+
         return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -44,7 +49,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 </section>
 
                 <section className="seksjon">
-                    <SporsmalsGruppe AAP={true}/>
+                    <SporsmalsGruppe AAP={meldegruppeErAAP}/>
                 </section>
                 <section className="seksjon">
                     <AlertStripe solid={true} type="info">
@@ -67,8 +72,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 }
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
-const mapStateToProps = ({}: RootState) => {
-    return {};
+const mapStateToProps = (state : RootState): MapStateToProps => {
+    let meldekort: AktivtMeldekortState = {
+        meldekort: state.aktivtMeldekort.meldekort
+    };
+    return {
+       aktivtMeldekort: meldekort,
+    };
 };
 
 const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) =>

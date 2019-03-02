@@ -7,9 +7,9 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
-import { Meldekort } from '../../types/meldekort';
+import { KortStatus, Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
-import { settMeldekortId } from '../../actions/innsending';
+import { settMeldekortInfo } from '../../actions/innsending';
 
 interface MapStateToProps {
     router: Router;
@@ -18,7 +18,7 @@ interface MapStateToProps {
 
 interface MapDispatcherToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
-    leggTilMeldekortId: (meldekortId: number) => void;
+    leggTilMeldekortInfo: (meldekortId: number, kortstatus: KortStatus) => void;
 }
 
 interface NavKnappProps {
@@ -52,9 +52,11 @@ class NavKnapp extends React.Component<Props> {
             newPath = this.props.nestePath;
 
         }
+
+        const aktivtMeldekort = this.props.aktivtMeldekort
         if (this.props.aktivtMeldekortObjekt  && currentPath.slice(0, 15) === '/send-meldekort') {
-            this.props.leggTilAktivtMeldekort(this.props.aktivtMeldekortObjekt);
-            this.props.leggTilMeldekortId(this.props.aktivtMeldekort.meldekort.meldekortId);
+            this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+            this.props.leggTilMeldekortInfo(aktivtMeldekort.meldekort.meldekortId, aktivtMeldekort.meldekort.kortStatus);
         }
         history.push(newPath);
     }
@@ -86,8 +88,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
             dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
-        leggTilMeldekortId: (meldekortid: number) =>
-            dispatch(settMeldekortId(meldekortid))
+        leggTilMeldekortInfo: (meldekortid: number, kortStatus: KortStatus) =>
+            dispatch(settMeldekortInfo(meldekortid, kortStatus))
     };
 };
 

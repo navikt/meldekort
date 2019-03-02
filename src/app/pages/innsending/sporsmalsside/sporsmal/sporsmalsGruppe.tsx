@@ -35,6 +35,10 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
         }
     }
 
+    settCheckedBasertPaSvar = (svar: boolean) => {
+        
+    }
+
     lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean) => {
         const tekstendelse = (erAAP) ? '-AAP' : '';
         for (let key in sporsmalsobj) {
@@ -42,6 +46,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             }
         }
+
         return(
             <Sporsmal
                 id={sporsmalsobj.kategori}

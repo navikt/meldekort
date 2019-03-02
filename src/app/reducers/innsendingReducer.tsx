@@ -1,5 +1,5 @@
 import { Constants, Innsending } from '../types/innsending';
-import { MeldekortDag } from '../types/meldekort';
+import { KortStatus, MeldekortDag } from '../types/meldekort';
 import { InnsendingActions } from '../actions/innsending';
 
 const hentInitMeldekortDager = () => {
@@ -19,7 +19,8 @@ const hentInitMeldekortDager = () => {
 };
 
 const initialState: Innsending = {
-    meldekortId:0,
+    meldekortId: 0,
+    kortStatus: KortStatus.OPPRE,
     sporsmal: {
         arbeidssoker: false,
         arbeidet: false,
@@ -34,7 +35,7 @@ const initialState: Innsending = {
 const innsendingReducer = (state: Innsending = initialState,
                            action: InnsendingActions) : Innsending => {
     switch (action.type) {
-        case Constants.SETT_MELDEKORTID:
+        case Constants.SETT_MELDEKORTINFO:
             return { ...state, ...action.payload };
 
         case Constants.LEGG_TIL_SVAR:
