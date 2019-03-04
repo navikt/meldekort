@@ -12,6 +12,7 @@ import { RootState } from '../../store/configureStore';
 import { KortStatus, Meldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
@@ -51,6 +52,24 @@ class SendMeldekort extends React.Component<Props> {
         return radliste;
     }
 
+    ventPaaDataOgReturnerSpinnerEllerTabell = (rows: MeldekortRad[], columns: any) => {
+        if (this.props.person.person.personId === 0) {
+            return (
+                <div className="meldekort-spinner">
+                    <NavFrontendSpinner type="XL"/>
+                </div>
+            );
+        } else {
+            return (
+                <Tabell
+                    rows={rows}
+                    columns={columns}
+                />
+            );
+        }
+    }
+
+
     render() {
         const rows = this.hentMeldekortRaderFraPerson();
         const columns = [
@@ -69,10 +88,7 @@ class SendMeldekort extends React.Component<Props> {
                         <FormattedHTMLMessage id="sendMeldekort.info.kanSende"/>
                     </div>
                     <div className="item">
-                        <Tabell
-                            rows={rows}
-                            columns={columns}
-                        />
+                        {this.ventPaaDataOgReturnerSpinnerEllerTabell(rows, columns)}
                     </div>
                 </section>
                 <section className="seksjon">
