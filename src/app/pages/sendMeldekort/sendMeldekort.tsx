@@ -13,8 +13,6 @@ import { KortStatus, Meldekort } from '../../types/meldekort';
 import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: PersonState;
@@ -40,14 +38,16 @@ class SendMeldekort extends React.Component<Props> {
     hentMeldekortRaderFraPerson = () => {
         let meldekortListe = this.props.person.person.meldekort;
         let radliste = [];
-        for (let i = 0; i < meldekortListe.length; i++) {
-            if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
-                if (kanMeldekortSendesInn(meldekortListe[i].meldeperiode.kortKanSendesFra)) {
-                    let rad: MeldekortRad = {
-                        periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
-                        dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
-                    };
-                    radliste.push(rad);
+        if (meldekortListe !== null) {
+            for (let i = 0; i < meldekortListe.length; i++) {
+                if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
+                    if (kanMeldekortSendesInn(meldekortListe[i].meldeperiode.kortKanSendesFra)) {
+                        let rad: MeldekortRad = {
+                            periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                            dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                        };
+                        radliste.push(rad);
+                    }
                 }
             }
         }
