@@ -41,7 +41,7 @@ class NavKnapp extends React.Component<Props> {
         super(props);
     }
 
-    clickHandler = () => {
+    clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
 
         const currentPath = this.props.router.location.pathname;
         const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
@@ -50,7 +50,6 @@ class NavKnapp extends React.Component<Props> {
             newPath = this.props.nestePath;
         } else {
             newPath = this.props.nestePath;
-
         }
 
         const aktivtMeldekort = this.props.aktivtMeldekort

@@ -27,6 +27,10 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         super(props);
     }
 
+    clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
+        console.log('CLICKED');
+    }
+
     render() {
 
         const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
@@ -62,6 +66,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         nestePath={'/innsending/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
+                        aktivtMeldekortObjekt={this.props.aktivtMeldekort.meldekort}
                     />
                 </section>
 
