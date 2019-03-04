@@ -62,8 +62,6 @@ export const hentNestePeriodeMedUkerOgDato = (fraDato: Date, tilDato: Date): str
 export const kanMeldekortSendesInn = (kortKanSendesFra: Date): boolean => {
     let sendesFra = moment(kortKanSendesFra).hour(0).minute(0).second(0).format();
     let dagensDato = moment(new Date()).hour(0).minute(0).second(0).format();
-    console.log('kortKanSendesFra: ' + sendesFra);
-    console.log('new date: ' + dagensDato);
     return moment(sendesFra).isSameOrBefore(dagensDato);
 };
 

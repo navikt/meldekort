@@ -66,14 +66,9 @@ class SendMeldekort extends React.Component<Props> {
             );
         } else {
             if (this.props.person.person.meldekort.length > 0) {
-                console.log('Person.meldekort: ' + this.props.person.person.meldekort.length);
-                console.log(rows.length);
                 if (rows.length === 0) {
-                    console.log('Rows var null');
                     let meldekortId = this.forTidligASende(this.props.person.person.meldekort);
-                    console.log('meldekortid: ' + meldekortId);
                     let meldekort = this.props.person.person.meldekort.filter((m) => m.meldekortId === meldekortId);
-                    console.log('meldekort: ' + meldekort);
                     if (meldekort.length !== 0) {
                         return (
                             <div className="send-meldekort-varsel">
@@ -119,10 +114,8 @@ class SendMeldekort extends React.Component<Props> {
         let meldekortId = 0;
         meldekortListe.map((meldekort) => {
             if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
-                console.log(meldekort);
-                console.log(kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra));
                 if (kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra) === false) {
-                    meldekortId =  meldekort.meldekortId;
+                    meldekortId = meldekort.meldekortId;
                 }
             }
         });
