@@ -3,6 +3,7 @@ import { Action, applyMiddleware, combineReducers, compose, createStore } from '
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
+// import logger from 'redux-logger';
 
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
@@ -13,7 +14,6 @@ import tekster from '../tekster/kompilerte-tekster';
 import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
 
-
 import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
 import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
 import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
@@ -22,7 +22,6 @@ import personStatusEpics from '../epics/personStatusEpics';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import innsendingReducer from '../reducers/innsendingReducer';
 import { Innsending } from '../types/innsending';
-
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -74,7 +73,7 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history));
+const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history)); //, logger);
 
 const store = createStore(persistedReducer,
     initialState as any,

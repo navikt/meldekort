@@ -32,7 +32,6 @@ type Props = MapDispatchToProps & MapStateToProps;
 class SendMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-
         this.props.hentPerson();
     }
 
@@ -107,7 +106,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SendMeldekort);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMeldekort);

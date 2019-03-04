@@ -7,7 +7,7 @@ export enum Constants {
 
 export interface Innsending {
     meldekortId: number;
-    kortStatus: KortStatus
+    kortStatus: KortStatus;
     sporsmal: Sporsmal;
     // Sett inn vars for utfylling.
 }
