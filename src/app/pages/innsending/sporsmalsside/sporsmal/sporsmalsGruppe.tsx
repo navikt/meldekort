@@ -1,43 +1,57 @@
 import * as React from 'react';
 
 import Sporsmal from './sporsmal';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Sporsmal as Spm, hentSporsmalConfig } from './sporsmalConfig';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { hentIntl } from '../../../../utils/intlUtil';
+import { InnsendingState } from '../../../../types/innsending';
+import { oppdaterSpm } from '../../../../actions/innsending';
+import { RootState } from '../../../../store/configureStore';
+import { Sporsmal as Spm, hentSporsmalConfig} from './sporsmalConfig';
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
+
+interface MapStateToProps {
+    innsending: InnsendingState;
+}
+
+interface MapDispatchToProps {
+    oppdaterSvar: (sporsmalsobjekt: Spm[]) => void;
+}
 
 interface Props {
     AAP: boolean;
 }
 
-interface SporsmalsGruppeState {
-    sporsmalobjekter: Spm[];
-}
+type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
 
-type SporsmalsGruppeProps = Props & InjectedIntlProps;
-
-class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGruppeState> {
+class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     constructor( props: SporsmalsGruppeProps ) {
         super(props);
-        this.state = {
-            sporsmalobjekter: hentSporsmalConfig(),
-        };
     }
 
     // TODO: mellomlagre sporsmalsvar > beregne & sett inn i fravarsdager variabel
-    sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>) => {
-        console.log('Save to Persist SS!');
-    }
+    sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>, value?: string) => {
+        const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
+            .map( sporsmalsobj => {
+                const val = (value !== undefined) ? value : "";
+                if (sporsmalsobj.kategori === val.split('.')[0] ) {
+                    return {
+                        ...sporsmalsobj,
+                        checked: value
+                    };
+                }
+                return {...sporsmalsobj}
+            });
+        this.props.oppdaterSvar(nySporsmalsobjekterState);
+    };
 
     finnesIntlId = (id: string) => {
-        if (this.props.intl.formatMessage({id: id}) !== id) {
+        if (hentIntl().formatMessage({id: id}) !== id) {
             return id;
         } else {
             return id.slice(0, -4);
         }
-    }
-
-    settCheckedBasertPaSvar = (svar: boolean) => {
-        
-    }
+    };
 
     lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean) => {
         const tekstendelse = (erAAP) ? '-AAP' : '';
@@ -46,25 +60,18 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             }
         }
-
         return(
             <Sporsmal
-                id={sporsmalsobj.kategori}
+                sporsmalsobjekt={sporsmalsobj}
                 key={sporsmalsobj.kategori}
-                sporsmal={sporsmalsobj.sporsmal}
-                jaSvar={sporsmalsobj.ja}
-                neiSvar={sporsmalsobj.nei}
-                hjelpetekst={sporsmalsobj.forklaring}
-                checked={undefined}
+                checked={sporsmalsobj.checked}
                 sporsmalOnChange={this.sporsmalOnChange}
             />
         );
-    }
+    };
 
     render() {
-        // Lag en liste med tekstid'er for AAP og dagpenger.
-        // Map gjennom alle spm & returner dem.
-        const sporsmalsgruppe = this.state.sporsmalobjekter
+        const sporsmalsgruppe = this.props.innsending.sporsmalsobjekter
             .map( sporsmalobj => this.lagSporsmal(sporsmalobj, this.props.AAP));
 
         return(
@@ -75,4 +82,18 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, SporsmalsGru
     }
 }
 
-export default injectIntl(SporsmalsGruppe);
+// TODO: Bytt til å hente meldekortDetaljer fra Store
+const mapStateToProps = (state : RootState): MapStateToProps => {
+    return {
+        innsending: state.innsending
+    };
+};
+
+const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
+    return {
+        oppdaterSvar: (sporsmalsobjekt: Spm[]) =>
+            dispatch(oppdaterSpm(sporsmalsobjekt))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatcherToProps)(SporsmalsGruppe);

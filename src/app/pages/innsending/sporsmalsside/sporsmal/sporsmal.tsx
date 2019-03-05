@@ -4,14 +4,10 @@ import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
+import { Sporsmal as Spm } from './sporsmalConfig';
 
 interface SporsmalProps {
-    key: string;
-    id: string;
-    sporsmal: string;
-    jaSvar: string;
-    neiSvar: string;
-    hjelpetekst: string;
+    sporsmalsobjekt: Spm;
     checked: string | undefined;
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
 }
@@ -22,23 +18,23 @@ const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
         <section className="seksjon sporsmal">
             <div className="flex-sporsmal-hjelpetekst-container">
                 <Undertittel>
-                    <FormattedMessage id={props.sporsmal} />
+                    <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
                 </Undertittel>
-                <HjelpetekstBase id={props.id} type="over">
-                    <FormattedHTMLMessage id={props.hjelpetekst} />
+                <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
+                    <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
                 </HjelpetekstBase>
             </div>
             <RadioPanelGruppe
-                name={props.id}
+                name={props.sporsmalsobjekt.kategori}
                 legend=""
                 radios={[
                     {
-                        label: hentIntl().formatMessage({ id: props.jaSvar }),
-                        value: 'ja'
+                        label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.ja }),
+                        value: props.sporsmalsobjekt.kategori + '.ja'
                     },
                     {
-                        label: hentIntl().formatMessage({ id: props.neiSvar }),
-                        value: 'nei'
+                        label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.nei }),
+                        value: props.sporsmalsobjekt.kategori + '.nei',
                     }
                 ]}
                 checked={props.checked}

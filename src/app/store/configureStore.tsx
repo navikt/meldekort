@@ -1,4 +1,5 @@
-import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage/session';
+
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
@@ -19,13 +20,15 @@ import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
 import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
 import personEpics from '../epics/personEpics';
 import personStatusEpics from '../epics/personStatusEpics';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
+// import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import innsendingReducer from '../reducers/innsendingReducer';
-import { Innsending } from '../types/innsending';
+import { InnsendingState } from '../types/innsending';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
 });
+
+const packageConfig = require('../../../package.json');
 
 const initialState = {
     intl: {
@@ -43,7 +46,7 @@ export interface RootState {
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;
     historiskeMeldekort: HistoriskeMeldekortState;
-    innsending: Innsending;
+    innsending: InnsendingState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -65,11 +68,11 @@ let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
-    key: 'root',
+    key: 'cake', //`meldekort:${packageConfig.redux_version}`,
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
     blacklist: ['intl', 'locales', 'router'],
-    stateReconciler: autoMergeLevel2,
+    // stateReconciler: autoMergeLevel2,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -79,6 +82,9 @@ const store = createStore(persistedReducer,
     initialState as any,
     composeEnhancer(appliedMiddleware)
 );
+
+console.log(store.getState());
+
 const persistor = persistStore(store);
 
 epicMiddleware.run(
