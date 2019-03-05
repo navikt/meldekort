@@ -1,7 +1,6 @@
 import { createBrowserHistory } from 'history';
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
-import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
 import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
 
 import { intlReducer, IntlState } from 'react-intl-redux';
@@ -17,6 +16,8 @@ import personStatusEpics from '../epics/personStatusEpics';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
 import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
+import uiReducer, { UIState } from '../reducers/uiReducer';
+import meldekortEpics from '../epics/meldekortEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -30,7 +31,6 @@ const initialState = {
 };
 
 export interface RootState {
-    meldekort: MeldekortState;
     intl: IntlState;
     locales: LocalesState;
     router: RouterState;
@@ -39,12 +39,12 @@ export interface RootState {
     historiskeMeldekort: HistoriskeMeldekortState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;
+    ui: UIState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
 
 const rootReducer = combineReducers({
-    meldekort: meldekortReducer,
     intl: intlReducer,
     locales: localesReducer,
     router: connectRouter(history),
@@ -53,6 +53,7 @@ const rootReducer = combineReducers({
     historiskeMeldekort: historiskeMeldekortReducer,
     meldekortdetaljer: meldekortdetaljerReducer,
     aktivtMeldekort: aktivtMeldekortReducer,
+    ui: uiReducer,
 });
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
@@ -74,6 +75,7 @@ epicMiddleware.run(
         personStatusEpics,
         historiskeMeldekortEpics,
         meldekortdetaljerEpics,
+        meldekortEpics
     )
 );
 

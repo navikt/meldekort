@@ -1,6 +1,8 @@
 import Environment from '../utils/env';
 import Konstanter from '../utils/consts';
 import { erMock } from '../mock/utils';
+import { Person, PersonStatus } from '../types/person';
+import { prefferedAxios } from '../types/fetch';
 
 function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
@@ -36,9 +38,28 @@ const getFetchJSONAndCheckForErrors = (url: string) => {
     return p;
 };
 
-export function fetchMeldekort() {
+const fetchGet = async (url: string) => {
+    if (erMock()) {
+        return fetch(Environment().apiUrl + url).then(response => {return response.json(); });
+    } else {
+        return prefferedAxios.get(Environment().apiUrl + url, {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+            },
+            withCredentials: true
+        }).then(response => {
+            return response.data;
+        });
+    }
+};
+
+export const fetchMeldekort = (): Promise<Person> => {
+    return fetchGet(Konstanter().hentMeldekortApiUri);
+};
+
+/*export function fetchMeldekort() {
     return getFetchJSONAndCheckForErrors( Konstanter().hentMeldekortApiUri);
-}
+}*/
 
 export function fetchHistoriskeMeldekort() {
     return getFetchJSONAndCheckForErrors(Konstanter().hentHistoriskeMeldekortApiUri);
@@ -49,9 +70,9 @@ export function fetchMeldekortdetaljer(id: number) {
     return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
 }
 
-export function fetchPersonstatus() {
-    return getFetchJSONAndCheckForErrors(Konstanter().hentPersonStatusApiUri);
-}
+export const fetchPersonstatus = (): Promise<PersonStatus> => {
+    return fetchGet(Konstanter().hentPersonStatusApiUri);
+};
 
 export function fetchKorrigertId(id: number) {
     return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));

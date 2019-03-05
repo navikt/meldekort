@@ -1,8 +1,12 @@
-import { action } from 'typesafe-actions';
-import { Constants, Meldekort } from '../types/meldekort';
+import { ActionType, createStandardAction } from 'typesafe-actions';
+import { AxiosError } from 'axios';
 
-export function leggTilMeldekort(mk: Meldekort) {
-    return action(Constants.LEGG_TIL_MELDEKORT, {
-        mk
-    });
+export enum MeldekortTypeKeys {
+    API_KALL_FEILET = 'API_KALL_FEILET'
 }
+
+export const MeldekortActions = {
+    apiKallFeilet: createStandardAction(MeldekortTypeKeys.API_KALL_FEILET)<AxiosError>()
+};
+
+export type MeldekortActionTypes = ActionType<typeof MeldekortActions>;
