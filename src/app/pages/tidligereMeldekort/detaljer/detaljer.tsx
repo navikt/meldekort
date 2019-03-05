@@ -16,6 +16,8 @@ import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReduc
 import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
 
+import utklippstavle from '../../../ikoner/utklippstavle.svg';
+
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;

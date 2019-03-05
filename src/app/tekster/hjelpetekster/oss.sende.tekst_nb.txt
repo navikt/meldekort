@@ -1,0 +1,7 @@
+<p>
+Du skal sende meldekortet på fastsatt meldingsdag. Det er mandag etter perioden på kortet (mandag i uke 3).
+På nav.no kan du sende meldekortet allerede den siste lørdag/søndag i perioden på kortet (lørdag/søndag i uke 2).
+</p>
+<p>
+På "Din side" ser du når neste meldekort kan sendes.
+</p>
