@@ -24,7 +24,7 @@ const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({ modal, s
             className={'uimodal'}
             isOpen={modal.visModal}
             onRequestClose={() => {
-                modal.onRequestClose ? modal.onRequestClose : skjulModal();
+                modal.onRequestClose ? modal.onRequestClose() : skjulModal();
             }}
             contentLabel={'ui-modal'}
             closeButton={true}

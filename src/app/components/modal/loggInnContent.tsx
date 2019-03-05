@@ -4,9 +4,9 @@ import * as React from 'react';
 export const loggInnContent = () => {
     return (
         <div>
-            <Undertittel children={'Logg inn'}/>
+            <Undertittel children={'Du må logge inn'}/>
             <Normaltekst>
-                Du er ikke logget inn. Vi viderefører deg til innloggingsiden nå.
+                Du er ikke logget inn. Vi viderefører deg til innloggingsiden.
             </Normaltekst>
         </div>
     );
