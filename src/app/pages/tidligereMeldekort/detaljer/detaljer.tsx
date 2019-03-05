@@ -17,6 +17,7 @@ import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
 
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -72,6 +73,7 @@ class Detaljer extends React.Component<Props> {
         ];
         return(
             <div className="sideinnhold innhold-detaljer">
+                <img src={utklippstavle}/>
                 <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">
@@ -79,7 +81,8 @@ class Detaljer extends React.Component<Props> {
                     </div>
                 </section>
                 { this.props.meldekortdetaljer.meldekortdetaljer.id !== '' ?
-                    <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> : null }
+                    <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> :
+                    <div className="meldekort-spinner"><NavFrontendSpinner/></div> }
             </div>
         );
     }

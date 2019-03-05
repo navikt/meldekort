@@ -6,6 +6,9 @@ function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
         window.location.assign(`${Environment().loginUrl}&redirect=${window.location.origin}` + '/meldekort');
         return false;
+    } else if (res.status === 500) {
+        // Her må det settes en feilmelding
+        return false;
     }
     return true;
 }
