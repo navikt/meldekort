@@ -1,6 +1,6 @@
 import { AppEpic } from '../store/configureStore';
 import { concatMap, filter } from 'rxjs/operators';
-import { action, isActionOf } from 'typesafe-actions';
+import { isActionOf } from 'typesafe-actions';
 import { MeldekortActions } from '../actions/meldekort';
 import { AxiosResponse } from 'axios';
 import { UiActions } from '../actions/ui';
@@ -13,7 +13,9 @@ const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
         filter(isActionOf(MeldekortActions.apiKallFeilet)),
         concatMap(action => {
+            console.log('Inne i handter Feilet api kall');
             const axiosResponse: AxiosResponse | undefined = action.payload.response;
+            console.log(axiosResponse);
             if (
                 axiosResponse &&
                 axiosResponse.status !== undefined &&

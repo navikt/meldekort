@@ -5,6 +5,7 @@ import historiskeMeldekort from './responses/historiskemeldekort.json';
 import meldekortdetaljer from './responses/meldekortdetaljer.json';
 import personstatus from './responses/personstatus.json';
 import korrigertid from './responses/korrigertid.json';
+import { MeldekortActions } from '../actions/meldekort';
 
 export default () => {
 

@@ -1,4 +1,5 @@
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import * as React from 'react';
 
 export const loggInnContent = () => {
     return (
