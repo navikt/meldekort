@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { hentUkedagerSomStringListe } from '../../../../../utils/ukedager';
 import { FormattedHTMLMessage } from 'react-intl';
-import { guid } from 'nav-frontend-js-utils';
 
 const Arbeidsrad: React.FunctionComponent<any> = () => {
 
