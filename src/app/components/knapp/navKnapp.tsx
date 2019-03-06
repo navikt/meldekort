@@ -9,7 +9,6 @@ import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { KortStatus, Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
-import { settMeldekortInfo } from '../../actions/innsending';
 
 interface MapStateToProps {
     router: Router;
@@ -18,7 +17,6 @@ interface MapStateToProps {
 
 interface MapDispatcherToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
-    leggTilMeldekortInfo: (meldekortId: number, kortstatus: KortStatus) => void;
 }
 
 interface NavKnappProps {
@@ -55,7 +53,6 @@ class NavKnapp extends React.Component<Props> {
         const aktivtMeldekort = this.props.aktivtMeldekort;
         if (this.props.aktivtMeldekortObjekt  && currentPath.slice(0, 15) === '/send-meldekort') {
             this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
-            this.props.leggTilMeldekortInfo(aktivtMeldekort.meldekort.meldekortId, aktivtMeldekort.meldekort.kortStatus);
         }
         history.push(newPath);
     }
@@ -86,9 +83,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
-        leggTilMeldekortInfo: (meldekortid: number, kortStatus: KortStatus) =>
-            dispatch(settMeldekortInfo(meldekortid, kortStatus))
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
     };
 };
 

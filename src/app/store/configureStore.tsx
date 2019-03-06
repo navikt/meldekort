@@ -70,7 +70,7 @@ const persistConfig = {
     key: `meldekort:${packageConfig.redux_version}`,
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    blacklist: ['intl', 'locales', 'router'],
+    blacklist: ['locales'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
