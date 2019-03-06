@@ -2,6 +2,7 @@ import { BaksystemFeilmelding, IModal } from '../types/ui';
 import { UiActions, UiActionTypes } from '../actions/ui';
 import { getType } from 'typesafe-actions';
 import { loggInnContent } from '../components/modal/loggInnContent';
+import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmeldingContent';
 
 export interface UIState {
     modal: IModal;
@@ -14,8 +15,8 @@ const initialState: UIState = {
         visModal: false,
     },
     baksystemFeilmelding: {
-        content: () => '',
-        visFeilmelding: false
+        content: () => baksystemFeilmeldingContent(),
+        visFeilmelding: true
     }
 };
 

@@ -13,9 +13,13 @@ import { KortStatus, Meldekort } from '../../types/meldekort';
 import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
+import { BaksystemFeilmelding } from '../../types/ui';
+import { selectFeilmelding } from '../../selectors/ui';
 
 interface MapStateToProps {
    person: PersonState;
+   baksystemFeilmelding: BaksystemFeilmelding;
 }
 interface MapDispatchToProps {
     hentPerson: () => void;
@@ -58,12 +62,14 @@ class SendMeldekort extends React.Component<Props> {
     }
 
     ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (rows: MeldekortRad[], columns: any) => {
-        if (this.props.person.person.personId === 0) {
+        if (this.props.baksystemFeilmelding.visFeilmelding) {
+            return <UIAlertstripeWrapper/>;
+        } else if (this.props.person.person.personId === 0) {
             return (
                 <div className="meldekort-spinner">
                     <NavFrontendSpinner type="XL"/>
                 </div>
-            );
+                );
         } else {
             if (this.props.person.person.meldekort.length > 0) {
                 if (rows.length === 0) {
@@ -176,9 +182,10 @@ class SendMeldekort extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (person: RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        person: person.person,
+        person: state.person,
+        baksystemFeilmelding: selectFeilmelding(state)
     };
 };
 
