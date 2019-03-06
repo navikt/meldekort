@@ -42,6 +42,7 @@ class NavKnapp extends React.Component<Props> {
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
 
         const currentPath = this.props.router.location.pathname;
+        console.log('currentPath: ', currentPath);
         const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
         let newPath;
         if (erPaInnsending) {
