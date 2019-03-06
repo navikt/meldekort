@@ -3,6 +3,7 @@ import Konstanter from '../utils/consts';
 import { erMock } from '../mock/utils';
 import { Person, PersonStatus } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
+import { Meldekort, Meldekortdetaljer } from '../types/meldekort';
 
 function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
@@ -57,25 +58,20 @@ export const fetchMeldekort = (): Promise<Person> => {
     return fetchGet(Konstanter().hentMeldekortApiUri);
 };
 
-/*export function fetchMeldekort() {
-    return getFetchJSONAndCheckForErrors( Konstanter().hentMeldekortApiUri);
-}*/
-
-export function fetchHistoriskeMeldekort() {
-    return getFetchJSONAndCheckForErrors(Konstanter().hentHistoriskeMeldekortApiUri);
+export function fetchHistoriskeMeldekort(): Promise<Meldekort[]> {
+    return fetchGet(Konstanter().hentHistoriskeMeldekortApiUri);
 }
 
-export function fetchMeldekortdetaljer(id: number) {
-    // TODO: Legge på feilmelding her hvis id er tom eller 0.
-    return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
+export function fetchMeldekortdetaljer(id: number): Promise<Meldekortdetaljer> {
+    return fetchGet(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
 }
 
 export const fetchPersonstatus = (): Promise<PersonStatus> => {
     return fetchGet(Konstanter().hentPersonStatusApiUri);
 };
 
-export function fetchKorrigertId(id: number) {
-    return getFetchJSONAndCheckForErrors(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+export function fetchKorrigertId(id: number): Promise<number> {
+    return fetchGet(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
 }
 
 function addIdToUrlIfNotMock(url: string, id: number): string {
