@@ -4,6 +4,7 @@ export interface Sporsmal {
     ja: string;
     nei: string;
     forklaring: string;
+    checked: string | undefined;
 }
 
 export const hentSporsmalConfig = () => {
@@ -15,6 +16,7 @@ export const hentSporsmalConfig = () => {
                 ja: 'svar.arbeid.ja',
                 nei: 'svar.arbeid.nei',
                 forklaring: 'forklaring.sporsmal.arbeid',
+                checked: undefined
             },
             {
                 kategori: 'aktivitetArbeid',
@@ -22,6 +24,7 @@ export const hentSporsmalConfig = () => {
                 ja: 'svar.aktivitetArbeid.ja',
                 nei: 'svar.aktivitetArbeid.nei',
                 forklaring: 'forklaring.sporsmal.aktivitetArbeid',
+                checked: undefined
             },
             {
                 kategori: 'forhindret',
@@ -29,6 +32,7 @@ export const hentSporsmalConfig = () => {
                 ja: 'svar.forhindret.ja',
                 nei: 'svar.forhindret.nei',
                 forklaring: 'forklaring.sporsmal.forhindret',
+                checked: undefined
             },
             {
                 kategori: 'ferieFravar',
@@ -36,6 +40,7 @@ export const hentSporsmalConfig = () => {
                 ja: 'svar.ferieFravar.ja',
                 nei: 'svar.ferieFravar.nei',
                 forklaring: 'forklaring.sporsmal.ferieFravar',
+                checked: undefined
             },
             {
                 kategori: 'registrert',
@@ -43,6 +48,7 @@ export const hentSporsmalConfig = () => {
                 ja: 'svar.registrert.ja',
                 nei: 'svar.registrert.nei',
                 forklaring: 'forklaring.sporsmal.registrert',
+                checked: undefined
             },
 
         ];

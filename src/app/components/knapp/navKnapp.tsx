@@ -7,7 +7,7 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
-import { Meldekort } from '../../types/meldekort';
+import { KortStatus, Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
 
 interface MapStateToProps {
@@ -39,19 +39,21 @@ class NavKnapp extends React.Component<Props> {
         super(props);
     }
 
-    clickHandler = () => {
+    clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
 
         const currentPath = this.props.router.location.pathname;
+        console.log('currentPath: ', currentPath);
         const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
         let newPath;
         if (erPaInnsending) {
             newPath = this.props.nestePath;
         } else {
             newPath = this.props.nestePath;
-
         }
+
+        const aktivtMeldekort = this.props.aktivtMeldekort;
         if (this.props.aktivtMeldekortObjekt  && currentPath.slice(0, 15) === '/send-meldekort') {
-            this.props.leggTilAktivtMeldekort(this.props.aktivtMeldekortObjekt);
+            this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
         }
         history.push(newPath);
     }

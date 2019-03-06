@@ -7,15 +7,21 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import { connect } from 'react-redux';
 import { RootState } from '../../../store/configureStore';
-import { bindActionCreators, Dispatch } from 'redux';
-import { IntlAction } from 'react-intl-redux';
+import { Dispatch } from 'redux';
+import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
+import { Meldegruppe } from '../../../types/meldekort';
+import { oppdaterSpm } from '../../../actions/innsending';
+import { Sporsmal } from './sporsmal/sporsmalConfig';
+import { InnsendingState } from '../../../types/innsending';
+import { getStoredState } from 'redux-persist/es/getStoredState';
 
 interface MapStateToProps {
-
+    aktivtMeldekort: AktivtMeldekortState;
+    innsending: InnsendingState;
 }
 
 interface MapDispatchToProps {
-
+    oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
 }
 
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
@@ -26,6 +32,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     render() {
+        const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
+
         return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -44,7 +52,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 </section>
 
                 <section className="seksjon">
-                    <SporsmalsGruppe AAP={true}/>
+                    <SporsmalsGruppe AAP={meldegruppeErAAP}/>
                 </section>
                 <section className="seksjon">
                     <AlertStripe solid={true} type="info">
@@ -57,6 +65,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         nestePath={'/innsending/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
+                        aktivtMeldekortObjekt={this.props.aktivtMeldekort.meldekort}
                     />
                 </section>
 
@@ -67,11 +76,19 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 }
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
-const mapStateToProps = ({}: RootState) => {
-    return {};
+const mapStateToProps = (state : RootState): MapStateToProps => {
+    const meldekort: AktivtMeldekortState = {meldekort: state.aktivtMeldekort.meldekort};
+    return {
+       aktivtMeldekort: meldekort,
+        innsending: state.innsending
+    };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) =>
-    bindActionCreators({}, dispatch);
+const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
+    return {
+        oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
+            dispatch(oppdaterSpm(sporsmalsobjekter))
+    };
+}
 
 export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);

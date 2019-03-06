@@ -8,7 +8,8 @@ import App from './app/app';
 import * as serviceWorker from './registerServiceWorker';
 import { IntlProvider } from 'react-intl-redux';
 import { Provider } from 'react-redux';
-import { store } from './app/store/configureStore';
+import { persistor, store } from './app/store/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
 
 addLocaleData([...nbLocaleData, ...enLocaleData]);
 
@@ -17,9 +18,11 @@ const rootElement = document.getElementById('meldekort-root');
 const render = (Component: React.ComponentType<{}>) => {
     ReactDOM.render(
         <Provider store={store}>
-            <IntlProvider locale="nb" defaultLocale="nb">
-                <Component />
-            </IntlProvider>
+                <PersistGate persistor={persistor} loading={<div />}>
+                    <IntlProvider locale="nb" defaultLocale="nb">
+                            <Component />
+                    </IntlProvider>
+                </PersistGate>
         </Provider>,
         rootElement
     );

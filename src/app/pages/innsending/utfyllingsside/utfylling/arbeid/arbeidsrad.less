@@ -1,0 +1,76 @@
+.arbeidsrad {
+  span {
+    display: inline-block;
+    font-size: 1.25rem;
+    width: 20rem;
+  }
+
+  .inputrad {
+    display: inline-block;
+    margin-left: 5rem;
+  }
+}
+
+.arbeidInput {
+  display: inline-block;
+  margin-right: 1rem;
+
+  .input--xs {
+    width: 3rem;
+  }
+  .skjemaelement__label {
+    padding-left: 1rem;
+  }
+}
+
+@media @tablet {
+  .arbeidInput {
+    margin-right: 1.35rem;
+
+    .input--xs {
+      width: 2.7rem;
+    }
+    .skjemaelement__label {
+      padding-left: 1rem;
+    }
+  }
+
+  .arbeidsrad {
+    display: block;
+    span {
+      display: inline-block;
+      margin-right: 0;
+      width: 17.5rem;
+    }
+
+    .inputrad {
+      display: inline-block;
+      margin-left: 0;
+    }
+  }
+}
+
+@media @phone {
+  .arbeidInput {
+    margin-right: 0;
+
+    .input--xs {
+      width: 2.7rem;
+    }
+    .skjemaelement__label {
+      padding-left: 1rem;
+    }
+  }
+
+  .arbeidsrad {
+    span {
+      display: block;
+      width: auto;
+    }
+
+    .inputrad {
+      display: block;
+      margin-left: 0;
+    }
+  }
+}

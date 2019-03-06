@@ -35,7 +35,6 @@ type Props = MapDispatchToProps & MapStateToProps;
 class SendMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-
         this.props.hentPerson();
     }
 
@@ -134,10 +133,10 @@ class SendMeldekort extends React.Component<Props> {
                 </div>
                 <section className="seksjon">
                     <div className="item">
-                <Tabell
-                    rows={rows}
-                    columns={columns}
-                />
+                        <Tabell
+                            rows={rows}
+                            columns={columns}
+                        />
                     </div>
                 </section>
                 <section className="seksjon">
@@ -196,7 +195,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SendMeldekort);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMeldekort);

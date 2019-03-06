@@ -15,8 +15,8 @@ const initialState: MeldekortdetaljerState = {
         meldeperiode: '',
         arkivnokkel: '',
         kortType: KortType.KORRIGERT_ELEKTRONISK,
-        meldeDato: Date.prototype,
-        lestDato: Date.prototype,
+        meldeDato: new Date(),
+        lestDato: new Date(),
         sporsmal: {
             annetFravaer: false,
             arbeidet: false,
