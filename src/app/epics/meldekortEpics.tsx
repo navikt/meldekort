@@ -14,9 +14,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
         filter(isActionOf(MeldekortActions.apiKallFeilet)),
         concatMap(action => {
-            console.log('Inne i handter Feilet api kall');
             const axiosResponse: AxiosResponse | undefined = action.payload.response;
-            console.log(axiosResponse);
             if (
                 axiosResponse &&
                 axiosResponse.status !== undefined &&
@@ -51,17 +49,13 @@ const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
     action$.pipe(
         filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)),
         concatMap(action => {
-            console.log('Inni sjekk om bruker har tidligere meldekort');
-            console.log(action.payload);
             if (action.payload.length === 0) {
-                console.log('TidligereMeldekortListe er 0');
                 return [
                     UiActions.sjekkTidligereMeldekort({
                         harTidligereMeldekort: false
                     }),
                 ];
             } else {
-                console.log('TidligereMeldekortListe var ikke 0');
                 return [
                     UiActions.sjekkTidligereMeldekort({
                         harTidligereMeldekort: true

@@ -18,6 +18,7 @@ import { selectRouter } from '../../../selectors/router';
 
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -82,7 +83,23 @@ class Detaljer extends React.Component<Props> {
                 </section>
                 { this.props.meldekortdetaljer.meldekortdetaljer.id !== '' ?
                     <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> :
-                    <div className="meldekort-spinner"><NavFrontendSpinner/></div> }
+                    <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div> }
+
+                    <section className="seksjon flex-innhold sentrert">
+                    <NavKnapp
+                        type={knappTyper.standard}
+                        nestePath={'/tidligere-meldekort'}
+                        tekstid={'naviger.forrige'}
+                        className={'navigasjonsknapp'}
+                    />
+                    <NavKnapp
+                        type={knappTyper.hoved}
+                        nestePath={'/tidligere-meldekort'}
+                        tekstid={'korriger.meldekort'}
+                        className={'navigasjonsknapp'}
+
+                    />
+                </section>
             </div>
         );
     }
