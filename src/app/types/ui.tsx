@@ -15,3 +15,7 @@ export interface BaksystemFeilmelding {
     content: () => React.ReactNode;
     visFeilmelding: boolean;
 }
+
+export interface IngenTidligereMeldekort {
+    harTidligereMeldekort: boolean;
+}

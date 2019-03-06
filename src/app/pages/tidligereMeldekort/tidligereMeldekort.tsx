@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Komponentlenke from '../../components/komponentlenke/komponentlenke';
 import { Dispatch } from 'redux';
@@ -15,9 +15,16 @@ import { Meldekort } from '../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../utils/mapper';
 import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../utils/statusEtikettUtil';
 import { hentIntl } from '../../utils/intlUtil';
+import { BaksystemFeilmelding, IngenTidligereMeldekort } from '../../types/ui';
+import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';
+import AlertStripe from 'nav-frontend-alertstriper';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 
 interface MapStateToProps {
     historiskeMeldekort: HistoriskeMeldekortState;
+    ingenTidligereMeldekort: IngenTidligereMeldekort;
+    baksystemFeilmelding: BaksystemFeilmelding;
 }
 
 interface MapDispatchToProps {
@@ -61,7 +68,7 @@ class TidligereMeldekort extends React.Component<Props> {
         return radliste;
     }
 
-    render() {
+    hentTabell = () => {
         const rows = this.hentRaderFraHistoriskeMeldekort();
 
         const columns = [
@@ -69,12 +76,12 @@ class TidligereMeldekort extends React.Component<Props> {
             {key: 'dato', label: <FormattedMessage id="overskrift.dato"/>, cell: 'dato'},
             {key: 'mottatt', label: <FormattedMessage id="overskrift.mottatt"/>, cell: 'mottatt'},
             {key: 'status', label: <FormattedMessage id="overskrift.status" />, cell: function( row: any, columnKey: any) {
-                return (
-                    <EtikettBase
-                        type={finnRiktigEtikettType(row.status)}
-                        className={HvisIngenBeregningSettBlaEtikett(row.status)}
-                    > {row.status}
-                    </EtikettBase>
+                    return (
+                        <EtikettBase
+                            type={finnRiktigEtikettType(row.status)}
+                            className={HvisIngenBeregningSettBlaEtikett(row.status)}
+                        > {row.status}
+                        </EtikettBase>
                     );
                 }},
             {key: 'bruttobelop', label: <FormattedMessage id="overskrift.bruttoBelop" />, cell: 'bruttobelop'},
@@ -82,6 +89,34 @@ class TidligereMeldekort extends React.Component<Props> {
                     return <Komponentlenke lenketekst={row.detaljer} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort}/>;
                 }}
         ];
+
+        return (
+            <Tabell
+                rows={rows}
+                columns={columns}
+            />
+        );
+    }
+
+    content = () => {
+        if (this.props.ingenTidligereMeldekort.harTidligereMeldekort === false) {
+            return (
+                <AlertStripe type={'info'}>
+                    <FormattedHTMLMessage id="tidligereMeldekort.harIngen"/>
+                </AlertStripe>
+            );
+        } else if (this.props.historiskeMeldekort.historiskeMeldekort.length > 0) {
+            return this.hentTabell();
+        } else {
+            return (
+                <div className="meldekort-spinner">
+                    <NavFrontendSpinner type="XL"/>
+                </div>
+            );
+        }
+    }
+
+    render() {
 
         return(
             <div className="sideinnhold">
@@ -96,19 +131,21 @@ class TidligereMeldekort extends React.Component<Props> {
                     <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
                 </section>
                 <section className="seksjon">
-                    <Tabell
-                        rows={rows}
-                        columns={columns}
-                    />
+                    {this.props.baksystemFeilmelding.visFeilmelding ?
+                        <UIAlertstripeWrapper/> :
+                        this.content()
+                    }
                 </section>
             </div>
         );
     }
 }
 
-const mapStateToProps = (historiskeMeldekort: RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        historiskeMeldekort: historiskeMeldekort.historiskeMeldekort,
+        historiskeMeldekort: state.historiskeMeldekort,
+        ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
+        baksystemFeilmelding: selectFeilmelding(state),
     };
 };
 

@@ -1,4 +1,4 @@
-import { BaksystemFeilmelding, IModal } from '../types/ui';
+import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
 import { UiActions, UiActionTypes } from '../actions/ui';
 import { getType } from 'typesafe-actions';
 import { loggInnContent } from '../components/modal/loggInnContent';
@@ -7,6 +7,7 @@ import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmel
 export interface UIState {
     modal: IModal;
     baksystemFeilmelding: BaksystemFeilmelding;
+    ingenTidligereMeldekort: IngenTidligereMeldekort
 }
 
 const initialState: UIState = {
@@ -15,8 +16,11 @@ const initialState: UIState = {
         visModal: false,
     },
     baksystemFeilmelding: {
-        content: () => baksystemFeilmeldingContent(),
-        visFeilmelding: true
+        content: () => '',
+        visFeilmelding: false
+    },
+    ingenTidligereMeldekort: {
+        harTidligereMeldekort: true
     }
 };
 
@@ -42,6 +46,11 @@ const uiReducer = (state: UIState = initialState, action: UiActionTypes): UIStat
                 ...state,
                 baksystemFeilmelding: initialState.baksystemFeilmelding,
             };
+        case getType(UiActions.sjekkTidligereMeldekort):
+            return {
+                ...state,
+                ingenTidligereMeldekort: action.payload,
+            }
         default:
             return state;
     }

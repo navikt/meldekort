@@ -62,9 +62,7 @@ class SendMeldekort extends React.Component<Props> {
     }
 
     ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (rows: MeldekortRad[], columns: any) => {
-        if (this.props.baksystemFeilmelding.visFeilmelding) {
-            return <UIAlertstripeWrapper/>;
-        } else if (this.props.person.person.personId === 0) {
+        if (this.props.person.person.personId === 0) {
             return (
                 <div className="meldekort-spinner">
                     <NavFrontendSpinner type="XL"/>
@@ -175,7 +173,10 @@ class SendMeldekort extends React.Component<Props> {
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">
-                    {this.ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(rows, columns)}
+                    {this.props.baksystemFeilmelding.visFeilmelding ?
+                        <UIAlertstripeWrapper/> :
+                        this.ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(rows, columns)
+                    }
                 </section>
             </main>
         );
