@@ -1,0 +1,77 @@
+.aktivitetsrad {
+  display: flex;
+  span {
+    font-size: 1.25rem;
+    width: 20rem;
+    padding-top: 1.4rem;
+  }
+
+  .inputrad {
+    display: flex;
+    margin-left: 5rem;
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column-reverse;
+  direction: ltr;
+  justify-content: flex-start;
+  width: 24px;
+  height: 3rem;
+  text-align: center;
+  margin-right: 2rem;
+  margin-left: 0.6rem;
+
+  .checkboks + .skjemaelement__label:before {
+    content: '';
+    position: inherit;
+    display: inline-block;
+    text-align: center;
+    background-color: #FFF;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #78706A;
+    width: 24px;
+    height: 24px;
+    left: 0;
+    top: 0.4rem;
+  }
+
+  .checkboks + .skjemaelement__label {
+    padding-left: 32px;
+    position: relative;
+    display: contents;
+    cursor: pointer;
+    margin-bottom: 0;
+    line-height: 24px
+  }
+}
+
+@media @phone {
+  .aktivitetsrad {
+    display: block;
+    span {
+      display: block;
+      margin-right: 0;
+    }
+
+    .inputrad {
+      display: flex;
+      margin-left: auto;
+    }
+  }
+
+  .flex-container {
+    display: flex;
+    flex-direction: column-reverse;
+    direction: ltr;
+    justify-content: flex-start;
+    width: 24px;
+    height: 3rem;
+    text-align: center;
+    margin-right: 0.8rem;
+    margin-left: 0.5rem;
+  }
+
+  }
