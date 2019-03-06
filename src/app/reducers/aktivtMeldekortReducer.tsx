@@ -10,15 +10,15 @@ const initialState: AktivtMeldekortState = {
         meldekortId: 0,
         kortType: KortType.RETUR,
         meldeperiode: {
-            til: Date.prototype,
-            fra: Date.prototype,
-            kortKanSendesFra: Date.prototype,
+            til: new Date(),
+            fra: new Date(),
+            kortKanSendesFra: new Date(),
             periodeKode: ''
         },
         meldegruppe: Meldegruppe.NULL,
         kortStatus: KortStatus.VENTE,
         bruttoBelop: 0,
-        mottattDato: Date.prototype,
+        mottattDato: new Date(),
         korrigerbart: false
 
     }

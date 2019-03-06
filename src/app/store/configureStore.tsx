@@ -1,26 +1,33 @@
-import { createBrowserHistory } from 'history';
+import storage from 'redux-persist/lib/storage/session';
+
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
-import meldekortReducer, { MeldekortState } from '../reducers/meldekortReducer';
-import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
+import { createBrowserHistory } from 'history';
+import { persistStore, persistReducer } from 'redux-persist';
+// import logger from 'redux-logger';
 
-import { intlReducer, IntlState } from 'react-intl-redux';
-import tekster from '../tekster/kompilerte-tekster';
-import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
-
-import personReducer, { PersonState } from '../reducers/personReducer';
-import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
-import personEpics from '../epics/personEpics';
-import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
-import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
-import personStatusEpics from '../epics/personStatusEpics';
-import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
-import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
+import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
+import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
+import personReducer, { PersonState } from '../reducers/personReducer';
+import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
+import tekster from '../tekster/kompilerte-tekster';
+import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
+import { intlReducer, IntlState } from 'react-intl-redux';
+
+import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
+import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
+import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
+import personEpics from '../epics/personEpics';
+import personStatusEpics from '../epics/personStatusEpics';
+import innsendingReducer from '../reducers/innsendingReducer';
+import { InnsendingState } from '../types/innsending';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
 });
+
+const packageConfig = require('../../../package.json');
 
 const initialState = {
     intl: {
@@ -30,43 +37,51 @@ const initialState = {
 };
 
 export interface RootState {
-    meldekort: MeldekortState;
-    intl: IntlState;
     locales: LocalesState;
+    intl: IntlState;
     router: RouterState;
     person: PersonState;
     personStatus: PersonStatusState;
-    historiskeMeldekort: HistoriskeMeldekortState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;
+    historiskeMeldekort: HistoriskeMeldekortState;
+    innsending: InnsendingState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
 
 const rootReducer = combineReducers({
-    meldekort: meldekortReducer,
-    intl: intlReducer,
     locales: localesReducer,
+    intl: intlReducer,
     router: connectRouter(history),
     person: personReducer,
     personStatus: personStatusReducer,
-    historiskeMeldekort: historiskeMeldekortReducer,
     meldekortdetaljer: meldekortdetaljerReducer,
     aktivtMeldekort: aktivtMeldekortReducer,
+    historiskeMeldekort: historiskeMeldekortReducer,
+    innsending: innsendingReducer
 });
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 let middleware: any[] = [routerMiddleware(history), epicMiddleware];
-
-const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history));
-
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-    rootReducer,
+const persistConfig = {
+    key: `meldekort:${packageConfig.redux_version}`,
+    storage,
+    // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
+    blacklist: ['locales'],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history)); //, logger);
+
+const store = createStore(persistedReducer,
     initialState as any,
     composeEnhancer(appliedMiddleware)
 );
+
+const persistor = persistStore(store);
 
 epicMiddleware.run(
     combineEpics(
@@ -77,4 +92,4 @@ epicMiddleware.run(
     )
 );
 
-export { store };
+export { store, persistor };
