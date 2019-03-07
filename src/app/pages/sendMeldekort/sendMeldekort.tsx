@@ -82,7 +82,7 @@ class SendMeldekort extends React.Component<Props> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/innsending'}
+                        nestePath={'/send-meldekort/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
                         aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
                     />

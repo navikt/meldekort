@@ -39,30 +39,30 @@ class NavKnapp extends React.Component<Props> {
         super(props);
     }
 
-    returnerInnsendingstypeEllersTomString = (currentPath: string) => {
-        let innsendingstype: string = "";
+   /* returnerInnsendingstypeEllersTomString = (urlListe: string[], nestePath: string) => {
+        let pathParam: string = "";
         for (let type in innsendingsTyper) {
             const pathType = "/" + type;
-            if (isNaN(Number(type)) && (pathType === this.props.nestePath)) {
-                innsendingstype = pathType;
-                console.log('type: ', innsendingstype);
+            const nestePathType = nestePath.split('/')[1];
+            console.log('nestepathType: ', nestePathType);
+            if (isNaN(Number(type)) && (pathType === nestePath)) {
+                pathParam = pathType;
+                console.log('pathParam', pathParam);
             }
         }
-        return innsendingstype;
-    }
+        return pathParam;
+    }*/
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
 
         const currentPath = this.props.router.location.pathname;
+        let newPath = this.props.nestePath;
         const urlListe = currentPath.split('/');
-        let newPath = currentPath + this.returnerInnsendingstypeEllersTomString(this.props.nestePath);
-        console.log('url liste:', urlListe);
 
         const aktivtMeldekort = this.props.aktivtMeldekort;
         if (this.props.aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort') {
             this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
         }
-        console.log('newpath:', newPath);
         history.push(newPath);
     }
 

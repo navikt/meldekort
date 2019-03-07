@@ -13,7 +13,6 @@ import { Meldegruppe } from '../../../types/meldekort';
 import { oppdaterSpm } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { InnsendingState } from '../../../types/innsending';
-import { getStoredState } from 'redux-persist/es/getStoredState';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -29,6 +28,7 @@ type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     constructor(props: SporsmalssideProps) {
         super(props);
+
     }
 
     render() {
