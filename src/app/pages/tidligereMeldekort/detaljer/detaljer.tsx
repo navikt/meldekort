@@ -92,13 +92,16 @@ class Detaljer extends React.Component<Props> {
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
-                    <NavKnapp
-                        type={knappTyper.hoved}
-                        nestePath={'/tidligere-meldekort'}
-                        tekstid={'korriger.meldekort'}
-                        className={'navigasjonsknapp'}
+                    {this.props.aktivtMeldekort.meldekort.korrigerbart ?
+                        <NavKnapp
+                            type={knappTyper.hoved}
+                            nestePath={'/tidligere-meldekort'}
+                            tekstid={'korriger.meldekort'}
+                            className={'navigasjonsknapp'}
 
-                    />
+                        /> : null
+                    }
+
                 </section>
             </div>
         );

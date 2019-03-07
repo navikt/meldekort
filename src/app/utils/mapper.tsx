@@ -43,7 +43,7 @@ export const mapKortStatusTilTekst = (status: KortStatus) => {
 export const mapKortTypeTilTekst = (type: KortType) => {
 
     const intl = hentIntl();
-
+    console.log(type);
     switch (type) {
         case KortType.RETUR:
             return intl.formatMessage({id: 'meldekort.type.retur'});
