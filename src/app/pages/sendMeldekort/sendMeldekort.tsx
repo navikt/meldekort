@@ -39,20 +39,19 @@ class SendMeldekort extends React.Component<Props> {
     }
 
     hentMeldekortRaderFraPerson = () => {
-        let meldekortListe = this.props.person.person.meldekort;
-        let radliste = [];
-        if (meldekortListe !== null) {
-            for (let i = 0; i < meldekortListe.length; i++) {
-                if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
-                    if (kanMeldekortSendesInn(meldekortListe[i].meldeperiode.kortKanSendesFra)) {
-                        let rad: MeldekortRad = {
-                            periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
-                            dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
-                        };
-                        radliste.push(rad);
+        let radliste: MeldekortRad[] = [];
+
+        if (this.props.person.person.meldekort != null) {
+            this.props.person.person.meldekort.map((meldekort) => {
+                if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
+                    if (kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra)) {
+                        radliste.push({
+                            periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+                            dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+                        });
                     }
                 }
-            }
+            });
         }
         if (radliste.length === 1) {
             // redirect til innsending
@@ -68,7 +67,7 @@ class SendMeldekort extends React.Component<Props> {
                 </div>
                 );
         } else {
-            if (this.props.person.person.meldekort.length > 0) {
+            if (rows.length > 0) {
                 if (rows.length === 0) {
                     let meldekortId = this.forTidligASende(this.props.person.person.meldekort);
                     let meldekort = this.props.person.person.meldekort.filter((m) => m.meldekortId === meldekortId);
@@ -93,7 +92,7 @@ class SendMeldekort extends React.Component<Props> {
                             </div>
                         );
                     }
-                } else if (this.props.person.person.meldekort.length < 5) {
+                } else if (rows.length < 5) {
                     return this.hentTabellOgTilhorendeElementer(rows, columns);
                 } else {
                     return (

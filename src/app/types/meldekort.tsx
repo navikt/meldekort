@@ -17,7 +17,7 @@ export interface Meldekort {
     meldeperiode: Meldeperiode;
     meldegruppe: Meldegruppe;
     kortStatus: KortStatus;
-    bruttoBelop: number;
+    bruttoBelop?: number;
     mottattDato: Date;
     korrigerbart: boolean;
 }

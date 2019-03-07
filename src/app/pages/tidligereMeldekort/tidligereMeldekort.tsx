@@ -51,20 +51,19 @@ class TidligereMeldekort extends React.Component<Props> {
     }
 
     hentRaderFraHistoriskeMeldekort = () => {
-        let historiskeMeldekortListe = this.props.historiskeMeldekort.historiskeMeldekort;
-        let radliste = [];
-        for (let i = 0; i < historiskeMeldekortListe.length; i++) {
-            let rad: HistoriskeMeldekortRad = {
-                meldekort: historiskeMeldekortListe[i],
-                periode: hentUkePeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
-                dato: hentDatoPeriode(historiskeMeldekortListe[i].meldeperiode.fra, historiskeMeldekortListe[i].meldeperiode.til),
-                mottatt: formaterDato(historiskeMeldekortListe[i].mottattDato),
-                status: mapKortStatusTilTekst(historiskeMeldekortListe[i].kortStatus),
-                bruttobelop: `${historiskeMeldekortListe[i].bruttoBelop.toString()} kr`,
+        let radliste: HistoriskeMeldekortRad[] = [];
+
+        this.props.historiskeMeldekort.historiskeMeldekort.map((meldekort) => {
+            radliste.push({
+                meldekort: meldekort,
+                periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+                dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+                mottatt: meldekort.mottattDato === null ? formaterDato(meldekort.mottattDato) : '',
+                status: mapKortStatusTilTekst(meldekort.kortStatus),
+                bruttobelop: meldekort.bruttoBelop === null ? `${meldekort.bruttoBelop} kr` : '',
                 detaljer: hentIntl().formatMessage({id: 'overskrift.detaljer'})
-            };
-            radliste.push(rad);
-        }
+            });
+        });
         return radliste;
     }
 
