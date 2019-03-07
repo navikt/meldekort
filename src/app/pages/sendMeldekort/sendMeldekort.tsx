@@ -12,8 +12,6 @@ import { RootState } from '../../store/configureStore';
 import { KortStatus, Meldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
-import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: PersonState;

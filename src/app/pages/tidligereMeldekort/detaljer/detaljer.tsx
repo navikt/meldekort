@@ -15,6 +15,7 @@ import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 
@@ -80,6 +81,13 @@ class Detaljer extends React.Component<Props> {
                 </section>
                 { this.props.meldekortdetaljer.meldekortdetaljer.id !== '' ?
                     <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> : null }
+                <section className="seksjon flex-innhold sentrert">
+                    <NavKnapp
+                        type={knappTyper.hoved}
+                        nestePath={'/korrigering'}
+                        tekstid={'korriger.meldekortet'}
+                    />
+                </section>
             </div>
         );
     }

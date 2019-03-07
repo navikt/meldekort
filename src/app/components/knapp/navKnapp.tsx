@@ -3,7 +3,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { RootState, history } from '../../store/configureStore';
-import { Router } from '../../types/router';
+import { innsendingsTyper, Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
@@ -39,22 +39,30 @@ class NavKnapp extends React.Component<Props> {
         super(props);
     }
 
+    returnerInnsendingstypeEllersTomString = (currentPath: string) => {
+        let innsendingstype: string = "";
+        for (let type in innsendingsTyper) {
+            const pathType = "/" + type;
+            if (isNaN(Number(type)) && (pathType === this.props.nestePath)) {
+                innsendingstype = pathType;
+                console.log('type: ', innsendingstype);
+            }
+        }
+        return innsendingstype;
+    }
+
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
 
         const currentPath = this.props.router.location.pathname;
-        console.log('currentPath: ', currentPath);
-        const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
-        let newPath;
-        if (erPaInnsending) {
-            newPath = this.props.nestePath;
-        } else {
-            newPath = this.props.nestePath;
-        }
+        const urlListe = currentPath.split('/');
+        let newPath = currentPath + this.returnerInnsendingstypeEllersTomString(this.props.nestePath);
+        console.log('url liste:', urlListe);
 
         const aktivtMeldekort = this.props.aktivtMeldekort;
-        if (this.props.aktivtMeldekortObjekt  && currentPath.slice(0, 15) === '/send-meldekort') {
+        if (this.props.aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort') {
             this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
         }
+        console.log('newpath:', newPath);
         history.push(newPath);
     }
 
@@ -69,7 +77,7 @@ class NavKnapp extends React.Component<Props> {
             </KnappBase>
         );
     }
-};
+}
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     let meldekort: AktivtMeldekortState = {

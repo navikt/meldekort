@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import Detaljer from '../pages/tidligereMeldekort/detaljer/detaljer';
 import OfteStilteSporsmal from '../pages/ofteStilteSporsmal/ofteStilteSporsmal';
 import EndreMeldeform from '../pages/endreMeldeform/endreMeldeform';
@@ -13,17 +13,23 @@ const MeldekortRoutes = () => {
     return (
         <div>
             <Switch>
-                <Route exact={true} path="/send-meldekort" component={SendMeldekort} />
-                <Route path="/endre-meldeform" component={EndreMeldeform} />
-                <Route path="/etterregistrer-meldekort" component={EtterregistrerMeldekort} />
-                <Route path="/om-meldekort" component={OmMeldekort} />
-                <Route path="/ofte-stilte-sporsmal" component={OfteStilteSporsmal} />
-                <Route path="/404" component={() => <div />} />
-                <Route path="/innsending" component={InnsendingRoutes}/>
-                <Route path="/tidligere-meldekort/detaljer" component={Detaljer}/>
-                <Route path="/tidligere-meldekort" component={TidligereMeldekort} />
-                <Redirect exact={true} from="/" to="/send-meldekort"/>
+                <Route path="send-meldekort/:innsendingsType" render={(props: RouteComponentProps<any>) => (<InnsendingRoutes {...props}/>)}/>
+                <Route exact={true} path="/send-meldekort" render={(props: RouteComponentProps<any>) => (<SendMeldekort />)} />
 
+                <Route path="/endre-meldeform" render={(props: RouteComponentProps<any>) => (<EndreMeldeform />)}/>
+
+                <Route path="/etterregistrer-meldekort" render={(props: RouteComponentProps<any>) => (<EtterregistrerMeldekort />)} />
+                <Route path="etterregistrer-meldekort/:innsendingsType" render={(props: RouteComponentProps<any>) => (<InnsendingRoutes {...props} />)}/>
+
+                <Route path="/tidligere-meldekort/detaljer" render={(props: RouteComponentProps<any>) => (<Detaljer />)} />
+                <Route path="/tidligere-meldekort" render={(props: RouteComponentProps<any>) => (<TidligereMeldekort />)} />
+                <Route path="tidligere-meldekort/:innsendingsType" render={(props: RouteComponentProps<any>) => (<InnsendingRoutes {...props} />)}/>
+
+                <Route path="/ofte-stilte-sporsmal" render={(props: RouteComponentProps<any>) => (<OfteStilteSporsmal />)} />
+                <Route path="/om-meldekort" render={(props: RouteComponentProps<any>) => (<OmMeldekort/>)} />
+
+                <Route path="/404" component={() => <div />} />
+                <Redirect exact={true} from="/" to="/send-meldekort"/>
             </Switch>
         </div>
     );
