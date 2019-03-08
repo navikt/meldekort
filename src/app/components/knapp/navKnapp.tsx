@@ -3,11 +3,11 @@ import KnappBase from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { RootState, history } from '../../store/configureStore';
-import { innsendingsTyper, Router } from '../../types/router';
+import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
-import { KortStatus, Meldekort } from '../../types/meldekort';
+import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
 
 interface MapStateToProps {

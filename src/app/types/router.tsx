@@ -3,9 +3,3 @@ export interface Router {
         pathname: string;
     };
 }
-
-export enum innsendingsTyper {
-    innsending = 'innsending',
-    korrigering = 'korrigering',
-    etterregistrering = 'etterregistrering',
-}

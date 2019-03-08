@@ -13,6 +13,7 @@ import { Meldegruppe } from '../../../types/meldekort';
 import { oppdaterSpm } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { InnsendingState } from '../../../types/innsending';
+import { RouteComponentProps } from 'react-router';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -23,7 +24,7 @@ interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
 }
 
-type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
+type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentProps;
 
 class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     constructor(props: SporsmalssideProps) {
@@ -33,7 +34,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
     render() {
         const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
-
+        const { match } = this.props;
+        console.log('match i sporsmalsside: ', match);
         return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -62,7 +64,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/innsending/utfylling'}
+                        nestePath={this.props.innsending+'/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                         aktivtMeldekortObjekt={this.props.aktivtMeldekort.meldekort}

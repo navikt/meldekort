@@ -1,47 +1,42 @@
 import * as React from 'react';
-import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import Bekreftelse from '../pages/innsending/bekreftelse';
 import Kvittering from '../pages/innsending/kvittering';
 import Utfylling from '../pages/innsending/utfyllingsside/utfyllingsside';
 import Sporsmalsside from '../pages/innsending/sporsmalsside/sporsmalsside';
 import StegBanner from '../components/stegBanner/stegBanner';
 import PeriodeBanner from '../components/periodeBanner/periodeBanner';
-import { RootState } from '../store/configureStore';
-import { connect } from 'react-redux';
+import { Innsendingstyper } from '../types/innsending';
 
-type PathParams = {
-    innsendingstype: string,
+interface InnsendingRoutesProps {
+    innsendingstype: Innsendingstyper;
 }
 
-type PropsType = RouteComponentProps<PathParams>;
+type PropsType = RouteComponentProps & InnsendingRoutesProps;
 
 class InnsendingRoutes extends React.Component<PropsType>{
     constructor(props: PropsType) {
         super(props);
 
     }
-    // const { match: params } = this.props;
     render() {
 
-        console.log('props.match:', this.props.match);
+        const { match } = this.props;
+        console.log('props.match:', match);
         return (
             <div className="sideinnhold">
                 <PeriodeBanner/>
                 <StegBanner/>
                 <Switch>
-                    <Route exact={true} path={"/innsending/sporsmal"} render={(props) => (<Sporsmalsside/>)}/>
-                    <Route path="/innsending/utfylling" render={(props: RouteComponentProps<any>) => (<Utfylling/>)}/>
-                    <Route path="/innsending/bekreftelse" render={(props: RouteComponentProps<any>) => (<Bekreftelse/>)}/>
-                    <Route path="/innsending/kvittering" render={(props: RouteComponentProps<any>) => (<Kvittering/>)}/>
-                    <Redirect exact={true} from={"/send-meldekort/innsending"} to="/send-meldekort/innsending/sporsmal"/>
+                    <Route exact={true} path={`${match.url}`+"/sporsmal"} render={(props) => (<Sporsmalsside {...props}/>)}/>
+                    <Route path={`${match.url}`+"/utfylling"} render={(props: RouteComponentProps<any>) => (<Utfylling {...props}/>)}/>
+                    <Route path={`${match.url}`+"/bekreftelse"} render={(props: RouteComponentProps<any>) => (<Bekreftelse {...props}/>)}/>
+                    <Route path={`${match.url}`+"/kvittering"} render={(props: RouteComponentProps<any>) => (<Kvittering {...props}/>)}/>
+                    <Redirect exact={true} from={`${match.url}`} to={`${match.url}`+"/sporsmal"}/>
                 </Switch>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: RootState, props: PropsType ): PathParams => {
-    const innsendingstype = props.match.params.innsendingstype;
-    return { innsendingstype };
-}
-export default withRouter(connect(mapStateToProps)(InnsendingRoutes));
+export default (InnsendingRoutes);
