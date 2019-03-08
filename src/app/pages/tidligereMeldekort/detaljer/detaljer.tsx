@@ -44,7 +44,7 @@ class Detaljer extends React.Component<Props> {
             mottattDato: formaterDato(this.props.aktivtMeldekort.meldekort.mottattDato),
             kortStatus: mapKortStatusTilTekst(this.props.aktivtMeldekort.meldekort.kortStatus),
             bruttoBelop: this.props.aktivtMeldekort.meldekort.bruttoBelop === undefined ? '' : this.props.aktivtMeldekort.meldekort.bruttoBelop + ' kr',
-            kortType: mapKortTypeTilTekst(this.props.meldekortdetaljer.meldekortdetaljer.kortType)
+            kortType: mapKortTypeTilTekst(this.props.aktivtMeldekort.meldekort.kortType)
         }];
     }
 
