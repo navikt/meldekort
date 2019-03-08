@@ -68,7 +68,18 @@ class SendMeldekort extends React.Component<Props> {
                 );
         } else {
             if (rows.length > 0) {
-                if (rows.length === 0) {
+                if (rows.length < 5) {
+                    return this.hentTabellOgTilhorendeElementer(rows, columns);
+                } else {
+                    return (
+                        <div className="send-meldekort-varsel">
+                            <Ingress><FormattedMessage id="sendMeldekort.info.forMangeMeldekort"/></Ingress>
+                            <Normaltekst><FormattedMessage id="sendMeldekort.info.forMangeMeldekort.feilmelding"/></Normaltekst>
+                        </div>
+                    );
+                }
+            } else {
+                if (rows.length === 0 && this.props.person.person.meldekort !== undefined) {
                     let meldekortId = this.forTidligASende(this.props.person.person.meldekort);
                     let meldekort = this.props.person.person.meldekort.filter((m) => m.meldekortId === meldekortId);
                     if (meldekort.length !== 0) {
@@ -92,28 +103,23 @@ class SendMeldekort extends React.Component<Props> {
                             </div>
                         );
                     }
-                } else if (rows.length < 5) {
-                    return this.hentTabellOgTilhorendeElementer(rows, columns);
                 } else {
                     return (
                         <div className="send-meldekort-varsel">
-                            <Ingress><FormattedMessage id="sendMeldekort.info.forMangeMeldekort"/></Ingress>
-                            <Normaltekst><FormattedMessage id="sendMeldekort.info.forMangeMeldekort.feilmelding"/></Normaltekst>
+                            <FormattedMessage id="sporsmal.ingenMeldekortASende"/>
                         </div>
                     );
                 }
-            } else {
-                return (
-                    <div className="send-meldekort-varsel">
-                        <FormattedMessage id="sporsmal.ingenMeldekortASende"/>
-                    </div>
-                );
             }
         }
     }
 
     forTidligASende = (meldekortListe: Meldekort[]): number => {
         let meldekortId = 0;
+        console.log(meldekortListe);
+        if (meldekortListe === undefined) {
+            return meldekortId;
+        }
         meldekortListe.map((meldekort) => {
             if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
                 if (kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra) === false) {
