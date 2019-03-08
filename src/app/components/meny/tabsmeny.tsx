@@ -72,11 +72,11 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
 
         const trengerKompakt = erDesktop ? false : true;
 
-        const path = this.props.router.location.pathname.slice(1, 11);
-        const sjekkOmPathHarInnsending = path !== 'innsending';
+        const pathListe = this.props.router.location.pathname.split('/');
+        const returnerFalseOmPathHarInnsending = pathListe[pathListe.length-2] !== 'innsending';
 
         return(
-            ( sjekkOmPathHarInnsending ? (
+            ( returnerFalseOmPathHarInnsending ? (
                 <>
                     <nav className="tabsmeny">
                         {this.lagTabs(this.state.tabsobjekter, this.props.router.location.pathname, trengerKompakt)}

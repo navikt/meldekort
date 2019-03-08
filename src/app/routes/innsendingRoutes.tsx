@@ -29,12 +29,11 @@ class InnsendingRoutes extends React.Component<PropsType>{
                 <PeriodeBanner/>
                 <StegBanner/>
                 <Switch>
-                    <Route exact={true} path={"innsending/sporsmal"}
-                           render={(props: RouteComponentProps<any>) => (<Sporsmalsside/>)}/>
+                    <Route exact={true} path={"/innsending/sporsmal"} render={(props) => (<Sporsmalsside/>)}/>
                     <Route path="/innsending/utfylling" render={(props: RouteComponentProps<any>) => (<Utfylling/>)}/>
                     <Route path="/innsending/bekreftelse" render={(props: RouteComponentProps<any>) => (<Bekreftelse/>)}/>
                     <Route path="/innsending/kvittering" render={(props: RouteComponentProps<any>) => (<Kvittering/>)}/>
-                    <Redirect exact={true} from={"/innsending"} to="/innsending/sporsmal"/>
+                    <Redirect exact={true} from={"/send-meldekort/innsending"} to="/send-meldekort/innsending/sporsmal"/>
                 </Switch>
             </div>
         );
