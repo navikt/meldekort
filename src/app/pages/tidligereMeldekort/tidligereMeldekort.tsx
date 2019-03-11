@@ -56,9 +56,9 @@ class TidligereMeldekort extends React.Component<Props> {
                 meldekort: meldekort,
                 periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
                 dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
-                mottatt: meldekort.mottattDato === undefined ? '' : formaterDato(meldekort.mottattDato),
+                mottatt: typeof meldekort.mottattDato === 'undefined' || meldekort.mottattDato === null ? '' : formaterDato(meldekort.mottattDato),
                 status: mapKortStatusTilTekst(meldekort.kortStatus),
-                bruttobelop: meldekort.bruttoBelop === undefined ? '' : `${meldekort.bruttoBelop} kr`,
+                bruttobelop: typeof meldekort.bruttoBelop === 'undefined' || meldekort.bruttoBelop === null ? '' : `${meldekort.bruttoBelop} kr`,
                 detaljer: hentIntl().formatMessage({id: 'overskrift.detaljer'})
             });
         });

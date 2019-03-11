@@ -19,6 +19,7 @@ import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import { Meldekort } from '../../../types/meldekort';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -37,12 +38,12 @@ class Detaljer extends React.Component<Props> {
         super(props);
     }
 
-    settTabellrader = () => {
+    settTabellrader = (meldekort: Meldekort) => {
         return [{
-            mottattDato: formaterDato(this.props.aktivtMeldekort.meldekort.mottattDato),
-            kortStatus: mapKortStatusTilTekst(this.props.aktivtMeldekort.meldekort.kortStatus),
-            bruttoBelop: this.props.aktivtMeldekort.meldekort.bruttoBelop === undefined ? '' : this.props.aktivtMeldekort.meldekort.bruttoBelop + ' kr',
-            kortType: mapKortTypeTilTekst(this.props.aktivtMeldekort.meldekort.kortType)
+            mottattDato: formaterDato(meldekort.mottattDato),
+            kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
+            bruttoBelop: typeof meldekort.bruttoBelop === 'undefined' || meldekort.bruttoBelop === null ? '' : `${meldekort.bruttoBelop} kr`,
+            kortType: mapKortTypeTilTekst(meldekort.kortType)
         }];
     }
 
@@ -60,7 +61,7 @@ class Detaljer extends React.Component<Props> {
     }
 
     render() {
-        const rows = this.settTabellrader();
+        const rows = this.settTabellrader(this.props.aktivtMeldekort.meldekort);
         const columns = [
             {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {

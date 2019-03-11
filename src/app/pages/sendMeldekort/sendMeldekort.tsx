@@ -59,6 +59,57 @@ class SendMeldekort extends React.Component<Props> {
         return radliste;
     }
 
+    hentMeldingOmMeldekortSomIkkeErKlare  = (rows: MeldekortRad[]) => {
+        if (rows.length === 0 && this.props.person.person.meldekort !== undefined) {
+            let meldekortId = this.forTidligASende(this.props.person.person.meldekort);
+            let meldekort = this.props.person.person.meldekort.filter((m) => m.meldekortId === meldekortId);
+            if (meldekort.length !== 0) {
+                return (
+                    <div className="send-meldekort-varsel">
+                        <Normaltekst>
+                            <FormattedMessage id="overskrift.nesteMeldekort"/>
+                            <FormattedMessage id="sendMeldekort.info.innsendingStatus.kanSendes"/>
+                            {formaterDato(meldekort[0].meldeperiode.kortKanSendesFra)}
+                        </Normaltekst>
+                        <Element>
+                            {formaterUkeOgDatoPeriode(meldekort[0].meldeperiode.fra, meldekort[0].meldeperiode.til)}
+                        </Element>
+                        <FormattedMessage id="sendMeldekort.info.ingenKlare"/>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="send-meldekort-varsel">
+                        <FormattedMessage id="sporsmal.ingenMeldekortASende"/>
+                    </div>
+                );
+            }
+        } else {
+            return (
+                <div className="send-meldekort-varsel">
+                    <FormattedMessage id="sporsmal.ingenMeldekortASende"/>
+                </div>
+            );
+        }
+    }
+
+    hentFeilmeldingEllerData = (rows: MeldekortRad[], columns: any) => {
+        if (rows.length > 0) {
+            if (rows.length < 5) {
+                return this.hentTabellOgTilhorendeElementer(rows, columns);
+            } else {
+                return (
+                    <div className="send-meldekort-varsel">
+                        <Ingress><FormattedMessage id="sendMeldekort.info.forMangeMeldekort"/></Ingress>
+                        <Normaltekst><FormattedMessage id="sendMeldekort.info.forMangeMeldekort.feilmelding"/></Normaltekst>
+                    </div>
+                );
+            }
+        } else {
+            return this.hentMeldingOmMeldekortSomIkkeErKlare(rows);
+        }
+    }
+
     ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (rows: MeldekortRad[], columns: any) => {
         if (this.props.person.person.personId === 0) {
             return (
@@ -67,50 +118,7 @@ class SendMeldekort extends React.Component<Props> {
                 </div>
                 );
         } else {
-            if (rows.length > 0) {
-                if (rows.length < 5) {
-                    return this.hentTabellOgTilhorendeElementer(rows, columns);
-                } else {
-                    return (
-                        <div className="send-meldekort-varsel">
-                            <Ingress><FormattedMessage id="sendMeldekort.info.forMangeMeldekort"/></Ingress>
-                            <Normaltekst><FormattedMessage id="sendMeldekort.info.forMangeMeldekort.feilmelding"/></Normaltekst>
-                        </div>
-                    );
-                }
-            } else {
-                if (rows.length === 0 && this.props.person.person.meldekort !== undefined) {
-                    let meldekortId = this.forTidligASende(this.props.person.person.meldekort);
-                    let meldekort = this.props.person.person.meldekort.filter((m) => m.meldekortId === meldekortId);
-                    if (meldekort.length !== 0) {
-                        return (
-                            <div className="send-meldekort-varsel">
-                                <Normaltekst>
-                                    <FormattedMessage id="overskrift.nesteMeldekort"/>
-                                    <FormattedMessage id="sendMeldekort.info.innsendingStatus.kanSendes"/>
-                                    {formaterDato(meldekort[0].meldeperiode.kortKanSendesFra)}
-                                </Normaltekst>
-                                <Element>
-                                    {formaterUkeOgDatoPeriode(meldekort[0].meldeperiode.fra, meldekort[0].meldeperiode.til)}
-                                </Element>
-                                <FormattedMessage id="sendMeldekort.info.ingenKlare"/>
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <div className="send-meldekort-varsel">
-                                <FormattedMessage id="sporsmal.ingenMeldekortASende"/>
-                            </div>
-                        );
-                    }
-                } else {
-                    return (
-                        <div className="send-meldekort-varsel">
-                            <FormattedMessage id="sporsmal.ingenMeldekortASende"/>
-                        </div>
-                    );
-                }
-            }
+            return this.hentFeilmeldingEllerData(rows, columns);
         }
     }
 
