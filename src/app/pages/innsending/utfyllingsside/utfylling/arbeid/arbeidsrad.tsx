@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { hentUkedagerSomStringListe } from '../../../../../utils/ukedager';
 import { FormattedHTMLMessage } from 'react-intl';
-import { InnsendingState } from '../../../../../types/innsending';
+import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { AktivtMeldekortState } from '../../../../../reducers/aktivtMeldekortReducer';
 import { UtfyltDag } from '../utfyllingConfig';
 import { RootState } from '../../../../../store/configureStore';
@@ -23,26 +23,7 @@ interface UkeProps {
     ukeNummer: number;
 }
 
-interface Feilmeldinger {
-    feilmeldinger?: {
-        mandag1?: string;
-        tirsdag1?: string;
-        onsdag1?: string;
-        torsdag1?: string;
-        fredag1?: string;
-        lordag1?: string;
-        sondag1?: string;
-        mandag2?: string;
-        tirsdag2?: string;
-        onsdag2?: string;
-        torsdag2?: string;
-        fredag2?: string;
-        lordag2?: string;
-        sondag2?: string;
-    };
-}
-
-type ArbeidsradProps = UkeProps & Feilmeldinger & MapStateToProps & MapDispatchToProps;
+type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
     constructor(props: ArbeidsradProps) {
@@ -77,8 +58,8 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                         this.setTimer(event, ukedag);
                     }}
                     feil={
-                        this.props.feilmeldinger !== undefined ?
-                            (this.props.feilmeldinger[ukedag.trim().toLowerCase().replace('ø', 'o') + this.props.ukeNummer]
+                        this.props.feilIDager !== undefined ?
+                            (this.props.feilIDager[ukedag.trim().toLowerCase().replace('ø', 'o') + this.props.ukeNummer]
                             !== undefined ? {feilmelding: ''} : undefined) : undefined
                     }
                 />
