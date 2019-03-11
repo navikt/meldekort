@@ -10,6 +10,8 @@ import { Dispatch } from 'redux';
 import { oppdaterUtfylteDager } from '../../../../../actions/innsending';
 import { connect } from 'react-redux';
 import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -67,13 +69,30 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         });
     }
 
-    render() {
+    innhold = () => {
         return (
             <div className="arbeidsrad">
                 <FormattedHTMLMessage id="utfylling.arbeid"/>
                 <div className="inputrad">
                     {this.setFelter()}
                 </div>
+            </div>
+        );
+    }
+
+    render() {
+        console.log(this.props.feilmelding);
+        return (
+            <div>
+                {this.props.feilmelding !== undefined && this.props.feilmelding !== '' ?
+                    <AlertStripe type={'advarsel'} solid={true}>
+                        {this.innhold()}
+                        <Normaltekst>
+                            {this.props.feilmelding}
+                        </Normaltekst>
+                    </AlertStripe> :
+                    this.innhold()
+                }
             </div>
         );
     }

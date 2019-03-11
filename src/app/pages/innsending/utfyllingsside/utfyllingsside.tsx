@@ -56,9 +56,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, any> {
             <div className="ukepanel">
                 <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
                 {this.sjekkSporsmal('arbeid') ? <Arbeidsrad ukeNummer={ukenummer} feilIDager={{mandag1: '', tirsdag1: '', sondag2: ''}}/> : null}
-                {this.sjekkSporsmal('aktivitetArbeid') ? <Aktivitetsrad ukeNummer={ukenummer} tekstId="utfylling.tiltak" feilIDager={{mandag1: ''}}/> : null}
-                {this.sjekkSporsmal('forhindret') ? <Aktivitetsrad ukeNummer={ukenummer} tekstId="utfylling.syk" feilIDager={{tirsdag2: ''}}/> : null}
-                {this.sjekkSporsmal('ferieFravar') ? <Aktivitetsrad ukeNummer={ukenummer} tekstId="utfylling.ferieFravar"/> : null}
+                {this.sjekkSporsmal('aktivitetArbeid') ? <Aktivitetsrad ukeNummer={ukenummer} tekstId="utfylling.tiltak" feilmelding={'Her er det feil!'}/> : null}
+                {this.sjekkSporsmal('forhindret') ? <Aktivitetsrad ukeNummer={ukenummer} tekstId="utfylling.syk" feilmelding={'Her er det feil!'}/> : null}
+                {this.sjekkSporsmal('ferieFravar') ? <Aktivitetsrad ukeNummer={ukenummer} tekstId="utfylling.ferieFravar" feilmelding={'Her er det feil!'}/> : null}
             </div>
         );
     }

@@ -8,6 +8,8 @@ import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { oppdaterUtfylteDager } from '../../../../../actions/innsending';
 import { connect } from 'react-redux';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -96,13 +98,26 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
         });
     }
 
-    render() {
+    innhold = () => {
         return (
             <div className="aktivitetsrad">
                 <FormattedHTMLMessage id={this.props.tekstId}/>
                 <div className="inputrad">
                     {this.setFelter()}
                 </div>
+            </div>
+        );
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.feilmelding !== undefined && this.props.feilmelding !== '' ?
+                    <div className={'feilIRad'}>
+                        {this.innhold()}
+                    </div> :
+                    this.innhold()
+                }
             </div>
         );
     }
