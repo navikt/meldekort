@@ -2,22 +2,19 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
+import Feilside from './components/feilside/feilside';
 import MeldekortBanner from './components/meldekortBanner/meldekortBanner';
-import MeldekortRoutes from './routes/meldekortRoutes';
+import MeldekortRoutes from './sider/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
-import { erMock } from './mock/utils';
-import { PersonStatusState } from './reducers/personStatusReducer';
-import { Dispatch } from 'redux';
-import { PersonStatusActions } from './actions/personStatus';
 import { connect } from 'react-redux';
-import Feilside from './components/feilside/feilside';
-import { hentTabConfig, Tab } from './components/meny/tabConfig';
-import { MeldeForm, Person } from './types/person';
-import EtterregistrerMeldekort from './pages/etterregistrerMeldekort/etterregistrerMeldekort';
+import { Dispatch } from 'redux';
+import { erMock } from './mock/utils';
+import { hentTabConfig } from './components/meny/tabConfig';
 import { isEmpty } from 'ramda';
-import { Meldekort } from './types/meldekort';
-
+import { MeldeForm, Person } from './types/person';
+import { PersonStatusActions } from './actions/personStatus';
+import { PersonStatusState } from './reducers/personStatusReducer';
 
 if (erMock()) {
     setupMock();
@@ -48,13 +45,9 @@ class App extends React.Component<Props> {
         const tabsobjekter = hentTabConfig();
         const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
             if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === "endreMeldeform")) {
-                return {
-                    ...tabsobj, disabled: !tabsobj.disabled
-                }
+                return { ...tabsobj, disabled: !tabsobj.disabled }
             } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === "etterregistrering") {
-                return {
-                    ...tabsobj, disabled: !tabsobj.disabled
-                }
+                return { ...tabsobj, disabled: !tabsobj.disabled }
             } else { return { ...tabsobj }}
         });
         return (
@@ -62,7 +55,7 @@ class App extends React.Component<Props> {
         )
     }
 
-    setInnhold = () => {
+    settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
             return null;
         }  else if (this.erBrukerRegistrertIArena()) {
@@ -96,7 +89,7 @@ class App extends React.Component<Props> {
         return(
             <div>
                 <MeldekortBanner tittel="Meldekort"/>
-                {this.setInnhold()}
+                {this.settInnhold()}
             </div>
         );
     }

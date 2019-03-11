@@ -1,6 +1,6 @@
 import { Constants, Innsendingstyper } from '../types/innsending';
 import { action, ActionType } from 'typesafe-actions';
-import { Sporsmal as Spm } from '../pages/innsending/sporsmalsside/sporsmal/sporsmalConfig';
+import { Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 
 export function oppdaterSpm(sporsmalsobjekter: Spm[]) {
     return action (Constants.OPPDATER_SPM, {sporsmalsobjekter})

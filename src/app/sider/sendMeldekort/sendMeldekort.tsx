@@ -12,6 +12,7 @@ import { RootState } from '../../store/configureStore';
 import { KortStatus, Meldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import { Innsendingstyper } from '../../types/innsending';
 
 interface MapStateToProps {
    person: PersonState;
@@ -85,6 +86,7 @@ class SendMeldekort extends React.Component<Props> {
                         nestePath={'/send-meldekort/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
                         aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
+                        innsendingstype={Innsendingstyper.innsending}
                     />
                 </section>
             </main>

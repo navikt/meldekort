@@ -1,12 +1,12 @@
 import { Constants, InnsendingState, Innsendingstyper } from '../types/innsending';
 import { InnsendingActions } from '../actions/innsending';
-import { hentSporsmalConfig } from '../pages/innsending/sporsmalsside/sporsmal/sporsmalConfig';
+import { hentSporsmalConfig } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { KortStatus } from '../types/meldekort';
 
 const initialState: InnsendingState = {
     meldekortId: 0,
     kortStatus: KortStatus.OPPRE,
-    innsendingsType: Innsendingstyper.innsending,
+    innsendingstype: Innsendingstyper.innsending,
     sporsmalsobjekter: hentSporsmalConfig(),
 };
 

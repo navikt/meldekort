@@ -44,15 +44,14 @@ class NavKnapp extends React.Component<Props> {
     }
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
-
-        const currentPath = this.props.router.location.pathname;
-        let newPath = this.props.nestePath;
+        const { aktivtMeldekort, aktivtMeldekortObjekt, innsendingstype, nestePath, router } = this.props;
+        const currentPath = router.location.pathname;
+        let newPath = nestePath;
         const urlListe = currentPath.split('/');
 
-        const aktivtMeldekort = this.props.aktivtMeldekort;
-        if (this.props.aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort') {
-            this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
-        }
+        aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort' && this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+        innsendingstype !== undefined && this.props.settInnsendingstype(innsendingstype);
+
         history.push(newPath);
     }
 

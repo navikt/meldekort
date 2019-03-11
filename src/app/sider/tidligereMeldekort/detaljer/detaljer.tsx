@@ -18,6 +18,7 @@ import { selectRouter } from '../../../selectors/router';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
+import { Innsendingstyper } from '../../../types/innsending';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -85,7 +86,8 @@ class Detaljer extends React.Component<Props> {
                     <NavKnapp
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/korriger'}
-                        tekstid={'korriger.meldekortet'}
+                        tekstid={'korriger.meldekort'}
+                        innsendingstype={Innsendingstyper.korrigering}
                     />
                 </section>
             </div>

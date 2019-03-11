@@ -29,13 +29,10 @@ type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentP
 class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     constructor(props: SporsmalssideProps) {
         super(props);
-
     }
 
     render() {
         const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
-        const { match } = this.props;
-        console.log('match i sporsmalsside: ', match);
         return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -67,7 +64,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         nestePath={this.props.innsending+'/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
-                        aktivtMeldekortObjekt={this.props.aktivtMeldekort.meldekort}
                     />
                 </section>
 
