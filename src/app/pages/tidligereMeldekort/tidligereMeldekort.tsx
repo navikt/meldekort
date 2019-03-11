@@ -46,9 +46,7 @@ type Props = MapDispatchToProps&MapStateToProps;
 class TidligereMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-
-        this.props.hentHistoriskeMeldekort();
-    }
+        }
 
     hentRaderFraHistoriskeMeldekort = () => {
         let radliste: HistoriskeMeldekortRad[] = [];
@@ -113,6 +111,10 @@ class TidligereMeldekort extends React.Component<Props> {
                 </div>
             );
         }
+    }
+
+    componentDidMount() {
+        this.props.hentHistoriskeMeldekort();
     }
 
     render() {

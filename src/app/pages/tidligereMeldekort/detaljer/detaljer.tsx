@@ -35,11 +35,9 @@ type Props = MapDispatchToProps&MapStateToProps;
 class Detaljer extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-        this.props.hentMeldekortdetaljer();
-        this.sjekkAktivtMeldekortOgRedirect();
     }
 
-    setTabellrader = () => {
+    settTabellrader = () => {
         return [{
             mottattDato: formaterDato(this.props.aktivtMeldekort.meldekort.mottattDato),
             kortStatus: mapKortStatusTilTekst(this.props.aktivtMeldekort.meldekort.kortStatus),
@@ -56,8 +54,13 @@ class Detaljer extends React.Component<Props> {
         }
     }
 
+    componentDidMount() {
+        this.props.hentMeldekortdetaljer();
+        this.sjekkAktivtMeldekortOgRedirect();
+    }
+
     render() {
-        const rows = this.setTabellrader();
+        const rows = this.settTabellrader();
         const columns = [
             {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
