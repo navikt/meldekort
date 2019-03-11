@@ -12,18 +12,20 @@ interface MapStateToProps {
     router: Router;
 }
 
-interface TabsState {
+interface Props {
     tabsobjekter: Tab[];
+}
+
+interface TabsState {
     windowSize: number;
 }
 
-type TabsProps = MapStateToProps;
+type TabsProps = MapStateToProps & Props;
 
 class Tabsmeny extends React.Component<TabsProps, TabsState> {
     constructor (props: TabsProps) {
         super(props);
         this.state = {
-            tabsobjekter: hentTabConfig().filter(obj => !obj.disabled),
             windowSize: window.innerWidth
         };
     }
@@ -43,13 +45,13 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
     }
 
     lagTab = (obj: Tab) => {
-        const formattedTabLabel = <FormattedMessage id={obj.tittel}/>;
+        const formattedTabLabel = <FormattedMessage id={obj.tekstid}/>;
         return({'label': formattedTabLabel});
     }
 
     handleOnChange = ( event: React.SyntheticEvent<EventTarget>, index: number ) => {
         const pathname = this.props.router.location.pathname;
-        pathname !== this.state.tabsobjekter[index].urlparam && history.push(this.state.tabsobjekter[index].urlparam);
+        pathname !== this.props.tabsobjekter[index].urlparam && history.push(this.props.tabsobjekter[index].urlparam);
     }
 
     handleWindowSize = () => {
@@ -79,7 +81,7 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
             ( returnerFalseOmPathHarInnsending ? (
                 <>
                     <nav className="tabsmeny">
-                        {this.lagTabs(this.state.tabsobjekter, this.props.router.location.pathname, trengerKompakt)}
+                        {this.lagTabs(this.props.tabsobjekter, this.props.router.location.pathname, trengerKompakt)}
                     </nav>
                 </>) : <></>
             )

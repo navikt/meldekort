@@ -12,6 +12,12 @@ import { Dispatch } from 'redux';
 import { PersonStatusActions } from './actions/personStatus';
 import { connect } from 'react-redux';
 import Feilside from './components/feilside/feilside';
+import { hentTabConfig, Tab } from './components/meny/tabConfig';
+import { MeldeForm, Person } from './types/person';
+import EtterregistrerMeldekort from './pages/etterregistrerMeldekort/etterregistrerMeldekort';
+import { isEmpty } from 'ramda';
+import { Meldekort } from './types/meldekort';
+
 
 if (erMock()) {
     setupMock();
@@ -19,6 +25,7 @@ if (erMock()) {
 
 interface MapStateToProps {
     personStatus: PersonStatusState;
+    person: Person;
 }
 
 interface MapDispatchToProps {
@@ -30,13 +37,29 @@ type Props = MapDispatchToProps&MapStateToProps;
 class App extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-
-        this.props.hentPersonStatus();
     }
 
     erBrukerRegistrertIArena = (): boolean => {
         let arbeidssokerStatus = this.props.personStatus.personStatus.statusArbeidsoker;
         return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
+    }
+
+    settMenyPunkter = (person: Person) => {
+        const tabsobjekter = hentTabConfig();
+        const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
+            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === "endreMeldeform")) {
+                return {
+                    ...tabsobj, disabled: !tabsobj.disabled
+                }
+            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === "etterregistrering") {
+                return {
+                    ...tabsobj, disabled: !tabsobj.disabled
+                }
+            } else { return { ...tabsobj }}
+        });
+        return (
+            <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
+        )
     }
 
     setInnhold = () => {
@@ -45,7 +68,7 @@ class App extends React.Component<Props> {
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
-                <NavTabs/>
+                    {this.settMenyPunkter(this.props.person)}
                 <div className="main-container">
                     <ConnectedRouter history={history}>
                         <Switch>
@@ -64,6 +87,10 @@ class App extends React.Component<Props> {
         }
     }
 
+    componentDidMount() {
+        this.props.hentPersonStatus();
+    }
+
     public render() {
 
         return(
@@ -75,9 +102,10 @@ class App extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (personStatus: RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        personStatus: personStatus.personStatus,
+        personStatus: state.personStatus,
+        person: state.person.person,
     };
 };
 

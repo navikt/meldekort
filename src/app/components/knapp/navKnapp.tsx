@@ -9,6 +9,8 @@ import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
+import { Innsendingstyper } from '../../types/innsending';
+import { leggTilInnsendingstype } from '../../actions/innsending';
 
 interface MapStateToProps {
     router: Router;
@@ -17,6 +19,7 @@ interface MapStateToProps {
 
 interface MapDispatcherToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+    settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
 interface NavKnappProps {
@@ -25,6 +28,7 @@ interface NavKnappProps {
     tekstid: string;
     className?: string;
     aktivtMeldekortObjekt?: Meldekort;
+    innsendingstype?: Innsendingstyper;
 }
 
 export enum knappTyper {
@@ -38,20 +42,6 @@ class NavKnapp extends React.Component<Props> {
     constructor(props: any) {
         super(props);
     }
-
-   /* returnerInnsendingstypeEllersTomString = (urlListe: string[], nestePath: string) => {
-        let pathParam: string = "";
-        for (let type in innsendingsTyper) {
-            const pathType = "/" + type;
-            const nestePathType = nestePath.split('/')[1];
-            console.log('nestepathType: ', nestePathType);
-            if (isNaN(Number(type)) && (pathType === nestePath)) {
-                pathParam = pathType;
-                console.log('pathParam', pathParam);
-            }
-        }
-        return pathParam;
-    }*/
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
 
@@ -92,7 +82,10 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+        settInnsendingstype: (innsendingstype: Innsendingstyper) =>
+            dispatch(leggTilInnsendingstype(innsendingstype)),
+
     };
 };
 
