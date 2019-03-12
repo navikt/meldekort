@@ -1,33 +1,36 @@
-import { Constants, InnsendingState, Innsendingstyper } from '../types/innsending';
-import { InnsendingActions, KorrigertIdActions } from '../actions/innsending';
+import { InnsendingState, Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
+import { InnsendingActions, InnsendingActionsTypes } from '../actions/innsending';
 import { hentSporsmalConfig } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { KortStatus } from '../types/meldekort';
 import { getType } from 'typesafe-actions';
-import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 
 const initialState: InnsendingState = {
-    meldekortId: 0,
+    meldekortId: 5,
     kortStatus: KortStatus.OPPRE,
-    korrigertMeldekortId: 1,
+    korrigertMeldekortId: 5,
     innsendingstype: Innsendingstyper.innsending,
     sporsmalsobjekter: hentSporsmalConfig(),
 };
 
 const innsendingReducer = (state: InnsendingState = initialState,
-                           action: InnsendingActions) : InnsendingState => {
+                           action: InnsendingActionsTypes) : InnsendingState => {
     switch (action.type) {
 
-        case Constants.OPPDATER_SPM:
-            return { ...state, ...action.payload };
+        case getType(InnsendingActions.oppdaterSpm):
+            return { ...state, sporsmalsobjekter: action.payload };
 
-        case Constants.LEGG_TIL_MELDEKORTID:
-            return { ...state, ...action.payload };
+        case getType(InnsendingActions.leggTilMeldekortId):
+            return { ...state, meldekortId: action.payload };
 
-        case Constants.LEGG_TIL_INNSENDINGSTYPE:
-            return { ...state, ...action.payload };
+        case getType(InnsendingActions.leggTilInnsendingstype):
+            return {...state, innsendingstype: action.payload };
 
-        case getType(KorrigertIdActions.hentKorrigertId.success):
-            return {...state, ...action.payload }
+        case getType(InnsendingActions.hentKorrigertId.success):
+            return {
+                ...state,
+                korrigertMeldekortId: action.payload,
+                ...action.payload
+            };
 
 
         default:

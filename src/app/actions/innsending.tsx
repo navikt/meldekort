@@ -1,33 +1,18 @@
-import { Constants, InnsendingState, Innsendingstyper } from '../types/innsending';
-import { action, ActionType, createAsyncAction } from 'typesafe-actions';
+import { InnsendingState, Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
+import { ActionType, createAsyncAction, createStandardAction } from 'typesafe-actions';
 import { Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';
 
-export enum KorrigertIdTypeKeys {
-    HENT_KORRIGERTID = 'HENT_KORRIGERTID',
-    HENT_KORRIGERTID_OK = 'HENT_KORRIGERTID_OK',
-    HENT_KORRIGERTID_FEILET = 'HENT_KORRIGERTID_FEILET',
-}
-
-export const KorrigertIdActions = {
+export const InnsendingActions = {
     hentKorrigertId: createAsyncAction(
-        KorrigertIdTypeKeys.HENT_KORRIGERTID,
-        KorrigertIdTypeKeys.HENT_KORRIGERTID_OK,
-        KorrigertIdTypeKeys.HENT_KORRIGERTID_FEILET
+        InnsendingTypeKeys.HENT_KORRIGERTID,
+        InnsendingTypeKeys.HENT_KORRIGERTID_OK,
+        InnsendingTypeKeys.HENT_KORRIGERTID_FEILET
     )<void, InnsendingState, AxiosError>(),
+
+    oppdaterSpm: createStandardAction(InnsendingTypeKeys.OPPDATER_SPM)<Spm[]>(),
+    leggTilMeldekortId: createStandardAction(InnsendingTypeKeys.LEGG_TIL_MELDEKORTID) <number>(),
+    leggTilInnsendingstype: createStandardAction(InnsendingTypeKeys.LEGG_TIL_INNSENDINGSTYPE)<Innsendingstyper>(),
 };
 
-export function oppdaterSpm(sporsmalsobjekter: Spm[]) {
-    return action (Constants.OPPDATER_SPM, {sporsmalsobjekter})
-}
-export function leggTilMeldekortId(meldekortId: number) {
-    return action (Constants.LEGG_TIL_MELDEKORTID, {meldekortId})
-}
-export function leggTilInnsendingstype(innsendingstype: Innsendingstyper) {
-    return action (Constants.LEGG_TIL_INNSENDINGSTYPE, {innsendingstype})
-}
-
-export type InnsendingActions = ActionType<typeof oppdaterSpm> &
-    ActionType<typeof leggTilMeldekortId>&
-    ActionType<typeof leggTilInnsendingstype> &
-    ActionType<typeof KorrigertIdActions>;
+export type InnsendingActionsTypes = ActionType<typeof InnsendingActions>;

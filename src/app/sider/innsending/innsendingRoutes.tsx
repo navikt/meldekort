@@ -10,7 +10,7 @@ import { InnsendingState, Innsendingstyper } from '../../types/innsending';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { KorrigertIdActions, leggTilMeldekortId, oppdaterSpm } from '../../actions/innsending';
+import { InnsendingActions } from '../../actions/innsending';
 import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
 import { Meldekortdetaljer } from '../../types/meldekort';
 
@@ -46,8 +46,10 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
     }
 
     componentDidMount() {
-        this.settInnsendingsobjekt();
+        console.log('korrigertMKid FØR:', this.props.innsending.korrigertMeldekortId);
         this.props.hentKorrigertId();
+        console.log('korrigertMKid ETTER:', this.props.innsending.korrigertMeldekortId);
+        this.settInnsendingsobjekt();
     }
 
     render() {
@@ -78,11 +80,11 @@ const mapStateToProps = (state: RootState) : MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
     return {
         oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
-            dispatch(oppdaterSpm(sporsmalsobjekter)),
+            dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
         settMeldekortId: (meldekortId: number) =>
-            dispatch(leggTilMeldekortId(meldekortId)),
+            dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
         hentKorrigertId: () => {
-            dispatch(KorrigertIdActions.hentKorrigertId.request())
+            dispatch(InnsendingActions.hentKorrigertId.request())
         }
     };
 }

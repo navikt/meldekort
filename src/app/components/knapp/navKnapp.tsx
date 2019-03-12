@@ -10,7 +10,7 @@ import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
 import { Innsendingstyper } from '../../types/innsending';
-import { leggTilInnsendingstype } from '../../actions/innsending';
+import { InnsendingActions } from '../../actions/innsending';
 
 interface MapStateToProps {
     router: Router;
@@ -20,6 +20,7 @@ interface MapStateToProps {
 interface MapDispatcherToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
+    hentKorrigertId: () => void;
 }
 
 interface NavKnappProps {
@@ -49,7 +50,9 @@ class NavKnapp extends React.Component<Props> {
         let newPath = nestePath;
         const urlListe = currentPath.split('/');
 
-        aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort' && this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+        aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort'
+        && this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+        // && this.props.hentKorrigertId;
         innsendingstype !== undefined && this.props.settInnsendingstype(innsendingstype);
 
         history.push(newPath);
@@ -83,7 +86,10 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
             dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
-            dispatch(leggTilInnsendingstype(innsendingstype)),
+            dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
+        hentKorrigertId: () => {
+            dispatch(InnsendingActions.hentKorrigertId.request())
+        }
 
     };
 };

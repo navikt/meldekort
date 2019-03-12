@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { InnsendingState } from '../../../../types/innsending';
-import { oppdaterSpm } from '../../../../actions/innsending';
+import { InnsendingActions } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
-import { Sporsmal as Spm, hentSporsmalConfig} from './sporsmalConfig';
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
+import { Sporsmal as Spm } from './sporsmalConfig';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -92,7 +91,7 @@ const mapStateToProps = (state : RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
     return {
         oppdaterSvar: (sporsmalsobjekt: Spm[]) =>
-            dispatch(oppdaterSpm(sporsmalsobjekt))
+            dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekt))
     };
 };
 

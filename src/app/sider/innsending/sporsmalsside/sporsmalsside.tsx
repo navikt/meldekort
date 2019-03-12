@@ -10,7 +10,7 @@ import { RootState } from '../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { Meldegruppe } from '../../../types/meldekort';
-import { oppdaterSpm } from '../../../actions/innsending';
+import { InnsendingActions } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { InnsendingState } from '../../../types/innsending';
 import { RouteComponentProps } from 'react-router';
@@ -85,7 +85,7 @@ const mapStateToProps = (state : RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
     return {
         oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
-            dispatch(oppdaterSpm(sporsmalsobjekter))
+            dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter))
     };
 }
 
