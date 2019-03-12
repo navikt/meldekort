@@ -56,6 +56,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     bredde="XS"
                     type={'number'}
                     step={0.5}
+                    value={0}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         this.setTimer(event, ukedag);
                     }}
@@ -81,16 +82,12 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     render() {
-        console.log(this.props.feilmelding);
         return (
             <div>
                 {this.props.feilmelding !== undefined && this.props.feilmelding !== '' ?
-                    <AlertStripe type={'advarsel'} solid={true}>
+                    <div className={'feilIRad'}>
                         {this.innhold()}
-                        <Normaltekst>
-                            {this.props.feilmelding}
-                        </Normaltekst>
-                    </AlertStripe> :
+                    </div> :
                     this.innhold()
                 }
             </div>
