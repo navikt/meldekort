@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { hentUkedagerSomStringListe } from '../../../../../utils/ukedager';
+import { hentUkedagerSomStringListe, konverterUkedag, matchUkedager } from '../../../../../utils/ukedager';
 import { FormattedHTMLMessage } from 'react-intl';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { AktivtMeldekortState } from '../../../../../reducers/aktivtMeldekortReducer';
@@ -34,7 +34,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
     setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: string) => {
         const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
-           if (dag.uke === this.props.ukeNummer && dag.dag === ukedag.trim()) {
+           if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
                return {
                    ...dag,
                    arbeidetTimer: Number(event.target.value)
@@ -46,8 +46,24 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         this.props.oppdaterDager(oppdaterteDager);
     }
 
+    finnIndex = (ukedag: string): number => {
+        let dagObj = null;
+        this.props.innsending.utfylteDager.map(dag => {
+            if (matchUkedager(dag.dag, ukedag.trim()) && dag.uke === this.props.ukeNummer) {
+                dagObj = dag;
+            }
+        });
+        if (dagObj !== null) {
+            return this.props.innsending.utfylteDager.indexOf(dagObj, 0);
+        }
+        return -1;
+    }
+
     setFelter = () => {
-        return hentUkedagerSomStringListe().map((ukedag) => {
+        return hentUkedagerSomStringListe().map((dag) => {
+            let ukedag = konverterUkedag(dag);
+            let { utfylteDager } = this.props.innsending;
+            let utfyltDagIndex = this.finnIndex(ukedag);
             return (
                 <Input
                     className="arbeidInput"
@@ -56,7 +72,10 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     bredde="XS"
                     type={'number'}
                     step={0.5}
-                    value={0}
+                    value={
+                        typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined' ?
+                            utfylteDager[utfyltDagIndex].arbeidetTimer : ''
+                    }
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         this.setTimer(event, ukedag);
                     }}
@@ -84,7 +103,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     render() {
         return (
             <div>
-                {this.props.feilmelding !== undefined && this.props.feilmelding !== '' ?
+                {this.props.feil ?
                     <div className={'feilIRad'}>
                         {this.innhold()}
                     </div> :

@@ -12,21 +12,7 @@ export interface InnsendingState {
 }
 
 export interface FeilIDager {
+    feil: boolean;
     feilmelding?: string;
-    feilIDager?: {
-        mandag1?: string;
-        tirsdag1?: string;
-        onsdag1?: string;
-        torsdag1?: string;
-        fredag1?: string;
-        lordag1?: string;
-        sondag1?: string;
-        mandag2?: string;
-        tirsdag2?: string;
-        onsdag2?: string;
-        torsdag2?: string;
-        fredag2?: string;
-        lordag2?: string;
-        sondag2?: string;
-    };
+    feilIDager?: string[];
 }
