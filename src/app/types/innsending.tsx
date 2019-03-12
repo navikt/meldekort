@@ -10,6 +10,7 @@ export enum Constants {
 export interface InnsendingState {
     meldekortId: number;
     kortStatus: KortStatus;
+    korrigertMeldekortId: number,
     innsendingstype: Innsendingstyper,
     sporsmalsobjekter: Spm[];
 }

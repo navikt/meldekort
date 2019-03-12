@@ -10,15 +10,19 @@ import { InnsendingState, Innsendingstyper } from '../../types/innsending';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { oppdaterSpm } from '../../actions/innsending';
+import { KorrigertIdActions, leggTilMeldekortId, oppdaterSpm } from '../../actions/innsending';
 import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
+import { Meldekortdetaljer } from '../../types/meldekort';
 
 interface MapStateToProps {
     innsending: InnsendingState;
+    meldekortDetaljer: Meldekortdetaljer;
 }
 
 interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
+    settMeldekortId: (meldekortId: number) => void;
+    hentKorrigertId: () => void;
 }
 
 type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
@@ -33,7 +37,9 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
         if (innsendingstype === Innsendingstyper.innsending) {
 
         } else if (innsendingstype === Innsendingstyper.korrigering) {
+            const { meldekortId } = this.props.meldekortDetaljer;
 
+            this.props.settMeldekortId(this.props.innsending.korrigertMeldekortId);
         } else {
             console.log('Ikke innsending eller korrigering');
         }
@@ -41,6 +47,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
 
     componentDidMount() {
         this.settInnsendingsobjekt();
+        this.props.hentKorrigertId();
     }
 
     render() {
@@ -64,13 +71,19 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
 const mapStateToProps = (state: RootState) : MapStateToProps => {
     return {
         innsending: state.innsending,
+        meldekortDetaljer: state.meldekortdetaljer.meldekortdetaljer
     }
 }
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
     return {
         oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
-            dispatch(oppdaterSpm(sporsmalsobjekter))
+            dispatch(oppdaterSpm(sporsmalsobjekter)),
+        settMeldekortId: (meldekortId: number) =>
+            dispatch(leggTilMeldekortId(meldekortId)),
+        hentKorrigertId: () => {
+            dispatch(KorrigertIdActions.hentKorrigertId.request())
+        }
     };
 }
 

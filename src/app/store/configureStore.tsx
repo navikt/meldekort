@@ -22,6 +22,7 @@ import personEpics from '../epics/personEpics';
 import personStatusEpics from '../epics/personStatusEpics';
 import innsendingReducer from '../reducers/innsendingReducer';
 import { InnsendingState } from '../types/innsending';
+import innsendingEpics from '../epics/innsendingEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -89,6 +90,7 @@ epicMiddleware.run(
         personStatusEpics,
         historiskeMeldekortEpics,
         meldekortdetaljerEpics,
+        innsendingEpics
     )
 );
 

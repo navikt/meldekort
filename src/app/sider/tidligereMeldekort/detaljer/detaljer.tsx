@@ -87,7 +87,6 @@ class Detaljer extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/korriger'}
                         tekstid={'korriger.meldekort'}
-                        innsendingstype={Innsendingstyper.korrigering}
                     />
                 </section>
             </div>
