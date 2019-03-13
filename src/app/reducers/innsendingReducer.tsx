@@ -8,7 +8,7 @@ const initialState: InnsendingState = {
     meldekortId: 5,
     kortStatus: KortStatus.OPPRE,
     korrigertMeldekortId: 5,
-    innsendingstype: Innsendingstyper.innsending,
+    innsendingstype: null,
     sporsmalsobjekter: hentSporsmalConfig(),
 };
 
@@ -25,13 +25,15 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case getType(InnsendingActions.leggTilInnsendingstype):
             return {...state, innsendingstype: action.payload };
 
+        case getType(InnsendingActions.resetInnsending):
+            return {...initialState };
+
         case getType(InnsendingActions.hentKorrigertId.success):
             return {
                 ...state,
                 korrigertMeldekortId: action.payload,
                 ...action.payload
             };
-
 
         default:
             return state;

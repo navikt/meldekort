@@ -13,12 +13,17 @@ import { KortStatus, Meldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
+import { InnsendingActions } from '../../actions/innsending';
+import { selectRouter } from '../../selectors/router';
+import { Router } from '../../types/router';
 
 interface MapStateToProps {
    person: PersonState;
+   router: Router;
 }
 interface MapDispatchToProps {
     hentPerson: () => void;
+    resetInnsending: () => void;
 }
 
 interface MeldekortRad {
@@ -31,7 +36,6 @@ type Props = MapDispatchToProps & MapStateToProps;
 class SendMeldekort extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-        this.props.hentPerson();
     }
 
     hentMeldekortRaderFraPerson = () => {
@@ -47,6 +51,11 @@ class SendMeldekort extends React.Component<Props> {
             }
         }
         return radliste;
+    }
+
+    componentDidMount() {
+        this.props.resetInnsending();
+        this.props.hentPerson();
     }
 
     render() {
@@ -83,10 +92,9 @@ class SendMeldekort extends React.Component<Props> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/send-meldekort/innsending'}
+                        nestePath={this.props.router.location.pathname + '/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
                         aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
-                        innsendingstype={Innsendingstyper.innsending}
                     />
                 </section>
             </main>
@@ -94,15 +102,18 @@ class SendMeldekort extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (person: RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        person: person.person,
+        person: state.person,
+        router: selectRouter(state),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+
     };
 };
 

@@ -6,6 +6,9 @@ import { EkspanderbartpanelPure } from 'nav-frontend-ekspanderbartpanel';
 import { hentIntl } from '../../utils/intlUtil';
 
 import sporrende from '../../ikoner/sporrende.svg';
+import { InnsendingActions } from '../../actions/innsending';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 interface SporsmalProps {
     overskriftId: string;
@@ -17,7 +20,11 @@ interface SporsmalVisningState {
     valgtSporsmalId: number;
 }
 
-class OfteStilteSporsmal extends React.Component<any, SporsmalVisningState> {
+interface MapDispatchToProps {
+    resetInnsending: () => void;
+}
+
+class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVisningState> {
     constructor(props: any) {
         super(props);
         this.state = {valgtSporsmalId: 0};
@@ -42,6 +49,10 @@ class OfteStilteSporsmal extends React.Component<any, SporsmalVisningState> {
 
     hentFormatertOverskrift = (id: string): string => {
         return hentIntl().formatMessage({id: id});
+    }
+
+    componentDidMount(){
+        this.props.resetInnsending;
     }
 
     render() {
@@ -75,4 +86,10 @@ class OfteStilteSporsmal extends React.Component<any, SporsmalVisningState> {
     }
 }
 
-export default OfteStilteSporsmal;
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(OfteStilteSporsmal);

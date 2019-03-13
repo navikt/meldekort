@@ -15,11 +15,18 @@ export interface InnsendingState {
     meldekortId: number;
     kortStatus: KortStatus;
     korrigertMeldekortId: number,
-    innsendingstype: Innsendingstyper,
+    innsendingstype: Innsendingstyper | null,
     sporsmalsobjekter: Spm[];
 }
 
 export enum Innsendingstyper {
     innsending = 'innsending',
-    korrigering = 'korrigering',
+    korrigering = 'korriger',
+}
+
+export enum InnsendingRoute {
+    sporsmal = 'sporsmal',
+    utfylling ='utfylling',
+    bekreftelse = 'bekreftelse',
+    kvittering = 'kvittering'
 }

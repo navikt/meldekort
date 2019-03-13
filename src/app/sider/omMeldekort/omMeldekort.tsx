@@ -5,10 +5,24 @@ import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 
 import veileder from '../../ikoner/veileder.svg';
+import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
+import { InnsendingActions } from '../../actions/innsending';
+import { connect } from 'react-redux';
+import { Meldekort } from '../../types/meldekort';
+import { Innsendingstyper } from '../../types/innsending';
+import { Dispatch } from 'redux';
 
-class OmMeldekort extends React.Component<any, any> {
+interface MapDispatchToProps {
+    resetInnsending: () => void;
+}
+
+class OmMeldekort extends React.Component<MapDispatchToProps, any> {
     constructor(props: any) {
         super(props);
+    }
+
+    componentDidMount(){
+        this.props.resetInnsending;
     }
 
     render() {
@@ -37,4 +51,11 @@ class OmMeldekort extends React.Component<any, any> {
     }
 }
 
-export default OmMeldekort;
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(OmMeldekort);
+

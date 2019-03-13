@@ -12,7 +12,8 @@ export const InnsendingActions = {
 
     oppdaterSpm: createStandardAction(InnsendingTypeKeys.OPPDATER_SPM)<Spm[]>(),
     leggTilMeldekortId: createStandardAction(InnsendingTypeKeys.LEGG_TIL_MELDEKORTID) <number>(),
-    leggTilInnsendingstype: createStandardAction(InnsendingTypeKeys.LEGG_TIL_INNSENDINGSTYPE)<Innsendingstyper>(),
+    leggTilInnsendingstype: createStandardAction(InnsendingTypeKeys.LEGG_TIL_INNSENDINGSTYPE)<Innsendingstyper | null>(),
+    resetInnsending: createStandardAction(InnsendingTypeKeys.RESET_INNSENDING)<void>(),
 };
 
 export type InnsendingActionsTypes = ActionType<typeof InnsendingActions>;

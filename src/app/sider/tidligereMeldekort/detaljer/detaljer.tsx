@@ -17,9 +17,6 @@ import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 
-import utklippstavle from '../../../ikoner/utklippstavle.svg';
-import { Innsendingstyper } from '../../../types/innsending';
-
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;

@@ -15,9 +15,10 @@ import { InnsendingActions } from '../../actions/innsending';
 interface MapStateToProps {
     router: Router;
     aktivtMeldekort: AktivtMeldekortState;
+    innsendingstype: Innsendingstyper | null;
 }
 
-interface MapDispatcherToProps {
+interface MapDispatchToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
     hentKorrigertId: () => void;
@@ -29,7 +30,6 @@ interface NavKnappProps {
     tekstid: string;
     className?: string;
     aktivtMeldekortObjekt?: Meldekort;
-    innsendingstype?: Innsendingstyper;
 }
 
 export enum knappTyper {
@@ -37,25 +37,74 @@ export enum knappTyper {
     standard = 'standard',
 }
 
-type Props = MapStateToProps & MapDispatcherToProps & NavKnappProps;
+type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 
 class NavKnapp extends React.Component<Props> {
     constructor(props: any) {
         super(props);
     }
 
+    // TODO: Kort ned på koden her hvis det går.
+    harNestePathInnsending = (nestePathParams: string[]) => {
+        console.log('harNEstePathInnsending/korriger: ', nestePathParams[nestePathParams.length - 1]);
+        return (nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending
+            || nestePathParams[nestePathParams.length - 1] === Innsendingstyper.korrigering)
+    }
+
+    returnerInnsendingstypeBasertPaString = (innsendingstypeFraPath: string) => {
+        return (innsendingstypeFraPath === Innsendingstyper.innsending) ? Innsendingstyper.innsending : Innsendingstyper.korrigering;
+    }
+
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
         const { aktivtMeldekort, aktivtMeldekortObjekt, innsendingstype, nestePath, router } = this.props;
-        const currentPath = router.location.pathname;
-        let newPath = nestePath;
-        const urlListe = currentPath.split('/');
 
-        aktivtMeldekortObjekt  && urlListe[1] === 'send-meldekort'
-        && this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
-        // && this.props.hentKorrigertId;
-        innsendingstype !== undefined && this.props.settInnsendingstype(innsendingstype);
+        const path = router.location.pathname;
+        const params = path.split('/');
+        const nestePathParams = nestePath.split('/');
+        const sisteParamINestePathParams = nestePathParams[nestePathParams.length-1];
+        let newPath: string = "";
+        console.log('path', path, 'params', params);
+        console.log('nestepath', nestePath, 'nesteparams', nestePathParams);
 
+        // ---> Hverken på innsending (ennå) eller trykket på UTF knapp.
+        if (innsendingstype === null) {
+            console.log('Hvis ikke på innsending (insstype=null):', innsendingstype);
+
+            if (this.harNestePathInnsending(nestePathParams)) {
+                // --> Hvis man skal til innsending (nestePath har innsending) (nestePath = "/korriger" eller "/innsending")
+                console.log('Hvis man skal til innsending..newPath = nestePath');
+                this.props.settInnsendingstype(this.returnerInnsendingstypeBasertPaString(sisteParamINestePathParams));
+                newPath = nestePath;
+            } else {
+                console.log('skal IKKE til dinnsending.. nestePath blir newPath');
+                // --> Hvis man ikke skal til innsending (nestePath ikke har innsending)
+                newPath = nestePath;
+            }
+        } else {
+            // ---> På innsending/ ...
+            console.log('Er På innsending: innstype er ikke null:', innsendingstype);
+
+            // ---> på "kvittering"
+            if (params[params.length-1] === 'kvittering') {
+                // --> Hvis man skal tilbake til meldekortOversikt/DittNav (send-meldekort/tidligere)
+                    // Overskriv newPath med NestePath (send-meldekort)
+
+                // --> Hvis man har innsendingstype.innsending & har flere meldekort
+                newPath = path + '/' + sisteParamINestePathParams;
+
+            } else {
+                // --> Hvis man ikke er på "Kvittering",
+                //  Må fjerne sporsmla/ replace med utfylling. sjekk kodeunder
+                const editedParams = params;
+                editedParams.pop();
+                editedParams.push(sisteParamINestePathParams);
+                newPath  = editedParams.join('/');
+                console.log('newPath hvis man er på innS, men ikke kvittering', newPath)
+            }
+        }
+        console.log('final newPath:', newPath);
         history.push(newPath);
+        aktivtMeldekortObjekt  && params[1] === 'send-meldekort' && this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
     }
 
     render() {
@@ -78,10 +127,11 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         aktivtMeldekort: meldekort,
         router: selectRouter(state),
+        innsendingstype: state.innsending.innsendingstype,
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
             dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
@@ -94,4 +144,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(NavKnapp);
+export default connect(mapStateToProps, mapDispatchToProps)(NavKnapp);

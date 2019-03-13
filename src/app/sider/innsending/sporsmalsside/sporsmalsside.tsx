@@ -61,7 +61,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={this.props.innsending+'/utfylling'}
+                        nestePath={'/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                     />

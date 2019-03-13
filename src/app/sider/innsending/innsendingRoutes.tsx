@@ -13,10 +13,13 @@ import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
 import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
 import { Meldekortdetaljer } from '../../types/meldekort';
+import MeldekortRoutes from '../meldekortRoutes';
+import { Router } from '../../types/router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     meldekortDetaljer: Meldekortdetaljer;
+    router: Router;
 }
 
 interface MapDispatchToProps {
@@ -46,14 +49,14 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
     }
 
     componentDidMount() {
-        console.log('korrigertMKid FØR:', this.props.innsending.korrigertMeldekortId);
         this.props.hentKorrigertId();
-        console.log('korrigertMKid ETTER:', this.props.innsending.korrigertMeldekortId);
         this.settInnsendingsobjekt();
     }
 
     render() {
-        const { match } = this.props;
+        const { match, router } = this.props;
+        console.log('route: ', router.location.pathname )
+
         return (
             <div className="sideinnhold">
                 <PeriodeBanner/>
@@ -73,7 +76,8 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
 const mapStateToProps = (state: RootState) : MapStateToProps => {
     return {
         innsending: state.innsending,
-        meldekortDetaljer: state.meldekortdetaljer.meldekortdetaljer
+        meldekortDetaljer: state.meldekortdetaljer.meldekortdetaljer,
+        router: state.router
     }
 }
 

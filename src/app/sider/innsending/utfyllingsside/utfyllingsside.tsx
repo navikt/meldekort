@@ -34,13 +34,13 @@ class Utfyllingsside extends React.Component<any, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
-                        nestePath={'/innsending/sporsmal'}
+                        nestePath={'/sporsmal'}
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/innsending/bekreftelse'}
+                        nestePath={'/bekreftelse'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                     />

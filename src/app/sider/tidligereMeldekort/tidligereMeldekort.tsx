@@ -15,6 +15,7 @@ import { Meldekort } from '../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../utils/mapper';
 import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../utils/statusEtikettUtil';
 import { hentIntl } from '../../utils/intlUtil';
+import { InnsendingActions } from '../../actions/innsending';
 
 interface MapStateToProps {
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -22,6 +23,7 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
     hentHistoriskeMeldekort: () => void;
+    resetInnsending: () => void;
 }
 
 interface HistoriskeMeldekortRad {
@@ -58,6 +60,10 @@ class TidligereMeldekort extends React.Component<Props> {
             radliste.push(rad);
         }
         return radliste;
+    }
+
+    componentDidMount() {
+        this.props.resetInnsending();
     }
 
     render() {
@@ -114,6 +120,7 @@ const mapStateToProps = (historiskeMeldekort: RootState): MapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentHistoriskeMeldekort: () => dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
     };
 };
 
