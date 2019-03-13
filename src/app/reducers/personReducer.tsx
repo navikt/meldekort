@@ -26,7 +26,6 @@ const personReducer = (state: PersonState = initialState,
                        action: PersonActionTypes): PersonState => {
     switch (action.type) {
         case getType(PersonActions.hentPerson.success):
-
             return {
                 person: action.payload,
             };

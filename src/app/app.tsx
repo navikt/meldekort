@@ -12,6 +12,7 @@ import { Dispatch } from 'redux';
 import { PersonStatusActions } from './actions/personStatus';
 import { connect } from 'react-redux';
 import Feilside from './components/feilside/feilside';
+import UIModalWrapper from './components/modal/UIModalWrapper';
 
 if (erMock()) {
     setupMock();
@@ -69,6 +70,7 @@ class App extends React.Component<Props> {
         return(
             <div>
                 <MeldekortBanner tittel="Meldekort"/>
+                <UIModalWrapper/>
                 {this.setInnhold()}
             </div>
         );

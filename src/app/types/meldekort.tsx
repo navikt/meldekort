@@ -1,4 +1,11 @@
 // CONSTANTS / Action?
+// Defining the redux state and constants
+import * as actions from '../actions/meldekort';
+import { ActionType } from 'typesafe-actions';
+
+// import { DemoActions } when you need to use our actions
+export type MeldekortDemoActions = ActionType<typeof actions>;
+
 export enum Constants {
     LEGG_TIL_AKTIVT_MELDEKORT = 'LEGG_TIL_AKTIVT_MELDEKORT'
 }
@@ -10,7 +17,7 @@ export interface Meldekort {
     meldeperiode: Meldeperiode;
     meldegruppe: Meldegruppe;
     kortStatus: KortStatus;
-    bruttoBelop: number;
+    bruttoBelop?: number;
     mottattDato: Date;
     korrigerbart: boolean;
 }
@@ -94,15 +101,15 @@ export interface MeldekortDag {
 
 /* ENUMS */
 export enum KortType {
-    ORDINAER = '01',
-    ERSTATNING = '03',
-    RETUR = '04',
-    ELEKTRONISK = '05',
-    AAP = '06',
-    ORDINAER_MANUELL = '07',
-    MASKINELT_OPPDATERT = '08',
-    MANUELL_ARENA = '09',
-    KORRIGERT_ELEKTRONISK = '10'
+    ORDINAER = 'ORDINAER',
+    ERSTATNING = 'ERSTATNING',
+    RETUR = 'RETUR',
+    ELEKTRONISK = 'ELEKTRONISK',
+    AAP = 'AAP',
+    ORDINAER_MANUELL = 'ORDINAER_MANUELL',
+    MASKINELT_OPPDATERT = 'MASKINELT_OPPDATERT',
+    MANUELL_ARENA = 'MANUELL_ARENA',
+    KORRIGERT_ELEKTRONISK = 'KORRIGERT_ELEKTRONISK'
 }
 
 export enum Meldegruppe {

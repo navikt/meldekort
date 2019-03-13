@@ -5,6 +5,7 @@ import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 import { from, of } from 'rxjs';
 import { fetchMeldekortdetaljer } from '../api/api';
 import { combineEpics } from 'redux-observable';
+import { MeldekortActions } from '../actions/meldekort';
 
 const hentMeldekortdetaljer: AppEpic = (action$, state$) =>
     action$.pipe(
@@ -14,7 +15,7 @@ const hentMeldekortdetaljer: AppEpic = (action$, state$) =>
             from(fetchMeldekortdetaljer(state.aktivtMeldekort.meldekort.meldekortId)).pipe(
                 map(MeldekortdetaljerActions.hentMeldekortdetaljer.success),
                 catchError(error =>
-                    of(MeldekortdetaljerActions.hentMeldekortdetaljer.failure(error))
+                    of(MeldekortdetaljerActions.hentMeldekortdetaljer.failure(error), MeldekortActions.apiKallFeilet(error))
                 )
             )
         )

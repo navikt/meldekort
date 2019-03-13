@@ -4,10 +4,12 @@ import { HistoriskeMeldekortActions, HistoriskeMeldekortActionTypes } from '../a
 
 export interface HistoriskeMeldekortState {
     historiskeMeldekort: Meldekort[];
+    ingenTidligereMeldekort: boolean;
 }
 
 const initalState: HistoriskeMeldekortState = {
-    historiskeMeldekort: []
+    historiskeMeldekort: [],
+    ingenTidligereMeldekort: false
 };
 
 const historiskeMeldekortReducer = (state: HistoriskeMeldekortState = initalState,
@@ -17,6 +19,7 @@ const historiskeMeldekortReducer = (state: HistoriskeMeldekortState = initalStat
 
             return {
                 historiskeMeldekort: action.payload,
+                ingenTidligereMeldekort: initalState.ingenTidligereMeldekort
             };
 
         default:
