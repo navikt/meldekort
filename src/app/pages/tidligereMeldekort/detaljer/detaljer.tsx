@@ -17,6 +17,9 @@ import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
 
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import { Meldekort } from '../../../types/meldekort';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -33,16 +36,14 @@ type Props = MapDispatchToProps&MapStateToProps;
 class Detaljer extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-        this.props.hentMeldekortdetaljer();
-        this.sjekkAktivtMeldekortOgRedirect();
     }
 
-    setTabellrader = () => {
+    settTabellrader = (meldekort: Meldekort) => {
         return [{
-            mottattDato: formaterDato(this.props.aktivtMeldekort.meldekort.mottattDato),
-            kortStatus: mapKortStatusTilTekst(this.props.aktivtMeldekort.meldekort.kortStatus),
-            bruttoBelop: this.props.aktivtMeldekort.meldekort.bruttoBelop + ' kr',
-            kortType: mapKortTypeTilTekst(this.props.meldekortdetaljer.meldekortdetaljer.kortType)
+            mottattDato: formaterDato(meldekort.mottattDato),
+            kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
+            bruttoBelop: typeof meldekort.bruttoBelop === 'undefined' || meldekort.bruttoBelop === null ? '' : `${meldekort.bruttoBelop} kr`,
+            kortType: mapKortTypeTilTekst(meldekort.kortType)
         }];
     }
 
@@ -54,8 +55,13 @@ class Detaljer extends React.Component<Props> {
         }
     }
 
+    componentDidMount() {
+        this.props.hentMeldekortdetaljer();
+        this.sjekkAktivtMeldekortOgRedirect();
+    }
+
     render() {
-        const rows = this.setTabellrader();
+        const rows = this.settTabellrader(this.props.aktivtMeldekort.meldekort);
         const columns = [
             {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
@@ -72,6 +78,7 @@ class Detaljer extends React.Component<Props> {
         ];
         return(
             <div className="sideinnhold innhold-detaljer">
+                <img src={utklippstavle}/>
                 <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">
@@ -79,7 +86,27 @@ class Detaljer extends React.Component<Props> {
                     </div>
                 </section>
                 { this.props.meldekortdetaljer.meldekortdetaljer.id !== '' ?
-                    <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> : null }
+                    <Meldekortdetaljer meldekortdetaljer={this.props.meldekortdetaljer.meldekortdetaljer}/> :
+                    <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div> }
+
+                    <section className="seksjon flex-innhold sentrert">
+                    <NavKnapp
+                        type={knappTyper.standard}
+                        nestePath={'/tidligere-meldekort'}
+                        tekstid={'naviger.forrige'}
+                        className={'navigasjonsknapp'}
+                    />
+                    {this.props.aktivtMeldekort.meldekort.korrigerbart ?
+                        <NavKnapp
+                            type={knappTyper.hoved}
+                            nestePath={'/tidligere-meldekort'}
+                            tekstid={'korriger.meldekort'}
+                            className={'navigasjonsknapp'}
+
+                        /> : null
+                    }
+
+                </section>
             </div>
         );
     }

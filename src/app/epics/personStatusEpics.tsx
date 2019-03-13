@@ -5,6 +5,7 @@ import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { fetchPersonstatus } from '../api/api';
 import { combineEpics } from 'redux-observable';
+import { MeldekortActions } from '../actions/meldekort';
 
 const hentPersonStatus: AppEpic = action$ =>
     action$.pipe(
@@ -13,7 +14,7 @@ const hentPersonStatus: AppEpic = action$ =>
             from(fetchPersonstatus()).pipe(
                 map(PersonStatusActions.hentPersonStatus.success),
                 catchError( error =>
-                    of(PersonStatusActions.hentPersonStatus.failure(error))
+                    of(PersonStatusActions.hentPersonStatus.failure(error), MeldekortActions.apiKallFeilet(error))
                 )
             )
         )

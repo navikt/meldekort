@@ -6,7 +6,6 @@ import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
 // import logger from 'redux-logger';
 
-import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
 import personReducer, { PersonState } from '../reducers/personReducer';
@@ -22,6 +21,9 @@ import personEpics from '../epics/personEpics';
 import personStatusEpics from '../epics/personStatusEpics';
 import innsendingReducer from '../reducers/innsendingReducer';
 import { InnsendingState } from '../types/innsending';
+import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
+import uiReducer, { UIState } from '../reducers/uiReducer';
+import meldekortEpics from '../epics/meldekortEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -46,6 +48,7 @@ export interface RootState {
     aktivtMeldekort: AktivtMeldekortState;
     historiskeMeldekort: HistoriskeMeldekortState;
     innsending: InnsendingState;
+    ui: UIState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -59,7 +62,8 @@ const rootReducer = combineReducers({
     meldekortdetaljer: meldekortdetaljerReducer,
     aktivtMeldekort: aktivtMeldekortReducer,
     historiskeMeldekort: historiskeMeldekortReducer,
-    innsending: innsendingReducer
+    innsending: innsendingReducer,
+    ui: uiReducer,
 });
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
@@ -70,15 +74,15 @@ const persistConfig = {
     key: `meldekort:${packageConfig.redux_version}`,
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    blacklist: ['locales'],
+    blacklist: ['locales', 'ui'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history)); //, logger);
+const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history));
 
 const store = createStore(persistedReducer,
-    initialState as any,
-    composeEnhancer(appliedMiddleware)
+                          initialState as any,
+                          composeEnhancer(appliedMiddleware)
 );
 
 const persistor = persistStore(store);
@@ -89,6 +93,7 @@ epicMiddleware.run(
         personStatusEpics,
         historiskeMeldekortEpics,
         meldekortdetaljerEpics,
+        meldekortEpics
     )
 );
 
