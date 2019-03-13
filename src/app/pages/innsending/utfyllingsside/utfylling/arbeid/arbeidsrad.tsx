@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { hentUkedagerSomStringListe, konverterUkedag, matchUkedager } from '../../../../../utils/ukedager';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyllingConfig';
 import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { oppdaterUtfylteDager } from '../../../../../actions/innsending';
 import { connect } from 'react-redux';
-import { isNumeric } from 'rxjs/internal-compatibility';
 import { hentIntl } from '../../../../../utils/intlUtil';
 
 interface MapStateToProps {
