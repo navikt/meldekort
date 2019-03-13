@@ -1,17 +1,15 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { hentUkedagerSomStringListe, konverterUkedag, matchUkedager } from '../../../../../utils/ukedager';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
-import { AktivtMeldekortState } from '../../../../../reducers/aktivtMeldekortReducer';
 import { UtfyltDag } from '../utfyllingConfig';
 import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { oppdaterUtfylteDager } from '../../../../../actions/innsending';
 import { connect } from 'react-redux';
-import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { isNumeric } from 'rxjs/internal-compatibility';
+import { hentIntl } from '../../../../../utils/intlUtil';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -68,21 +66,25 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                 <Input
                     className="arbeidInput"
                     key={ukedag}
-                    label={<abbr title={ukedag}>{ukedag.charAt(0)}</abbr>}
+                    label={
+                        <div>
+                            <abbr title={dag}>{dag.charAt(0)}</abbr>
+                            <span className="vekk">{hentIntl().formatMessage({id: 'utfylling.arbeid'})}</span>
+                        </div>
+                    }
                     bredde="XS"
-                    type={'number'}
                     step={0.5}
-                    value={
-                        typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined' ?
+                    type={'number'}
+                    value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer === 'number' ?
                             utfylteDager[utfyltDagIndex].arbeidetTimer : ''
                     }
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         this.setTimer(event, ukedag);
                     }}
                     feil={
-                        this.props.feilIDager !== undefined ?
-                            (this.props.feilIDager[ukedag.trim().toLowerCase().replace('ø', 'o') + this.props.ukeNummer]
-                            !== undefined ? {feilmelding: ''} : undefined) : undefined
+                        typeof this.props.feilIDager !== 'undefined' ?
+                            (this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer)
+                            >= 0 ? {feilmelding: ''} : undefined) : undefined
                     }
                 />
             );

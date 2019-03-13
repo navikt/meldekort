@@ -8,8 +8,7 @@ import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { oppdaterUtfylteDager } from '../../../../../actions/innsending';
 import { connect } from 'react-redux';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { hentIntl } from '../../../../../utils/intlUtil';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -34,7 +33,6 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
     setVerdi = (ukedag: string) => {
         const oppdaterteDager = this.props.innsending.utfylteDager.map( dag => {
-            console.log(matchUkedager(dag.dag, ukedag.trim()));
             if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
                 switch (this.props.tekstId) {
                     case 'utfylling.tiltak':
@@ -87,14 +85,14 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 <Checkbox
                     className="flex-container"
                     key={ukedag}
-                    label={<abbr title={ukedag}>{ukedag.charAt(0)}</abbr>}
+                    label={
+                        <div>
+                            <abbr title={dag}>{dag.charAt(0)}</abbr>
+                            <span className="vekk">{hentIntl().formatMessage({id: this.props.tekstId})}</span>
+                        </div>
+                    }
                     checked={this.isChecked(ukedag)}
                     onChange={() => { this.setVerdi(ukedag); }}
-                    feil={
-                        this.props.feilIDager !== undefined ?
-                            (this.props.feilIDager[ukedag.trim().toLowerCase().replace('ø', 'o') + this.props.ukeNummer]
-                            !== undefined ? {feilmelding: ''} : undefined) : undefined
-                    }
                 />
             );
         });

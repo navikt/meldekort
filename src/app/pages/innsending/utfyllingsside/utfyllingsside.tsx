@@ -6,7 +6,7 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Arbeidsrad from './utfylling/arbeid/arbeidsrad';
 import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
 import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../../utils/dates';
-import { FeilIDager, InnsendingState } from '../../../types/innsending';
+import { InnsendingState } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
@@ -35,16 +35,24 @@ interface Feil {
     feilIKurs: Feilmelding;
     feilISyk: Feilmelding;
     feilIFerie: Feilmelding;
+    feilIArbeidetTimerHeleHalve: boolean;
+    feilIArbeidetTimer: boolean;
     feilIDager: string[];
 }
 
 type UtfyllingssideProps = MapStateToProps;
 
-// <> props inside
 class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
     constructor(props: UtfyllingssideProps) {
         super(props);
-        this.state = {feilIArbeid: { feil: false }, feilIKurs: { feil: false }, feilISyk: { feil: false }, feilIFerie: { feil: false }, feilIDager: []};
+        this.state = {
+            feilIArbeid: { feil: false },
+            feilIKurs: { feil: false },
+            feilISyk: { feil: false },
+            feilIFerie: { feil: false },
+            feilIArbeidetTimerHeleHalve: false,
+            feilIArbeidetTimer: false,
+            feilIDager: []};
     }
 
     hentSporsmal = (): SpmSvar[] => {
@@ -105,14 +113,21 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
 
     validerAntallTimerForDag = (dager: UtfyltDag[]): boolean => {
         let feil: string[] = [];
+        let feilIArbeidetTimer = false;
+        let feilIArbeidetTimerHeleHalve = false;
+
         dager.map( dag => {
             if (typeof dag.arbeidetTimer !== 'undefined') {
-                if (dag.arbeidetTimer > 24 || (dag.arbeidetTimer * 2) % 1 !== 0) {
+                if ((dag.arbeidetTimer * 2) % 1 !== 0) {
                     feil.push(dag.dag + dag.uke);
+                    feilIArbeidetTimerHeleHalve = true;
+                } else if (dag.arbeidetTimer > 24 || dag.arbeidetTimer < 0) {
+                    feil.push(dag.dag + dag.uke);
+                    feilIArbeidetTimer = true;
                 }
             }
         });
-        this.setState({feilIDager: feil});
+        this.setState({feilIDager: feil, feilIArbeidetTimerHeleHalve: feilIArbeidetTimerHeleHalve, feilIArbeidetTimer: feilIArbeidetTimer});
         return feil.length === 0;
     }
 
@@ -146,22 +161,29 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
     }
 
     hentFeilmeldinger = () => {
-        if (this.state.feilIArbeid.feil || this.state.feilIKurs.feil || this.state.feilISyk.feil || this.state.feilIFerie.feil) {
+        let { feilIArbeid, feilIKurs, feilISyk, feilIFerie, feilIArbeidetTimer, feilIArbeidetTimerHeleHalve} = this.state;
+        if (feilIArbeid.feil || feilIKurs.feil || feilISyk.feil || feilIFerie.feil || feilIArbeidetTimer || feilIArbeidetTimerHeleHalve) {
             let feiltekst = hentIntl().formatMessage({id: 'utfylling.ingenDagerUtfylt'});
             return (
-                <AlertStripe type={'advarsel'} solid={true}>
+                <AlertStripe className={'utfyllingFeil'} type={'advarsel'} solid={true}>
                     <ul>
-                        {this.state.feilIArbeid.feil ?
+                        {feilIArbeid.feil ?
                             <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.arbeid'}).trim()}"`}</li> : null
                         }
-                        {this.state.feilIKurs.feil ?
+                        {feilIKurs.feil ?
                             <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}"`}</li> : null
                         }
-                        {this.state.feilISyk.feil ?
+                        {feilISyk.feil ?
                             <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}"`}</li> : null
                         }
-                        {this.state.feilIFerie.feil ?
+                        {feilIFerie.feil ?
                             <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}"`}</li> : null
+                        }
+                        {feilIArbeidetTimerHeleHalve ?
+                            <li>{`${hentIntl().formatMessage({id: 'arbeidTimer.heleEllerHalveTallValidator'})}`}</li> : null
+                        }
+                        {feilIArbeidetTimer ?
+                            <li>{`${hentIntl().formatMessage({id: 'arbeidTimer.rangeValidator.range'})}`}</li> : null
                         }
                     </ul>
                 </AlertStripe>
@@ -174,8 +196,8 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
         let { meldeperiode } = this.props.aktivtMeldekort.meldekort;
         return(
             <main>
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 {this.hentFeilmeldinger()}
