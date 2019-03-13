@@ -9,6 +9,8 @@ import { Dispatch } from 'redux';
 import { oppdaterUtfylteDager } from '../../../../../actions/innsending';
 import { connect } from 'react-redux';
 import { hentIntl } from '../../../../../utils/intlUtil';
+import HjelpetekstBase from 'nav-frontend-hjelpetekst';
+import { Undertittel } from 'nav-frontend-typografi';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -20,6 +22,9 @@ interface MapDispatchToProps {
 
 interface UkeProps {
     ukeNummer: number;
+    aap: boolean;
+    tekstId: string;
+    forklaingId: string;
 }
 
 type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
@@ -68,7 +73,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     label={
                         <div>
                             <abbr title={dag}>{dag.charAt(0)}</abbr>
-                            <span className="vekk">{hentIntl().formatMessage({id: 'utfylling.arbeid'})}</span>
+                            <span className="vekk">{hentIntl().formatMessage({id: this.props.tekstId})}</span>
                         </div>
                     }
                     bredde="XS"
@@ -91,9 +96,17 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     innhold = () => {
+        let { tekstId, aap, forklaingId } = this.props;
         return (
             <div className="arbeidsrad">
-                <FormattedHTMLMessage id="utfylling.arbeid"/>
+                <div className="kategori_forklaring">
+                    <Undertittel>
+                        <FormattedHTMLMessage id={tekstId}/>
+                    </Undertittel>
+                    <HjelpetekstBase id={'arbeid'} type="venstre">
+                        <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
+                    </HjelpetekstBase>
+                </div>
                 <div className="inputrad">
                     {this.setFelter()}
                 </div>

@@ -14,6 +14,7 @@ import Konstanter from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { KortType } from '../../../types/meldekort';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -76,6 +77,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
     }
 
     hentUkePanel = (ukenummer: number, datoTittel: string) => {
+        let aap: boolean = this.props.aktivtMeldekort.meldekort.kortType === KortType.AAP;
         return (
             <div className="ukepanel">
                 <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
@@ -84,12 +86,17 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                         ukeNummer={ukenummer}
                         feil={this.state.feilIArbeid.feil}
                         feilIDager={this.state.feilIDager}
+                        aap={aap}
+                        tekstId={'utfylling.arbeid'}
+                        forklaingId={'forklaring.utfylling.arbeid'}
                     /> : null
                 }
                 {this.sjekkSporsmal('aktivitetArbeid') ?
                     <Aktivitetsrad
                         ukeNummer={ukenummer}
                         tekstId="utfylling.tiltak"
+                        forklaingId={'forklaring.utfylling.tiltak'}
+                        aap={aap}
                         feil={this.state.feilIKurs.feil}
                     /> : null
                 }
@@ -97,6 +104,8 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                     <Aktivitetsrad
                         ukeNummer={ukenummer}
                         tekstId="utfylling.syk"
+                        forklaingId={'forklaring.utfylling.syk'}
+                        aap={aap}
                         feil={this.state.feilISyk.feil}
                     /> : null
                 }
@@ -104,6 +113,8 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                     <Aktivitetsrad
                         ukeNummer={ukenummer}
                         tekstId="utfylling.ferieFravar"
+                        forklaingId={'forklaring.utfylling.ferieFravar'}
+                        aap={aap}
                         feil={this.state.feilIFerie.feil}
                     /> : null
                 }
