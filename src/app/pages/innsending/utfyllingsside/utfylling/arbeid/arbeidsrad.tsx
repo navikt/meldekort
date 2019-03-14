@@ -104,7 +104,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="venstre">
+                    <HjelpetekstBase id={'arbeid'} type="hoyre">
                         <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
                     </HjelpetekstBase>
                 </div>
