@@ -15,6 +15,7 @@ import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { KortType } from '../../../types/meldekort';
+import { scrollToTop } from '../../../utils/scroll';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -168,7 +169,11 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
         });
 
         this.setState({feilIArbeid: { feil: !arbeidet }, feilIKurs: { feil: !kurs }, feilISyk: { feil: !syk }, feilIFerie: { feil: !ferie }});
-        return arbeidet && kurs && syk && ferie && feilITimer;
+        let resultat = arbeidet && kurs && syk && ferie && feilITimer;
+        if (!resultat) {
+            scrollToTop();
+        }
+        return resultat;
     }
 
     hentFeilmeldinger = () => {
