@@ -14,6 +14,9 @@ import { oppdaterSpm } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { InnsendingState } from '../../../types/innsending';
 import { getStoredState } from 'redux-persist/es/getStoredState';
+import { hentIntl } from '../../../utils/intlUtil';
+import meldekortEpics from '../../../epics/meldekortEpics';
+import { scrollToTop } from '../../../utils/scroll';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -29,11 +32,26 @@ interface SpmSvar {
     svar: boolean;
 }
 
+interface Feil {
+    feilIArbeid: boolean;
+    feillIKurs: boolean;
+    feilISyk: boolean;
+    feilIFerie: boolean;
+    feilIRegistrert: boolean;
+}
+
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 
-class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
+class Sporsmalsside extends React.Component<SporsmalssideProps, Feil> {
     constructor(props: SporsmalssideProps) {
         super(props);
+        this.state = {
+            feilIArbeid: false,
+            feillIKurs: false,
+            feilISyk: false,
+            feilIFerie: false,
+            feilIRegistrert: false
+        };
     }
 
     valider = (): boolean => {
@@ -44,16 +62,31 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         let ferie = this.sjekkSporsmal('ferieFravar');
         let registrert = this.sjekkSporsmal('registrert');
 
-        return arbeidet && kurs && syk && ferie && registrert;
+        this.setState({
+            feilIArbeid: !arbeidet,
+            feillIKurs: !kurs,
+            feilISyk: !syk,
+            feilIFerie: !ferie,
+            feilIRegistrert: !registrert
+        });
+
+        let resultat = arbeidet && kurs && syk && ferie && registrert;
+        if (!resultat) {
+            scrollToTop();
+        }
+
+        return resultat;
     }
 
     hentSporsmal = (): SpmSvar[] => {
         let sporsmalListe: SpmSvar[] = [];
+
         this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
-            console.log(sporsmalobj.kategori + ' ' + typeof sporsmalobj.checked);
+            console.log(sporsmalobj.checked);
+            console.log(typeof sporsmalobj.checked);
             sporsmalListe.push({
                 kategori: sporsmalobj.kategori,
-                svar: sporsmalobj.checked !== 'undefined'
+                svar: typeof sporsmalobj.checked !== 'undefined'
             });
         });
         return sporsmalListe;
@@ -68,10 +101,38 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return false;
     }
 
+    hentFeilmeldinger = (aap: boolean) => {
+        let { feilIArbeid, feillIKurs, feilISyk, feilIFerie, feilIRegistrert } = this.state;
+        if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert) {
+            return (
+                <AlertStripe type={'advarsel'} solid={true}>
+                    <ul>
+                        {feilIArbeid ?
+                            <li>{`${hentIntl().formatMessage({id: 'arbeidet.required'})}`}</li> : null
+                        }
+                        {feillIKurs ?
+                            <li>{`${hentIntl().formatMessage({id: 'kurs.required' + (aap ? '-AAP' : '')})}`}</li> : null
+                        }
+                        {feilISyk ?
+                            <li>{`${hentIntl().formatMessage({id: 'syk.required' + (aap ? '-AAP' : '')})}`}</li> : null
+                        }
+                        {feilIFerie ?
+                            <li>{`${hentIntl().formatMessage({id: 'annetFravar.required' + (aap ? '-AAP' : '')})}`}</li> : null
+                        }
+                        {feilIRegistrert ?
+                            <li>{`${hentIntl().formatMessage({id: 'fortsetteRegistrert.required'})}`}</li> : null
+                        }
+                    </ul>
+                </AlertStripe>
+            );
+        }
+    }
+
     render() {
+        // TODO Denne må endres til meldegruppe === Meldegruppe.ATTF (ATTF = Attføring -> Arbeidsavklaringspenger)
         const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
 
-        return(
+        return (
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
@@ -86,6 +147,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                             <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
                         </div>
                     </AlertStripe>
+                </section>
+                <section className="seksjon">
+                    {this.hentFeilmeldinger(meldegruppeErAAP)}
                 </section>
 
                 <section className="seksjon">
@@ -117,7 +181,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 const mapStateToProps = (state: RootState): MapStateToProps => {
     const meldekort: AktivtMeldekortState = {meldekort: state.aktivtMeldekort.meldekort};
     return {
-       aktivtMeldekort: meldekort,
+        aktivtMeldekort: meldekort,
         innsending: state.innsending
     };
 };
