@@ -32,43 +32,41 @@ interface SpmSvar {
     svar: boolean;
 }
 
-interface Feil {
-    feilIArbeid: boolean;
-    feillIKurs: boolean;
-    feilISyk: boolean;
-    feilIFerie: boolean;
-    feilIRegistrert: boolean;
-}
-
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 
-class Sporsmalsside extends React.Component<SporsmalssideProps, Feil> {
+const kategorier = ['arbeid', 'aktivitetArbeid', 'forhindret', 'ferieFravar', 'registrert'];
+
+class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     constructor(props: SporsmalssideProps) {
         super(props);
-        this.state = {
-            feilIArbeid: false,
-            feillIKurs: false,
-            feilISyk: false,
-            feilIFerie: false,
-            feilIRegistrert: false
-        };
     }
 
     valider = (): boolean => {
 
-        let arbeidet = this.sjekkSporsmal('arbeid');
-        let kurs = this.sjekkSporsmal('aktivitetArbeid');
-        let syk = this.sjekkSporsmal('forhindret');
-        let ferie = this.sjekkSporsmal('ferieFravar');
-        let registrert = this.sjekkSporsmal('registrert');
+        let arbeidet = this.sjekkSporsmal(kategorier[0]);
+        let kurs = this.sjekkSporsmal(kategorier[1]);
+        let syk = this.sjekkSporsmal(kategorier[2]);
+        let ferie = this.sjekkSporsmal(kategorier[3]);
+        let registrert = this.sjekkSporsmal(kategorier[4]);
 
-        this.setState({
-            feilIArbeid: !arbeidet,
-            feillIKurs: !kurs,
-            feilISyk: !syk,
-            feilIFerie: !ferie,
-            feilIRegistrert: !registrert
-        });
+        const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
+            .map( sporsmalsobj => {
+                switch (sporsmalsobj.kategori) {
+                    case kategorier[0]:
+                        return { ...sporsmalsobj, feil: {erFeil: !arbeidet, feilmeldingId: sporsmalsobj.feil.feilmeldingId}};
+                    case kategorier[1]:
+                        return { ...sporsmalsobj, feil: {erFeil: !kurs, feilmeldingId: sporsmalsobj.feil.feilmeldingId}};
+                    case kategorier[2]:
+                        return { ...sporsmalsobj, feil: {erFeil: !syk, feilmeldingId: sporsmalsobj.feil.feilmeldingId}};
+                    case kategorier[3]:
+                        return { ...sporsmalsobj, feil: {erFeil: !ferie, feilmeldingId: sporsmalsobj.feil.feilmeldingId}};
+                    case kategorier[4]:
+                        return { ...sporsmalsobj, feil: {erFeil: !registrert, feilmeldingId: sporsmalsobj.feil.feilmeldingId}};
+                    default:
+                        return {...sporsmalsobj};
+                }
+            });
+        this.props.oppdaterSvar(nySporsmalsobjekterState);
 
         let resultat = arbeidet && kurs && syk && ferie && registrert;
         if (!resultat) {
@@ -82,8 +80,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, Feil> {
         let sporsmalListe: SpmSvar[] = [];
 
         this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
-            console.log(sporsmalobj.checked);
-            console.log(typeof sporsmalobj.checked);
             sporsmalListe.push({
                 kategori: sporsmalobj.kategori,
                 svar: typeof sporsmalobj.checked !== 'undefined'
@@ -102,7 +98,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, Feil> {
     }
 
     hentFeilmeldinger = (aap: boolean) => {
-        let { feilIArbeid, feillIKurs, feilISyk, feilIFerie, feilIRegistrert } = this.state;
+        let { sporsmalsobjekter } = this.props.innsending;
+        let feilIArbeid = sporsmalsobjekter[0].feil.erFeil;
+        let feillIKurs = sporsmalsobjekter[1].feil.erFeil;
+        let feilISyk = sporsmalsobjekter[2].feil.erFeil;
+        let feilIFerie = sporsmalsobjekter[3].feil.erFeil;
+        let feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
+
         if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert) {
             return (
                 <AlertStripe type={'advarsel'} solid={true}>
@@ -129,9 +131,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, Feil> {
     }
 
     render() {
-        // TODO Denne må endres til meldegruppe === Meldegruppe.ATTF (ATTF = Attføring -> Arbeidsavklaringspenger)
-        const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe !== Meldegruppe.DAGP;
-
+        const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
         return (
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">

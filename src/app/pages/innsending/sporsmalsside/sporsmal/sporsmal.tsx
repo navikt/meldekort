@@ -12,7 +12,7 @@ interface SporsmalProps {
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
 }
 
-const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
+const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
 
     return (
         <section className="seksjon sporsmal">
@@ -39,6 +39,10 @@ const Sporsmal: React.StatelessComponent<SporsmalProps> = (props) => {
                 ]}
                 checked={props.checked}
                 onChange={props.sporsmalOnChange}
+                feil={props.sporsmalsobjekt.feil.erFeil ?
+                    {feilmelding: hentIntl().formatMessage({id: props.sporsmalsobjekt.feil.feilmeldingId})}
+                    : undefined
+                }
             />
 
         </section>

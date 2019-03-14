@@ -23,4 +23,3 @@ const innsendingReducer = (state: InnsendingState = initialState,
 };
 
 export default innsendingReducer;
-
