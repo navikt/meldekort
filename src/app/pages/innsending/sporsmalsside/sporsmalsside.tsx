@@ -24,11 +24,48 @@ interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
 }
 
+interface SpmSvar {
+    kategori: string;
+    svar: boolean;
+}
+
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 
 class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     constructor(props: SporsmalssideProps) {
         super(props);
+    }
+
+    valider = (): boolean => {
+
+        let arbeidet = this.sjekkSporsmal('arbeid');
+        let kurs = this.sjekkSporsmal('aktivitetArbeid');
+        let syk = this.sjekkSporsmal('forhindret');
+        let ferie = this.sjekkSporsmal('ferieFravar');
+        let registrert = this.sjekkSporsmal('registrert');
+
+        return arbeidet && kurs && syk && ferie && registrert;
+    }
+
+    hentSporsmal = (): SpmSvar[] => {
+        let sporsmalListe: SpmSvar[] = [];
+        this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+            console.log(sporsmalobj.kategori + ' ' + typeof sporsmalobj.checked);
+            sporsmalListe.push({
+                kategori: sporsmalobj.kategori,
+                svar: sporsmalobj.checked !== 'undefined'
+            });
+        });
+        return sporsmalListe;
+    }
+
+    sjekkSporsmal = (kategori: string): boolean => {
+        let sporsmalListe = this.hentSporsmal();
+        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
+        if (sporsmal.length !== 0) {
+            return sporsmal[0].svar;
+        }
+        return false;
     }
 
     render() {
@@ -66,6 +103,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                         aktivtMeldekortObjekt={this.props.aktivtMeldekort.meldekort}
+                        validering={this.valider}
                     />
                 </section>
 
@@ -76,7 +114,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 }
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
-const mapStateToProps = (state : RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     const meldekort: AktivtMeldekortState = {meldekort: state.aktivtMeldekort.meldekort};
     return {
        aktivtMeldekort: meldekort,
@@ -84,11 +122,11 @@ const mapStateToProps = (state : RootState): MapStateToProps => {
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
+const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
             dispatch(oppdaterSpm(sporsmalsobjekter))
     };
-}
+};
 
 export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);

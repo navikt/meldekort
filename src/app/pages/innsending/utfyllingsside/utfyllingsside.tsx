@@ -144,7 +144,6 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
     }
 
     valider = (): boolean => {
-        console.log('Validerer!');
 
         let arbeidet = !this.sjekkSporsmal('arbeid');
         let kurs = !this.sjekkSporsmal('aktivitetArbeid');
