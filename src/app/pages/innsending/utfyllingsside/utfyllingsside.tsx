@@ -14,7 +14,7 @@ import Konstanter from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { KortType } from '../../../types/meldekort';
+import { KortType, Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
 
 interface MapStateToProps {
@@ -78,7 +78,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
     }
 
     hentUkePanel = (ukenummer: number, datoTittel: string) => {
-        let aap: boolean = this.props.aktivtMeldekort.meldekort.kortType === KortType.AAP;
+        let aap: boolean = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
         return (
             <div className="ukepanel">
                 <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
