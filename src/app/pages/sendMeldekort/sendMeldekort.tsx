@@ -145,7 +145,6 @@ class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
 
     forTidligASende = (meldekortListe: Meldekort[]): number => {
         let meldekortId = 0;
-        console.log(meldekortListe);
         if (meldekortListe === undefined) {
             return meldekortId;
         }
