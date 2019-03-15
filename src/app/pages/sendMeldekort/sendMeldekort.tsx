@@ -71,12 +71,19 @@ class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
     hentMeldekortRaderFraPerson = () => {
         let radliste: MeldekortRad[] = [];
 
-        this.state.meldekortListe.map((meldekort) => {
-            radliste.push({
-                periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
-                dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+        let { meldekort } = this.props.person.person;
+        if (meldekort != null) {
+            meldekort.map((meldekortObj) => {
+                if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
+                    if (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)) {
+                        radliste.push({
+                           periode: hentUkePeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
+                           dato: hentDatoPeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
+                        });
+                    }
+                }
             });
-        });
+        }
         return radliste;
     }
 
