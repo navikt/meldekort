@@ -36,6 +36,8 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     }
 
     setVerdi = (ukedag: string) => {
+        console.log(ukedag + ' ' + this.props.ukeNummer);
+        console.log(this.props.tekstId);
         const oppdaterteDager = this.props.innsending.utfylteDager.map( dag => {
             if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
                 switch (this.props.tekstId) {
@@ -62,13 +64,14 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
             }
             return {...dag};
         });
+        console.log(oppdaterteDager);
         this.props.oppdaterDager(oppdaterteDager);
     }
 
     isChecked = (ukedag: string): boolean => {
         let valgtDag = this.props.innsending.utfylteDager.filter(dag => dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim()));
         let checked: boolean = false;
-        console.log(ukedag + ' uke: ' + this.props.ukeNummer + ' tekstId: ' + this.props.tekstId)
+        console.log(ukedag + ' uke: ' + this.props.ukeNummer + ' tekstId: ' + this.props.tekstId);
         console.log(valgtDag);
         switch (this.props.tekstId) {
             case 'utfylling.tiltak':
