@@ -14,7 +14,7 @@ import Konstanter from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { KortType, Meldegruppe } from '../../../types/meldekort';
+import { Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
 
 interface MapStateToProps {
