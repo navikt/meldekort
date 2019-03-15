@@ -84,6 +84,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 checked = valgtDag[0].annetFravaer;
                 break;
         }
+        console.log(checked);
         return checked;
     }
 
