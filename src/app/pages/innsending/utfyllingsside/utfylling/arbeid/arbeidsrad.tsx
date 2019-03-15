@@ -35,7 +35,6 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: string) => {
-        console.log(event.target.value);
         const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
            if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
                return {
