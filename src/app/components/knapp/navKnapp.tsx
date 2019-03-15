@@ -56,9 +56,9 @@ class NavKnapp extends React.Component<Props> {
                 newPath = this.props.nestePath;
             }
 
-            const aktivtMeldekort = this.props.aktivtMeldekort;
-            if (this.props.aktivtMeldekortObjekt && currentPath.slice(0, 15) === '/send-meldekort') {
-                this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+            const aktivtMeldekort = this.props.aktivtMeldekortObjekt;
+            if (aktivtMeldekort && currentPath.slice(0, 15) === '/send-meldekort') {
+                this.props.leggTilAktivtMeldekort(aktivtMeldekort);
             }
             history.push(newPath);
         }
