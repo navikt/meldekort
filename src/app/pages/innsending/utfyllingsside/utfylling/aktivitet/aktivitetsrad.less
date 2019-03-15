@@ -1,14 +1,17 @@
 .aktivitetsrad {
   display: flex;
-  span {
-    font-size: 1.25rem;
-    width: 20rem;
-    padding-top: 1.4rem;
+  align-items: center;
+  justify-content: center;
+  //flex-wrap: wrap;
+
+  .kategori_forklaring {
+    display: flex;
+    width: 21rem;
   }
 
   .inputrad {
-    display: flex;
-    margin-left: 5rem;
+    display: inline-flex;
+    margin-left: 7em;
   }
 }
 
@@ -48,6 +51,19 @@
   }
 }
 
+.feilIRad {
+  background-color: #e79999;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+@media @tablet {
+  .aktivitetsrad {
+    display: block;
+  }
+}
+
 @media @phone {
   .aktivitetsrad {
     display: block;
@@ -74,4 +90,17 @@
     margin-left: 0.5rem;
   }
 
+  .feilIRad {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
   }
+}
+
+@media @tablet {
+  .feilIRad {
+    margin-right: 0;
+    margin-left: -0.5rem;
+    padding-left: 0.5rem;
+  }
+}

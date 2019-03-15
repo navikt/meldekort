@@ -7,7 +7,7 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
-import { KortStatus, Meldekort } from '../../types/meldekort';
+import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
 
 interface MapStateToProps {
@@ -25,6 +25,7 @@ interface NavKnappProps {
     tekstid: string;
     className?: string;
     aktivtMeldekortObjekt?: Meldekort;
+    validering?: () => boolean;
 }
 
 export enum knappTyper {
@@ -40,22 +41,27 @@ class NavKnapp extends React.Component<Props> {
     }
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
-
-        const currentPath = this.props.router.location.pathname;
-        console.log('currentPath: ', currentPath);
-        const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
-        let newPath;
-        if (erPaInnsending) {
-            newPath = this.props.nestePath;
-        } else {
-            newPath = this.props.nestePath;
+        let validert: boolean = true;
+        if (typeof this.props.validering !== 'undefined') {
+            validert = this.props.validering();
         }
+        if (validert) {
+            const currentPath = this.props.router.location.pathname;
+            console.log('currentPath: ', currentPath);
+            const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
+            let newPath;
+            if (erPaInnsending) {
+                newPath = this.props.nestePath;
+            } else {
+                newPath = this.props.nestePath;
+            }
 
-        const aktivtMeldekort = this.props.aktivtMeldekort;
-        if (this.props.aktivtMeldekortObjekt  && currentPath.slice(0, 15) === '/send-meldekort') {
-            this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+            const aktivtMeldekort = this.props.aktivtMeldekortObjekt;
+            if (aktivtMeldekort && currentPath.slice(0, 15) === '/send-meldekort') {
+                this.props.leggTilAktivtMeldekort(aktivtMeldekort);
+            }
+            history.push(newPath);
         }
-        history.push(newPath);
     }
 
     render() {
@@ -69,7 +75,7 @@ class NavKnapp extends React.Component<Props> {
             </KnappBase>
         );
     }
-};
+}
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     let meldekort: AktivtMeldekortState = {

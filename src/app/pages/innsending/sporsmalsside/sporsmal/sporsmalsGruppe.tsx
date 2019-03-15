@@ -8,7 +8,6 @@ import { InnsendingState } from '../../../../types/innsending';
 import { oppdaterSpm } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm, hentSporsmalConfig} from './sporsmalConfig';
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -33,17 +32,17 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>, value?: string) => {
         const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
             .map( sporsmalsobj => {
-                const val = (value !== undefined) ? value : "";
+                const val = (value !== undefined) ? value : '';
                 if (sporsmalsobj.kategori === val.split('.')[0] ) {
                     return {
                         ...sporsmalsobj,
                         checked: value
                     };
                 }
-                return {...sporsmalsobj}
+                return {...sporsmalsobj};
             });
         this.props.oppdaterSvar(nySporsmalsobjekterState);
-    };
+    }
 
     finnesIntlId = (id: string) => {
         if (hentIntl().formatMessage({id: id}) !== id) {
@@ -51,14 +50,17 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         } else {
             return id.slice(0, -4);
         }
-    };
+    }
 
     lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean) => {
         const tekstendelse = (erAAP) ? '-AAP' : '';
         for (let key in sporsmalsobj) {
-            if (sporsmalsobj[key] !== sporsmalsobj.kategori) {
+            if (sporsmalsobj[key] !== sporsmalsobj.kategori && sporsmalsobj[key] !== sporsmalsobj.feil && sporsmalsobj[key] !== sporsmalsobj.checked) {
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
+            } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
+                sporsmalsobj.feil.feilmeldingId = this.finnesIntlId(sporsmalsobj.feil.feilmeldingId);
             }
+
         }
         return(
             <Sporsmal
@@ -68,7 +70,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 sporsmalOnChange={this.sporsmalOnChange}
             />
         );
-    };
+    }
 
     render() {
         const sporsmalsgruppe = this.props.innsending.sporsmalsobjekter
@@ -83,7 +85,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 }
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
-const mapStateToProps = (state : RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         innsending: state.innsending
     };

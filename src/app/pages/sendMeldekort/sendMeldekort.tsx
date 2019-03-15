@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Ingress, Innholdstittel, Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
@@ -8,7 +8,7 @@ import { Dispatch } from 'redux';
 import { PersonActions } from '../../actions/person';
 import Tabell from '../../components/tabell/tabell';
 import { PersonState } from '../../reducers/personReducer';
-import { RootState } from '../../store/configureStore';
+import { RootState, history } from '../../store/configureStore';
 import { KortStatus, Meldekort } from '../../types/meldekort';
 import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
@@ -16,6 +16,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { BaksystemFeilmelding } from '../../types/ui';
 import { selectFeilmelding } from '../../selectors/ui';
+import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: PersonState;
@@ -23,6 +24,7 @@ interface MapStateToProps {
 }
 interface MapDispatchToProps {
     hentPerson: () => void;
+    leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
 interface MeldekortRad {
@@ -30,32 +32,51 @@ interface MeldekortRad {
     dato: string;
 }
 
+interface MeldekortTilInnsending {
+    meldekortListe: Meldekort[];
+}
+
 type Props = MapDispatchToProps & MapStateToProps;
 
-class SendMeldekort extends React.Component<Props> {
+class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
     constructor(props: any) {
         super(props);
         this.props.hentPerson();
+        this.state = {meldekortListe: []};
+    }
+
+    componentDidMount(): void {
+        this.setMeldekortTilInnsedingIState();
+    }
+
+    setMeldekortTilInnsedingIState = () => {
+        let meldekortTilInnsending: Meldekort[] = [];
+        let { meldekort } = this.props.person.person;
+        if (meldekort != null) {
+            meldekort.map((meldekortObj) => {
+                if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
+                    if (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)) {
+                        meldekortTilInnsending.push(meldekortObj);
+                    }
+                }
+            });
+        }
+        this.setState({meldekortListe: meldekortTilInnsending});
+        if (meldekortTilInnsending.length === 1) {
+            this.props.leggTilAktivtMeldekort(meldekortTilInnsending[0]);
+            history.push('/innsending');
+        }
     }
 
     hentMeldekortRaderFraPerson = () => {
         let radliste: MeldekortRad[] = [];
 
-        if (this.props.person.person.meldekort != null) {
-            this.props.person.person.meldekort.map((meldekort) => {
-                if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
-                    if (kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra)) {
-                        radliste.push({
-                            periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
-                            dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
-                        });
-                    }
-                }
+        this.state.meldekortListe.map((meldekort) => {
+            radliste.push({
+                periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+                dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
             });
-        }
-        if (radliste.length === 1) {
-            // redirect til innsending
-        }
+        });
         return radliste;
     }
 
@@ -124,7 +145,6 @@ class SendMeldekort extends React.Component<Props> {
 
     forTidligASende = (meldekortListe: Meldekort[]): number => {
         let meldekortId = 0;
-        console.log(meldekortListe);
         if (meldekortListe === undefined) {
             return meldekortId;
         }
@@ -136,6 +156,10 @@ class SendMeldekort extends React.Component<Props> {
             }
         });
         return meldekortId;
+    }
+
+    hentNesteMeldekortTilInnsending = () => {
+        return this.state.meldekortListe[0];
     }
 
     hentTabellOgTilhorendeElementer = (rows: MeldekortRad[], columns: any) => {
@@ -164,7 +188,7 @@ class SendMeldekort extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={'/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
-                        aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
+                        aktivtMeldekortObjekt={this.hentNesteMeldekortTilInnsending()}
                     />
                 </section>
             </div>
@@ -205,6 +229,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
+        leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
     };
 };
 

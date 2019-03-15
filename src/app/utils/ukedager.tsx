@@ -26,3 +26,19 @@ export const hentUkedagerSomStringListe = (): string[] => {
         intl.formatMessage({id: 'ukedag.sondag'}),
     ];
 };
+
+export const matchUkedager = (norskUkedag: string, testUkedag: string): boolean => {
+    return norskUkedag.trim() === konverterUkedag(testUkedag.trim());
+};
+
+export const konverterUkedag = (ukedag: string): string => {
+    let index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].indexOf(ukedag.trim());
+    if ( index >= 0) {
+        return hentNorskeUkedager()[index];
+    }
+    return ukedag.trim();
+};
+
+export const hentNorskeUkedager = (): string[] => {
+    return ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
+};
