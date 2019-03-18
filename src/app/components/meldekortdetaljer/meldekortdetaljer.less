@@ -1,25 +1,53 @@
 
 .meldekortdetaljer {
-   .sporsmal {
-     padding-bottom: 2rem;
-     margin-bottom: 2rem;
-     border-bottom: 1px solid #d1d1d1;
-     .seksjon {
-       .typo-element {
-         font-size: 1.1rem;
-         margin-bottom: 1rem;
-       }
-       img {
-         height: 1.3rem;
-         margin-left: 1rem;
-       }
-     }
-   }
-   .ukevisning {
+  .sporsmal {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #d1d1d1;
+
+    .seksjon {
+      .typo-element {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      img {
+        height: 24px;
+      }
+
+      span span {
+        height: 22px;
+        line-height: 1.22;
+      }
+    }
+    .flex-sporsmal-hjelpetekst-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .ukevisning {
+
+    .meldekortdetaljer-utfyllt-hjelpetekster {
+      ul {
+        list-style-type: initial;
+      }
+      strong {
+        font-size: 20px;
+      }
+      .overskrift-hjelpetekst {
+        display: block;
+        margin-top: 1rem;
+      }
+    }
+
      .uke {
        padding-bottom: 2rem;
        margin-bottom: 2rem;
        border-bottom: 1px solid #d1d1d1;
+
+       .utfylling {
+         margin-left: 0.5rem;
+       }
      }
      .uketittel {
        margin-top: 2rem;

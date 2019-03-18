@@ -15,7 +15,7 @@ const initialState: AktivtMeldekortState = {
             kortKanSendesFra: new Date(),
             periodeKode: ''
         },
-        meldegruppe: Meldegruppe.NULL,
+        meldegruppe: Meldegruppe.ATTF,
         kortStatus: KortStatus.VENTE,
         bruttoBelop: 0,
         mottattDato: new Date(),

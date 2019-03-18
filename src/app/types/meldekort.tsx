@@ -96,7 +96,7 @@ export interface MeldekortDag {
     syk: boolean;
     annetFravaer: boolean;
     kurs: boolean;
-    meldegruppe: string;
+    meldegruppe?: string;
 }
 
 /* ENUMS */
@@ -152,4 +152,5 @@ export interface SporsmalOgSvar {
     sporsmalId: string;
     svar: boolean;
     formatertDato?: string;
+    forklaring: string;
 }
