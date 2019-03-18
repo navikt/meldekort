@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
-import { Tab, hentTabConfig } from './tabConfig';
+import { Tab } from './tabConfig';
 
 interface MapStateToProps {
     router: Router;

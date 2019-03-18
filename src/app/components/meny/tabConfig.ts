@@ -23,7 +23,7 @@ export const hentTabConfig = () => {
             {
                 tekstid: 'sekundarmeny.etterregistrer',
                 tittel: 'etterregistrering',
-                urlparam: '/etterregistrering',
+                urlparam: '/etterregistrer-meldekort',
                 disabled: true,
             },
             {

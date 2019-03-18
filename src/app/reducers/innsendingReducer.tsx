@@ -6,8 +6,6 @@ import { getType } from 'typesafe-actions';
 
 const initialState: InnsendingState = {
     meldekortId: 5,
-    kortStatus: KortStatus.OPPRE,
-    korrigertMeldekortId: 5,
     innsendingstype: null,
     sporsmalsobjekter: hentSporsmalConfig(),
 };
@@ -31,7 +29,7 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case getType(InnsendingActions.hentKorrigertId.success):
             return {
                 ...state,
-                korrigertMeldekortId: action.payload,
+                meldekortId: action.payload,
                 ...action.payload
             };
 

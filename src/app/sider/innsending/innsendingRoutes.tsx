@@ -12,13 +12,15 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
 import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
-import { Meldekortdetaljer } from '../../types/meldekort';
+import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
 import MeldekortRoutes from '../meldekortRoutes';
 import { Router } from '../../types/router';
+import meldekortdetaljer from '../../components/meldekortdetaljer/meldekortdetaljer';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     meldekortDetaljer: Meldekortdetaljer;
+    aktivtMeldekort: Meldekort;
     router: Router;
 }
 
@@ -35,27 +37,21 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
         super(props);
     }
 
-    settInnsendingsobjekt = () => {
-        const { innsendingstype } = this.props.innsending;
-        if (innsendingstype === Innsendingstyper.innsending) {
-
-        } else if (innsendingstype === Innsendingstyper.korrigering) {
-            const { meldekortId } = this.props.meldekortDetaljer;
-
-            this.props.settMeldekortId(this.props.innsending.korrigertMeldekortId);
+    settMeldekortIdBasertPaInnsendingstype = () => {
+        if (this.props.innsending.innsendingstype === Innsendingstyper.korrigering) {
+            this.props.hentKorrigertId();
         } else {
-            console.log('Ikke innsending eller korrigering');
+            this.props.settMeldekortId(this.props.aktivtMeldekort.meldekortId);
         }
     }
 
     componentDidMount() {
-        this.props.hentKorrigertId();
-        this.settInnsendingsobjekt();
+        this.settMeldekortIdBasertPaInnsendingstype()
     }
 
     render() {
         const { match, router } = this.props;
-        console.log('route: ', router.location.pathname )
+        console.log('route: ', router.location.pathname );
 
         return (
             <div className="sideinnhold">
@@ -76,12 +72,13 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
 const mapStateToProps = (state: RootState) : MapStateToProps => {
     return {
         innsending: state.innsending,
+        aktivtMeldekort: state.aktivtMeldekort.meldekort,
         meldekortDetaljer: state.meldekortdetaljer.meldekortdetaljer,
         router: state.router
     }
 }
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
+const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
             dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),

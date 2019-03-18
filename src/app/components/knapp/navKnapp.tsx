@@ -15,12 +15,13 @@ import { InnsendingActions } from '../../actions/innsending';
 interface MapStateToProps {
     router: Router;
     aktivtMeldekort: AktivtMeldekortState;
-    innsendingstype: Innsendingstyper | null;
+    innsendingstypeFraStore: Innsendingstyper | null;
 }
 
 interface MapDispatchToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
+    settInnsendingMeldekortId: (meldekortId: number) => void;
     hentKorrigertId: () => void;
 }
 
@@ -29,7 +30,8 @@ interface NavKnappProps {
     nestePath: string;
     tekstid: string;
     className?: string;
-    aktivtMeldekortObjekt?: Meldekort;
+    nesteAktivtMeldekort?: Meldekort;
+    nesteInnsendingstype?: Innsendingstyper;
 }
 
 export enum knappTyper {
@@ -52,11 +54,13 @@ class NavKnapp extends React.Component<Props> {
     }
 
     returnerInnsendingstypeBasertPaString = (innsendingstypeFraPath: string) => {
+        // legg tile tterregistrering
         return (innsendingstypeFraPath === Innsendingstyper.innsending) ? Innsendingstyper.innsending : Innsendingstyper.korrigering;
     }
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
-        const { aktivtMeldekort, aktivtMeldekortObjekt, innsendingstype, nestePath, router } = this.props;
+        const { aktivtMeldekort, nesteAktivtMeldekort, innsendingstypeFraStore,
+            nesteInnsendingstype, nestePath, router } = this.props;
 
         const path = router.location.pathname;
         const params = path.split('/');
@@ -67,13 +71,13 @@ class NavKnapp extends React.Component<Props> {
         console.log('nestepath', nestePath, 'nesteparams', nestePathParams);
 
         // ---> Hverken på innsending (ennå) eller trykket på UTF knapp.
-        if (innsendingstype === null) {
-            console.log('Hvis ikke på innsending (insstype=null):', innsendingstype);
+        if (innsendingstypeFraStore === null) {
+            console.log('Hvis ikke på innsending (insstype=null):', innsendingstypeFraStore);
 
-            if (this.harNestePathInnsending(nestePathParams)) {
+            if (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined ) {
                 // --> Hvis man skal til innsending (nestePath har innsending) (nestePath = "/korriger" eller "/innsending")
                 console.log('Hvis man skal til innsending..newPath = nestePath');
-                this.props.settInnsendingstype(this.returnerInnsendingstypeBasertPaString(sisteParamINestePathParams));
+                this.props.settInnsendingstype(nesteInnsendingstype);
                 newPath = nestePath;
             } else {
                 console.log('skal IKKE til dinnsending.. nestePath blir newPath');
@@ -82,19 +86,25 @@ class NavKnapp extends React.Component<Props> {
             }
         } else {
             // ---> På innsending/ ...
-            console.log('Er På innsending: innstype er ikke null:', innsendingstype);
+            console.log('Er På innsending: innstype er ikke null:', innsendingstypeFraStore);
+
+            const erPaKvittering = params[params.length-1] === 'kvittering';
 
             // ---> på "kvittering"
-            if (params[params.length-1] === 'kvittering') {
+            if (erPaKvittering) {
                 // --> Hvis man skal tilbake til meldekortOversikt/DittNav (send-meldekort/tidligere)
                     // Overskriv newPath med NestePath (send-meldekort)
+
+                typeof nesteAktivtMeldekort !== undefined
+                // MeldekortOversikt / DittNAV
+                history.push(nestePath);
 
                 // --> Hvis man har innsendingstype.innsending & har flere meldekort
                 newPath = path + '/' + sisteParamINestePathParams;
 
             } else {
                 // --> Hvis man ikke er på "Kvittering",
-                //  Må fjerne sporsmla/ replace med utfylling. sjekk kodeunder
+                //  Må fjerne sporsmal/ replace med utfylling. Sjekk kodeunder
                 const editedParams = params;
                 editedParams.pop();
                 editedParams.push(sisteParamINestePathParams);
@@ -104,7 +114,8 @@ class NavKnapp extends React.Component<Props> {
         }
         console.log('final newPath:', newPath);
         history.push(newPath);
-        aktivtMeldekortObjekt  && params[1] === 'send-meldekort' && this.props.leggTilAktivtMeldekort(aktivtMeldekort.meldekort);
+        (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
+        && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
     }
 
     render() {
@@ -127,7 +138,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         aktivtMeldekort: meldekort,
         router: selectRouter(state),
-        innsendingstype: state.innsending.innsendingstype,
+        innsendingstypeFraStore: state.innsending.innsendingstype,
     };
 };
 
@@ -137,6 +148,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
+        settInnsendingMeldekortId: (meldekortId: number) => {
+            dispatch(InnsendingActions.leggTilMeldekortId(meldekortId))
+        },
         hentKorrigertId: () => {
             dispatch(InnsendingActions.hentKorrigertId.request())
         }

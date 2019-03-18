@@ -9,13 +9,13 @@ import { PersonActions } from '../../actions/person';
 import Tabell from '../../components/tabell/tabell';
 import { PersonState } from '../../reducers/personReducer';
 import { RootState } from '../../store/configureStore';
-import { KortStatus, Meldekort } from '../../types/meldekort';
+import { KortStatus } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
-import { Innsendingstyper } from '../../types/innsending';
 import { InnsendingActions } from '../../actions/innsending';
 import { selectRouter } from '../../selectors/router';
 import { Router } from '../../types/router';
+import { Innsendingstyper } from '../../types/innsending';
 
 interface MapStateToProps {
    person: PersonState;
@@ -94,7 +94,8 @@ class SendMeldekort extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
-                        aktivtMeldekortObjekt={this.props.person.person.meldekort[0]}
+                        nesteAktivtMeldekort={this.props.person.person.meldekort[0]}
+                        nesteInnsendingstype={Innsendingstyper.innsending}
                     />
                 </section>
             </main>

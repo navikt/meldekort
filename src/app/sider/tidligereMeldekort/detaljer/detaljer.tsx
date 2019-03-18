@@ -16,6 +16,7 @@ import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReduc
 import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import { Innsendingstyper } from '../../../types/innsending';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -84,6 +85,8 @@ class Detaljer extends React.Component<Props> {
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/korriger'}
                         tekstid={'korriger.meldekort'}
+                        nesteAktivtMeldekort={this.props.aktivtMeldekort.meldekort}
+                        nesteInnsendingstype={Innsendingstyper.korrigering}
                     />
                 </section>
             </div>
