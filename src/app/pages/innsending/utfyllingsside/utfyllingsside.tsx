@@ -79,14 +79,15 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
 
     hentUkePanel = (ukenummer: number, datoTittel: string) => {
         let aap: boolean = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
+        let {feilIArbeid, feilIFerie, feilISyk, feilIKurs, feilIDager} = this.state;
         return (
             <div className="ukepanel">
                 <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
                 {this.sjekkSporsmal('arbeid') ?
                     <Arbeidsrad
                         ukeNummer={ukenummer}
-                        feil={this.state.feilIArbeid.feil}
-                        feilIDager={this.state.feilIDager}
+                        feil={feilIArbeid.feil}
+                        feilIDager={feilIDager}
                         aap={aap}
                         tekstId={'utfylling.arbeid'}
                         forklaingId={'forklaring.utfylling.arbeid'}
@@ -98,7 +99,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                         tekstId="utfylling.tiltak"
                         forklaingId={'forklaring.utfylling.tiltak'}
                         aap={aap}
-                        feil={this.state.feilIKurs.feil}
+                        feil={feilIKurs.feil}
                     /> : null
                 }
                 {this.sjekkSporsmal('forhindret') ?
@@ -107,7 +108,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                         tekstId="utfylling.syk"
                         forklaingId={'forklaring.utfylling.syk'}
                         aap={aap}
-                        feil={this.state.feilISyk.feil}
+                        feil={feilISyk.feil}
                     /> : null
                 }
                 {this.sjekkSporsmal('ferieFravar') ?
@@ -116,7 +117,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                         tekstId="utfylling.ferieFravar"
                         forklaingId={'forklaring.utfylling.ferieFravar'}
                         aap={aap}
-                        feil={this.state.feilIFerie.feil}
+                        feil={feilIFerie.feil}
                     /> : null
                 }
             </div>
@@ -167,7 +168,13 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
             }
         });
 
-        this.setState({feilIArbeid: { feil: !arbeidet }, feilIKurs: { feil: !kurs }, feilISyk: { feil: !syk }, feilIFerie: { feil: !ferie }});
+        this.setState({
+             feilIArbeid: { feil: !arbeidet },
+             feilIKurs: { feil: !kurs },
+             feilISyk: { feil: !syk },
+             feilIFerie: { feil: !ferie }
+        });
+
         let resultat = arbeidet && kurs && syk && ferie && feilITimer;
         if (!resultat) {
             scrollToTop();
