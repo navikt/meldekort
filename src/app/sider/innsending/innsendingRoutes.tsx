@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import Bekreftelse from './bekreftelse';
-import Kvittering from './kvittering';
+import Kvittering from './kvitteringsside/kvittering';
 import Utfylling from './utfyllingsside/utfyllingsside';
 import Sporsmalsside from './sporsmalsside/sporsmalsside';
 import StegBanner from '../../components/stegBanner/stegBanner';
@@ -28,6 +28,7 @@ interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
     settMeldekortId: (meldekortId: number) => void;
     hentKorrigertId: () => void;
+    settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
 type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
@@ -84,10 +85,11 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
         settMeldekortId: (meldekortId: number) =>
             dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
-        hentKorrigertId: () => {
-            dispatch(InnsendingActions.hentKorrigertId.request())
-        }
-    };
+        hentKorrigertId: () =>
+            dispatch(InnsendingActions.hentKorrigertId.request()),
+        settInnsendingstype: (innsendingstype: Innsendingstyper) =>
+                dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
+    }
 }
 
 export default connect(mapStateToProps, mapDispatcherToProps)(InnsendingRoutes);

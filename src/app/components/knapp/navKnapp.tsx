@@ -70,6 +70,9 @@ class NavKnapp extends React.Component<Props> {
         console.log('path', path, 'params', params);
         console.log('nestepath', nestePath, 'nesteparams', nestePathParams);
 
+        (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
+        && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
+
         // ---> Hverken på innsending (ennå) eller trykket på UTF knapp.
         if (innsendingstypeFraStore === null) {
             console.log('Hvis ikke på innsending (insstype=null):', innsendingstypeFraStore);
@@ -94,14 +97,8 @@ class NavKnapp extends React.Component<Props> {
             if (erPaKvittering) {
                 // --> Hvis man skal tilbake til meldekortOversikt/DittNav (send-meldekort/tidligere)
                     // Overskriv newPath med NestePath (send-meldekort)
-
-                typeof nesteAktivtMeldekort !== undefined
-                // MeldekortOversikt / DittNAV
-                history.push(nestePath);
-
                 // --> Hvis man har innsendingstype.innsending & har flere meldekort
-                newPath = path + '/' + sisteParamINestePathParams;
-
+                newPath = nestePath;
             } else {
                 // --> Hvis man ikke er på "Kvittering",
                 //  Må fjerne sporsmal/ replace med utfylling. Sjekk kodeunder
@@ -114,8 +111,6 @@ class NavKnapp extends React.Component<Props> {
         }
         console.log('final newPath:', newPath);
         history.push(newPath);
-        (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
-        && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
     }
 
     render() {
