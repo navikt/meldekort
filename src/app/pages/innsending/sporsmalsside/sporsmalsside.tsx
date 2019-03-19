@@ -6,17 +6,18 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import { connect } from 'react-redux';
-import { RootState } from '../../../store/configureStore';
+import { history, RootState } from '../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { Meldegruppe } from '../../../types/meldekort';
 import { oppdaterSpm } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { InnsendingState } from '../../../types/innsending';
-import { getStoredState } from 'redux-persist/es/getStoredState';
 import { hentIntl } from '../../../utils/intlUtil';
-import meldekortEpics from '../../../epics/meldekortEpics';
 import { scrollToTop } from '../../../utils/scroll';
+import { IModal, ModalKnapp } from '../../../types/ui';
+import { UiActions } from '../../../actions/ui';
+import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -25,6 +26,8 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
+    skjulModal: () => void;
+    visModal: (modal: IModal) => void;
 }
 
 interface SpmSvar {
@@ -71,9 +74,34 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         let resultat = arbeidet && kurs && syk && ferie && registrert;
         if (!resultat) {
             scrollToTop();
+            return resultat;
+        }
+
+        if (!this.fortsetteRegistrert()) {
+            this.props.visModal({
+                content: () => ikkeFortsetteRegistrertContent(),
+                knapper: this.ikkeFortsetteRegistrertKnapper(),
+                visModal: true,
+            });
+            return false;
         }
 
         return resultat;
+    }
+
+    fortsetteRegistrert = (): boolean => {
+        let sporsmalListe: SpmSvar[] = [];
+        this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+            sporsmalListe.push({
+                kategori: sporsmalobj.kategori,
+                svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja')
+            });
+        });
+        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategorier[4]);
+        if (sporsmal.length !== 0) {
+            return sporsmal[0].svar;
+        }
+        return false;
     }
 
     hentSporsmal = (): SpmSvar[] => {
@@ -175,6 +203,26 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         );
 
     }
+
+    ikkeFortsetteRegistrertKnapper = (): ModalKnapp[] => {
+        return [
+            {
+                action: () => {
+                    history.push('/innsending/utfylling');
+                    this.props.skjulModal();
+                },
+                label: hentIntl().formatMessage({id: 'overskrift.bekreftOgFortsett'}),
+                type: 'hoved'
+            },
+            {
+                action: () => {
+                    this.props.skjulModal();
+                },
+                label: hentIntl().formatMessage({id: 'sporsmal.tilbakeEndre'}),
+                type: 'standard'
+            },
+        ];
+    }
 }
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
@@ -189,7 +237,9 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
-            dispatch(oppdaterSpm(sporsmalsobjekter))
+            dispatch(oppdaterSpm(sporsmalsobjekter)),
+        skjulModal: () => dispatch(UiActions.skjulModal()),
+        visModal: (modal: IModal) => dispatch(UiActions.visModal(modal)),
     };
 };
 

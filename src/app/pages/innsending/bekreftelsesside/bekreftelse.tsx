@@ -16,7 +16,6 @@ import { hentIntl } from '../../../utils/intlUtil';
 import { Checkbox } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
-// import meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import { oppdaterMeldekortdetaljer } from '../../../actions/innsending';
 
 interface MapStateToProps {

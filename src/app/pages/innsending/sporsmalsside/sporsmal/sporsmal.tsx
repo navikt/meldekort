@@ -5,11 +5,13 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
+import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
     checked: string | undefined;
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
+    formatertDato?: string;
 }
 
 const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
@@ -19,6 +21,11 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
             <div className="flex-sporsmal-hjelpetekst-container">
                 <Undertittel>
                     <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
+                    {props.formatertDato ?
+                            <span>
+                                {props.formatertDato}?
+                            </span> : null
+                    }
                 </Undertittel>
                 <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
                     <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
