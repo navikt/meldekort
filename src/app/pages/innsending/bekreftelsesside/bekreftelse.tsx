@@ -9,11 +9,15 @@ import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { PersonState } from '../../../reducers/personReducer';
-import { Meldegruppe, MeldekortDag } from '../../../types/meldekort';
+import { Meldegruppe, MeldekortDag, Meldekortdetaljer as MDetaljer } from '../../../types/meldekort';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { hentIntl } from '../../../utils/intlUtil';
 import { Checkbox } from 'nav-frontend-skjema';
+import { scrollToTop } from '../../../utils/scroll';
+import { Dispatch } from 'redux';
+// import meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
+import { oppdaterMeldekortdetaljer } from '../../../actions/innsending';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -21,17 +25,22 @@ interface MapStateToProps {
     person: PersonState;
 }
 
-type BekreftelseProps = MapStateToProps;
-
-interface Detaljer {
-    meldekortdetaljer: MeldekortdetaljerState;
+interface MapDispatchToProps {
+    oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) => void;
 }
 
-class Bekreftelse extends React.Component<BekreftelseProps, Detaljer> {
+type BekreftelseProps = MapStateToProps & MapDispatchToProps;
+
+interface DetaljerOgFeil {
+    meldekortdetaljer: MeldekortdetaljerState;
+    feilmelding: string;
+}
+
+class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     constructor(props: BekreftelseProps) {
         super(props);
-        this.state = {meldekortdetaljer: this.konverterInnsendingTilMeldekortdetaljer()};
+        this.state = {meldekortdetaljer: this.konverterInnsendingTilMeldekortdetaljer(), feilmelding: ''};
         console.log(this.konverterInnsendingTilMeldekortdetaljer());
     }
 
@@ -55,7 +64,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, Detaljer> {
                     syk: innsending.sporsmalsobjekter[2].checked === undefined ? false : innsending.sporsmalsobjekter[2].checked.endsWith('ja'),
                     annetFravaer: innsending.sporsmalsobjekter[3].checked === undefined ? false : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
                     arbeidssoker: innsending.sporsmalsobjekter[4].checked === undefined ? false : innsending.sporsmalsobjekter[4].checked.endsWith('ja'),
-                    signatur: true, // Denne kan antakelig brukes til å sette om bruker har bekreftet betinngelesene.
+                    signatur: false,
                     meldekortDager: this.hentMeldekortDager()
                 }
             }
@@ -78,8 +87,32 @@ class Bekreftelse extends React.Component<BekreftelseProps, Detaljer> {
         return meldekortdager;
     }
 
+    setChecked = () => {
+        let detaljer = this.state.meldekortdetaljer;
+        detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer.sporsmal.signatur;
+        if (detaljer.meldekortdetaljer.sporsmal.signatur) {
+            this.setState({feilmelding: ''});
+        }
+        this.setState({meldekortdetaljer: detaljer});
+    }
+
+    valider = (): boolean => {
+       let sign = this.state.meldekortdetaljer.meldekortdetaljer.sporsmal.signatur;
+
+       if (!sign) {
+           this.setState({feilmelding: hentIntl().formatMessage({id: 'utfylling.bekreft.feil'})});
+           scrollToTop();
+       } else {
+           this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
+       }
+       return sign;
+    }
+
     render() {
         let { meldegruppe } = this.props.aktivtMeldekort.meldekort;
+        let { meldekortdetaljer } = this.state.meldekortdetaljer;
+        let { feilmelding } = this.state;
+        let aap = meldegruppe === Meldegruppe.ATTF;
         return(
             <main>
                 <div className="ikkeSendt">
@@ -90,14 +123,24 @@ class Bekreftelse extends React.Component<BekreftelseProps, Detaljer> {
                         </span>
                     </AlertStripe>
                 </div>
+                {this.state.feilmelding === '' ? null :
+                    <AlertStripe type={'advarsel'} solid={true}>
+                        {this.state.feilmelding}
+                    </AlertStripe>
+                }
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg3" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <Meldekortdetaljer meldekortdetaljer={this.state.meldekortdetaljer.meldekortdetaljer} erAap={meldegruppe === Meldegruppe.ATTF}/>
+                <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap}/>
                 <div className={'bekreftInfo'}>
-                    <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft'}/></Normaltekst>
-                    <Checkbox label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}/>
+                    <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')}/></Normaltekst>
+                    <Checkbox
+                        onChange={() => this.setChecked()}
+                        label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
+                        checked={meldekortdetaljer.sporsmal.signatur}
+                        feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
+                    />
                 </div>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
@@ -111,6 +154,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, Detaljer> {
                         nestePath={'/innsending/kvittering'}
                         tekstid={'naviger.send'}
                         className={'navigasjonsknapp'}
+                        validering={this.valider}
                     />
                 </section>
             </main>
@@ -127,4 +171,11 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps, null)(Bekreftelse);
+const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) =>
+            dispatch(oppdaterMeldekortdetaljer(mdetaljer))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatcherToProps)(Bekreftelse);
