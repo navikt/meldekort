@@ -4,13 +4,12 @@ import Sporsmal from './sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { hentIntl } from '../../../../utils/intlUtil';
-import { InnsendingState } from '../../../../types/innsending';
+import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
 import { InnsendingActions } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';
 
 interface MapStateToProps {
-    innsending: InnsendingState;
 }
 
 interface MapDispatchToProps {
@@ -19,6 +18,7 @@ interface MapDispatchToProps {
 
 interface Props {
     AAP: boolean;
+    innsending: InnsendingState;
 }
 
 type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
@@ -52,9 +52,10 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         }
     };
 
-    lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean) => {
+    lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean, innsendingstype: Innsendingstyper | null) => {
         const tekstendelse = (erAAP) ? '-AAP' : '';
         for (let key in sporsmalsobj) {
+            // kategori == registrert såå
             if (sporsmalsobj[key] !== sporsmalsobj.kategori) {
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             }
@@ -70,8 +71,9 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     };
 
     render() {
-        const sporsmalsgruppe = this.props.innsending.sporsmalsobjekter
-            .map( sporsmalobj => this.lagSporsmal(sporsmalobj, this.props.AAP));
+        const { innsending, AAP } = this.props;
+        const sporsmalsgruppe = innsending.sporsmalsobjekter
+            .map( sporsmalobj => this.lagSporsmal(sporsmalobj, AAP, innsending.innsendingstype ));
 
         return(
             <div>
@@ -84,7 +86,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 // TODO: Bytt til å hente meldekortDetaljer fra Store
 const mapStateToProps = (state : RootState): MapStateToProps => {
     return {
-        innsending: state.innsending
     };
 };
 

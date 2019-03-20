@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import { Router } from '../../../types/router';
 import { Person } from '../../../types/person';
 import { isEmpty } from 'ramda';
-import Environment from '../../../utils/env';
 
 interface MapStateToProps {
     router: Router;

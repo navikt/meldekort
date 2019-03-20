@@ -51,7 +51,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 </section>
 
                 <section className="seksjon">
-                    <SporsmalsGruppe AAP={meldegruppeErAAP}/>
+                    <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={this.props.innsending}/>
                 </section>
                 <section className="seksjon">
                     <AlertStripe solid={true} type="info">
