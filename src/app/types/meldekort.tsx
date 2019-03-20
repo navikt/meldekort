@@ -61,7 +61,7 @@ export interface MeldekortdetaljerInnsending {
     fnr: string;
     personId: number;
     ipAdresse: string;
-    sessjonsId: string;
+    sesjonsId: string;
 }
 
 export interface Fravaer {
