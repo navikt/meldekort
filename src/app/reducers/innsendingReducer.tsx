@@ -5,7 +5,7 @@ import { KortStatus } from '../types/meldekort';
 import { getType } from 'typesafe-actions';
 
 const initialState: InnsendingState = {
-    meldekortId: 5,
+    meldekortId: 0,
     innsendingstype: null,
     sporsmalsobjekter: hentSporsmalConfig(),
 };

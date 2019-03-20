@@ -36,7 +36,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
+                    <Innholdstittel ><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon alert">

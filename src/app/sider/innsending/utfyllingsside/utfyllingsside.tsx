@@ -25,8 +25,8 @@ class Utfyllingsside extends React.Component<any, any> {
     render() {
         return(
             <main>
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel ><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 {this.hentUkePanel(hentNummerOgDatoForForsteUke(new Date()))}

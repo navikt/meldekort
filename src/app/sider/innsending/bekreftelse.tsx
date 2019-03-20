@@ -12,8 +12,8 @@ class Bekreftelse extends React.Component<any, any> {
     render() {
         return(
             <main>
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg3" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel ><FormattedMessage id="overskrift.steg3" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">

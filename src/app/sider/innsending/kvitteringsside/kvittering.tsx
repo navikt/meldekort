@@ -82,20 +82,20 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
     render() {
         const { person, innsendingstype } = this.props;
-        const { knappTekstid, nestePath } = this.returnerNesteInnsendingstypeOgAktivtMeldekort();
+        const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerNesteInnsendingstypeOgAktivtMeldekort();
 
         const dittnav = Environment().dittNavUrl;
         console.log(dittnav);
     return(
             <main>
-                <Innholdstittel className="seksjon"><FormattedMessage id="overskrift.steg4" /></Innholdstittel>
-                <section className="seksjon">
+                <section className="seksjon flex-innhold tittel-sprakvelger">
+                    <Innholdstittel ><FormattedMessage id="overskrift.steg4" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">
                     <FormattedMessage id="tidligereMeldekort.forklaring" />
                 </section>
-                {innsendingstype === Innsendingstyper.innsending && isEmpty(person.meldekort) && (
+                {innsendingstype === Innsendingstyper.innsending && (isEmpty(person.meldekort) && !isEmpty(person.etterregistrerteMeldekort))&& (
                     <section className="seksjon">
                         <FormattedMessage id={'sendt.etterregistrering.info'} />
                     </section>)}
@@ -111,7 +111,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
                         className={'navigasjonsknapp'}
                         tekstid={ knappTekstid }
                         nestePath={ nestePath }
-
+                        nesteAktivtMeldekort={nesteAktivtMeldekort}
+                        nesteInnsendingstype={nesteInnsendingstype}
                     />
                 </section>
             </main>
