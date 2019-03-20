@@ -63,13 +63,11 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
         ];
-
         const { etterregistrerteMeldekort } = this.props.person.person;
-
         return(
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel className="seksjon"> {etterregistrerteMeldekort.length} meldekort klar for etteregistrering </Innholdstittel>
+                    <Innholdstittel className="seksjon"> {rows.length} meldekort klar for etteregistrering </Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">

@@ -14,15 +14,12 @@ import { InnsendingActions } from '../../actions/innsending';
 
 interface MapStateToProps {
     router: Router;
-    aktivtMeldekort: AktivtMeldekortState;
     innsendingstypeFraStore: Innsendingstyper | null;
 }
 
 interface MapDispatchToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
-    settInnsendingMeldekortId: (meldekortId: number) => void;
-    hentKorrigertId: () => void;
 }
 
 interface NavKnappProps {
@@ -46,72 +43,46 @@ class NavKnapp extends React.Component<Props> {
         super(props);
     }
 
-    // TODO: Kort ned på koden her hvis det går.
     harNestePathInnsending = (nestePathParams: string[]) => {
-        console.log('harNEstePathInnsending/korriger: ', nestePathParams[nestePathParams.length - 1]);
         return (nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending
             || nestePathParams[nestePathParams.length - 1] === Innsendingstyper.korrigering)
-    }
+    };
 
-    returnerInnsendingstypeBasertPaString = (innsendingstypeFraPath: string) => {
-        // legg tile tterregistrering
-        return (innsendingstypeFraPath === Innsendingstyper.innsending) ? Innsendingstyper.innsending : Innsendingstyper.korrigering;
-    }
+    returnerNestePathInnenforInnsending = (params: string[], nestePathParams: string[]) => {
+        const editedParams = params;
+        editedParams.pop();
+        editedParams.push(nestePathParams[nestePathParams.length-1]);
+        return editedParams.join('/');
+    };
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
-        const { aktivtMeldekort, nesteAktivtMeldekort, innsendingstypeFraStore,
-            nesteInnsendingstype, nestePath, router } = this.props;
+        const { nesteAktivtMeldekort, innsendingstypeFraStore, nesteInnsendingstype,
+            nestePath, router } = this.props;
 
         const path = router.location.pathname;
         const params = path.split('/');
         const nestePathParams = nestePath.split('/');
-        const sisteParamINestePathParams = nestePathParams[nestePathParams.length-1];
-        let newPath: string = "";
-        console.log('path', path, 'params', params);
-        console.log('nestepath', nestePath, 'nesteparams', nestePathParams);
+        const erPaKvittering = params[params.length-1] === 'kvittering';
+        const erPaInnsending = innsendingstypeFraStore !== null;
+
+        let nyPath: string = "";
 
         (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
         && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
 
-        // ---> Hverken på innsending (ennå) eller trykket på UTF knapp.
-        if (innsendingstypeFraStore === null) {
-            console.log('Hvis ikke på innsending (insstype=null):', innsendingstypeFraStore);
-
-            if (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined ) {
-                // --> Hvis man skal til innsending (nestePath har innsending) (nestePath = "/korriger" eller "/innsending")
-                console.log('Hvis man skal til innsending..newPath = nestePath');
-                this.props.settInnsendingstype(nesteInnsendingstype);
-                newPath = nestePath;
+        if (erPaInnsending) {
+            if (!erPaKvittering) {
+                nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
             } else {
-                console.log('skal IKKE til dinnsending.. nestePath blir newPath');
-                // --> Hvis man ikke skal til innsending (nestePath ikke har innsending)
-                newPath = nestePath;
+                nyPath = nestePath;
             }
         } else {
-            // ---> På innsending/ ...
-            console.log('Er På innsending: innstype er ikke null:', innsendingstypeFraStore);
-
-            const erPaKvittering = params[params.length-1] === 'kvittering';
-
-            // ---> på "kvittering"
-            if (erPaKvittering) {
-                // --> Hvis man skal tilbake til meldekortOversikt/DittNav (send-meldekort/tidligere)
-                    // Overskriv newPath med NestePath (send-meldekort)
-                // --> Hvis man har innsendingstype.innsending & har flere meldekort
-                newPath = nestePath;
-            } else {
-                // --> Hvis man ikke er på "Kvittering",
-                //  Må fjerne sporsmal/ replace med utfylling. Sjekk kodeunder
-                const editedParams = params;
-                editedParams.pop();
-                editedParams.push(sisteParamINestePathParams);
-                newPath  = editedParams.join('/');
-                console.log('newPath hvis man er på innS, men ikke kvittering', newPath)
-            }
+            (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
+            && this.props.settInnsendingstype(nesteInnsendingstype);
+            nyPath = nestePath;
         }
-        console.log('final newPath:', newPath);
-        history.push(newPath);
-    }
+        history.push(nyPath);
+    };
 
     render() {
         return (
@@ -127,11 +98,7 @@ class NavKnapp extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    let meldekort: AktivtMeldekortState = {
-        meldekort: state.aktivtMeldekort.meldekort
-    };
     return {
-        aktivtMeldekort: meldekort,
         router: selectRouter(state),
         innsendingstypeFraStore: state.innsending.innsendingstype,
     };
@@ -143,13 +110,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
-        settInnsendingMeldekortId: (meldekortId: number) => {
-            dispatch(InnsendingActions.leggTilMeldekortId(meldekortId))
-        },
-        hentKorrigertId: () => {
-            dispatch(InnsendingActions.hentKorrigertId.request())
-        }
-
     };
 };
 

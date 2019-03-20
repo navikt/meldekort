@@ -41,6 +41,7 @@ class SendMeldekort extends React.Component<Props> {
     hentMeldekortRaderFraPerson = () => {
         let meldekortListe = this.props.person.person.meldekort;
         let radliste = [];
+        console.log(meldekortListe.length);
         for (let i = 0; i < meldekortListe.length; i++) {
             if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
                 let rad: MeldekortRad = {
@@ -60,6 +61,7 @@ class SendMeldekort extends React.Component<Props> {
 
     render() {
         const rows = this.hentMeldekortRaderFraPerson();
+        console.log(rows);
         const columns = [
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
@@ -68,7 +70,7 @@ class SendMeldekort extends React.Component<Props> {
         return(
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel className="seksjon"> {this.props.person.person.meldekort.length} meldekort klar for innsending </Innholdstittel>
+                    <Innholdstittel className="seksjon"> {rows.lengthe} meldekort klar for innsending </Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">

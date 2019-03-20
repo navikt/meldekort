@@ -12,14 +12,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
 import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
-import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
-import MeldekortRoutes from '../meldekortRoutes';
+import { Meldekort } from '../../types/meldekort';
 import { Router } from '../../types/router';
-import meldekortdetaljer from '../../components/meldekortdetaljer/meldekortdetaljer';
 
 interface MapStateToProps {
     innsending: InnsendingState;
-    meldekortDetaljer: Meldekortdetaljer;
     aktivtMeldekort: Meldekort;
     router: Router;
 }
@@ -28,7 +25,6 @@ interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
     settMeldekortId: (meldekortId: number) => void;
     hentKorrigertId: () => void;
-    settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
 type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
@@ -39,27 +35,24 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
     }
 
     settMeldekortIdBasertPaInnsendingstype = () => {
-        if (this.props.innsending.innsendingstype === Innsendingstyper.korrigering) {
-            this.props.hentKorrigertId();
-        } else {
-            this.props.settMeldekortId(this.props.aktivtMeldekort.meldekortId);
-        }
-    }
+        const { hentKorrigertId, innsending, settMeldekortId, aktivtMeldekort } = this.props;
+        (innsending.innsendingstype === Innsendingstyper.korrigering) ?
+            hentKorrigertId() : settMeldekortId(aktivtMeldekort.meldekortId);
+    };
 
     componentDidMount() {
         this.settMeldekortIdBasertPaInnsendingstype()
     }
 
     render() {
-        const { match, router } = this.props;
-        console.log('route: ', router.location.pathname );
-
+        const { pathname } = this.props.router.location;
+        const { match } = this.props;
         return (
             <div className="sideinnhold">
                 <PeriodeBanner/>
                 <StegBanner/>
                 <Switch>
-                    <Route exact={true} path={`${match.url}`+"/sporsmal"} render={(props) => (<Sporsmalsside {...props}/>)}/>
+                    <Route exact={true} path={pathname +"/sporsmal"} render={(props) => (<Sporsmalsside {...props}/>)}/>
                     <Route path={`${match.url}`+"/utfylling"} render={(props: RouteComponentProps<any>) => (<Utfylling {...props}/>)}/>
                     <Route path={`${match.url}`+"/bekreftelse"} render={(props: RouteComponentProps<any>) => (<Bekreftelse {...props}/>)}/>
                     <Route path={`${match.url}`+"/kvittering"} render={(props: RouteComponentProps<any>) => (<Kvittering {...props}/>)}/>
@@ -74,7 +67,6 @@ const mapStateToProps = (state: RootState) : MapStateToProps => {
     return {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort.meldekort,
-        meldekortDetaljer: state.meldekortdetaljer.meldekortdetaljer,
         router: state.router
     }
 }
@@ -86,9 +78,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
         settMeldekortId: (meldekortId: number) =>
             dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
         hentKorrigertId: () =>
-            dispatch(InnsendingActions.hentKorrigertId.request()),
-        settInnsendingstype: (innsendingstype: Innsendingstyper) =>
-                dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
+            dispatch(InnsendingActions.hentKorrigertId.request())
     }
 }
 
