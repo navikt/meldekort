@@ -1,8 +1,9 @@
 import { Constants, InnsendingState } from '../types/innsending';
-import { InnsendingActions } from '../actions/innsending';
+import { InnsendingActions, KontrollerActions } from '../actions/innsending';
 import { hentSporsmalConfig } from '../pages/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../pages/innsending/utfyllingsside/utfylling/utfyllingConfig';
 import { KortType } from '../types/meldekort';
+import { getType } from 'typesafe-actions';
 
 const initialState: InnsendingState = {
     sporsmalsobjekter: hentSporsmalConfig(),
@@ -28,6 +29,8 @@ const initialState: InnsendingState = {
         },
         begrunnelse: ''
     },
+    meldekortdetaljerInnsending: undefined,
+    valideringsResultat: undefined
 };
 
 const innsendingReducer = (state: InnsendingState = initialState,
@@ -39,6 +42,12 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case Constants.OPPDATER_DAGER:
             return { ...state, ...action.payload };
         case Constants.OPPDATER_MELDEKORTDETALJER:
+            return { ...state, ...action.payload };
+        case Constants.SETT_MELDEKORTDETALJER_INNSEDNING:
+            return { ...state, ...action.payload };
+        case Constants.SETT_VALIDERINGSRESULTAT:
+            return { ...state, ...action.payload };
+        case getType(KontrollerActions.kontrollerMeldekort.success):
             return { ...state, ...action.payload };
 
         default:

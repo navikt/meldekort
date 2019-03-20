@@ -51,10 +51,11 @@ export interface MeldekortdetaljerInnsending {
     mottattDato: Date;
     meldeperiode: Meldeperiode;
     erArbeidssokerNestePeriode: boolean;
-    bruttoBelop: number;
+    bruttoBelop?: number;
     fravaersdager: Fravaer[];
     korrigerbart: boolean;
     begrunnelse: string;
+    signatur: boolean;
 
     fnr: string;
     personId: number;
@@ -65,7 +66,7 @@ export interface MeldekortdetaljerInnsending {
 export interface Fravaer {
     dag: Date;
     type: FravaerType;
-    arbeidTimer: number;
+    arbeidTimer?: number;
 }
 
 export interface ValideringsResultat {

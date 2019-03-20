@@ -9,14 +9,23 @@ import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { PersonState } from '../../../reducers/personReducer';
-import { Meldegruppe, MeldekortDag, Meldekortdetaljer as MDetaljer } from '../../../types/meldekort';
+import {
+    Fravaer,
+    FravaerType,
+    Meldegruppe,
+    Meldekort,
+    MeldekortDag,
+    Meldekortdetaljer as MDetaljer,
+    MeldekortdetaljerInnsending
+} from '../../../types/meldekort';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { hentIntl } from '../../../utils/intlUtil';
 import { Checkbox } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
-import { oppdaterMeldekortdetaljer } from '../../../actions/innsending';
+import { KontrollerActions, oppdaterMeldekortdetaljer, setMeldekortdetaljerInnsending } from '../../../actions/innsending';
+import { kalkulerDato } from '../../../utils/dates';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -26,6 +35,8 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
     oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) => void;
+    setMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
+    kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
 }
 
 type BekreftelseProps = MapStateToProps & MapDispatchToProps;
@@ -70,6 +81,60 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         };
     }
 
+    konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
+        let { meldekortdetaljer } = this.state.meldekortdetaljer;
+        let { meldekort } = this.props.aktivtMeldekort;
+        return {
+            meldekortId: meldekortdetaljer.meldekortId,
+            kortType: meldekortdetaljer.kortType,
+            meldegruppe: meldekort.meldegruppe,
+            mottattDato: meldekortdetaljer.meldeDato,
+            meldeperiode: meldekort.meldeperiode,
+            erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
+            korrigerbart: true, // Her må det sjekkes på om innsendingen er en korrigering (settes til false)
+            begrunnelse: '', // Begrunnelse må legges til ved korrigering
+            signatur: meldekortdetaljer.sporsmal.signatur,
+            fnr: meldekortdetaljer.fodselsnr,
+            personId: meldekortdetaljer.personId,
+            ipAdresse: '',
+            sessjonsId: '',
+            fravaersdager: this.hentFravaersdager(meldekortdetaljer, meldekort)
+        };
+    }
+
+    hentFravaersdager = (meldekortdetaljer: MDetaljer, meldekort: Meldekort): Fravaer[] => {
+        let fravar: Fravaer[] = [];
+        meldekortdetaljer.sporsmal.meldekortDager.map( meldekortDag => {
+            let dato = kalkulerDato(meldekort.meldeperiode.fra, meldekortDag.dag);
+            if (typeof meldekortDag.arbeidetTimerSum !== 'undefined' && meldekortDag.arbeidetTimerSum > 0) {
+                fravar.push({
+                    dag: dato,
+                    type: FravaerType.ARBEIDS_FRAVAER,
+                    arbeidTimer: meldekortDag.arbeidetTimerSum
+                });
+            }
+            if (meldekortDag.syk) {
+                fravar.push({
+                    dag: dato,
+                    type: FravaerType.SYKDOM,
+                });
+            }
+            if (meldekortDag.kurs) {
+                fravar.push({
+                    dag: dato,
+                    type: FravaerType.KURS_UTDANNING,
+                });
+            }
+            if (meldekortDag.annetFravaer) {
+                fravar.push({
+                    dag: dato,
+                    type: FravaerType.ANNET_FRAVAER,
+                });
+            }
+        });
+        return fravar;
+    }
+
     hentMeldekortDager = (): MeldekortDag[] => {
         let meldekortdager: MeldekortDag[] = [];
         let dagTeller = 0;
@@ -102,7 +167,11 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
            this.setState({feilmelding: hentIntl().formatMessage({id: 'utfylling.bekreft.feil'})});
            scrollToTop();
        } else {
+           let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
            this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
+           console.log(mDetaljerInn);
+           this.props.setMeldekortdetaljerInnsending(mDetaljerInn);
+           this.props.kontrollerMeldekort(mDetaljerInn);
        }
        return sign;
     }
@@ -173,7 +242,11 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) =>
-            dispatch(oppdaterMeldekortdetaljer(mdetaljer))
+            dispatch(oppdaterMeldekortdetaljer(mdetaljer)),
+        setMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
+            dispatch(setMeldekortdetaljerInnsending(meldekortdetaljerInnsending)),
+        kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
+            dispatch(KontrollerActions.kontrollerMeldekort.request(meldekortdetaljerInnsending))
     };
 };
 

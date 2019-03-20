@@ -3,7 +3,8 @@ import Konstanter from '../utils/consts';
 import { erMock } from '../mock/utils';
 import { Person, PersonStatus } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
-import { Meldekort, Meldekortdetaljer } from '../types/meldekort';
+import { Meldekort, Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
+import { AxiosResponse } from 'axios';
 
 function sjekkAuthOgRedirect(res: any) {
     if (res.status === 401 || res.status === 403 || (res.status === 0 && !res.ok)) {
@@ -15,29 +16,6 @@ function sjekkAuthOgRedirect(res: any) {
     }
     return true;
 }
-
-const getFetchJSONAndCheckForErrors = (url: string) => {
-    const p = new Promise((res, rej) => {
-         fetch(`${Environment().apiUrl}` + url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
-            credentials: 'include',
-        }).then((response) => {
-            sjekkAuthOgRedirect(response);
-            if (response.status === 200) {
-                res(response.json());
-            } else {
-                res({ status: response.status });
-            }
-        })
-            .catch((e) => {
-                rej(e);
-            });
-    });
-    return p;
-};
 
 const fetchGet = async (url: string) => {
     if (erMock()) {
@@ -53,6 +31,17 @@ const fetchGet = async (url: string) => {
         });
     }
 };
+
+const fetchPost = async (url: string, data: any) => {
+    return prefferedAxios.post(Environment().apiUrl + url, data, {
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        withCredentials: true
+    }).then((response: AxiosResponse<ValideringsResultat>) => {
+        return response.data;
+    });
+}
 
 export const fetchMeldekort = (): Promise<Person> => {
     return fetchGet(Konstanter().hentMeldekortApiUri);
@@ -72,6 +61,10 @@ export const fetchPersonstatus = (): Promise<PersonStatus> => {
 
 export function fetchKorrigertId(id: number): Promise<number> {
     return fetchGet(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+}
+
+export function postMeldekort(meldekortdetaljer: MeldekortdetaljerInnsending): Promise<ValideringsResultat> {
+    return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
 }
 
 function addIdToUrlIfNotMock(url: string, id: number): string {
