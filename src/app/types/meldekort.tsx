@@ -47,6 +47,7 @@ export interface Meldeperiode {
 export interface MeldekortdetaljerInnsending {
     meldekortId: number;
     kortType: KortType;
+    kortStatus: KortStatus;
     meldegruppe: Meldegruppe;
     mottattDato: Date;
     meldeperiode: Meldeperiode;
@@ -100,6 +101,10 @@ export interface MeldekortDag {
     meldegruppe?: string;
 }
 
+export interface FravaerType {
+    typeFravaer: FravaerTypeEnum;
+}
+
 /* ENUMS */
 export enum KortType {
     ORDINAER = 'ORDINAER',
@@ -140,7 +145,7 @@ export enum KortStatus {
     OPPF = 'OPPF'
 }
 
-export enum FravaerType {
+export enum FravaerTypeEnum {
     KURS_UTDANNING = 'K',
     SYKDOM = 'S',
     ANNET_FRAVAER = 'X',

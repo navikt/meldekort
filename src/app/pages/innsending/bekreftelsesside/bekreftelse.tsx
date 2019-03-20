@@ -11,7 +11,7 @@ import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReduc
 import { PersonState } from '../../../reducers/personReducer';
 import {
     Fravaer,
-    FravaerType,
+    FravaerTypeEnum,
     Meldegruppe,
     Meldekort,
     MeldekortDag,
@@ -87,6 +87,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         return {
             meldekortId: meldekortdetaljer.meldekortId,
             kortType: meldekortdetaljer.kortType,
+            kortStatus: meldekort.kortStatus,
             meldegruppe: meldekort.meldegruppe,
             mottattDato: meldekortdetaljer.meldeDato,
             meldeperiode: meldekort.meldeperiode,
@@ -109,26 +110,26 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             if (typeof meldekortDag.arbeidetTimerSum !== 'undefined' && meldekortDag.arbeidetTimerSum > 0) {
                 fravar.push({
                     dag: dato,
-                    type: FravaerType.ARBEIDS_FRAVAER,
+                    type: { typeFravaer: FravaerTypeEnum.ARBEIDS_FRAVAER },
                     arbeidTimer: meldekortDag.arbeidetTimerSum
                 });
             }
             if (meldekortDag.syk) {
                 fravar.push({
                     dag: dato,
-                    type: FravaerType.SYKDOM,
+                    type: { typeFravaer: FravaerTypeEnum.SYKDOM },
                 });
             }
             if (meldekortDag.kurs) {
                 fravar.push({
                     dag: dato,
-                    type: FravaerType.KURS_UTDANNING,
+                    type: { typeFravaer: FravaerTypeEnum.KURS_UTDANNING },
                 });
             }
             if (meldekortDag.annetFravaer) {
                 fravar.push({
                     dag: dato,
-                    type: FravaerType.ANNET_FRAVAER,
+                    type: { typeFravaer: FravaerTypeEnum.ANNET_FRAVAER },
                 });
             }
         });
