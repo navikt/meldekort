@@ -97,8 +97,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             signatur: meldekortdetaljer.sporsmal.signatur,
             fnr: meldekortdetaljer.fodselsnr,
             personId: meldekortdetaljer.personId,
-            ipAdresse: '',
-            sessjonsId: '',
+            ipAdresse: 'test',
+            sessjonsId: 'test',
             fravaersdager: this.hentFravaersdager(meldekortdetaljer, meldekort)
         };
     }
