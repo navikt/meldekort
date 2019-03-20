@@ -1,4 +1,4 @@
-import { InnsendingState, Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
+import { Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
 import { ActionType, createAsyncAction, createStandardAction } from 'typesafe-actions';
 import { Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';

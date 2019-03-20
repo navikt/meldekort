@@ -3,19 +3,18 @@ import { UtfyltDag } from '../sider/innsending/utfyllingsside/utfylling/utfyllin
 
 export enum InnsendingTypeKeys {
     HENT_KORRIGERTID = 'HENT_KORRIGERTID',
-    HENT_KORRIGERTID_OK = 'HENT_KORRIGERTID_OK',
     HENT_KORRIGERTID_FEILET = 'HENT_KORRIGERTID_FEILET',
-    OPPDATER_SPM = 'OPPDATER_SPM',
-    LEGG_TIL_MELDEKORTID = 'LEGG_TIL_MELDEKORTID',
+    HENT_KORRIGERTID_OK = 'HENT_KORRIGERTID_OK',
     LEGG_TIL_INNSENDINGSTYPE = 'LEGG_TIL_INNSENDINGSTYPE',
+    LEGG_TIL_MELDEKORTID = 'LEGG_TIL_MELDEKORTID',
+    OPPDATER_DAGER = 'OPPDATER_DAGER',
+    OPPDATER_SPM = 'OPPDATER_SPM',
     RESET_INNSENDING = 'RESET_INNSENDING',
-    OPPDATER_DAGER = 'OPPDATER_DAGER'
-
 }
-
 
 export interface InnsendingState {
     meldekortId: number;
+    korrigertMeldekortId: number;
     innsendingstype: Innsendingstyper | null,
     sporsmalsobjekter: Spm[];
     utfylteDager: UtfyltDag[];

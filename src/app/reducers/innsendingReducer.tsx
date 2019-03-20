@@ -6,6 +6,7 @@ import { hentUtfyltDagConfig } from '../sider/innsending/utfyllingsside/utfyllin
 
 const initialState: InnsendingState = {
     meldekortId: 0,
+    korrigertMeldekortId: 0,
     innsendingstype: null,
     sporsmalsobjekter: hentSporsmalConfig(),
     utfylteDager: hentUtfyltDagConfig(),
@@ -32,7 +33,7 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case getType(InnsendingActions.hentKorrigertId.success):
             return {
                 ...state,
-                meldekortId: action.payload
+                korrigertMeldekortId: action.payload
             };
 
         default:
