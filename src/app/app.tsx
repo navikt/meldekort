@@ -2,12 +2,10 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
-import Feilside from './components/feilside/feilside';
 import MeldekortBanner from './components/meldekortBanner/meldekortBanner';
 import MeldekortRoutes from './sider/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
-import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
 import { hentTabConfig } from './components/meny/tabConfig';
@@ -15,6 +13,9 @@ import { isEmpty } from 'ramda';
 import { MeldeForm, Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
 import { PersonStatusState } from './reducers/personStatusReducer';
+import { connect } from 'react-redux';
+import Feilside from './components/feilside/feilside';
+import UIModalWrapper from './components/modal/UIModalWrapper';
 
 if (erMock()) {
     setupMock();
@@ -89,6 +90,7 @@ class App extends React.Component<Props> {
         return(
             <div>
                 <MeldekortBanner tittel="Meldekort"/>
+                <UIModalWrapper/>
                 {this.settInnhold()}
             </div>
         );

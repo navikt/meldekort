@@ -1,8 +1,16 @@
 .arbeidsrad {
-  span {
-    display: inline-block;
-    font-size: 1.25rem;
-    width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  typo-undertittel {
+    padding-top: 1rem;
+  }
+
+  .kategori_forklaring {
+    display: inline-flex;
+    width: 23rem;
   }
 
   .inputrad {
@@ -37,15 +45,10 @@
 
   .arbeidsrad {
     display: block;
-    span {
-      display: inline-block;
-      margin-right: 0;
-      width: 17.5rem;
-    }
 
     .inputrad {
       display: inline-block;
-      margin-left: 0;
+      margin-left: 7rem;
     }
   }
 }
@@ -63,6 +66,7 @@
   }
 
   .arbeidsrad {
+    display: inline-block;
     span {
       display: block;
       width: auto;

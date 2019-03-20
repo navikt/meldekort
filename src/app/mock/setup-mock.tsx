@@ -1,10 +1,11 @@
-import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
+import FetchMock, { HandlerArgument, Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
 import Konstanter from '../utils/consts';
 import person from './responses/person.json';
 import historiskeMeldekort from './responses/historiskemeldekort.json';
 import meldekortdetaljer from './responses/meldekortdetaljer.json';
 import personstatus from './responses/personstatus.json';
 import korrigertid from './responses/korrigertid.json';
+import { MeldekortActions } from '../actions/meldekort';
 
 export default () => {
 
@@ -24,7 +25,7 @@ export default () => {
 
     console.log('### MOCK AKTIVERT ###');
 
-    fetchMock.get(Konstanter().hentMeldekortApiUri, {
+    fetchMock.get(Konstanter().hentMeldekortApiUri,  {
         ...person
     });
 

@@ -12,7 +12,7 @@ export const HistoriskeMeldekortActions = {
     hentHistoriskeMeldekort: createAsyncAction(
         HistoriskeMeldekortTypeKeys.HENT_HISTORISKE,
         HistoriskeMeldekortTypeKeys.HENT_HISTORISKE_OK,
-        HistoriskeMeldekortTypeKeys.HENT_HISTORISKE_FEILET
+        HistoriskeMeldekortTypeKeys.HENT_HISTORISKE_FEILET,
     )<void, Meldekort[], AxiosError>(),
 };
 

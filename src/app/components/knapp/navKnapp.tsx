@@ -29,6 +29,7 @@ interface NavKnappProps {
     className?: string;
     nesteAktivtMeldekort?: Meldekort;
     nesteInnsendingstype?: Innsendingstyper;
+    validering?: () => boolean;
 }
 
 export enum knappTyper {
@@ -59,30 +60,35 @@ class NavKnapp extends React.Component<Props> {
         const { nesteAktivtMeldekort, innsendingstypeFraStore, nesteInnsendingstype,
             nestePath, router } = this.props;
 
-        const path = router.location.pathname;
-        const params = path.split('/');
-        const nestePathParams = nestePath.split('/');
-        const erPaKvittering = params[params.length-1] === 'kvittering';
-        const erPaInnsending = innsendingstypeFraStore !== null;
-
-        let nyPath: string = "";
-
         (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
         && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
 
-        if (erPaInnsending) {
-            if (!erPaKvittering) {
-                nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
+        let validert: boolean = true;
+        if (typeof this.props.validering !== 'undefined') {
+            validert = this.props.validering();
+        }
+        if (validert) {
+            const path = router.location.pathname;
+            const params = path.split('/');
+            const nestePathParams = nestePath.split('/');
+            const erPaKvittering = params[params.length-1] === 'kvittering';
+            const erPaInnsending = innsendingstypeFraStore !== null;
+            let nyPath: string = "";
+
+            if (erPaInnsending) {
+                if (!erPaKvittering) {
+                    nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
+                } else {
+                    nyPath = nestePath;
+                }
             } else {
+                (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
+                && this.props.settInnsendingstype(nesteInnsendingstype);
                 nyPath = nestePath;
             }
-        } else {
-            (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
-            && this.props.settInnsendingstype(nesteInnsendingstype);
-            nyPath = nestePath;
+            history.push(nyPath);
         }
-        history.push(nyPath);
-    };
+    }
 
     render() {
         return (

@@ -8,7 +8,9 @@ const Konstanter = () => {
         sendMeldeformApiUri: 'person/meldeform',
         hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
         metodeGet: 'GET',
-        metodePost: 'POST'
+        metodePost: 'POST',
+        forsteUke: 1,
+        andreUke: 2
     };
 };
 
