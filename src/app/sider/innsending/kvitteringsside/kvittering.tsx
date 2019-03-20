@@ -38,7 +38,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         super(props);
     }
 
-    settParams = (meldekort1: Meldekort[], innsendingstype1: Innsendingstyper, meldekort2: Meldekort[], innsendingstype2: Innsendingstyper) => {
+    returnerMeldekortListaMedFlereMeldekortIgjen = (meldekort1: Meldekort[], innsendingstype1: Innsendingstyper, meldekort2: Meldekort[], innsendingstype2: Innsendingstyper) => {
         let nesteAktivtMeldekort, nesteInnsendingstype;
         if (!isEmpty(meldekort1)) {
             nesteAktivtMeldekort = meldekort1[0];
@@ -48,24 +48,23 @@ class Kvittering extends React.Component<KvitteringsProps> {
             nesteInnsendingstype = innsendingstype2;
         }
         return { nesteAktivtMeldekort: nesteAktivtMeldekort, nesteInnsendingstype: nesteInnsendingstype }
-    }
+    };
 
-    returnerNesteInnsendingstypeOgAktivtMeldekort = () => {
+    returnerPropsVerdier = () => {
         const { innsendingstype, person, router } = this.props;
         const urlParams = router.location.pathname.split('/');
         urlParams.pop();
-        console.log(urlParams);
         let knappTekstid: string, nestePath: string,
             nesteAktivtMeldekort, nesteInnsendingstype;
         nestePath = urlParams.join('/');
         if ( innsendingstype === Innsendingstyper.innsending && (!isEmpty(person.meldekort) || !isEmpty(person.etterregistrerteMeldekort))) {
             knappTekstid = "overskrift.nesteMeldekort";
-            const params = this.settParams(person.meldekort, Innsendingstyper.innsending, person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
+            const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(person.meldekort, Innsendingstyper.innsending, person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
             nesteAktivtMeldekort = params.nesteAktivtMeldekort;
             nesteInnsendingstype = params.nesteInnsendingstype;
         } else if (innsendingstype === Innsendingstyper.etterregistrering && (!isEmpty(person.meldekort) || !isEmpty(person.etterregistrerteMeldekort))) {
             knappTekstid = "overskrift.etterregistrertMeldekort";
-            const params = this.settParams(person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering, person.meldekort, Innsendingstyper.innsending);
+            const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering, person.meldekort, Innsendingstyper.innsending);
             nesteAktivtMeldekort = params.nesteAktivtMeldekort;
             nesteInnsendingstype = params.nesteInnsendingstype;
         } else {
@@ -78,14 +77,13 @@ class Kvittering extends React.Component<KvitteringsProps> {
         return (
             { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype }
         );
-    }
+    };
 
     render() {
         const { person, innsendingstype } = this.props;
-        const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerNesteInnsendingstypeOgAktivtMeldekort();
+        const { knappTekstid, nestePath,
+            nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerPropsVerdier();
 
-        const dittnav = Environment().dittNavUrl;
-        console.log(dittnav);
     return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">

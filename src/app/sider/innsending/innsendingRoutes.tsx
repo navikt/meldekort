@@ -18,7 +18,6 @@ import { Router } from '../../types/router';
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: Meldekort;
-    router: Router;
 }
 
 interface MapDispatchToProps {
@@ -45,14 +44,13 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
     }
 
     render() {
-        const { pathname } = this.props.router.location;
         const { match } = this.props;
         return (
             <div className="sideinnhold">
                 <PeriodeBanner/>
                 <StegBanner/>
                 <Switch>
-                    <Route exact={true} path={pathname +"/sporsmal"} render={(props) => (<Sporsmalsside {...props}/>)}/>
+                    <Route exact={true} path={`${match.url}`+"/sporsmal"} render={(props) => (<Sporsmalsside {...props}/>)}/>
                     <Route path={`${match.url}`+"/utfylling"} render={(props: RouteComponentProps<any>) => (<Utfylling {...props}/>)}/>
                     <Route path={`${match.url}`+"/bekreftelse"} render={(props: RouteComponentProps<any>) => (<Bekreftelse {...props}/>)}/>
                     <Route path={`${match.url}`+"/kvittering"} render={(props: RouteComponentProps<any>) => (<Kvittering {...props}/>)}/>
@@ -67,7 +65,6 @@ const mapStateToProps = (state: RootState) : MapStateToProps => {
     return {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort.meldekort,
-        router: state.router
     }
 }
 

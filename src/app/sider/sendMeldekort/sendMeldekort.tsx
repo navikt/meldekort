@@ -41,7 +41,6 @@ class SendMeldekort extends React.Component<Props> {
     hentMeldekortRaderFraPerson = () => {
         let meldekortListe = this.props.person.person.meldekort;
         let radliste = [];
-        console.log(meldekortListe.length);
         for (let i = 0; i < meldekortListe.length; i++) {
             if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
                 let rad: MeldekortRad = {
