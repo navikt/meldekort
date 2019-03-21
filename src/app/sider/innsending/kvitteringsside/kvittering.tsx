@@ -25,6 +25,14 @@ interface MapStateToProps {
     innsendingstype: Innsendingstyper | null;
 }
 
+interface PropsVerdier {
+    knappTekstid: string;
+    nestePath: string;
+    nesteAktivtMeldekort: Meldekort | undefined;
+    nesteInnsendingstype: Innsendingstyper | undefined;
+
+}
+
 interface MapDispatchToProps {
     leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
@@ -49,33 +57,38 @@ class Kvittering extends React.Component<KvitteringsProps> {
         return { nesteAktivtMeldekort: nesteAktivtMeldekort, nesteInnsendingstype: nesteInnsendingstype }
     };
 
-    returnerPropsVerdier = () => {
+    returnerPropsVerdier = (): PropsVerdier => {
         const { innsendingstype, person, router } = this.props;
         const urlParams = router.location.pathname.split('/');
         urlParams.pop();
-        let knappTekstid: string, nestePath: string,
-            nesteAktivtMeldekort, nesteInnsendingstype;
-        nestePath = urlParams.join('/');
+        const nestePath = urlParams.join('/');
+
         if ( innsendingstype === Innsendingstyper.innsending && (!isEmpty(person.meldekort) || !isEmpty(person.etterregistrerteMeldekort))) {
-            knappTekstid = "overskrift.nesteMeldekort";
             const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(person.meldekort, Innsendingstyper.innsending, person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
-            nesteAktivtMeldekort = params.nesteAktivtMeldekort;
-            nesteInnsendingstype = params.nesteInnsendingstype;
+            return {
+                knappTekstid: "overskrift.nesteMeldekort",
+                nestePath: nestePath,
+                nesteAktivtMeldekort: params.nesteAktivtMeldekort,
+                nesteInnsendingstype: params.nesteInnsendingstype
+            }
         } else if (innsendingstype === Innsendingstyper.etterregistrering && (!isEmpty(person.meldekort) || !isEmpty(person.etterregistrerteMeldekort))) {
-            knappTekstid = "overskrift.etterregistrertMeldekort";
             const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering, person.meldekort, Innsendingstyper.innsending);
-            nesteAktivtMeldekort = params.nesteAktivtMeldekort;
-            nesteInnsendingstype = params.nesteInnsendingstype;
+            return {
+                knappTekstid: 'overskrift.etterregistrertMeldekort',
+                nestePath: nestePath,
+                nesteAktivtMeldekort: params.nesteAktivtMeldekort,
+                nesteInnsendingstype: params.nesteInnsendingstype
+            }
         } else {
-            knappTekstid = "tilbake.dittNav";
             // TODO: sett opp url tilbake til dittnav
-            nestePath = "/DittNav";
-            nesteAktivtMeldekort = undefined;
-            nesteInnsendingstype = undefined;
+
+            return {
+                knappTekstid: 'tilbake.dittNav',
+                nestePath: '/DittNav',
+                nesteAktivtMeldekort: undefined,
+                nesteInnsendingstype: undefined
+            }
         }
-        return (
-            { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype }
-        );
     };
 
     render() {
