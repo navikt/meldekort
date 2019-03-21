@@ -33,14 +33,18 @@ const fetchGet = async (url: string) => {
 };
 
 const fetchPost = async (url: string, data: any) => {
-    return prefferedAxios.post(Environment().apiUrl + url, data, {
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        },
-        withCredentials: true
-    }).then((response: AxiosResponse<ValideringsResultat>) => {
-        return response.data;
-    });
+    if (erMock()) {
+        return fetch(Environment().apiUrl + url, {method: 'POST', body: data}).then(response => {return response.json(); });
+    } else {
+        return prefferedAxios.post(Environment().apiUrl + url, data, {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+            },
+            withCredentials: true
+        }).then((response: AxiosResponse<ValideringsResultat>) => {
+            return response.data;
+        });
+    }
 }
 
 export const fetchMeldekort = (): Promise<Person> => {

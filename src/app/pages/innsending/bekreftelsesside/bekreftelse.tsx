@@ -56,7 +56,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
         let { aktivtMeldekort, innsending, person } = this.props;
-        return {
+        let mDet = {
             meldekortdetaljer: {
                 id: '',
                 personId: person.person.personId,
@@ -79,6 +79,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 }
             }
         };
+        this.props.oppdaterMeldekortdetaljer(mDet.meldekortdetaljer);
+        return mDet;
     }
 
     konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
@@ -177,6 +179,11 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
        return sign;
     }
 
+    hoppOverUtfylling = () => {
+        let { sporsmal } = this.props.innsending.meldekortdetaljer;
+        return !sporsmal.arbeidet && !sporsmal.kurs && !sporsmal.syk && !sporsmal.annetFravaer;
+    }
+
     render() {
         let { meldegruppe } = this.props.aktivtMeldekort.meldekort;
         let { meldekortdetaljer } = this.state.meldekortdetaljer;
@@ -214,7 +221,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
-                        nestePath={'/innsending/utfylling'}
+                        nestePath={this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'}
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />

@@ -48,7 +48,7 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case Constants.SETT_VALIDERINGSRESULTAT:
             return { ...state, ...action.payload };
         case getType(KontrollerActions.kontrollerMeldekort.success):
-            return { ...state, ...action.payload };
+            return { ...state, ...action.payload, valideringsResultat: action.payload.valideringsresultat };
 
         default:
             return state;

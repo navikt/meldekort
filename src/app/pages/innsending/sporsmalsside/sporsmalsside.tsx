@@ -89,7 +89,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return resultat;
     }
 
-    fortsetteRegistrert = (): boolean => {
+    hentSvarPaaSporsmal = (): SpmSvar[] => {
         let sporsmalListe: SpmSvar[] = [];
         this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
             sporsmalListe.push({
@@ -97,7 +97,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja')
             });
         });
-        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategorier[4]);
+        return sporsmalListe;
+    }
+
+    fortsetteRegistrert = (): boolean => {
+
+        let sporsmal = this.hentSvarPaaSporsmal().filter( spm => spm.kategori === kategorier[4]);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
@@ -158,8 +163,19 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         }
     }
 
+    hoppeOverUtfylling = (): boolean => {
+        let jaSvar = false;
+        this.hentSvarPaaSporsmal().map(spm => {
+            if (spm.kategori !== kategorier[4] && spm.svar && !jaSvar) {
+                jaSvar = true;
+            }
+        });
+        return !jaSvar;
+    }
+
     render() {
         const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
+
         return (
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -191,7 +207,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/innsending/utfylling'}
+                        nestePath={this.hoppeOverUtfylling() ? '/innsending/bekreftelse' : '/innsending/utfylling'}
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                         aktivtMeldekortObjekt={this.props.aktivtMeldekort.meldekort}
@@ -208,7 +224,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return [
             {
                 action: () => {
-                    history.push('/innsending/utfylling');
+                    history.push(this.hoppeOverUtfylling() ? '/innsending/bekreftelse' : '/innsending/utfylling');
                     this.props.skjulModal();
                 },
                 label: hentIntl().formatMessage({id: 'overskrift.bekreftOgFortsett'}),
