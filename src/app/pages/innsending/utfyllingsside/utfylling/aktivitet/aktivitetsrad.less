@@ -2,52 +2,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  //flex-wrap: wrap;
+  flex-wrap: wrap;
+  border: solid 1px #c6c2bf;
+  border-left: solid 9px;
+  margin: 0.25rem;
 
   .kategori_forklaring {
-    display: flex;
-    width: 21rem;
+    display: inline-flex;
+    width: 23rem;
   }
 
   .inputrad {
     display: inline-flex;
-    margin-left: 7em;
+    margin-left: 6.5em;
   }
 }
 
 .flex-container {
-  display: flex;
-  flex-direction: column-reverse;
-  direction: ltr;
-  justify-content: flex-start;
-  width: 24px;
-  height: 3rem;
-  text-align: center;
-  margin-right: 2rem;
-  margin-left: 0.6rem;
-
-  .checkboks + .skjemaelement__label:before {
-    content: '';
-    position: inherit;
-    display: inline-block;
-    text-align: center;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border: 1px solid #78706A;
-    width: 24px;
-    height: 24px;
-    left: 0;
-    top: 0.4rem;
-  }
-
-  .checkboks + .skjemaelement__label {
-    padding-left: 32px;
-    position: relative;
-    display: contents;
-    cursor: pointer;
-    margin-bottom: 0;
-    line-height: 24px
-  }
+  display: inline-block;
+  width: 3rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+  padding-bottom: 1rem;
 }
 
 .feilIRad {

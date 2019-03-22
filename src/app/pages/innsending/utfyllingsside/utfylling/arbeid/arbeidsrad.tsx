@@ -72,8 +72,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     key={ukedag}
                     label={
                         <div>
-                            <abbr title={dag}>{dag.charAt(0)}</abbr>
-                            <span className="vekk">{hentIntl().formatMessage({id: this.props.tekstId})}</span>
+                            <span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>
                         </div>
                     }
                     bredde="XS"

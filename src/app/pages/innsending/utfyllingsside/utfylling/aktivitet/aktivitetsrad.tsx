@@ -89,12 +89,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 <Checkbox
                     className="flex-container"
                     key={ukedag}
-                    label={
-                        <div>
-                            <abbr title={dag}>{dag.charAt(0)}</abbr>
-                            <span className="vekk">{hentIntl().formatMessage({id: this.props.tekstId})}</span>
-                        </div>
-                    }
+                    label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     checked={this.isChecked(ukedag)}
                     onChange={() => { this.setVerdi(ukedag); }}
                 />
@@ -102,10 +97,21 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
         });
     }
 
+    hentFarge = () => {
+        switch (this.props.tekstId) {
+            case 'utfylling.tiltak':
+                return {borderLeftColor: '#ffe9cc'};
+            case 'utfylling.syk':
+                return {borderLeftColor: '#6ab889'};
+            case 'utfylling.ferieFravar':
+                return {borderLeftColor: '#c1b5d0'};
+        }
+    }
+
     innhold = () => {
         let { tekstId, aap, forklaingId } = this.props;
         return (
-            <div className="aktivitetsrad">
+            <div className="aktivitetsrad" style={this.hentFarge()}>
                 <div className="kategori_forklaring">
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
