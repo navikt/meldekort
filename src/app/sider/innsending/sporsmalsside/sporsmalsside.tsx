@@ -160,6 +160,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     hoppeOverUtfylling = (): boolean => {
+
         let jaSvar = false;
         this.hentSvarPaaSporsmal().map(spm => {
             if (spm.kategori !== kategorier[4] && spm.svar && !jaSvar) {
@@ -170,7 +171,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     render() {
-        const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
+        const { innsending, aktivtMeldekort } = this.props;
+        const meldegruppeErAAP = aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
 
         return (
             <main>
@@ -193,7 +195,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 </section>
 
                 <section className="seksjon">
-                    <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={this.props.innsending}/>
+                    <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
                 </section>
                 <section className="seksjon">
                     <AlertStripe solid={true} type="info">

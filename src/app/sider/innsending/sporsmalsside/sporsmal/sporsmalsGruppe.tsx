@@ -12,7 +12,6 @@ import { AktivtMeldekortState } from '../../../../reducers/aktivtMeldekortReduce
 import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
 
 interface MapStateToProps {
-    innsending: InnsendingState;
     aktivtMeldekort: AktivtMeldekortState;
 }
 
@@ -94,7 +93,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 // TODO: Bytt til å hente meldekortDetaljer fra Store
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort,
     };
 };
