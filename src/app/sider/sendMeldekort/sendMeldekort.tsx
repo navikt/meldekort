@@ -14,13 +14,14 @@ import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
 import { KortStatus, Meldekort } from '../../types/meldekort';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { PersonActions } from '../../actions/person';
 import { PersonState } from '../../reducers/personReducer';
-import { RootState, history } from '../../store/configureStore';
+import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectFeilmelding } from '../../selectors/ui';
+import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
+import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: PersonState;
@@ -38,34 +39,28 @@ interface MeldekortRad {
     dato: string;
 }
 
-interface MeldekortTilInnsending {
-    meldekortListe: Meldekort[];
-}
-
 type Props = MapDispatchToProps & MapStateToProps;
 
-class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
+class SendMeldekort extends React.Component<Props, any> {
     constructor(props: any) {
         super(props);
     }
 
-    setMeldekortTilInnsedingIState = () => {
-        let meldekortTilInnsending: Meldekort[] = [];
-        let { meldekort } = this.props.person.person;
-        if (meldekort != null) {
-            meldekort.map((meldekortObj) => {
-                if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
-                    if (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)) {
-                        meldekortTilInnsending.push(meldekortObj);
-                    }
-                }
-            });
+    harEttMeldekort = () => {
+        let meldekortListe = this.filtrerMeldekortListe();
+
+        if (meldekortListe.length === 1) {
+            console.log('Har ett meldekort');
+            this.props.leggTilAktivtMeldekort(meldekortListe[0]);
+            return true;
         }
-        this.setState({meldekortListe: meldekortTilInnsending});
-        if (meldekortTilInnsending.length === 1) {
-            this.props.leggTilAktivtMeldekort(meldekortTilInnsending[0]);
-            history.push('/innsending');
-        }
+        return false;
+    }
+
+    filtrerMeldekortListe = () => {
+        return this.props.person.person.meldekort.filter((meldekortObj) =>
+             (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
+               (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
     }
 
     hentMeldekortRaderFraPerson = () => {
@@ -90,8 +85,6 @@ class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
     componentDidMount() {
         this.props.resetInnsending();
         this.props.hentPerson();
-        this.setMeldekortTilInnsedingIState();
-
     }
 
     hentMeldingOmMeldekortSomIkkeErKlare  = (rows: MeldekortRad[]) => {
@@ -172,10 +165,6 @@ class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
         return meldekortId;
     }
 
-    hentNesteMeldekortTilInnsending = () => {
-        return this.state.meldekortListe[0];
-    }
-
     hentTabellOgTilhorendeElementer = (rows: MeldekortRad[], columns: any) => {
         return (
             <>
@@ -202,7 +191,7 @@ class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/innsending'}
                         tekstid={'sendMeldekort.knapp.startUtfylling'}
-                        nesteAktivtMeldekort={this.props.person.person.meldekort[0]}
+                        nesteAktivtMeldekort={this.filtrerMeldekortListe()[0]}
                         nesteInnsendingstype={Innsendingstyper.innsending}
                     />
                 </section>
@@ -213,25 +202,28 @@ class SendMeldekort extends React.Component<Props, MeldekortTilInnsending> {
 
     render() {
         const rows = this.hentMeldekortRaderFraPerson();
-        console.log(rows);
         const columns = [
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
         ];
-        return(
-            <main className="sideinnhold">
-                <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel> {rows.length} meldekort klar for innsending </Innholdstittel>
-                    <Sprakvelger/>
-                </section>
-                <section className="seksjon">
-                    {this.props.baksystemFeilmelding.visFeilmelding ?
-                        <UIAlertstripeWrapper/> :
-                        this.ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(rows, columns)
-                    }
-                </section>
-            </main>
-        );
+
+        const ettMeldekort = this.harEttMeldekort();
+
+        return !ettMeldekort ?
+            (
+                <main className="sideinnhold">
+                    <section className="seksjon flex-innhold tittel-sprakvelger">
+                        <Innholdstittel> <FormattedMessage id="overskrift.innsending"/> </Innholdstittel>
+                        <Sprakvelger/>
+                    </section>
+                    <section className="seksjon">
+                        {this.props.baksystemFeilmelding.visFeilmelding ?
+                            <UIAlertstripeWrapper/> :
+                            this.ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(rows, columns)
+                        }
+                    </section>
+                </main>
+            ) : <Redirect exact={true} from="/send-meldekort" to="/innsending"/>;
     }
 }
 

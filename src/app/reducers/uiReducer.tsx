@@ -1,8 +1,6 @@
 import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
 import { UiActions, UiActionTypes } from '../actions/ui';
 import { getType } from 'typesafe-actions';
-import { loggInnContent } from '../components/modal/loggInnContent';
-import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmeldingContent';
 
 export interface UIState {
     modal: IModal;

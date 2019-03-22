@@ -1,19 +1,18 @@
 import * as React from 'react';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
-import Bekreftelse from './bekreftelse';
+import Bekreftelse from './bekreftelsesside/bekreftelse';
 import Kvittering from './kvitteringsside/kvittering';
-import Utfylling from './utfyllingsside/utfyllingsside';
+import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
 import Sporsmalsside from './sporsmalsside/sporsmalsside';
 import StegBanner from '../../components/stegBanner/stegBanner';
-import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
-import { InnsendingState, Innsendingstyper } from '../../types/innsending';
-import { RootState } from '../../store/configureStore';
+import Utfylling from './utfyllingsside/utfyllingsside';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
-import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
+import { InnsendingState, Innsendingstyper } from '../../types/innsending';
 import { Meldekort } from '../../types/meldekort';
-import { Router } from '../../types/router';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { RootState } from '../../store/configureStore';
+import { Sporsmal } from './sporsmalsside/sporsmal/sporsmalConfig';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -28,7 +27,7 @@ interface MapDispatchToProps {
 
 type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
 
-class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
+class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     constructor(props: InnsendingRoutesProps) {
         super(props);
     }
@@ -37,10 +36,10 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
         const { hentKorrigertId, innsending, settMeldekortId, aktivtMeldekort } = this.props;
         (innsending.innsendingstype === Innsendingstyper.korrigering) ?
             hentKorrigertId() : settMeldekortId(aktivtMeldekort.meldekortId);
-    };
+    }
 
     componentDidMount() {
-        this.settMeldekortIdBasertPaInnsendingstype()
+        this.settMeldekortIdBasertPaInnsendingstype();
     }
 
     render() {
@@ -50,23 +49,23 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps>{
                 <PeriodeBanner/>
                 <StegBanner/>
                 <Switch>
-                    <Route exact={true} path={`${match.url}`+"/sporsmal"} render={(props) => (<Sporsmalsside {...props}/>)}/>
-                    <Route path={`${match.url}`+"/utfylling"} render={(props: RouteComponentProps<any>) => (<Utfylling {...props}/>)}/>
-                    <Route path={`${match.url}`+"/bekreftelse"} render={(props: RouteComponentProps<any>) => (<Bekreftelse {...props}/>)}/>
-                    <Route path={`${match.url}`+"/kvittering"} render={(props: RouteComponentProps<any>) => (<Kvittering {...props}/>)}/>
-                    <Redirect exact={true} from={`${match.url}`} to={`${match.url}`+"/sporsmal"}/>
+                    <Route exact={true} path={`${match.url}` + '/sporsmal'} render={(props) => (<Sporsmalsside {...props}/>)}/>
+                    <Route path={`${match.url}` + '/utfylling'} render={(props: RouteComponentProps<any>) => (<Utfylling {...props}/>)}/>
+                    <Route path={`${match.url}` + '/bekreftelse'} render={(props: RouteComponentProps<any>) => (<Bekreftelse {...props}/>)}/>
+                    <Route path={`${match.url}` + '/kvittering'} render={(props: RouteComponentProps<any>) => (<Kvittering {...props}/>)}/>
+                    <Redirect exact={true} from={`${match.url}`} to={`${match.url}` + '/sporsmal'}/>
                 </Switch>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: RootState) : MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort.meldekort,
-    }
-}
+    };
+};
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
@@ -76,7 +75,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
         hentKorrigertId: () =>
             dispatch(InnsendingActions.hentKorrigertId.request())
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, mapDispatcherToProps)(InnsendingRoutes);

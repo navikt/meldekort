@@ -93,6 +93,7 @@ epicMiddleware.run(
         personEpics,
         personStatusEpics,
         historiskeMeldekortEpics,
+        innsendingEpics,
         meldekortdetaljerEpics,
         innsendingEpics,
         meldekortEpics

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { SporsmalOgSvar } from '../../types/meldekort';
-import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
+import { Element, Undertittel } from 'nav-frontend-typografi';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import checkMark from '../../ikoner/check.svg';
+import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 
 interface Props {
     sporsmalOgSvar: SporsmalOgSvar[];
@@ -22,14 +23,19 @@ const Sporsmalvisning: React.FunctionComponent<Props> = (props) => {
             {props.sporsmalOgSvar.map((sporsmalOgSvar) => {
                 return (
                     <section key={sporsmalOgSvar.sporsmalId} className="seksjon">
-                        <Element>
-                            <FormattedMessage id={sporsmalOgSvar.sporsmalId}/>
-                            {sporsmalOgSvar.formatertDato ?
-                                <span>
-                                    {sporsmalOgSvar.formatertDato}?
-                                </span> : null
-                            }
-                        </Element>
+                        <div className="flex-sporsmal-hjelpetekst-container">
+                            <Undertittel>
+                                <FormattedMessage id={sporsmalOgSvar.sporsmalId}/>
+                                {sporsmalOgSvar.formatertDato ?
+                                    <span>
+                                        {sporsmalOgSvar.formatertDato}?
+                                    </span> : null
+                                }
+                            </Undertittel>
+                            <HjelpetekstBase id={sporsmalOgSvar.forklaring} type="over">
+                                <FormattedHTMLMessage id={sporsmalOgSvar.forklaring} />
+                            </HjelpetekstBase>
+                        </div>
                         <img src={checkMark}/>
                         <span> {hentTekstForSvar(sporsmalOgSvar.svar)} </span>
                     </section>
