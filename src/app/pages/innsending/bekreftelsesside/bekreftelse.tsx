@@ -94,13 +94,12 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             mottattDato: meldekortdetaljer.meldeDato,
             meldeperiode: meldekort.meldeperiode,
             erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
-            korrigerbart: true, // Her må det sjekkes på om innsendingen er en korrigering (settes til false)
+            korrigerbart: true, // Her må det sjekkes på om innsendingen er en korrigering (settes da til false)
             begrunnelse: '', // Begrunnelse må legges til ved korrigering
             signatur: meldekortdetaljer.sporsmal.signatur,
             fnr: meldekortdetaljer.fodselsnr,
             personId: meldekortdetaljer.personId,
-            ipAdresse: 'test',
-            sesjonsId: 'test',
+            sesjonsId: 'test', // TODO: Denne må settes til noe fornuftig. Mulig vi må lage en egen sesjonsId.
             fravaersdager: this.hentFravaersdager(meldekortdetaljer, meldekort)
         };
     }

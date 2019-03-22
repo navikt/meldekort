@@ -60,7 +60,7 @@ export interface MeldekortdetaljerInnsending {
 
     fnr: string;
     personId: number;
-    ipAdresse: string;
+    ipAdresse?: string;
     sesjonsId: string;
 }
 
