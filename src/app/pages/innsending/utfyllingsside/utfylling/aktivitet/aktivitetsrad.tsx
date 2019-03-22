@@ -100,11 +100,11 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     hentFarge = () => {
         switch (this.props.tekstId) {
             case 'utfylling.tiltak':
-                return {borderLeftColor: '#ffe9cc'};
+                return {borderLeftColor: '#ffe9cc', backgroundColor: this.props.feil ? '#e79999' : ''};
             case 'utfylling.syk':
-                return {borderLeftColor: '#6ab889'};
+                return {borderLeftColor: '#6ab889', backgroundColor: this.props.feil ? '#e79999' : ''};
             case 'utfylling.ferieFravar':
-                return {borderLeftColor: '#c1b5d0'};
+                return {borderLeftColor: '#c1b5d0', backgroundColor: this.props.feil ? '#e79999' : ''};
         }
     }
 
@@ -130,12 +130,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     render() {
         return (
             <div>
-                {this.props.feil ?
-                    <div className={'feilIRad'}>
-                        {this.innhold()}
-                    </div> :
-                    this.innhold()
-                }
+                {this.innhold()}
             </div>
         );
     }

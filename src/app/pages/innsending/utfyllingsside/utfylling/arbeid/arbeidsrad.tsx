@@ -97,7 +97,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     innhold = () => {
         let { tekstId, aap, forklaingId } = this.props;
         return (
-            <div className="arbeidsrad">
+            <div className="arbeidsrad" style={{backgroundColor: this.props.feil ? '#e79999' : ''}}>
                 <div className="kategori_forklaring">
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
@@ -116,12 +116,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     render() {
         return (
             <div>
-                {this.props.feil ?
-                    <div className={'feilIRad'}>
-                        {this.innhold()}
-                    </div> :
-                    this.innhold()
-                }
+                {this.innhold()}
             </div>
         );
     }

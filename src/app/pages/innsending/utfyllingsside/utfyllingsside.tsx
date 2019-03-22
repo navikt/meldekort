@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Ingress, Innholdstittel, Undertittel } from 'nav-frontend-typografi';
+import { Ingress, Innholdstittel, Element } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
@@ -22,6 +22,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
+import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -78,6 +79,14 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
         return false;
     }
 
+    hentUkedager = () => {
+        return hentUkedagerSomStringListe().map((dag) => {
+            return (
+                <abbr className="bold" key={'ukedager-' + dag} title={dag}>{dag.toUpperCase()[0]}</abbr>
+            );
+        });
+    }
+
     hentUkePanel = (ukenummer: number, faktiskUkeNummer: string, datoTittel: string) => {
         let aap: boolean = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
         let {feilIArbeid, feilIFerie, feilISyk, feilIKurs, feilIDager} = this.state;
@@ -94,6 +103,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                 ariaTittel={`${ukeTekst()} ${faktiskUkeNummer} ${datoTittel}`}
             >
                 <div className="ukepanel">
+                    <div className="ukedager">
+                        {this.hentUkedager()}
+                    </div>
                 {this.sjekkSporsmal('arbeid') ?
                     <Arbeidsrad
                         ukeNummer={ukenummer}

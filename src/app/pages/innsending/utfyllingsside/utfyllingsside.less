@@ -8,6 +8,19 @@
   .uketittel {
     margin-bottom: 2rem;
   }
+
+  .ukedager {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4rem;
+    font-weight: bold;
+    font-size: 16px;
+
+    abbr {
+      //margin: 0.5rem;
+      margin-left: 3.45rem;
+    }
+  }
 }
 
 // Denne settes på et span-element som inneholder navnet på raden, inni label til inputfelt og checboxer
@@ -31,7 +44,9 @@
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
