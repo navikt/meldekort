@@ -20,7 +20,6 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
-    oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
     settMeldekortId: (meldekortId: number) => void;
     hentKorrigertId: () => void;
 }
@@ -67,10 +66,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
-        oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
-            dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
         settMeldekortId: (meldekortId: number) =>
             dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
         hentKorrigertId: () =>
@@ -78,4 +75,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(InnsendingRoutes);
+export default connect(mapStateToProps, mapDispatchToProps)(InnsendingRoutes);
