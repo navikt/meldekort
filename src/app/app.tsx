@@ -45,15 +45,17 @@ class App extends React.Component<Props> {
     settMenyPunkter = (person: Person) => {
         const tabsobjekter = hentTabConfig();
         const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
-            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === "endreMeldeform")) {
-                return { ...tabsobj, disabled: !tabsobj.disabled }
-            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === "etterregistrering") {
-                return { ...tabsobj, disabled: !tabsobj.disabled }
-            } else { return { ...tabsobj }}
+            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === 'endreMeldeform')) {
+                return { ...tabsobj, disabled: !tabsobj.disabled };
+            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === 'etterregistrering') {
+                return { ...tabsobj, disabled: !tabsobj.disabled };
+            } else {
+                return { ...tabsobj };
+            }
         });
         return (
             <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
-        )
+        );
     }
 
     settInnhold = () => {
@@ -100,7 +102,7 @@ class App extends React.Component<Props> {
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         personStatus: state.personStatus,
-        person: state.person.person,
+        person: state.person,
     };
 };
 

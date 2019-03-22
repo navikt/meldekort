@@ -9,7 +9,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
-import personReducer, { PersonState } from '../reducers/personReducer';
+import personReducer from '../reducers/personReducer';
 import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
 import tekster from '../tekster/kompilerte-tekster';
 import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
@@ -25,6 +25,7 @@ import { InnsendingState } from '../types/innsending';
 import innsendingEpics from '../epics/innsendingEpics';
 import uiReducer, { UIState } from '../reducers/uiReducer';
 import meldekortEpics from '../epics/meldekortEpics';
+import { Person } from '../types/person';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -43,7 +44,7 @@ export interface RootState {
     locales: LocalesState;
     intl: IntlState;
     router: RouterState;
-    person: PersonState;
+    person: Person;
     personStatus: PersonStatusState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;

@@ -15,16 +15,16 @@ import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
 import { KortStatus, Meldekort } from '../../types/meldekort';
 import { PersonActions } from '../../actions/person';
-import { PersonState } from '../../reducers/personReducer';
 import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectFeilmelding } from '../../selectors/ui';
 import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
+import { Person } from '../../types/person';
 
 interface MapStateToProps {
-   person: PersonState;
+   person: Person;
    baksystemFeilmelding: BaksystemFeilmelding;
    router: Router;
 }
@@ -58,7 +58,7 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     filtrerMeldekortListe = () => {
-        return this.props.person.person.meldekort.filter((meldekortObj) =>
+        return this.props.person.meldekort.filter((meldekortObj) =>
              (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
                (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
     }
@@ -66,7 +66,7 @@ class SendMeldekort extends React.Component<Props, any> {
     hentMeldekortRaderFraPerson = () => {
         let radliste: MeldekortRad[] = [];
 
-        let { meldekort } = this.props.person.person;
+        let { meldekort } = this.props.person;
         if (meldekort != null) {
             meldekort.map((meldekortObj) => {
                 if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
@@ -87,10 +87,10 @@ class SendMeldekort extends React.Component<Props, any> {
         this.props.hentPerson();
     }
 
-    hentMeldingOmMeldekortSomIkkeErKlare  = (rows: MeldekortRad[]) => {
-        if (rows.length === 0 && this.props.person.person.meldekort !== undefined) {
-            let meldekortId = this.forTidligASende(this.props.person.person.meldekort);
-            let meldekort = this.props.person.person.meldekort.filter((m) => m.meldekortId === meldekortId);
+    hentMeldingOmMeldekortSomIkkeErKlare  = (rows: MeldekortRad[], person: Person) => {
+        if (rows.length === 0 && person.meldekort !== undefined) {
+            let meldekortId = this.forTidligASende(person.meldekort);
+            let meldekort = person.meldekort.filter((m) => m.meldekortId === meldekortId);
             if (meldekort.length !== 0) {
                 return (
                     <div className="send-meldekort-varsel">
@@ -134,12 +134,12 @@ class SendMeldekort extends React.Component<Props, any> {
                 );
             }
         } else {
-            return this.hentMeldingOmMeldekortSomIkkeErKlare(rows);
+            return this.hentMeldingOmMeldekortSomIkkeErKlare(rows, this.props.person);
         }
     }
 
     ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (rows: MeldekortRad[], columns: any) => {
-        if (this.props.person.person.personId === 0) {
+        if (this.props.person.personId === 0) {
             return (
                 <div className="meldekort-spinner">
                     <NavFrontendSpinner type="XL"/>
@@ -198,7 +198,6 @@ class SendMeldekort extends React.Component<Props, any> {
             </>
         );
     }
-
 
     render() {
         const rows = this.hentMeldekortRaderFraPerson();
