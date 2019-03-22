@@ -38,6 +38,16 @@ export const hentDatoForUkestartIAndreUke = (periodeSlutt: Date) => {
     return moment(periodeSlutt).subtract(6, 'days').format(datoFormat);
 };
 
+export const hentDatoForForsteUke = (fraDato: Date): string => {
+    let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(fraDato)}`;
+    return `${periode}`;
+};
+
+export const hentDatoForAndreUke = (tilDato: Date): string => {
+    let periode = `${hentDatoForUkestartIAndreUke(tilDato)} - ${formaterDato(tilDato)}`;
+    return `${periode}`;
+};
+
 export const hentNummerOgDatoForForsteUke = (fraDato: Date): string => {
     let ukenr = hentUkenummerForDato(fraDato);
     let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(fraDato)}`;
@@ -65,7 +75,7 @@ export const kanMeldekortSendesInn = (kortKanSendesFra: Date): boolean => {
     return moment(sendesFra).isSameOrBefore(dagensDato);
 };
 
-const ukeTekst = () => {
+export const ukeTekst = () => {
     return hentIntl().formatMessage({id: 'overskrift.uke'});
 };
 

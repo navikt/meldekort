@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
+import { Ingress, Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Arbeidsrad from './utfylling/arbeid/arbeidsrad';
 import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
-import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../../utils/dates';
+import {
+    hentDatoForAndreUke,
+    hentDatoForForsteUke,
+    hentNummerOgDatoForAndreUke,
+    hentNummerOgDatoForForsteUke,
+    hentUkenummerForDato,
+    ukeTekst
+} from '../../../utils/dates';
 import { InnsendingState } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
@@ -16,6 +23,7 @@ import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
+import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -77,12 +85,22 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
         return false;
     }
 
-    hentUkePanel = (ukenummer: number, datoTittel: string) => {
+    hentUkePanel = (ukenummer: number, faktiskUkeNummer: string, datoTittel: string) => {
         let aap: boolean = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
         let {feilIArbeid, feilIFerie, feilISyk, feilIKurs, feilIDager} = this.state;
         return (
-            <div className="ukepanel">
-                <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
+            <EkspanderbartpanelBase
+                heading={
+                    <div className="uketittel">
+                        <Innholdstittel>{`${ukeTekst()} ${faktiskUkeNummer}`}</Innholdstittel>
+                        <Ingress>{datoTittel}</Ingress>
+                    </div>
+                }
+                border={true}
+                apen={true}
+                ariaTittel={`${ukeTekst()} ${faktiskUkeNummer} ${datoTittel}`}
+            >
+                <div className="ukepanel">
                 {this.sjekkSporsmal('arbeid') ?
                     <Arbeidsrad
                         ukeNummer={ukenummer}
@@ -120,7 +138,8 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                         feil={feilIFerie.feil}
                     /> : null
                 }
-            </div>
+                </div>
+            </EkspanderbartpanelBase>
         );
     }
 
@@ -223,8 +242,8 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                     <Sprakvelger/>
                 </section>
                 {this.hentFeilmeldinger()}
-                {this.hentUkePanel(Konstanter().forsteUke, hentNummerOgDatoForForsteUke(meldeperiode.fra))}
-                {this.hentUkePanel(Konstanter().andreUke, hentNummerOgDatoForAndreUke(meldeperiode.til))}
+                {this.hentUkePanel(Konstanter().forsteUke, hentUkenummerForDato(meldeperiode.fra), hentDatoForForsteUke(meldeperiode.fra))}
+                {this.hentUkePanel(Konstanter().andreUke, hentUkenummerForDato(meldeperiode.til), hentDatoForAndreUke(meldeperiode.til))}
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
