@@ -29,6 +29,10 @@ const personReducer = (state: PersonState = initialState,
             return {
                 person: action.payload,
             };
+        case getType(PersonActions.endreMeldeform):
+            return {
+                ...state, meldeform: action.payload,
+            };
 
         default:
             return state;
