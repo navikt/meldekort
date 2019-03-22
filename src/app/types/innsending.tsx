@@ -6,7 +6,7 @@ export enum Constants {
     OPPDATER_SPM = 'OPPDATER_SPM',
     OPPDATER_DAGER = 'OPPDATER_DAGER',
     OPPDATER_MELDEKORTDETALJER = 'OPPDATER_MELDEKORTDETALJER',
-    SETT_MELDEKORTDETALJER_INNSEDNING = 'SET_MELDEKORTDETALJER_INNSEDNING',
+    SETT_MELDEKORTDETALJER_INNSENDING = 'SET_MELDEKORTDETALJER_INNSENDING',
     SETT_VALIDERINGSRESULTAT = 'SETT_VALIDERINGSRESULTAT',
 
     KONTROLLER_MELDEKORT = 'KONTROLLER_MELDEKORT',
@@ -27,4 +27,9 @@ export interface FeilIDager {
     feil: boolean;
     feilmelding?: string;
     feilIDager?: string[];
+}
+
+export interface SpmSvar {
+    kategori: string;
+    svar: boolean;
 }

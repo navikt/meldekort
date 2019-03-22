@@ -17,11 +17,11 @@ export function oppdaterMeldekortdetaljer(meldekortdetaljer: Meldekortdetaljer) 
     return action (Constants.OPPDATER_MELDEKORTDETALJER, {meldekortdetaljer});
 }
 
-export function setMeldekortdetaljerInnsending(meldekortdetaljerInnsending: MeldekortdetaljerInnsending) {
-    return action (Constants.SETT_MELDEKORTDETALJER_INNSEDNING, {meldekortdetaljerInnsending});
+export function settMeldekortdetaljerInnsending(meldekortdetaljerInnsending: MeldekortdetaljerInnsending) {
+    return action (Constants.SETT_MELDEKORTDETALJER_INNSENDING, {meldekortdetaljerInnsending});
 }
 
-export function setValideringsresultat(valideringsresultat: ValideringsResultat) {
+export function settValideringsresultat(valideringsresultat: ValideringsResultat) {
     return action (Constants.SETT_VALIDERINGSRESULTAT, {valideringsresultat});
 }
 
@@ -38,5 +38,5 @@ export type KontrollerActionTypes = ActionType<typeof KontrollerActions>;
 export type InnsendingActions =
     ActionType<typeof oppdaterSpm> &
     ActionType<typeof oppdaterUtfylteDager> &
-    ActionType<typeof setMeldekortdetaljerInnsending> &
-    ActionType<typeof setValideringsresultat>;
+    ActionType<typeof settMeldekortdetaljerInnsending> &
+    ActionType<typeof settValideringsresultat>;

@@ -43,7 +43,7 @@ const innsendingReducer = (state: InnsendingState = initialState,
             return { ...state, ...action.payload };
         case Constants.OPPDATER_MELDEKORTDETALJER:
             return { ...state, ...action.payload };
-        case Constants.SETT_MELDEKORTDETALJER_INNSEDNING:
+        case Constants.SETT_MELDEKORTDETALJER_INNSENDING:
             return { ...state, ...action.payload };
         case Constants.SETT_VALIDERINGSRESULTAT:
             return { ...state, ...action.payload };

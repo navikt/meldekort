@@ -24,7 +24,7 @@ import { hentIntl } from '../../../utils/intlUtil';
 import { Checkbox } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
-import { KontrollerActions, oppdaterMeldekortdetaljer, setMeldekortdetaljerInnsending } from '../../../actions/innsending';
+import { KontrollerActions, oppdaterMeldekortdetaljer, settMeldekortdetaljerInnsending } from '../../../actions/innsending';
 import { kalkulerDato } from '../../../utils/dates';
 
 interface MapStateToProps {
@@ -35,7 +35,7 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
     oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) => void;
-    setMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
+    settMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
     kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
 }
 
@@ -172,7 +172,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
            let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
            this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
            console.log(mDetaljerInn);
-           this.props.setMeldekortdetaljerInnsending(mDetaljerInn);
+           this.props.settMeldekortdetaljerInnsending(mDetaljerInn);
            this.props.kontrollerMeldekort(mDetaljerInn);
        }
        return sign;
@@ -250,8 +250,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) =>
             dispatch(oppdaterMeldekortdetaljer(mdetaljer)),
-        setMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
-            dispatch(setMeldekortdetaljerInnsending(meldekortdetaljerInnsending)),
+        settMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
+            dispatch(settMeldekortdetaljerInnsending(meldekortdetaljerInnsending)),
         kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
             dispatch(KontrollerActions.kontrollerMeldekort.request(meldekortdetaljerInnsending))
     };

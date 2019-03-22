@@ -6,7 +6,7 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Arbeidsrad from './utfylling/arbeid/arbeidsrad';
 import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
 import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../../utils/dates';
-import { InnsendingState } from '../../../types/innsending';
+import { InnsendingState, SpmSvar } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
@@ -20,11 +20,6 @@ import { scrollToTop } from '../../../utils/scroll';
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: AktivtMeldekortState;
-}
-
-interface SpmSvar {
-    kategori: string;
-    svar: boolean;
 }
 
 interface Feilmelding {

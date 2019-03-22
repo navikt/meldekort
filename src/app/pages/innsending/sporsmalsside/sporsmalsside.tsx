@@ -12,7 +12,7 @@ import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { Meldegruppe } from '../../../types/meldekort';
 import { oppdaterSpm } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { InnsendingState } from '../../../types/innsending';
+import { InnsendingState, SpmSvar } from '../../../types/innsending';
 import { hentIntl } from '../../../utils/intlUtil';
 import { scrollToTop } from '../../../utils/scroll';
 import { IModal, ModalKnapp } from '../../../types/ui';
@@ -28,11 +28,6 @@ interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
     skjulModal: () => void;
     visModal: (modal: IModal) => void;
-}
-
-interface SpmSvar {
-    kategori: string;
-    svar: boolean;
 }
 
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
