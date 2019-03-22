@@ -1,5 +1,6 @@
 {
   "personId": 123456,
+  "fodselsnr": "11223344556",
   "etternavn": "MOCKESEN",
   "fornavn": "MOCK",
   "maalformkode": "NO",
@@ -30,7 +31,7 @@
         "kortKanSendesFra": "2019-01-26T12:00:00+01:00",
         "periodeKode": "201903"
       },
-      "meldegruppe": "DAGP",
+      "meldegruppe": "ATTF",
       "kortStatus": "OPPRE",
       "erForskuddsPeriode": false,
       "korrigerbart": true

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Bekreftelse from '../pages/innsending/bekreftelse';
+import Bekreftelse from '../pages/innsending/bekreftelsesside/bekreftelse';
 import Kvittering from '../pages/innsending/kvittering';
 import Utfyllingsside from '../pages/innsending/utfyllingsside/utfyllingsside';
 import Sporsmalsside from '../pages/innsending/sporsmalsside/sporsmalsside';

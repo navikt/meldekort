@@ -24,6 +24,7 @@ import { InnsendingState } from '../types/innsending';
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import uiReducer, { UIState } from '../reducers/uiReducer';
 import meldekortEpics from '../epics/meldekortEpics';
+import innsendingEpics from '../epics/innsendingEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -92,6 +93,7 @@ epicMiddleware.run(
         personEpics,
         personStatusEpics,
         historiskeMeldekortEpics,
+        innsendingEpics,
         meldekortdetaljerEpics,
         meldekortEpics
     )

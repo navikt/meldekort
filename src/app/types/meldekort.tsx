@@ -47,25 +47,27 @@ export interface Meldeperiode {
 export interface MeldekortdetaljerInnsending {
     meldekortId: number;
     kortType: KortType;
+    kortStatus: KortStatus;
     meldegruppe: Meldegruppe;
     mottattDato: Date;
     meldeperiode: Meldeperiode;
     erArbeidssokerNestePeriode: boolean;
-    bruttoBelop: number;
+    bruttoBelop?: number;
     fravaersdager: Fravaer[];
     korrigerbart: boolean;
     begrunnelse: string;
+    signatur: boolean;
 
     fnr: string;
     personId: number;
-    ipAdresse: string;
-    sessjonsId: string;
+    ipAdresse?: string;
+    sesjonsId: string;
 }
 
 export interface Fravaer {
     dag: Date;
     type: FravaerType;
-    arbeidTimer: number;
+    arbeidTimer?: number;
 }
 
 export interface ValideringsResultat {
@@ -96,7 +98,11 @@ export interface MeldekortDag {
     syk: boolean;
     annetFravaer: boolean;
     kurs: boolean;
-    meldegruppe: string;
+    meldegruppe?: string;
+}
+
+export interface FravaerType {
+    typeFravaer: FravaerTypeEnum;
 }
 
 /* ENUMS */
@@ -139,7 +145,7 @@ export enum KortStatus {
     OPPF = 'OPPF'
 }
 
-export enum FravaerType {
+export enum FravaerTypeEnum {
     KURS_UTDANNING = 'K',
     SYKDOM = 'S',
     ANNET_FRAVAER = 'X',
@@ -152,4 +158,5 @@ export interface SporsmalOgSvar {
     sporsmalId: string;
     svar: boolean;
     formatertDato?: string;
+    forklaring: string;
 }

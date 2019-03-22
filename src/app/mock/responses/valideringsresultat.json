@@ -1,0 +1,11 @@
+{
+  "meldekortid": "12345678",
+  "status": "STATUS",
+  "arsakskoder": [{
+    "kode": "kode",
+    "tekst": "tekst"
+  }],
+  "meldekortdager": [{
+    "dag": 1
+  }]
+}

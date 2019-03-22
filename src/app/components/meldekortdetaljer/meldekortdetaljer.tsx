@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
 import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
 import { MeldekortDag, SporsmalOgSvar } from '../../types/meldekort';
@@ -10,12 +10,31 @@ import { Undertittel, Element } from 'nav-frontend-typografi';
 
 import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
 import { hentUkedagerSomElementListe } from '../../utils/ukedager';
+import { hentIntl } from '../../utils/intlUtil';
+import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 
-type Props = MeldekortdetaljerState & ReturnType<typeof mapStateToProps>;
+interface ErAap {
+    erAap: boolean;
+}
+
+type Props = MeldekortdetaljerState & ErAap & ReturnType<typeof mapStateToProps>;
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
     let ukedager = hentUkedagerSomElementListe();
+
+    const sjekkOmDetFinnesFlereElementer = (element: string, meldekortDag: MeldekortDag) => {
+        switch (element) {
+            case 'arbeid':
+                return meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer;
+            case 'kurs':
+                return meldekortDag.syk || meldekortDag.annetFravaer;
+            case 'syk':
+                return meldekortDag.annetFravaer;
+            default:
+                return false;
+        }
+    };
 
     const hentDagListe = (meldekortdager: MeldekortDag[]) => {
         const dagListe = [];
@@ -28,35 +47,87 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                         <Element>{ukedag}</Element>
                         {
                             meldekortDag.arbeidetTimerSum > 0 ?
-                                <div>
+                                <div className="utfylling">
                                     <FormattedMessage id="utfylling.arbeid"/>
                                     <span> {meldekortDag.arbeidetTimerSum} </span>
-                                    <FormattedMessage id="overskrift.timer"/>
+                                    {hentIntl().formatMessage({id: 'overskrift.timer'}).trim()}
+                                    {sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? <span>,</span> : null}
                                 </div> : null
                         }
                         {
                             meldekortDag.kurs ?
-                                <div>
-                                    <FormattedMessage id="utfylling.tiltak"/>
+                                <div className="utfylling">
+                                    {hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}
+                                    {sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? <span>,</span> : null}
                                 </div> : null
                         }
                         {
                             meldekortDag.syk ?
-                                <div>
-                                    <FormattedMessage id="utfylling.syk"/>
+                                <div className="utfylling">
+                                    {hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}
+                                    {sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? <span>,</span> : null}
                                 </div> : null
                         }
                         {
                             meldekortDag.annetFravaer ?
-                                <div>
-                                    <FormattedMessage id="utfylling.ferieFravar"/>
+                                <div className="utfylling">
+                                    {hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}
                                 </div> : null
+                        }
+                        {
+                            meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer ?
+                                <HjelpetekstBase id={ukedag + `${i}`} type="over">
+                                    {leggTilHjelpetekster(meldekortDag)}
+                                </HjelpetekstBase> : null
                         }
                     </li>
                 );
             }
         }
         return dagListe;
+    };
+
+    const leggTilHjelpetekster = (meldekortDag: MeldekortDag) => {
+        let aap = '';
+        if (props.erAap) {
+            aap = '-AAP';
+        }
+        return (
+            <span className={'meldekortdetaljer-utfyllt-hjelpetekster'}>
+                {meldekortDag.arbeidetTimerSum > 0 ?
+                    <span>
+                        <span className={'overskrift-hjelpetekst'}>
+                            <strong>{hentIntl().formatMessage({id: 'utfylling.arbeid'}).toUpperCase()}</strong>
+                        </span>
+                        <FormattedHTMLMessage id={'forklaring.utfylling.arbeid' + aap}/>
+                    </span> : null
+                }
+                {meldekortDag.kurs ?
+                    <span>
+                        <span className={'overskrift-hjelpetekst'}>
+                            <strong>{hentIntl().formatMessage({id: 'utfylling.tiltak'}).toUpperCase()}</strong>
+                        </span>
+                        <FormattedHTMLMessage id={'forklaring.utfylling.tiltak' + aap}/>
+                    </span> : null
+                }
+                {meldekortDag.syk ?
+                    <span>
+                        <span className={'overskrift-hjelpetekst'}>
+                            <strong>{hentIntl().formatMessage({id: 'utfylling.syk'}).toUpperCase()}</strong>
+                        </span>
+                        <FormattedHTMLMessage id={'forklaring.utfylling.syk' + aap}/>
+                    </span> : null
+                }
+                {meldekortDag.annetFravaer ?
+                    <span>
+                        <span className={'overskrift-hjelpetekst'}>
+                            <strong>{hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).toUpperCase()}</strong>
+                        </span>
+                        <FormattedHTMLMessage id={'forklaring.utfylling.ferieFravar' + aap}/>
+                    </span> : null
+                }
+            </span>
+        );
     };
 
     const hentUkeListe = (meldekortDager: MeldekortDag[], ukeNr: number) => {
@@ -82,12 +153,21 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
     };
 
     const sporsmalOgSvar = (): SporsmalOgSvar[] => {
+        let aap = '';
+        if (props.erAap) {
+            aap = '-AAP';
+        }
         return [
-            {sporsmalId: 'sporsmal.arbeid', svar: props.meldekortdetaljer.sporsmal.arbeidet},
-            {sporsmalId: 'sporsmal.aktivitetArbeid', svar: props.meldekortdetaljer.sporsmal.kurs},
-            {sporsmalId: 'sporsmal.forhindret', svar: props.meldekortdetaljer.sporsmal.syk},
-            {sporsmalId: 'sporsmal.ferieFravar', svar: props.meldekortdetaljer.sporsmal.annetFravaer},
+            {sporsmalId: 'sporsmal.arbeid', svar: props.meldekortdetaljer.sporsmal.arbeidet,
+                forklaring: 'forklaring.sporsmal.arbeid' + aap},
+            {sporsmalId: 'sporsmal.aktivitetArbeid' + aap, svar: props.meldekortdetaljer.sporsmal.kurs,
+                forklaring: 'forklaring.sporsmal.aktivitetArbeid' + aap},
+            {sporsmalId: 'sporsmal.forhindret' + aap, svar: props.meldekortdetaljer.sporsmal.syk,
+                forklaring: 'forklaring.sporsmal.forhindret' + aap},
+            {sporsmalId: 'sporsmal.ferieFravar' + aap, svar: props.meldekortdetaljer.sporsmal.annetFravaer,
+                forklaring: 'forklaring.sporsmal.ferieFravar' + aap},
             {sporsmalId: 'sporsmal.registrert', svar: props.meldekortdetaljer.sporsmal.arbeidssoker,
+                forklaring: 'forklaring.sporsmal.registrert'  + aap,
                 formatertDato: hentNestePeriodeMedUkerOgDato(
                     props.aktivtMeldekort.meldekort.meldeperiode.fra,
                     props.aktivtMeldekort.meldekort.meldeperiode.til)

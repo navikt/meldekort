@@ -68,3 +68,7 @@ export const kanMeldekortSendesInn = (kortKanSendesFra: Date): boolean => {
 const ukeTekst = () => {
     return hentIntl().formatMessage({id: 'overskrift.uke'});
 };
+
+export const kalkulerDato = (startDato: Date, plussDager: number): Date => {
+    return moment(startDato).add(plussDager, 'days').toDate();
+};
