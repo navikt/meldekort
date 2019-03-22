@@ -8,12 +8,10 @@ import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
 import {
     hentDatoForAndreUke,
     hentDatoForForsteUke,
-    hentNummerOgDatoForAndreUke,
-    hentNummerOgDatoForForsteUke,
     hentUkenummerForDato,
     ukeTekst
 } from '../../../utils/dates';
-import { InnsendingState } from '../../../types/innsending';
+import { InnsendingState, SpmSvar } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
@@ -28,11 +26,6 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: AktivtMeldekortState;
-}
-
-interface SpmSvar {
-    kategori: string;
-    svar: boolean;
 }
 
 interface Feilmelding {
