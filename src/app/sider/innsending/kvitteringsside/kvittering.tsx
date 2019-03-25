@@ -108,7 +108,14 @@ class Kvittering extends React.Component<KvitteringsProps> {
         return tekst.replace('{1}', klokkeslett).replace('{0}', dato);
     }
 
-    visOppsummeringsTekster = () => {
+    nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
+        const tekst = hentIntl().formatMessage({id: 'sendt.meldekortKanSendes'});
+        if ( nesteAktivtMeldekort !== undefined) {
+            return tekst.replace('{0}', formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra));
+        }
+    }
+
+    visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort) => {
         const { person, aktivtMeldekort } = this.props;
         const { meldekortdetaljerInnsending } = this.props.innsending;
         const ukeOgPeriode = formaterUkeOgDatoPeriode(meldekortdetaljerInnsending!.meldeperiode.fra, meldekortdetaljerInnsending!.meldeperiode.til);
@@ -124,6 +131,11 @@ class Kvittering extends React.Component<KvitteringsProps> {
                 <Ingress>
                     {this.returnerStringMedDatoOgKlokkeslett(tidMottatt, meldekortdetaljerInnsending!)}
                 </Ingress>
+                {(typeof nesteAktivtMeldekort !== undefined) &&
+                <Ingress>
+                    {this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}
+                </Ingress>
+                }
             </>
         );
     }
@@ -139,7 +151,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">
-                    {this.visOppsummeringsTekster()}
+                    {this.visOppsummeringsTekster(nesteAktivtMeldekort!)}
                 </section>
                 <section className="seksjon">
                     <Meldekortdetaljer meldekortdetaljer={innsending.meldekortdetaljer} erAap={aktivtMeldekort.meldegruppe === Meldegruppe.ATTF} />

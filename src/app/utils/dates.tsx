@@ -6,7 +6,7 @@ const datoFormat = 'DD.MM.YYYY';
 
 export const hentTid = (dato: Date) => {
     return moment(dato).format('HH:mm');
-}
+};
 
 // Henter ukenummer
 export const hentUkenummerForDato = (dato: Date) => {
