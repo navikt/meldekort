@@ -36,17 +36,44 @@
 }
 @media @tablet {
   .aktivitetsrad {
-    display: block;
+    display: flex;
+    height: auto;
+
+    .inputrad {
+      display: inline-flex;
+      margin-left: auto;
+    }
+
+    .kategori_forklaring {
+      display: inline-block;
+      width: auto;
+      padding-left: 0.5rem;
+    }
+  }
+
+  .flex-container {
+    display: inline-block;
+    flex-direction: column-reverse;
+    direction: ltr;
+    justify-content: flex-start;
+    width: 24px;
+    height: 3rem;
+    text-align: center;
+    margin-right: 1.2rem;
+    margin-left: 0.5rem;
+  }
+
+  .feilIRad {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
   }
 }
 
 @media @phone {
   .aktivitetsrad {
-    display: block;
-    span {
-      display: block;
-      margin-right: 0;
-    }
+    display: flex;
+    height: auto;
 
     .inputrad {
       display: flex;
@@ -55,7 +82,7 @@
   }
 
   .flex-container {
-    display: flex;
+    display: inline-block;
     flex-direction: column-reverse;
     direction: ltr;
     justify-content: flex-start;
@@ -70,13 +97,5 @@
     margin-right: 0;
     margin-left: 0;
     padding-left: 0;
-  }
-}
-
-@media @tablet {
-  .feilIRad {
-    margin-right: 0;
-    margin-left: -0.5rem;
-    padding-left: 0.5rem;
   }
 }

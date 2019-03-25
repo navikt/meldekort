@@ -22,6 +22,7 @@
 .arbeidInput {
   display: inline-block;
   margin-right: 1rem;
+  padding-top: 0.2rem;
 
   .input--xs {
     width: 3rem;
@@ -32,22 +33,26 @@
 
 @media @tablet {
   .arbeidInput {
-    margin-right: 1.35rem;
+    margin-right: 0.5rem;
+    height: auto;
 
     .input--xs {
       width: 2.7rem;
     }
-    .skjemaelement__label {
-      padding-left: 1rem;
-    }
   }
 
   .arbeidsrad {
-    display: block;
+    display: flex;
 
     .inputrad {
-      display: inline-block;
-      margin-left: 7rem;
+      display: inline-flex;
+      margin-left: auto;
+    }
+
+    .kategori_forklaring {
+      display: inline-flex;
+      width: auto;
+      padding-left: 0.5rem;
     }
   }
 }
@@ -65,11 +70,8 @@
   }
 
   .arbeidsrad {
-    display: inline-block;
-    span {
-      display: block;
-      width: auto;
-    }
+    display: flex;
+    height: auto;
 
     .inputrad {
       display: block;

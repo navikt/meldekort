@@ -70,11 +70,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                 <Input
                     className="arbeidInput"
                     key={ukedag}
-                    label={
-                        <div>
-                            <span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>
-                        </div>
-                    }
+                    label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     bredde="XS"
                     step={0.5}
                     type={'number'}
