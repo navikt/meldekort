@@ -171,7 +171,6 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
        } else {
            let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
            this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
-           console.log(mDetaljerInn);
            this.props.settMeldekortdetaljerInnsending(mDetaljerInn);
            this.props.kontrollerMeldekort(mDetaljerInn);
        }
