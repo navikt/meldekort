@@ -97,7 +97,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     fortsetteRegistrert = (): boolean => {
-
         let sporsmal = this.hentSvarPaaSporsmal().filter( spm => spm.kategori === kategorier[4]);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
@@ -160,7 +159,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     hoppeOverUtfylling = (): boolean => {
-
         let jaSvar = false;
         this.hentSvarPaaSporsmal().map(spm => {
             if (spm.kategori !== kategorier[4] && spm.svar && !jaSvar) {
@@ -193,7 +191,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 <section className="seksjon">
                     {this.hentFeilmeldinger(meldegruppeErAAP)}
                 </section>
-
                 <section className="seksjon">
                     <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
                 </section>

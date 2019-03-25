@@ -17,6 +17,7 @@ export const InnsendingActions = {
     leggTilMeldekortId: createStandardAction(InnsendingTypeKeys.LEGG_TIL_MELDEKORTID) <number>(),
     leggTilInnsendingstype: createStandardAction(InnsendingTypeKeys.LEGG_TIL_INNSENDINGSTYPE)<Innsendingstyper | null>(),
     resetInnsending: createStandardAction(InnsendingTypeKeys.RESET_INNSENDING)<void>(),
+    resetSporsmal: createStandardAction(InnsendingTypeKeys.RESET_SPORSMAL)<void>(),
 
     kontrollerMeldekort: createAsyncAction(
         InnsendingTypeKeys.KONTROLLER_MELDEKORT,

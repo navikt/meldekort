@@ -116,7 +116,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
     }
 
     visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort) => {
-        const { person, aktivtMeldekort } = this.props;
+        const { person} = this.props;
         const { meldekortdetaljerInnsending } = this.props.innsending;
         const ukeOgPeriode = formaterUkeOgDatoPeriode(meldekortdetaljerInnsending!.meldeperiode.fra, meldekortdetaljerInnsending!.meldeperiode.til);
         const tidMottatt = hentIntl().formatMessage({id: 'sendt.mottatt.label'});

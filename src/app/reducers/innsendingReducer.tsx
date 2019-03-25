@@ -54,6 +54,9 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case getType(InnsendingActions.resetInnsending):
             return {...initialState };
 
+        case getType(InnsendingActions.resetSporsmal):
+            return {...state, sporsmalsobjekter: hentSporsmalConfig() };
+
         case getType(InnsendingActions.hentKorrigertId.success):
             return {
                 ...state,
