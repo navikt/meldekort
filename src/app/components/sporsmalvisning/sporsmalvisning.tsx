@@ -32,7 +32,7 @@ const Sporsmalvisning: React.FunctionComponent<Props> = (props) => {
                                     </span> : null
                                 }
                             </Undertittel>
-                            <HjelpetekstBase id={sporsmalOgSvar.forklaring} type="over">
+                            <HjelpetekstBase id={sporsmalOgSvar.forklaring} type="auto">
                                 <FormattedHTMLMessage id={sporsmalOgSvar.forklaring} />
                             </HjelpetekstBase>
                         </div>

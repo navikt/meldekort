@@ -25,6 +25,7 @@ interface UkeProps {
     aap: boolean;
     tekstId: string;
     forklaingId: string;
+    bareArbeid: boolean;
 }
 
 type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
@@ -91,18 +92,18 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     innhold = () => {
-        let { tekstId, aap, forklaingId } = this.props;
+        let { tekstId, aap, forklaingId, feil, bareArbeid } = this.props;
         return (
-            <div className="arbeidsrad" style={{backgroundColor: this.props.feil ? '#e79999' : ''}}>
+            <div className="arbeidsrad" style={{backgroundColor: feil ? '#e79999' : '', borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none'}}>
                 <div className="kategori_forklaring">
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="hoyre">
+                    <HjelpetekstBase id={'arbeid'} type="auto">
                         <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
                     </HjelpetekstBase>
                 </div>
-                <div className="inputrad">
+                <div className="inputrad_arbeid">
                     {this.setFelter()}
                 </div>
             </div>

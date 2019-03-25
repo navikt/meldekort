@@ -1,21 +1,24 @@
 .arbeidsrad {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  border: solid 1px #c6c2bf;
   border-left: solid 9px #99c2e8;
-  margin: 0.25rem;
+  border-top: 1px solid #c6c2bf;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
   height: 4rem;
 
   .kategori_forklaring {
     display: inline-flex;
+    padding-left: 0.8rem;
+    //justify-content: flex-start;
     width: 23rem;
   }
 
-  .inputrad {
+  .inputrad_arbeid {
     display: inline-block;
-    margin-left: 5rem;
+    margin-left: 6.5rem;
   }
 }
 
@@ -44,7 +47,7 @@
   .arbeidsrad {
     display: flex;
 
-    .inputrad {
+    .inputrad_arbeid {
       display: inline-flex;
       margin-left: auto;
     }
@@ -73,7 +76,7 @@
     display: flex;
     height: auto;
 
-    .inputrad {
+    .inputrad_arbeid {
       display: block;
       margin-left: 0;
     }

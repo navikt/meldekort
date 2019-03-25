@@ -114,6 +114,11 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                         aap={aap}
                         tekstId={'utfylling.arbeid'}
                         forklaingId={'forklaring.utfylling.arbeid'}
+                        bareArbeid={
+                            !this.sjekkSporsmal('aktivitetArbeid') &&
+                            !this.sjekkSporsmal('forhindret') &&
+                            !this.sjekkSporsmal('ferieFravar')
+                        }
                     /> : null
                 }
                 {this.sjekkSporsmal('aktivitetArbeid') ?

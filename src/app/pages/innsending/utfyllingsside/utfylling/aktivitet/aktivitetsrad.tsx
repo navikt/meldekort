@@ -116,7 +116,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="hoyre">
+                    <HjelpetekstBase id={'arbeid'} type="auto">
                         <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
                     </HjelpetekstBase>
                 </div>
@@ -129,9 +129,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
     render() {
         return (
-            <div>
+            <>
                 {this.innhold()}
-            </div>
+            </>
         );
     }
 }

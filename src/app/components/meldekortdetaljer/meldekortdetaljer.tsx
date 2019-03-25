@@ -76,7 +76,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                         }
                         {
                             meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer ?
-                                <HjelpetekstBase id={ukedag + `${i}`} type="over">
+                                <HjelpetekstBase id={ukedag + `${i}`} type="auto">
                                     {leggTilHjelpetekster(meldekortDag)}
                                 </HjelpetekstBase> : null
                         }
