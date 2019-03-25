@@ -10,7 +10,7 @@ import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../.
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../../store/configureStore';
-import { mapKortTypeTilTekst, mapKortStatusTilTekst } from '../../../utils/mapper';
+import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/mapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';
@@ -19,7 +19,7 @@ import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { Meldekort } from '../../../types/meldekort';
+import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { Innsendingstyper } from '../../../types/innsending';
 
 interface MapStateToProps {
@@ -78,6 +78,7 @@ class Detaljer extends React.Component<Props> {
             {key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop"/>},
             {key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype"/>}
         ];
+        let { meldegruppe } = aktivtMeldekort.meldekort;
         return(
             <div className="sideinnhold innhold-detaljer">
                 <img src={utklippstavle}/>
@@ -87,8 +88,8 @@ class Detaljer extends React.Component<Props> {
                         <Tabell rows={rows} columns={columns}/>
                     </div>
                 </section>
-                { meldekortdetaljer.meldekortdetaljer.id !== '' ?
-                    <Meldekortdetaljer meldekortdetaljer={ meldekortdetaljer.meldekortdetaljer}/> :
+                {meldekortdetaljer.meldekortdetaljer.id !== '' ?
+                    <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer.meldekortdetaljer} erAap={meldegruppe === Meldegruppe.ATTF}/> :
                     <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div> }
 
                     <section className="seksjon flex-innhold sentrert">
@@ -98,18 +99,16 @@ class Detaljer extends React.Component<Props> {
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
-                    { aktivtMeldekort.meldekort.korrigerbart ?
+                    {aktivtMeldekort.meldekort.korrigerbart ?
                         <NavKnapp
                             type={knappTyper.hoved}
                             nestePath={router.location.pathname + '/korriger'}
                             tekstid={'korriger.meldekort'}
                             className={'navigasjonsknapp'}
-                            nesteAktivtMeldekort={ aktivtMeldekort.meldekort}
+                            nesteAktivtMeldekort={aktivtMeldekort.meldekort}
                             nesteInnsendingstype={Innsendingstyper.korrigering}
-
                         /> : null
                     }
-
                 </section>
             </div>
         );

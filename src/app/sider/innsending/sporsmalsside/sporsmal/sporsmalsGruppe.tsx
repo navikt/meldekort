@@ -8,8 +8,11 @@ import { InnsendingState, Innsendingstyper } from '../../../../types/innsending'
 import { InnsendingActions } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';
+import { AktivtMeldekortState } from '../../../../reducers/aktivtMeldekortReducer';
+import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
 
 interface MapStateToProps {
+    aktivtMeldekort: AktivtMeldekortState;
 }
 
 interface MapDispatchToProps {
@@ -62,12 +65,14 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 sporsmalsobj.feil.feilmeldingId = this.finnesIntlId(sporsmalsobj.feil.feilmeldingId);
             }
         }
+        let { til, fra } = this.props.aktivtMeldekort.meldekort.meldeperiode;
         return(
             <Sporsmal
                 sporsmalsobjekt={sporsmalsobj}
                 key={sporsmalsobj.kategori}
                 checked={sporsmalsobj.checked}
                 sporsmalOnChange={this.sporsmalOnChange}
+                formatertDato={sporsmalsobj.kategori === 'registrert' ? hentNestePeriodeMedUkerOgDato(fra, til) : undefined}
             />
         );
     }
@@ -88,11 +93,11 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 // TODO: Bytt til å hente meldekortDetaljer fra Store
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        innsending: state.innsending
+        aktivtMeldekort: state.aktivtMeldekort,
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps =>{
+const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterSvar: (sporsmalsobjekt: Spm[]) =>
             dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekt))

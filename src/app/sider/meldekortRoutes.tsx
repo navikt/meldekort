@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Detaljer from './tidligereMeldekort/detaljer/detaljer';
 import OfteStilteSporsmal from './ofteStilteSporsmal/ofteStilteSporsmal';
 import EndreMeldeform from './endreMeldeform/endreMeldeform';
@@ -8,11 +8,8 @@ import EtterregistrerMeldekort from './etterregistrerMeldekort/etterregistrerMel
 import OmMeldekort from './omMeldekort/omMeldekort';
 import TidligereMeldekort from './tidligereMeldekort/tidligereMeldekort';
 import InnsendingRoutes from './innsending/innsendingRoutes';
-import { Innsendingstyper } from '../types/innsending';
 
-type PropsType = RouteComponentProps;
-
-const MeldekortRoutes = (props: PropsType) => {
+const MeldekortRoutes = () => {
     return (
         <div>
             <Switch>
@@ -23,8 +20,8 @@ const MeldekortRoutes = (props: PropsType) => {
                 <Route path="/etterregistrer-meldekort" render={() => <EtterregistrerMeldekort />} />
 
                 <Route path="/tidligere-meldekort/detaljer/korriger" render={(props) => <InnsendingRoutes {...props} />}/>
-                <Route path="/tidligere-meldekort/detaljer" render={(props: RouteComponentProps<any>) => <Detaljer {...props}/>} />
-                <Route path="/tidligere-meldekort" render={() => <TidligereMeldekort {...props} />} />
+                <Route path="/tidligere-meldekort/detaljer" render={(props) => <Detaljer {...props}/>} />
+                <Route path="/tidligere-meldekort" render={(props) => <TidligereMeldekort {...props} />} />
 
                 <Route path="/ofte-stilte-sporsmal" render={() => <OfteStilteSporsmal />} />
                 <Route path="/om-meldekort" render={() => <OmMeldekort/>} />

@@ -8,16 +8,16 @@ import { InnsendingActions } from '../../actions/innsending';
 import { Dispatch } from 'redux';
 import { selectRouter } from '../../selectors/router';
 import { connect } from 'react-redux';
-import { PersonState } from '../../reducers/personReducer';
 import { Router } from '../../types/router';
 import Tabell from '../../components/tabell/tabell';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { KortStatus } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
+import { Person } from '../../types/person';
 
 interface MapStateToProps {
-    person: PersonState;
+    person: Person;
     router: Router;
 }
 interface MapDispatchToProps {
@@ -38,7 +38,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     }
 
     hentMeldekortRaderFraPerson = () => {
-        let meldekortListe = this.props.person.person.etterregistrerteMeldekort;
+        let meldekortListe = this.props.person.etterregistrerteMeldekort;
         let radliste = [];
         for (let i = 0; i < meldekortListe.length; i++) {
             if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
@@ -63,7 +63,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
         ];
-        const { etterregistrerteMeldekort } = this.props.person.person;
+        const { etterregistrerteMeldekort } = this.props.person;
         return(
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">

@@ -4,6 +4,10 @@ const moment = require('moment');
 
 const datoFormat = 'DD.MM.YYYY';
 
+export const hentTid = (dato: Date) => {
+    return moment(dato).format('HH:mm');
+}
+
 // Henter ukenummer
 export const hentUkenummerForDato = (dato: Date) => {
     return moment(dato).isoWeek();
@@ -67,4 +71,8 @@ export const kanMeldekortSendesInn = (kortKanSendesFra: Date): boolean => {
 
 const ukeTekst = () => {
     return hentIntl().formatMessage({id: 'overskrift.uke'});
+};
+
+export const kalkulerDato = (startDato: Date, plussDager: number): Date => {
+    return moment(startDato).add(plussDager, 'days').toDate();
 };

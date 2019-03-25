@@ -1,9 +1,10 @@
 {
   "personId": 123456,
+  "fodselsnr": "11223344556",
   "etternavn": "MOCKESEN",
   "fornavn": "MOCK",
   "maalformkode": "NO",
-  "meldeform": "EMELD",
+  "meldeform": "PAPIR",
   "meldekort": [
     {
       "meldekortId": 1011121314,
@@ -30,7 +31,7 @@
         "kortKanSendesFra": "2019-01-26T12:00:00+01:00",
         "periodeKode": "201903"
       },
-      "meldegruppe": "DAGP",
+      "meldegruppe": "ATTF",
       "kortStatus": "OPPRE",
       "erForskuddsPeriode": false,
       "korrigerbart": true
@@ -65,33 +66,6 @@
     }
   ],
   "etterregistrerteMeldekort": [
-    {
-      "meldekortId": 1011121317,
-      "kortType": "ELEKTRONISK",
-      "meldeperiode": {
-        "fra": "2019-01-11T12:00:00+01:00",
-        "til": "2019-02-24T12:00:00+01:00",
-        "kortKanSendesFra": "2019-02-23T12:00:00+01:00",
-        "periodeKode": "201907"
-      },
-      "meldegruppe": "DAGP",
-      "kortStatus": "OPPRE",
-      "erForskuddsPeriode": false,
-      "korrigerbart": true
-    },
-    {
-      "meldekortId": 1011121317,
-      "kortType": "ELEKTRONISK",
-      "meldeperiode": {
-        "fra": "2019-01-11T12:00:00+01:00",
-        "til": "2019-02-24T12:00:00+01:00",
-        "kortKanSendesFra": "2019-02-23T12:00:00+01:00",
-        "periodeKode": "201907"
-      },
-      "meldegruppe": "DAGP",
-      "kortStatus": "OPPRE",
-      "erForskuddsPeriode": false,
-      "korrigerbart": true
-    }
+
   ]
 }
