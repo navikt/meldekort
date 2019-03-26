@@ -114,7 +114,7 @@ class TidligereMeldekort extends React.Component<Props> {
                 </div>
             );
         }
-    };
+    }
 
     componentDidMount() {
         this.props.resetInnsending();

@@ -59,8 +59,7 @@ const innsendingReducer = (state: InnsendingState = initialState,
 
         case getType(InnsendingActions.hentKorrigertId.success):
             return {
-                ...state,
-                korrigertMeldekortId: action.payload
+                ...state, korrigertMeldekortId: action.payload
             };
         case getType(InnsendingActions.oppdaterMeldekortdetaljer):
             return {...state, meldekortdetaljer: action.payload };

@@ -21,11 +21,11 @@ export const hentSporsmalConfig = () => {
             ja: 'svar.arbeid.ja',
             nei: 'svar.arbeid.nei',
             forklaring: 'forklaring.sporsmal.arbeid',
+            checked: undefined,
             feil: {
                 erFeil: false,
                 feilmeldingId: 'arbeidet.required'
-            },
-            checked: undefined
+            }
         },
         {
             kategori: 'aktivitetArbeid',
@@ -33,11 +33,11 @@ export const hentSporsmalConfig = () => {
             ja: 'svar.aktivitetArbeid.ja',
             nei: 'svar.aktivitetArbeid.nei',
             forklaring: 'forklaring.sporsmal.aktivitetArbeid',
+            checked: undefined,
             feil: {
                 erFeil: false,
                 feilmeldingId: 'kurs.required'
             },
-            checked: undefined
         },
         {
             kategori: 'forhindret',
@@ -45,11 +45,11 @@ export const hentSporsmalConfig = () => {
             ja: 'svar.forhindret.ja',
             nei: 'svar.forhindret.nei',
             forklaring: 'forklaring.sporsmal.forhindret',
+            checked: undefined,
             feil: {
                 erFeil: false,
                 feilmeldingId: 'syk.required'
             },
-            checked: undefined
         },
         {
             kategori: 'ferieFravar',
@@ -57,11 +57,11 @@ export const hentSporsmalConfig = () => {
             ja: 'svar.ferieFravar.ja',
             nei: 'svar.ferieFravar.nei',
             forklaring: 'forklaring.sporsmal.ferieFravar',
+            checked: undefined,
             feil: {
                 erFeil: false,
                 feilmeldingId: 'annetFravar.required'
             },
-            checked: undefined
         },
         {
             kategori: 'registrert',
@@ -69,11 +69,11 @@ export const hentSporsmalConfig = () => {
             ja: 'svar.registrert.ja',
             nei: 'svar.registrert.nei',
             forklaring: 'forklaring.sporsmal.registrert',
+            checked: undefined,
             feil: {
                 erFeil: false,
                 feilmeldingId: 'fortsetteRegistrert.required'
             },
-            checked: undefined
         },
 
     ];
