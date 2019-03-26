@@ -251,7 +251,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <section className="seksjon flex-innhold sentrert">
+                <section className="seksjon flex-innhold sentrert utfylling">
                     {this.hentFeilmeldinger()}
                     {this.hentUkePanel(Konstanter().forsteUke, hentUkenummerForDato(meldeperiode.fra), hentDatoForForsteUke(meldeperiode.fra))}
                     {this.hentUkePanel(Konstanter().andreUke, hentUkenummerForDato(meldeperiode.til), hentDatoForAndreUke(meldeperiode.til))}

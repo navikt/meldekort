@@ -5,7 +5,6 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
-import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
