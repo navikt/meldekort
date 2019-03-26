@@ -18,6 +18,8 @@ import { scrollToTop } from '../../../utils/scroll';
 import { IModal, ModalKnapp } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
 import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import veileder from '../../../ikoner/veileder.svg';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -178,14 +180,14 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon alert">
-                    <AlertStripe solid={true} type="info">
+                    <Veilederpanel type={'plakat'} kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
                         <div className="item">
                             <FormattedMessage id="sporsmal.lesVeiledning" />
                         </div>
                         <div className="item">
                             <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
                         </div>
-                    </AlertStripe>
+                    </Veilederpanel>
                 </section>
                 <section className="seksjon">
                     {this.hentFeilmeldinger(meldegruppeErAAP)}
@@ -193,9 +195,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
                 <section className="seksjon">
                     <SporsmalsGruppe AAP={meldegruppeErAAP}/>
-                </section>
-                <section className="seksjon">
-                    <AlertStripe solid={true} type="info">
+                    <AlertStripe type="info">
                         <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
                     </AlertStripe>
                 </section>

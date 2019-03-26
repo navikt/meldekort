@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Element, Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -173,17 +172,17 @@ class SendMeldekort extends React.Component<Props, any> {
                     </div>
                 </section>
                 <section className="seksjon">
-                    <AlertStripe type="info" solid={true}>
-                        <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/>
-                        <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/>
-                        <FormattedHTMLMessage id="sendMeldekort.info.neste"/>
-                    </AlertStripe>
+                    <div className="box">
+                        <Normaltekst><FormattedHTMLMessage id="sendMeldekort.info.neste"/></Normaltekst>
+                        <Normaltekst><FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/></Normaltekst>
+                        <Normaltekst><FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/></Normaltekst>
+                    </div>
                 </section>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
                         nestePath={'/innsending'}
-                        tekstid={'sendMeldekort.knapp.startUtfylling'}
+                        tekstid={'naviger.neste'}
                         aktivtMeldekortObjekt={this.filtrerMeldekortListe()[0]}
                     />
                 </section>

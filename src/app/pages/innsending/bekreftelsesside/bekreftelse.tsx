@@ -21,7 +21,7 @@ import {
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { hentIntl } from '../../../utils/intlUtil';
-import { Checkbox } from 'nav-frontend-skjema';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
 import { KontrollerActions, oppdaterMeldekortdetaljer, settMeldekortdetaljerInnsending } from '../../../actions/innsending';
@@ -207,15 +207,15 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                     <Sprakvelger/>
                 </section>
                 <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap}/>
-                <div className={'bekreftInfo'}>
+                <BekreftCheckboksPanel
+                    className={'bekreftInfo'}
+                    onChange={() => this.setChecked()}
+                    checked={meldekortdetaljer.sporsmal.signatur}
+                    label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
+                    feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
+                >
                     <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')}/></Normaltekst>
-                    <Checkbox
-                        onChange={() => this.setChecked()}
-                        label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
-                        checked={meldekortdetaljer.sporsmal.signatur}
-                        feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
-                    />
-                </div>
+                </BekreftCheckboksPanel>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
