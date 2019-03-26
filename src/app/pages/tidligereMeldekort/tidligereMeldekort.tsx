@@ -76,7 +76,6 @@ class TidligereMeldekort extends React.Component<Props> {
                     return (
                         <EtikettBase
                             type={finnRiktigEtikettType(row.status)}
-                            className={HvisIngenBeregningSettBlaEtikett(row.status)}
                         > {row.status}
                         </EtikettBase>
                     );

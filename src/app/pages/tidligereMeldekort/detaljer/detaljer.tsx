@@ -68,7 +68,6 @@ class Detaljer extends React.Component<Props> {
                     return (
                         <EtikettBase
                             type={finnRiktigEtikettType(row.kortStatus)}
-                            className={HvisIngenBeregningSettBlaEtikett(row.kortStatus)}
                         > {row.kortStatus}
                         </EtikettBase>
                     );
