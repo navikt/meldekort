@@ -20,6 +20,7 @@ import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selector
 import AlertStripe from 'nav-frontend-alertstriper';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
+import { formaterBelop } from '../../utils/numberFormat';
 
 interface MapStateToProps {
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -58,7 +59,7 @@ class TidligereMeldekort extends React.Component<Props> {
                 dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
                 mottatt: typeof meldekort.mottattDato === 'undefined' || meldekort.mottattDato === null ? '' : formaterDato(meldekort.mottattDato),
                 status: mapKortStatusTilTekst(meldekort.kortStatus),
-                bruttobelop: typeof meldekort.bruttoBelop === 'undefined' || meldekort.bruttoBelop === null ? '' : `${meldekort.bruttoBelop} kr`,
+                bruttobelop: formaterBelop(meldekort.bruttoBelop),
                 detaljer: hentIntl().formatMessage({id: 'overskrift.detaljer'})
             });
         });
