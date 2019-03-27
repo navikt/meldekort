@@ -9,11 +9,13 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
 import { InnsendingState, Innsendingstyper } from '../../types/innsending';
-import { Meldekort, Meldekortdetaljer, Sporsmal } from '../../types/meldekort';
+import { Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal } from '../../types/meldekort';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { RootState } from '../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
+import { UtfyltDag } from './utfyllingsside/utfylling/utfyllingConfig';
+import { hentUkedagerSomStringListe } from '../../utils/ukedager';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -25,6 +27,7 @@ interface MapDispatchToProps {
     hentKorrigertId: () => void;
     hentMeldekortdetaljer: () => void;
     oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
+    oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => void;
     resetSporsmalOgUtfylling: () => void;
     settMeldekortId: (meldekortId: number) => void;
 }
@@ -43,13 +46,17 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     }
 
     resetSporsmalsHvisIkkeKorrigering = () => {
-        const { innsending, oppdaterSporsmalsobjekter, resetSporsmalOgUtfylling } = this.props;
+        const { innsending, oppdaterSporsmalsobjekter, resetSporsmalOgUtfylling, oppdaterUtfylteDager } = this.props;
         const erIkkeUndefined = innsending.sporsmalsobjekter! && this.props.meldekortdetaljer.sporsmal!;
         if (innsending.innsendingstype === Innsendingstyper.korrigering  && erIkkeUndefined) {
             const konverterteSporsmalsobjekter = this.konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal(
                 this.props.meldekortdetaljer.sporsmal, innsending.sporsmalsobjekter
             );
-            this.props.oppdaterSporsmalsobjekter(konverterteSporsmalsobjekter);
+            const konverterteUtfylteDager = this.konverterMeldekortdetaljerMeldekortDagerTilInnsendingUtfylteDager(
+                this.props.meldekortdetaljer.sporsmal.meldekortDager, innsending.utfylteDager
+            );
+            oppdaterSporsmalsobjekter(konverterteSporsmalsobjekter);
+            oppdaterUtfylteDager(konverterteUtfylteDager);
         } else {
             resetSporsmalOgUtfylling();
         }
@@ -69,8 +76,22 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
         return (sporsmalValg) ? kategoritekst + '.ja' :  kategoritekst + '.nei';
     }
 
+    konverterMeldekortdetaljerMeldekortDagerTilInnsendingUtfylteDager = (meldekortDager: MeldekortDag[], utfylteDager: UtfyltDag[]) => {
+        const ukedagerSomListe = hentUkedagerSomStringListe();
+        const konverterteUtfylteDager = utfylteDager.map((utfyltDag, index) => {
+            return {
+                ...utfyltDag, uke: (index < 7 ) ? 1 : 2,
+                dag: ukedagerSomListe[index % 7],
+                syk: meldekortDager[index].syk,
+                arbeidetTimer: meldekortDager[index].arbeidetTimerSum,
+                annetFravaer: meldekortDager[index].annetFravaer,
+                kurs: meldekortDager[index].kurs
+            };
+        });
+        return konverterteUtfylteDager;
+    }
+
     konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal = (mkdetaljerSporsmal: Sporsmal, innsendingSporsmal: Spm[]): Spm[] => {
-        console.log('inssSpm', innsendingSporsmal);
         const listeMedSporsmal = (mkdetaljerSporsmal!) ? this.returnerListeMedMeldekortdetaljerSporsmal(mkdetaljerSporsmal) : [];
         const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal
              .map( spm => {
@@ -81,7 +102,6 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
                  }
                  return { ...spm};
              });
-        console.log(konvertertListeMedInnsendingSpm);
         return konvertertListeMedInnsendingSpm;
     }
 
@@ -128,6 +148,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
         oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
             dispatch((InnsendingActions.oppdaterSpm(sporsmalsobjekter))),
+        oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) =>
+            dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
         hentMeldekortdetaljer: () =>
             dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
     };

@@ -101,17 +101,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
         }
     }
 
-    returnerStringMedDatoOgKlokkeslett = (tekst: String, meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => {
-        const klokkeslett = hentTid(meldekortdetaljerInnsending!.mottattDato);
-        const dato = formaterDato(meldekortdetaljerInnsending!.mottattDato);
-
-        return tekst.replace('{1}', klokkeslett).replace('{0}', dato);
-    }
-
     nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
-        const tekst = hentIntl().formatMessage({id: 'sendt.meldekortKanSendes'});
         if ( nesteAktivtMeldekort !== undefined) {
-            return tekst.replace('{0}', formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra));
+            return hentIntl().formatMessage({id: 'sendt.meldekortKanSendes'}, {[0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra)});
         }
     }
 
@@ -119,22 +111,17 @@ class Kvittering extends React.Component<KvitteringsProps> {
         const { person} = this.props;
         const { meldekortdetaljerInnsending } = this.props.innsending;
         const ukeOgPeriode = formaterUkeOgDatoPeriode(meldekortdetaljerInnsending!.meldeperiode.fra, meldekortdetaljerInnsending!.meldeperiode.til);
-        const tidMottatt = hentIntl().formatMessage({id: 'sendt.mottatt.label'});
+        const meldekortErMottatt = hentIntl().formatMessage(
+            {id: 'sendt.mottatt.label'},
+            {[0]: formaterDato(meldekortdetaljerInnsending!.mottattDato), [1]: hentTid(meldekortdetaljerInnsending!.mottattDato)});
+
         return(
             <>
-                <Ingress>
-                    {hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn}
-                </Ingress>
-                <Ingress>
-                    {hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}
-                </Ingress>
-                <Ingress>
-                    {this.returnerStringMedDatoOgKlokkeslett(tidMottatt, meldekortdetaljerInnsending!)}
-                </Ingress>
+                <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn}</span></Ingress>
+                <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
+                <Ingress><span>{meldekortErMottatt}</span></Ingress>
                 {(typeof nesteAktivtMeldekort !== undefined) &&
-                <Ingress>
-                    {this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}
-                </Ingress>
+                <Ingress><span>{this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}</span></Ingress>
                 }
             </>
         );
