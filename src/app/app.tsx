@@ -13,6 +13,9 @@ import { PersonStatusActions } from './actions/personStatus';
 import { connect } from 'react-redux';
 import Feilside from './components/feilside/feilside';
 import UIModalWrapper from './components/modal/UIModalWrapper';
+import { BaksystemFeilmelding } from './types/ui';
+import { selectFeilmelding } from './selectors/ui';
+import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
 
 if (erMock()) {
     setupMock();
@@ -20,6 +23,7 @@ if (erMock()) {
 
 interface MapStateToProps {
     personStatus: PersonStatusState;
+    baksystemFeilmelding: BaksystemFeilmelding;
 }
 
 interface MapDispatchToProps {
@@ -42,7 +46,13 @@ class App extends React.Component<Props> {
 
     setInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
-            return null;
+            return (
+                <div className="main-container">
+                {this.props.baksystemFeilmelding.visFeilmelding ?
+                    <UIAlertstripeWrapper/> : <Feilside/>
+                }
+                </div>
+            );
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
@@ -77,9 +87,10 @@ class App extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (personStatus: RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        personStatus: personStatus.personStatus,
+        personStatus: state.personStatus,
+        baksystemFeilmelding: selectFeilmelding(state)
     };
 };
 

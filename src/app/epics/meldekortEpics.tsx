@@ -14,9 +14,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
         filter(isActionOf(MeldekortActions.apiKallFeilet)),
         concatMap(action => {
-            console.log('APIKALL FEILET!');
             const axiosResponse: AxiosResponse | undefined = action.payload.response;
-            console.log('Status var: ' + axiosResponse!.status);
             if (
                 axiosResponse &&
                 axiosResponse.status !== undefined &&

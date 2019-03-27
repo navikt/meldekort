@@ -19,7 +19,7 @@ type UIAlertstripeWrapperProps = MapStateToProps & MapDispatchToProps;
 
 const UIAlertstripeWrapper: React.FunctionComponent<UIAlertstripeWrapperProps> = ({ baksystemFeilmelding, skjulFeilmelding }) => {
     return (
-        <div>
+        <div className={'alertstripe_wrapper'}>
             {baksystemFeilmelding.visFeilmelding ?
                 <AlertStripe type="advarsel" solid={true}>
                     <div>{baksystemFeilmelding.content()}</div>

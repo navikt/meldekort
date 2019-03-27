@@ -47,7 +47,6 @@ class SendMeldekort extends React.Component<Props, any> {
         let meldekortListe = this.filtrerMeldekortListe();
 
         if (meldekortListe.length === 1) {
-            console.log('Har ett meldekort');
             this.props.leggTilAktivtMeldekort(meldekortListe[0]);
             return true;
         }
