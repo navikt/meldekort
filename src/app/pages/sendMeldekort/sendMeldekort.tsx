@@ -17,6 +17,8 @@ import { BaksystemFeilmelding } from '../../types/ui';
 import { selectFeilmelding } from '../../selectors/ui';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Redirect } from 'react-router';
+import { hentIntl } from '../../utils/intlUtil';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 interface MapStateToProps {
    person: PersonState;

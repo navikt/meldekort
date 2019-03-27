@@ -172,9 +172,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
     render() {
         const meldegruppeErAAP = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
+        const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
 
         return (
             <main>
+                <section className="seksjon flex-innhold sentrert">
+                    {brukermelding !== '' ?
+                        <AlertStripe type={'info'}>
+                            {brukermelding}
+                        </AlertStripe> : null
+                    }
+                </section>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>

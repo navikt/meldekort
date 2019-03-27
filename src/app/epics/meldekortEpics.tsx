@@ -34,7 +34,6 @@ const handterFeiletApiKall: AppEpic = action$ =>
                 axiosResponse.status !== undefined &&
                 axiosResponse.status === 500
             ) {
-                console.log('Returnerer baksystem feilmelding');
                 return [
                     UiActions.visBaksystemFeilmelding({
                         content: () => baksystemFeilmeldingContent(),
