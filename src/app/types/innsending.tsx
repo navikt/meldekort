@@ -9,8 +9,8 @@ export interface InnsendingState {
     sporsmalsobjekter: Spm[];
     utfylteDager: UtfyltDag[];
     meldekortdetaljer: Meldekortdetaljer;
-    meldekortdetaljerInnsending?: MeldekortdetaljerInnsending | null;
-    valideringsResultat?: ValideringsResultat | undefined;
+    meldekortdetaljerInnsending?: MeldekortdetaljerInnsending;
+    valideringsResultat?: ValideringsResultat;
 }
 
 export interface FeilIDager {

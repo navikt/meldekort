@@ -214,7 +214,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
         return(
             <main>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel ><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
+                    <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 {this.hentFeilmeldinger()}

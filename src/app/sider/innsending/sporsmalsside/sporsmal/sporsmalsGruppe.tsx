@@ -93,7 +93,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     }
 }
 
-// TODO: Bytt til å hente meldekortDetaljer fra Store
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         aktivtMeldekort: state.aktivtMeldekort,

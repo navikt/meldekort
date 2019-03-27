@@ -10,7 +10,6 @@ import { MeldekortActions } from '../actions/meldekort';
 import { postMeldekort } from '../api/api';
 import { ValideringsResultat } from '../types/meldekort';
 
-                    // TODO: sett inn MeldekortActions.feilet lalal
 const hentKorrigertId: AppEpic = (action$, state$) =>
     action$.pipe(
         filter(isActionOf([InnsendingActions.hentKorrigertId.request])),
@@ -19,7 +18,7 @@ const hentKorrigertId: AppEpic = (action$, state$) =>
             from(fetchKorrigertId(state.aktivtMeldekort.meldekort.meldekortId)).pipe(
                 map(InnsendingActions.hentKorrigertId.success),
                 catchError(error =>
-                    of(InnsendingActions.hentKorrigertId.failure(error))
+                    of(InnsendingActions.hentKorrigertId.failure(error), MeldekortActions.apiKallFeilet(error))
                 )
             )
         )

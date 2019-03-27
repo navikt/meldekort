@@ -8,7 +8,7 @@ import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { RootState } from '../../../store/configureStore';
 import { oppdaterAktivtMeldekort } from '../../../actions/aktivtMeldekort';
 import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe, Meldekort, MeldekortdetaljerInnsending } from '../../../types/meldekort';
+import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
 import { Dispatch } from 'redux';
 import { selectRouter } from '../../../selectors/router';
@@ -19,7 +19,7 @@ import { isEmpty } from 'ramda';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
-import { formaterDato, formaterUkeOgDatoPeriode, hentTid, kanMeldekortSendesInn } from '../../../utils/dates';
+import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
 
 interface MapStateToProps {
     router: Router;

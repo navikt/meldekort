@@ -46,8 +46,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
 
     settSporsmalOgUtfyllingHvisKorrigering = () => {
         const { innsending, oppdaterSporsmalsobjekter, oppdaterUtfylteDager } = this.props;
-        const erIkkeUndefined = innsending.sporsmalsobjekter! && this.props.meldekortdetaljer.sporsmal!;
-        if (innsending.innsendingstype === Innsendingstyper.korrigering  && erIkkeUndefined) {
+        if (innsending.innsendingstype === Innsendingstyper.korrigering ) {
             const konverterteSporsmalsobjekter = this.konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal(
                 this.props.meldekortdetaljer.sporsmal, innsending.sporsmalsobjekter);
             const konverterteUtfylteDager = this.konverterMeldekortdetaljerMeldekortDagerTilInnsendingUtfylteDager(
