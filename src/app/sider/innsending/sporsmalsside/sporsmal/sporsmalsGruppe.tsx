@@ -31,7 +31,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         super(props);
     }
 
-    // TODO: mellomlagre sporsmalsvar > beregne & sett inn i fravarsdager variabel
     sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>, value?: string) => {
         const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
             .map( sporsmalsobj => {
@@ -57,12 +56,15 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
     lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean, innsendingstype: Innsendingstyper | null) => {
         const tekstendelse = (erAAP) ? '-AAP' : '';
+        let skalVareDisabled: boolean = false;
         for (let key in sporsmalsobj) {
-            // kategori == registrert såå
-            if (sporsmalsobj[key] !== sporsmalsobj.kategori && sporsmalsobj[key] !== sporsmalsobj.feil && sporsmalsobj[key] !== sporsmalsobj.checked) {
+            if (sporsmalsobj[key] !== sporsmalsobj.kategori &&
+                sporsmalsobj[key] !== sporsmalsobj.feil && sporsmalsobj[key] !== sporsmalsobj.checked) {
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
                 sporsmalsobj.feil.feilmeldingId = this.finnesIntlId(sporsmalsobj.feil.feilmeldingId);
+            } else if (sporsmalsobj[key] === 'registrert' && this.props.innsending.innsendingstype === Innsendingstyper.korrigering) {
+                skalVareDisabled = true;
             }
         }
         let { til, fra } = this.props.aktivtMeldekort.meldekort.meldeperiode;
@@ -71,6 +73,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 sporsmalsobjekt={sporsmalsobj}
                 key={sporsmalsobj.kategori}
                 checked={sporsmalsobj.checked}
+                disabled={skalVareDisabled}
                 sporsmalOnChange={this.sporsmalOnChange}
                 formatertDato={sporsmalsobj.kategori === 'registrert' ? hentNestePeriodeMedUkerOgDato(fra, til) : undefined}
             />

@@ -25,22 +25,15 @@ interface MapDispatchToProps {
     hentKorrigertId: () => void;
     hentMeldekortdetaljer: () => void;
     oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
-    resetSporsmal: () => void;
+    resetSporsmalOgUtfylling: () => void;
     settMeldekortId: (meldekortId: number) => void;
-}
-
-interface State {
-    sporsmalobjekter: Spm[];
 }
 
 type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
 
-class InnsendingRoutes extends React.Component<InnsendingRoutesProps, State> {
+class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     constructor(props: InnsendingRoutesProps) {
         super(props);
-        this.state = {
-            sporsmalobjekter: this.props.innsending.sporsmalsobjekter
-        };
     }
 
     settMeldekortIdBasertPaInnsendingstype = () => {
@@ -50,7 +43,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, State> {
     }
 
     resetSporsmalsHvisIkkeKorrigering = () => {
-        const { innsending, oppdaterSporsmalsobjekter, resetSporsmal } = this.props;
+        const { innsending, oppdaterSporsmalsobjekter, resetSporsmalOgUtfylling } = this.props;
         const erIkkeUndefined = innsending.sporsmalsobjekter! && this.props.meldekortdetaljer.sporsmal!;
         if (innsending.innsendingstype === Innsendingstyper.korrigering  && erIkkeUndefined) {
             const konverterteSporsmalsobjekter = this.konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal(
@@ -58,7 +51,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, State> {
             );
             this.props.oppdaterSporsmalsobjekter(konverterteSporsmalsobjekter);
         } else {
-            resetSporsmal();
+            resetSporsmalOgUtfylling();
         }
     }
 
@@ -73,11 +66,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, State> {
     }
 
     settCheckedBasertPaBoolean = (kategoritekst: string, sporsmalValg: boolean) => {
-        if (sporsmalValg) {
-            return kategoritekst + '.ja';
-        } else {
-            return kategoritekst + '.nei';
-        }
+        return (sporsmalValg) ? kategoritekst + '.ja' :  kategoritekst + '.nei';
     }
 
     konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal = (mkdetaljerSporsmal: Sporsmal, innsendingSporsmal: Spm[]): Spm[] => {
@@ -105,8 +94,6 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, State> {
     render() {
         const { match, innsending } = this.props;
 
-        // console.log(typeof konverterteSporsmalsobjekter);
-        // if (typeof konverterteSporsmalsobjekter !== 'undefined') {this.props.oppdaterSporsmalsobjekter(konverterteSporsmalsobjekter);}
         return (
             <div className="sideinnhold">
                 <PeriodeBanner/>
@@ -137,8 +124,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
         hentKorrigertId: () =>
             dispatch(InnsendingActions.hentKorrigertId.request()),
-        resetSporsmal: () =>
-            dispatch(InnsendingActions.resetSporsmal()),
+        resetSporsmalOgUtfylling: () =>
+            dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
         oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
             dispatch((InnsendingActions.oppdaterSpm(sporsmalsobjekter))),
         hentMeldekortdetaljer: () =>

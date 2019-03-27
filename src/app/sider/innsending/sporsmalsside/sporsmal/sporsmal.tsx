@@ -11,6 +11,7 @@ interface SporsmalProps {
     checked: string | undefined;
     sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
     formatertDato?: string;
+    disabled: boolean;
 }
 
 const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
@@ -36,11 +37,13 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                 radios={[
                     {
                         label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.ja }),
-                        value: props.sporsmalsobjekt.kategori + '.ja'
+                        value: props.sporsmalsobjekt.kategori + '.ja',
+                        disabled: props.disabled
                     },
                     {
                         label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.nei }),
                         value: props.sporsmalsobjekt.kategori + '.nei',
+                        disabled: props.disabled
                     }
                 ]}
                 checked={props.checked}
