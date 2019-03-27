@@ -46,15 +46,15 @@ class NavKnapp extends React.Component<Props> {
 
     harNestePathInnsending = (nestePathParams: string[]) => {
         return (nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending
-            || nestePathParams[nestePathParams.length - 1] === Innsendingstyper.korrigering)
-    };
+            || nestePathParams[nestePathParams.length - 1] === Innsendingstyper.korrigering);
+    }
 
     returnerNestePathInnenforInnsending = (params: string[], nestePathParams: string[]) => {
         const editedParams = params;
         editedParams.pop();
-        editedParams.push(nestePathParams[nestePathParams.length-1]);
+        editedParams.push(nestePathParams[nestePathParams.length - 1]);
         return editedParams.join('/');
-    };
+    }
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
         const { nesteAktivtMeldekort, innsendingstypeFraStore, nesteInnsendingstype,
@@ -71,9 +71,9 @@ class NavKnapp extends React.Component<Props> {
             const path = router.location.pathname;
             const params = path.split('/');
             const nestePathParams = nestePath.split('/');
-            const erPaKvittering = params[params.length-1] === 'kvittering';
+            const erPaKvittering = params[params.length - 1] === 'kvittering';
             const erPaInnsending = innsendingstypeFraStore !== null;
-            let nyPath: string = "";
+            let nyPath: string = '';
 
             if (erPaInnsending) {
                 if (!erPaKvittering) {
