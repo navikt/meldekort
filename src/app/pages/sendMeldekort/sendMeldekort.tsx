@@ -55,6 +55,9 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     filtrerMeldekortListe = () => {
+        if (typeof this.props.person.person.meldekort === 'undefined') {
+            return [];
+        }
         return this.props.person.person.meldekort.filter((meldekortObj) =>
              (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
                (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
