@@ -4,7 +4,7 @@
   "etternavn": "MOCKESEN",
   "fornavn": "MOCK",
   "maalformkode": "NO",
-  "meldeform": "PAPIR",
+  "meldeform": "EMELD",
   "meldekort": [
     {
       "meldekortId": 1011121314,
@@ -15,7 +15,7 @@
         "kortKanSendesFra": "2019-01-12T12:00:00+01:00",
         "periodeKode": "201901"
       },
-      "meldegruppe": "DAGP",
+      "meldegruppe": "ATTF",
       "kortStatus": "FERDI",
       "bruttoBelop": 13430,
       "erForskuddsPeriode": false,
