@@ -28,6 +28,7 @@ interface MapStateToProps {
 interface MapDispatchToProps {
     oppdaterSvar: (sporsmalsobjekt: Sporsmal[]) => void;
     skjulModal: () => void;
+    resetSporsmalOgUtfylling: () => void;
     visModal: (modal: IModal) => void;
 }
 
@@ -168,6 +169,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return !jaSvar;
     }
 
+    resetSporsmalOgUtfyllingHvisAktivtMeldekortIdErLikInnsendingMeldekortId = () => {
+        const { aktivtMeldekort, innsending, resetSporsmalOgUtfylling } = this.props;
+        if ( aktivtMeldekort.meldekort.meldekortId !== innsending.meldekortId ) {
+            resetSporsmalOgUtfylling();
+        }
+    }
+
+    componentDidMount() {
+        this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdErLikInnsendingMeldekortId();
+    }
+
     render() {
         const { innsending, aktivtMeldekort } = this.props;
         const meldegruppeErAAP = aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
@@ -250,6 +262,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
         skjulModal: () => dispatch(UiActions.skjulModal()),
         visModal: (modal: IModal) => dispatch(UiActions.visModal(modal)),
+        resetSporsmalOgUtfylling: () =>
+            dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
     };
 };
 

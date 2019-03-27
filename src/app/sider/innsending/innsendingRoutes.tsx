@@ -28,7 +28,6 @@ interface MapDispatchToProps {
     hentMeldekortdetaljer: () => void;
     oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
     oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => void;
-    resetSporsmalOgUtfylling: () => void;
     settMeldekortId: (meldekortId: number) => void;
 }
 
@@ -45,20 +44,16 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
             hentKorrigertId() : settMeldekortId(aktivtMeldekort.meldekortId);
     }
 
-    resetSporsmalsHvisIkkeKorrigering = () => {
-        const { innsending, oppdaterSporsmalsobjekter, resetSporsmalOgUtfylling, oppdaterUtfylteDager } = this.props;
+    settSporsmalOgUtfyllingHvisKorrigering = () => {
+        const { innsending, oppdaterSporsmalsobjekter, oppdaterUtfylteDager } = this.props;
         const erIkkeUndefined = innsending.sporsmalsobjekter! && this.props.meldekortdetaljer.sporsmal!;
         if (innsending.innsendingstype === Innsendingstyper.korrigering  && erIkkeUndefined) {
             const konverterteSporsmalsobjekter = this.konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal(
-                this.props.meldekortdetaljer.sporsmal, innsending.sporsmalsobjekter
-            );
+                this.props.meldekortdetaljer.sporsmal, innsending.sporsmalsobjekter);
             const konverterteUtfylteDager = this.konverterMeldekortdetaljerMeldekortDagerTilInnsendingUtfylteDager(
-                this.props.meldekortdetaljer.sporsmal.meldekortDager, innsending.utfylteDager
-            );
+                this.props.meldekortdetaljer.sporsmal.meldekortDager, innsending.utfylteDager);
             oppdaterSporsmalsobjekter(konverterteSporsmalsobjekter);
             oppdaterUtfylteDager(konverterteUtfylteDager);
-        } else {
-            resetSporsmalOgUtfylling();
         }
     }
 
@@ -108,11 +103,11 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     componentDidMount() {
         this.settMeldekortIdBasertPaInnsendingstype();
         this.props.hentMeldekortdetaljer();
-        this.resetSporsmalsHvisIkkeKorrigering();
+        this.settSporsmalOgUtfyllingHvisKorrigering();
     }
 
     render() {
-        const { match, innsending } = this.props;
+        const { match } = this.props;
 
         return (
             <div className="sideinnhold">
@@ -144,8 +139,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
         hentKorrigertId: () =>
             dispatch(InnsendingActions.hentKorrigertId.request()),
-        resetSporsmalOgUtfylling: () =>
-            dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
         oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
             dispatch((InnsendingActions.oppdaterSpm(sporsmalsobjekter))),
         oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) =>
