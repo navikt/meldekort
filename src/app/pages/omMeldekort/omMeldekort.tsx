@@ -13,7 +13,6 @@ class OmMeldekort extends React.Component<any, any> {
     }
 
     render() {
-        console.log(hentIntl().formatMessage({id: 'genereltOmMeldekort.informasjonOmMeldekortLink'}));
         return(
             <div className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
