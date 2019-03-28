@@ -1,11 +1,14 @@
-import { Constants, InnsendingState } from '../types/innsending';
-import { InnsendingActions, KontrollerActions } from '../actions/innsending';
-import { hentSporsmalConfig } from '../pages/innsending/sporsmalsside/sporsmal/sporsmalConfig';
-import { hentUtfyltDagConfig } from '../pages/innsending/utfyllingsside/utfylling/utfyllingConfig';
-import { KortType } from '../types/meldekort';
+import { InnsendingState } from '../types/innsending';
+import { InnsendingActions, InnsendingActionsTypes } from '../actions/innsending';
 import { getType } from 'typesafe-actions';
+import { hentSporsmalConfig } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
+import { hentUtfyltDagConfig } from '../sider/innsending/utfyllingsside/utfylling/utfyllingConfig';
+import { KortType } from '../types/meldekort';
 
 const initialState: InnsendingState = {
+    meldekortId: 0,
+    korrigertMeldekortId: 0,
+    innsendingstype: null,
     sporsmalsobjekter: hentSporsmalConfig(),
     utfylteDager: hentUtfyltDagConfig(),
     meldekortdetaljer: {
@@ -34,21 +37,38 @@ const initialState: InnsendingState = {
 };
 
 const innsendingReducer = (state: InnsendingState = initialState,
-                           action: InnsendingActions): InnsendingState => {
+                           action: InnsendingActionsTypes): InnsendingState => {
     switch (action.type) {
+        case getType(InnsendingActions.oppdaterUtfylteDager):
+            return { ...state, utfylteDager: action.payload };
 
-        case Constants.OPPDATER_SPM:
-            return { ...state, ...action.payload };
-        case Constants.OPPDATER_DAGER:
-            return { ...state, ...action.payload };
-        case Constants.OPPDATER_MELDEKORTDETALJER:
-            return { ...state, ...action.payload };
-        case Constants.SETT_MELDEKORTDETALJER_INNSENDING:
-            return { ...state, ...action.payload };
-        case Constants.SETT_VALIDERINGSRESULTAT:
-            return { ...state, ...action.payload };
-        case getType(KontrollerActions.kontrollerMeldekort.success):
-            return { ...state, ...action.payload, valideringsResultat: action.payload.valideringsresultat };
+        case getType(InnsendingActions.oppdaterSpm):
+            return { ...state, sporsmalsobjekter: action.payload };
+
+        case getType(InnsendingActions.leggTilMeldekortId):
+            return { ...state, meldekortId: action.payload };
+
+        case getType(InnsendingActions.leggTilInnsendingstype):
+            return {...state, innsendingstype: action.payload };
+
+        case getType(InnsendingActions.resetInnsending):
+            return {...initialState };
+
+        case getType(InnsendingActions.resetSporsmalOgUtfylling):
+            return {...state, sporsmalsobjekter: hentSporsmalConfig(), utfylteDager: hentUtfyltDagConfig() };
+
+        case getType(InnsendingActions.hentKorrigertId.success):
+            return {
+                ...state, korrigertMeldekortId: action.payload
+            };
+        case getType(InnsendingActions.oppdaterMeldekortdetaljer):
+            return {...state, meldekortdetaljer: action.payload };
+
+        case getType(InnsendingActions.settMeldekortdetaljerInnsending):
+            return {...state, meldekortdetaljerInnsending: action.payload };
+
+        case getType(InnsendingActions.settValideringsresultat):
+            return {...state, ...action.payload, valideringsResultat: action.payload };
 
         default:
             return state;

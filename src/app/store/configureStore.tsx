@@ -6,9 +6,10 @@ import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
 // import logger from 'redux-logger';
 
+import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
-import personReducer, { PersonState } from '../reducers/personReducer';
+import personReducer from '../reducers/personReducer';
 import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
 import tekster from '../tekster/kompilerte-tekster';
 import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
@@ -21,10 +22,10 @@ import personEpics from '../epics/personEpics';
 import personStatusEpics from '../epics/personStatusEpics';
 import innsendingReducer from '../reducers/innsendingReducer';
 import { InnsendingState } from '../types/innsending';
-import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
+import innsendingEpics from '../epics/innsendingEpics';
 import uiReducer, { UIState } from '../reducers/uiReducer';
 import meldekortEpics from '../epics/meldekortEpics';
-import innsendingEpics from '../epics/innsendingEpics';
+import { Person } from '../types/person';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -43,7 +44,7 @@ export interface RootState {
     locales: LocalesState;
     intl: IntlState;
     router: RouterState;
-    person: PersonState;
+    person: Person;
     personStatus: PersonStatusState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: AktivtMeldekortState;
@@ -95,6 +96,7 @@ epicMiddleware.run(
         historiskeMeldekortEpics,
         innsendingEpics,
         meldekortdetaljerEpics,
+        innsendingEpics,
         meldekortEpics
     )
 );

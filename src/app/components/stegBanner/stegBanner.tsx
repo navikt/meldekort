@@ -16,16 +16,14 @@ const StegBanner: React.FunctionComponent<StegBannerProps> = (props) => {
 
     let stegobjekter = [];
     const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
-    // const erAktivRoute = (index: number) => (props.router.location.pathname.split('/')[2] === routes[index - 1]);
-    const aktivtSteg = routes.findIndex( steg => steg === props.router.location.pathname.split('/')[2]);
+    const pathParams = props.router.location.pathname.split('/');
+    const aktivtSteg = routes.findIndex( steg => steg === pathParams[pathParams.length - 1]);
 
     for (let i = 1; i < 5; i++) {
         const stegobj = Object.assign(
             {
                 'index': i,
                 'label': hentIntl().formatMessage({id: 'overskrift.steg' + i}),
-                // 'disabled': !erAktivRoute(i)
-
             });
         stegobjekter.push(stegobj);
     }

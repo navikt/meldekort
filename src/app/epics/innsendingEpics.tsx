@@ -1,17 +1,32 @@
 import { AppEpic } from '../store/configureStore';
-import { catchError, concatMap, filter, mergeMap, withLatestFrom } from 'rxjs/operators';
-import { isActionOf } from 'typesafe-actions';
-import { KontrollerActions } from '../actions/innsending';
-import { ValideringsResultat } from '../types/meldekort';
-import { postMeldekort } from '../api/api';
-import { fromAsync } from '../utils/epicUtils';
-import { of } from 'rxjs';
-import { MeldekortActions } from '../actions/meldekort';
+import { catchError, filter, concatMap, map, switchMap, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { combineEpics } from 'redux-observable';
+import { fetchKorrigertId } from '../api/api';
+import { from, of } from 'rxjs';
+import { fromAsync } from '../utils/epicUtils';
+import { InnsendingActions } from '../actions/innsending';
+import { isActionOf } from 'typesafe-actions';
+import { MeldekortActions } from '../actions/meldekort';
+import { postMeldekort } from '../api/api';
+import { ValideringsResultat } from '../types/meldekort';
+
+const hentKorrigertId: AppEpic = (action$, state$) =>
+    action$.pipe(
+        filter(isActionOf([InnsendingActions.hentKorrigertId.request])),
+        withLatestFrom(state$),
+        switchMap(([action, state]) =>
+            from(fetchKorrigertId(state.aktivtMeldekort.meldekort.meldekortId)).pipe(
+                map(InnsendingActions.hentKorrigertId.success),
+                catchError(error =>
+                    of(InnsendingActions.hentKorrigertId.failure(error), MeldekortActions.apiKallFeilet(error))
+                )
+            )
+        )
+    );
 
 const kontrollerMeldekort: AppEpic = (action$, state$) =>
     action$.pipe(
-        filter(isActionOf(KontrollerActions.kontrollerMeldekort.request)),
+        filter(isActionOf(InnsendingActions.kontrollerMeldekort.request)),
         withLatestFrom(state$),
         concatMap(([action, state]) =>
             fromAsync( async () => {
@@ -20,14 +35,14 @@ const kontrollerMeldekort: AppEpic = (action$, state$) =>
             }).pipe(
                 mergeMap( (valideringsresultat: ValideringsResultat) => {
                    return [
-                       KontrollerActions.kontrollerMeldekort.success(valideringsresultat),
+                       InnsendingActions.kontrollerMeldekort.success(valideringsresultat),
                    ];
                 }),
                 catchError( error =>
-                    of(KontrollerActions.kontrollerMeldekort.failure(error), MeldekortActions.apiKallFeilet(error))
+                    of(InnsendingActions.kontrollerMeldekort.failure(error), MeldekortActions.apiKallFeilet(error))
                 )
             )
         )
     );
 
-export default combineEpics(kontrollerMeldekort);
+export default combineEpics(hentKorrigertId, kontrollerMeldekort);

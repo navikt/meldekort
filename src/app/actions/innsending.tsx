@@ -1,42 +1,37 @@
-import { Constants } from '../types/innsending';
-import { action, ActionType, createAsyncAction } from 'typesafe-actions';
-import { Sporsmal as Spm } from '../pages/innsending/sporsmalsside/sporsmal/sporsmalConfig';
-import { UtfyltDag } from '../pages/innsending/utfyllingsside/utfylling/utfyllingConfig';
-import { Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
+import { Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
+import { ActionType, createAsyncAction, createStandardAction } from 'typesafe-actions';
+import { Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';
+import { UtfyltDag } from '../sider/innsending/utfyllingsside/utfylling/utfyllingConfig';
+import { Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
 
-export function oppdaterSpm(sporsmalsobjekter: Spm[]) {
-    return action (Constants.OPPDATER_SPM, {sporsmalsobjekter});
-}
+export const InnsendingActions = {
+    hentKorrigertId: createAsyncAction(
+        InnsendingTypeKeys.HENT_KORRIGERTID,
+        InnsendingTypeKeys.HENT_KORRIGERTID_OK,
+        InnsendingTypeKeys.HENT_KORRIGERTID_FEILET
+    )<void, number, AxiosError>(),
 
-export function oppdaterUtfylteDager(utfylteDager: UtfyltDag[]) {
-    return action (Constants.OPPDATER_DAGER, {utfylteDager});
-}
+    oppdaterUtfylteDager: createStandardAction(InnsendingTypeKeys.OPPDATER_DAGER)<UtfyltDag[]>(),
+    oppdaterSpm: createStandardAction(InnsendingTypeKeys.OPPDATER_SPM)<Spm[] >(),
+    leggTilMeldekortId: createStandardAction(InnsendingTypeKeys.LEGG_TIL_MELDEKORTID) <number>(),
+    leggTilInnsendingstype: createStandardAction(InnsendingTypeKeys.LEGG_TIL_INNSENDINGSTYPE)<Innsendingstyper | null>(),
 
-export function oppdaterMeldekortdetaljer(meldekortdetaljer: Meldekortdetaljer) {
-    return action (Constants.OPPDATER_MELDEKORTDETALJER, {meldekortdetaljer});
-}
+    resetInnsending: createStandardAction(InnsendingTypeKeys.RESET_INNSENDING)<void>(),
+    resetSporsmalOgUtfylling: createStandardAction(InnsendingTypeKeys.RESET_SPORSMAL_OG_UTFYLLING)<void>(),
 
-export function settMeldekortdetaljerInnsending(meldekortdetaljerInnsending: MeldekortdetaljerInnsending) {
-    return action (Constants.SETT_MELDEKORTDETALJER_INNSENDING, {meldekortdetaljerInnsending});
-}
-
-export function settValideringsresultat(valideringsresultat: ValideringsResultat) {
-    return action (Constants.SETT_VALIDERINGSRESULTAT, {valideringsresultat});
-}
-
-export const KontrollerActions = {
     kontrollerMeldekort: createAsyncAction(
-        Constants.KONTROLLER_MELDEKORT,
-        Constants.KONTROLLER_MELDEKORT_OK,
-        Constants.KONTROLLER_MELDEKORT_FEILET
-    )<MeldekortdetaljerInnsending, ValideringsResultat, AxiosError>()
+        InnsendingTypeKeys.KONTROLLER_MELDEKORT,
+        InnsendingTypeKeys.KONTROLLER_MELDEKORT_OK,
+        InnsendingTypeKeys.KONTROLLER_MELDEKORT_FEILET
+    )<MeldekortdetaljerInnsending, ValideringsResultat, AxiosError>(),
+
+    oppdaterMeldekortdetaljer: createStandardAction(
+        InnsendingTypeKeys.OPPDATER_MELDEKORTDETALJER)<Meldekortdetaljer>(),
+    settMeldekortdetaljerInnsending: createStandardAction(
+        InnsendingTypeKeys.SETT_MELDEKORTDETALJER_INNSENDING)<MeldekortdetaljerInnsending>(),
+    settValideringsresultat: createStandardAction(
+        InnsendingTypeKeys.SETT_VALIDERINGSRESULTAT)<ValideringsResultat>()
 };
 
-export type KontrollerActionTypes = ActionType<typeof KontrollerActions>;
-
-export type InnsendingActions =
-    ActionType<typeof oppdaterSpm> &
-    ActionType<typeof oppdaterUtfylteDager> &
-    ActionType<typeof settMeldekortdetaljerInnsending> &
-    ActionType<typeof settValideringsresultat>;
+export type InnsendingActionsTypes = ActionType<typeof InnsendingActions>;
