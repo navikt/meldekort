@@ -23,7 +23,7 @@ class Sprakvelger extends React.Component<ReduxType> {
     render() {
         const { locale, locs } = this.props;
         const locsArray = [locs.nb, locs.en];
-        
+
         return (
             <div className="sprakvelger-container">
                 <Select
