@@ -223,7 +223,7 @@ class SendMeldekort extends React.Component<Props, any> {
                         }
                     </section>
                 </main>
-            ) : <Redirect exact={true} from="/send-meldekort" to="/innsending"/>;
+            ) : <Redirect exact={true} from="/send-meldekort" to="/send-meldekort/innsending"/>;
     }
 }
 
