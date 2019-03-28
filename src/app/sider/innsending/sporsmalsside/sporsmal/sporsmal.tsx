@@ -5,6 +5,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
@@ -31,6 +32,9 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                     <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
                 </HjelpetekstBase>
             </div>
+            {props.disabled && (
+                <AlertStripe type="info">{hentIntl().formatMessage({ id: 'korrigering.registrert.merknad'})}</AlertStripe>
+            )}
             <RadioPanelGruppe
                 name={props.sporsmalsobjekt.kategori}
                 legend=""
