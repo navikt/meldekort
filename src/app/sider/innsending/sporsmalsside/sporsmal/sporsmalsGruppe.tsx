@@ -47,6 +47,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     }
 
     finnesIntlId = (id: string) => {
+        console.log(hentIntl().formatMessage({id: id}) !== id);
         if (hentIntl().formatMessage({id: id}) !== id) {
             return id;
         } else {
@@ -63,7 +64,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
                 sporsmalsobj.feil.feilmeldingId = this.finnesIntlId(sporsmalsobj.feil.feilmeldingId);
-            } else if (sporsmalsobj[key] === 'registrert' && this.props.innsending.innsendingstype === Innsendingstyper.korrigering) {
+            } else if (sporsmalsobj[key] === 'registrert' && innsendingstype === Innsendingstyper.korrigering) {
                 skalVareDisabled = true;
             }
         }
