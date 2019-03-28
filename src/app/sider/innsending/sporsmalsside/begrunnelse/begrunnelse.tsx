@@ -27,6 +27,7 @@ const Begrunnelse: React.StatelessComponent<Props> = (props) => {
                 label={hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
                 onChange={handleOnChange}
             >
+                <option value={''}> {hentIntl().formatMessage({id: 'begrunnelse.velgArsak'})}</option>
                 {options.map(opt => (
                     <option key={opt}> {opt} </option>
                 ))}
