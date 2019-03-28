@@ -47,7 +47,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     }
 
     finnesIntlId = (id: string) => {
-        console.log(hentIntl().formatMessage({id: id}) !== id);
         if (hentIntl().formatMessage({id: id}) !== id) {
             return id;
         } else {
