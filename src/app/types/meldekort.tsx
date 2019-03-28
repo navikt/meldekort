@@ -119,12 +119,12 @@ export enum KortType {
 }
 
 export enum Meldegruppe {
-    ATTF,
-    DAGP,
-    INDIV,
-    ARBS,
-    FY,
-    NULL
+    ATTF = 'ATTF',
+    DAGP = 'DAGP',
+    INDIV = 'INDIV',
+    ARBS = 'ARBS',
+    FY = 'FY',
+    NULL = 'NULL'
 }
 
 export enum KortStatus {
