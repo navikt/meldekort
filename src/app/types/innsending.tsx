@@ -6,6 +6,7 @@ export interface InnsendingState {
     meldekortId: number;
     korrigertMeldekortId: number;
     innsendingstype: Innsendingstyper | null;
+    begrunnelse: string;
     sporsmalsobjekter: Spm[];
     utfylteDager: UtfyltDag[];
     meldekortdetaljer: Meldekortdetaljer;
@@ -44,6 +45,7 @@ export enum InnsendingTypeKeys {
 
     SETT_MELDEKORTDETALJER_INNSENDING = 'SETT_MELDEKORTDETALJER_INNSENDING',
     SETT_VALIDERINGSRESULTAT = 'SETT_VALIDERINGSRESULTAT',
+    SETT_BEGRUNNELSE = 'SETT_BEGRUNNELSE',
 
     RESET_INNSENDING = 'RESET_INNSENDING',
     RESET_SPORSMAL_OG_UTFYLLING = 'RESET_SPORSMAL_OG_UTFYLLING',

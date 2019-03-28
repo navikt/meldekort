@@ -9,6 +9,7 @@ const initialState: InnsendingState = {
     meldekortId: 0,
     korrigertMeldekortId: 0,
     innsendingstype: null,
+    begrunnelse: '',
     sporsmalsobjekter: hentSporsmalConfig(),
     utfylteDager: hentUtfyltDagConfig(),
     meldekortdetaljer: {
@@ -66,6 +67,9 @@ const innsendingReducer = (state: InnsendingState = initialState,
 
         case getType(InnsendingActions.settMeldekortdetaljerInnsending):
             return {...state, meldekortdetaljerInnsending: action.payload };
+
+        case getType(InnsendingActions.settBegrunnelse):
+            return {...state, begrunnelse: action.payload };
 
         case getType(InnsendingActions.settValideringsresultat):
             return {...state, ...action.payload, valideringsResultat: action.payload };
