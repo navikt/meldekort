@@ -1,22 +1,36 @@
-import { Constants, LocalesActions } from '../types/locales';
+import { LocalesActions } from '../types/locales';
 import tekster from '../tekster/kompilerte-tekster';
 
 export interface LocalesState {
-    nb: {};
-    en: {};
+    nb: {
+        label: string,
+        tittel: string,
+        tekster: {}
+    };
+    en: {
+        label: string,
+        tittel: string,
+        tekster: {}
+    };
 }
 
 const initialState: LocalesState = {
-    nb: tekster.nb,
-    en: tekster.en,
+    nb: {
+        label: 'nb',
+        tittel: 'Norsk',
+        tekster: tekster.nb
+    },
+    en: {
+        label: 'en',
+        tittel: 'English',
+        tekster: tekster.en
+    },
 };
 
 const localesReducer = (state: LocalesState = initialState,
                         action: LocalesActions): LocalesState => {
 
     switch (action.type) {
-        case Constants.UPDATE_LOCALES:
-            return { ...state,  ...action.payload };
 
         default:
             return state;

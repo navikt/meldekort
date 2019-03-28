@@ -16,23 +16,26 @@ class Sprakvelger extends React.Component<ReduxType> {
 
    handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         this.props.updateIntl(
-           event.target.value, this.props.locs[event.target.value]
+           event.target.value, this.props.locs[event.target.value].tekster
            );
     }
 
     render() {
-       const currentLocale = this.props.locale;
-
-       return (
+        const { locale, locs } = this.props;
+        const locsArray = [locs.nb, locs.en];
+        
+        return (
             <div className="sprakvelger-container">
                 <Select
                     label=""
-                    value={currentLocale}
+                    value={locale}
                     onChange={this.handleOnChange}
                 >
-                    {Object.keys(this.props.locs).map(locale => (
-                        <option key={locale}>{locale}</option>
-                    ))}
+                    {locsArray.map( loc => {
+                        return (
+                            <option key={loc.label} value={loc.label}> {loc.tittel} </option>
+                        );
+                    })}
                 </Select>
             </div>
         );
@@ -40,16 +43,17 @@ class Sprakvelger extends React.Component<ReduxType> {
 }
 
 const mapStateToProps = ({ intl, locales }: RootState) => {
-    const { locale, messages } = intl;
-    const locs = locales;
-    return { locale, messages, locs};
+    return {
+        locale: intl.locale,
+        messages: intl.messages,
+        locs: locales
+    };
 };
 
 const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {
     return {
-
         updateIntl: (locale: any, messages: any) =>
-            dispatch(updateIntl({ locale, messages }))
+            dispatch(updateIntl({locale, messages}))
     };
 };
 
