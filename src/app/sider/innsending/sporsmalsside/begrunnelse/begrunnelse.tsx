@@ -25,11 +25,10 @@ const Begrunnelse: React.StatelessComponent<Props> = (props) => {
         <div className="seksjon">
             <Select
                 label={hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
-                value=""
                 onChange={handleOnChange}
             >
-                {options.map(locale => (
-                    <option key={locale}>{locale}</option>
+                {options.map(opt => (
+                    <option key={opt}> {opt} </option>
                 ))}
             </Select>
         </div>
