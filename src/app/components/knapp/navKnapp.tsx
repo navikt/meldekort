@@ -9,14 +9,17 @@ import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
+import { Innsendingstyper } from '../../types/innsending';
+import { InnsendingActions } from '../../actions/innsending';
 
 interface MapStateToProps {
     router: Router;
-    aktivtMeldekort: AktivtMeldekortState;
+    innsendingstypeFraStore: Innsendingstyper | null;
 }
 
-interface MapDispatcherToProps {
+interface MapDispatchToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+    settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
 interface NavKnappProps {
@@ -24,7 +27,8 @@ interface NavKnappProps {
     nestePath: string;
     tekstid: string;
     className?: string;
-    aktivtMeldekortObjekt?: Meldekort;
+    nesteAktivtMeldekort?: Meldekort;
+    nesteInnsendingstype?: Innsendingstyper;
     validering?: () => boolean;
 }
 
@@ -33,34 +37,56 @@ export enum knappTyper {
     standard = 'standard',
 }
 
-type Props = MapStateToProps & MapDispatcherToProps & NavKnappProps;
+type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 
 class NavKnapp extends React.Component<Props> {
     constructor(props: any) {
         super(props);
     }
 
+    harNestePathInnsending = (nestePathParams: string[]) => {
+        return (nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending
+            || nestePathParams[nestePathParams.length - 1] === Innsendingstyper.korrigering);
+    }
+
+    returnerNestePathInnenforInnsending = (params: string[], nestePathParams: string[]) => {
+        const editedParams = params;
+        editedParams.pop();
+        editedParams.push(nestePathParams[nestePathParams.length - 1]);
+        return editedParams.join('/');
+    }
+
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
+        const { nesteAktivtMeldekort, innsendingstypeFraStore, nesteInnsendingstype,
+            nestePath, router } = this.props;
+
+        (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
+        && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
+
         let validert: boolean = true;
         if (typeof this.props.validering !== 'undefined') {
             validert = this.props.validering();
         }
         if (validert) {
-            const currentPath = this.props.router.location.pathname;
-            console.log('currentPath: ', currentPath);
-            const erPaInnsending = currentPath.slice(0, 11) === '/innsending';
-            let newPath;
-            if (erPaInnsending) {
-                newPath = this.props.nestePath;
-            } else {
-                newPath = this.props.nestePath;
-            }
+            const path = router.location.pathname;
+            const params = path.split('/');
+            const nestePathParams = nestePath.split('/');
+            const erPaKvittering = params[params.length - 1] === 'kvittering';
+            const erPaInnsending = innsendingstypeFraStore !== null;
+            let nyPath: string = '';
 
-            const aktivtMeldekort = this.props.aktivtMeldekortObjekt;
-            if (aktivtMeldekort && currentPath.slice(0, 15) === '/send-meldekort') {
-                this.props.leggTilAktivtMeldekort(aktivtMeldekort);
+            if (erPaInnsending) {
+                if (!erPaKvittering) {
+                    nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
+                } else {
+                    nyPath = nestePath;
+                }
+            } else {
+                (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
+                && this.props.settInnsendingstype(nesteInnsendingstype);
+                nyPath = nestePath;
             }
-            history.push(newPath);
+            history.push(nyPath);
         }
     }
 
@@ -78,20 +104,19 @@ class NavKnapp extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    let meldekort: AktivtMeldekortState = {
-        meldekort: state.aktivtMeldekort.meldekort
-    };
     return {
-        aktivtMeldekort: meldekort,
         router: selectRouter(state),
+        innsendingstypeFraStore: state.innsending.innsendingstype,
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+        settInnsendingstype: (innsendingstype: Innsendingstyper) =>
+            dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(NavKnapp);
+export default connect(mapStateToProps, mapDispatchToProps)(NavKnapp);

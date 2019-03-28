@@ -1,5 +1,6 @@
 export interface Tab {
     urlparam: string;
+    tekstid: string;
     tittel: string;
     disabled: boolean;
 }
@@ -8,32 +9,38 @@ export const hentTabConfig = () => {
     const tabConfig: Tab[] =
         [
             {
-                tittel: 'sekundarmeny.send',
+                tekstid: 'sekundarmeny.send',
+                tittel: 'sendMeldekort',
                 urlparam: '/send-meldekort',
                 disabled: false,
             },
             {
-                tittel: 'sekundarmeny.tidligere',
+                tekstid: 'sekundarmeny.tidligere',
+                tittel: 'tidligereMeldekort',
                 urlparam: '/tidligere-meldekort',
                 disabled: false,
             },
             {
-                tittel: 'sekundarmeny.etterregistrer',
-                urlparam: '/etterregistrering',
+                tekstid: 'sekundarmeny.etterregistrer',
+                tittel: 'etterregistrering',
+                urlparam: '/etterregistrer-meldekort',
                 disabled: true,
             },
             {
-                tittel: 'sekundarmeny.endreMeldeform',
+                tekstid: 'sekundarmeny.endreMeldeform',
+                tittel: 'endreMeldeform',
                 urlparam: '/endre-meldeform',
                 disabled: true,
             },
             {
-                tittel: 'sekundarmeny.omMeldekort',
+                tekstid: 'sekundarmeny.omMeldekort',
+                tittel: 'omMeldekort',
                 urlparam: '/om-meldekort',
                 disabled: false,
             },
             {
-                tittel: 'sekundarmeny.faq',
+                tekstid: 'sekundarmeny.faq',
+                tittel: 'ofteStilteSporsmal',
                 urlparam: '/ofte-stilte-sporsmal',
                 disabled: false,
             }

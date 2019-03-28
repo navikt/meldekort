@@ -3,13 +3,16 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
 import MeldekortBanner from './components/meldekortBanner/meldekortBanner';
-import MeldekortRoutes from './routes/meldekortRoutes';
+import MeldekortRoutes from './sider/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
-import { erMock } from './mock/utils';
-import { PersonStatusState } from './reducers/personStatusReducer';
 import { Dispatch } from 'redux';
+import { erMock } from './mock/utils';
+import { hentTabConfig } from './components/meny/tabConfig';
+import { isEmpty } from 'ramda';
+import { MeldeForm, Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
+import { PersonStatusState } from './reducers/personStatusReducer';
 import { connect } from 'react-redux';
 import Feilside from './components/feilside/feilside';
 import UIModalWrapper from './components/modal/UIModalWrapper';
@@ -20,6 +23,7 @@ if (erMock()) {
 
 interface MapStateToProps {
     personStatus: PersonStatusState;
+    person: Person;
 }
 
 interface MapDispatchToProps {
@@ -31,8 +35,6 @@ type Props = MapDispatchToProps&MapStateToProps;
 class App extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-
-        this.props.hentPersonStatus();
     }
 
     erBrukerRegistrertIArena = (): boolean => {
@@ -40,13 +42,29 @@ class App extends React.Component<Props> {
         return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
     }
 
-    setInnhold = () => {
+    settMenyPunkter = (person: Person) => {
+        const tabsobjekter = hentTabConfig();
+        const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
+            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === 'endreMeldeform')) {
+                return { ...tabsobj, disabled: !tabsobj.disabled };
+            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === 'etterregistrering') {
+                return { ...tabsobj, disabled: !tabsobj.disabled };
+            } else {
+                return { ...tabsobj };
+            }
+        });
+        return (
+            <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
+        );
+    }
+
+    settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
             return null;
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
-                <NavTabs/>
+                    {this.settMenyPunkter(this.props.person)}
                 <div className="main-container">
                     <ConnectedRouter history={history}>
                         <Switch>
@@ -65,21 +83,26 @@ class App extends React.Component<Props> {
         }
     }
 
+    componentDidMount() {
+        this.props.hentPersonStatus();
+    }
+
     public render() {
 
         return(
             <div>
                 <MeldekortBanner tittel="Meldekort"/>
                 <UIModalWrapper/>
-                {this.setInnhold()}
+                {this.settInnhold()}
             </div>
         );
     }
 }
 
-const mapStateToProps = (personStatus: RootState): MapStateToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        personStatus: personStatus.personStatus,
+        personStatus: state.personStatus,
+        person: state.person,
     };
 };
 
