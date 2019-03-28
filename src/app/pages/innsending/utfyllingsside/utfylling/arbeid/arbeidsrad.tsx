@@ -24,7 +24,7 @@ interface UkeProps {
     ukeNummer: number;
     aap: boolean;
     tekstId: string;
-    forklaingId: string;
+    forklaringId: string;
     bareArbeid: boolean;
 }
 
@@ -92,7 +92,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     innhold = () => {
-        let { tekstId, aap, forklaingId, feil, bareArbeid } = this.props;
+        let { tekstId, aap, forklaringId, feil, bareArbeid } = this.props;
         return (
             <div className="arbeidsrad" style={{backgroundColor: feil ? '#e79999' : '', borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none'}}>
                 <div className="kategori_forklaring">
@@ -100,7 +100,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
                     <HjelpetekstBase id={'arbeid'} type="auto">
-                        <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
+                        <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                     </HjelpetekstBase>
                 </div>
                 <div className="inputrad_arbeid">

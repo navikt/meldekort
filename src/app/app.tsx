@@ -44,7 +44,7 @@ class App extends React.Component<Props> {
         return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
     }
 
-    setInnhold = () => {
+    settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
             return (
                 <div className="main-container">
@@ -81,7 +81,7 @@ class App extends React.Component<Props> {
             <div>
                 <MeldekortBanner tittel="Meldekort"/>
                 <UIModalWrapper/>
-                {this.setInnhold()}
+                {this.settInnhold()}
             </div>
         );
     }

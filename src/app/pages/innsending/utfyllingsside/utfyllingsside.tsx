@@ -1,17 +1,10 @@
 import * as React from 'react';
-import { Ingress, Innholdstittel, Element } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import Arbeidsrad from './utfylling/arbeid/arbeidsrad';
-import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
-import {
-    hentDatoForAndreUke,
-    hentDatoForForsteUke,
-    hentUkenummerForDato,
-    ukeTekst
-} from '../../../utils/dates';
-import { InnsendingState, SpmSvar } from '../../../types/innsending';
+import { hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates';
+import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
@@ -21,32 +14,16 @@ import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
+import UkePanel from '../../../components/ukepanel/ukepanel';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: AktivtMeldekortState;
 }
 
-interface Feilmelding {
-    feil: boolean;
-    feilmelding?: string;
-}
-
-interface Feil {
-    feilIArbeid: Feilmelding;
-    feilIKurs: Feilmelding;
-    feilISyk: Feilmelding;
-    feilIFerie: Feilmelding;
-    feilIArbeidetTimerHeleHalve: boolean;
-    feilIArbeidetTimer: boolean;
-    feilIDager: string[];
-}
-
 type UtfyllingssideProps = MapStateToProps;
 
-class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
+class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil> {
     constructor(props: UtfyllingssideProps) {
         super(props);
         this.state = {
@@ -77,80 +54,6 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
             return sporsmal[0].svar;
         }
         return false;
-    }
-
-    hentUkedager = () => {
-        return hentUkedagerSomStringListe().map((dag) => {
-            return (
-                <abbr className="bold" key={'ukedager-' + dag} title={dag}>{dag.toUpperCase()[0]}</abbr>
-            );
-        });
-    }
-
-    hentUkePanel = (ukenummer: number, faktiskUkeNummer: string, datoTittel: string) => {
-        let aap: boolean = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
-        let {feilIArbeid, feilIFerie, feilISyk, feilIKurs, feilIDager} = this.state;
-        return (
-            <EkspanderbartpanelBase
-                heading={
-                    <div className="uketittel">
-                        <Innholdstittel>{`${ukeTekst()} ${faktiskUkeNummer}`}</Innholdstittel>
-                        <Ingress>{datoTittel}</Ingress>
-                    </div>
-                }
-                border={true}
-                apen={true}
-                ariaTittel={`${ukeTekst()} ${faktiskUkeNummer} ${datoTittel}`}
-            >
-                <div className="ukepanel">
-                    <div className="ukedager">
-                        {this.hentUkedager()}
-                    </div>
-                {this.sjekkSporsmal('arbeid') ?
-                    <Arbeidsrad
-                        ukeNummer={ukenummer}
-                        feil={feilIArbeid.feil}
-                        feilIDager={feilIDager}
-                        aap={aap}
-                        tekstId={'utfylling.arbeid'}
-                        forklaingId={'forklaring.utfylling.arbeid'}
-                        bareArbeid={
-                            !this.sjekkSporsmal('aktivitetArbeid') &&
-                            !this.sjekkSporsmal('forhindret') &&
-                            !this.sjekkSporsmal('ferieFravar')
-                        }
-                    /> : null
-                }
-                {this.sjekkSporsmal('aktivitetArbeid') ?
-                    <Aktivitetsrad
-                        ukeNummer={ukenummer}
-                        tekstId="utfylling.tiltak"
-                        forklaingId={'forklaring.utfylling.tiltak'}
-                        aap={aap}
-                        feil={feilIKurs.feil}
-                    /> : null
-                }
-                {this.sjekkSporsmal('forhindret') ?
-                    <Aktivitetsrad
-                        ukeNummer={ukenummer}
-                        tekstId="utfylling.syk"
-                        forklaingId={'forklaring.utfylling.syk'}
-                        aap={aap}
-                        feil={feilISyk.feil}
-                    /> : null
-                }
-                {this.sjekkSporsmal('ferieFravar') ?
-                    <Aktivitetsrad
-                        ukeNummer={ukenummer}
-                        tekstId="utfylling.ferieFravar"
-                        forklaingId={'forklaring.utfylling.ferieFravar'}
-                        aap={aap}
-                        feil={feilIFerie.feil}
-                    /> : null
-                }
-                </div>
-            </EkspanderbartpanelBase>
-        );
     }
 
     validerAntallTimerForDag = (dager: UtfyltDag[]): boolean => {
@@ -253,8 +156,20 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                 </section>
                 <section className="seksjon flex-innhold sentrert utfylling">
                     {this.hentFeilmeldinger()}
-                    {this.hentUkePanel(Konstanter().forsteUke, hentUkenummerForDato(meldeperiode.fra), hentDatoForForsteUke(meldeperiode.fra))}
-                    {this.hentUkePanel(Konstanter().andreUke, hentUkenummerForDato(meldeperiode.til), hentDatoForAndreUke(meldeperiode.til))}
+                    <UkePanel
+                        ukenummer={Konstanter().forsteUke}
+                        faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
+                        datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
+                        utfyllingFeil={this.state}
+                        erAap={this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF}
+                    />
+                    <UkePanel
+                        ukenummer={Konstanter().andreUke}
+                        faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
+                        datoTittel={hentDatoForForsteUke(meldeperiode.til)}
+                        utfyllingFeil={this.state}
+                        erAap={this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF}
+                    />
                 </section>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp

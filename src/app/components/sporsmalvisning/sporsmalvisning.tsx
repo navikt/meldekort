@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SporsmalOgSvar } from '../../types/meldekort';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import checkMark from '../../ikoner/check.svg';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';

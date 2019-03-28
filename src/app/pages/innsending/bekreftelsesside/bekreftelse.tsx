@@ -153,7 +153,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         return meldekortdager;
     }
 
-    setChecked = () => {
+    settChecked = () => {
         let detaljer = this.state.meldekortdetaljer;
         detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer.sporsmal.signatur;
         if (detaljer.meldekortdetaljer.sporsmal.signatur) {
@@ -209,7 +209,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap}/>
                 <BekreftCheckboksPanel
                     className={'bekreftInfo'}
-                    onChange={() => this.setChecked()}
+                    onChange={() => this.settChecked()}
                     checked={meldekortdetaljer.sporsmal.signatur}
                     label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
                     feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}

@@ -33,3 +33,18 @@ export interface SpmSvar {
     kategori: string;
     svar: boolean;
 }
+
+export interface Feilmelding {
+    feil: boolean;
+    feilmelding?: string;
+}
+
+export interface UtfyllingFeil {
+    feilIArbeid: Feilmelding;
+    feilIKurs: Feilmelding;
+    feilISyk: Feilmelding;
+    feilIFerie: Feilmelding;
+    feilIArbeidetTimerHeleHalve: boolean;
+    feilIArbeidetTimer: boolean;
+    feilIDager: string[];
+}
