@@ -11,10 +11,12 @@ import { connect } from 'react-redux';
 import { Router } from '../../types/router';
 import Tabell from '../../components/tabell/tabell';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
-import { KortStatus } from '../../types/meldekort';
-import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
+import { KortStatus, Meldekort } from '../../types/meldekort';
+import { hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
 import { Person } from '../../types/person';
+import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
+import { Redirect } from 'react-router';
 
 interface MapStateToProps {
     person: Person;
@@ -23,6 +25,8 @@ interface MapStateToProps {
 interface MapDispatchToProps {
     hentPerson: () => void;
     resetInnsending: () => void;
+    leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+    settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
 interface MeldekortRad {
@@ -35,6 +39,26 @@ type Props = MapDispatchToProps & MapStateToProps;
 class EtterregistrerMeldekort extends React.Component<Props, any> {
     constructor(props: any) {
         super(props);
+    }
+
+    harEttMeldekort = () => {
+        let meldekortListe = this.filtrerMeldekortListe();
+
+        if (meldekortListe.length === 1) {
+            this.props.leggTilAktivtMeldekort(meldekortListe[0]);
+            this.props.settInnsendingstype(Innsendingstyper.etterregistrering);
+            return true;
+        }
+        return false;
+    }
+
+    filtrerMeldekortListe = (): Meldekort[] => {
+        if (typeof this.props.person.etterregistrerteMeldekort === 'undefined') {
+            return [];
+        }
+        return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) =>
+            (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
+            (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
     }
 
     hentMeldekortRaderFraPerson = () => {
@@ -64,7 +88,8 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
             {key: 'dato', label: 'Dato'}
         ];
         const { etterregistrerteMeldekort } = this.props.person;
-        return(
+        const ettMeldekort = this.harEttMeldekort();
+        return !ettMeldekort ? (
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel className="seksjon"> {rows.length} meldekort klar for etteregistrering </Innholdstittel>
@@ -92,7 +117,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
                     />
                 </section>
             </main>
-        );
+        ) : <Redirect exact={true} from="/etterregistrer-meldekort" to="/etterregistrer-meldekort/innsending"/>;
     }
 }
 
@@ -107,7 +132,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
         resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-
+        leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
+            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+        settInnsendingstype: (innsendingstype: Innsendingstyper) =>
+            dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     };
 };
 
