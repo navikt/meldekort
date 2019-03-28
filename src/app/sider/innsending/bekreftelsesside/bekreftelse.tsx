@@ -4,19 +4,14 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { Checkbox } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { hentIntl } from '../../../utils/intlUtil';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
 import { InnsendingState } from '../../../types/innsending';
-import { kalkulerDato } from '../../../utils/dates';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Person } from '../../../types/person';
 import { RootState } from '../../../store/configureStore';
-import { scrollToTop } from '../../../utils/scroll';
 import {
     Fravaer,
     FravaerTypeEnum,
@@ -26,13 +21,10 @@ import {
     Meldekortdetaljer as MDetaljer,
     MeldekortdetaljerInnsending
 } from '../../../types/meldekort';
-import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import AlertStripe from 'nav-frontend-alertstriper';
 import { hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
-import { KontrollerActions, oppdaterMeldekortdetaljer, settMeldekortdetaljerInnsending } from '../../../actions/innsending';
 import { kalkulerDato } from '../../../utils/dates';
 
 interface MapStateToProps {

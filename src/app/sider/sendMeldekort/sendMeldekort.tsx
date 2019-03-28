@@ -1,12 +1,10 @@
 import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Tabell from '../../components/tabell/tabell';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { BaksystemFeilmelding } from '../../types/ui';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Element, Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
@@ -58,7 +56,7 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     filtrerMeldekortListe = () => {
-        if (typeof this.props.person.person.meldekort === 'undefined') {
+        if (typeof this.props.person.meldekort === 'undefined') {
             return [];
         }
         return this.props.person.meldekort.filter((meldekortObj) =>

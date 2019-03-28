@@ -40,8 +40,12 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
 
     settMeldekortIdBasertPaInnsendingstype = () => {
         const { hentKorrigertId, innsending, settMeldekortId, aktivtMeldekort } = this.props;
-        (innsending.innsendingstype === Innsendingstyper.korrigering) ?
-            hentKorrigertId() : settMeldekortId(aktivtMeldekort.meldekortId);
+        if (innsending.innsendingstype === Innsendingstyper.korrigering) {
+            hentKorrigertId();
+            settMeldekortId(aktivtMeldekort.meldekortId);
+        } else {
+            settMeldekortId(aktivtMeldekort.meldekortId);
+        }
     }
 
     settSporsmalOgUtfyllingHvisKorrigering = () => {

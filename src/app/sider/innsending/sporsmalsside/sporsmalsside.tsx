@@ -186,7 +186,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         const { innsending, aktivtMeldekort } = this.props;
         const meldegruppeErAAP = aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
         const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
-        console.log(brukermelding.length);
         return (
             <main>
                 <section className="seksjon flex-innhold sentrert">
@@ -240,7 +239,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return [
             {
                 action: () => {
-                    history.push(this.hoppeOverUtfylling() ? '/innsending/bekreftelse' : '/innsending/utfylling');
+                    history.push('/send-meldekort/innsending/' + (this.hoppeOverUtfylling() ? 'bekreftelse' : 'utfylling'));
                     this.props.skjulModal();
                 },
                 label: hentIntl().formatMessage({id: 'overskrift.bekreftOgFortsett'}),

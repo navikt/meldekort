@@ -4,8 +4,8 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import { ukeTekst } from '../../utils/dates';
 import { hentUkedagerSomStringListe } from '../../utils/ukedager';
-import Aktivitetsrad from '../../pages/innsending/utfyllingsside/utfylling/aktivitet/aktivitetsrad';
-import Arbeidsrad from '../../pages/innsending/utfyllingsside/utfylling/arbeid/arbeidsrad';
+import Aktivitetsrad from '../../sider/innsending/utfyllingsside/utfylling/aktivitet/aktivitetsrad';
+import Arbeidsrad from '../../sider/innsending/utfyllingsside/utfylling/arbeid/arbeidsrad';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 
@@ -24,7 +24,6 @@ interface MapStateToProps {
 type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
-
     const hentUkedager = () => {
         return hentUkedagerSomStringListe().map((dag) => {
             return (
