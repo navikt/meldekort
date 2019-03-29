@@ -1,4 +1,4 @@
-import { Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
+import { Begrunnelse, Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
 import { ActionType, createAsyncAction, createStandardAction } from 'typesafe-actions';
 import { Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';
@@ -29,7 +29,7 @@ export const InnsendingActions = {
     resetInnsending: createStandardAction(InnsendingTypeKeys.RESET_INNSENDING)<void>(),
     resetSporsmalOgUtfylling: createStandardAction(InnsendingTypeKeys.RESET_SPORSMAL_OG_UTFYLLING)<void>(),
 
-    settBegrunnelse: createStandardAction(InnsendingTypeKeys.SETT_BEGRUNNELSE)<string>(),
+    settBegrunnelse: createStandardAction(InnsendingTypeKeys.SETT_BEGRUNNELSE)<Begrunnelse>(),
     settMeldekortdetaljerInnsending: createStandardAction(
         InnsendingTypeKeys.SETT_MELDEKORTDETALJER_INNSENDING)<MeldekortdetaljerInnsending>(),
     settValideringsresultat: createStandardAction(

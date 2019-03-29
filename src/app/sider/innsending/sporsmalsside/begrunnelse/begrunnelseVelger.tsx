@@ -4,17 +4,26 @@ import { InnsendingActions } from '../../../../actions/innsending';
 import { Dispatch } from 'redux';
 import Select from 'nav-frontend-skjema/lib/select';
 import { hentIntl } from '../../../../utils/intlUtil';
+import { Begrunnelse } from '../../../../types/innsending';
+import { RootState } from '../../../../store/configureStore';
 
-interface MapDispatchToProps {
-    settBegrunnelse: (begrunnelse: string) => void;
+interface MapStateToProps {
+    begrunnelse: Begrunnelse;
 }
 
-type Props = MapDispatchToProps;
+interface MapDispatchToProps {
+    settBegrunnelse: (begrunnelse: Begrunnelse) => void;
+}
 
-const Begrunnelse: React.StatelessComponent<Props> = (props) => {
+type Props = MapDispatchToProps & MapStateToProps;
+
+const BegrunnelseVelger: React.StatelessComponent<Props> = (props) => {
 
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        props.settBegrunnelse(event.target.value);
+        props.settBegrunnelse({
+            valgtArsak: event.target.value,
+            erFeil: event.target.value === '' ? true : false
+        });
     };
 
     const options: string[] = hentIntl()
@@ -36,11 +45,17 @@ const Begrunnelse: React.StatelessComponent<Props> = (props) => {
     );
 };
 
+const mapStateToProps = (state: RootState) => {
+    return {
+      begrunnelse: state.innsending.begrunnelse,
+    };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
-        settBegrunnelse: (begrunnelse: string) =>
+        settBegrunnelse: (begrunnelse: Begrunnelse) =>
             dispatch(InnsendingActions.settBegrunnelse(begrunnelse)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(Begrunnelse);
+export default connect(mapStateToProps, mapDispatchToProps)(BegrunnelseVelger);

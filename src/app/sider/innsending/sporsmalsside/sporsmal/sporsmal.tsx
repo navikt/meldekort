@@ -6,6 +6,8 @@ import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import AlertStripe from 'nav-frontend-alertstriper';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
+import Ingress from 'nav-frontend-typografi/lib/ingress';
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
@@ -20,21 +22,31 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
     return (
         <section className="seksjon sporsmal">
             <div className="flex-sporsmal-hjelpetekst-container">
-                <Undertittel>
-                    <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
-                    {props.formatertDato ?
-                            <span>
-                                {props.formatertDato}?
-                            </span> : null
-                    }
-                </Undertittel>
-                <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
-                    <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
-                </HjelpetekstBase>
+                {props.disabled ? (
+                    <>
+                        <Undertittel>
+                            <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
+                            {props.formatertDato ?
+                                <span> {props.formatertDato} ? </span> : null
+                            }
+                        </Undertittel>
+                        <Ingress> {hentIntl().formatMessage({ id: 'korrigering.registrert.merknad'})}</Ingress>
+                    </>
+                ) : (
+                    <>
+                        <Undertittel>
+                            <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
+                            {props.formatertDato ?
+                                <span> {props.formatertDato} ? </span> : null
+                            }
+                        </Undertittel>
+                        <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
+                            <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
+                        </HjelpetekstBase>
+                    </>
+                )}
             </div>
-            {props.disabled && (
-                <AlertStripe type="info">{hentIntl().formatMessage({ id: 'korrigering.registrert.merknad'})}</AlertStripe>
-            )}
+
             <RadioPanelGruppe
                 name={props.sporsmalsobjekt.kategori}
                 legend=""

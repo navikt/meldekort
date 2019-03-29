@@ -9,7 +9,10 @@ const initialState: InnsendingState = {
     meldekortId: 0,
     korrigertMeldekortId: 0,
     innsendingstype: null,
-    begrunnelse: '',
+    begrunnelse: {
+        valgtArsak: '',
+        erFeil: false,
+    },
     sporsmalsobjekter: hentSporsmalConfig(),
     utfylteDager: hentUtfyltDagConfig(),
     meldekortdetaljer: {

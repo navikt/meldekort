@@ -12,7 +12,7 @@ import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { Meldegruppe } from '../../../types/meldekort';
 import { InnsendingActions } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { InnsendingState, SpmSvar } from '../../../types/innsending';
+import { InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
 import { RouteComponentProps } from 'react-router';
 import { hentIntl } from '../../../utils/intlUtil';
 import { scrollToTop } from '../../../utils/scroll';
@@ -43,11 +43,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
     valider = (): boolean => {
 
-        let arbeidet = this.sjekkSporsmal(kategorier[0]);
-        let kurs = this.sjekkSporsmal(kategorier[1]);
-        let syk = this.sjekkSporsmal(kategorier[2]);
-        let ferie = this.sjekkSporsmal(kategorier[3]);
-        let registrert = this.sjekkSporsmal(kategorier[4]);
+        const arbeidet = this.sjekkSporsmal(kategorier[0]);
+        const kurs = this.sjekkSporsmal(kategorier[1]);
+        const syk = this.sjekkSporsmal(kategorier[2]);
+        const ferie = this.sjekkSporsmal(kategorier[3]);
+        const registrert = this.sjekkSporsmal(kategorier[4]);
 
         const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
             .map( sporsmalsobj => {
@@ -68,7 +68,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             });
         this.props.oppdaterSvar(nySporsmalsobjekterState);
 
-        let resultat = arbeidet && kurs && syk && ferie && registrert;
+        const resultat = arbeidet && kurs && syk && ferie && registrert;
         if (!resultat) {
             scrollToTop();
             return resultat;
@@ -98,7 +98,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     fortsetteRegistrert = (): boolean => {
-        let sporsmal = this.hentSvarPaaSporsmal().filter( spm => spm.kategori === kategorier[4]);
+        const sporsmal = this.hentSvarPaaSporsmal().filter( spm => spm.kategori === kategorier[4]);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
@@ -118,8 +118,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     sjekkSporsmal = (kategori: string): boolean => {
-        let sporsmalListe = this.hentSporsmal();
-        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
+        const sporsmalListe = this.hentSporsmal();
+        const sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
@@ -127,17 +127,21 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     hentFeilmeldinger = (aap: boolean) => {
-        let { sporsmalsobjekter } = this.props.innsending;
-        let feilIArbeid = sporsmalsobjekter[0].feil.erFeil;
-        let feillIKurs = sporsmalsobjekter[1].feil.erFeil;
-        let feilISyk = sporsmalsobjekter[2].feil.erFeil;
-        let feilIFerie = sporsmalsobjekter[3].feil.erFeil;
-        let feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
+        const { sporsmalsobjekter, begrunnelse, innsendingstype } = this.props.innsending;
+        const feilIArbeid = sporsmalsobjekter[0].feil.erFeil;
+        const feillIKurs = sporsmalsobjekter[1].feil.erFeil;
+        const feilISyk = sporsmalsobjekter[2].feil.erFeil;
+        const feilIFerie = sporsmalsobjekter[3].feil.erFeil;
+        const feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
+        const feilIBegrunnelse = begrunnelse.erFeil && innsendingstype === Innsendingstyper.korrigering;
 
-        if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert) {
+        if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert || feilIBegrunnelse) {
             return (
                 <AlertStripe type={'advarsel'} solid={true}>
                     <ul>
+                        {feilIBegrunnelse ?
+                            <li>{`${hentIntl().formatMessage({id: 'begrunnelse.required'})}`}</li> : null
+                        }
                         {feilIArbeid ?
                             <li>{`${hentIntl().formatMessage({id: 'arbeidet.required'})}`}</li> : null
                         }

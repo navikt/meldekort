@@ -1,4 +1,4 @@
-export interface FeilSpm {
+export interface Feil {
     erFeil: boolean;
     feilmeldingId: string;
 }
@@ -9,7 +9,7 @@ export interface Sporsmal {
     ja: string;
     nei: string;
     forklaring: string;
-    feil: FeilSpm;
+    feil: Feil;
     checked: string | undefined;
 }
 
