@@ -19,6 +19,8 @@ import { scrollToTop } from '../../../utils/scroll';
 import { IModal, ModalKnapp } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
 import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import veileder from '../../../ikoner/veileder.svg';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -183,22 +185,29 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     render() {
         const { innsending, aktivtMeldekort } = this.props;
         const meldegruppeErAAP = aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
-
+        const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
         return (
             <main>
+                <section className="seksjon flex-innhold sentrert">
+                    {brukermelding.length > 1 ?
+                        <AlertStripe type={'info'}>
+                            {brukermelding}
+                        </AlertStripe> : null
+                    }
+                </section>
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel ><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon alert">
-                    <AlertStripe solid={true} type="info">
+                    <Veilederpanel type={'plakat'} kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
                         <div className="item">
                             <FormattedMessage id="sporsmal.lesVeiledning" />
                         </div>
                         <div className="item">
                             <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
                         </div>
-                    </AlertStripe>
+                    </Veilederpanel>
                 </section>
                 <section className="seksjon">
                     {this.hentFeilmeldinger(meldegruppeErAAP)}
@@ -207,7 +216,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
                 </section>
                 <section className="seksjon">
-                    <AlertStripe solid={true} type="info">
+                    <AlertStripe type="info">
                         <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
                     </AlertStripe>
                 </section>
@@ -230,7 +239,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return [
             {
                 action: () => {
-                    history.push(this.hoppeOverUtfylling() ? '/innsending/bekreftelse' : '/innsending/utfylling');
+                    history.push('/send-meldekort/innsending/' + (this.hoppeOverUtfylling() ? 'bekreftelse' : 'utfylling'));
                     this.props.skjulModal();
                 },
                 label: hentIntl().formatMessage({id: 'overskrift.bekreftOgFortsett'}),

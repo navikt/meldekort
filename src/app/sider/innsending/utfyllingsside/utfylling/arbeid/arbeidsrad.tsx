@@ -24,7 +24,8 @@ interface UkeProps {
     ukeNummer: number;
     aap: boolean;
     tekstId: string;
-    forklaingId: string;
+    forklaringId: string;
+    bareArbeid: boolean;
 }
 
 type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
@@ -70,12 +71,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                 <Input
                     className="arbeidInput"
                     key={ukedag}
-                    label={
-                        <div>
-                            <abbr title={dag}>{dag.charAt(0)}</abbr>
-                            <span className="vekk">{hentIntl().formatMessage({id: this.props.tekstId})}</span>
-                        </div>
-                    }
+                    label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     bredde="XS"
                     step={0.5}
                     type={'number'}
@@ -96,18 +92,18 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     innhold = () => {
-        let { tekstId, aap, forklaingId } = this.props;
+        let { tekstId, aap, forklaringId, feil, bareArbeid } = this.props;
         return (
-            <div className="arbeidsrad">
+            <div className="arbeidsrad" style={{backgroundColor: feil ? '#e79999' : '', borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none'}}>
                 <div className="kategori_forklaring">
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="hoyre">
-                        <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
+                    <HjelpetekstBase id={'arbeid'} type="auto">
+                        <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                     </HjelpetekstBase>
                 </div>
-                <div className="inputrad">
+                <div className="inputrad_arbeid">
                     {this.setFelter()}
                 </div>
             </div>
@@ -117,12 +113,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     render() {
         return (
             <div>
-                {this.props.feil ?
-                    <div className={'feilIRad'}>
-                        {this.innhold()}
-                    </div> :
-                    this.innhold()
-                }
+                {this.innhold()}
             </div>
         );
     }

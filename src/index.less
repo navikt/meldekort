@@ -25,6 +25,8 @@
 @import "app/components/stegBanner/stegBanner.less";
 @import "app/components/tabell/tabell.less";
 @import "app/components/tabell/tabell.less";
+@import "app/components/modal/UIModalWrapper.less";
+@import "app/components/feil/UIAlertstripeWrapper.less";
 @import "app/sider/innsending/bekreftelsesside/bekreftelse.less";
 @import "app/sider/innsending/sporsmalsside/sporsmal/sporsmal.less";
 @import "app/sider/innsending/sporsmalsside/sporsmalsside.less";
@@ -34,6 +36,7 @@
 @import "app/sider/innsending/utfyllingsside/utfyllingsside.less";
 @import "app/sider/ofteStilteSporsmal/ofteStilteSporsmal.less";
 @import "app/sider/sendMeldekort/sendMeldekort.less";
+@import "app/sider/tidligereMeldekort/detaljer/detaljer.less";
 @import "app/sider/tidligereMeldekort/detaljer/detaljer.less";
 
 /*
@@ -136,6 +139,20 @@ body {
   }
   .sentrert-tekst {
     text-align: center;
+  }
+
+  @media @desktop {
+    #meldekort-root {
+      .main-container {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+
+        .sideinnhold {
+          width: 800px;
+        }
+      }
+    }
   }
 
   @media @tablet {

@@ -4,19 +4,14 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { Checkbox } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { hentIntl } from '../../../utils/intlUtil';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
 import { InnsendingState } from '../../../types/innsending';
-import { kalkulerDato } from '../../../utils/dates';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Person } from '../../../types/person';
 import { RootState } from '../../../store/configureStore';
-import { scrollToTop } from '../../../utils/scroll';
 import {
     Fravaer,
     FravaerTypeEnum,
@@ -26,6 +21,11 @@ import {
     Meldekortdetaljer as MDetaljer,
     MeldekortdetaljerInnsending
 } from '../../../types/meldekort';
+import { hentIntl } from '../../../utils/intlUtil';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
+import { scrollToTop } from '../../../utils/scroll';
+import { Dispatch } from 'redux';
+import { kalkulerDato } from '../../../utils/dates';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -153,7 +153,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         return meldekortdager;
     }
 
-    setChecked = () => {
+    settChecked = () => {
         let detaljer = this.state.meldekortdetaljer;
         detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer.sporsmal.signatur;
         if (detaljer.meldekortdetaljer.sporsmal.signatur) {
@@ -171,7 +171,6 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
        } else {
            let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
            this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
-           console.log(mDetaljerInn);
            this.props.settMeldekortdetaljerInnsending(mDetaljerInn);
            this.props.kontrollerMeldekort(mDetaljerInn);
        }
@@ -208,15 +207,15 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                     <Sprakvelger/>
                 </section>
                 <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap}/>
-                <div className={'bekreftInfo'}>
+                <BekreftCheckboksPanel
+                    className={'bekreftInfo'}
+                    onChange={() => this.settChecked()}
+                    checked={meldekortdetaljer.sporsmal.signatur}
+                    label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
+                    feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
+                >
                     <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')}/></Normaltekst>
-                    <Checkbox
-                        onChange={() => this.setChecked()}
-                        label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
-                        checked={meldekortdetaljer.sporsmal.signatur}
-                        feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
-                    />
-                </div>
+                </BekreftCheckboksPanel>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}

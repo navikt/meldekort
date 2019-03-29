@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import Arbeidsrad from './utfylling/arbeid/arbeidsrad';
-import Aktivitetsrad from './utfylling/aktivitet/aktivitetsrad';
-import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../../utils/dates';
-import { InnsendingState, SpmSvar } from '../../../types/innsending';
+import { hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates';
+import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
@@ -16,30 +14,16 @@ import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
+import UkePanel from '../../../components/ukepanel/ukepanel';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: AktivtMeldekortState;
 }
 
-interface Feilmelding {
-    feil: boolean;
-    feilmelding?: string;
-}
-
-interface Feil {
-    feilIArbeid: Feilmelding;
-    feilIKurs: Feilmelding;
-    feilISyk: Feilmelding;
-    feilIFerie: Feilmelding;
-    feilIArbeidetTimerHeleHalve: boolean;
-    feilIArbeidetTimer: boolean;
-    feilIDager: string[];
-}
-
 type UtfyllingssideProps = MapStateToProps;
 
-class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
+class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil> {
     constructor(props: UtfyllingssideProps) {
         super(props);
         this.state = {
@@ -70,53 +54,6 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
             return sporsmal[0].svar;
         }
         return false;
-    }
-
-    hentUkePanel = (ukenummer: number, datoTittel: string) => {
-        let aap: boolean = this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
-        let {feilIArbeid, feilIFerie, feilISyk, feilIKurs, feilIDager} = this.state;
-        return (
-            <div className="ukepanel">
-                <Undertittel className="uketittel flex-innhold sentrert">{datoTittel}</Undertittel>
-                {this.sjekkSporsmal('arbeid') ?
-                    <Arbeidsrad
-                        ukeNummer={ukenummer}
-                        feil={feilIArbeid.feil}
-                        feilIDager={feilIDager}
-                        aap={aap}
-                        tekstId={'utfylling.arbeid'}
-                        forklaingId={'forklaring.utfylling.arbeid'}
-                    /> : null
-                }
-                {this.sjekkSporsmal('aktivitetArbeid') ?
-                    <Aktivitetsrad
-                        ukeNummer={ukenummer}
-                        tekstId="utfylling.tiltak"
-                        forklaingId={'forklaring.utfylling.tiltak'}
-                        aap={aap}
-                        feil={feilIKurs.feil}
-                    /> : null
-                }
-                {this.sjekkSporsmal('forhindret') ?
-                    <Aktivitetsrad
-                        ukeNummer={ukenummer}
-                        tekstId="utfylling.syk"
-                        forklaingId={'forklaring.utfylling.syk'}
-                        aap={aap}
-                        feil={feilISyk.feil}
-                    /> : null
-                }
-                {this.sjekkSporsmal('ferieFravar') ?
-                    <Aktivitetsrad
-                        ukeNummer={ukenummer}
-                        tekstId="utfylling.ferieFravar"
-                        forklaingId={'forklaring.utfylling.ferieFravar'}
-                        aap={aap}
-                        feil={feilIFerie.feil}
-                    /> : null
-                }
-            </div>
-        );
     }
 
     validerAntallTimerForDag = (dager: UtfyltDag[]): boolean => {
@@ -217,9 +154,23 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, Feil> {
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                {this.hentFeilmeldinger()}
-                {this.hentUkePanel(Konstanter().forsteUke, hentNummerOgDatoForForsteUke(meldeperiode.fra))}
-                {this.hentUkePanel(Konstanter().andreUke, hentNummerOgDatoForAndreUke(meldeperiode.til))}
+                <section className="seksjon flex-innhold sentrert utfylling">
+                    {this.hentFeilmeldinger()}
+                    <UkePanel
+                        ukenummer={Konstanter().forsteUke}
+                        faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
+                        datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
+                        utfyllingFeil={this.state}
+                        erAap={this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF}
+                    />
+                    <UkePanel
+                        ukenummer={Konstanter().andreUke}
+                        faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
+                        datoTittel={hentDatoForForsteUke(meldeperiode.til)}
+                        utfyllingFeil={this.state}
+                        erAap={this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF}
+                    />
+                </section>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.standard}
