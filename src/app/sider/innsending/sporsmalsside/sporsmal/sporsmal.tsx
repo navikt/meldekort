@@ -22,24 +22,18 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
     return (
         <section className="seksjon sporsmal">
             <div className="flex-sporsmal-hjelpetekst-container">
+                <Undertittel>
+                    <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
+                    {props.formatertDato ?
+                        <span> {props.formatertDato} ? </span> : null
+                    }
+                </Undertittel>
                 {props.disabled ? (
                     <>
-                        <Undertittel>
-                            <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
-                            {props.formatertDato ?
-                                <span> {props.formatertDato} ? </span> : null
-                            }
-                        </Undertittel>
                         <Ingress> {hentIntl().formatMessage({ id: 'korrigering.registrert.merknad'})}</Ingress>
                     </>
                 ) : (
                     <>
-                        <Undertittel>
-                            <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
-                            {props.formatertDato ?
-                                <span> {props.formatertDato} ? </span> : null
-                            }
-                        </Undertittel>
                         <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
                             <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
                         </HjelpetekstBase>

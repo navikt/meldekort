@@ -21,7 +21,7 @@ interface BegrunnselseProps {
 
 type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
-const BegrunnelseVelger: React.StatelessComponent<Props> = (props) => {
+const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
 
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         props.settBegrunnelse({
