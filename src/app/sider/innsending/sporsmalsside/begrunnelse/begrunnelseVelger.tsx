@@ -15,7 +15,11 @@ interface MapDispatchToProps {
     settBegrunnelse: (begrunnelse: Begrunnelse) => void;
 }
 
-type Props = MapDispatchToProps & MapStateToProps;
+interface BegrunnselseProps {
+    erFeil: boolean;
+}
+
+type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
 const BegrunnelseVelger: React.StatelessComponent<Props> = (props) => {
 
@@ -30,8 +34,10 @@ const BegrunnelseVelger: React.StatelessComponent<Props> = (props) => {
         .formatMessage({id: 'korriger.begrunnelse.valg'})
         .split(',');
 
+    const begrunnelseClass = props.erFeil ? 'feilmelding' : '';
+
     return (
-        <div className="seksjon">
+        <div className={'seksjon begrunnelse ' + begrunnelseClass}>
             <Select
                 label={hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
                 onChange={handleOnChange}
@@ -41,6 +47,7 @@ const BegrunnelseVelger: React.StatelessComponent<Props> = (props) => {
                     <option key={opt}> {opt} </option>
                 ))}
             </Select>
+            {props.erFeil && (<span className={'rodTekst'}>{hentIntl().formatMessage({id: 'begrunnelse.required'})}</span>)}
         </div>
     );
 };

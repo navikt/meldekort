@@ -1,26 +1,27 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
+import BegrunnelseVelger from './begrunnelse/begrunnelseVelger';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
-import { connect } from 'react-redux';
-import { history, RootState } from '../../../store/configureStore';
-import { Dispatch } from 'redux';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { Meldegruppe } from '../../../types/meldekort';
-import { InnsendingActions } from '../../../actions/innsending';
-import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
-import { RouteComponentProps } from 'react-router';
-import { hentIntl } from '../../../utils/intlUtil';
-import { scrollToTop } from '../../../utils/scroll';
-import { IModal, ModalKnapp } from '../../../types/ui';
-import { UiActions } from '../../../actions/ui';
-import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
-import Veilederpanel from 'nav-frontend-veilederpanel';
+import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import { InnsendingState, Innsendingstyper, SpmSvar, Begrunnelse } from '../../../types/innsending';
+import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { hentIntl } from '../../../utils/intlUtil';
+import { history, RootState } from '../../../store/configureStore';
+import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import { IModal, ModalKnapp } from '../../../types/ui';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import { InnsendingActions } from '../../../actions/innsending';
+import { Meldegruppe } from '../../../types/meldekort';
+import { RouteComponentProps } from 'react-router';
+import { scrollToTop } from '../../../utils/scroll';
+import { Sporsmal } from './sporsmal/sporsmalConfig';
+import { UiActions } from '../../../actions/ui';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -222,6 +223,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 <section className="seksjon">
                     {this.hentFeilmeldinger(meldegruppeErAAP)}
                 </section>
+                { innsending.innsendingstype === Innsendingstyper.korrigering && (
+                    <section className="seksjon">
+                        <BegrunnelseVelger erFeil={innsending.begrunnelse.erFeil}/>
+                    </section>
+                )}
                 <section className="seksjon">
                     <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
                 </section>

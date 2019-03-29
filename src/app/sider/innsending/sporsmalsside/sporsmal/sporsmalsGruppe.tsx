@@ -10,7 +10,6 @@ import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import { AktivtMeldekortState } from '../../../../reducers/aktivtMeldekortReducer';
 import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
-import Begrunnelse from '../begrunnelse/begrunnelseVelger';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -88,7 +87,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
         return(
             <div>
-                <Begrunnelse />
                 {sporsmalsgruppe}
             </div>
         );
