@@ -12,7 +12,7 @@ import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { Meldegruppe } from '../../../types/meldekort';
 import { InnsendingActions } from '../../../actions/innsending';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
+import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
 import { RouteComponentProps } from 'react-router';
 import { hentIntl } from '../../../utils/intlUtil';
 import { scrollToTop } from '../../../utils/scroll';
@@ -30,6 +30,7 @@ interface MapDispatchToProps {
     skjulModal: () => void;
     resetSporsmalOgUtfylling: () => void;
     visModal: (modal: IModal) => void;
+    settBegrunnelse: (begrunnelse: Begrunnelse) => void;
 }
 
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentProps;
@@ -42,14 +43,16 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     valider = (): boolean => {
+        const { sporsmalsobjekter, begrunnelse, innsendingstype } = this.props.innsending;
 
         const arbeidet = this.sjekkSporsmal(kategorier[0]);
         const kurs = this.sjekkSporsmal(kategorier[1]);
         const syk = this.sjekkSporsmal(kategorier[2]);
         const ferie = this.sjekkSporsmal(kategorier[3]);
         const registrert = this.sjekkSporsmal(kategorier[4]);
-
-        const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
+        const begrunnelseValgt = begrunnelse.valgtArsak === '' && innsendingstype === Innsendingstyper.korrigering;
+        console.log('begrunnelsevalgt', begrunnelseValgt);
+        const nySporsmalsobjekterState = sporsmalsobjekter
             .map( sporsmalsobj => {
                 switch (sporsmalsobj.kategori) {
                     case kategorier[0]:
@@ -67,8 +70,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 }
             });
         this.props.oppdaterSvar(nySporsmalsobjekterState);
+        this.props.settBegrunnelse({
+            valgtArsak: begrunnelse.valgtArsak,
+            erFeil: begrunnelseValgt
+        });
 
-        const resultat = arbeidet && kurs && syk && ferie && registrert;
+        const resultat = arbeidet && kurs && syk && ferie && registrert && begrunnelseValgt;
         if (!resultat) {
             scrollToTop();
             return resultat;
@@ -268,6 +275,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
         visModal: (modal: IModal) => dispatch(UiActions.visModal(modal)),
         resetSporsmalOgUtfylling: () =>
             dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
+        settBegrunnelse: (begrunnelsesobj: Begrunnelse) =>
+            dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj))
     };
 };
 
