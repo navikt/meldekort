@@ -1,5 +1,4 @@
 import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
@@ -50,7 +49,6 @@ class SendMeldekort extends React.Component<Props, any> {
         let meldekortListe = this.filtrerMeldekortListe();
 
         if (meldekortListe.length === 1) {
-            console.log('Har ett meldekort');
             this.props.leggTilAktivtMeldekort(meldekortListe[0]);
             return true;
         }
@@ -58,6 +56,9 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     filtrerMeldekortListe = () => {
+        if (typeof this.props.person.meldekort === 'undefined') {
+            return [];
+        }
         return this.props.person.meldekort.filter((meldekortObj) =>
              (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
                (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
@@ -180,17 +181,17 @@ class SendMeldekort extends React.Component<Props, any> {
                     </div>
                 </section>
                 <section className="seksjon">
-                    <AlertStripe type="info" solid={true}>
-                        <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/>
-                        <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/>
-                        <FormattedHTMLMessage id="sendMeldekort.info.neste"/>
-                    </AlertStripe>
+                    <div className="box">
+                        <Normaltekst><FormattedHTMLMessage id="sendMeldekort.info.neste"/></Normaltekst>
+                        <Normaltekst><FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden"/></Normaltekst>
+                        <Normaltekst><FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet"/></Normaltekst>
+                    </div>
                 </section>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/innsending'}
-                        tekstid={'sendMeldekort.knapp.startUtfylling'}
+                        tekstid={'naviger.neste'}
                         nesteAktivtMeldekort={this.filtrerMeldekortListe()[0]}
                         nesteInnsendingstype={Innsendingstyper.innsending}
                     />
@@ -222,7 +223,7 @@ class SendMeldekort extends React.Component<Props, any> {
                         }
                     </section>
                 </main>
-            ) : <Redirect exact={true} from="/send-meldekort" to="/innsending"/>;
+            ) : <Redirect exact={true} from="/send-meldekort" to="/send-meldekort/innsending"/>;
     }
 }
 

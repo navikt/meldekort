@@ -20,6 +20,7 @@ import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { Meldegruppe, Meldekort } from '../../../types/meldekort';
+import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 
 interface MapStateToProps {
@@ -43,7 +44,7 @@ class Detaljer extends React.Component<Props> {
         return [{
             mottattDato: formaterDato(meldekort.mottattDato),
             kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
-            bruttoBelop: typeof meldekort.bruttoBelop === 'undefined' || meldekort.bruttoBelop === null ? '' : `${meldekort.bruttoBelop} kr`,
+            bruttoBelop: formaterBelop(meldekort.bruttoBelop),
             kortType: mapKortTypeTilTekst(meldekort.kortType)
         }];
     }
@@ -70,7 +71,6 @@ class Detaljer extends React.Component<Props> {
                     return (
                         <EtikettBase
                             type={finnRiktigEtikettType(row.kortStatus)}
-                            className={HvisIngenBeregningSettBlaEtikett(row.kortStatus)}
                         > {row.kortStatus}
                         </EtikettBase>
                     );

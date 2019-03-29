@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SporsmalOgSvar } from '../../types/meldekort';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import checkMark from '../../ikoner/check.svg';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
@@ -32,7 +32,7 @@ const Sporsmalvisning: React.FunctionComponent<Props> = (props) => {
                                     </span> : null
                                 }
                             </Undertittel>
-                            <HjelpetekstBase id={sporsmalOgSvar.forklaring} type="over">
+                            <HjelpetekstBase id={sporsmalOgSvar.forklaring} type="auto">
                                 <FormattedHTMLMessage id={sporsmalOgSvar.forklaring} />
                             </HjelpetekstBase>
                         </div>

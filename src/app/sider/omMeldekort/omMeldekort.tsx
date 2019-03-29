@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { Meldekort } from '../../types/meldekort';
 import { Innsendingstyper } from '../../types/innsending';
 import { Dispatch } from 'redux';
+import { hentIntl } from '../../utils/intlUtil';
 
 interface MapDispatchToProps {
     resetInnsending: () => void;
@@ -32,17 +33,22 @@ class OmMeldekort extends React.Component<MapDispatchToProps, any> {
                     <Innholdstittel><FormattedMessage id="overskrift.genereltOmMeldekort" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <Veilederpanel type={'plakat'} kompakt={true} svg={<img src={veileder}/>}>
+                <Veilederpanel type={'plakat'} kompakt={true} svg={<img alt={'Veileder'} src={veileder}/>}>
                     <section className="seksjon">
                         <Normaltekst><FormattedMessage id="genereltOmMeldekort.velkommen" /></Normaltekst>
                         <Normaltekst><FormattedMessage id="genereltOmMeldekort.velge" /></Normaltekst>
                         <ul>
                             <li><FormattedMessage id="genereltOmMeldekort.valg.sende" /></li>
                             <li><FormattedMessage id="genereltOmMeldekort.valg.tidligere" /></li>
-                            <li><FormattedMessage id="genereltOmMeldekort.valg.endre" /></li>
+                            <li><FormattedMessage id="genereltOmMeldekort.valg.endre"/></li>
                         </ul>
-                        {/* TODO: Fikse lenke i teksten genereltOmMeldekort.om.meldekort */}
-                        <Normaltekst><FormattedHTMLMessage id="genereltOmMeldekort.om.meldekort" /></Normaltekst>
+                        <Normaltekst><FormattedHTMLMessage
+                            id="genereltOmMeldekort.om.meldekort"
+                            values={{
+                                0: 'https://www.nav.no',
+                                1: hentIntl().formatMessage({id: 'genereltOmMeldekort.informasjonOmMeldekortLink'}).trim()
+                            }}
+                        /></Normaltekst>
                         <Normaltekst><FormattedMessage id="genereltOmMeldekort.oss" /></Normaltekst>
                     </section>
                 </Veilederpanel>

@@ -16,6 +16,9 @@ import { PersonStatusState } from './reducers/personStatusReducer';
 import { connect } from 'react-redux';
 import Feilside from './components/feilside/feilside';
 import UIModalWrapper from './components/modal/UIModalWrapper';
+import { BaksystemFeilmelding } from './types/ui';
+import { selectFeilmelding } from './selectors/ui';
+import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
 
 if (erMock()) {
     setupMock();
@@ -23,6 +26,7 @@ if (erMock()) {
 
 interface MapStateToProps {
     personStatus: PersonStatusState;
+    baksystemFeilmelding: BaksystemFeilmelding;
     person: Person;
 }
 
@@ -35,6 +39,8 @@ type Props = MapDispatchToProps&MapStateToProps;
 class App extends React.Component<Props> {
     constructor(props: any) {
         super(props);
+
+        this.props.hentPersonStatus();
     }
 
     erBrukerRegistrertIArena = (): boolean => {
@@ -60,7 +66,13 @@ class App extends React.Component<Props> {
 
     settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
-            return null;
+            return (
+                <div className="main-container">
+                {this.props.baksystemFeilmelding.visFeilmelding ?
+                    <UIAlertstripeWrapper/> : <Feilside/>
+                }
+                </div>
+            );
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
@@ -103,6 +115,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         personStatus: state.personStatus,
         person: state.person,
+        baksystemFeilmelding: selectFeilmelding(state)
     };
 };
 

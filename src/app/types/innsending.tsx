@@ -60,3 +60,18 @@ export enum InnsendingTypeKeys {
     KONTROLLER_MELDEKORT_FEILET = 'KONTROLLER_MELDEKORT_FEILET'
 
 }
+
+export interface Feilmelding {
+    feil: boolean;
+    feilmelding?: string;
+}
+
+export interface UtfyllingFeil {
+    feilIArbeid: Feilmelding;
+    feilIKurs: Feilmelding;
+    feilISyk: Feilmelding;
+    feilIFerie: Feilmelding;
+    feilIArbeidetTimerHeleHalve: boolean;
+    feilIArbeidetTimer: boolean;
+    feilIDager: string[];
+}

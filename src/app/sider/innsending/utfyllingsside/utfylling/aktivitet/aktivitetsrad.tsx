@@ -89,12 +89,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 <Checkbox
                     className="flex-container"
                     key={ukedag}
-                    label={
-                        <div>
-                            <abbr title={dag}>{dag.charAt(0)}</abbr>
-                            <span className="vekk">{hentIntl().formatMessage({id: this.props.tekstId})}</span>
-                        </div>
-                    }
+                    label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     checked={this.isChecked(ukedag)}
                     onChange={() => { this.setVerdi(ukedag); }}
                 />
@@ -102,15 +97,26 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
         });
     }
 
+    hentFarge = () => {
+        switch (this.props.tekstId) {
+            case 'utfylling.tiltak':
+                return {borderLeftColor: '#ffe9cc', backgroundColor: this.props.feil ? '#e79999' : ''};
+            case 'utfylling.syk':
+                return {borderLeftColor: '#6ab889', backgroundColor: this.props.feil ? '#e79999' : ''};
+            case 'utfylling.ferieFravar':
+                return {borderLeftColor: '#c1b5d0', backgroundColor: this.props.feil ? '#e79999' : ''};
+        }
+    }
+
     innhold = () => {
         let { tekstId, aap, forklaingId } = this.props;
         return (
-            <div className="aktivitetsrad">
+            <div className="aktivitetsrad" style={this.hentFarge()}>
                 <div className="kategori_forklaring">
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="hoyre">
+                    <HjelpetekstBase id={'arbeid'} type="auto">
                         <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
                     </HjelpetekstBase>
                 </div>
@@ -123,14 +129,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
     render() {
         return (
-            <div>
-                {this.props.feil ?
-                    <div className={'feilIRad'}>
-                        {this.innhold()}
-                    </div> :
-                    this.innhold()
-                }
-            </div>
+            <>
+                {this.innhold()}
+            </>
         );
     }
 }
