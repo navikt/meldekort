@@ -1,11 +1,76 @@
 {
-  "meldekortid": "12345678",
-  "status": "STATUS",
-  "arsakskoder": [{
-    "kode": "kode",
-    "tekst": "tekst"
-  }],
-  "meldekortdager": [{
-    "dag": 1
-  }]
+  "meldekortId": 1331533859,
+  "status": "FEIL",
+  "arsakskoder": [
+    {
+      "kode": "FA01",
+      "tekst": "Mandag uke 1, krysset av både for arbeid og annet fravær enn sykdom "
+    },
+    {
+      "kode": "SF01",
+      "tekst": "Mandag uke 1, krysset av for både sykedag og annet fravær enn sykdom"
+    },
+    {
+      "kode": "FA10",
+      "tekst": "Onsdag uke 2, krysset av både for arbeid og annet fravær enn sykdom "
+    }
+  ],
+  "meldekortdager": [
+    {
+      "dag": 1,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 2,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 3,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 4,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 5,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 6,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 7,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 8,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 9,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 10,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 11,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 12,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 13,
+      "meldegruppe": "ATTF"
+    },
+    {
+      "dag": 14,
+      "meldegruppe": "ATTF"
+    }
+  ]
 }

@@ -26,6 +26,8 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
 import { kalkulerDato } from '../../../utils/dates';
+import { type } from 'os';
+import { Redirect } from 'react-router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -44,14 +46,14 @@ type BekreftelseProps = MapStateToProps & MapDispatchToProps;
 interface DetaljerOgFeil {
     meldekortdetaljer: MeldekortdetaljerState;
     feilmelding: string;
+    senderMeldekort: boolean;
 }
 
 class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     constructor(props: BekreftelseProps) {
         super(props);
-        this.state = {meldekortdetaljer: this.konverterInnsendingTilMeldekortdetaljer(), feilmelding: ''};
-        console.log(this.konverterInnsendingTilMeldekortdetaljer());
+        this.state = {meldekortdetaljer: this.konverterInnsendingTilMeldekortdetaljer(), feilmelding: '', senderMeldekort: false};
     }
 
     konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
@@ -169,12 +171,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
            this.setState({feilmelding: hentIntl().formatMessage({id: 'utfylling.bekreft.feil'})});
            scrollToTop();
        } else {
+           this.setState({senderMeldekort: true});
            let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
            this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
            this.props.settMeldekortdetaljerInnsending(mDetaljerInn);
            this.props.kontrollerMeldekort(mDetaljerInn);
        }
-       return sign;
+       return false;
     }
 
     hoppOverUtfylling = () => {
@@ -184,55 +187,67 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     render() {
         let { meldegruppe } = this.props.aktivtMeldekort.meldekort;
+        let { valideringsResultat } = this.props.innsending;
         let { meldekortdetaljer } = this.state.meldekortdetaljer;
         let { feilmelding } = this.state;
         let aap = meldegruppe === Meldegruppe.ATTF;
-        return(
-            <main>
-                <div className="ikkeSendt">
-                    <AlertStripe type={'info'} solid={true}>
+        if (typeof valideringsResultat !== 'undefined') {
+
+            return valideringsResultat.status === 'FEIL' ? (
+                <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="utfylling"/>
+            ) : (
+                <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="kvittering"/>
+            );
+        } else {
+            return (
+                <main>
+                    <div className="ikkeSendt">
+                        <AlertStripe type={'info'} solid={true}>
                         <span>{
                             `${hentIntl().formatMessage({id: 'overskrift.steg3.info.ikkeSendt'})}
                              ${hentIntl().formatMessage({id: 'overskrift.steg3.info.bekreftVerdier'})}`}
                         </span>
-                    </AlertStripe>
-                </div>
-                {this.state.feilmelding === '' ? null :
-                    <AlertStripe type={'advarsel'} solid={true}>
-                        {this.state.feilmelding}
-                    </AlertStripe>
-                }
-                <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel><FormattedMessage id="overskrift.steg3" /></Innholdstittel>
-                    <Sprakvelger/>
-                </section>
-                <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap}/>
-                <BekreftCheckboksPanel
-                    className={'bekreftInfo'}
-                    onChange={() => this.settChecked()}
-                    checked={meldekortdetaljer.sporsmal.signatur}
-                    label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
-                    feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
-                >
-                    <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')}/></Normaltekst>
-                </BekreftCheckboksPanel>
-                <section className="seksjon flex-innhold sentrert">
-                    <NavKnapp
-                        type={knappTyper.standard}
-                        nestePath={this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'}
-                        tekstid={'naviger.forrige'}
-                        className={'navigasjonsknapp'}
-                    />
-                    <NavKnapp
-                        type={knappTyper.hoved}
-                        nestePath={'/innsending/kvittering'}
-                        tekstid={'naviger.send'}
-                        className={'navigasjonsknapp'}
-                        validering={this.valider}
-                    />
-                </section>
-            </main>
-        );
+                        </AlertStripe>
+                    </div>
+                    {this.state.feilmelding === '' ? null :
+                        <AlertStripe type={'advarsel'} solid={true}>
+                            {this.state.feilmelding}
+                        </AlertStripe>
+                    }
+                    <section className="seksjon flex-innhold tittel-sprakvelger">
+                        <Innholdstittel><FormattedMessage id="overskrift.steg3"/></Innholdstittel>
+                        <Sprakvelger/>
+                    </section>
+                    <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap}/>
+                    <BekreftCheckboksPanel
+                        className={'bekreftInfo'}
+                        onChange={() => this.settChecked()}
+                        checked={meldekortdetaljer.sporsmal.signatur}
+                        label={hentIntl().formatMessage({id: 'utfylling.bekreftAnsvar'})}
+                        feil={feilmelding === '' ? undefined : {feilmelding: feilmelding}}
+                    >
+                        <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')}/></Normaltekst>
+                    </BekreftCheckboksPanel>
+                    <section className="seksjon flex-innhold sentrert">
+                        <NavKnapp
+                            type={knappTyper.standard}
+                            nestePath={this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'}
+                            tekstid={'naviger.forrige'}
+                            className={'navigasjonsknapp'}
+                        />
+                        <NavKnapp
+                            type={knappTyper.hoved}
+                            nestePath={'/innsending/kvittering'}
+                            tekstid={'naviger.send'}
+                            className={'navigasjonsknapp'}
+                            validering={this.valider}
+                            spinner={this.state.senderMeldekort}
+                            disabled={this.state.senderMeldekort}
+                        />
+                    </section>
+                </main>
+            );
+        }
     }
 }
 

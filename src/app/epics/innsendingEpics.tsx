@@ -24,7 +24,7 @@ const hentKorrigertId: AppEpic = (action$, state$) =>
         )
     );
 
-const kontrollerMeldekort: AppEpic = (action$, state$) =>
+/*const kontrollerMeldekort: AppEpic = (action$, state$) =>
     action$.pipe(
         filter(isActionOf(InnsendingActions.kontrollerMeldekort.request)),
         withLatestFrom(state$),
@@ -42,6 +42,20 @@ const kontrollerMeldekort: AppEpic = (action$, state$) =>
                     of(InnsendingActions.kontrollerMeldekort.failure(error), MeldekortActions.apiKallFeilet(error))
                 )
             )
+        )
+    );*/
+
+const kontrollerMeldekort: AppEpic = (action$, state$) =>
+    action$.pipe(
+        filter(isActionOf([InnsendingActions.kontrollerMeldekort.request])),
+        withLatestFrom(state$),
+        switchMap(([action, state]) =>
+                      from(postMeldekort(state.innsending.meldekortdetaljerInnsending!)).pipe(
+                          map(InnsendingActions.kontrollerMeldekort.success),
+                          catchError(error =>
+                                         of(InnsendingActions.kontrollerMeldekort.failure(error), MeldekortActions.apiKallFeilet(error))
+                          )
+                      )
         )
     );
 

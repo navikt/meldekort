@@ -31,7 +31,8 @@ export const InnsendingActions = {
     settMeldekortdetaljerInnsending: createStandardAction(
         InnsendingTypeKeys.SETT_MELDEKORTDETALJER_INNSENDING)<MeldekortdetaljerInnsending>(),
     settValideringsresultat: createStandardAction(
-        InnsendingTypeKeys.SETT_VALIDERINGSRESULTAT)<ValideringsResultat>()
+        InnsendingTypeKeys.SETT_VALIDERINGSRESULTAT)<ValideringsResultat>(),
+    resetValideringsresultat: createStandardAction(InnsendingTypeKeys.RESET_VALIDERINGSRESULTAT)<void>()
 };
 
 export type InnsendingActionsTypes = ActionType<typeof InnsendingActions>;

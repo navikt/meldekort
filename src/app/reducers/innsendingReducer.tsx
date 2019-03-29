@@ -57,6 +57,9 @@ const innsendingReducer = (state: InnsendingState = initialState,
         case getType(InnsendingActions.resetSporsmalOgUtfylling):
             return {...state, sporsmalsobjekter: hentSporsmalConfig(), utfylteDager: hentUtfyltDagConfig() };
 
+        case getType(InnsendingActions.resetValideringsresultat):
+            return {...state, valideringsResultat: undefined};
+
         case getType(InnsendingActions.hentKorrigertId.success):
             return {
                 ...state, korrigertMeldekortId: action.payload
@@ -69,6 +72,9 @@ const innsendingReducer = (state: InnsendingState = initialState,
 
         case getType(InnsendingActions.settValideringsresultat):
             return {...state, ...action.payload, valideringsResultat: action.payload };
+
+        case getType(InnsendingActions.kontrollerMeldekort.success):
+            return {...state, valideringsResultat: action.payload};
 
         default:
             return state;
