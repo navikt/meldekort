@@ -31,7 +31,6 @@ const hentKorrigertId: AppEpic = (action$, state$) =>
         concatMap(([action, state]) =>
             fromAsync( async () => {
                 return await postMeldekort(state.innsending.meldekortdetaljerInnsending!);
-
             }).pipe(
                 mergeMap( (valideringsresultat: ValideringsResultat) => {
                    return [
