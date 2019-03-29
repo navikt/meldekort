@@ -15,13 +15,19 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
 import { scrollToTop } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
+import { Dispatch } from 'redux';
+import { InnsendingActions } from '../../../actions/innsending';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: AktivtMeldekortState;
 }
 
-type UtfyllingssideProps = MapStateToProps;
+interface MapDispatchToProps {
+    resetValideringsresultat: () => void;
+}
+
+type UtfyllingssideProps = MapStateToProps & MapDispatchToProps;
 
 class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil> {
     constructor(props: UtfyllingssideProps) {
@@ -77,7 +83,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     }
 
     valider = (): boolean => {
-
+        this.props.resetValideringsresultat();
         let arbeidet = !this.sjekkSporsmal('arbeid');
         let kurs = !this.sjekkSporsmal('aktivitetArbeid');
         let syk = !this.sjekkSporsmal('forhindret');
@@ -116,6 +122,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
     hentFeilmeldinger = () => {
         let { feilIArbeid, feilIKurs, feilISyk, feilIFerie, feilIArbeidetTimer, feilIArbeidetTimerHeleHalve} = this.state;
+        const { valideringsResultat } = this.props.innsending;
         if (feilIArbeid.feil || feilIKurs.feil || feilISyk.feil || feilIFerie.feil || feilIArbeidetTimer || feilIArbeidetTimerHeleHalve) {
             let feiltekst = hentIntl().formatMessage({id: 'utfylling.ingenDagerUtfylt'});
             return (
@@ -142,6 +149,20 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                     </ul>
                 </AlertStripe>
             );
+        } else if (typeof valideringsResultat !== 'undefined') {
+            if (valideringsResultat.status === 'FEIL') {
+                return (
+                    <AlertStripe className={'utfyllingFeil'} type={'advarsel'} solid={true}>
+                        <ul>
+                            {
+                                valideringsResultat.arsakskoder.map(arsakskode => {
+                                    return ( <li key={arsakskode.kode}>{arsakskode.tekst}</li> );
+                                })
+                            }
+                        </ul>
+                    </AlertStripe>
+                );
+            }
         }
         return null;
     }
@@ -200,4 +221,9 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps, null)(Utfyllingsside);
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        resetValideringsresultat: () => dispatch(InnsendingActions.resetValideringsresultat()),
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Utfyllingsside);
