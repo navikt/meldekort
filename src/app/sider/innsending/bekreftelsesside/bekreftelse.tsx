@@ -26,7 +26,6 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollToTop } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
 import { kalkulerDato } from '../../../utils/dates';
-import { type } from 'os';
 import { Redirect } from 'react-router';
 
 interface MapStateToProps {

@@ -122,7 +122,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
     hentFeilmeldinger = () => {
         let { feilIArbeid, feilIKurs, feilISyk, feilIFerie, feilIArbeidetTimer, feilIArbeidetTimerHeleHalve} = this.state;
-        let { valideringsResultat } = this.props.innsending;
+        const { valideringsResultat } = this.props.innsending;
         if (feilIArbeid.feil || feilIKurs.feil || feilISyk.feil || feilIFerie.feil || feilIArbeidetTimer || feilIArbeidetTimerHeleHalve) {
             let feiltekst = hentIntl().formatMessage({id: 'utfylling.ingenDagerUtfylt'});
             return (
