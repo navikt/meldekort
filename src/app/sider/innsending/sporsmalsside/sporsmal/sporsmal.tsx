@@ -5,6 +5,9 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
+import AlertStripe from 'nav-frontend-alertstriper';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
+import Ingress from 'nav-frontend-typografi/lib/ingress';
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
@@ -22,15 +25,22 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                 <Undertittel>
                     <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
                     {props.formatertDato ?
-                            <span>
-                                {props.formatertDato}?
-                            </span> : null
+                        <span> {props.formatertDato} ? </span> : null
                     }
                 </Undertittel>
-                <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
-                    <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
-                </HjelpetekstBase>
+                {props.disabled ? (
+                    <>
+                        <Ingress> {hentIntl().formatMessage({ id: 'korrigering.registrert.merknad'})}</Ingress>
+                    </>
+                ) : (
+                    <>
+                        <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
+                            <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
+                        </HjelpetekstBase>
+                    </>
+                )}
             </div>
+
             <RadioPanelGruppe
                 name={props.sporsmalsobjekt.kategori}
                 legend=""
