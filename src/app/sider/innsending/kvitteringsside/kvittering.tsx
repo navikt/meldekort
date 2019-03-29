@@ -34,7 +34,6 @@ interface PropsVerdier {
     nestePath: string;
     nesteAktivtMeldekort: Meldekort | undefined;
     nesteInnsendingstype: Innsendingstyper | undefined;
-
 }
 
 interface MapDispatchToProps {

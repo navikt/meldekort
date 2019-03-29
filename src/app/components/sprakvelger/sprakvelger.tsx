@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 type ReduxType =
     ReturnType<typeof mapStateToProps> &
-    ReturnType<typeof mapDispatcherToProps>;
+    ReturnType<typeof mapDispatchToProps>;
 
 class Sprakvelger extends React.Component<ReduxType> {
     constructor(props: ReduxType) {
@@ -50,11 +50,11 @@ const mapStateToProps = ({ intl, locales }: RootState) => {
     };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch<IntlAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
     return {
         updateIntl: (locale: any, messages: any) =>
             dispatch(updateIntl({locale, messages}))
     };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(Sprakvelger);
+export default connect(mapStateToProps, mapDispatchToProps)(Sprakvelger);
