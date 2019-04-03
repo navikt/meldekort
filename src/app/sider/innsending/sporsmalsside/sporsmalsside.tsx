@@ -230,8 +230,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 )}
                 <section className="seksjon">
                     <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                </section>
-                <section className="seksjon">
                     <AlertStripe type="info">
                         <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
                     </AlertStripe>
