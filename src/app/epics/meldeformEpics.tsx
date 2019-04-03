@@ -13,8 +13,8 @@ const endreMeldeform: AppEpic = (action$, state$) =>
     action$.pipe(
         filter(isActionOf([MeldeformActions.endreMeldeform.request])),
         withLatestFrom(state$),
-        switchMap(([action, state]) =>
-            from(postEndreMeldeform(state.meldeform.meldeformDetaljer)).pipe(
+        switchMap(([action]) =>
+            from(postEndreMeldeform(action.payload)).pipe(
                 map(MeldeformActions.endreMeldeform.success),
                 catchError(error =>
                     of(MeldeformActions.endreMeldeform.failure(error), MeldekortActions.apiKallFeilet(error))
