@@ -6,7 +6,6 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { RootState } from '../../../store/configureStore';
-import { oppdaterAktivtMeldekort } from '../../../actions/aktivtMeldekort';
 import { InnsendingActions } from '../../../actions/innsending';
 import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
@@ -20,6 +19,7 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
+import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
     router: Router;
@@ -186,7 +186,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper | null) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     };

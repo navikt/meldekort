@@ -1,14 +1,14 @@
 import * as React from 'react';
 import 'nav-frontend-lenker-style';
 import { history, RootState } from '../../store/configureStore';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { selectRouter } from '../../selectors/router';
 import { Router } from '../../types/router';
 import { Meldekort } from '../../types/meldekort';
-import { HoyreChevron } from 'nav-frontend-chevron';
+import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import Lenke from 'nav-frontend-lenker';
 
 interface KomponentlenkeProps {
     lenketekst: string;
@@ -45,9 +45,9 @@ class Komponentlenke extends React.Component<ReduxType> {
 
     render() {
         return (
-            <div className="komponentlenke">
-                <a className="lenke" href="#" onClick={this.clickHandler}> <span>{this.props.lenketekst}<HoyreChevron/></span> </a>
-            </div>
+            <Lenke href={'#'} onClick={this.clickHandler}>
+                {this.props.lenketekst}
+            </Lenke>
         );
     }
 }
@@ -65,7 +65,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort))
+            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort))
     };
 };
 
