@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { ActionType, createAsyncAction } from 'typesafe-actions';
-import { MeldeformDetaljerInn, Meldeperiode, Person } from '../types/person';
+import { Person } from '../types/person';
 
 export enum PersonTypeKeys {
     HENT_PERSON = 'HENT_PERSON',

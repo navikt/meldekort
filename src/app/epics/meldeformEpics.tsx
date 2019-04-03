@@ -11,7 +11,7 @@ import { endreMeldeformBekreftelseContent } from '../components/modal/endreMelde
 
 const endreMeldeform: AppEpic = (action$, state$) =>
     action$.pipe(
-        filter(isActionOf(MeldeformActions.endreMeldeform.request)),
+        filter(isActionOf([MeldeformActions.endreMeldeform.request])),
         withLatestFrom(state$),
         switchMap(([action, state]) =>
             from(postEndreMeldeform(state.meldeform.meldeformDetaljer)).pipe(

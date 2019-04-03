@@ -1,7 +1,6 @@
 import { ActionType, createAsyncAction, createStandardAction } from 'typesafe-actions';
 import { MeldeformDetaljerInn, Meldeperiode } from '../types/person';
 import { AxiosError } from 'axios';
-import { MeldeformState } from '../reducers/meldeformReducer';
 
 export enum MeldeformTypeKeys {
     SETT_MELDEFORM = 'SETT_MELDEFORM',

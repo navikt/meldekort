@@ -3,8 +3,8 @@ import { MeldeformActions, MeldeformActionTypes } from '../actions/meldeform';
 import { getType } from 'typesafe-actions';
 
 export interface MeldeformState {
-    meldeformDetaljer: MeldeformDetaljerInn,
-    meldeperiode: Meldeperiode
+    meldeformDetaljer: MeldeformDetaljerInn;
+    meldeperiode: Meldeperiode;
 }
 
 const initialState: MeldeformState = {

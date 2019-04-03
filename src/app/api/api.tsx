@@ -34,7 +34,7 @@ const fetchGet = async (url: string) => {
 
 const fetchPost = async (url: string, data: any) => {
     if (erMock()) {
-        return fetch(Environment().apiUrl + url, {method: 'POST', body: data}).then(response => {return response.json(); });
+        return fetch(url, {method: 'POST', body: data}).then(response => {return response.json(); });
     } else {
         return prefferedAxios.post(Environment().apiUrl + url, data, {
             headers: {

@@ -2,8 +2,8 @@ import { AppEpic } from '../store/configureStore';
 import { isActionOf } from 'typesafe-actions';
 import { PersonActions } from '../actions/person';
 import { from, of } from 'rxjs';
-import { catchError, concatMap, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { fetchMeldekort, postEndreMeldeform } from '../api/api';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { fetchMeldekort } from '../api/api';
 import { combineEpics } from 'redux-observable';
 import { MeldekortActions } from '../actions/meldekort';
 
