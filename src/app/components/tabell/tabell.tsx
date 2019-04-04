@@ -12,9 +12,7 @@ const Tabell: React.FunctionComponent<TabellProps> = (props) => {
     const JsonTable = require('ts-react-json-table');
     const tabellClass = props.mobilSkjerm ? 'tabell mobilversjon' : 'tabell';
 
-    return (
-        <>
-        {!props.mobilSkjerm ? (
+       /* {!props.mobilSkjerm ? (
             <MobilTabell
                 rows={props.rows}
                 columns={props.columns}
@@ -27,7 +25,16 @@ const Tabell: React.FunctionComponent<TabellProps> = (props) => {
                     className={props.className}
                 />
             </div>
-        )}
+        )}*/
+    return (
+        <>
+            <div className={tabellClass}>
+                <JsonTable
+                    rows={props.rows}
+                    columns={props.columns}
+                    className={props.className}
+                />
+            </div>
         </>
     );
 };

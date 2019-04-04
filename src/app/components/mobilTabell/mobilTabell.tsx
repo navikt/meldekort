@@ -12,7 +12,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = (props) => {
 
     return (
         <>
-            Hei
+
         </>
     );
 };
