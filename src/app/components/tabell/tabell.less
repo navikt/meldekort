@@ -27,16 +27,75 @@
       }
     }
     .jsonOdd {
-      background: #eee;
+      background: white;
     }
   }
 }
 
 @media (max-width: @screen-sm) {
-  .tabell {
+  .tabell, .tabell.mobilversjon {
 
     td, th {
       padding: 0.5rem;
+    }
+  }
+
+  .tabell.mobilversjon {
+    // background-color: #e79999;
+
+    .jsonTable {
+
+      th {
+        font-weight: normal;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      tr {
+        margin: 0 0 2rem 0;
+      }
+
+      tr:nth-child(odd) {
+        background: #f8f8f8;
+      }
+
+      td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td:before {
+        /* Now like a table header */
+        position: absolute;
+        left: 1rem;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+      }
+
+      /*
+		Label the data
+    You could also use a data-* attribute and content for this. That way "bloats" the HTML,
+    this way means you need to keep HTML and CSS in sync.
+    Lea Verou has a clever way to handle with text-shadow.
+		*/
+      td:nth-of-type(1):before { content: "Periode"; }
+      td:nth-of-type(2):before { content: "Dato"; }
+      td:nth-of-type(3):before { content: "Mottatt"; }
+      td:nth-of-type(4):before { content: "Status"; }
+      td:nth-of-type(5):before { content: "Brutto Beløp"; }
+
     }
   }
 }

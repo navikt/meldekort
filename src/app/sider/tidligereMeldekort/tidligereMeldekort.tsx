@@ -96,6 +96,7 @@ class TidligereMeldekort extends React.Component<Props> {
             <Tabell
                 rows={rows}
                 columns={columns}
+                mobilSkjerm={true}
             />
         );
     }
