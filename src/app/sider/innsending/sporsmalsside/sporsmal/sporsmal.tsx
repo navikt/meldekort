@@ -26,19 +26,15 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                     <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
                     {props.formatertDato ?
                         <span> {props.formatertDato} ? </span> : null
+                    } { props.disabled ?
+                        <FormattedMessage id={"korrigering.registrert.merknad"}/> : null
                     }
                 </Undertittel>
-                {props.disabled ? (
-                    <>
-                        <Ingress> {hentIntl().formatMessage({ id: 'korrigering.registrert.merknad'})}</Ingress>
-                    </>
-                ) : (
                     <>
                         <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
                             <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
                         </HjelpetekstBase>
                     </>
-                )}
             </div>
 
             <RadioPanelGruppe
