@@ -1,32 +1,33 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, {knappTyper} from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { connect } from 'react-redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../../actions/innsending';
-import { InnsendingState } from '../../../types/innsending';
-import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
-import { Person } from '../../../types/person';
-import { RootState } from '../../../store/configureStore';
+import {AktivtMeldekortState} from '../../../reducers/aktivtMeldekortReducer';
+import {connect} from 'react-redux';
+import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {InnsendingActions} from '../../../actions/innsending';
+import {InnsendingState, Innsendingstyper} from '../../../types/innsending';
+import {MeldekortdetaljerState} from '../../../reducers/meldekortdetaljerReducer';
+import {Person} from '../../../types/person';
+import {RootState} from '../../../store/configureStore';
 import {
     Fravaer,
     FravaerTypeEnum,
+    KortType,
     Meldegruppe,
     Meldekort,
     MeldekortDag,
     Meldekortdetaljer as MDetaljer,
     MeldekortdetaljerInnsending
 } from '../../../types/meldekort';
-import { hentIntl } from '../../../utils/intlUtil';
-import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
-import { scrollToTop } from '../../../utils/scroll';
-import { Dispatch } from 'redux';
-import { kalkulerDato } from '../../../utils/dates';
-import { Redirect } from 'react-router';
+import {hentIntl} from '../../../utils/intlUtil';
+import {BekreftCheckboksPanel} from 'nav-frontend-skjema';
+import {scrollToTop} from '../../../utils/scroll';
+import {Dispatch} from 'redux';
+import {kalkulerDato} from '../../../utils/dates';
+import {Redirect} from 'react-router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -65,10 +66,11 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 meldekortId: aktivtMeldekort.meldekort.meldekortId,
                 meldeperiode: aktivtMeldekort.meldekort.meldeperiode.periodeKode,
                 arkivnokkel: '1-ELEKTRONISK',
-                kortType: aktivtMeldekort.meldekort.kortType,
+                kortType: innsending.innsendingstype === Innsendingstyper.korrigering ?
+                    KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.meldekort.kortType,
                 meldeDato: new Date(),
                 lestDato: new Date(),
-                begrunnelse: '',
+                begrunnelse: innsending.innsendingstype === Innsendingstyper.korrigering ? innsending.begrunnelse.valgtArsak : '',
                 sporsmal: {
                     arbeidet: innsending.sporsmalsobjekter[0].checked === undefined ? false : innsending.sporsmalsobjekter[0].checked.endsWith('ja'),
                     kurs: innsending.sporsmalsobjekter[1].checked === undefined ? false : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
@@ -95,8 +97,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             mottattDato: meldekortdetaljer.meldeDato,
             meldeperiode: meldekort.meldeperiode,
             erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
-            korrigerbart: true, // Her må det sjekkes på om innsendingen er en korrigering (settes da til false)
-            begrunnelse: '', // Begrunnelse må legges til ved korrigering
+            korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
+            begrunnelse: meldekortdetaljer.begrunnelse,
             signatur: meldekortdetaljer.sporsmal.signatur,
             fnr: meldekortdetaljer.fodselsnr,
             personId: meldekortdetaljer.personId,

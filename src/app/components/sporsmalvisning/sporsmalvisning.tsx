@@ -36,7 +36,7 @@ const Sporsmalvisning: React.FunctionComponent<Props> = (props) => {
                                 <FormattedHTMLMessage id={sporsmalOgSvar.forklaring} />
                             </HjelpetekstBase>
                         </div>
-                        <img src={checkMark}/>
+                        <img alt={'checkmark'} src={checkMark}/>
                         <span> {hentTekstForSvar(sporsmalOgSvar.svar)} </span>
                     </section>
                 );

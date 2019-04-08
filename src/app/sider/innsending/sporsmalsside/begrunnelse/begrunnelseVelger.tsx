@@ -6,9 +6,12 @@ import Select from 'nav-frontend-skjema/lib/select';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Begrunnelse } from '../../../../types/innsending';
 import { RootState } from '../../../../store/configureStore';
+import {Undertittel} from "nav-frontend-typografi";
+import HjelpetekstBase from "nav-frontend-hjelpetekst";
 
 interface MapStateToProps {
     begrunnelse: Begrunnelse;
+    AAP: boolean;
 }
 
 interface MapDispatchToProps {
@@ -26,7 +29,7 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         props.settBegrunnelse({
             valgtArsak: event.target.value,
-            erFeil: event.target.value === '' ? true : false
+            erFeil: event.target.value === ''
         });
     };
 
@@ -39,7 +42,14 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
     return (
         <div className={'seksjon begrunnelse ' + begrunnelseClass}>
             <Select
-                label={hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
+                label={
+                    <Undertittel>
+                        {hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
+                        <HjelpetekstBase type={'over'} id={'begrunnelse'}>
+                            {hentIntl().formatHTMLMessage({id: 'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : '')})}
+                        </HjelpetekstBase>
+                    </Undertittel>
+                }
                 onChange={handleOnChange}
             >
                 <option value={''}> {hentIntl().formatMessage({id: 'begrunnelse.velgArsak'})}</option>

@@ -1,17 +1,22 @@
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
 
-import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
-import { MeldekortDag, SporsmalOgSvar } from '../../types/meldekort';
-import { hentNestePeriodeMedUkerOgDato, hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../utils/dates';
-import { RootState } from '../../store/configureStore';
-import { connect } from 'react-redux';
-import { Undertittel, Element } from 'nav-frontend-typografi';
+import {MeldekortdetaljerState} from '../../reducers/meldekortdetaljerReducer';
+import {KortType, MeldekortDag, SporsmalOgSvar} from '../../types/meldekort';
+import {
+    hentNestePeriodeMedUkerOgDato,
+    hentNummerOgDatoForAndreUke,
+    hentNummerOgDatoForForsteUke
+} from '../../utils/dates';
+import {RootState} from '../../store/configureStore';
+import {connect} from 'react-redux';
+import {Element, Undertittel} from 'nav-frontend-typografi';
 
 import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
-import { hentUkedagerSomElementListe } from '../../utils/ukedager';
-import { hentIntl } from '../../utils/intlUtil';
+import {hentUkedagerSomElementListe} from '../../utils/ukedager';
+import {hentIntl} from '../../utils/intlUtil';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
+import checkMark from '../../ikoner/check.svg';
 
 interface ErAap {
     erAap: boolean;
@@ -175,9 +180,28 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
         ];
     };
 
+    const visBegrunnelse = () => {
+        if (props.meldekortdetaljer.begrunnelse !== '') {
+            return (
+                <section className="seksjon">
+                <div className="flex-sporsmal-hjelpetekst-container">
+                    <Undertittel><FormattedMessage id={'korrigering.sporsmal.begrunnelse'}/></Undertittel>
+                    <HjelpetekstBase id={'forklaring_begrunnelse'} type="auto">
+                        <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
+                    </HjelpetekstBase>
+                </div>
+                    <img alt={'checkmark'} src={checkMark}/>
+                    <span>{props.meldekortdetaljer.begrunnelse}</span>
+                </section>
+            );
+        }
+        return null;
+    };
+
     return (
         <div className="meldekortdetaljer">
             <div className="sporsmal">
+                {visBegrunnelse()}
                 <Sporsmalvisning sporsmalOgSvar={sporsmalOgSvar()}/>
             </div>
             <div className="ukevisning">

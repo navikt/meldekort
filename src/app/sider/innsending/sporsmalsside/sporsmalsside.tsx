@@ -225,7 +225,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 </section>
                 { innsending.innsendingstype === Innsendingstyper.korrigering && (
                     <section className="seksjon">
-                        <BegrunnelseVelger erFeil={innsending.begrunnelse.erFeil}/>
+                        <BegrunnelseVelger AAP={meldegruppeErAAP} erFeil={innsending.begrunnelse.erFeil}/>
                     </section>
                 )}
                 <section className="seksjon">
