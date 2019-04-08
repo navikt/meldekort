@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
-import MeldekortBanner from './components/meldekortBanner/meldekortBanner';
+import MeldekortBanner from './components/header/header';
 import MeldekortRoutes from './sider/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
