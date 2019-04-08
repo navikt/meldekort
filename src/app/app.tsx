@@ -99,6 +99,10 @@ class App extends React.Component<Props> {
         this.props.hentPersonStatus();
     }
 
+    componentWillUnmount() {
+
+    }
+
     public render() {
 
         return(

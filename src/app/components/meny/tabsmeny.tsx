@@ -30,16 +30,17 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
         };
     }
 
-    lagTabs = (tabsobjekter: Tab[], aktivTab: string, kompakt: boolean) => {
+    lagTabs = (tabsobjekter: Tab[], aktivTab: string, mobilSkjerm: boolean) => {
         const tablabels = tabsobjekter.map(obj => this.lagTab(obj));
         const aktivTabIndex = tabsobjekter.findIndex( obj => obj.urlparam === aktivTab);
 
+        // TODO: sett tabs ut ifra mobilSkjerm: Hvis den er true, så hvis mobilMeny. Ellers Tabs
         return (
             <Tabs
                 onChange={this.handleOnChange}
                 defaultAktiv={aktivTabIndex}
                 tabs={tablabels}
-                kompakt={kompakt}
+                kompakt={true}
             />
         );
     }
@@ -72,16 +73,16 @@ class Tabsmeny extends React.Component<TabsProps, TabsState> {
         const {windowSize} = this.state;
         const erDesktop = windowSize > 767;
 
-        const trengerKompakt = erDesktop ? false : true;
+        const erMobilSkjerm = erDesktop ? false : true;
 
         const pathListe = this.props.router.location.pathname.split('/');
-        const returnerFalseOmPathHarInnsending = pathListe[pathListe.length-2] !== 'innsending';
+        const returnerFalseOmPathHarInnsending = pathListe[pathListe.length - 2] !== 'innsending';
 
         return(
             ( returnerFalseOmPathHarInnsending ? (
                 <>
                     <nav className="tabsmeny">
-                        {this.lagTabs(this.props.tabsobjekter, this.props.router.location.pathname, trengerKompakt)}
+                        {this.lagTabs(this.props.tabsobjekter, this.props.router.location.pathname, erMobilSkjerm)}
                     </nav>
                 </>) : <></>
             )

@@ -1,16 +1,33 @@
 .tabsmeny {
-  background-color: @panelBakgrunn;
-
-  .nav-frontend-tabs {
+  border-bottom: 4px solid #E9E7E7;
+  
+  .nav-frontend-tabs, .nav-frontend-tabs--kompakt {
     display: flex;
     justify-content: center;
 
     &__tab-list {
-      width: @width-container;
-      margin: @padding-vertical-md;
+
 
       @media @tablet {
-        margin: @padding-vertical-sm;
+        padding: @padding-vertical-sm;
+      }
+      .nav-frontend-tabs__tab-outer {
+        margin-bottom: 0;
+      }
+    }
+
+    &__tab-inner.nav-frontend-tabs__tab-inner--interaktiv {
+      // border-bottom: 4px solid #E9E7E7;
+      padding: @padding-vertical-sm;
+
+      .nav-frontend-tabs__tab-label {
+
+      }
+    }
+    &__tab-inner.nav-frontend-tabs__tab-inner--aktiv {
+      .nav-frontend-tabs__tab-label {
+        // background-color: #A3DFF3;
+        border-bottom: 4px solid @navDypBla;
       }
     }
   }
