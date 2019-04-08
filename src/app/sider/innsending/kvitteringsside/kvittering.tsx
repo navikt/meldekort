@@ -116,7 +116,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
         return(
             <>
-                <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn}</span></Ingress>
+                <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn  + ' (' + person.fodselsnr + ')'}</span></Ingress>
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
                 <Ingress><span>{meldekortErMottatt}</span></Ingress>
                 {(typeof nesteAktivtMeldekort !== undefined) &&
