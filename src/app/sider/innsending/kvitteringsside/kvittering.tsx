@@ -150,18 +150,18 @@ class Kvittering extends React.Component<KvitteringsProps> {
                 </section>)}
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
-                        type={knappTyper.standard}
-                        nestePath={'/tidligere-meldekort'}
-                        tekstid={'sendt.linkTilTidligereMeldekort'}
-                        className={'navigasjonsknapp'}
-                    />
-                    <NavKnapp
                         type={knappTyper.hoved}
                         className={'navigasjonsknapp'}
                         tekstid={knappTekstid}
                         nestePath={nestePath}
                         nesteAktivtMeldekort={nesteAktivtMeldekort}
                         nesteInnsendingstype={nesteInnsendingstype}
+                    />
+                    <NavKnapp
+                        type={knappTyper.standard}
+                        nestePath={'/tidligere-meldekort'}
+                        tekstid={'sendt.linkTilTidligereMeldekort'}
+                        className={'navigasjonsknapp'}
                     />
                 </section>
             </main>

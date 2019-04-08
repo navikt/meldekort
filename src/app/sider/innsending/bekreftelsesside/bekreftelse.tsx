@@ -231,12 +231,6 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                     </BekreftCheckboksPanel>
                     <section className="seksjon flex-innhold sentrert">
                         <NavKnapp
-                            type={knappTyper.standard}
-                            nestePath={this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'}
-                            tekstid={'naviger.forrige'}
-                            className={'navigasjonsknapp'}
-                        />
-                        <NavKnapp
                             type={knappTyper.hoved}
                             nestePath={'/innsending/kvittering'}
                             tekstid={'naviger.send'}
@@ -244,6 +238,18 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                             validering={this.valider}
                             spinner={this.state.senderMeldekort}
                             disabled={this.state.senderMeldekort}
+                        />
+                        <NavKnapp
+                            type={knappTyper.standard}
+                            nestePath={this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'}
+                            tekstid={'naviger.forrige'}
+                            className={'navigasjonsknapp'}
+                        />
+                        <NavKnapp
+                            type={knappTyper.flat}
+                            nestePath={'/om-meldekort'}
+                            tekstid={'naviger.avbryt'}
+                            className={'navigasjonsknapp'}
                         />
                     </section>
                 </main>

@@ -1,27 +1,27 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import BegrunnelseVelger from './begrunnelse/begrunnelseVelger';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, {knappTyper} from '../../../components/knapp/navKnapp';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { InnsendingState, Innsendingstyper, SpmSvar, Begrunnelse } from '../../../types/innsending';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { hentIntl } from '../../../utils/intlUtil';
-import { history, RootState } from '../../../store/configureStore';
-import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
-import { IModal, ModalKnapp } from '../../../types/ui';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe } from '../../../types/meldekort';
-import { RouteComponentProps } from 'react-router';
-import { scrollToTop } from '../../../utils/scroll';
-import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { UiActions } from '../../../actions/ui';
+import {Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar} from '../../../types/innsending';
+import {AktivtMeldekortState} from '../../../reducers/aktivtMeldekortReducer';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
+import {hentIntl} from '../../../utils/intlUtil';
+import {history, RootState} from '../../../store/configureStore';
+import {ikkeFortsetteRegistrertContent} from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import {IModal, ModalKnapp} from '../../../types/ui';
+import {Innholdstittel} from 'nav-frontend-typografi';
+import {InnsendingActions} from '../../../actions/innsending';
+import {Meldegruppe} from '../../../types/meldekort';
+import {RouteComponentProps} from 'react-router';
+import {scrollToTop} from '../../../utils/scroll';
+import {Sporsmal} from './sporsmal/sporsmalConfig';
+import {UiActions} from '../../../actions/ui';
 import {UtfyltDag} from "../utfyllingsside/utfylling/utfyllingConfig";
 
 interface MapStateToProps {
@@ -277,6 +277,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         tekstid={'naviger.neste'}
                         className={'navigasjonsknapp'}
                         validering={this.valider}
+                    />
+                    <NavKnapp
+                        type={knappTyper.flat}
+                        nestePath={'/om-meldekort'}
+                        tekstid={'naviger.avbryt'}
+                        className={'navigasjonsknapp'}
                     />
                 </section>
 
