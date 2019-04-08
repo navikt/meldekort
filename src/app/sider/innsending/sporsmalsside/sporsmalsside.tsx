@@ -22,6 +22,7 @@ import { RouteComponentProps } from 'react-router';
 import { scrollToTop } from '../../../utils/scroll';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
+import {UtfyltDag} from "../utfyllingsside/utfylling/utfyllingConfig";
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -34,6 +35,7 @@ interface MapDispatchToProps {
     resetSporsmalOgUtfylling: () => void;
     visModal: (modal: IModal) => void;
     settBegrunnelse: (begrunnelse: Begrunnelse) => void;
+    oppdaterDager: (utfylteDager: UtfyltDag[]) => void;
 }
 
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentProps;
@@ -48,11 +50,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     valider = (): boolean => {
         const { sporsmalsobjekter, begrunnelse, innsendingstype } = this.props.innsending;
 
-        const arbeidet = this.sjekkSporsmal(kategorier[0]);
-        const kurs = this.sjekkSporsmal(kategorier[1]);
-        const syk = this.sjekkSporsmal(kategorier[2]);
-        const ferie = this.sjekkSporsmal(kategorier[3]);
-        const registrert = this.sjekkSporsmal(kategorier[4]);
+        const arbeidet = this.sjekkOmSporsmalErUtfylt(kategorier[0]);
+        const kurs = this.sjekkOmSporsmalErUtfylt(kategorier[1]);
+        const syk = this.sjekkOmSporsmalErUtfylt(kategorier[2]);
+        const ferie = this.sjekkOmSporsmalErUtfylt(kategorier[3]);
+        const registrert = this.sjekkOmSporsmalErUtfylt(kategorier[4]);
         const begrunnelseValgt = begrunnelse.valgtArsak === '' && innsendingstype === Innsendingstyper.korrigering;
         const nySporsmalsobjekterState = sporsmalsobjekter
             .map( sporsmalsobj => {
@@ -92,7 +94,39 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             return false;
         }
 
+        this.resetEndredeKategorier();
+
         return resultat;
+    }
+
+    resetEndredeKategorier() {
+        let arbeidet: boolean, kurs: boolean, syk: boolean, ferie: boolean = true;
+        this.hentSvarPaaSporsmal().map(spm => {
+            switch (spm.kategori) {
+                case kategorier[0]:
+                    arbeidet = spm.svar;
+                    break;
+                case kategorier[1]:
+                    kurs = spm.svar;
+                    break;
+                case kategorier[2]:
+                    syk = spm.svar;
+                    break;
+                case kategorier[3]:
+                    ferie = spm.svar;
+                    break;
+            }
+        });
+        let oppdatertUtfylteDager = this.props.innsending.utfylteDager.map( utfyltDag => {
+            return {
+                ...utfyltDag,
+                arbeidetTimer: arbeidet ? utfyltDag.arbeidetTimer : undefined,
+                kurs: kurs ? utfyltDag.kurs : false,
+                syk: syk ? utfyltDag.syk : false,
+                annetFravaer: ferie ? utfyltDag.annetFravaer : false
+            }
+        });
+        this.props.oppdaterDager(oppdatertUtfylteDager);
     }
 
     hentSvarPaaSporsmal = (): SpmSvar[] => {
@@ -126,7 +160,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return sporsmalListe;
     }
 
-    sjekkSporsmal = (kategori: string): boolean => {
+    sjekkOmSporsmalErUtfylt = (kategori: string): boolean => {
         const sporsmalListe = this.hentSporsmal();
         const sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
         if (sporsmal.length !== 0) {
@@ -290,7 +324,9 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
         resetSporsmalOgUtfylling: () =>
             dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
         settBegrunnelse: (begrunnelsesobj: Begrunnelse) =>
-            dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj))
+            dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj)),
+        oppdaterDager: (utfylteDager: UtfyltDag[]) =>
+            dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager))
     };
 };
 
