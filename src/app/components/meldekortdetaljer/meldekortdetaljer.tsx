@@ -181,19 +181,22 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
     };
 
     const visBegrunnelse = () => {
-        if (props.meldekortdetaljer.begrunnelse !== '') {
-            return (
-                <section className="seksjon">
-                <div className="flex-sporsmal-hjelpetekst-container">
-                    <Undertittel><FormattedMessage id={'korrigering.sporsmal.begrunnelse'}/></Undertittel>
-                    <HjelpetekstBase id={'forklaring_begrunnelse'} type="auto">
-                        <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
-                    </HjelpetekstBase>
-                </div>
-                    <img alt={'checkmark'} src={checkMark}/>
-                    <span>{props.meldekortdetaljer.begrunnelse}</span>
-                </section>
-            );
+        if (typeof props.meldekortdetaljer.begrunnelse !== 'undefined') {
+            const begrunnelse = String(props.meldekortdetaljer.begrunnelse);
+            if(begrunnelse.length > 0) {
+                return (
+                    <section className="seksjon">
+                        <div className="flex-sporsmal-hjelpetekst-container">
+                            <Undertittel><FormattedMessage id={'korrigering.sporsmal.begrunnelse'}/></Undertittel>
+                            <HjelpetekstBase id={'forklaring_begrunnelse'} type="auto">
+                                <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'}/>
+                            </HjelpetekstBase>
+                        </div>
+                        <img alt={'checkmark'} src={checkMark}/>
+                        <span>{props.meldekortdetaljer.begrunnelse}</span>
+                    </section>
+                );
+            }
         }
         return null;
     };

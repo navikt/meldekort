@@ -35,6 +35,19 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         super(props);
     }
 
+    componentWillMount(): void {
+        let rensetUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
+            if (utfyltDag.arbeidetTimer === 0) {
+                return {
+                    ...utfyltDag,
+                    arbeidetTimer: undefined
+                };
+            }
+            return {...utfyltDag}
+        });
+        this.props.oppdaterDager(rensetUtfylteDager);
+    }
+
     setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: string) => {
         const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
            if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
@@ -75,7 +88,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     bredde="XS"
                     step={0.5}
                     type={'number'}
-                    value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer === 'number' ?
+                    value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined' ?
                             utfylteDager[utfyltDagIndex].arbeidetTimer : ''
                     }
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
