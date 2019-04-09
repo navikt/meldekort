@@ -92,16 +92,16 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         let feilITimer = this.validerAntallTimerForDag(this.props.innsending.utfylteDager);
 
         this.props.innsending.utfylteDager.map(dag => {
-            if (arbeidet === false && typeof dag.arbeidetTimer !== 'undefined' && dag.arbeidetTimer > 0) {
+            if (!arbeidet && typeof dag.arbeidetTimer !== 'undefined' && dag.arbeidetTimer > 0) {
                 arbeidet = true;
             }
-            if (kurs === false && dag.kurs) {
+            if (!kurs && dag.kurs) {
                 kurs = true;
             }
-            if (syk === false && dag.syk) {
+            if (!syk && dag.syk) {
                 syk = true;
             }
-            if (ferie === false && dag.annetFravaer) {
+            if (!ferie && dag.annetFravaer) {
                 ferie = true;
             }
         });

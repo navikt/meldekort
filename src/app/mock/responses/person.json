@@ -35,34 +35,6 @@
       "kortStatus": "OPPRE",
       "erForskuddsPeriode": false,
       "korrigerbart": true
-    },
-    {
-      "meldekortId": 1011121316,
-      "kortType": "ELEKTRONISK",
-      "meldeperiode": {
-        "fra": "2019-01-28T12:00:00+01:00",
-        "til": "2019-02-10T12:00:00+01:00",
-        "kortKanSendesFra": "2019-02-09T12:00:00+01:00",
-        "periodeKode": "201905"
-      },
-      "meldegruppe": "DAGP",
-      "kortStatus": "OPPRE",
-      "erForskuddsPeriode": false,
-      "korrigerbart": true
-    },
-    {
-      "meldekortId": 1011121317,
-      "kortType": "ELEKTRONISK",
-      "meldeperiode": {
-        "fra": "2019-02-11T12:00:00+01:00",
-        "til": "2019-02-24T12:00:00+01:00",
-        "kortKanSendesFra": "2019-02-23T12:00:00+01:00",
-        "periodeKode": "201907"
-      },
-      "meldegruppe": "DAGP",
-      "kortStatus": "OPPRE",
-      "erForskuddsPeriode": false,
-      "korrigerbart": true
     }
   ],
   "etterregistrerteMeldekort": [

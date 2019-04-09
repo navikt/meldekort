@@ -47,11 +47,13 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     harEttMeldekort = () => {
+
         let meldekortListe = this.filtrerMeldekortListe();
 
         if (meldekortListe.length === 1) {
             this.props.leggTilAktivtMeldekort(meldekortListe[0]);
             this.props.settInnsendingstype(Innsendingstyper.innsending);
+            console.log('Setter innsendingstype til: ' + Innsendingstyper.innsending);
             return true;
         }
         return false;
@@ -86,7 +88,9 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     componentDidMount() {
-        this.props.resetInnsending();
+        if (this.filtrerMeldekortListe().length !== 1) {
+            this.props.resetInnsending();
+        }
         this.props.hentPerson();
     }
 

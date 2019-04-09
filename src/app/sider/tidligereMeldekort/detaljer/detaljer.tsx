@@ -94,14 +94,14 @@ class Detaljer extends React.Component<Props> {
 
                     <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
-                        type={knappTyper.standard}
+                        type={knappTyper.hoved}
                         nestePath={'/tidligere-meldekort'}
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
                     {aktivtMeldekort.meldekort.korrigerbart ?
                         <NavKnapp
-                            type={knappTyper.hoved}
+                            type={knappTyper.standard}
                             nestePath={router.location.pathname + '/korriger'}
                             tekstid={'korriger.meldekort'}
                             className={'navigasjonsknapp'}

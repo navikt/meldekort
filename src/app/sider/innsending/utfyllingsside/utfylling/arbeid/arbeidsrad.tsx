@@ -35,7 +35,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         super(props);
     }
 
-    componentWillMount(): void {
+    componentDidMount(): void {
         let rensetUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
             if (utfyltDag.arbeidetTimer === 0) {
                 return {
@@ -80,6 +80,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
             let ukedag = konverterUkedag(dag);
             let { utfylteDager } = this.props.innsending;
             let utfyltDagIndex = this.finnIndex(ukedag);
+
+            console.log(this.props.feilIDager);
+            console.log(ukedag.trim() + this.props.ukeNummer);
             return (
                 <Input
                     className="arbeidInput"
@@ -96,7 +99,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     }}
                     feil={
                         typeof this.props.feilIDager !== 'undefined' ?
-                            (this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer)
+                            (this.props.feilIDager.indexOf(ukedag.trim() + ' ' +this.props.ukeNummer)
                             >= 0 ? {feilmelding: ''} : undefined) : undefined
                     }
                 />
@@ -124,6 +127,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     render() {
+        console.log('Arbeid Feil: ' + this.props.feilIDager);
         return (
             <div>
                 {this.innhold()}

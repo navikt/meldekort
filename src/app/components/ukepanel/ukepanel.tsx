@@ -68,6 +68,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
                 <div className="ukedager">
                     {hentUkedager()}
                 </div>
+                {console.log('Ukepanel feil: ' + props.utfyllingFeil.feilIDager)}
                 {sjekkSporsmal('arbeid') ?
                     <Arbeidsrad
                         ukeNummer={props.ukenummer}

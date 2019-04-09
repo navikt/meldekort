@@ -8,8 +8,6 @@ import veileder from '../../ikoner/veileder.svg';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { InnsendingActions } from '../../actions/innsending';
 import { connect } from 'react-redux';
-import { Meldekort } from '../../types/meldekort';
-import { Innsendingstyper } from '../../types/innsending';
 import { Dispatch } from 'redux';
 import { hentIntl } from '../../utils/intlUtil';
 

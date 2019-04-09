@@ -63,14 +63,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 id: '',
                 personId: person.personId,
                 fodselsnr: person.fodselsnr,
-                meldekortId: aktivtMeldekort.meldekort.meldekortId,
+                meldekortId: this.erInnsendingKorrigering() ? innsending.korrigertMeldekortId : aktivtMeldekort.meldekort.meldekortId,
                 meldeperiode: aktivtMeldekort.meldekort.meldeperiode.periodeKode,
                 arkivnokkel: '1-ELEKTRONISK',
-                kortType: innsending.innsendingstype === Innsendingstyper.korrigering ?
-                    KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.meldekort.kortType,
+                kortType: this.erInnsendingKorrigering() ? KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.meldekort.kortType,
                 meldeDato: new Date(),
                 lestDato: new Date(),
-                begrunnelse: innsending.innsendingstype === Innsendingstyper.korrigering ? innsending.begrunnelse.valgtArsak : '',
+                begrunnelse: this.erInnsendingKorrigering() ? innsending.begrunnelse.valgtArsak : '',
                 sporsmal: {
                     arbeidet: innsending.sporsmalsobjekter[0].checked === undefined ? false : innsending.sporsmalsobjekter[0].checked.endsWith('ja'),
                     kurs: innsending.sporsmalsobjekter[1].checked === undefined ? false : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
@@ -84,6 +83,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         };
         this.props.oppdaterMeldekortdetaljer(mDet.meldekortdetaljer);
         return mDet;
+    }
+
+    erInnsendingKorrigering = (): boolean => {
+        return this.props.innsending.innsendingstype === Innsendingstyper.korrigering;
     }
 
     konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
