@@ -99,7 +99,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     }}
                     feil={
                         typeof this.props.feilIDager !== 'undefined' ?
-                            (this.props.feilIDager.indexOf(ukedag.trim() + ' ' +this.props.ukeNummer)
+                            (this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer)
                             >= 0 ? {feilmelding: ''} : undefined) : undefined
                     }
                 />
