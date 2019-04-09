@@ -20,6 +20,7 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
+import Environment from "../../../utils/env";
 
 interface MapStateToProps {
     router: Router;
@@ -89,11 +90,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
                 nesteInnsendingstype: params.nesteInnsendingstype
             };
         } else {
-            // TODO: sett opp url tilbake til dittnav
-
             return {
                 knappTekstid: 'tilbake.dittNav',
-                nestePath: '/DittNav',
+                nestePath: Environment().dittNavUrl,
                 nesteAktivtMeldekort: undefined,
                 nesteInnsendingstype: undefined
             };

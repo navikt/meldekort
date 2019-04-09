@@ -1,16 +1,41 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { hentIntl } from '../../utils/intlUtil';
-import { FormattedMessage } from 'react-intl';
-
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Systemtittel from 'nav-frontend-typografi/lib/systemtittel';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
+import { MeldeForm, MeldeformDetaljerInn, Person } from '../../types/person';
+import { RootState } from '../../store/configureStore';
+import { Dispatch } from 'redux';
+import { MeldeformActions } from '../../actions/meldeform';
+import { connect } from 'react-redux';
+import { MeldeformState } from '../../reducers/meldeformReducer';
 
-class EndreMeldeform extends React.Component<any, any> {
+interface MapStateToProps {
+    person: Person;
+    meldeform: MeldeformState;
+}
+
+interface MapDispatchToProps {
+    endreMeldeform: (meldeformDetaljerInn: MeldeformDetaljerInn) => void;
+}
+
+type EndreMeldeformProps = MapStateToProps & MapDispatchToProps;
+
+class EndreMeldeform extends React.Component<EndreMeldeformProps, any> {
     constructor(props: any) {
         super(props);
+    }
+
+    sendEndringAvMeldeform = (): boolean => {
+        const { fodselsnr, personId } = this.props.person;
+        this.props.endreMeldeform({
+            fnr: fodselsnr,
+            meldeformNavn: MeldeForm.ELEKTRONISK.valueOf(),
+            personId: personId
+        });
+        return true;
     }
 
     render() {
@@ -47,8 +72,9 @@ class EndreMeldeform extends React.Component<any, any> {
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
                         type={knappTyper.hoved}
-                        nestePath={'/innsending'}
+                        nestePath={'/om-meldekort'}
                         tekstid={'overskrift.endreMeldeform'}
+                        validering={this.sendEndringAvMeldeform}
                     />
                 </section>
             </main>
@@ -56,4 +82,18 @@ class EndreMeldeform extends React.Component<any, any> {
     }
 }
 
-export default EndreMeldeform;
+const mapStateToProps = (state: RootState): MapStateToProps => {
+    return {
+        person: state.person,
+        meldeform: state.meldeform
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        endreMeldeform: (meldeformDetaljer: MeldeformDetaljerInn) =>
+            dispatch(MeldeformActions.endreMeldeform.request(meldeformDetaljer))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EndreMeldeform);

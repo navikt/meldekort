@@ -6,6 +6,7 @@ import meldekortdetaljer from './responses/meldekortdetaljer.json';
 import personstatus from './responses/personstatus.json';
 import korrigertid from './responses/korrigertid.json';
 import valideringsresultat from './responses/valideringsresultat.json';
+import meldeperiode from './responses/meldeperiode.json';
 
 export default () => {
 
@@ -43,6 +44,10 @@ export default () => {
 
     fetchMock.post(Konstanter().sendMeldekortApiUri, {
         ...valideringsresultat
+    });
+
+    fetchMock.post(Konstanter().sendMeldeformApiUri, {
+        ...meldeperiode
     });
 
 };

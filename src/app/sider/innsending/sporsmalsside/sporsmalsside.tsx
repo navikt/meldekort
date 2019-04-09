@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import BegrunnelseVelger from './begrunnelse/begrunnelseVelger';
-import NavKnapp, {knappTyper} from '../../../components/knapp/navKnapp';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
@@ -23,6 +23,22 @@ import {scrollToTop} from '../../../utils/scroll';
 import {Sporsmal} from './sporsmal/sporsmalConfig';
 import {UiActions} from '../../../actions/ui';
 import {UtfyltDag} from "../utfyllingsside/utfylling/utfyllingConfig";
+import {Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar} from '../../../types/innsending';
+import {AktivtMeldekortState} from '../../../reducers/aktivtMeldekortReducer';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
+import {hentIntl} from '../../../utils/intlUtil';
+import {history, RootState} from '../../../store/configureStore';
+import {ikkeFortsetteRegistrertContent} from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import {IModal, ModalKnapp} from '../../../types/ui';
+import {Innholdstittel} from 'nav-frontend-typografi';
+import {InnsendingActions} from '../../../actions/innsending';
+import {Meldegruppe} from '../../../types/meldekort';
+import {RouteComponentProps} from 'react-router';
+import {scrollToTop} from '../../../utils/scroll';
+import {Sporsmal} from './sporsmal/sporsmalConfig';
+import {UiActions} from '../../../actions/ui';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -216,7 +232,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return !jaSvar;
     }
 
-    resetSporsmalOgUtfyllingHvisAktivtMeldekortIdErLikInnsendingMeldekortId = () => {
+    resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId = () => {
         const { aktivtMeldekort, innsending, resetSporsmalOgUtfylling } = this.props;
         if ( aktivtMeldekort.meldekort.meldekortId !== innsending.meldekortId ) {
             resetSporsmalOgUtfylling();
@@ -224,7 +240,20 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     componentDidMount() {
-        this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdErLikInnsendingMeldekortId();
+        this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
+        if (this.props.innsending.innsendingstype === Innsendingstyper.etterregistrering) {
+            const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter
+                .map( spmObj => {
+                        if (spmObj.kategori === kategorier[4]) {
+                            return { ...spmObj, checked: kategorier[4] + '.ja' }
+                        }
+                        else {
+                            return { ...spmObj }
+                        }
+                    }
+                )
+            this.props.oppdaterSvar(nySporsmalsobjektState);
+        }
     }
 
     render() {
@@ -264,8 +293,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 )}
                 <section className="seksjon">
                     <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                </section>
-                <section className="seksjon">
                     <AlertStripe type="info">
                         <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
                     </AlertStripe>

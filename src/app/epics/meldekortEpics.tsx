@@ -9,6 +9,11 @@ import Environment from '../utils/env';
 import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmeldingContent';
 import { combineEpics } from 'redux-observable';
 import { HistoriskeMeldekortActions } from '../actions/historiskeMeldekort';
+import {InnsendingActions} from "../actions/innsending";
+import {MeldeformActions} from "../actions/meldeform";
+import {MeldekortdetaljerActions} from "../actions/meldekortdetaljer";
+import {PersonActions} from "../actions/person";
+import {PersonStatusActions} from "../actions/personStatus";
 
 const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
@@ -45,6 +50,28 @@ const handterFeiletApiKall: AppEpic = action$ =>
         })
     );
 
+// Lista i isActionOf må inneholde alle actions som skal fjerne feilmelding.
+const fjernFeilmelding: AppEpic = action$ =>
+    action$.pipe(
+        filter(isActionOf([
+            HistoriskeMeldekortActions.hentHistoriskeMeldekort.success,
+            InnsendingActions.hentKorrigertId.success,
+            InnsendingActions.kontrollerMeldekort.success,
+            MeldeformActions.endreMeldeform.success,
+            MeldekortdetaljerActions.hentMeldekortdetaljer.success,
+            PersonActions.hentPerson.success,
+            PersonStatusActions.hentPersonStatus.success
+        ])),
+        concatMap( action => {
+            return [
+                UiActions.visBaksystemFeilmelding({
+                    content: () => '',
+                    visFeilmelding: false
+                })
+            ]
+        })
+    );
+
 const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
     action$.pipe(
         filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)),
@@ -67,5 +94,6 @@ const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
 
 export default combineEpics(
     handterFeiletApiKall,
+    fjernFeilmelding,
     sjekkOmBrukerHarTidligereMeldekort,
 );
