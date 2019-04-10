@@ -21,14 +21,6 @@ const menyConfig: MenyPunkt[] = [
         component: SendMeldekort,
         tittel: 'sendMeldekort',
         tekstid: 'sekundarmeny.send',
-        urlparam: '/',
-        disabled: false
-    },
-    {
-        exact: true,
-        component: SendMeldekort,
-        tittel: 'sendMeldekort',
-        tekstid: 'sekundarmeny.send',
         urlparam: '/send-meldekort',
         disabled: false
     },

@@ -26,6 +26,8 @@ import innsendingEpics from '../epics/innsendingEpics';
 import uiReducer, { UIState } from '../reducers/uiReducer';
 import meldekortEpics from '../epics/meldekortEpics';
 import { Person } from '../types/person';
+import { MenyState } from '../types/meny';
+import menyReducer from '../reducers/menyReducer';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -50,6 +52,7 @@ export interface RootState {
     aktivtMeldekort: AktivtMeldekortState;
     historiskeMeldekort: HistoriskeMeldekortState;
     innsending: InnsendingState;
+    meny: MenyState;
     ui: UIState;
 }
 
@@ -65,6 +68,7 @@ const rootReducer = combineReducers({
     aktivtMeldekort: aktivtMeldekortReducer,
     historiskeMeldekort: historiskeMeldekortReducer,
     innsending: innsendingReducer,
+    meny: menyReducer,
     ui: uiReducer,
 });
 

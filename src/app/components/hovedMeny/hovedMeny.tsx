@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
 import { Tab } from '../meny/tabConfig';
 import { hentIntl } from '../../utils/intlUtil';
 import { RootState } from '../../store/configureStore';
 import { selectRouter } from '../../selectors/router';
 import { connect } from 'react-redux';
 import { Router } from '../../types/router';
+import Lenke from 'nav-frontend-lenker';
 
 interface MapStateToProps {
     router: Router;
@@ -28,22 +28,22 @@ const HovedMeny: React.FunctionComponent<Props> = (props) => {
     };
     console.log(tabsobjekter);
 
+    // TODO: sett default "tab".
+
     return (
         <nav className="mainNav">
-            HovedMeny
             <div className="mainNav__wrapper">
                 <ul>
                     {
                         tabsobjekter.filter((item: Tab) => item.urlparam && item.urlparam !== '/new-project').map((item: Tab, index: any) =>
                             (
                                 <li key={item.tittel}>
-                                    <NavLink
-                                         to={'/meldekort' + item.urlparam}
+                                    <Lenke
+                                         href={'/meldekort' + item.urlparam}
                                          onClick={handleOnChange}
-                                         activeClassName={'active'}
                                     >
                                         {hentIntl().formatMessage({id: item.tekstid})}
-                                    </NavLink>
+                                    </Lenke>
                                 </li>
                             )
                         )
