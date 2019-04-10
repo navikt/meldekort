@@ -37,7 +37,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
     componentDidMount(): void {
         let rensetUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
-            if (utfyltDag.arbeidetTimer === 0) {
+            if (utfyltDag.arbeidetTimer === '0') {
                 return {
                     ...utfyltDag,
                     arbeidetTimer: undefined
@@ -49,17 +49,26 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: string) => {
-        const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
-           if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
-               return {
-                   ...dag,
-                   arbeidetTimer: event.target.value === '' ? undefined : Number(event.target.value)
+        const match = event.target.value.match(/^[0-9]?\d{0,2}?([,.]?[0-9]?)?$/);
+        if (match !== null) {
+            let nyVerdi = event.target.value;
+            if (match[0] === ',' || match[0] === '.') {
+                nyVerdi = '0.'
+            } else if (nyVerdi.includes(',')) {
+                nyVerdi = nyVerdi.replace(',', '.');
+            }
+            const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
+                if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
+                    return {
+                        ...dag,
+                        arbeidetTimer: event.target.value === '' ? undefined : nyVerdi
 
-               };
-           }
-           return {...dag};
-        });
-        this.props.oppdaterDager(oppdaterteDager);
+                    };
+                }
+                return {...dag};
+            });
+            this.props.oppdaterDager(oppdaterteDager);
+        }
     }
 
     finnIndex = (ukedag: string): number => {
@@ -81,8 +90,6 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
             let { utfylteDager } = this.props.innsending;
             let utfyltDagIndex = this.finnIndex(ukedag);
 
-            console.log(this.props.feilIDager);
-            console.log(ukedag.trim() + this.props.ukeNummer);
             return (
                 <Input
                     className="arbeidInput"
@@ -90,13 +97,11 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     bredde="XS"
                     step={0.5}
-                    type={'number'}
+                    type={'text'}
                     value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined' ?
                             utfylteDager[utfyltDagIndex].arbeidetTimer : ''
                     }
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        this.setTimer(event, ukedag);
-                    }}
+                    onChange={event => {this.setTimer(event, ukedag);}}
                     feil={
                         typeof this.props.feilIDager !== 'undefined' ?
                             (this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer)
@@ -127,7 +132,6 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
 
     render() {
-        console.log('Arbeid Feil: ' + this.props.feilIDager);
         return (
             <div>
                 {this.innhold()}

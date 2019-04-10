@@ -53,7 +53,6 @@ class SendMeldekort extends React.Component<Props, any> {
         if (meldekortListe.length === 1) {
             this.props.leggTilAktivtMeldekort(meldekortListe[0]);
             this.props.settInnsendingstype(Innsendingstyper.innsending);
-            console.log('Setter innsendingstype til: ' + Innsendingstyper.innsending);
             return true;
         }
         return false;

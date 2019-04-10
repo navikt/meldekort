@@ -79,9 +79,9 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
         const konverterteUtfylteDager = utfylteDager.map((utfyltDag, index) => {
             return {
                 ...utfyltDag, uke: (index < 7 ) ? 1 : 2,
-                dag: ukedagerSomListe[index % 7],
+                dag: ukedagerSomListe[index % 7].trim(),
                 syk: meldekortDager[index].syk,
-                arbeidetTimer: meldekortDager[index].arbeidetTimerSum,
+                arbeidetTimer: meldekortDager[index].arbeidetTimerSum.toString(),
                 annetFravaer: meldekortDager[index].annetFravaer,
                 kurs: meldekortDager[index].kurs
             };

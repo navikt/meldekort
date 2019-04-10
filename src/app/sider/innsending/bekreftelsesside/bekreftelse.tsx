@@ -149,7 +149,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         this.props.innsending.utfylteDager.map( utfyltDag => {
             meldekortdager.push({
                 dag: dagTeller,
-                arbeidetTimerSum: typeof utfyltDag.arbeidetTimer === 'undefined' ? 0 : utfyltDag.arbeidetTimer,
+                arbeidetTimerSum: typeof utfyltDag.arbeidetTimer === 'undefined' ? 0 : Number(utfyltDag.arbeidetTimer),
                 syk: utfyltDag.syk,
                 kurs: utfyltDag.kurs,
                 annetFravaer: utfyltDag.annetFravaer

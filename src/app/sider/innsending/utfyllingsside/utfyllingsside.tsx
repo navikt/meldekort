@@ -69,10 +69,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
         dager.map( dag => {
             if (typeof dag.arbeidetTimer !== 'undefined') {
-                if ((dag.arbeidetTimer * 2) % 1 !== 0) {
+                if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
                     feil.push(dag.dag + dag.uke);
                     feilIArbeidetTimerHeleHalve = true;
-                } else if (dag.arbeidetTimer > 24 || dag.arbeidetTimer < 0) {
+                } else if (Number(dag.arbeidetTimer) > 24 || Number(dag.arbeidetTimer) < 0) {
                     feil.push(dag.dag + dag.uke);
                     feilIArbeidetTimer = true;
                 }
@@ -88,11 +88,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         let kurs = !this.sjekkSporsmal('aktivitetArbeid');
         let syk = !this.sjekkSporsmal('forhindret');
         let ferie = !this.sjekkSporsmal('ferieFravar');
-
         let feilITimer = this.validerAntallTimerForDag(this.props.innsending.utfylteDager);
 
         this.props.innsending.utfylteDager.map(dag => {
-            if (!arbeidet && typeof dag.arbeidetTimer !== 'undefined' && dag.arbeidetTimer > 0) {
+            if (!arbeidet && typeof dag.arbeidetTimer !== 'undefined' && Number(dag.arbeidetTimer) > 0) {
                 arbeidet = true;
             }
             if (!kurs && dag.kurs) {
