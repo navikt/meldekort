@@ -258,7 +258,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon alert">
-                    <Veilederpanel type={'plakat'} kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
+                    <Veilederpanel kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
                         <div className="item">
                             <FormattedMessage id="sporsmal.lesVeiledning" />
                         </div>
