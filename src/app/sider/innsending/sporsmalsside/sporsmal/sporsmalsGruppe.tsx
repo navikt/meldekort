@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import Sporsmal from './sporsmal';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { hentIntl } from '../../../../utils/intlUtil';
-import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
-import { InnsendingActions } from '../../../../actions/innsending';
-import { RootState } from '../../../../store/configureStore';
-import { Sporsmal as Spm } from './sporsmalConfig';
-import { AktivtMeldekortState } from '../../../../reducers/aktivtMeldekortReducer';
-import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {hentIntl} from '../../../../utils/intlUtil';
+import {InnsendingState, Innsendingstyper} from '../../../../types/innsending';
+import {InnsendingActions} from '../../../../actions/innsending';
+import {RootState} from '../../../../store/configureStore';
+import {Sporsmal as Spm} from './sporsmalConfig';
+import {AktivtMeldekortState} from '../../../../reducers/aktivtMeldekortReducer';
+import {hentNestePeriodeMedUkerOgDato} from '../../../../utils/dates';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -63,7 +63,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
             } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
                 sporsmalsobj.feil.feilmeldingId = this.finnesIntlId(sporsmalsobj.feil.feilmeldingId);
-            } else if (sporsmalsobj[key] === 'registrert' && innsendingstype === Innsendingstyper.korrigering) {
+            } else if (sporsmalsobj[key] === 'registrert' && innsendingstype !== Innsendingstyper.innsending) {
                 skalVareDisabled = true;
             }
         }

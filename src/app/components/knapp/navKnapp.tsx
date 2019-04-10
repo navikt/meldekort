@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { RootState, history } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
-import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';

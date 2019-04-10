@@ -22,6 +22,19 @@ export interface PersonStatus {
     statusYtelse: string;
 }
 
+export interface MeldeformDetaljerInn {
+    fnr: string;
+    meldeformNavn: string;
+    personId: number;
+}
+
+export interface Meldeperiode {
+    id: string;
+    meldeperiodeNavn: string;
+    fraDato: Date;
+    tilDato: Date;
+}
+
 export enum MeldeForm {
     ELEKTRONISK = 'EMELD',
     PAPIR = 'PAPIR',
