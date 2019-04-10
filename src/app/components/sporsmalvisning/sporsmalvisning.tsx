@@ -3,7 +3,7 @@ import { SporsmalOgSvar } from '../../types/meldekort';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import checkMark from '../../ikoner/check.svg';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
+import UtvidetInformasjon from "../utvidetinformasjon/utvidetInformasjon";
 
 interface Props {
     sporsmalOgSvar: SporsmalOgSvar[];
@@ -32,9 +32,9 @@ const Sporsmalvisning: React.FunctionComponent<Props> = (props) => {
                                     </span> : null
                                 }
                             </Undertittel>
-                            <HjelpetekstBase id={sporsmalOgSvar.forklaring} type="auto">
+                            <UtvidetInformasjon>
                                 <FormattedHTMLMessage id={sporsmalOgSvar.forklaring} />
-                            </HjelpetekstBase>
+                            </UtvidetInformasjon>
                         </div>
                         <img alt={'checkmark'} src={checkMark}/>
                         <span> {hentTekstForSvar(sporsmalOgSvar.svar)} </span>

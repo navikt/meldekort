@@ -17,6 +17,7 @@ import {hentUkedagerSomElementListe} from '../../utils/ukedager';
 import {hentIntl} from '../../utils/intlUtil';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import checkMark from '../../ikoner/check.svg';
+import UtvidetInformasjon from "../utvidetinformasjon/utvidetInformasjon";
 
 interface ErAap {
     erAap: boolean;
@@ -48,8 +49,9 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             if (meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.annetFravaer || meldekortDag.syk) {
                 let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
                 dagListe.push(
-                    <li key={i}>
-                        <Element>{ukedag}</Element>
+                    <>
+                        <div className="dagliste">
+                        <strong>{ukedag}: </strong>
                         {
                             meldekortDag.arbeidetTimerSum > 0 ?
                                 <div className="utfylling">
@@ -79,13 +81,14 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                                     {hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}
                                 </div> : null
                         }
+                        </div>
                         {
                             meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer ?
-                                <HjelpetekstBase id={ukedag + `${i}`} type="auto">
-                                    {leggTilHjelpetekster(meldekortDag)}
-                                </HjelpetekstBase> : null
+                             <UtvidetInformasjon>
+                                 {leggTilHjelpetekster(meldekortDag)}
+                             </UtvidetInformasjon> : null
                         }
-                    </li>
+                    </>
                 );
             }
         }
@@ -150,7 +153,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                 <div className="uke">
                     <Undertittel className="uketittel flex-innhold sentrert">{uke}</Undertittel>
                     <hr className="detaljerborder"/>
-                    <ul>{dagListe}</ul>
+                    <>{dagListe}</>
                 </div>
             );
         }
@@ -188,9 +191,9 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                     <section className="seksjon">
                         <div className="flex-sporsmal-hjelpetekst-container">
                             <Undertittel><FormattedMessage id={'korrigering.sporsmal.begrunnelse'}/></Undertittel>
-                            <HjelpetekstBase id={'forklaring_begrunnelse'} type="auto">
+                            <UtvidetInformasjon>
                                 <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'}/>
-                            </HjelpetekstBase>
+                            </UtvidetInformasjon>
                         </div>
                         <img alt={'checkmark'} src={checkMark}/>
                         <span>{props.meldekortdetaljer.begrunnelse}</span>
