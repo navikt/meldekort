@@ -1,6 +1,11 @@
 import * as React from 'react';
+import { Tab } from '../meny/tabConfig';
 
-const MobilMeny: React.FunctionComponent<any> = () => {
+interface MobilMenyProps {
+    tabsobjekter: Tab[];
+}
+
+const MobilMeny: React.FunctionComponent<MobilMenyProps> = () => {
 
     return (
         <nav>

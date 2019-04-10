@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
-import MeldekortBanner from './components/header/header';
+import Header from './components/header/header';
 import MeldekortRoutes from './sider/meldekortRoutes';
 import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
-import { hentTabConfig } from './components/meny/tabConfig';
 import { isEmpty } from 'ramda';
 import { MeldeForm, Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
@@ -19,6 +18,7 @@ import UIModalWrapper from './components/modal/UIModalWrapper';
 import { BaksystemFeilmelding } from './types/ui';
 import { selectFeilmelding } from './selectors/ui';
 import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
+import menyConfig from './utils/menyConfig';
 
 if (erMock()) {
     setupMock();
@@ -49,7 +49,7 @@ class App extends React.Component<Props> {
     }
 
     settMenyPunkter = (person: Person) => {
-        const tabsobjekter = hentTabConfig();
+        const tabsobjekter = menyConfig;
         const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
             if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === 'endreMeldeform')) {
                 return { ...tabsobj, disabled: !tabsobj.disabled };
@@ -60,7 +60,10 @@ class App extends React.Component<Props> {
             }
         });
         return (
-            <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
+            <>
+                <Header tittel="Meldekort" menypunkter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
+                <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
+            </>
         );
     }
 
@@ -99,15 +102,14 @@ class App extends React.Component<Props> {
         this.props.hentPersonStatus();
     }
 
-    componentWillUnmount() {
+/*    componentWillUnmount() {
 
-    }
+    }*/
 
     public render() {
 
         return(
             <div>
-                <MeldekortBanner tittel="Meldekort"/>
                 <UIModalWrapper/>
                 {this.settInnhold()}
             </div>

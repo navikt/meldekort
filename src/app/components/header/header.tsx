@@ -7,15 +7,21 @@ import { Router } from '../../types/router';
 import MobilMeny from '../mobilMeny/mobilMeny';
 import HovedMeny from '../hovedMeny/hovedMeny';
 
+import { MenyPunkt } from '../../utils/menyConfig';
+
 interface MapStateToProps {
     router: Router;
 }
 
-export interface BannerProps {
+interface BannerProps {
     tittel: string;
 }
 
-type HeaderProps = MapStateToProps & BannerProps;
+interface MenyProps {
+    menypunkter: MenyPunkt[];
+}
+
+type HeaderProps = MapStateToProps & BannerProps & MenyProps;
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
     const pathListe = props.router.location.pathname.split('/');
@@ -31,8 +37,8 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
             </div>
             {!harPathInnsending ? (
                 <>
-                    <MobilMeny/>
-                    <HovedMeny/>
+                    <MobilMeny tabsobjekter={props.menypunkter}/>
+                    <HovedMeny tabsobjekter={props.menypunkter}/>
                 </>) : <></>
             }
         </header>
