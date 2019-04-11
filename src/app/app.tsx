@@ -16,19 +16,27 @@ import UIModalWrapper from './components/modal/UIModalWrapper';
 import { BaksystemFeilmelding } from './types/ui';
 import { selectFeilmelding } from './selectors/ui';
 import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
+import { MenyState } from './types/meny';
+import { MenyPunkt } from './utils/menyConfig';
+import { MenyActions } from './actions/meny';
+import { Router } from './types/router';
+import { selectRouter } from './selectors/router';
 
 if (erMock()) {
     setupMock();
 }
 
 interface MapStateToProps {
+    router: Router;
     personStatus: PersonStatusState;
     baksystemFeilmelding: BaksystemFeilmelding;
     person: Person;
+    meny: MenyState;
 }
 
 interface MapDispatchToProps {
     hentPersonStatus: () => void;
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
 type Props = MapDispatchToProps&MapStateToProps;
@@ -76,8 +84,21 @@ class App extends React.Component<Props> {
         }
     }
 
+    settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
+        console.log('inni ny metode');
+        const urlparam = '/' + url.split('/')[1];
+        for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
+            if (meny.alleMenyPunkter[i].urlparam === urlparam) {
+                const menypunkt = meny.alleMenyPunkter[i];
+                this.props.settValgtMenyPunkt(menypunkt);
+            }
+        }
+    }
+
     componentDidMount() {
-        this.props.hentPersonStatus();
+        const { hentPersonStatus, meny, router  } = this.props;
+        hentPersonStatus();
+        this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
     }
 
     public render() {
@@ -93,15 +114,19 @@ class App extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
+        router: selectRouter(state),
         personStatus: state.personStatus,
         person: state.person,
-        baksystemFeilmelding: selectFeilmelding(state)
+        baksystemFeilmelding: selectFeilmelding(state),
+        meny: state.meny
+
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
+        settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
     };
 };
 

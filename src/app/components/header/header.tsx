@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Sidetittel } from 'nav-frontend-typografi';
-import { RootState } from '../../store/configureStore';
-import { selectRouter } from '../../selectors/router';
-import { connect } from 'react-redux';
-import { Router } from '../../types/router';
-import MobilMeny from '../mobilMeny/mobilMeny';
 import HovedMeny from '../hovedMeny/hovedMeny';
-import { MenyState } from '../../types/meny';
-import { MeldeForm, Person } from '../../types/person';
-import { isEmpty } from 'ramda';
-import { MenyPunkt } from '../../utils/menyConfig';
-import { MenyActions } from '../../actions/meny';
+import MobilMeny from '../mobilMeny/mobilMeny';
+import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { isEmpty } from 'ramda';
+import { MeldeForm, Person } from '../../types/person';
+import { MenyActions } from '../../actions/meny';
+import { MenyPunkt } from '../../utils/menyConfig';
+import { MenyState } from '../../types/meny';
+import { RootState } from '../../store/configureStore';
+import { Router } from '../../types/router';
+import { selectRouter } from '../../selectors/router';
+import { Sidetittel } from 'nav-frontend-typografi';
 
 interface MapStateToProps {
     router: Router;
@@ -28,14 +28,15 @@ interface BannerProps {
     tittel: string;
 }
 
-type HeaderProps = MapStateToProps & BannerProps;
+type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
-    const {router, meny, person} = props;
-    const pathListe = router.location.pathname.split('/');
-    const harPathInnsending = pathListe[pathListe.length - 2] === 'innsending' || pathListe[pathListe.length - 2] === 'korrigering' ;
+    const {router, meny, person, settValgtMenyPunkt} = props;
+    const params = router.location.pathname.split('/');
+    console.log(params);
+    const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
     const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
-    const kunAktiveMenyPunkter = settMenyPunkter(person, meny.alleMenyPunkter).filter((menypunkt: MenyPunkt) => {return !menypunkt.disabled; });
+    const kunAktiveMenyPunkter = returnerMenyPunkter(person, meny.alleMenyPunkter).filter((menypunkt: MenyPunkt) => {return !menypunkt.disabled; });
 
     return (
         <header className={headerClass}>
@@ -54,7 +55,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
     );
 };
 
-const settMenyPunkter = (person: Person, menypunkter: MenyPunkt[]) => {
+const returnerMenyPunkter = (person: Person, menypunkter: MenyPunkt[]) => {
     const filtrertetabsobjekter = menypunkter
         .filter(tab => !tab.disabled)
         .map(tabsobj => {

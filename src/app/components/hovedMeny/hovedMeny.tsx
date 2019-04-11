@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { hentIntl } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
-import { RootState } from '../../store/configureStore';
+import { RootState, history } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 
@@ -27,7 +27,12 @@ type Props = HovedMenyProps & MapStateToProps & MapDispatchToProps;
 const HovedMeny: React.FunctionComponent<Props> = (props) => {
     const {router, menypunkter, settValgtMenyPunkt, valgtMenyPunkt} = props;
 
-    const pathname = '/meldekort/' + router.location.pathname.split('/')[1];
+    const path = '/meldekort/' + router.location.pathname.split('/')[1];
+
+    const onChange = (item: MenyPunkt) => {
+        settValgtMenyPunkt(item);
+        history.push(item.urlparam);
+    };
 
     return (
         <nav className="mainNav">
@@ -38,7 +43,7 @@ const HovedMeny: React.FunctionComponent<Props> = (props) => {
                             (
                                 <li key={item.tittel}>
                                     <button
-                                         onClick={() => settValgtMenyPunkt(item)}
+                                         onClick={() => onChange(item)}
                                          className={classNames('menypunkt', {
                                              active: valgtMenyPunkt.tittel === item.tittel
                                          })}
