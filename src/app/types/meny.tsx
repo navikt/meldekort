@@ -2,8 +2,7 @@ import { MenyPunkt } from '../utils/menyConfig';
 
 export interface MenyState {
     valgtMenyPunkt: MenyPunkt;
-    aktiveMenyPunkter: MenyPunkt[];
-    menyConfig: MenyPunkt[];
+    alleMenyPunkter: MenyPunkt[];
 }
 
 export enum MenyTypeKeys {

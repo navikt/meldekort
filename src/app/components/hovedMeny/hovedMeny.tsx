@@ -1,49 +1,51 @@
 import * as React from 'react';
-import { Tab } from '../meny/tabConfig';
-import { hentIntl } from '../../utils/intlUtil';
-import { RootState } from '../../store/configureStore';
-import { selectRouter } from '../../selectors/router';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { hentIntl } from '../../utils/intlUtil';
+import { MenyActions } from '../../actions/meny';
+import { MenyPunkt } from '../../utils/menyConfig';
+import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
-import Lenke from 'nav-frontend-lenker';
+import { selectRouter } from '../../selectors/router';
 
 interface MapStateToProps {
     router: Router;
+    valgtMenyPunkt: MenyPunkt;
+}
+
+interface MapDispatchToProps {
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
 interface HovedMenyProps {
-    tabsobjekter: Tab[];
+    menypunkter: MenyPunkt[];
 }
 
-type Props = HovedMenyProps & MapStateToProps;
+type Props = HovedMenyProps & MapStateToProps & MapDispatchToProps;
 
 const HovedMeny: React.FunctionComponent<Props> = (props) => {
-    const {router, tabsobjekter} = props;
+    const {router, menypunkter, settValgtMenyPunkt, valgtMenyPunkt} = props;
 
     const pathname = '/meldekort/' + router.location.pathname.split('/')[1];
-    console.log(pathname);
-    const handleOnChange = ( event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        console.log(event.currentTarget);
-        // pathname !== event.target.urlparam && history.push(tabsobjekter[index].urlparam);
-    };
-    console.log(tabsobjekter);
-
-    // TODO: sett default "tab".
 
     return (
         <nav className="mainNav">
             <div className="mainNav__wrapper">
                 <ul>
                     {
-                        tabsobjekter.filter((item: Tab) => item.urlparam && item.urlparam !== '/new-project').map((item: Tab, index: any) =>
+                        menypunkter.filter((item: MenyPunkt) => item.urlparam && item.urlparam !== '/new-project').map((item: MenyPunkt, index: any) =>
                             (
                                 <li key={item.tittel}>
-                                    <Lenke
-                                         href={'/meldekort' + item.urlparam}
-                                         onClick={handleOnChange}
+                                    <button
+                                         onClick={() => settValgtMenyPunkt(item)}
+                                         className={classNames('menypunkt', {
+                                             active: valgtMenyPunkt.tittel === item.tittel
+                                         })}
+
                                     >
                                         {hentIntl().formatMessage({id: item.tekstid})}
-                                    </Lenke>
+                                    </button>
                                 </li>
                             )
                         )
@@ -57,7 +59,15 @@ const HovedMeny: React.FunctionComponent<Props> = (props) => {
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         router: selectRouter(state),
+        valgtMenyPunkt: state.meny.valgtMenyPunkt
     };
 };
 
-export default connect(mapStateToProps)(HovedMeny);
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
+        dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HovedMeny);

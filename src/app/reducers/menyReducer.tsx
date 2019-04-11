@@ -5,8 +5,7 @@ import { getType } from 'typesafe-actions';
 
 const initialState: MenyState = {
     valgtMenyPunkt: menyConfig[0],
-    aktiveMenyPunkter: menyConfig.filter( menyobj => !menyobj.disabled),
-    menyConfig: menyConfig
+    alleMenyPunkter: menyConfig,
 };
 
 const menyReducer = (state: MenyState = initialState,
@@ -16,7 +15,7 @@ const menyReducer = (state: MenyState = initialState,
             return { ...state, valgtMenyPunkt: action.payload };
 
         case getType(MenyActions.settAktiveMenyPunkter):
-            return { ...state, aktiveMenyPunkter: action.payload };
+            return { ...state, alleMenyPunkter: action.payload };
 
         default:
             return state;

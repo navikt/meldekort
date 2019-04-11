@@ -4,12 +4,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
 import Header from './components/header/header';
 import MeldekortRoutes from './sider/meldekortRoutes';
-import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
-import { isEmpty } from 'ramda';
-import { MeldeForm, Person } from './types/person';
+import { Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
 import { PersonStatusState } from './reducers/personStatusReducer';
 import { connect } from 'react-redux';
@@ -18,7 +16,6 @@ import UIModalWrapper from './components/modal/UIModalWrapper';
 import { BaksystemFeilmelding } from './types/ui';
 import { selectFeilmelding } from './selectors/ui';
 import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
-import menyConfig from './utils/menyConfig';
 
 if (erMock()) {
     setupMock();
@@ -48,25 +45,6 @@ class App extends React.Component<Props> {
         return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
     }
 
-    settMenyPunkter = (person: Person) => {
-        const tabsobjekter = menyConfig;
-        const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
-            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === 'endreMeldeform')) {
-                return { ...tabsobj, disabled: !tabsobj.disabled };
-            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === 'etterregistrering') {
-                return { ...tabsobj, disabled: !tabsobj.disabled };
-            } else {
-                return { ...tabsobj };
-            }
-        });
-        return (
-            <>
-                <Header tittel="Meldekort" menypunkter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
-                <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
-            </>
-        );
-    }
-
     settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
             return (
@@ -79,7 +57,7 @@ class App extends React.Component<Props> {
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
-                    {this.settMenyPunkter(this.props.person)}
+                    <Header tittel={'Meldekort'}/>
                 <div className="main-container">
                     <ConnectedRouter history={history}>
                         <Switch>
@@ -101,10 +79,6 @@ class App extends React.Component<Props> {
     componentDidMount() {
         this.props.hentPersonStatus();
     }
-
-/*    componentWillUnmount() {
-
-    }*/
 
     public render() {
 
