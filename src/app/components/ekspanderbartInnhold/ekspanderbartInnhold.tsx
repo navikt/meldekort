@@ -22,7 +22,11 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
     erApen = false,
     ariaLive = 'off'
 }) => {
-    const content = <div aria-live={ariaLive}>{erApen ? <div>{children}</div> : <div />}</div>;
+    const content = (
+        <div aria-live={ariaLive}>
+            {erApen ? <div className={'ekspanderbart__tekst'}>{children}</div> : <div />}
+        </div>);
+
     if (!animert) {
         return content;
     }

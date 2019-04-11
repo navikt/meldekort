@@ -8,6 +8,7 @@ import { Sporsmal as Spm } from './sporsmalConfig';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
+import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
@@ -31,9 +32,9 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                     }
                 </Undertittel>
                     <>
-                        <HjelpetekstBase id={props.sporsmalsobjekt.kategori} type="over">
+                        <UtvidetInformasjon>
                             <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
-                        </HjelpetekstBase>
+                        </UtvidetInformasjon>
                     </>
             </div>
 

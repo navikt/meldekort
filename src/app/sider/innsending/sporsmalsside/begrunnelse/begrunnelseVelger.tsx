@@ -8,6 +8,7 @@ import { Begrunnelse } from '../../../../types/innsending';
 import { RootState } from '../../../../store/configureStore';
 import {Undertittel} from "nav-frontend-typografi";
 import HjelpetekstBase from "nav-frontend-hjelpetekst";
+import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface MapStateToProps {
     begrunnelse: Begrunnelse;
@@ -43,12 +44,14 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
         <div className={'seksjon begrunnelse ' + begrunnelseClass}>
             <Select
                 label={
-                    <Undertittel>
-                        {hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
-                        <HjelpetekstBase type={'over'} id={'begrunnelse'}>
+                    <>
+                        <Undertittel>
+                            {hentIntl().formatMessage({id: 'korrigering.sporsmal.begrunnelse'})}
+                        </Undertittel>
+                        <UtvidetInformasjon>
                             {hentIntl().formatHTMLMessage({id: 'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : '')})}
-                        </HjelpetekstBase>
-                    </Undertittel>
+                        </UtvidetInformasjon>
+                    </>
                 }
                 onChange={handleOnChange}
             >

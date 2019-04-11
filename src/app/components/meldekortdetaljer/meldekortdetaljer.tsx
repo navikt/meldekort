@@ -49,8 +49,8 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             if (meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.annetFravaer || meldekortDag.syk) {
                 let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
                 dagListe.push(
-                    <>
-                        <div className="dagliste">
+                    <div className="dagliste">
+                        <div className="dagliste__dager">
                         <strong>{ukedag}: </strong>
                         {
                             meldekortDag.arbeidetTimerSum > 0 ?
@@ -88,7 +88,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                                  {leggTilHjelpetekster(meldekortDag)}
                              </UtvidetInformasjon> : null
                         }
-                    </>
+                    </div>
                 );
             }
         }

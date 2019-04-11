@@ -11,6 +11,7 @@ import { hentIntl } from '../../../../../utils/intlUtil';
 import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
+import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -116,9 +117,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="auto">
+                    <UtvidetInformasjon>
                         <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
-                    </HjelpetekstBase>
+                    </UtvidetInformasjon>
                 </div>
                 <div className="inputrad">
                     {this.setFelter()}
