@@ -16,11 +16,13 @@ import {Sporsmal as Spm} from './sporsmalsside/sporsmal/sporsmalConfig';
 import {MeldekortdetaljerActions} from '../../actions/meldekortdetaljer';
 import {UtfyltDag} from './utfyllingsside/utfylling/utfyllingConfig';
 import {hentUkedagerSomStringListe} from '../../utils/ukedager';
+import {RouterState} from "connected-react-router";
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: Meldekort;
     meldekortdetaljer: Meldekortdetaljer;
+    router: RouterState;
 }
 
 interface MapDispatchToProps {
@@ -113,10 +115,15 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
 
     render() {
         const { match } = this.props;
+        const { pathname } = this.props.router.location;
+
+        let noPrint = pathname === '/send-meldekort/innsending/kvittering' ||
+            pathname === '/tidligere-meldekort/detaljer/korriger/kvittering'?
+            'noPrint' : undefined;
 
         return (
             <div className="sideinnhold">
-                <PeriodeBanner/>
+                <PeriodeBanner className={noPrint}/>
                 <StegBanner/>
                 <Switch>
                     <Route exact={true} path={`${match.url}` + '/sporsmal'} render={(props) => (<Sporsmalsside {...props}/>)}/>
@@ -135,6 +142,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort.meldekort,
         meldekortdetaljer: state.meldekortdetaljer.meldekortdetaljer,
+        router: state.router
     };
 };
 

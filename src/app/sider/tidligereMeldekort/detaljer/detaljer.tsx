@@ -6,7 +6,7 @@ import Tabell from '../../../components/tabell/tabell';
 import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../../utils/statusEtikettUtil';
+import { finnRiktigEtikettType } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../../store/configureStore';
@@ -22,6 +22,10 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
+import {Flatknapp} from "nav-frontend-knapper";
+import PrintHeader from "../../../components/print/printHeader";
+import {hentIntl} from "../../../utils/intlUtil";
+import PrintKnapp from "../../../components/print/printKnapp";
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -81,7 +85,8 @@ class Detaljer extends React.Component<Props> {
         let { meldegruppe } = aktivtMeldekort.meldekort;
         return(
             <div className="sideinnhold innhold-detaljer">
-                <img src={utklippstavle}/>
+                <img className="noPrint" src={utklippstavle}/>
+                <PrintHeader erKvittering={false}/>
                 <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">
@@ -92,7 +97,7 @@ class Detaljer extends React.Component<Props> {
                     <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer.meldekortdetaljer} erAap={meldegruppe === Meldegruppe.ATTF}/> :
                     <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div> }
 
-                    <section className="seksjon flex-innhold sentrert">
+                    <section className="seksjon flex-innhold sentrert noPrint">
                     <NavKnapp
                         type={knappTyper.hoved}
                         nestePath={'/tidligere-meldekort'}
@@ -109,6 +114,7 @@ class Detaljer extends React.Component<Props> {
                             nesteInnsendingstype={Innsendingstyper.korrigering}
                         /> : null
                     }
+                    <PrintKnapp/>
                 </section>
             </div>
         );

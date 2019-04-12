@@ -21,6 +21,9 @@ import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
 import Environment from "../../../utils/env";
+import PrintHeader from "../../../components/print/printHeader";
+import PrintKnapp from "../../../components/print/printKnapp";
+import AlertStripe from "nav-frontend-alertstriper";
 
 interface MapStateToProps {
     router: Router;
@@ -114,14 +117,14 @@ class Kvittering extends React.Component<KvitteringsProps> {
             {[0]: formaterDato(meldekortdetaljerInnsending!.mottattDato), [1]: hentTid(meldekortdetaljerInnsending!.mottattDato)});
 
         return(
-            <>
+            <div className="oppsummeringsTekster">
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn  + ' (' + person.fodselsnr + ')'}</span></Ingress>
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
                 <Ingress><span>{meldekortErMottatt}</span></Ingress>
                 {(typeof nesteAktivtMeldekort !== undefined) &&
-                <Ingress><span>{this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}</span></Ingress>
+                <Ingress className="noPrint"><span>{this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}</span></Ingress>
                 }
-            </>
+            </div>
         );
     }
 
@@ -131,10 +134,14 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
         return(
             <main>
-                <section className="seksjon flex-innhold tittel-sprakvelger">
+                <AlertStripe type={'suksess'} className="alertSendt noPrint">
+                    <FormattedMessage id={'overskrift.meldekort.sendt'}/>
+                </AlertStripe>
+                <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
                     <Innholdstittel ><FormattedMessage id="overskrift.steg4" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
+                <PrintHeader erKvittering={true}/>
                 <section className="seksjon">
                     {this.visOppsummeringsTekster(nesteAktivtMeldekort!)}
                 </section>
@@ -147,7 +154,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
                 <section className="seksjon">
                         <FormattedMessage id={'sendt.etterregistrering.info'} />
                 </section>)}
-                <section className="seksjon flex-innhold sentrert">
+                <section className="seksjon flex-innhold sentrert noPrint">
                     <NavKnapp
                         type={knappTyper.hoved}
                         className={'navigasjonsknapp'}
@@ -162,6 +169,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
                         tekstid={'sendt.linkTilTidligereMeldekort'}
                         className={'navigasjonsknapp'}
                     />
+                    <PrintKnapp/>
                 </section>
             </main>
         );

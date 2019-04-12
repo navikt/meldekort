@@ -10,14 +10,14 @@ import {
 } from '../../utils/dates';
 import {RootState} from '../../store/configureStore';
 import {connect} from 'react-redux';
-import {Element, Undertittel} from 'nav-frontend-typografi';
+import {Undertittel} from 'nav-frontend-typografi';
 
 import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
-import {hentUkedagerSomElementListe} from '../../utils/ukedager';
+import {hentUkedagerSomElementListe, hentUkedagerSomStringListe} from '../../utils/ukedager';
 import {hentIntl} from '../../utils/intlUtil';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import checkMark from '../../ikoner/check.svg';
 import UtvidetInformasjon from "../utvidetinformasjon/utvidetInformasjon";
+import {guid} from "nav-frontend-js-utils";
 
 interface ErAap {
     erAap: boolean;
@@ -27,7 +27,7 @@ type Props = MeldekortdetaljerState & ErAap & ReturnType<typeof mapStateToProps>
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
-    let ukedager = hentUkedagerSomElementListe();
+    let ukedager = hentUkedagerSomStringListe();
 
     const sjekkOmDetFinnesFlereElementer = (element: string, meldekortDag: MeldekortDag) => {
         switch (element) {
@@ -49,38 +49,36 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             if (meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.annetFravaer || meldekortDag.syk) {
                 let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
                 dagListe.push(
-                    <div className="dagliste">
+                    <div className="dagliste" key={guid()}>
                         <div className="dagliste__dager">
-                        <strong>{ukedag}: </strong>
+                        <strong>{ukedag}:&nbsp;</strong>
+                            <span>
                         {
                             meldekortDag.arbeidetTimerSum > 0 ?
-                                <div className="utfylling">
-                                    <FormattedMessage id="utfylling.arbeid"/>
-                                    <span> {meldekortDag.arbeidetTimerSum} </span>
-                                    {hentIntl().formatMessage({id: 'overskrift.timer'}).trim()}
-                                    {sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? <span>,</span> : null}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.arbeid'})}
+                                ${meldekortDag.arbeidetTimerSum} 
+                                ${hentIntl().formatMessage({id: 'overskrift.timer'}).trim()}${
+                                sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : null}`
+                                : null
                         }
                         {
                             meldekortDag.kurs ?
-                                <div className="utfylling">
-                                    {hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}
-                                    {sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? <span>,</span> : null}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}${
+                                sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? ', ' : null}`
+                                : null
                         }
                         {
                             meldekortDag.syk ?
-                                <div className="utfylling">
-                                    {hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}
-                                    {sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? <span>,</span> : null}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}${
+                                sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? ', ' : null}`
+                                : null
                         }
                         {
                             meldekortDag.annetFravaer ?
-                                <div className="utfylling">
-                                    {hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}`
+                                : null
                         }
+                            </span>
                         </div>
                         {
                             meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer ?
@@ -152,7 +150,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             return (
                 <div className="uke">
                     <Undertittel className="uketittel flex-innhold sentrert">{uke}</Undertittel>
-                    <hr className="detaljerborder"/>
+                    <hr className="detaljerborder noPrint"/>
                     <>{dagListe}</>
                 </div>
             );

@@ -28,7 +28,7 @@ class UtvidetInformasjon extends React.Component<Props, State> {
     }
 
     render() {
-        const cls = classNames('utvidetInformasjon', {'utvidetInformasjon--apen': this.state.apen});
+        const cls = classNames('noPrint utvidetInformasjon', {'utvidetInformasjon--apen': this.state.apen});
         const {
             apenLabelId = 'veiledning.les',
             lukkLabelId = 'veiledning.lukk'
