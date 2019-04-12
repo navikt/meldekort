@@ -15,16 +15,13 @@ import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
-
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
-import {Flatknapp} from "nav-frontend-knapper";
 import PrintHeader from "../../../components/print/printHeader";
-import {hentIntl} from "../../../utils/intlUtil";
 import PrintKnapp from "../../../components/print/printKnapp";
 
 interface MapStateToProps {

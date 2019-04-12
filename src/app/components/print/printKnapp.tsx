@@ -13,10 +13,10 @@ const PrintKnapp: React.FunctionComponent = () => {
 
     return (
         <>
-        <Flatknapp onClick={print}>
-            <img className="printLogo" src={printLogo} alt={tekst + ' logo'}/>
-            {tekst}
-        </Flatknapp>
+            <Flatknapp onClick={print}>
+                <img className="printLogo" src={printLogo} alt={tekst + ' logo'}/>
+                {tekst}
+            </Flatknapp>
         </>
     )
 }
