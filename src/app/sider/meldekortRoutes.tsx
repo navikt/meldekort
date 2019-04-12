@@ -10,7 +10,6 @@ import TidligereMeldekort from './tidligereMeldekort/tidligereMeldekort';
 import InnsendingRoutes from './innsending/innsendingRoutes';
 
 const MeldekortRoutes = () => {
-
     return (
         <div>
             <Switch>

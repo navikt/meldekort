@@ -26,6 +26,8 @@
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
     "craco-less": "^1.6.0",
+    "hyper-cat": "^4.0.0",
+    "hyperborder": "^1.1.1",
     "kleur": "^3.0.2",
     "less-plugin-npm-import": "^2.1.0",
     "lodash.throttle": "^4.1.1",

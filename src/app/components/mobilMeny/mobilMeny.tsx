@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Tab } from '../meny/tabConfig';
+import { MenyPunkt } from '../../utils/menyConfig';
 
 interface MobilMenyProps {
-    tabsobjekter: Tab[];
+    menypunkter: MenyPunkt[];
 }
 
 const MobilMeny: React.FunctionComponent<MobilMenyProps> = () => {
 
     return (
-        <nav>
+        <nav className={'meldekort-mobile-nav'}>
             Mobilmeny
         </nav>
     );

@@ -31,12 +31,12 @@ interface BannerProps {
 type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
-    const {router, meny, person, settValgtMenyPunkt} = props;
+    const {router, meny, person} = props;
     const params = router.location.pathname.split('/');
-    console.log(params);
     const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
     const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
-    const kunAktiveMenyPunkter = returnerMenyPunkter(person, meny.alleMenyPunkter).filter((menypunkt: MenyPunkt) => {return !menypunkt.disabled; });
+    const filtrerteMenyPunkter = settMenyPunkterBasertPaMeldeformOgEtterregistrering(person, meny.alleMenyPunkter)
+        .filter((menypunkt: MenyPunkt) => {return !menypunkt.disabled; });
 
     return (
         <header className={headerClass}>
@@ -47,27 +47,26 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
             </div>
             {!harPathInnsending ? (
                 <>
-                    <MobilMeny tabsobjekter={kunAktiveMenyPunkter}/>
-                    <HovedMeny menypunkter={kunAktiveMenyPunkter}/>
+                    <MobilMeny menypunkter={filtrerteMenyPunkter}/>
+                    <HovedMeny menypunkter={filtrerteMenyPunkter}/>
                 </>) : <></>
             }
         </header>
     );
 };
 
-const returnerMenyPunkter = (person: Person, menypunkter: MenyPunkt[]) => {
-    const filtrertetabsobjekter = menypunkter
-        .filter(tab => !tab.disabled)
-        .map(tabsobj => {
-            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === 'endreMeldeform')) {
-                return { ...tabsobj, disabled: !tabsobj.disabled };
-            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === 'etterregistrering') {
-                return { ...tabsobj, disabled: !tabsobj.disabled };
+const settMenyPunkterBasertPaMeldeformOgEtterregistrering = (person: Person, menypunkter: MenyPunkt[]) => {
+    const personHarPapirMeldeform = (mp: MenyPunkt) => (person.meldeform === MeldeForm.PAPIR) && (mp.tittel === 'endreMeldeform');
+    const personHarEtterregistrerteMeldekort = (mp: MenyPunkt) =>  !isEmpty(person.etterregistrerteMeldekort) && mp.tittel === 'etterregistrering';
+    const menypunktliste = menypunkter
+        .map(menypunkt => {
+            if (personHarPapirMeldeform(menypunkt) || personHarEtterregistrerteMeldekort(menypunkt)) {
+                return { ...menypunkt, disabled: !menypunkt.disabled };
             } else {
-                return { ...tabsobj };
+                return { ...menypunkt };
             }
         });
-    return filtrertetabsobjekter;
+    return menypunktliste;
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {

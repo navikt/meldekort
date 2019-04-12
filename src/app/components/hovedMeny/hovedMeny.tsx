@@ -6,11 +6,8 @@ import { hentIntl } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { RootState, history } from '../../store/configureStore';
-import { Router } from '../../types/router';
-import { selectRouter } from '../../selectors/router';
 
 interface MapStateToProps {
-    router: Router;
     valgtMenyPunkt: MenyPunkt;
 }
 
@@ -25,9 +22,7 @@ interface HovedMenyProps {
 type Props = HovedMenyProps & MapStateToProps & MapDispatchToProps;
 
 const HovedMeny: React.FunctionComponent<Props> = (props) => {
-    const {router, menypunkter, settValgtMenyPunkt, valgtMenyPunkt} = props;
-
-    const path = '/meldekort/' + router.location.pathname.split('/')[1];
+    const { menypunkter, settValgtMenyPunkt, valgtMenyPunkt} = props;
 
     const onChange = (item: MenyPunkt) => {
         settValgtMenyPunkt(item);
@@ -63,7 +58,6 @@ const HovedMeny: React.FunctionComponent<Props> = (props) => {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        router: selectRouter(state),
         valgtMenyPunkt: state.meny.valgtMenyPunkt
     };
 };
