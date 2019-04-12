@@ -58,19 +58,19 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
                                 `${hentIntl().formatMessage({id: 'utfylling.arbeid'})}
                                 ${meldekortDag.arbeidetTimerSum} 
                                 ${hentIntl().formatMessage({id: 'overskrift.timer'}).trim()}${
-                                sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : null}`
+                                sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : ''}`
                                 : null
                         }
                         {
                             meldekortDag.kurs ?
                                 `${hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}${
-                                sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? ', ' : null}`
+                                sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? ', ' : ''}`
                                 : null
                         }
                         {
                             meldekortDag.syk ?
                                 `${hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}${
-                                sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? ', ' : null}`
+                                sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? ', ' : ''}`
                                 : null
                         }
                         {
