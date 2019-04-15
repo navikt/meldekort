@@ -4,7 +4,6 @@ import { Action, applyMiddleware, combineReducers, compose, createStore } from '
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
-// import logger from 'redux-logger';
 
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';

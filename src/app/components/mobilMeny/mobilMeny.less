@@ -25,10 +25,11 @@
 
       .nav-list {
 
-        > li {
+        li {
           position:relative;
+          background-color: #A3DFF3;
 
-          > a {
+          button {
             font-size:1.1rem;
             padding: 1rem;
             padding-left:2rem;
@@ -40,10 +41,10 @@
             }
           }
 
-          > ul {
+          ul {
             display:none;
 
-            > li > a {
+            li > button {
               padding-left:4rem !important;
             }
           }
@@ -90,7 +91,7 @@
           }
         }
 
-        a {
+        button {
           border-left: 4px solid transparent;
 
           &:hover {
@@ -119,6 +120,7 @@
 
     &--hidden {
       z-index:-1;
+      background-color: #e79999;
     }
 
     @media @tablet, @desktop {

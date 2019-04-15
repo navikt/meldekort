@@ -6,6 +6,7 @@ import { getType } from 'typesafe-actions';
 const initialState: MenyState = {
     valgtMenyPunkt: menyConfig[0],
     alleMenyPunkter: menyConfig,
+    erApen: true,
 };
 
 const menyReducer = (state: MenyState = initialState,
@@ -16,6 +17,9 @@ const menyReducer = (state: MenyState = initialState,
 
         case getType(MenyActions.settAktiveMenyPunkter):
             return { ...state, alleMenyPunkter: action.payload };
+
+        case getType(MenyActions.toggleMeny):
+            return { ...state, erApen: action.payload };
 
         default:
             return state;

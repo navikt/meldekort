@@ -13,6 +13,7 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
+import { useState } from 'react';
 
 interface MapStateToProps {
     router: Router;
@@ -32,6 +33,7 @@ interface BannerProps {
 type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
+
     const {router, meny, person} = props;
     const params = router.location.pathname.split('/');
     const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
