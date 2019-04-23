@@ -20,10 +20,10 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
-import Environment from "../../../utils/env";
-import PrintHeader from "../../../components/print/printHeader";
-import PrintKnapp from "../../../components/print/printKnapp";
-import AlertStripe from "nav-frontend-alertstriper";
+import Environment from '../../../utils/env';
+import PrintKnapp from '../../../components/print/printKnapp';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { scrollTilElement } from '../../../utils/scroll';
 
 interface MapStateToProps {
     router: Router;
@@ -50,6 +50,10 @@ type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToPro
 class Kvittering extends React.Component<KvitteringsProps> {
     constructor(props: KvitteringsProps) {
         super(props);
+    }
+
+    componentDidMount() {
+        scrollTilElement(undefined, 'auto');
     }
 
     returnerMeldekortListaMedFlereMeldekortIgjen = (meldekort1: Meldekort[], innsendingstype1: Innsendingstyper,

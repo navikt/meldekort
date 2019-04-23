@@ -6,23 +6,23 @@ import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import {UtfyltDag} from "../utfyllingsside/utfylling/utfyllingConfig";
-import {Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar} from '../../../types/innsending';
-import {AktivtMeldekortState} from '../../../reducers/aktivtMeldekortReducer';
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
-import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
-import {hentIntl} from '../../../utils/intlUtil';
-import {history, RootState} from '../../../store/configureStore';
-import {ikkeFortsetteRegistrertContent} from '../../../components/modal/ikkeFortsetteRegistrertContent';
-import {IModal, ModalKnapp} from '../../../types/ui';
-import {Innholdstittel} from 'nav-frontend-typografi';
-import {InnsendingActions} from '../../../actions/innsending';
-import {Meldegruppe} from '../../../types/meldekort';
-import {RouteComponentProps} from 'react-router';
-import {scrollToTop} from '../../../utils/scroll';
-import {Sporsmal} from './sporsmal/sporsmalConfig';
-import {UiActions} from '../../../actions/ui';
+import { UtfyltDag } from '../utfyllingsside/utfylling/utfyllingConfig';
+import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
+import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { hentIntl } from '../../../utils/intlUtil';
+import { history, RootState } from '../../../store/configureStore';
+import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import { IModal, ModalKnapp } from '../../../types/ui';
+import { Innholdstittel } from 'nav-frontend-typografi';
+import { InnsendingActions } from '../../../actions/innsending';
+import { Meldegruppe } from '../../../types/meldekort';
+import { RouteComponentProps } from 'react-router';
+import { scrollTilElement } from '../../../utils/scroll';
+import { Sporsmal } from './sporsmal/sporsmalConfig';
+import { UiActions } from '../../../actions/ui';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -81,7 +81,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
         const resultat = arbeidet && kurs && syk && ferie && registrert && !begrunnelseValgt;
         if (!resultat) {
-            scrollToTop();
+            scrollTilElement('feilmelding');
             return resultat;
         }
 
@@ -124,7 +124,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 kurs: kurs ? utfyltDag.kurs : false,
                 syk: syk ? utfyltDag.syk : false,
                 annetFravaer: ferie ? utfyltDag.annetFravaer : false
-            }
+            };
         });
         this.props.oppdaterDager(oppdatertUtfylteDager);
     }
@@ -224,18 +224,18 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     componentDidMount() {
+        scrollTilElement(undefined, 'auto');
         this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
         if (this.props.innsending.innsendingstype === Innsendingstyper.etterregistrering) {
             const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter
                 .map( spmObj => {
                         if (spmObj.kategori === kategorier[4]) {
-                            return { ...spmObj, checked: kategorier[4] + '.ja' }
-                        }
-                        else {
-                            return { ...spmObj }
+                            return { ...spmObj, checked: kategorier[4] + '.ja' };
+                        } else {
+                            return { ...spmObj };
                         }
                     }
-                )
+                );
             this.props.oppdaterSvar(nySporsmalsobjektState);
         }
     }
@@ -267,7 +267,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         </div>
                     </Veilederpanel>
                 </section>
-                <section className="seksjon">
+                <section id="feilmelding" className="seksjon">
                     {this.hentFeilmeldinger(meldegruppeErAAP)}
                 </section>
                 { innsending.innsendingstype === Innsendingstyper.korrigering && (

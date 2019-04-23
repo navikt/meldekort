@@ -67,10 +67,8 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
     }
 
     render() {
-
         const {prerenderInnhold, innholdRenderer, erKvittering} = this.props;
 
-        console.log(innholdRenderer());
         return (
             <div>
                 <Flatknapp

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import {guid} from "nav-frontend-js-utils";
-import {hentIntl} from "../../utils/intlUtil";
-import InfoToggler from "./infoToggler/infoToggler";
-import EkspanderbartInnhold from "../ekspanderbartInnhold/ekspanderbartInnhold";
+import { guid } from 'nav-frontend-js-utils';
+import { hentIntl } from '../../utils/intlUtil';
+import InfoToggler from './infoToggler/infoToggler';
+import EkspanderbartInnhold from '../ekspanderbartInnhold/ekspanderbartInnhold';
 
 interface Props {
     children: React.ReactNode;

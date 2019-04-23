@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import {Collapse} from 'react-collapse';
+import { Collapse } from 'react-collapse';
 
 export interface OwnProps {
     /** Innholdet som skal vises */
@@ -36,7 +36,8 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
             springConfig={{ stiffness: 250, damping: 30 }}
             className={classNames('ekspanderbartInnhold', {
                 'ekspanderbartInnhold--apen': erApen})}
-            hasNestedCollapse={harEkspanderbartInnhold}>
+            hasNestedCollapse={harEkspanderbartInnhold}
+        >
             {content}
         </Collapse>
     );

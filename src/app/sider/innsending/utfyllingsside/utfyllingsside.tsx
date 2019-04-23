@@ -13,7 +13,7 @@ import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
-import { scrollToTop } from '../../../utils/scroll';
+import { scrollTilElement } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
@@ -40,6 +40,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
             feilIArbeidetTimerHeleHalve: false,
             feilIArbeidetTimer: false,
             feilIDager: []};
+    }
+
+    componentDidMount() {
+        scrollTilElement(undefined, 'auto');
     }
 
     hentSporsmal = (): SpmSvar[] => {
@@ -114,7 +118,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
         let resultat = arbeidet && kurs && syk && ferie && feilITimer;
         if (!resultat) {
-            scrollToTop();
+            scrollTilElement('feilmelding');
         }
         return resultat;
     }
@@ -168,14 +172,17 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
     render() {
         let { meldeperiode } = this.props.aktivtMeldekort.meldekort;
+
         return(
             <main>
-                <section className="seksjon flex-innhold tittel-sprakvelger">
+                <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon flex-innhold sentrert utfylling">
-                    {this.hentFeilmeldinger()}
+                    <div id="feilmelding">
+                        {this.hentFeilmeldinger()}
+                    </div>
                     <UkePanel
                         ukenummer={Konstanter().forsteUke}
                         faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}

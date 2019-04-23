@@ -1,17 +1,17 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import NavKnapp, {knappTyper} from '../../../components/knapp/navKnapp';
+import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import {AktivtMeldekortState} from '../../../reducers/aktivtMeldekortReducer';
-import {connect} from 'react-redux';
-import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {InnsendingActions} from '../../../actions/innsending';
-import {InnsendingState, Innsendingstyper} from '../../../types/innsending';
-import {MeldekortdetaljerState} from '../../../reducers/meldekortdetaljerReducer';
-import {Person} from '../../../types/person';
-import {RootState} from '../../../store/configureStore';
+import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
+import { connect } from 'react-redux';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { InnsendingActions } from '../../../actions/innsending';
+import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
+import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
+import { Person } from '../../../types/person';
+import { RootState } from '../../../store/configureStore';
 import {
     Fravaer,
     FravaerTypeEnum,
@@ -22,12 +22,12 @@ import {
     Meldekortdetaljer as MDetaljer,
     MeldekortdetaljerInnsending
 } from '../../../types/meldekort';
-import {hentIntl} from '../../../utils/intlUtil';
-import {BekreftCheckboksPanel} from 'nav-frontend-skjema';
-import {scrollToTop} from '../../../utils/scroll';
-import {Dispatch} from 'redux';
-import {kalkulerDato} from '../../../utils/dates';
-import {Redirect} from 'react-router';
+import { hentIntl } from '../../../utils/intlUtil';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
+import { scrollTilElement } from '../../../utils/scroll';
+import { Dispatch } from 'redux';
+import { kalkulerDato } from '../../../utils/dates';
+import { Redirect } from 'react-router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -54,6 +54,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     constructor(props: BekreftelseProps) {
         super(props);
         this.state = {meldekortdetaljer: this.konverterInnsendingTilMeldekortdetaljer(), feilmelding: '', senderMeldekort: false};
+    }
+
+    componentDidMount() {
+        scrollTilElement(undefined, 'auto');
     }
 
     konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
@@ -173,7 +177,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
        if (!sign) {
            this.setState({feilmelding: hentIntl().formatMessage({id: 'utfylling.bekreft.feil'})});
-           scrollToTop();
+           scrollTilElement('feilmelding');
        } else {
            this.setState({senderMeldekort: true});
            let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
@@ -213,11 +217,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                         </span>
                         </AlertStripe>
                     </div>
-                    {this.state.feilmelding === '' ? null :
-                        <AlertStripe type={'advarsel'} solid={true}>
-                            {this.state.feilmelding}
-                        </AlertStripe>
-                    }
+                    <div id="feilmelding">
+                        {this.state.feilmelding === '' ? null :
+                            <AlertStripe type={'advarsel'} solid={true}>
+                                {this.state.feilmelding}
+                            </AlertStripe>
+                        }
+                    </div>
                     <section className="seksjon flex-innhold tittel-sprakvelger">
                         <Innholdstittel><FormattedMessage id="overskrift.steg3"/></Innholdstittel>
                         <Sprakvelger/>
