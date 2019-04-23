@@ -36,14 +36,14 @@ const menyConfig: MenyPunkt[] = [
         tekstid: 'sekundarmeny.etterregistrer',
         tittel: 'etterregistrering',
         urlparam: '/etterregistrer-meldekort',
-        disabled: true,
+        disabled: false,
     },
     {
         component: EndreMeldeform,
         tekstid: 'sekundarmeny.endreMeldeform',
         tittel: 'endreMeldeform',
         urlparam: '/endre-meldeform',
-        disabled: true,
+        disabled: false,
     },
     {
         component: OmMeldekort,

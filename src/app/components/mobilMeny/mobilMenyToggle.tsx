@@ -1,46 +1,47 @@
 import * as React from 'react';
-import classnames from 'classnames';
-import { hentIntl } from '../../utils/intlUtil';
+import { RootState } from '../../store/configureStore';
+import { Dispatch } from 'redux';
+import { MenyActions } from '../../actions/meny';
+import { connect } from 'react-redux';
 
-interface State {
-    shadow: boolean;
+interface MapDispatchToProps {
+    toggleMeny: (erApen: boolean) => void;
 }
 
-class MobilMenyToggle extends React.Component<any, State> {
-    constructor(props: any) {
-        super(props);
-
-        this.state = {
-            shadow: false
-        };
-
-        window.addEventListener('scroll', () => this.checkScroll());
-    }
-
-    checkScroll = () => {
-        if (window.scrollY > 60) {
-            this.setState({
-                shadow: true
-            });
-        } else {
-            this.setState({
-                shadow: false
-            });
-        }
-    }
-
-    render() {
-        return (
-            <button
-                className={classnames('meldekort-mobile-nav-toggle', { 'meldekort-mobile-nav-toggle--with-shadow': this.state.shadow })}
-                {...this.props}
-            >
-                <span className="meldekort-mobile-nav-toggle__hamburger-icon">
-                    {hentIntl().formatMessage({id: 'meny.toggle.apne'})}
-                </span>
-            </button>
-        );
-    }
+interface MapStateToProps {
+    erApen: boolean;
 }
 
-export default MobilMenyToggle;
+const MobilMenyToggle: React.FunctionComponent<MapDispatchToProps&MapStateToProps> = (props) => {
+
+    const mobilMenyToggleClass = props.erApen ? 'nav-icon open' : 'nav-icon';
+
+    return (
+        <div
+            className={'burger-menu-toggle'}
+            onClick={() => props.toggleMeny(!props.erApen)}
+        >
+            <div className={mobilMenyToggleClass}>
+                <span/>
+                <span/>
+                <span/>
+                <span/>
+            </div>
+        </div>
+    );
+};
+
+const mapStateToProps = (state: RootState): MapStateToProps => {
+    return {
+        erApen: state.meny.erApen
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        toggleMeny: (erApen: boolean) =>
+            dispatch(MenyActions.toggleMeny(erApen)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobilMenyToggle);

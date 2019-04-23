@@ -1,7 +1,5 @@
 .meldekort-header {
 
-  border-bottom: 4px solid #E9E7E7;
-
   &__innsending {
     display: none;
   }
@@ -11,20 +9,27 @@
     border-bottom: 2px solid @navBlaLighten60;
 
     .banner-content {
-      display: flex;
-      padding: 2rem;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr 60px;
+      grid-template-rows: minmax(40px, auto) ;
+      .banner-title {
+        height: 100%;
+        justify-self: center;
+        padding: 0.5rem;
+      }
     }
   }
 }
 @media @tablet {
 
 }
-@media @phone {
+@media @small-phone {
   .meldekort-header {
     border-bottom: none;
     .banner-content {
-      padding: 1rem;
+      .banner-title {
+        width: 100%;
+      }
     }
   }
 }

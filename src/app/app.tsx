@@ -7,7 +7,7 @@ import MeldekortRoutes from './sider/meldekortRoutes';
 import setupMock from './mock/setup-mock';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
-import { Person } from './types/person';
+import { MeldeForm, Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
 import { PersonStatusState } from './reducers/personStatusReducer';
 import { connect } from 'react-redux';
@@ -21,6 +21,7 @@ import { MenyPunkt } from './utils/menyConfig';
 import { MenyActions } from './actions/meny';
 import { Router } from './types/router';
 import { selectRouter } from './selectors/router';
+import { isEmpty } from 'ramda';
 
 if (erMock()) {
     setupMock();
@@ -37,6 +38,7 @@ interface MapStateToProps {
 interface MapDispatchToProps {
     hentPersonStatus: () => void;
     settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
+    settMenyPunkter: ( menypunkter: MenyPunkt[]) => void;
 }
 
 type Props = MapDispatchToProps&MapStateToProps;
@@ -85,7 +87,6 @@ class App extends React.Component<Props> {
     }
 
     settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
-        console.log('inni ny metode');
         const urlparam = '/' + url.split('/')[1];
         for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
             if (meny.alleMenyPunkter[i].urlparam === urlparam) {
@@ -95,10 +96,29 @@ class App extends React.Component<Props> {
         }
     }
 
+    settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
+        console.log(menypunkter);
+        const personHarPapirMeldeform = (mp: MenyPunkt): boolean => (person.meldeform === MeldeForm.PAPIR)
+            && (mp.tittel === 'endreMeldeform') && (mp.disabled === true);
+        const personHarEtterregistrerteMeldekort = (mp: MenyPunkt): boolean =>  !isEmpty(person.etterregistrerteMeldekort)
+            && mp.tittel === 'etterregistrering' && (mp.disabled === true);
+        const menypunktliste = menypunkter
+            .map(menypunkt => {
+                if (personHarPapirMeldeform(menypunkt) || personHarEtterregistrerteMeldekort(menypunkt) ) {
+                    console.log(menypunkt.tittel, menypunkt.disabled);
+                    return { ...menypunkt, disabled: !menypunkt.disabled };
+                } else {
+                    return { ...menypunkt };
+                }
+            });
+        this.props.settMenyPunkter(menypunktliste);
+    }
+
     componentDidMount() {
-        const { hentPersonStatus, meny, router  } = this.props;
+        const { hentPersonStatus, person, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
+        this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
     }
 
     public render() {
@@ -127,6 +147,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
         settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
+        settMenyPunkter: (menypunkter: MenyPunkt[]) => dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),
     };
 };
 

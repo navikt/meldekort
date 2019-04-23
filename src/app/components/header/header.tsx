@@ -13,7 +13,7 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 interface MapStateToProps {
     router: Router;
@@ -34,43 +34,31 @@ type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
 
-    const {router, meny, person} = props;
+    const {router, meny} = props;
     const params = router.location.pathname.split('/');
     const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
     const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
-    const filtrerteMenyPunkter = settMenyPunkterBasertPaMeldeformOgEtterregistrering(person, meny.alleMenyPunkter)
-        .filter((menypunkt: MenyPunkt) => {return !menypunkt.disabled; });
 
     return (
         <header className={headerClass}>
             <div className="banner-container">
                 <div className="banner-content">
-                    <Sidetittel>{props.tittel}</Sidetittel>
+                    <div className={'banner-title'}>
+                        <Sidetittel>{props.tittel}</Sidetittel>
+                    </div>
+                    <MobilMenyToggle/>
                 </div>
+                {!harPathInnsending ? (
+                    <MobilMeny menypunkter={meny.alleMenyPunkter.filter( menypunkt => !menypunkt.disabled)}/>
+                ) : <></>
+                }
             </div>
             {!harPathInnsending ? (
-                <>
-                    <MobilMenyToggle />
-                    <MobilMeny menypunkter={filtrerteMenyPunkter}/>
-                    <HovedMeny menypunkter={filtrerteMenyPunkter}/>
-                </>) : <></>
+                <HovedMeny menypunkter={meny.alleMenyPunkter.filter( menypunkt => !menypunkt.disabled)}/>
+                ) : <></>
             }
         </header>
     );
-};
-
-const settMenyPunkterBasertPaMeldeformOgEtterregistrering = (person: Person, menypunkter: MenyPunkt[]) => {
-    const personHarPapirMeldeform = (mp: MenyPunkt) => (person.meldeform === MeldeForm.PAPIR) && (mp.tittel === 'endreMeldeform');
-    const personHarEtterregistrerteMeldekort = (mp: MenyPunkt) =>  !isEmpty(person.etterregistrerteMeldekort) && mp.tittel === 'etterregistrering';
-    const menypunktliste = menypunkter
-        .map(menypunkt => {
-            if (personHarPapirMeldeform(menypunkt) || personHarEtterregistrerteMeldekort(menypunkt)) {
-                return { ...menypunkt, disabled: !menypunkt.disabled };
-            } else {
-                return { ...menypunkt };
-            }
-        });
-    return menypunktliste;
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
