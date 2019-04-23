@@ -128,12 +128,11 @@ class Kvittering extends React.Component<KvitteringsProps> {
         );
     }
 
-    render() {
+    innhold = () => {
         const { person, innsendingstype, innsending, aktivtMeldekort } = this.props;
-        const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerPropsVerdier();
-
-        return(
-            <main>
+        const { nesteAktivtMeldekort } = this.returnerPropsVerdier();
+        return (
+            <>
                 <AlertStripe type={'suksess'} className="alertSendt noPrint">
                     <FormattedMessage id={'overskrift.meldekort.sendt'}/>
                 </AlertStripe>
@@ -141,7 +140,6 @@ class Kvittering extends React.Component<KvitteringsProps> {
                     <Innholdstittel ><FormattedMessage id="overskrift.steg4" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <PrintHeader erKvittering={true}/>
                 <section className="seksjon">
                     {this.visOppsummeringsTekster(nesteAktivtMeldekort!)}
                 </section>
@@ -151,9 +149,19 @@ class Kvittering extends React.Component<KvitteringsProps> {
                 {innsendingstype === Innsendingstyper.innsending
                 && (isEmpty(person.meldekort) && !isEmpty(person.etterregistrerteMeldekort))
                 && (
-                <section className="seksjon">
+                    <section className="seksjon">
                         <FormattedMessage id={'sendt.etterregistrering.info'} />
-                </section>)}
+                    </section>)}
+            </>
+        );
+    }
+
+    render() {
+        const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerPropsVerdier();
+
+        return(
+            <main>
+                {this.innhold()}
                 <section className="seksjon flex-innhold sentrert noPrint">
                     <NavKnapp
                         type={knappTyper.hoved}
@@ -169,7 +177,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
                         tekstid={'sendt.linkTilTidligereMeldekort'}
                         className={'navigasjonsknapp'}
                     />
-                    <PrintKnapp/>
+                    <PrintKnapp erKvittering={true} innholdRenderer={this.innhold} prerenderInnhold={true}/>
                 </section>
             </main>
         );
