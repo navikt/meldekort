@@ -17,7 +17,8 @@ const InfoToggler: React.FunctionComponent<ToggleLenkeProps> = (props) => {
                 evt.preventDefault();
                 onToggle();
             }}
-            aria-expanded={apen}>
+            aria-expanded={apen}
+        >
             <span className="infoToggler__content">
                 <span className="infoToggler__label">{children}</span>
                 <span className="infoToggler__chevron">
