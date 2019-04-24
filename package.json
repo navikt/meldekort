@@ -72,7 +72,7 @@
     "nav-frontend-veilederpanel-style": "0.0.14",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
-    "react": "^16.8.5",
+    "react": "^16.8.6",
     "react-burger-menu": "^2.6.8",
     "react-collapse": "^4.0.3",
     "react-dom": "^16.7.0",

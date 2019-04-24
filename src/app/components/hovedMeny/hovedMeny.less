@@ -15,21 +15,24 @@
         padding: 0;
 
         li {
+          display: inline;
+
           button.menypunkt {
-            height: 100%;
-            display:block;
-            border: 0;
             background: white;
-            font-size: 1.1rem;
+            border: 0;
             color: @navBla;
-            padding: 0.75rem 1.25rem;
+            display: inline-block;
+            font-size: 1.1rem;
+            height: 100%;
+            width: 100%;
+            margin: .5rem 0 .5rem 0;
             text-decoration: none;
-            border-bottom: 4px solid #E9E7E7;
-            position: relative;
             top: 4px;
+            position: relative;
+            transition: .3s ease-in-out;
+            border-bottom: 4px solid #E9E7E7;
 
             &:hover {
-              background: #f8f8f8;
               border-bottom: 4px solid @navBla;
             }
 
@@ -44,10 +47,12 @@
               font-weight: bold;
               border-bottom: 4px solid @navBla;
               color: @navMorkGra;
+
             }
           }
         }
       }
+
     }
     @media @phone, @small-phone {
       display:none;

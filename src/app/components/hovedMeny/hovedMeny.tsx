@@ -39,12 +39,12 @@ const HovedMeny: React.FunctionComponent<Props> = (props) => {
                                 <li key={item.tittel}>
                                     <button
                                          onClick={() => onChange(item)}
-                                         className={classNames('menypunkt', {
+                                         className={classNames('menypunkt underline', {
                                              active: valgtMenyPunkt.tittel === item.tittel
                                          })}
 
                                     >
-                                        {hentIntl().formatMessage({id: item.tekstid})}
+                                        <span>{hentIntl().formatMessage({id: item.tekstid})}</span>
                                     </button>
                                 </li>
                             )

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { default as menyConfig, MenyPunkt } from '../../utils/menyConfig';
+import { MenyPunkt } from '../../utils/menyConfig';
 import { history, RootState } from '../../store/configureStore';
 import { selectRouter } from '../../selectors/router';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import { hentIntl } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { Dispatch } from 'redux';
 import classNames from 'classnames';
+import { Collapse } from 'react-collapse';
 
 interface MobilMenyProps {
     menypunkter: MenyPunkt[];
@@ -32,17 +33,25 @@ const MobilMeny: React.FunctionComponent<MobilMenyProps&MapStateToProps&MapDispa
     };
 
     return (
-        <nav className={classNames('mobilMeny', {open: erApen})}>
-                {menypunkter.map( menypunkt => (
-                    <button
-                        className={classNames('mobilMeny-item', {
-                            active: valgtMenyPunkt.tittel === menypunkt.tittel
-                        })}
-                        onClick={() => onChange(menypunkt)}
-                    >
-                        {hentIntl().formatMessage({id: menypunkt.tekstid})}
-                    </button>
-                ))}
+        <nav className={'mobilMeny'}>
+            <Collapse isOpened={props.erApen}>
+                    <ul className={classNames('mobilMeny-navlist', {open: erApen})}>
+                        {menypunkter.map( menypunkt => (
+                            <li
+                                className={'navlist-item'}
+                                onClick={() => onChange(menypunkt)}
+                            >
+                                <div
+                                    className={classNames('item-wrapper', {
+                                    active: valgtMenyPunkt.tittel === menypunkt.tittel
+                                })}
+                                >
+                                    {hentIntl().formatMessage({id: menypunkt.tekstid})}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+            </Collapse>
         </nav>
     );
 };
