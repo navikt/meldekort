@@ -28,6 +28,10 @@ import meldekortEpics from '../epics/meldekortEpics';
 import { Person } from '../types/person';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
+import hardSet from 'redux-persist/es/stateReconciler/hardSet';
+import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
+import { MeldekortActions } from '../actions/meldekort';
+import { AxiosResponse } from 'axios';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -58,7 +62,7 @@ export interface RootState {
 
 export type AppEpic = Epic<Action, Action, RootState>;
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     locales: localesReducer,
     intl: intlReducer,
     router: connectRouter(history),
@@ -72,6 +76,24 @@ const rootReducer = combineReducers({
     ui: uiReducer,
 });
 
+const rootReducer = (state: any, action: any) => {
+    if (action.type === MeldekortActions.apiKallFeilet) {
+        const axiosResponse: AxiosResponse | undefined = action.payload.response;
+        if
+        (
+            axiosResponse &&
+            axiosResponse.status !== undefined &&
+            axiosResponse.status === 401
+        ) {
+            console.log('SLETTER ALLE DATA!');
+            state = undefined;
+            storage.removeItem('persist:meldekort:undefined');
+        }
+
+    }
+    return appReducer(state, action);
+};
+
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -81,6 +103,7 @@ const persistConfig = {
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
     blacklist: ['locales', 'ui'],
+    stateReconciler: autoMergeLevel1
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
