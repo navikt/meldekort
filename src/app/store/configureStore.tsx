@@ -77,14 +77,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state: any, action: any) => {
-    console.log('INNI ROOT REDUCER!');
-    console.log(action);
-    console.log(action.type === MeldekortTypeKeys.API_KALL_FEILET);
     if (action.type === MeldekortTypeKeys.API_KALL_FEILET) {
-        const axiosResponse: AxiosResponse | undefined = action.payload.response;
-        console.log('INNI ROOTREDUCER OG API_KALL_FEILET!');
-        console.log(action);
-        console.log(axiosResponse);
         if
         (
             action.payload.response &&
@@ -92,7 +85,8 @@ const rootReducer = (state: any, action: any) => {
             action.payload.response.status === 401
         ) {
             console.log('SLETTER ALLE DATA!');
-            state = undefined;
+            const { intl } = state;
+            state = { intl };
             storage.removeItem('persist:meldekort:undefined');
         }
 
