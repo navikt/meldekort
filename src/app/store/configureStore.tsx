@@ -77,6 +77,8 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state: any, action: any) => {
+    console.log('INNI ROOT REDUCER!');
+    console.log(action);
     if (action.type === MeldekortActions.apiKallFeilet) {
         const axiosResponse: AxiosResponse | undefined = action.payload.response;
         console.log('INNI ROOTREDUCER OG API_KALL_FEILET!');
