@@ -30,7 +30,7 @@ import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import hardSet from 'redux-persist/es/stateReconciler/hardSet';
 import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
-import { MeldekortActions } from '../actions/meldekort';
+import { MeldekortActions, MeldekortTypeKeys } from '../actions/meldekort';
 import { AxiosResponse } from 'axios';
 
 export const history = createBrowserHistory({
@@ -79,17 +79,17 @@ const appReducer = combineReducers({
 const rootReducer = (state: any, action: any) => {
     console.log('INNI ROOT REDUCER!');
     console.log(action);
-    console.log(action.type === MeldekortActions.apiKallFeilet);
-    if (action.type === MeldekortActions.apiKallFeilet) {
+    console.log(action.type === MeldekortTypeKeys.API_KALL_FEILET);
+    if (action.type === MeldekortTypeKeys.API_KALL_FEILET) {
         const axiosResponse: AxiosResponse | undefined = action.payload.response;
         console.log('INNI ROOTREDUCER OG API_KALL_FEILET!');
         console.log(action);
         console.log(axiosResponse);
         if
         (
-            axiosResponse &&
-            axiosResponse.status !== undefined &&
-            axiosResponse.status === 401
+            action.payload.response &&
+            action.payload.response.status !== undefined &&
+            action.payload.response.status === 401
         ) {
             console.log('SLETTER ALLE DATA!');
             state = undefined;
