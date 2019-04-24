@@ -22,6 +22,7 @@ import { MenyActions } from './actions/meny';
 import { Router } from './types/router';
 import { selectRouter } from './selectors/router';
 import { isEmpty } from 'ramda';
+import { hentIntl } from './utils/intlUtil';
 
 if (erMock()) {
     setupMock();
@@ -67,7 +68,7 @@ class App extends React.Component<Props> {
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
-                    <Header tittel={'Meldekort'}/>
+                    <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
                 <div className="main-container">
                     <ConnectedRouter history={history}>
                         <Switch>
@@ -91,7 +92,6 @@ class App extends React.Component<Props> {
         for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
             if (meny.alleMenyPunkter[i].urlparam === urlparam) {
                 const menypunkt = meny.alleMenyPunkter[i];
-                this.props.settValgtMenyPunkt(menypunkt);
             }
         }
     }
