@@ -76,13 +76,13 @@ class App extends React.Component<Props> {
                         className={classNames({overlay: this.props.meny.erApen})}
                         onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
                     >
-                    <div className={'main-container'}>
-                        <ConnectedRouter history={history}>
-                            <Switch>
-                                <Route path="/" component={MeldekortRoutes}/>
-                            </Switch>
-                        </ConnectedRouter>
-                    </div>
+                        <div className={'main-container'}>
+                            <ConnectedRouter history={history}>
+                                <Switch>
+                                    <Route path="/" component={MeldekortRoutes}/>
+                                </Switch>
+                            </ConnectedRouter>
+                        </div>
                     </div>
                 </div>
             );

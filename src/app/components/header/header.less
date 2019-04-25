@@ -1,5 +1,5 @@
 .meldekort-header {
-  z-index: 100;
+
   &__innsending {
     display: none;
   }
@@ -16,9 +16,8 @@
       display: grid;
       grid-template-columns: 1fr 60px;
       grid-template-rows: minmax(40px, auto) ;
+
       .banner-title {
-        grid-column: 1;
-        grid-row: 1;
         height: 100%;
         justify-self: center;
         padding: 0.5rem;
@@ -26,9 +25,7 @@
     }
   }
 }
-@media @tablet {
 
-}
 @media @small-phone {
   .meldekort-header {
     border-bottom: none;

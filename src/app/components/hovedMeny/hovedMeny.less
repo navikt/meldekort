@@ -19,16 +19,14 @@
           display: inline;
 
           button.menypunkt {
-            background: white;
+            padding: .25rem .4rem .25rem .4rem;
             max-width: 200px;
             border: 0;
             color: @navBla;
-            display: inline-block;
             font-size: 1.1rem;
             height: 100%;
             width: 100%;
             margin: 0 0 .5rem 0;
-            text-decoration: none;
             top: 4px;
             position: relative;
             transition: .3s ease-in-out;
@@ -39,13 +37,12 @@
             }
 
             &:focus {
-              outline:none;
-              box-shadow:0 0 0 3px #FFBD66;
-              z-index:1;
+              outline: none;
+              box-shadow: 0 0 0 3px #FFBD66;
+              z-index: 1;
             }
 
             &.active {
-              background: white;
               font-weight: bold;
               border-bottom: 4px solid @navBla;
               color: @navMorkGra;
@@ -53,7 +50,6 @@
           }
         }
       }
-
     }
     @media @phone, @small-phone {
       display:none;

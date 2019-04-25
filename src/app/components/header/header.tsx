@@ -3,8 +3,7 @@ import HovedMeny from '../hovedMeny/hovedMeny';
 import MobilMeny from '../mobilMeny/mobilMeny';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { isEmpty } from 'ramda';
-import { MeldeForm, Person } from '../../types/person';
+import { Person } from '../../types/person';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyState } from '../../types/meny';
@@ -13,7 +12,6 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
-import { useEffect } from 'react';
 
 interface MapStateToProps {
     router: Router;
