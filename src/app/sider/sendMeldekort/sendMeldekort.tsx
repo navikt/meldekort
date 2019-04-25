@@ -31,6 +31,7 @@ interface MapDispatchToProps {
     hentPerson: () => void;
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     resetInnsending: () => void;
+    settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
 interface MeldekortRad {
@@ -50,6 +51,7 @@ class SendMeldekort extends React.Component<Props, any> {
 
         if (meldekortListe.length === 1) {
             this.props.leggTilAktivtMeldekort(meldekortListe[0]);
+            this.props.settInnsendingstype(Innsendingstyper.innsending);
             return true;
         }
         return false;
@@ -240,7 +242,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
         resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort))
+            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
+        settInnsendingstype: (innsendingstype: Innsendingstyper) => {
+            dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype));
+        }
     };
 };
 

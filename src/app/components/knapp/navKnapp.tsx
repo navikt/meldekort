@@ -29,6 +29,8 @@ interface NavKnappProps {
     nesteAktivtMeldekort?: Meldekort;
     nesteInnsendingstype?: Innsendingstyper;
     validering?: () => boolean;
+    disabled?: boolean;
+    spinner?: boolean;
 }
 
 export enum knappTyper {
@@ -95,6 +97,8 @@ class NavKnapp extends React.Component<Props> {
                 type={this.props.type}
                 onClick={this.clickHandler}
                 className={this.props.className}
+                spinner={typeof this.props.spinner === 'undefined' ? false : this.props.spinner}
+                disabled={typeof this.props.disabled === 'undefined' ? false : this.props.disabled}
             >
                 <FormattedMessage id={this.props.tekstid}/>
             </KnappBase>

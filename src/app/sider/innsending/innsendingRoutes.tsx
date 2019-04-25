@@ -5,17 +5,17 @@ import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
 import Sporsmalsside from './sporsmalsside/sporsmalsside';
 import StegBanner from '../../components/stegBanner/stegBanner';
 import Utfylling from './utfyllingsside/utfyllingsside';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { InnsendingActions } from '../../actions/innsending';
-import { InnsendingState, Innsendingstyper } from '../../types/innsending';
-import { Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal } from '../../types/meldekort';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { RootState } from '../../store/configureStore';
-import { Sporsmal as Spm } from './sporsmalsside/sporsmal/sporsmalConfig';
-import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
-import { UtfyltDag } from './utfyllingsside/utfylling/utfyllingConfig';
-import { hentUkedagerSomStringListe } from '../../utils/ukedager';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {InnsendingActions} from '../../actions/innsending';
+import {InnsendingState, Innsendingstyper} from '../../types/innsending';
+import {Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal} from '../../types/meldekort';
+import {Redirect, Route, RouteComponentProps, Switch} from 'react-router-dom';
+import {RootState} from '../../store/configureStore';
+import {Sporsmal as Spm} from './sporsmalsside/sporsmal/sporsmalConfig';
+import {MeldekortdetaljerActions} from '../../actions/meldekortdetaljer';
+import {UtfyltDag} from './utfyllingsside/utfylling/utfyllingConfig';
+import {hentUkedagerSomStringListe} from '../../utils/ukedager';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -105,8 +105,10 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
 
     componentDidMount() {
         this.settMeldekortIdBasertPaInnsendingstype();
-        this.props.hentMeldekortdetaljer();
         this.settSporsmalOgUtfyllingHvisKorrigering();
+        if (this.props.innsending.innsendingstype !== Innsendingstyper.innsending) {
+            this.props.hentMeldekortdetaljer();
+        }
     }
 
     render() {

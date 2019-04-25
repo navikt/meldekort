@@ -27,6 +27,8 @@ import meldekortEpics from '../epics/meldekortEpics';
 import { Person } from '../types/person';
 import { MenyState } from '../types/meny';
 import menyReducer from '../reducers/menyReducer';
+import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
+import meldeformEpics from '../epics/meldeformEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -51,6 +53,7 @@ export interface RootState {
     aktivtMeldekort: AktivtMeldekortState;
     historiskeMeldekort: HistoriskeMeldekortState;
     innsending: InnsendingState;
+    meldeform: MeldeformState;
     meny: MenyState;
     ui: UIState;
 }
@@ -68,6 +71,7 @@ const rootReducer = combineReducers({
     historiskeMeldekort: historiskeMeldekortReducer,
     innsending: innsendingReducer,
     meny: menyReducer,
+    meldeform: meldeformReducer,
     ui: uiReducer,
 });
 
@@ -99,8 +103,8 @@ epicMiddleware.run(
         historiskeMeldekortEpics,
         innsendingEpics,
         meldekortdetaljerEpics,
-        innsendingEpics,
-        meldekortEpics
+        meldekortEpics,
+        meldeformEpics
     )
 );
 

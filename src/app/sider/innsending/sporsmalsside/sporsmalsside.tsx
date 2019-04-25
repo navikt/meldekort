@@ -1,26 +1,27 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
+import BegrunnelseVelger from './begrunnelse/begrunnelseVelger';
+import NavKnapp, {knappTyper} from '../../../components/knapp/navKnapp';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
-import { connect } from 'react-redux';
-import { history, RootState } from '../../../store/configureStore';
-import { Dispatch } from 'redux';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
-import { Meldegruppe } from '../../../types/meldekort';
-import { InnsendingActions } from '../../../actions/innsending';
-import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { InnsendingState, SpmSvar } from '../../../types/innsending';
-import { RouteComponentProps } from 'react-router';
-import { hentIntl } from '../../../utils/intlUtil';
-import { scrollToTop } from '../../../utils/scroll';
-import { IModal, ModalKnapp } from '../../../types/ui';
-import { UiActions } from '../../../actions/ui';
-import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
-import Veilederpanel from 'nav-frontend-veilederpanel';
+import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import {Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar} from '../../../types/innsending';
+import {AktivtMeldekortState} from '../../../reducers/aktivtMeldekortReducer';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
+import {hentIntl} from '../../../utils/intlUtil';
+import {history, RootState} from '../../../store/configureStore';
+import {ikkeFortsetteRegistrertContent} from '../../../components/modal/ikkeFortsetteRegistrertContent';
+import {IModal, ModalKnapp} from '../../../types/ui';
+import {Innholdstittel} from 'nav-frontend-typografi';
+import {InnsendingActions} from '../../../actions/innsending';
+import {Meldegruppe} from '../../../types/meldekort';
+import {RouteComponentProps} from 'react-router';
+import {scrollToTop} from '../../../utils/scroll';
+import {Sporsmal} from './sporsmal/sporsmalConfig';
+import {UiActions} from '../../../actions/ui';
 
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
@@ -32,6 +33,7 @@ interface MapDispatchToProps {
     skjulModal: () => void;
     resetSporsmalOgUtfylling: () => void;
     visModal: (modal: IModal) => void;
+    settBegrunnelse: (begrunnelse: Begrunnelse) => void;
 }
 
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentProps;
@@ -44,14 +46,15 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     valider = (): boolean => {
+        const { sporsmalsobjekter, begrunnelse, innsendingstype } = this.props.innsending;
 
-        let arbeidet = this.sjekkSporsmal(kategorier[0]);
-        let kurs = this.sjekkSporsmal(kategorier[1]);
-        let syk = this.sjekkSporsmal(kategorier[2]);
-        let ferie = this.sjekkSporsmal(kategorier[3]);
-        let registrert = this.sjekkSporsmal(kategorier[4]);
-
-        const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter
+        const arbeidet = this.sjekkSporsmal(kategorier[0]);
+        const kurs = this.sjekkSporsmal(kategorier[1]);
+        const syk = this.sjekkSporsmal(kategorier[2]);
+        const ferie = this.sjekkSporsmal(kategorier[3]);
+        const registrert = this.sjekkSporsmal(kategorier[4]);
+        const begrunnelseValgt = begrunnelse.valgtArsak === '' && innsendingstype === Innsendingstyper.korrigering;
+        const nySporsmalsobjekterState = sporsmalsobjekter
             .map( sporsmalsobj => {
                 switch (sporsmalsobj.kategori) {
                     case kategorier[0]:
@@ -69,8 +72,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 }
             });
         this.props.oppdaterSvar(nySporsmalsobjekterState);
+        this.props.settBegrunnelse({
+            valgtArsak: begrunnelse.valgtArsak,
+            erFeil: begrunnelseValgt
+        });
 
-        let resultat = arbeidet && kurs && syk && ferie && registrert;
+        const resultat = arbeidet && kurs && syk && ferie && registrert && !begrunnelseValgt;
         if (!resultat) {
             scrollToTop();
             return resultat;
@@ -100,7 +107,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     fortsetteRegistrert = (): boolean => {
-        let sporsmal = this.hentSvarPaaSporsmal().filter( spm => spm.kategori === kategorier[4]);
+        const sporsmal = this.hentSvarPaaSporsmal().filter( spm => spm.kategori === kategorier[4]);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
@@ -120,8 +127,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     sjekkSporsmal = (kategori: string): boolean => {
-        let sporsmalListe = this.hentSporsmal();
-        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
+        const sporsmalListe = this.hentSporsmal();
+        const sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
@@ -129,17 +136,21 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     hentFeilmeldinger = (aap: boolean) => {
-        let { sporsmalsobjekter } = this.props.innsending;
-        let feilIArbeid = sporsmalsobjekter[0].feil.erFeil;
-        let feillIKurs = sporsmalsobjekter[1].feil.erFeil;
-        let feilISyk = sporsmalsobjekter[2].feil.erFeil;
-        let feilIFerie = sporsmalsobjekter[3].feil.erFeil;
-        let feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
+        const { sporsmalsobjekter, begrunnelse, innsendingstype } = this.props.innsending;
+        const feilIArbeid = sporsmalsobjekter[0].feil.erFeil;
+        const feillIKurs = sporsmalsobjekter[1].feil.erFeil;
+        const feilISyk = sporsmalsobjekter[2].feil.erFeil;
+        const feilIFerie = sporsmalsobjekter[3].feil.erFeil;
+        const feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
+        const feilIBegrunnelse = begrunnelse.erFeil && innsendingstype === Innsendingstyper.korrigering;
 
-        if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert) {
+        if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert || feilIBegrunnelse) {
             return (
                 <AlertStripe type={'advarsel'} solid={true}>
                     <ul>
+                        {feilIBegrunnelse ?
+                            <li>{`${hentIntl().formatMessage({id: 'begrunnelse.required'})}`}</li> : null
+                        }
                         {feilIArbeid ?
                             <li>{`${hentIntl().formatMessage({id: 'arbeidet.required'})}`}</li> : null
                         }
@@ -171,7 +182,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         return !jaSvar;
     }
 
-    resetSporsmalOgUtfyllingHvisAktivtMeldekortIdErLikInnsendingMeldekortId = () => {
+    resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId = () => {
         const { aktivtMeldekort, innsending, resetSporsmalOgUtfylling } = this.props;
         if ( aktivtMeldekort.meldekort.meldekortId !== innsending.meldekortId ) {
             resetSporsmalOgUtfylling();
@@ -179,7 +190,20 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     componentDidMount() {
-        this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdErLikInnsendingMeldekortId();
+        this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
+        if (this.props.innsending.innsendingstype === Innsendingstyper.etterregistrering) {
+            const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter
+                .map( spmObj => {
+                        if (spmObj.kategori === kategorier[4]) {
+                            return { ...spmObj, checked: kategorier[4] + '.ja' }
+                        }
+                        else {
+                            return { ...spmObj }
+                        }
+                    }
+                )
+            this.props.oppdaterSvar(nySporsmalsobjektState);
+        }
     }
 
     render() {
@@ -212,10 +236,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                 <section className="seksjon">
                     {this.hentFeilmeldinger(meldegruppeErAAP)}
                 </section>
+                { innsending.innsendingstype === Innsendingstyper.korrigering && (
+                    <section className="seksjon">
+                        <BegrunnelseVelger erFeil={innsending.begrunnelse.erFeil}/>
+                    </section>
+                )}
                 <section className="seksjon">
                     <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                </section>
-                <section className="seksjon">
                     <AlertStripe type="info">
                         <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
                     </AlertStripe>
@@ -273,6 +300,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
         visModal: (modal: IModal) => dispatch(UiActions.visModal(modal)),
         resetSporsmalOgUtfylling: () =>
             dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
+        settBegrunnelse: (begrunnelsesobj: Begrunnelse) =>
+            dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj))
     };
 };
 

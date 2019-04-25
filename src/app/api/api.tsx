@@ -1,7 +1,7 @@
 import Environment from '../utils/env';
 import Konstanter from '../utils/consts';
 import { erMock } from '../mock/utils';
-import { Person, PersonStatus } from '../types/person';
+import { MeldeformDetaljerInn, Meldeperiode, Person, PersonStatus } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
 import { Meldekort, Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
 import { AxiosResponse } from 'axios';
@@ -34,7 +34,7 @@ const fetchGet = async (url: string) => {
 
 const fetchPost = async (url: string, data: any) => {
     if (erMock()) {
-        return fetch(Environment().apiUrl + url, {method: 'POST', body: data}).then(response => {return response.json(); });
+        return fetch(url, {method: 'POST', body: data}).then(response => {return response.json(); });
     } else {
         return prefferedAxios.post(Environment().apiUrl + url, data, {
             headers: {
@@ -69,6 +69,10 @@ export function fetchKorrigertId(id: number): Promise<number> {
 
 export function postMeldekort(meldekortdetaljer: MeldekortdetaljerInnsending): Promise<ValideringsResultat> {
     return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
+}
+
+export function postEndreMeldeform(meldeformdetaljer: MeldeformDetaljerInn): Promise<Meldeperiode> {
+    return fetchPost(Konstanter().sendMeldeformApiUri, meldeformdetaljer);
 }
 
 function addIdToUrlIfNotMock(url: string, id: number): string {

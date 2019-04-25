@@ -5,7 +5,7 @@ import { getType } from 'typesafe-actions';
 export interface UIState {
     modal: IModal;
     baksystemFeilmelding: BaksystemFeilmelding;
-    ingenTidligereMeldekort: IngenTidligereMeldekort
+    ingenTidligereMeldekort: IngenTidligereMeldekort;
 }
 
 const initialState: UIState = {
