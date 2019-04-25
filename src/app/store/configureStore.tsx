@@ -4,6 +4,7 @@ import { Action, applyMiddleware, combineReducers, compose, createStore } from '
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
+import createEncryptor from 'redux-persist-transform-encrypt';
 // import logger from 'redux-logger';
 
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
@@ -29,6 +30,7 @@ import { Person } from '../types/person';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
+import { Cookies } from 'react-cookie';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -95,11 +97,29 @@ const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const hentInnloggetCookie = (): string => {
+    const cookie = new Cookies();
+    let selv = cookie.get('selvbetjening-idtoken');
+    if (typeof selv === 'undefined') {
+        selv = 'test';
+    }
+    console.log(selv);
+    return selv;
+};
+
+const encryptor = createEncryptor({
+    secretKey: hentInnloggetCookie(),
+    onError: function (error: any) {
+        console.log('Det skjedde en feil med kryptering!', error);
+    }
+});
+
 const persistConfig = {
     key: `meldekort:${packageConfig.redux_version}`,
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
     blacklist: ['locales', 'ui'],
+    transforms: [encryptor]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
