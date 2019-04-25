@@ -98,6 +98,8 @@ let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const hentInnloggetCookie = (): string => {
+    console.log(process.env);
+    console.log(process.env.meldekortSessionStorage);
     const cookie = new Cookies();
     let selv = cookie.get('selvbetjening-idtoken');
     if (typeof selv === 'undefined') {
