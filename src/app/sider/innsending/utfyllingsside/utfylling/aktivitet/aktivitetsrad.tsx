@@ -8,10 +8,9 @@ import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { hentIntl } from '../../../../../utils/intlUtil';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
-import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
+import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -31,10 +30,6 @@ interface RadProps {
 type AktivitetsradProps = RadProps & FeilIDager & MapStateToProps & MapDispatchToProps;
 
 class Aktivitetsrad extends React.Component<AktivitetsradProps> {
-
-    constructor(props: AktivitetsradProps) {
-        super(props);
-    }
 
     setVerdi = (ukedag: string) => {
         const oppdaterteDager = this.props.innsending.utfylteDager.map( dag => {
@@ -79,6 +74,8 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
             case 'utfylling.ferieFravar':
                 checked = valgtDag[0].annetFravaer;
                 break;
+            default:
+                break;
         }
         return checked;
     }
@@ -106,6 +103,8 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 return {borderLeftColor: '#6ab889', backgroundColor: this.props.feil ? '#e79999' : ''};
             case 'utfylling.ferieFravar':
                 return {borderLeftColor: '#c1b5d0', backgroundColor: this.props.feil ? '#e79999' : ''};
+            default:
+                break;
         }
     }
 

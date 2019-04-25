@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
-import AlertStripe from 'nav-frontend-alertstriper';
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
-import Ingress from 'nav-frontend-typografi/lib/ingress';
-import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
+import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
 
 interface SporsmalProps {
     sporsmalsobjekt: Spm;
@@ -28,7 +24,7 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                     {props.formatertDato ?
                         <span> {props.formatertDato} ? </span> : null
                     } { props.disabled ?
-                        <FormattedMessage id={"korrigering.registrert.merknad"}/> : null
+                        <FormattedMessage id={'korrigering.registrert.merknad'}/> : null
                     }
                 </Undertittel>
                     <>

@@ -8,7 +8,7 @@ export const ikkeFortsetteRegistrertContent = () => {
     return (
         <div className="modal-overskrift">
             <Undertittel children={<FormattedMessage id={'sporsmal.bekreft'}/>}/>
-            <Veilederpanel fargetema="advarsel" svg={<img src={veileder}/>}>
+            <Veilederpanel fargetema="advarsel" svg={<img alt="" src={veileder}/>}>
                 <div className="modal-tekst">
                     <Normaltekst>
                         <FormattedMessage id={'sporsmal.bekreftelse'}/>

@@ -1,27 +1,32 @@
 import * as React from 'react';
-import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
-
-import {MeldekortdetaljerState} from '../../reducers/meldekortdetaljerReducer';
-import {KortType, MeldekortDag, SporsmalOgSvar} from '../../types/meldekort';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
+import { MeldekortDag, SporsmalOgSvar } from '../../types/meldekort';
 import {
     hentNestePeriodeMedUkerOgDato,
     hentNummerOgDatoForAndreUke,
     hentNummerOgDatoForForsteUke
 } from '../../utils/dates';
-import {RootState} from '../../store/configureStore';
-import {connect} from 'react-redux';
-import {Undertittel} from 'nav-frontend-typografi';
+import { RootState } from '../../store/configureStore';
+import { connect } from 'react-redux';
+import { Undertittel } from 'nav-frontend-typografi';
 
 import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
-import {hentUkedagerSomElementListe, hentUkedagerSomStringListe} from '../../utils/ukedager';
-import {hentIntl} from '../../utils/intlUtil';
+import { hentUkedagerSomStringListe } from '../../utils/ukedager';
+import { hentIntl } from '../../utils/intlUtil';
 import checkMark from '../../ikoner/check.svg';
-import UtvidetInformasjon from "../utvidetinformasjon/utvidetInformasjon";
-import {guid} from "nav-frontend-js-utils";
+import UtvidetInformasjon from '../utvidetinformasjon/utvidetInformasjon';
+import { guid } from 'nav-frontend-js-utils';
 
 interface ErAap {
     erAap: boolean;
 }
+
+const mapStateToProps = (state: RootState) => {
+    return {
+        aktivtMeldekort: state.aktivtMeldekort
+    };
+};
 
 type Props = MeldekortdetaljerState & ErAap & ReturnType<typeof mapStateToProps>;
 
@@ -184,7 +189,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
     const visBegrunnelse = () => {
         if (typeof props.meldekortdetaljer.begrunnelse !== 'undefined') {
             const begrunnelse = String(props.meldekortdetaljer.begrunnelse);
-            if(begrunnelse.length > 0) {
+            if (begrunnelse.length > 0) {
                 return (
                     <section className="seksjon">
                         <div className="flex-sporsmal-hjelpetekst-container">
@@ -218,12 +223,6 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             </div>
         </div>
     );
-};
-
-const mapStateToProps = (state: RootState) => {
-    return {
-        aktivtMeldekort: state.aktivtMeldekort
-    };
 };
 
 export default connect(mapStateToProps, null)(Meldekortdetaljer);

@@ -42,9 +42,6 @@ interface MeldekortRad {
 type Props = MapDispatchToProps & MapStateToProps;
 
 class SendMeldekort extends React.Component<Props, any> {
-    constructor(props: any) {
-        super(props);
-    }
 
     harEttMeldekort = () => {
 

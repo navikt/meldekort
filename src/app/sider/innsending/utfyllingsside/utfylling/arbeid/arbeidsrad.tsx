@@ -8,10 +8,9 @@ import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { hentIntl } from '../../../../../utils/intlUtil';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
-import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
+import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -32,9 +31,6 @@ interface UkeProps {
 type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
-    constructor(props: ArbeidsradProps) {
-        super(props);
-    }
 
     componentDidMount(): void {
         let rensetUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
@@ -44,7 +40,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     arbeidetTimer: undefined
                 };
             }
-            return {...utfyltDag}
+            return {...utfyltDag};
         });
         this.props.oppdaterDager(rensetUtfylteDager);
     }
@@ -54,7 +50,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         if (match !== null) {
             let nyVerdi = event.target.value;
             if (match[0] === ',' || match[0] === '.') {
-                nyVerdi = '0.'
+                nyVerdi = '0.';
             } else if (nyVerdi.includes(',')) {
                 nyVerdi = nyVerdi.replace(',', '.');
             }
@@ -102,7 +98,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined' ?
                             utfylteDager[utfyltDagIndex].arbeidetTimer : ''
                     }
-                    onChange={event => {this.setTimer(event, ukedag);}}
+                    onChange={event => {this.setTimer(event, ukedag); }}
                     feil={
                         typeof this.props.feilIDager !== 'undefined' ?
                             (this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer)

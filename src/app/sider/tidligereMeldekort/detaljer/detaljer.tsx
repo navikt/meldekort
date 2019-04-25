@@ -36,9 +36,6 @@ interface MapDispatchToProps {
 type Props = MapDispatchToProps&MapStateToProps;
 
 class Detaljer extends React.Component<Props> {
-    constructor(props: any) {
-        super(props);
-    }
 
     settTabellrader = (meldekort: Meldekort) => {
         return [{
@@ -83,7 +80,7 @@ class Detaljer extends React.Component<Props> {
 
         return (
             <>
-                <img className="noPrint" src={utklippstavle}/>
+                <img alt="" className="noPrint" src={utklippstavle}/>
                 <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">

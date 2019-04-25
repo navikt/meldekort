@@ -6,9 +6,8 @@ import Select from 'nav-frontend-skjema/lib/select';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Begrunnelse } from '../../../../types/innsending';
 import { RootState } from '../../../../store/configureStore';
-import {Undertittel} from "nav-frontend-typografi";
-import HjelpetekstBase from "nav-frontend-hjelpetekst";
-import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
+import { Undertittel } from 'nav-frontend-typografi';
+import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
 
 interface MapStateToProps {
     begrunnelse: Begrunnelse;

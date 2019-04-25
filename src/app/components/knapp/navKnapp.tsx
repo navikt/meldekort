@@ -43,9 +43,6 @@ export enum knappTyper {
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 
 class NavKnapp extends React.Component<Props> {
-    constructor(props: any) {
-        super(props);
-    }
 
     harNestePathInnsending = (nestePathParams: string[]) => {
         return (nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending

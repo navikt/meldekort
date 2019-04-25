@@ -32,6 +32,12 @@ export const Side: React.FunctionComponent<SideProps> = ({
     </div>
 );
 
+const mapStateToProps = (state: RootState) => {
+    return {
+        person: state.person
+    };
+};
+
 type UtskriftProps = Props & ReturnType<typeof mapStateToProps>;
 
 const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
@@ -69,12 +75,6 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
         </div>
 
     );
-};
-
-const mapStateToProps = (state: RootState) => {
-    return {
-        person: state.person
-    };
 };
 
 export default connect(mapStateToProps, null)(Utskrift);

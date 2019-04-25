@@ -51,8 +51,8 @@ class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVis
         return hentIntl().formatMessage({id: id});
     }
 
-    componentDidMount(){
-        this.props.resetInnsending;
+    componentDidMount() {
+        this.props.resetInnsending();
     }
 
     render() {
@@ -63,7 +63,7 @@ class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVis
                     <Sprakvelger/>
                 </section>
 
-                <img className="oss-ikon" src={sporrende}/>
+                <img className="oss-ikon" alt="" src={sporrende}/>
                 <section className="oss-seksjon seksjon">
                     {
                         this.sporsmal().map((sporsmal) => {

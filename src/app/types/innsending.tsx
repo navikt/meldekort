@@ -1,4 +1,4 @@
-import { Feil, Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
+import { Sporsmal as Spm } from '../sider/innsending/sporsmalsside/sporsmal/sporsmalConfig';
 import { UtfyltDag } from '../sider/innsending/utfyllingsside/utfylling/utfyllingConfig';
 import { Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from './meldekort';
 

@@ -28,10 +28,7 @@ import meldekortEpics from '../epics/meldekortEpics';
 import { Person } from '../types/person';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
-import hardSet from 'redux-persist/es/stateReconciler/hardSet';
-import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
-import { MeldekortActions, MeldekortTypeKeys } from '../actions/meldekort';
-import { AxiosResponse } from 'axios';
+import { MeldekortTypeKeys } from '../actions/meldekort';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -103,7 +100,6 @@ const persistConfig = {
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
     blacklist: ['locales', 'ui'],
-    stateReconciler: autoMergeLevel1
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

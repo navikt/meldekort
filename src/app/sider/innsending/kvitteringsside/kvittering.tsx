@@ -48,9 +48,6 @@ interface MapDispatchToProps {
 type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToProps;
 
 class Kvittering extends React.Component<KvitteringsProps> {
-    constructor(props: KvitteringsProps) {
-        super(props);
-    }
 
     componentDidMount() {
         scrollTilElement(undefined, 'auto');

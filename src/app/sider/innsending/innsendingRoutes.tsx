@@ -5,18 +5,18 @@ import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
 import Sporsmalsside from './sporsmalsside/sporsmalsside';
 import StegBanner from '../../components/stegBanner/stegBanner';
 import Utfylling from './utfyllingsside/utfyllingsside';
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
-import {InnsendingActions} from '../../actions/innsending';
-import {InnsendingState, Innsendingstyper} from '../../types/innsending';
-import {Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal} from '../../types/meldekort';
-import {Redirect, Route, RouteComponentProps, Switch} from 'react-router-dom';
-import {RootState} from '../../store/configureStore';
-import {Sporsmal as Spm} from './sporsmalsside/sporsmal/sporsmalConfig';
-import {MeldekortdetaljerActions} from '../../actions/meldekortdetaljer';
-import {UtfyltDag} from './utfyllingsside/utfylling/utfyllingConfig';
-import {hentUkedagerSomStringListe} from '../../utils/ukedager';
-import {RouterState} from "connected-react-router";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { InnsendingActions } from '../../actions/innsending';
+import { InnsendingState, Innsendingstyper } from '../../types/innsending';
+import { Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal } from '../../types/meldekort';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { RootState } from '../../store/configureStore';
+import { Sporsmal as Spm } from './sporsmalsside/sporsmal/sporsmalConfig';
+import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
+import { UtfyltDag } from './utfyllingsside/utfylling/utfyllingConfig';
+import { hentUkedagerSomStringListe } from '../../utils/ukedager';
+import { RouterState } from 'connected-react-router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -36,9 +36,6 @@ interface MapDispatchToProps {
 type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
 
 class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
-    constructor(props: InnsendingRoutesProps) {
-        super(props);
-    }
 
     settMeldekortIdBasertPaInnsendingstype = () => {
         const { hentKorrigertId, innsending, settMeldekortId, aktivtMeldekort } = this.props;
@@ -117,9 +114,9 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
         const { match } = this.props;
         const { pathname } = this.props.router.location;
 
-        let noPrint = pathname === '/send-meldekort/innsending/kvittering' ||
-            pathname === '/tidligere-meldekort/detaljer/korriger/kvittering'?
-            'noPrint' : undefined;
+        let noPrint = pathname === `/send-meldekort/innsending/kvittering` ||
+            pathname === `/tidligere-meldekort/detaljer/korriger/kvittering` ?
+            `noPrint` : undefined;
 
         return (
             <div className="sideinnhold">
@@ -130,7 +127,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
                     <Route path={`${match.url}` + '/utfylling'} render={(props: RouteComponentProps<any>) => (<Utfylling {...props}/>)}/>
                     <Route path={`${match.url}` + '/bekreftelse'} render={(props: RouteComponentProps<any>) => (<Bekreftelse {...props}/>)}/>
                     <Route path={`${match.url}` + '/kvittering'} render={(props: RouteComponentProps<any>) => (<Kvittering {...props}/>)}/>
-                    <Redirect exact={true} from={`${match.url}`} to={`${match.url}` + '/sporsmal'}/>
+                    <Redirect exact={true} from={`${match.url}`} to={`${match.url}` + `/sporsmal`}/>
                 </Switch>
             </div>
         );

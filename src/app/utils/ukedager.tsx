@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import * as React from 'react';
 import { hentIntl } from './intlUtil';
-import {combineAll} from "rxjs/operators";
-import {guid} from "nav-frontend-js-utils";
+import { guid } from 'nav-frontend-js-utils';
 
 export const hentUkedagerSomElementListe = (): JSX.Element[] => {
     return [

@@ -8,7 +8,7 @@ export const loggInnContent = () => {
     return (
         <div className="modal-overskrift">
             <Undertittel children={<FormattedMessage id={'melding.loggInn.overskrift'}/>}/>
-            <Veilederpanel fargetema="advarsel" svg={<img src={veileder}/>}>
+            <Veilederpanel fargetema="advarsel" svg={<img alt="" src={veileder}/>}>
                 <div className="modal-tekst">
                 <Normaltekst>
                     <FormattedMessage id={'melding.loggInn'}/>

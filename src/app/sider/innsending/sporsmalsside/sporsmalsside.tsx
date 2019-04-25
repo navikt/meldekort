@@ -43,9 +43,6 @@ type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentP
 const kategorier = ['arbeid', 'aktivitetArbeid', 'forhindret', 'ferieFravar', 'registrert'];
 
 class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
-    constructor(props: SporsmalssideProps) {
-        super(props);
-    }
 
     valider = (): boolean => {
         const { sporsmalsobjekter, begrunnelse, innsendingstype } = this.props.innsending;
@@ -114,6 +111,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     break;
                 case kategorier[3]:
                     ferie = spm.svar;
+                    break;
+                default:
                     break;
             }
         });

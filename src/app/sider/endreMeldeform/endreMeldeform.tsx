@@ -24,9 +24,6 @@ interface MapDispatchToProps {
 type EndreMeldeformProps = MapStateToProps & MapDispatchToProps;
 
 class EndreMeldeform extends React.Component<EndreMeldeformProps, any> {
-    constructor(props: any) {
-        super(props);
-    }
 
     sendEndringAvMeldeform = (): boolean => {
         const { fodselsnr, personId } = this.props.person;
