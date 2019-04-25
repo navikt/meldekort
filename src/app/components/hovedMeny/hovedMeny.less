@@ -3,9 +3,10 @@
     background: white;
     display: flex;
     justify-content: center;
+    border-bottom: 4px solid #E9E7E7;
 
     &__wrapper {
-      display:flex;
+      display: flex;
       justify-content: space-between;
 
       ul {
@@ -16,10 +17,10 @@
 
         li {
           display: inline;
-          margin-top: 1rem;
 
           button.menypunkt {
             background: white;
+            max-width: 200px;
             border: 0;
             color: @navBla;
             display: inline-block;
@@ -34,7 +35,7 @@
             border-bottom: 4px solid #E9E7E7;
 
             &:hover {
-              border-bottom: 4px solid @navBla;
+              border-bottom: 4px solid @navBlaLighten40;
             }
 
             &:focus {
@@ -48,7 +49,6 @@
               font-weight: bold;
               border-bottom: 4px solid @navBla;
               color: @navMorkGra;
-
             }
           }
         }

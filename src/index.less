@@ -83,13 +83,15 @@
 -----------------------------
 */
 
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color: white;
 
   #meldekort-root {
 
-    .main-container {
+    .main-container, .main-container.overlay {
+      z-index: 100;
       margin-right: auto;
       margin-left: auto;
       max-width: @width-container;

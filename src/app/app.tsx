@@ -23,6 +23,7 @@ import { Router } from './types/router';
 import { selectRouter } from './selectors/router';
 import { isEmpty } from 'ramda';
 import { hentIntl } from './utils/intlUtil';
+import classNames from 'classnames';
 
 if (erMock()) {
     setupMock();
@@ -40,6 +41,8 @@ interface MapDispatchToProps {
     hentPersonStatus: () => void;
     settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
     settMenyPunkter: ( menypunkter: MenyPunkt[]) => void;
+    toggleMeny: (erApen: boolean) => void;
+
 }
 
 type Props = MapDispatchToProps&MapStateToProps;
@@ -69,13 +72,18 @@ class App extends React.Component<Props> {
             return (
                 <div>
                     <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
-                <div className="main-container">
-                    <ConnectedRouter history={history}>
-                        <Switch>
-                            <Route path="/" component={MeldekortRoutes}/>
-                        </Switch>
-                    </ConnectedRouter>
-                </div>
+                    <div
+                        className={classNames({overlay: this.props.meny.erApen})}
+                        onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
+                    >
+                    <div className={'main-container'}>
+                        <ConnectedRouter history={history}>
+                            <Switch>
+                                <Route path="/" component={MeldekortRoutes}/>
+                            </Switch>
+                        </ConnectedRouter>
+                    </div>
+                    </div>
                 </div>
             );
         } else {
@@ -148,6 +156,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
         settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
         settMenyPunkter: (menypunkter: MenyPunkt[]) => dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),
+        toggleMeny: (erApen: boolean) => dispatch(MenyActions.toggleMeny(erApen)),
     };
 };
 
