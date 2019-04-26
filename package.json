@@ -74,7 +74,6 @@
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-collapse": "^4.0.3",
-    "react-cookie": "^3.1.2",
     "react-dom": "^16.7.0",
     "react-intl": "^2.8.0",
     "react-intl-redux": "^2.1.0",

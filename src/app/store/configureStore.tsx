@@ -30,7 +30,6 @@ import { Person } from '../types/person';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
-import { Cookies } from 'react-cookie';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -83,7 +82,6 @@ const rootReducer = (state: any, action: any) => {
             action.payload.response.status !== undefined &&
             action.payload.response.status === 401
         ) {
-            console.log('SLETTER ALLE DATA!');
             const { intl } = state;
             state = { intl };
             storage.removeItem('persist:meldekort:undefined');
@@ -97,23 +95,20 @@ const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const hentInnloggetCookie = (): string => {
-    console.log(process.env);
-    console.log(process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_USERNAME);
-    console.log(process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_PASSWORD);
-    const cookie = new Cookies();
-    let selv = cookie.get('selvbetjening-idtoken');
-    if (typeof selv === 'undefined') {
-        selv = 'test';
+const hentNokkel = (): string => {
+    // TODO: Denne blir alltid undefined. Fikser dette i egen branch.
+    let nokkel = process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_PASSWORD;
+    if (typeof nokkel === 'undefined') {
+        nokkel = 'test';
     }
-    console.log(selv);
-    return selv;
+    return nokkel;
 };
 
 const encryptor = createEncryptor({
-    secretKey: hentInnloggetCookie(),
+    secretKey: hentNokkel(),
     onError: function (error: any) {
         console.log('Det skjedde en feil med kryptering!', error);
+        storage.removeItem('persist:meldekort:undefined');
     }
 });
 
