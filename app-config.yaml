@@ -31,5 +31,5 @@ fasitResources:
       resourceType: baseUrl
     - alias: appdynamics
       resourceType: applicationproperties
-    - alias: meldekortSessionStorage
+    - alias: REACT_APP_MELDEKORTSESSIONSTORAGE
       resourceType: credential

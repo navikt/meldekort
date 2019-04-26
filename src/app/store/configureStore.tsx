@@ -99,8 +99,8 @@ const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSI
 
 const hentInnloggetCookie = (): string => {
     console.log(process.env);
-    console.log(process.env.MELDEKORTSESSIONSTORAGE_USERNAME);
-    console.log(process.env.MELDEKORTSESSIONSTORAGE_PASSWORD);
+    console.log(process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_USERNAME);
+    console.log(process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_PASSWORD);
     const cookie = new Cookies();
     let selv = cookie.get('selvbetjening-idtoken');
     if (typeof selv === 'undefined') {
