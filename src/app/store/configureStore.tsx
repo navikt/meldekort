@@ -30,6 +30,8 @@ import { Person } from '../types/person';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
+import meldekortReducer from '../reducers/meldekortReducer';
+import { SendteMeldekortState } from '../types/meldekort';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -56,6 +58,8 @@ export interface RootState {
     innsending: InnsendingState;
     meldeform: MeldeformState;
     ui: UIState;
+    meldekort: SendteMeldekortState;
+
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -72,6 +76,7 @@ const appReducer = combineReducers({
     innsending: innsendingReducer,
     meldeform: meldeformReducer,
     ui: uiReducer,
+    meldekort: meldekortReducer
 });
 
 const rootReducer = (state: any, action: any) => {
