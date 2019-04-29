@@ -20,7 +20,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps, any> {
     }
 
     componentDidMount() {
-        this.props.resetInnsending;
+        this.props.resetInnsending();
     }
 
     render() {
