@@ -29,8 +29,6 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
 
     constructor(props: PrintKnappProps) {
         super(props);
-        this.print = this.print.bind(this);
-        this.reset = this.reset.bind(this);
         this.state = {
             active: false
         };
@@ -44,13 +42,13 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
         updateDocumentClass(false);
     }
 
-    print() {
+    print = () => {
         window.print();
         this.printTimeoutId = -1;
         setTimeout(this.reset, 10);
     }
 
-    reset() {
+    reset = () => {
         this.setState({
             active: false
         });

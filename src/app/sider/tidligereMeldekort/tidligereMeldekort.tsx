@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Tabell from '../../components/tabell/tabell';
 import EtikettBase from 'nav-frontend-etiketter';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
-import { RootState } from '../../store/configureStore';
+import { history, RootState } from '../../store/configureStore';
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Meldekort } from '../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../utils/mapper';
@@ -22,6 +22,8 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { formaterBelop } from '../../utils/numberFormat';
+import { MeldekortActions } from '../../actions/meldekort';
+import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -32,6 +34,7 @@ interface MapStateToProps {
 interface MapDispatchToProps {
     hentHistoriskeMeldekort: () => void;
     resetInnsending: () => void;
+    leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
 interface HistoriskeMeldekortRad {
@@ -73,7 +76,9 @@ class TidligereMeldekort extends React.Component<Props> {
         const rows = this.hentRaderFraHistoriskeMeldekort();
 
         const columns = [
-            {key: 'periode', label: <FormattedMessage id="overskrift.periode"/>, cell: 'periode'},
+            {key: 'periode', label: <FormattedMessage id="overskrift.periode"/>, cell: function( row: any, column: any) {
+                    return <Komponentlenke lenketekst={row.periode} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort}/>;
+                }},
             {key: 'dato', label: <FormattedMessage id="overskrift.dato"/>, cell: 'dato'},
             {key: 'mottatt', label: <FormattedMessage id="overskrift.mottatt"/>, cell: 'mottatt'},
             {key: 'status', label: <FormattedMessage id="overskrift.status" />, cell: function( row: any, columnKey: any) {
@@ -85,15 +90,13 @@ class TidligereMeldekort extends React.Component<Props> {
                     );
                 }},
             {key: 'bruttobelop', label: <FormattedMessage id="overskrift.bruttoBelop" />, cell: 'bruttobelop'},
-            {key: 'detaljer', label: <FormattedMessage id="overskrift.detaljer"/>, cell: function( row: any, columnKey: any) {
-                    return <Komponentlenke lenketekst={row.detaljer} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort}/>;
-                }}
         ];
 
         return (
             <Tabell
                 rows={rows}
                 columns={columns}
+                mobilSkjerm={true}
             />
         );
     }
@@ -158,6 +161,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentHistoriskeMeldekort: () => dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
         resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+        leggTilAktivtMeldekort: (meldekort: Meldekort) => dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),
     };
 };
 

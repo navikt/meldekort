@@ -15,8 +15,8 @@ import { KortStatus, Meldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
 import { Person } from '../../types/person';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Redirect } from 'react-router';
+import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
     person: Person;
@@ -130,7 +130,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
         resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     };

@@ -19,8 +19,8 @@ import { Router } from '../../types/router';
 import { selectFeilmelding } from '../../selectors/ui';
 import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Person } from '../../types/person';
+import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
    person: Person;
@@ -242,7 +242,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         hentPerson: () => dispatch(PersonActions.hentPerson.request()),
         resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) => {
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype));
         }

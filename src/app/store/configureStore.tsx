@@ -5,7 +5,6 @@ import { connectRouter, routerMiddleware, RouterState } from 'connected-react-ro
 import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
-// import logger from 'redux-logger';
 
 import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
@@ -27,6 +26,8 @@ import innsendingEpics from '../epics/innsendingEpics';
 import uiReducer, { UIState } from '../reducers/uiReducer';
 import meldekortEpics from '../epics/meldekortEpics';
 import { Person } from '../types/person';
+import { MenyState } from '../types/meny';
+import menyReducer from '../reducers/menyReducer';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
@@ -57,6 +58,7 @@ export interface RootState {
     historiskeMeldekort: HistoriskeMeldekortState;
     innsending: InnsendingState;
     meldeform: MeldeformState;
+    meny: MenyState;
     ui: UIState;
     meldekort: SendteMeldekortState;
 
@@ -74,6 +76,7 @@ const appReducer = combineReducers({
     aktivtMeldekort: aktivtMeldekortReducer,
     historiskeMeldekort: historiskeMeldekortReducer,
     innsending: innsendingReducer,
+    meny: menyReducer,
     meldeform: meldeformReducer,
     ui: uiReducer,
     meldekort: meldekortReducer

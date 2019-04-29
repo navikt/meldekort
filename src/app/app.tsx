@@ -2,14 +2,11 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, RootState } from './store/configureStore';
-import MeldekortBanner from './components/meldekortBanner/meldekortBanner';
+import Header from './components/header/header';
 import MeldekortRoutes from './sider/meldekortRoutes';
-import NavTabs from './components/meny/tabsmeny';
 import setupMock from './mock/setup-mock';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
-import { hentTabConfig } from './components/meny/tabConfig';
-import { isEmpty } from 'ramda';
 import { MeldeForm, Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
 import { PersonStatusState } from './reducers/personStatusReducer';
@@ -19,19 +16,33 @@ import UIModalWrapper from './components/modal/UIModalWrapper';
 import { BaksystemFeilmelding } from './types/ui';
 import { selectFeilmelding } from './selectors/ui';
 import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
+import { MenyState } from './types/meny';
+import { MenyPunkt } from './utils/menyConfig';
+import { MenyActions } from './actions/meny';
+import { Router } from './types/router';
+import { selectRouter } from './selectors/router';
+import { isEmpty } from 'ramda';
+import { hentIntl } from './utils/intlUtil';
+import classNames from 'classnames';
 
 if (erMock()) {
     setupMock();
 }
 
 interface MapStateToProps {
+    router: Router;
     personStatus: PersonStatusState;
     baksystemFeilmelding: BaksystemFeilmelding;
     person: Person;
+    meny: MenyState;
 }
 
 interface MapDispatchToProps {
     hentPersonStatus: () => void;
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
+    settMenyPunkter: ( menypunkter: MenyPunkt[]) => void;
+    toggleMeny: (erApen: boolean) => void;
+
 }
 
 type Props = MapDispatchToProps&MapStateToProps;
@@ -48,22 +59,6 @@ class App extends React.Component<Props> {
         return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
     }
 
-    settMenyPunkter = (person: Person) => {
-        const tabsobjekter = hentTabConfig();
-        const filtrertetabsobjekter = tabsobjekter.map(tabsobj => {
-            if ((person.meldeform === MeldeForm.PAPIR) && (tabsobj.tittel === 'endreMeldeform')) {
-                return { ...tabsobj, disabled: !tabsobj.disabled };
-            } else if (!isEmpty(person.etterregistrerteMeldekort) && tabsobj.tittel === 'etterregistrering') {
-                return { ...tabsobj, disabled: !tabsobj.disabled };
-            } else {
-                return { ...tabsobj };
-            }
-        });
-        return (
-            <NavTabs tabsobjekter={filtrertetabsobjekter.filter(obj => !obj.disabled)}/>
-        );
-    }
-
     settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
             return (
@@ -76,14 +71,19 @@ class App extends React.Component<Props> {
         }  else if (this.erBrukerRegistrertIArena()) {
             return (
                 <div>
-                    {this.settMenyPunkter(this.props.person)}
-                <div className="main-container">
-                    <ConnectedRouter history={history}>
-                        <Switch>
-                            <Route path="/" component={MeldekortRoutes}/>
-                        </Switch>
-                    </ConnectedRouter>
-                </div>
+                    <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
+                    <div
+                        className={classNames({overlay: this.props.meny.erApen})}
+                        onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
+                    >
+                        <div className={'main-container'}>
+                            <ConnectedRouter history={history}>
+                                <Switch>
+                                    <Route path="/" component={MeldekortRoutes}/>
+                                </Switch>
+                            </ConnectedRouter>
+                        </div>
+                    </div>
                 </div>
             );
         } else {
@@ -95,15 +95,44 @@ class App extends React.Component<Props> {
         }
     }
 
+    settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
+        const urlparam = '/' + url.split('/')[1];
+        for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
+            if (meny.alleMenyPunkter[i].urlparam === urlparam) {
+                const menypunkt = meny.alleMenyPunkter[i];
+            }
+        }
+    }
+
+    settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
+        console.log(menypunkter);
+        const personHarPapirMeldeform = (mp: MenyPunkt): boolean => (person.meldeform === MeldeForm.PAPIR)
+            && (mp.tittel === 'endreMeldeform') && (mp.disabled === true);
+        const personHarEtterregistrerteMeldekort = (mp: MenyPunkt): boolean =>  !isEmpty(person.etterregistrerteMeldekort)
+            && mp.tittel === 'etterregistrering' && (mp.disabled === true);
+        const menypunktliste = menypunkter
+            .map(menypunkt => {
+                if (personHarPapirMeldeform(menypunkt) || personHarEtterregistrerteMeldekort(menypunkt) ) {
+                    console.log(menypunkt.tittel, menypunkt.disabled);
+                    return { ...menypunkt, disabled: !menypunkt.disabled };
+                } else {
+                    return { ...menypunkt };
+                }
+            });
+        this.props.settMenyPunkter(menypunktliste);
+    }
+
     componentDidMount() {
-        this.props.hentPersonStatus();
+        const { hentPersonStatus, person, meny, router  } = this.props;
+        hentPersonStatus();
+        this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
+        this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
     }
 
     public render() {
 
         return(
             <div>
-                <MeldekortBanner tittel="Meldekort"/>
                 <UIModalWrapper/>
                 {this.settInnhold()}
             </div>
@@ -113,15 +142,21 @@ class App extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
+        router: selectRouter(state),
         personStatus: state.personStatus,
         person: state.person,
-        baksystemFeilmelding: selectFeilmelding(state)
+        baksystemFeilmelding: selectFeilmelding(state),
+        meny: state.meny
+
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
+        settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
+        settMenyPunkter: (menypunkter: MenyPunkt[]) => dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),
+        toggleMeny: (erApen: boolean) => dispatch(MenyActions.toggleMeny(erApen)),
     };
 };
 

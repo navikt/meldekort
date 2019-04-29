@@ -1,15 +1,3 @@
-// CONSTANTS / Action?
-// Defining the redux state and constants
-import * as actions from '../actions/meldekort';
-import { ActionType } from 'typesafe-actions';
-
-// import { DemoActions } when you need to use our actions
-export type MeldekortDemoActions = ActionType<typeof actions>;
-
-export enum Constants {
-    LEGG_TIL_AKTIVT_MELDEKORT = 'LEGG_TIL_AKTIVT_MELDEKORT'
-}
-
 /* INTERFACES */
 export interface Meldekort {
     meldekortId: number;
@@ -116,6 +104,7 @@ export interface FravaerType {
 }
 
 /* ENUMS */
+
 export enum KortType {
     ORDINAER = 'ORDINAER',
     ERSTATNING = 'ERSTATNING',

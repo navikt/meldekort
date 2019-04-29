@@ -15,7 +15,6 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.idea
 *.iml
 
 npm-debug.log*
@@ -24,5 +23,6 @@ yarn-error.log*
 
 #idea
 /.idea
+.idea
 .idea/workspace.xml
 meldekort.iml
