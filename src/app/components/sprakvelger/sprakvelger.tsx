@@ -5,14 +5,26 @@ import { Select } from 'nav-frontend-skjema';
 import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 
+const mapStateToProps = ({ intl, locales }: RootState) => {
+    return {
+        locale: intl.locale,
+        messages: intl.messages,
+        locs: locales
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
+    return {
+        updateIntl: (locale: any, messages: any) =>
+            dispatch(updateIntl({locale, messages}))
+    };
+};
+
 type ReduxType =
     ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatchToProps>;
 
 class Sprakvelger extends React.Component<ReduxType> {
-    constructor(props: ReduxType) {
-        super(props);
-    }
 
    handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         this.props.updateIntl(
@@ -41,20 +53,5 @@ class Sprakvelger extends React.Component<ReduxType> {
         );
     }
 }
-
-const mapStateToProps = ({ intl, locales }: RootState) => {
-    return {
-        locale: intl.locale,
-        messages: intl.messages,
-        locs: locales
-    };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
-    return {
-        updateIntl: (locale: any, messages: any) =>
-            dispatch(updateIntl({locale, messages}))
-    };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sprakvelger);

@@ -13,7 +13,7 @@ import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe } from '../../../types/meldekort';
-import { scrollToTop } from '../../../utils/scroll';
+import { scrollTilElement } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
@@ -40,6 +40,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
             feilIArbeidetTimerHeleHalve: false,
             feilIArbeidetTimer: false,
             feilIDager: []};
+    }
+
+    componentDidMount() {
+        scrollTilElement(undefined, 'auto');
     }
 
     hentSporsmal = (): SpmSvar[] => {
@@ -69,10 +73,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
         dager.map( dag => {
             if (typeof dag.arbeidetTimer !== 'undefined') {
-                if ((dag.arbeidetTimer * 2) % 1 !== 0) {
+                if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
                     feil.push(dag.dag + dag.uke);
                     feilIArbeidetTimerHeleHalve = true;
-                } else if (dag.arbeidetTimer > 24 || dag.arbeidetTimer < 0) {
+                } else if (Number(dag.arbeidetTimer) > 24 || Number(dag.arbeidetTimer) < 0) {
                     feil.push(dag.dag + dag.uke);
                     feilIArbeidetTimer = true;
                 }
@@ -88,20 +92,19 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         let kurs = !this.sjekkSporsmal('aktivitetArbeid');
         let syk = !this.sjekkSporsmal('forhindret');
         let ferie = !this.sjekkSporsmal('ferieFravar');
-
         let feilITimer = this.validerAntallTimerForDag(this.props.innsending.utfylteDager);
 
         this.props.innsending.utfylteDager.map(dag => {
-            if (arbeidet === false && typeof dag.arbeidetTimer !== 'undefined' && dag.arbeidetTimer > 0) {
+            if (!arbeidet && typeof dag.arbeidetTimer !== 'undefined' && Number(dag.arbeidetTimer) > 0) {
                 arbeidet = true;
             }
-            if (kurs === false && dag.kurs) {
+            if (!kurs && dag.kurs) {
                 kurs = true;
             }
-            if (syk === false && dag.syk) {
+            if (!syk && dag.syk) {
                 syk = true;
             }
-            if (ferie === false && dag.annetFravaer) {
+            if (!ferie && dag.annetFravaer) {
                 ferie = true;
             }
         });
@@ -115,7 +118,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
         let resultat = arbeidet && kurs && syk && ferie && feilITimer;
         if (!resultat) {
-            scrollToTop();
+            scrollTilElement('feilmelding');
         }
         return resultat;
     }
@@ -169,14 +172,17 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
     render() {
         let { meldeperiode } = this.props.aktivtMeldekort.meldekort;
+
         return(
             <main>
-                <section className="seksjon flex-innhold tittel-sprakvelger">
+                <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon flex-innhold sentrert utfylling">
-                    {this.hentFeilmeldinger()}
+                    <div id="feilmelding">
+                        {this.hentFeilmeldinger()}
+                    </div>
                     <UkePanel
                         ukenummer={Konstanter().forsteUke}
                         faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
@@ -194,17 +200,23 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                 </section>
                 <section className="seksjon flex-innhold sentrert">
                     <NavKnapp
+                        type={knappTyper.hoved}
+                        nestePath={'/bekreftelse'}
+                        tekstid={'naviger.neste'}
+                        className={'navigasjonsknapp'}
+                        validering={this.valider}
+                    />
+                    <NavKnapp
                         type={knappTyper.standard}
                         nestePath={'/sporsmal'}
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
                     <NavKnapp
-                        type={knappTyper.hoved}
-                        nestePath={'/bekreftelse'}
-                        tekstid={'naviger.neste'}
+                        type={knappTyper.flat}
+                        nestePath={'/om-meldekort'}
+                        tekstid={'naviger.avbryt'}
                         className={'navigasjonsknapp'}
-                        validering={this.valider}
                     />
                 </section>
             </main>

@@ -19,6 +19,7 @@ interface MapStateToProps {
 interface MapDispatchToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
+    resetInnsending: () => void;
 }
 
 interface NavKnappProps {
@@ -36,14 +37,12 @@ interface NavKnappProps {
 export enum knappTyper {
     hoved = 'hoved',
     standard = 'standard',
+    flat = 'flat'
 }
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 
 class NavKnapp extends React.Component<Props> {
-    constructor(props: any) {
-        super(props);
-    }
 
     harNestePathInnsending = (nestePathParams: string[]) => {
         return (nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending
@@ -59,35 +58,40 @@ class NavKnapp extends React.Component<Props> {
 
     clickHandler = (event: React.SyntheticEvent<EventTarget>) => {
         const { nesteAktivtMeldekort, innsendingstypeFraStore, nesteInnsendingstype,
-            nestePath, router } = this.props;
+            nestePath, router, tekstid } = this.props;
 
-        (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
-        && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
+        if (tekstid === 'naviger.avbryt') {
+            this.props.resetInnsending();
+            history.push(nestePath);
+        } else {
+            (nesteAktivtMeldekort !== undefined && nesteInnsendingstype !== undefined)
+            && this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
 
-        let validert: boolean = true;
-        if (typeof this.props.validering !== 'undefined') {
-            validert = this.props.validering();
-        }
-        if (validert) {
-            const path = router.location.pathname;
-            const params = path.split('/');
-            const nestePathParams = nestePath.split('/');
-            const erPaKvittering = params[params.length - 1] === 'kvittering';
-            const erPaInnsending = innsendingstypeFraStore !== null;
-            let nyPath: string = '';
+            let validert: boolean = true;
+            if (typeof this.props.validering !== 'undefined') {
+                validert = this.props.validering();
+            }
+            if (validert) {
+                const path = router.location.pathname;
+                const params = path.split('/');
+                const nestePathParams = nestePath.split('/');
+                const erPaKvittering = params[params.length - 1] === 'kvittering';
+                const erPaInnsending = innsendingstypeFraStore !== null;
+                let nyPath: string = '';
 
-            if (erPaInnsending) {
-                if (!erPaKvittering) {
-                    nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
+                if (erPaInnsending) {
+                    if (!erPaKvittering) {
+                        nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
+                    } else {
+                        nyPath = nestePath;
+                    }
                 } else {
+                    (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
+                    && this.props.settInnsendingstype(nesteInnsendingstype);
                     nyPath = nestePath;
                 }
-            } else {
-                (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
-                && this.props.settInnsendingstype(nesteInnsendingstype);
-                nyPath = nestePath;
+                history.push(nyPath);
             }
-            history.push(nyPath);
         }
     }
 
@@ -119,6 +123,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending())
     };
 };
 

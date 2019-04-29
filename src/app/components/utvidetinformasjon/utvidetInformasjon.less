@@ -1,0 +1,23 @@
+.utvidetInformasjon {
+  /* Justere på grunn av animasjon */
+  p {
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  //margin: 0.5rem;
+  &__innhold,
+  &__toggler {
+    width: 100%;
+  }
+  &__innhold {
+    order: 1;
+    //padding: 0.2rem;
+  }
+  &__toggler {
+    order: 2;
+  }
+}

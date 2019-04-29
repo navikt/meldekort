@@ -42,11 +42,9 @@ interface MeldekortRad {
 type Props = MapDispatchToProps & MapStateToProps;
 
 class SendMeldekort extends React.Component<Props, any> {
-    constructor(props: any) {
-        super(props);
-    }
 
     harEttMeldekort = () => {
+
         let meldekortListe = this.filtrerMeldekortListe();
 
         if (meldekortListe.length === 1) {
@@ -86,7 +84,9 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     componentDidMount() {
-        this.props.resetInnsending();
+        if (this.filtrerMeldekortListe().length !== 1) {
+            this.props.resetInnsending();
+        }
         this.props.hentPerson();
     }
 

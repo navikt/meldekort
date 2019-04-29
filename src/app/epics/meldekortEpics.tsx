@@ -9,11 +9,11 @@ import Environment from '../utils/env';
 import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmeldingContent';
 import { combineEpics } from 'redux-observable';
 import { HistoriskeMeldekortActions } from '../actions/historiskeMeldekort';
-import {InnsendingActions} from "../actions/innsending";
-import {MeldeformActions} from "../actions/meldeform";
-import {MeldekortdetaljerActions} from "../actions/meldekortdetaljer";
-import {PersonActions} from "../actions/person";
-import {PersonStatusActions} from "../actions/personStatus";
+import { InnsendingActions } from '../actions/innsending';
+import { MeldeformActions } from '../actions/meldeform';
+import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
+import { PersonActions } from '../actions/person';
+import { PersonStatusActions } from '../actions/personStatus';
 
 const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
@@ -29,7 +29,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
                     UiActions.visModal({
                         content: () => loggInnContent(),
                         onRequestClose: () => {
-                            window.location.assign(`${Environment().loginUrl}&redirect=${window.location.origin}` + '/meldekort');
+                            window.location.assign(`${Environment().loginUrl}&redirect=${window.location.origin}/meldekort`);
                         },
                         visModal: true,
                     }),
@@ -68,7 +68,7 @@ const fjernFeilmelding: AppEpic = action$ =>
                     content: () => '',
                     visFeilmelding: false
                 })
-            ]
+            ];
         })
     );
 

@@ -15,9 +15,6 @@ interface MapDispatchToProps {
 }
 
 class OmMeldekort extends React.Component<MapDispatchToProps, any> {
-    constructor(props: any) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.resetInnsending();

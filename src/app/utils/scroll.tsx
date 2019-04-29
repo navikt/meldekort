@@ -1,9 +1,13 @@
-export function scrollToTop() {
-    let doc = document.documentElement;
-    let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+export function scrollTilElement(elementid?: string, oppforsel: ScrollBehavior = 'smooth') {
 
-    if (top > 0) {
-        window.scrollTo(0, top - 15);
-        setTimeout(scrollToTop, 10);
+    let elementPos = 0;
+
+    if (typeof elementid !== 'undefined') {
+        elementPos = document.getElementById(elementid)!.getBoundingClientRect().top + window.scrollY;
     }
+
+    window.scroll({
+        top: elementPos,
+        behavior: typeof oppforsel === 'undefined' ? 'smooth' : oppforsel
+    });
 }

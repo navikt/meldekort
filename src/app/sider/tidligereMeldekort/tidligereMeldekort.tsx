@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Komponentlenke from '../../components/komponentlenke/komponentlenke';
@@ -13,7 +13,7 @@ import { history, RootState } from '../../store/configureStore';
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Meldekort } from '../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../utils/mapper';
-import { finnRiktigEtikettType, HvisIngenBeregningSettBlaEtikett } from '../../utils/statusEtikettUtil';
+import { finnRiktigEtikettType } from '../../utils/statusEtikettUtil';
 import { hentIntl } from '../../utils/intlUtil';
 import { InnsendingActions } from '../../actions/innsending';
 import { BaksystemFeilmelding, IngenTidligereMeldekort } from '../../types/ui';

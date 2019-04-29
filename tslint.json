@@ -3,6 +3,9 @@
     "tslint-react"
   ],
   "rules": {
+    "no-useless-computed-key": "off",
+    "array-callback-return": "off",
+    "no-useless-concat": "off",
     "align": [
       true,
       "parameters",
