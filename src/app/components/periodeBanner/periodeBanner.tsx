@@ -11,14 +11,20 @@ import { connect } from 'react-redux';
 interface MapStateToProps {
     aktivtMeldekort: AktivtMeldekortState;
 }
-type Props = MapStateToProps;
+
+interface PeriodeBannerProps {
+    className?: string;
+}
+
+type Props = PeriodeBannerProps & MapStateToProps;
 
 const PeriodeBanner: React.FunctionComponent<Props> = (props) => {
 
     const meldeperiode = props.aktivtMeldekort.meldekort.meldeperiode;
+    const { className = '' } = props;
 
     return (
-        <section className="seksjon">
+        <section className={'seksjon periodeBanner ' + className}>
             <Ingress className="flex-innhold sentrert">
                 <FormattedMessage id="meldekort.for.perioden"/>
             </Ingress>

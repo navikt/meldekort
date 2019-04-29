@@ -29,7 +29,7 @@ const StegBanner: React.FunctionComponent<StegBannerProps> = (props) => {
     }
 
     return (
-        <section className="seksjon stegbanner">
+        <section className="seksjon stegbanner noPrint">
             <Stegindikator
                 steg={stegobjekter}
                 aktivtSteg={aktivtSteg}

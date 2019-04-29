@@ -9,7 +9,7 @@ export const endreMeldeformBekreftelseContent = () => {
     return (
         <div className={'modal-overskrift'}>
             <Undertittel children={<FormattedMessage id={'overskrift.bekreftelse'}/>}/>
-            <Veilederpanel fargetema="suksess" svg={<img src={veileder}/>}>
+            <Veilederpanel fargetema="suksess" svg={<img alt="" src={veileder}/>}>
                 <div className="modal-tekst">
                     <Normaltekst>
                         {`${hentIntl().formatMessage({id: 'endreMeldeform.valgtBytte'}).trim()}

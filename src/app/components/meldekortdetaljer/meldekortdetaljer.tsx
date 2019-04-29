@@ -1,27 +1,38 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-
 import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
 import { MeldekortDag, SporsmalOgSvar } from '../../types/meldekort';
-import { hentNestePeriodeMedUkerOgDato, hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../utils/dates';
+import {
+    hentNestePeriodeMedUkerOgDato,
+    hentNummerOgDatoForAndreUke,
+    hentNummerOgDatoForForsteUke
+} from '../../utils/dates';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
-import { Undertittel, Element } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 
 import Sporsmalvisning from '../sporsmalvisning/sporsmalvisning';
-import { hentUkedagerSomElementListe } from '../../utils/ukedager';
+import { hentUkedagerSomStringListe } from '../../utils/ukedager';
 import { hentIntl } from '../../utils/intlUtil';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
+import checkMark from '../../ikoner/check.svg';
+import UtvidetInformasjon from '../utvidetinformasjon/utvidetInformasjon';
+import { guid } from 'nav-frontend-js-utils';
 
 interface ErAap {
     erAap: boolean;
 }
 
+const mapStateToProps = (state: RootState) => {
+    return {
+        aktivtMeldekort: state.aktivtMeldekort
+    };
+};
+
 type Props = MeldekortdetaljerState & ErAap & ReturnType<typeof mapStateToProps>;
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
-    let ukedager = hentUkedagerSomElementListe();
+    let ukedager = hentUkedagerSomStringListe();
 
     const sjekkOmDetFinnesFlereElementer = (element: string, meldekortDag: MeldekortDag) => {
         switch (element) {
@@ -43,44 +54,44 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             if (meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.annetFravaer || meldekortDag.syk) {
                 let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
                 dagListe.push(
-                    <li key={i}>
-                        <Element>{ukedag}</Element>
+                    <div className="dagliste" key={guid()}>
+                        <div className="dagliste__dager">
+                        <strong>{ukedag}:&nbsp;</strong>
+                            <span>
                         {
                             meldekortDag.arbeidetTimerSum > 0 ?
-                                <div className="utfylling">
-                                    <FormattedMessage id="utfylling.arbeid"/>
-                                    <span> {meldekortDag.arbeidetTimerSum} </span>
-                                    {hentIntl().formatMessage({id: 'overskrift.timer'}).trim()}
-                                    {sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? <span>,</span> : null}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.arbeid'})}
+                                ${meldekortDag.arbeidetTimerSum} 
+                                ${hentIntl().formatMessage({id: 'overskrift.timer'}).trim()}${
+                                sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : ''}`
+                                : null
                         }
                         {
                             meldekortDag.kurs ?
-                                <div className="utfylling">
-                                    {hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}
-                                    {sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? <span>,</span> : null}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}${
+                                sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? ', ' : ''}`
+                                : null
                         }
                         {
                             meldekortDag.syk ?
-                                <div className="utfylling">
-                                    {hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}
-                                    {sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? <span>,</span> : null}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}${
+                                sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? ', ' : ''}`
+                                : null
                         }
                         {
                             meldekortDag.annetFravaer ?
-                                <div className="utfylling">
-                                    {hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}
-                                </div> : null
+                                `${hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}`
+                                : null
                         }
+                            </span>
+                        </div>
                         {
                             meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer ?
-                                <HjelpetekstBase id={ukedag + `${i}`} type="auto">
-                                    {leggTilHjelpetekster(meldekortDag)}
-                                </HjelpetekstBase> : null
+                             <UtvidetInformasjon>
+                                 {leggTilHjelpetekster(meldekortDag)}
+                             </UtvidetInformasjon> : null
                         }
-                    </li>
+                    </div>
                 );
             }
         }
@@ -144,8 +155,8 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             return (
                 <div className="uke">
                     <Undertittel className="uketittel flex-innhold sentrert">{uke}</Undertittel>
-                    <hr className="detaljerborder"/>
-                    <ul>{dagListe}</ul>
+                    <hr className="detaljerborder noPrint"/>
+                    <>{dagListe}</>
                 </div>
             );
         }
@@ -175,9 +186,31 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
         ];
     };
 
+    const visBegrunnelse = () => {
+        if (typeof props.meldekortdetaljer.begrunnelse !== 'undefined') {
+            const begrunnelse = String(props.meldekortdetaljer.begrunnelse);
+            if (begrunnelse.length > 0) {
+                return (
+                    <section className="seksjon">
+                        <div className="flex-sporsmal-hjelpetekst-container">
+                            <Undertittel><FormattedMessage id={'korrigering.sporsmal.begrunnelse'}/></Undertittel>
+                            <UtvidetInformasjon>
+                                <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'}/>
+                            </UtvidetInformasjon>
+                        </div>
+                        <img alt={'checkmark'} src={checkMark}/>
+                        <span>{props.meldekortdetaljer.begrunnelse}</span>
+                    </section>
+                );
+            }
+        }
+        return null;
+    };
+
     return (
         <div className="meldekortdetaljer">
             <div className="sporsmal">
+                {visBegrunnelse()}
                 <Sporsmalvisning sporsmalOgSvar={sporsmalOgSvar()}/>
             </div>
             <div className="ukevisning">
@@ -190,12 +223,6 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             </div>
         </div>
     );
-};
-
-const mapStateToProps = (state: RootState) => {
-    return {
-        aktivtMeldekort: state.aktivtMeldekort
-    };
 };
 
 export default connect(mapStateToProps, null)(Meldekortdetaljer);

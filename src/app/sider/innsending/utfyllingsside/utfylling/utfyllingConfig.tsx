@@ -1,7 +1,7 @@
 export interface UtfyltDag {
     uke: number;
     dag: string;
-    arbeidetTimer?: number;
+    arbeidetTimer?: string;
     syk: boolean;
     annetFravaer: boolean;
     kurs: boolean;

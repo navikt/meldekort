@@ -15,7 +15,8 @@
      MELDEKORT IMPORTS
 -----------------------------------------
 */
-@import "./app/components/meldekortBanner/meldekortBanner.less";
+@import "app/components/ekspanderbartInnhold/ekspanderbartInnhold.less";
+@import "app/components/meldekortBanner/meldekortBanner.less";
 @import "app/components/komponentlenke/komponentlenke.less";
 @import "app/components/meldekortdetaljer/meldekortdetaljer.less";
 @import "app/components/meny/tabsmeny.less";
@@ -27,6 +28,9 @@
 @import "app/components/tabell/tabell.less";
 @import "app/components/modal/UIModalWrapper.less";
 @import "app/components/feil/UIAlertstripeWrapper.less";
+@import "app/components/utvidetinformasjon/infoToggler/infoToggler.less";
+@import "app/components/utvidetinformasjon/utvidetInformasjon.less";
+@import "app/components/print/printStyle.less";
 @import "app/sider/innsending/bekreftelsesside/bekreftelse.less";
 @import "app/sider/innsending/sporsmalsside/sporsmal/sporsmal.less";
 @import "app/sider/innsending/sporsmalsside/begrunnelse/begrunnelsesVelger.less";
@@ -39,6 +43,7 @@
 @import "app/sider/sendMeldekort/sendMeldekort.less";
 @import "app/sider/tidligereMeldekort/detaljer/detaljer.less";
 @import "app/sider/tidligereMeldekort/detaljer/detaljer.less";
+@import "app/sider/innsending/kvitteringsside/kvittering.less";
 
 /*
 -----------------------------------------
@@ -112,7 +117,7 @@ body {
 
             .navigasjonsknapp {
               margin-right: 2rem;
-              margin-bottom: 2rem;
+              // margin-bottom: 2rem;
 
               &:last-child {
                 margin-left: 0;

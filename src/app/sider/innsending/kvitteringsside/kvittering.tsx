@@ -20,7 +20,10 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
-import Environment from "../../../utils/env";
+import Environment from '../../../utils/env';
+import PrintKnapp from '../../../components/print/printKnapp';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { scrollTilElement } from '../../../utils/scroll';
 
 interface MapStateToProps {
     router: Router;
@@ -45,8 +48,9 @@ interface MapDispatchToProps {
 type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToProps;
 
 class Kvittering extends React.Component<KvitteringsProps> {
-    constructor(props: KvitteringsProps) {
-        super(props);
+
+    componentDidMount() {
+        scrollTilElement(undefined, 'auto');
     }
 
     returnerMeldekortListaMedFlereMeldekortIgjen = (meldekort1: Meldekort[], innsendingstype1: Innsendingstyper,
@@ -114,24 +118,26 @@ class Kvittering extends React.Component<KvitteringsProps> {
             {[0]: formaterDato(meldekortdetaljerInnsending!.mottattDato), [1]: hentTid(meldekortdetaljerInnsending!.mottattDato)});
 
         return(
-            <>
-                <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn}</span></Ingress>
+            <div className="oppsummeringsTekster">
+                <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn  + ' (' + person.fodselsnr + ')'}</span></Ingress>
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
                 <Ingress><span>{meldekortErMottatt}</span></Ingress>
                 {(typeof nesteAktivtMeldekort !== undefined) &&
-                <Ingress><span>{this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}</span></Ingress>
+                <Ingress className="noPrint"><span>{this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}</span></Ingress>
                 }
-            </>
+            </div>
         );
     }
 
-    render() {
+    innhold = () => {
         const { person, innsendingstype, innsending, aktivtMeldekort } = this.props;
-        const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerPropsVerdier();
-
-        return(
-            <main>
-                <section className="seksjon flex-innhold tittel-sprakvelger">
+        const { nesteAktivtMeldekort } = this.returnerPropsVerdier();
+        return (
+            <>
+                <AlertStripe type={'suksess'} className="alertSendt noPrint">
+                    <FormattedMessage id={'overskrift.meldekort.sendt'}/>
+                </AlertStripe>
+                <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
                     <Innholdstittel ><FormattedMessage id="overskrift.steg4" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
@@ -144,16 +150,20 @@ class Kvittering extends React.Component<KvitteringsProps> {
                 {innsendingstype === Innsendingstyper.innsending
                 && (isEmpty(person.meldekort) && !isEmpty(person.etterregistrerteMeldekort))
                 && (
-                <section className="seksjon">
+                    <section className="seksjon">
                         <FormattedMessage id={'sendt.etterregistrering.info'} />
-                </section>)}
-                <section className="seksjon flex-innhold sentrert">
-                    <NavKnapp
-                        type={knappTyper.standard}
-                        nestePath={'/tidligere-meldekort'}
-                        tekstid={'sendt.linkTilTidligereMeldekort'}
-                        className={'navigasjonsknapp'}
-                    />
+                    </section>)}
+            </>
+        );
+    }
+
+    render() {
+        const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerPropsVerdier();
+
+        return(
+            <main>
+                {this.innhold()}
+                <section className="seksjon flex-innhold sentrert noPrint">
                     <NavKnapp
                         type={knappTyper.hoved}
                         className={'navigasjonsknapp'}
@@ -162,6 +172,13 @@ class Kvittering extends React.Component<KvitteringsProps> {
                         nesteAktivtMeldekort={nesteAktivtMeldekort}
                         nesteInnsendingstype={nesteInnsendingstype}
                     />
+                    <NavKnapp
+                        type={knappTyper.standard}
+                        nestePath={'/tidligere-meldekort'}
+                        tekstid={'sendt.linkTilTidligereMeldekort'}
+                        className={'navigasjonsknapp'}
+                    />
+                    <PrintKnapp erKvittering={true} innholdRenderer={this.innhold} prerenderInnhold={true}/>
                 </section>
             </main>
         );

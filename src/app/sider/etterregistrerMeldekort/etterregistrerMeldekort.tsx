@@ -37,9 +37,6 @@ interface MeldekortRad {
 type Props = MapDispatchToProps & MapStateToProps;
 
 class EtterregistrerMeldekort extends React.Component<Props, any> {
-    constructor(props: any) {
-        super(props);
-    }
 
     harEttMeldekort = () => {
         let meldekortListe = this.filtrerMeldekortListe();

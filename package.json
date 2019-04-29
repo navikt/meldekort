@@ -5,6 +5,7 @@
   "homepage": "/meldekort",
   "dependencies": {
     "@craco/craco": "^3.4.1",
+    "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/node": "^10.12.18",
     "@types/ramda": "^0.26.1",
@@ -17,6 +18,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-logger": "^3.0.7",
     "@types/redux-persist": "^4.3.1",
+    "@types/redux-persist-transform-encrypt": "^2.0.1",
     "acorn": "^6.1.0",
     "ajv": "^6.6.2",
     "axios": "^0.18.0",
@@ -29,7 +31,7 @@
     "less-plugin-npm-import": "^2.1.0",
     "lodash.throttle": "^4.1.1",
     "moment": "^2.24.0",
-    "nav-frontend-alertstriper": "^1.0.29",
+    "nav-frontend-alertstriper": "^1.0.34",
     "nav-frontend-alertstriper-style": "^0.2.53",
     "nav-frontend-chevron": "^1.0.6",
     "nav-frontend-chevron-style": "^0.3.4",
@@ -70,7 +72,7 @@
     "nav-frontend-veilederpanel-style": "0.0.14",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
-    "react": "^16.8.5",
+    "react": "^16.8.6",
     "react-collapse": "^4.0.3",
     "react-dom": "^16.7.0",
     "react-intl": "^2.8.0",
@@ -80,13 +82,14 @@
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^3.0.0",
     "redux": "^4.0.1",
     "redux-devtools": "^3.5.0",
     "redux-devtools-extension": "^2.13.7",
     "redux-logger": "^3.0.6",
     "redux-observable": "^1.0.0",
     "redux-persist": "^5.10.0",
+    "redux-persist-transform-encrypt": "^2.0.1",
     "rxjs": "^6.4.0",
     "ts-react-json-table": "^0.1.1",
     "typesafe-actions": "^3.0.0",
@@ -115,5 +118,12 @@
   },
   "optionalDependencies": {
     "fsevents": "^1.2.7"
+  },
+  "eslintConfig": {
+    "rules": {
+      "no-useless-computed-key": "off",
+      "array-callback-return": "off",
+      "no-useless-concat": "off"
+    }
   }
 }

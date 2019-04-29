@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "no-useless-computed-key": "off",
+    "array-callback-return": "off",
+    "no-useless-concat": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "no-useless-computed-key": "off",
+        "array-callback-return": "off",
+        "no-useless-concat": "off"
+      }
+    }
+  ]
+}

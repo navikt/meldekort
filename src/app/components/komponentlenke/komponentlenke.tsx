@@ -30,10 +30,6 @@ type ReduxType =
 
 class Komponentlenke extends React.Component<ReduxType> {
 
-    constructor(props: any) {
-        super(props);
-    }
-
     clickHandler = () => {
         if (this.props.meldekort) {
             this.props.leggTilAktivtMeldekort(this.props.meldekort);

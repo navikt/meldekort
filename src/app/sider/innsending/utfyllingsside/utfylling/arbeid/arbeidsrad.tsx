@@ -8,9 +8,9 @@ import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { hentIntl } from '../../../../../utils/intlUtil';
-import HjelpetekstBase from 'nav-frontend-hjelpetekst';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
+import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -31,22 +31,41 @@ interface UkeProps {
 type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
-    constructor(props: ArbeidsradProps) {
-        super(props);
+
+    componentDidMount(): void {
+        let rensetUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
+            if (utfyltDag.arbeidetTimer === '0') {
+                return {
+                    ...utfyltDag,
+                    arbeidetTimer: undefined
+                };
+            }
+            return {...utfyltDag};
+        });
+        this.props.oppdaterDager(rensetUtfylteDager);
     }
 
     setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: string) => {
-        const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
-           if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
-               return {
-                   ...dag,
-                   arbeidetTimer: event.target.value === '' ? undefined : Number(event.target.value)
+        const match = event.target.value.match(/^[0-9]?\d{0,2}?([,.]?[0-9]?)?$/);
+        if (match !== null) {
+            let nyVerdi = event.target.value;
+            if (match[0] === ',' || match[0] === '.') {
+                nyVerdi = '0.';
+            } else if (nyVerdi.includes(',')) {
+                nyVerdi = nyVerdi.replace(',', '.');
+            }
+            const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
+                if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
+                    return {
+                        ...dag,
+                        arbeidetTimer: event.target.value === '' ? undefined : nyVerdi
 
-               };
-           }
-           return {...dag};
-        });
-        this.props.oppdaterDager(oppdaterteDager);
+                    };
+                }
+                return {...dag};
+            });
+            this.props.oppdaterDager(oppdaterteDager);
+        }
     }
 
     finnIndex = (ukedag: string): number => {
@@ -67,6 +86,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
             let ukedag = konverterUkedag(dag);
             let { utfylteDager } = this.props.innsending;
             let utfyltDagIndex = this.finnIndex(ukedag);
+
             return (
                 <Input
                     className="arbeidInput"
@@ -74,13 +94,11 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     bredde="XS"
                     step={0.5}
-                    type={'number'}
-                    value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer === 'number' ?
+                    type={'text'}
+                    value={ typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined' ?
                             utfylteDager[utfyltDagIndex].arbeidetTimer : ''
                     }
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        this.setTimer(event, ukedag);
-                    }}
+                    onChange={event => {this.setTimer(event, ukedag); }}
                     feil={
                         typeof this.props.feilIDager !== 'undefined' ?
                             (this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer)
@@ -99,9 +117,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     <Undertittel>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
-                    <HjelpetekstBase id={'arbeid'} type="auto">
+                    <UtvidetInformasjon>
                         <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
-                    </HjelpetekstBase>
+                    </UtvidetInformasjon>
                 </div>
                 <div className="inputrad_arbeid">
                     {this.setFelter()}
