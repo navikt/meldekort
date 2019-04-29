@@ -13,6 +13,7 @@ const initialState: AktivtMeldekortState = {
             til: new Date(),
             fra: new Date(),
             kortKanSendesFra: new Date(),
+            kanKortSendes: false,
             periodeKode: ''
         },
         meldegruppe: Meldegruppe.ATTF,

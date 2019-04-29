@@ -12,7 +12,7 @@ import { Router } from '../../types/router';
 import Tabell from '../../components/tabell/tabell';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { KortStatus, Meldekort } from '../../types/meldekort';
-import { hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
+import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
 import { Person } from '../../types/person';
 import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
@@ -55,7 +55,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         }
         return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) =>
             (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
-            (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
+            (meldekortObj.meldeperiode.kanKortSendes));
     }
 
     hentMeldekortRaderFraPerson = () => {

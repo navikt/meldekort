@@ -8,7 +8,7 @@ import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Element, Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
+import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
@@ -61,7 +61,7 @@ class SendMeldekort extends React.Component<Props, any> {
         }
         return this.props.person.meldekort.filter((meldekortObj) =>
              (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
-               (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
+               (meldekortObj.meldeperiode.kanKortSendes));
     }
 
     hentMeldekortRaderFraPerson = () => {
@@ -71,7 +71,7 @@ class SendMeldekort extends React.Component<Props, any> {
         if (meldekort != null) {
             meldekort.map((meldekortObj) => {
                 if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
-                    if (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)) {
+                    if (meldekortObj.meldeperiode.kanKortSendes) {
                         radliste.push({
                            periode: hentUkePeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
                            dato: hentDatoPeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
@@ -160,7 +160,7 @@ class SendMeldekort extends React.Component<Props, any> {
         }
         meldekortListe.map((meldekort) => {
             if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
-                if (kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra) === false) {
+                if (!meldekort.meldeperiode.kanKortSendes) {
                     meldekortId = meldekort.meldekortId;
                 }
             }
@@ -244,7 +244,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
             dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) => {
-            dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype))
+            dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype));
         }
     };
 };

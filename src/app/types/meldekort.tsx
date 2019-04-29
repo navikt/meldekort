@@ -50,6 +50,7 @@ export interface Meldeperiode {
     fra: Date;
     til: Date;
     kortKanSendesFra: Date;
+    kanKortSendes: boolean;
     periodeKode: string;
 }
 
