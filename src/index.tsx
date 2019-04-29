@@ -20,7 +20,7 @@ const render = (Component: React.ComponentType<{}>) => {
         <Provider store={store}>
                 <PersistGate persistor={persistor} loading={<div />}>
                     <IntlProvider locale="nb" defaultLocale="nb">
-                            <Component />
+                        <Component />
                     </IntlProvider>
                 </PersistGate>
         </Provider>,

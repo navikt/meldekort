@@ -81,7 +81,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         return -1;
     }
 
-    setFelter = () => {
+    settFelter = () => {
         return hentUkedagerSomStringListe().map((dag) => {
             let ukedag = konverterUkedag(dag);
             let { utfylteDager } = this.props.innsending;
@@ -122,7 +122,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                     </UtvidetInformasjon>
                 </div>
                 <div className="inputrad_arbeid">
-                    {this.setFelter()}
+                    {this.settFelter()}
                 </div>
             </div>
         );

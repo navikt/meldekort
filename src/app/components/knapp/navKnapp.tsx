@@ -5,11 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import { RootState, history } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
-import { oppdaterAktivtMeldekort } from '../../actions/aktivtMeldekort';
 import { Meldekort } from '../../types/meldekort';
 import { Dispatch } from 'redux';
 import { Innsendingstyper } from '../../types/innsending';
 import { InnsendingActions } from '../../actions/innsending';
+import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 
 interface MapStateToProps {
     router: Router;
@@ -120,7 +120,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-            dispatch(oppdaterAktivtMeldekort(aktivtMeldekort)),
+            dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
         resetInnsending: () => dispatch(InnsendingActions.resetInnsending())

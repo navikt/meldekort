@@ -1,10 +1,12 @@
-import { Constants, Meldekort } from '../types/meldekort';
-import { action, ActionType } from 'typesafe-actions';
+import { Meldekort } from '../types/meldekort';
+import { ActionType, createStandardAction } from 'typesafe-actions';
 
-export function oppdaterAktivtMeldekort(meldekort: Meldekort) {
-    return action(Constants.LEGG_TIL_AKTIVT_MELDEKORT, {
-        meldekort
-    });
+export enum AktivtMeldekortTypeKeys {
+    LEGG_TIL_AKTIVT_MELDEKORT = 'LEGG_TIL_AKTIVT_MELDEKORT'
 }
 
-export type AktivtMeldekortActions = ActionType<typeof oppdaterAktivtMeldekort>;
+export const AktivtMeldekortActions = {
+    oppdaterAktivtMeldekort: createStandardAction(AktivtMeldekortTypeKeys.LEGG_TIL_AKTIVT_MELDEKORT)<Meldekort>(),
+};
+
+export type AktivtMeldekortActionsTypes = ActionType<typeof AktivtMeldekortActions>;
