@@ -13,6 +13,7 @@ import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
 import { useEffect, useState } from 'react';
+import { isEmpty } from 'ramda';
 
 interface MapStateToProps {
     router: Router;
@@ -37,10 +38,10 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
     const [oppdaterMeny, settMeny] = useState(meny.alleMenyPunkter);
 
     const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
-        if (menypunkt.tittel === 'endreMeldeform' && person.meldeform === MeldeForm.ELEKTRONISK) {
-            return {...menypunkt, disabled: true};
-        } else if (menypunkt.tittel === 'etterregistrering' && person.etterregistrerteMeldekort.length === 0) {
-            return {...menypunkt, disabled: true};
+        if (menypunkt.tittel === 'endreMeldeform') {
+            return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
+        } else if (menypunkt.tittel === 'etterregistrering') {
+            return {...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort)};
         }
         return menypunkt;
     });
