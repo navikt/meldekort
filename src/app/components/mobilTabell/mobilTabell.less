@@ -1,0 +1,35 @@
+.mobilTabell-container {
+  border-bottom: 1px solid #B7B1A9;
+
+  table.mobilTabell {
+    border-spacing: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    tbody {
+
+      tr.tabellRad {
+        height: 2.5rem;
+
+        &:first-child {
+          border-top: 1px solid #B7B1A9;
+        }
+
+        &:nth-child(odd) {
+          background: #f8f8f8;
+
+        }
+        &:nth-child(even) {
+          background: white;
+
+        }
+        th.headerCol {
+
+        }
+        td.dataCol {
+
+        }
+      }
+    }
+  }
+}

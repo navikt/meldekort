@@ -10,11 +10,13 @@ const Tabell: React.FunctionComponent<TabellProps> = (props) => {
     const JsonTable = require('ts-react-json-table');
 
     return (
-        <JsonTable
-            rows={props.rows}
-            columns={props.columns}
-            className={props.className}
-        />
+        <div className={'tabell'}>
+            <JsonTable
+                rows={props.rows}
+                columns={props.columns}
+                className={props.className}
+            />
+        </div>
     );
 };
 
