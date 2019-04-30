@@ -92,12 +92,39 @@ class TidligereMeldekort extends React.Component<Props> {
             {key: 'bruttobelop', label: <FormattedMessage id="overskrift.bruttoBelop" />, cell: 'bruttobelop'},
         ];
 
-        return (
-            <Tabell
+        const returnerTabellRad = (header: {key: string, label: JSX.Element, cell: any}, rowData: HistoriskeMeldekortRad) => {
+            let tableD = 'data';
+            for (let i in rowData) {
+                if (i === header.key) {
+                    tableD = rowData[i];
+                }
+            }
+
+            return (
+                <tr key={header.key}>
+                    <th> {header.label} </th>
+                    <td> {tableD} </td>
+                </tr>
+            );
+        }
+
+            /*<Tabell
                 rows={rows}
                 columns={columns}
-                mobilSkjerm={true}
-            />
+            />*/
+        return (
+            <div className={'mobilTabell_alle'}>
+                {rows.map( allRowData => (
+                    <table key={allRowData.meldekort.meldekortId}>
+                        <tbody>
+                            {columns.map((colHeader) => (
+                                returnerTabellRad(colHeader, allRowData)
+                            ))}
+                        </tbody>
+                    </table>
+                ))
+                }
+            </div>
         );
     }
 
