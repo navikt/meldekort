@@ -71,7 +71,7 @@
   ],
   "etterregistrerteMeldekort": [
     {
-      "meldekortId": 1011121315,
+      "meldekortId": 1011121325,
       "kortType": "ELEKTRONISK",
       "meldeperiode": {
         "fra": "2019-01-14T12:00:00+01:00",
@@ -86,7 +86,7 @@
       "korrigerbart": true
     },
     {
-      "meldekortId": 1011121316,
+      "meldekortId": 1011121326,
       "kortType": "ELEKTRONISK",
       "meldeperiode": {
         "fra": "2019-01-28T12:00:00+01:00",
@@ -101,7 +101,7 @@
       "korrigerbart": true
     },
     {
-      "meldekortId": 1011121317,
+      "meldekortId": 1011121327,
       "kortType": "ELEKTRONISK",
       "meldeperiode": {
         "fra": "2019-02-11T12:00:00+01:00",

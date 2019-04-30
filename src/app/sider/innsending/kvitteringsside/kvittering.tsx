@@ -24,6 +24,7 @@ import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { scrollTilElement } from '../../../utils/scroll';
 import { MeldekortActions } from '../../../actions/meldekort';
+import { erMeldekortSendtInnFor } from '../../../utils/meldekortUtils';
 
 interface MapStateToProps {
     router: Router;
@@ -80,6 +81,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
         const nestePath = urlParams.join('/');
         const meldekort = this.meldekortSomKanSendes(person.meldekort);
         const etterregistrerteMeldekort = this.meldekortSomKanSendes(person.etterregistrerteMeldekort);
+        console.log('meldekort som kan sendes: ', meldekort);
+        console.log('etterregistrerteMeldekort som kan sendes: ', etterregistrerteMeldekort);
         const harBrukerFlereMeldekort = meldekort.length > 0;
         const harBrukerFlereEtterregistrerteMeldekort = etterregistrerteMeldekort.length > 0;
         const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(
@@ -134,9 +137,13 @@ class Kvittering extends React.Component<KvitteringsProps> {
     }
 
     meldekortSomKanSendes = (meldekortListe: Meldekort[]): Meldekort[] => {
-        return meldekortListe.filter(meldekort => meldekort.meldeperiode.kanKortSendes)
-            .filter(meldekort =>
-                this.props.sendteMeldekort.sendteMeldekort.filter(m => m.meldekortId !== meldekort.meldekortId));
+        return meldekortListe.filter(meldekort => {
+            let kanSendes = meldekort.meldeperiode.kanKortSendes;
+            if (kanSendes) {
+                kanSendes = erMeldekortSendtInnFor(meldekort, this.props.sendteMeldekort.sendteMeldekort);
+            }
+            return kanSendes;
+        });
     }
 
     nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
@@ -169,9 +176,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
         );
     }
 
-    innhold = () => {
-        const { person, innsendingstype, innsending, aktivtMeldekort } = this.props;
-        const { nesteAktivtMeldekort } = this.returnerPropsVerdier();
+    innhold = (nesteAktivtMeldekort?: Meldekort, nesteInnsendingstype?: Innsendingstyper) => {
+        const { innsendingstype, innsending, aktivtMeldekort } = this.props;
         return (
             <>
                 <AlertStripe type={'suksess'} className="alertSendt noPrint">
@@ -188,9 +194,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
                     <Meldekortdetaljer meldekortdetaljer={innsending.meldekortdetaljer} erAap={aktivtMeldekort.meldegruppe === Meldegruppe.ATTF} />
                 </section>
                 {innsendingstype === Innsendingstyper.innsending
-                && (isEmpty(person.meldekort) && !isEmpty(person.etterregistrerteMeldekort))
+                && (nesteInnsendingstype === Innsendingstyper.etterregistrering)
                 && (
-                    <section className="seksjon">
+                    <section className="seksjon etterregistrering_info">
                         <FormattedMessage id={'sendt.etterregistrering.info'} />
                     </section>)}
             </>
@@ -202,8 +208,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
         return(
             <main>
-                {this.innhold()}
-                <section className="seksjon flex-innhold sentrert noPrint">
+                {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
+                <section className="seksjon flex-innhold sentrert noPrint kvitteringsKnapper">
                     <NavKnapp
                         type={knappTyper.hoved}
                         className={'navigasjonsknapp'}
@@ -243,7 +249,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
         settInnsendingstype: (innsendingstype: Innsendingstyper | null) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
         leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>
-            dispatch(MeldekortActions.leggTilInnsendtMeldekort(sendteMeldekort))
+            dispatch(MeldekortActions.leggTilInnsendtMeldekort(sendteMeldekort)),
     };
 };
 
