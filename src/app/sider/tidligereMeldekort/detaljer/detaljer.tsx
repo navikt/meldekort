@@ -3,7 +3,6 @@ import EtikettBase from 'nav-frontend-etiketter';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import PeriodeBanner from '../../../components/periodeBanner/periodeBanner';
 import Tabell from '../../../components/tabell/tabell';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { finnRiktigEtikettType } from '../../../utils/statusEtikettUtil';
@@ -25,7 +24,7 @@ import PrintKnapp from '../../../components/print/printKnapp';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
     router: Router;
 }
 
@@ -47,7 +46,7 @@ class Detaljer extends React.Component<Props> {
     }
 
     sjekkAktivtMeldekortOgRedirect = () => {
-        if (this.props.aktivtMeldekort.meldekort.meldekortId === 0) {
+        if (this.props.aktivtMeldekort.meldekortId === 0) {
             const pathname = this.props.router.location.pathname;
             const tidligereMeldekort = '/tidligere-meldekort';
             pathname !== tidligereMeldekort && history.push(tidligereMeldekort);
@@ -62,7 +61,7 @@ class Detaljer extends React.Component<Props> {
     innhold = () => {
 
         const { meldekortdetaljer, aktivtMeldekort } = this.props;
-        const rows = this.settTabellrader(aktivtMeldekort.meldekort);
+        const rows = this.settTabellrader(aktivtMeldekort);
         const columns = [
             {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
@@ -76,7 +75,7 @@ class Detaljer extends React.Component<Props> {
             {key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop"/>},
             {key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype"/>}
         ];
-        let { meldegruppe } = aktivtMeldekort.meldekort;
+        let { meldegruppe } = aktivtMeldekort;
 
         return (
             <>
@@ -107,13 +106,13 @@ class Detaljer extends React.Component<Props> {
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
-                    {aktivtMeldekort.meldekort.korrigerbart ?
+                    {aktivtMeldekort.korrigerbart ?
                         <NavKnapp
                             type={knappTyper.standard}
                             nestePath={router.location.pathname + '/korriger'}
                             tekstid={'korriger.meldekort'}
                             className={'navigasjonsknapp'}
-                            nesteAktivtMeldekort={aktivtMeldekort.meldekort}
+                            nesteAktivtMeldekort={aktivtMeldekort}
                             nesteInnsendingstype={Innsendingstyper.korrigering}
                         /> : null
                     }

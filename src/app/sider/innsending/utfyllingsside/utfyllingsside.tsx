@@ -7,12 +7,11 @@ import { hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates
 import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import Konstanter from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Meldegruppe } from '../../../types/meldekort';
+import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { scrollTilElement } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
@@ -20,7 +19,7 @@ import { InnsendingActions } from '../../../actions/innsending';
 
 interface MapStateToProps {
     innsending: InnsendingState;
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
 }
 
 interface MapDispatchToProps {
@@ -171,7 +170,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     }
 
     render() {
-        let { meldeperiode } = this.props.aktivtMeldekort.meldekort;
+        let { meldeperiode } = this.props.aktivtMeldekort;
 
         return(
             <main>
@@ -188,14 +187,14 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                         faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
                         datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
                         utfyllingFeil={this.state}
-                        erAap={this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF}
+                        erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
                     />
                     <UkePanel
                         ukenummer={Konstanter().andreUke}
                         faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
                         datoTittel={hentDatoForForsteUke(meldeperiode.til)}
                         utfyllingFeil={this.state}
-                        erAap={this.props.aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF}
+                        erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
                     />
                 </section>
                 <section className="seksjon flex-innhold sentrert">
@@ -226,10 +225,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    const meldekort: AktivtMeldekortState = {meldekort: state.aktivtMeldekort.meldekort};
     return {
         innsending: state.innsending,
-        aktivtMeldekort: meldekort,
+        aktivtMeldekort: state.aktivtMeldekort,
     };
 };
 

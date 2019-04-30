@@ -146,9 +146,9 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
         let uke: string = '';
         if (ukeNr === 1) {
-            uke = hentNummerOgDatoForForsteUke(props.aktivtMeldekort.meldekort.meldeperiode.fra);
+            uke = hentNummerOgDatoForForsteUke(props.aktivtMeldekort.meldeperiode.fra);
         } else if (ukeNr === 2) {
-            uke = hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldekort.meldeperiode.til);
+            uke = hentNummerOgDatoForAndreUke(props.aktivtMeldekort.meldeperiode.til);
         }
 
         if (dagListe.length > 0) {
@@ -180,8 +180,8 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
             {sporsmalId: 'sporsmal.registrert', svar: props.meldekortdetaljer.sporsmal.arbeidssoker,
                 forklaring: 'forklaring.sporsmal.registrert'  + aap,
                 formatertDato: hentNestePeriodeMedUkerOgDato(
-                    props.aktivtMeldekort.meldekort.meldeperiode.fra,
-                    props.aktivtMeldekort.meldekort.meldeperiode.til)
+                    props.aktivtMeldekort.meldeperiode.fra,
+                    props.aktivtMeldekort.meldeperiode.til)
             }
         ];
     };

@@ -137,7 +137,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         innsending: state.innsending,
-        aktivtMeldekort: state.aktivtMeldekort.meldekort,
+        aktivtMeldekort: state.aktivtMeldekort,
         meldekortdetaljer: state.meldekortdetaljer.meldekortdetaljer,
         router: state.router
     };

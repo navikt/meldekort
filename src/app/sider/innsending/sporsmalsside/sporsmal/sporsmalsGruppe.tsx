@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import Sporsmal from './sporsmal';
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
-import {hentIntl} from '../../../../utils/intlUtil';
-import {InnsendingState, Innsendingstyper} from '../../../../types/innsending';
-import {InnsendingActions} from '../../../../actions/innsending';
-import {RootState} from '../../../../store/configureStore';
-import {Sporsmal as Spm} from './sporsmalConfig';
-import {AktivtMeldekortState} from '../../../../reducers/aktivtMeldekortReducer';
-import {hentNestePeriodeMedUkerOgDato} from '../../../../utils/dates';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { hentIntl } from '../../../../utils/intlUtil';
+import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
+import { InnsendingActions } from '../../../../actions/innsending';
+import { RootState } from '../../../../store/configureStore';
+import { Sporsmal as Spm } from './sporsmalConfig';
+import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
+import { Meldekort } from '../../../../types/meldekort';
 
 interface MapStateToProps {
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
 }
 
 interface MapDispatchToProps {
@@ -64,7 +64,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
                 skalVareDisabled = true;
             }
         }
-        let { til, fra } = this.props.aktivtMeldekort.meldekort.meldeperiode;
+        let { til, fra } = this.props.aktivtMeldekort.meldeperiode;
         return(
             <Sporsmal
                 sporsmalsobjekt={sporsmalsobj}

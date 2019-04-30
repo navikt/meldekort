@@ -3,7 +3,7 @@ import HovedMeny from '../hovedMeny/hovedMeny';
 import MobilMeny from '../mobilMeny/mobilMeny';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Person } from '../../types/person';
+import { MeldeForm, Person } from '../../types/person';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyState } from '../../types/meny';
@@ -12,6 +12,7 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
+import { useEffect, useState } from 'react';
 
 interface MapStateToProps {
     router: Router;
@@ -32,7 +33,24 @@ type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
 
-    const {router, meny} = props;
+    const {router, meny, person} = props;
+    const [oppdaterMeny, settMeny] = useState(meny.alleMenyPunkter);
+
+    const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
+        if (menypunkt.tittel === 'endreMeldeform' && person.meldeform === MeldeForm.ELEKTRONISK) {
+            return {...menypunkt, disabled: true};
+        } else if (menypunkt.tittel === 'etterregistrering' && person.etterregistrerteMeldekort.length === 0) {
+            return {...menypunkt, disabled: true};
+        }
+        return menypunkt;
+    });
+
+    useEffect(() => {
+            props.settMenyPunkter(oppdatertMeny);
+        },
+              [oppdaterMeny]
+    );
+
     const params = router.location.pathname.split('/');
     const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
     const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';

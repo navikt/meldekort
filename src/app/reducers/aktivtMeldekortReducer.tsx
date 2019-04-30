@@ -2,12 +2,7 @@ import { KortStatus, KortType, Meldegruppe, Meldekort } from '../types/meldekort
 import { AktivtMeldekortActions, AktivtMeldekortActionsTypes } from '../actions/aktivtMeldekort';
 import { getType } from 'typesafe-actions';
 
-export interface AktivtMeldekortState {
-    meldekort: Meldekort;
-}
-
-const initialState: AktivtMeldekortState = {
-    meldekort: {
+const initialState: Meldekort = {
         meldekortId: 0,
         kortType: KortType.RETUR,
         meldeperiode: {
@@ -22,12 +17,10 @@ const initialState: AktivtMeldekortState = {
         bruttoBelop: 0,
         mottattDato: new Date(),
         korrigerbart: false
-
-    }
 };
 
-const aktivtMeldekortReducer = (state: AktivtMeldekortState = initialState,
-                                action: AktivtMeldekortActionsTypes): AktivtMeldekortState => {
+const aktivtMeldekortReducer = (state: Meldekort = initialState,
+                                action: AktivtMeldekortActionsTypes): Meldekort => {
     switch (action.type) {
         case getType(AktivtMeldekortActions.oppdaterAktivtMeldekort):
             return { ...state, ...action.payload };

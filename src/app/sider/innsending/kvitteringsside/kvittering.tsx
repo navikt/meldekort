@@ -4,7 +4,6 @@ import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
 import { Meldegruppe, Meldekort, SendteMeldekortState, SendtMeldekort } from '../../../types/meldekort';
@@ -56,7 +55,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         scrollTilElement(undefined, 'auto');
         let oppdatertSendteMeldekort = this.props.sendteMeldekort;
         let { meldekortId, kortType } = this.props.aktivtMeldekort;
-        oppdatertSendteMeldekort.sendteMeldekort.push({meldekortId, kortType})
+        oppdatertSendteMeldekort.sendteMeldekort.push({meldekortId, kortType});
         this.props.leggTilInnsendtMeldekort(oppdatertSendteMeldekort.sendteMeldekort);
     }
 
@@ -79,41 +78,65 @@ class Kvittering extends React.Component<KvitteringsProps> {
         const urlParams = router.location.pathname.split('/');
         urlParams.pop();
         const nestePath = urlParams.join('/');
-        // TODO Sjekke om meldekortene i lista faktisk kan sendes inn.
-        const harBrukerFlereMeldekort = this.harBrukerFlereMeldekort(person.meldekort, person.etterregistrerteMeldekort);
+        const meldekort = this.meldekortSomKanSendes(person.meldekort);
+        const etterregistrerteMeldekort = this.meldekortSomKanSendes(person.etterregistrerteMeldekort);
+        const harBrukerFlereMeldekort = meldekort.length > 0;
+        const harBrukerFlereEtterregistrerteMeldekort = etterregistrerteMeldekort.length > 0;
+        const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(
+            meldekort, Innsendingstyper.innsending,
+            etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
+        const paramsForEtterregistrerte = this.returnerMeldekortListaMedFlereMeldekortIgjen(
+            etterregistrerteMeldekort, Innsendingstyper.etterregistrering,
+            meldekort, Innsendingstyper.innsending);
 
-        if ( innsendingstype === Innsendingstyper.innsending && harBrukerFlereMeldekort) {
-            const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(
-                person.meldekort, Innsendingstyper.innsending,
-                person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
-            return {
-                knappTekstid: 'overskrift.nesteMeldekort',
-                nestePath: nestePath,
-                nesteAktivtMeldekort: params.nesteAktivtMeldekort,
-                nesteInnsendingstype: params.nesteInnsendingstype
-            };
-        } else if (innsendingstype === Innsendingstyper.etterregistrering && harBrukerFlereMeldekort) {
-            const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(
-                person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering,
-                person.meldekort, Innsendingstyper.innsending);
-            return {
-                knappTekstid: 'overskrift.etterregistrertMeldekort',
-                nestePath: nestePath,
-                nesteAktivtMeldekort: params.nesteAktivtMeldekort,
-                nesteInnsendingstype: params.nesteInnsendingstype
-            };
-        } else {
-            return {
-                knappTekstid: 'tilbake.dittNav',
-                nestePath: Environment().dittNavUrl,
-                nesteAktivtMeldekort: undefined,
-                nesteInnsendingstype: undefined
-            };
+        if (innsendingstype === Innsendingstyper.innsending) {
+
+            if (harBrukerFlereMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.nesteMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForMeldekort.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForMeldekort.nesteInnsendingstype
+                };
+            } else if (harBrukerFlereEtterregistrerteMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.etterregistrertMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForEtterregistrerte.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype
+                };
+            }
+        } else if (innsendingstype === Innsendingstyper.etterregistrering) {
+
+            if (harBrukerFlereEtterregistrerteMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.etterregistrertMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForEtterregistrerte.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype
+                };
+            } else if (harBrukerFlereMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.nesteMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForMeldekort.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForMeldekort.nesteInnsendingstype
+                };
+            }
+
         }
+        return {
+            knappTekstid: 'tilbake.dittNav',
+            nestePath: Environment().dittNavUrl,
+            nesteAktivtMeldekort: undefined,
+            nesteInnsendingstype: undefined
+        };
     }
 
-    harBrukerFlereMeldekort = (meldekortListe: Meldekort[], etterregistrerteMeldekortListe: Meldekort[]): boolean => {
-        return !isEmpty(meldekortListe) || !isEmpty(etterregistrerteMeldekortListe);
+    meldekortSomKanSendes = (meldekortListe: Meldekort[]): Meldekort[] => {
+        return meldekortListe.filter(meldekort => meldekort.meldeperiode.kanKortSendes)
+            .filter(meldekort =>
+                this.props.sendteMeldekort.sendteMeldekort.filter(m => m.meldekortId !== meldekort.meldekortId));
     }
 
     nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
@@ -203,11 +226,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    let meldekort: AktivtMeldekortState = {
-        meldekort: state.aktivtMeldekort.meldekort
-    };
     return {
-        aktivtMeldekort: meldekort.meldekort,
+        aktivtMeldekort: state.aktivtMeldekort,
         router: selectRouter(state),
         innsending: state.innsending,
         innsendingstype: state.innsending.innsendingstype,
