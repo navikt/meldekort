@@ -4,10 +4,9 @@ import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe, Meldekort } from '../../../types/meldekort';
+import { Meldegruppe, Meldekort, SendteMeldekortState, SendtMeldekort } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
 import { Dispatch } from 'redux';
 import { selectRouter } from '../../../selectors/router';
@@ -24,6 +23,8 @@ import Environment from '../../../utils/env';
 import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { scrollTilElement } from '../../../utils/scroll';
+import { MeldekortActions } from '../../../actions/meldekort';
+import { erMeldekortSendtInnFor } from '../../../utils/meldekortUtils';
 
 interface MapStateToProps {
     router: Router;
@@ -31,6 +32,7 @@ interface MapStateToProps {
     aktivtMeldekort: Meldekort;
     innsending: InnsendingState;
     innsendingstype: Innsendingstyper | null;
+    sendteMeldekort: SendteMeldekortState;
 }
 
 interface PropsVerdier {
@@ -43,6 +45,7 @@ interface PropsVerdier {
 interface MapDispatchToProps {
     leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
+    leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) => void;
 }
 
 type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToProps;
@@ -51,6 +54,10 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
     componentDidMount() {
         scrollTilElement(undefined, 'auto');
+        let oppdatertSendteMeldekort = this.props.sendteMeldekort;
+        let { meldekortId, kortType } = this.props.aktivtMeldekort;
+        oppdatertSendteMeldekort.sendteMeldekort.push({meldekortId, kortType});
+        this.props.leggTilInnsendtMeldekort(oppdatertSendteMeldekort.sendteMeldekort);
     }
 
     returnerMeldekortListaMedFlereMeldekortIgjen = (meldekort1: Meldekort[], innsendingstype1: Innsendingstyper,
@@ -72,35 +79,71 @@ class Kvittering extends React.Component<KvitteringsProps> {
         const urlParams = router.location.pathname.split('/');
         urlParams.pop();
         const nestePath = urlParams.join('/');
+        const meldekort = this.meldekortSomKanSendes(person.meldekort);
+        const etterregistrerteMeldekort = this.meldekortSomKanSendes(person.etterregistrerteMeldekort);
+        console.log('meldekort som kan sendes: ', meldekort);
+        console.log('etterregistrerteMeldekort som kan sendes: ', etterregistrerteMeldekort);
+        const harBrukerFlereMeldekort = meldekort.length > 0;
+        const harBrukerFlereEtterregistrerteMeldekort = etterregistrerteMeldekort.length > 0;
+        const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(
+            meldekort, Innsendingstyper.innsending,
+            etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
+        const paramsForEtterregistrerte = this.returnerMeldekortListaMedFlereMeldekortIgjen(
+            etterregistrerteMeldekort, Innsendingstyper.etterregistrering,
+            meldekort, Innsendingstyper.innsending);
 
-        if ( innsendingstype === Innsendingstyper.innsending && (!isEmpty(person.meldekort) || !isEmpty(person.etterregistrerteMeldekort))) {
-            const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(
-                person.meldekort, Innsendingstyper.innsending,
-                person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering);
-            return {
-                knappTekstid: 'overskrift.nesteMeldekort',
-                nestePath: nestePath,
-                nesteAktivtMeldekort: params.nesteAktivtMeldekort,
-                nesteInnsendingstype: params.nesteInnsendingstype
-            };
-        } else if (innsendingstype === Innsendingstyper.etterregistrering && (!isEmpty(person.meldekort) || !isEmpty(person.etterregistrerteMeldekort))) {
-            const params = this.returnerMeldekortListaMedFlereMeldekortIgjen(
-                person.etterregistrerteMeldekort, Innsendingstyper.etterregistrering,
-                person.meldekort, Innsendingstyper.innsending);
-            return {
-                knappTekstid: 'overskrift.etterregistrertMeldekort',
-                nestePath: nestePath,
-                nesteAktivtMeldekort: params.nesteAktivtMeldekort,
-                nesteInnsendingstype: params.nesteInnsendingstype
-            };
-        } else {
-            return {
-                knappTekstid: 'tilbake.dittNav',
-                nestePath: Environment().dittNavUrl,
-                nesteAktivtMeldekort: undefined,
-                nesteInnsendingstype: undefined
-            };
+        if (innsendingstype === Innsendingstyper.innsending) {
+
+            if (harBrukerFlereMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.nesteMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForMeldekort.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForMeldekort.nesteInnsendingstype
+                };
+            } else if (harBrukerFlereEtterregistrerteMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.etterregistrertMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForEtterregistrerte.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype
+                };
+            }
+        } else if (innsendingstype === Innsendingstyper.etterregistrering) {
+
+            if (harBrukerFlereEtterregistrerteMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.etterregistrertMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForEtterregistrerte.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype
+                };
+            } else if (harBrukerFlereMeldekort) {
+                return {
+                    knappTekstid: 'overskrift.nesteMeldekort',
+                    nestePath: nestePath,
+                    nesteAktivtMeldekort: paramsForMeldekort.nesteAktivtMeldekort,
+                    nesteInnsendingstype: paramsForMeldekort.nesteInnsendingstype
+                };
+            }
+
         }
+        return {
+            knappTekstid: 'tilbake.dittNav',
+            nestePath: Environment().dittNavUrl,
+            nesteAktivtMeldekort: undefined,
+            nesteInnsendingstype: undefined
+        };
+    }
+
+    meldekortSomKanSendes = (meldekortListe: Meldekort[]): Meldekort[] => {
+        return meldekortListe.filter(meldekort => {
+            let kanSendes = meldekort.meldeperiode.kanKortSendes;
+            if (kanSendes) {
+                kanSendes = !erMeldekortSendtInnFor(meldekort, this.props.sendteMeldekort.sendteMeldekort);
+            }
+            return kanSendes;
+        });
     }
 
     nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
@@ -121,7 +164,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
             <div className="oppsummeringsTekster">
                 <Ingress>
                     <span>
-                    {hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn  + ' (' + person.fodselsnr + ')'}
+                        {hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn  + ' (' + person.fodselsnr + ')'}
                     </span>
                 </Ingress>
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
@@ -133,9 +176,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
         );
     }
 
-    innhold = () => {
-        const { person, innsendingstype, innsending, aktivtMeldekort } = this.props;
-        const { nesteAktivtMeldekort } = this.returnerPropsVerdier();
+    innhold = (nesteAktivtMeldekort?: Meldekort, nesteInnsendingstype?: Innsendingstyper) => {
+        const { innsendingstype, innsending, aktivtMeldekort } = this.props;
         return (
             <>
                 <AlertStripe type={'suksess'} className="alertSendt noPrint">
@@ -152,9 +194,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
                     <Meldekortdetaljer meldekortdetaljer={innsending.meldekortdetaljer} erAap={aktivtMeldekort.meldegruppe === Meldegruppe.ATTF} />
                 </section>
                 {innsendingstype === Innsendingstyper.innsending
-                && (isEmpty(person.meldekort) && !isEmpty(person.etterregistrerteMeldekort))
+                && (nesteInnsendingstype === Innsendingstyper.etterregistrering)
                 && (
-                    <section className="seksjon">
+                    <section className="seksjon etterregistrering_info">
                         <FormattedMessage id={'sendt.etterregistrering.info'} />
                     </section>)}
             </>
@@ -166,8 +208,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
         return(
             <main>
-                {this.innhold()}
-                <section className="seksjon flex-innhold sentrert noPrint">
+                {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
+                <section className="seksjon flex-innhold sentrert noPrint kvitteringsKnapper">
                     <NavKnapp
                         type={knappTyper.hoved}
                         className={'navigasjonsknapp'}
@@ -190,15 +232,13 @@ class Kvittering extends React.Component<KvitteringsProps> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    let meldekort: AktivtMeldekortState = {
-        meldekort: state.aktivtMeldekort.meldekort
-    };
     return {
-        aktivtMeldekort: meldekort.meldekort,
+        aktivtMeldekort: state.aktivtMeldekort,
         router: selectRouter(state),
         innsending: state.innsending,
         innsendingstype: state.innsending.innsendingstype,
         person: state.person,
+        sendteMeldekort: state.meldekort
     };
 };
 
@@ -208,6 +248,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper | null) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
+        leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>
+            dispatch(MeldekortActions.leggTilInnsendtMeldekort(sendteMeldekort)),
     };
 };
 

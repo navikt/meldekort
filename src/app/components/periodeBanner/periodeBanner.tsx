@@ -4,12 +4,12 @@ import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
 import { FormattedMessage } from 'react-intl';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
-import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
+import { Meldekort } from '../../types/meldekort';
 
 interface MapStateToProps {
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
 }
 
 interface PeriodeBannerProps {
@@ -20,9 +20,8 @@ type Props = PeriodeBannerProps & MapStateToProps;
 
 const PeriodeBanner: React.FunctionComponent<Props> = (props) => {
 
-    const meldeperiode = props.aktivtMeldekort.meldekort.meldeperiode;
+    const { meldeperiode } = props.aktivtMeldekort;
     const { className = '' } = props;
-
     return (
         <section className={'seksjon periodeBanner ' + className}>
             <Ingress className="flex-innhold sentrert">

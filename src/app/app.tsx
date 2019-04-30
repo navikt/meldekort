@@ -105,20 +105,15 @@ class App extends React.Component<Props> {
     }
 
     settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
-        console.log(menypunkter);
-        const personHarPapirMeldeform = (mp: MenyPunkt): boolean => (person.meldeform === MeldeForm.PAPIR)
-            && (mp.tittel === 'endreMeldeform') && (mp.disabled === true);
-        const personHarEtterregistrerteMeldekort = (mp: MenyPunkt): boolean =>  !isEmpty(person.etterregistrerteMeldekort)
-            && mp.tittel === 'etterregistrering' && (mp.disabled === true);
-        const menypunktliste = menypunkter
-            .map(menypunkt => {
-                if (personHarPapirMeldeform(menypunkt) || personHarEtterregistrerteMeldekort(menypunkt) ) {
-                    console.log(menypunkt.tittel, menypunkt.disabled);
-                    return { ...menypunkt, disabled: !menypunkt.disabled };
-                } else {
-                    return { ...menypunkt };
-                }
-            });
+        const menypunktliste = menypunkter.map(menypunkt => {
+            if (menypunkt.tittel === 'endreMeldeform') {
+                return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
+            } else if (menypunkt.tittel === 'etterregistrering') {
+                return {...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort)};
+            }
+            return menypunkt;
+        });
+
         this.props.settMenyPunkter(menypunktliste);
     }
 

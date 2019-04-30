@@ -10,6 +10,15 @@ export interface Meldekort {
     korrigerbart: boolean;
 }
 
+export interface SendteMeldekortState {
+    sendteMeldekort: SendtMeldekort[];
+}
+
+export interface SendtMeldekort {
+    meldekortId: number;
+    kortType: KortType;
+}
+
 // hentMeldekortDetaljer
 export interface Meldekortdetaljer {
     id: string;
@@ -29,6 +38,7 @@ export interface Meldeperiode {
     fra: Date;
     til: Date;
     kortKanSendesFra: Date;
+    kanKortSendes: boolean;
     periodeKode: string;
 }
 
