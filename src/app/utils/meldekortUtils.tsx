@@ -4,12 +4,12 @@ export const erMeldekortSendtInnFor = (
     meldekort: Meldekort,
     sendteMeldekort: SendtMeldekort[]): boolean => {
 
-    let kanSendes = true;
+    let kanIkkeSendes = false;
     for (let i = 0; i < sendteMeldekort.length; i++) {
         if (sendteMeldekort[i].meldekortId === meldekort.meldekortId && sendteMeldekort[i].kortType === meldekort.kortType) {
-            kanSendes = false;
+            kanIkkeSendes = true;
             i = sendteMeldekort.length;
         }
     }
-    return kanSendes;
+    return kanIkkeSendes;
 };

@@ -140,7 +140,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         return meldekortListe.filter(meldekort => {
             let kanSendes = meldekort.meldeperiode.kanKortSendes;
             if (kanSendes) {
-                kanSendes = erMeldekortSendtInnFor(meldekort, this.props.sendteMeldekort.sendteMeldekort);
+                kanSendes = !erMeldekortSendtInnFor(meldekort, this.props.sendteMeldekort.sendteMeldekort);
             }
             return kanSendes;
         });

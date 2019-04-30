@@ -82,11 +82,6 @@ class NavKnapp extends React.Component<Props> {
                 const erPaInnsending = innsendingstypeFraStore !== null;
                 let nyPath: string = '';
 
-                console.log('erPåInnsending: ', erPaInnsending);
-                console.log('erPåKvittering: ', erPaKvittering);
-                console.log('nestePathParam: ', nestePathParams);
-                console.log('nesteInnsedningsType: ', nesteInnsendingstype);
-
                 if (erPaInnsending) {
                     if (!erPaKvittering) {
                         nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
