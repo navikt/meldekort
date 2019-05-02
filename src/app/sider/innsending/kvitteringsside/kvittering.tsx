@@ -24,7 +24,7 @@ import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { scrollTilElement } from '../../../utils/scroll';
 import { MeldekortActions } from '../../../actions/meldekort';
-import { erMeldekortSendtInnFor } from '../../../utils/meldekortUtils';
+import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 
 interface MapStateToProps {
     router: Router;
@@ -140,7 +140,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         return meldekortListe.filter(meldekort => {
             let kanSendes = meldekort.meldeperiode.kanKortSendes;
             if (kanSendes) {
-                kanSendes = !erMeldekortSendtInnFor(meldekort, this.props.sendteMeldekort.sendteMeldekort);
+                kanSendes = !erMeldekortSendtInnTidligere(meldekort, this.props.sendteMeldekort.sendteMeldekort);
             }
             return kanSendes;
         });

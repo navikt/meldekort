@@ -11,15 +11,18 @@ import Konstanter from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyllingConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Meldegruppe, Meldekort } from '../../../types/meldekort';
+import { Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
 import { scrollTilElement } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
+import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
+import { Redirect } from 'react-router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: Meldekort;
+    sendteMeldekort: SendtMeldekort[];
 }
 
 interface MapDispatchToProps {
@@ -170,9 +173,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     }
 
     render() {
-        let { meldeperiode } = this.props.aktivtMeldekort;
+        let { aktivtMeldekort, sendteMeldekort } = this.props;
+        let { meldeperiode } = aktivtMeldekort;
 
-        return(
+        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
             <main>
                 <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
@@ -219,7 +223,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                     />
                 </section>
             </main>
-        );
+        ) : <Redirect exact={true} to="/send-meldekort"/>;
 
     }
 }
@@ -228,6 +232,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort,
+        sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };
 

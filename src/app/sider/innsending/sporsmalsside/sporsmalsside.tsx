@@ -17,15 +17,17 @@ import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFo
 import { IModal, ModalKnapp } from '../../../types/ui';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe, Meldekort } from '../../../types/meldekort';
-import { RouteComponentProps } from 'react-router';
+import { Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
+import { Redirect, RouteComponentProps } from 'react-router';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
+import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 
 interface MapStateToProps {
     aktivtMeldekort: Meldekort;
     innsending: InnsendingState;
+    sendteMeldekort: SendtMeldekort[];
 }
 
 interface MapDispatchToProps {
@@ -239,65 +241,63 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     render() {
-        const { innsending, aktivtMeldekort } = this.props;
+        const { innsending, aktivtMeldekort, sendteMeldekort } = this.props;
         const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
         const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
-        return (
-            <main>
-                <section className="seksjon flex-innhold sentrert">
-                    {brukermelding.length > 1 ?
-                        <AlertStripe type={'info'}>
-                            {brukermelding}
-                        </AlertStripe> : null
-                    }
-                </section>
-                <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel ><FormattedMessage id="overskrift.steg1" /></Innholdstittel>
-                    <Sprakvelger/>
-                </section>
-                <section className="seksjon alert">
-                    <Veilederpanel kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
-                        <div className="item">
-                            <FormattedMessage id="sporsmal.lesVeiledning" />
-                        </div>
-                        <div className="item">
-                            <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
-                        </div>
-                    </Veilederpanel>
-                </section>
-                <section id="feilmelding" className="seksjon">
-                    {this.hentFeilmeldinger(meldegruppeErAAP)}
-                </section>
-                { innsending.innsendingstype === Innsendingstyper.korrigering && (
-                    <section className="seksjon">
-                        <BegrunnelseVelger AAP={meldegruppeErAAP} erFeil={innsending.begrunnelse.erFeil}/>
+        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
+                <main>
+                    <section className="seksjon flex-innhold sentrert">
+                        {brukermelding.length > 1 ?
+                            <AlertStripe type={'info'}>
+                                {brukermelding}
+                            </AlertStripe> : null
+                        }
                     </section>
-                )}
-                <section className="seksjon">
-                    <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                    <AlertStripe type="info">
-                        <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
-                    </AlertStripe>
-                </section>
-                <section className="seksjon flex-innhold sentrert">
-                    <NavKnapp
-                        type={knappTyper.hoved}
-                        nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
-                        tekstid={'naviger.neste'}
-                        className={'navigasjonsknapp'}
-                        validering={this.valider}
-                    />
-                    <NavKnapp
-                        type={knappTyper.flat}
-                        nestePath={'/om-meldekort'}
-                        tekstid={'naviger.avbryt'}
-                        className={'navigasjonsknapp'}
-                    />
-                </section>
-
-            </main>
-        );
-
+                    <section className="seksjon flex-innhold tittel-sprakvelger">
+                        <Innholdstittel><FormattedMessage id="overskrift.steg1"/></Innholdstittel>
+                        <Sprakvelger/>
+                    </section>
+                    <section className="seksjon alert">
+                        <Veilederpanel kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
+                            <div className="item">
+                                <FormattedMessage id="sporsmal.lesVeiledning"/>
+                            </div>
+                            <div className="item">
+                                <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling"/>
+                            </div>
+                        </Veilederpanel>
+                    </section>
+                    <section id="feilmelding" className="seksjon">
+                        {this.hentFeilmeldinger(meldegruppeErAAP)}
+                    </section>
+                    {innsending.innsendingstype === Innsendingstyper.korrigering && (
+                        <section className="seksjon">
+                            <BegrunnelseVelger AAP={meldegruppeErAAP} erFeil={innsending.begrunnelse.erFeil}/>
+                        </section>
+                    )}
+                    <section className="seksjon">
+                        <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
+                        <AlertStripe type="info">
+                            <FormattedHTMLMessage id="sporsmal.registrertMerknad"/>
+                        </AlertStripe>
+                    </section>
+                    <section className="seksjon flex-innhold sentrert">
+                        <NavKnapp
+                            type={knappTyper.hoved}
+                            nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
+                            tekstid={'naviger.neste'}
+                            className={'navigasjonsknapp'}
+                            validering={this.valider}
+                        />
+                        <NavKnapp
+                            type={knappTyper.flat}
+                            nestePath={'/om-meldekort'}
+                            tekstid={'naviger.avbryt'}
+                            className={'navigasjonsknapp'}
+                        />
+                    </section>
+                </main>
+            ) : <Redirect exact={true} to="/send-meldekort"/>;
     }
 
     ikkeFortsetteRegistrertKnapper = (): ModalKnapp[] => {
@@ -325,7 +325,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         aktivtMeldekort: state.aktivtMeldekort,
-        innsending: state.innsending
+        innsending: state.innsending,
+        sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };
 

@@ -1,6 +1,6 @@
 import { Meldekort, SendtMeldekort } from '../types/meldekort';
 
-export const erMeldekortSendtInnFor = (
+export const erMeldekortSendtInnTidligere = (
     meldekort: Meldekort,
     sendteMeldekort: SendtMeldekort[]): boolean => {
 
@@ -12,4 +12,13 @@ export const erMeldekortSendtInnFor = (
         }
     }
     return kanIkkeSendes;
+};
+
+export const erAktivtMeldekortGyldig = (
+    meldekort: Meldekort,
+    sendteMeldekort: SendtMeldekort[]): boolean => {
+    if (meldekort.meldekortId !== 0) {
+        return !erMeldekortSendtInnTidligere(meldekort, sendteMeldekort);
+    }
+    return false;
 };

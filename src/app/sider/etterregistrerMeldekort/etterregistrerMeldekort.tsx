@@ -17,7 +17,7 @@ import { Innsendingstyper } from '../../types/innsending';
 import { Person } from '../../types/person';
 import { Redirect } from 'react-router';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
-import { erMeldekortSendtInnFor } from '../../utils/meldekortUtils';
+import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 
 interface MapStateToProps {
     person: Person;
@@ -58,7 +58,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) => {
             if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
                 if (meldekortObj.meldeperiode.kanKortSendes) {
-                    return !erMeldekortSendtInnFor(meldekortObj, this.props.sendteMeldekort);
+                    return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
                 }
             }
             return false;
