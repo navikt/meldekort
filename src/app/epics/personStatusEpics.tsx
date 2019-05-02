@@ -1,7 +1,7 @@
 import { AppEpic } from '../store/configureStore';
 import { isActionOf } from 'typesafe-actions';
 import { PersonStatusActions } from '../actions/personStatus';
-import { catchError, concatMap, filter, map, switchMap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { fetchPersonstatus } from '../api/api';
 import { combineEpics } from 'redux-observable';

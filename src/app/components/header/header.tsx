@@ -108,5 +108,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     };
 };
 
-// Header.displayName = 'Header';
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
