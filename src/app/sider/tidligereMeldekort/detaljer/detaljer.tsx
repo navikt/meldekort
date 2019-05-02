@@ -17,10 +17,11 @@ import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { Meldegruppe, Meldekort } from '../../../types/meldekort';
+import { DetaljRad, Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
+import MobilTabell from '../../../components/mobilTabell/mobilTabell';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
@@ -34,15 +35,22 @@ interface MapDispatchToProps {
 
 type Props = MapDispatchToProps&MapStateToProps;
 
-class Detaljer extends React.Component<Props> {
+class Detaljer extends React.Component<Props, {windowSize: number}> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            windowSize: window.innerWidth
+        };
+    }
 
-    settTabellrader = (meldekort: Meldekort) => {
-        return [{
+    settTabellrader = (meldekort: Meldekort): DetaljRad => {
+        return {
+            meldekortid: meldekort.meldekortId,
             mottattDato: formaterDato(meldekort.mottattDato),
             kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
             bruttoBelop: formaterBelop(meldekort.bruttoBelop),
             kortType: mapKortTypeTilTekst(meldekort.kortType)
-        }];
+        };
     }
 
     sjekkAktivtMeldekortOgRedirect = () => {
@@ -56,7 +64,14 @@ class Detaljer extends React.Component<Props> {
     componentDidMount() {
         this.props.hentMeldekortdetaljer();
         this.sjekkAktivtMeldekortOgRedirect();
+        window.addEventListener('resize', this.handleWindowSize);
+
     }
+
+    handleWindowSize = () =>
+        this.setState({
+            windowSize: window.innerWidth
+        })
 
     innhold = () => {
 
@@ -75,7 +90,9 @@ class Detaljer extends React.Component<Props> {
             {key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop"/>},
             {key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype"/>}
         ];
-        let { meldegruppe } = aktivtMeldekort;
+        const { meldegruppe } = aktivtMeldekort;
+
+        const erDesktopEllerTablet = this.state.windowSize > 768;
 
         return (
             <>
@@ -83,7 +100,17 @@ class Detaljer extends React.Component<Props> {
                 <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">
-                        <Tabell rows={rows} columns={columns}/>
+                        {erDesktopEllerTablet ? (
+                            <Tabell
+                                rows={[rows]}
+                                columns={columns}
+                            />
+                        ) : (
+                            <MobilTabell
+                                row={rows}
+                                columns={columns}
+                            />
+                        )}
                     </div>
                 </section>
                 {meldekortdetaljer.meldekortdetaljer.id !== '' ?

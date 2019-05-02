@@ -21,7 +21,7 @@ import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortRedu
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/mapper';
-import { Meldekort } from '../../types/meldekort';
+import { HistoriskeMeldekortRad, Meldekort } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';
 
@@ -40,16 +40,6 @@ interface MapDispatchToProps {
 type State = {
     windowSize: number;
 };
-
-export interface HistoriskeMeldekortRad {
-    meldekort: Meldekort;
-    periode: string;
-    dato: string;
-    mottatt: string;
-    status: string;
-    bruttobelop: string;
-    detaljer: string;
-}
 
 type Props = MapDispatchToProps&MapStateToProps;
 
