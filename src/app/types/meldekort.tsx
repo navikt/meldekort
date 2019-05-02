@@ -1,4 +1,8 @@
 /* INTERFACES */
+import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../utils/mapper';
+import { formaterDato } from '../utils/dates';
+import { formaterBelop } from '../utils/numberFormat';
+
 export interface Meldekort {
     meldekortId: number;
     kortType: KortType;
@@ -8,6 +12,15 @@ export interface Meldekort {
     bruttoBelop?: number;
     mottattDato: Date;
     korrigerbart: boolean;
+}
+
+export interface SendteMeldekortState {
+    sendteMeldekort: SendtMeldekort[];
+}
+
+export interface SendtMeldekort {
+    meldekortId: number;
+    kortType: KortType;
 }
 
 // hentMeldekortDetaljer
@@ -29,6 +42,7 @@ export interface Meldeperiode {
     fra: Date;
     til: Date;
     kortKanSendesFra: Date;
+    kanKortSendes: boolean;
     periodeKode: string;
 }
 
@@ -91,6 +105,24 @@ export interface MeldekortDag {
 
 export interface FravaerType {
     typeFravaer: FravaerTypeEnum;
+}
+
+export interface HistoriskeMeldekortRad {
+    meldekort: Meldekort;
+    periode?: string;
+    dato: string;
+    mottatt: string;
+    status: string;
+    bruttobelop: string;
+    detaljer?: string;
+}
+
+export interface DetaljRad {
+    meldekortid: number;
+    kortType: string;
+    kortStatus: string;
+    bruttoBelop: string;
+    mottattDato: any;
 }
 
 /* ENUMS */

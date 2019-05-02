@@ -3,7 +3,6 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
@@ -31,7 +30,7 @@ import { Redirect } from 'react-router';
 
 interface MapStateToProps {
     innsending: InnsendingState;
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
     person: Person;
 }
 
@@ -67,10 +66,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 id: '',
                 personId: person.personId,
                 fodselsnr: person.fodselsnr,
-                meldekortId: this.erInnsendingKorrigering() ? innsending.korrigertMeldekortId : aktivtMeldekort.meldekort.meldekortId,
-                meldeperiode: aktivtMeldekort.meldekort.meldeperiode.periodeKode,
+                meldekortId: this.erInnsendingKorrigering() ? innsending.korrigertMeldekortId : aktivtMeldekort.meldekortId,
+                meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
                 arkivnokkel: '1-ELEKTRONISK',
-                kortType: this.erInnsendingKorrigering() ? KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.meldekort.kortType,
+                kortType: this.erInnsendingKorrigering() ? KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.kortType,
                 meldeDato: new Date(),
                 lestDato: new Date(),
                 begrunnelse: this.erInnsendingKorrigering() ? innsending.begrunnelse.valgtArsak : '',
@@ -95,14 +94,14 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
         let { meldekortdetaljer } = this.state.meldekortdetaljer;
-        let { meldekort } = this.props.aktivtMeldekort;
+        let { aktivtMeldekort } = this.props;
         return {
             meldekortId: meldekortdetaljer.meldekortId,
             kortType: meldekortdetaljer.kortType,
-            kortStatus: meldekort.kortStatus,
-            meldegruppe: meldekort.meldegruppe,
+            kortStatus: aktivtMeldekort.kortStatus,
+            meldegruppe: aktivtMeldekort.meldegruppe,
             mottattDato: meldekortdetaljer.meldeDato,
-            meldeperiode: meldekort.meldeperiode,
+            meldeperiode: aktivtMeldekort.meldeperiode,
             erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
             korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
             begrunnelse: meldekortdetaljer.begrunnelse,
@@ -110,7 +109,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             fnr: meldekortdetaljer.fodselsnr,
             personId: meldekortdetaljer.personId,
             sesjonsId: 'test', // TODO: Denne må settes til noe fornuftig. Mulig vi må lage en egen sesjonsId.
-            fravaersdager: this.hentFravaersdager(meldekortdetaljer, meldekort)
+            fravaersdager: this.hentFravaersdager(meldekortdetaljer, aktivtMeldekort)
         };
     }
 
@@ -194,7 +193,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     }
 
     render() {
-        let { meldegruppe } = this.props.aktivtMeldekort.meldekort;
+        let { meldegruppe } = this.props.aktivtMeldekort;
         let { valideringsResultat } = this.props.innsending;
         let { meldekortdetaljer } = this.state.meldekortdetaljer;
         let { feilmelding } = this.state;
@@ -268,10 +267,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    const meldekort: AktivtMeldekortState = {meldekort: state.aktivtMeldekort.meldekort};
     return {
         innsending: state.innsending,
-        aktivtMeldekort: meldekort,
+        aktivtMeldekort: state.aktivtMeldekort,
         person: state.person,
     };
 };

@@ -8,7 +8,6 @@ import veileder from '../../../ikoner/veileder.svg';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { UtfyltDag } from '../utfyllingsside/utfylling/utfyllingConfig';
 import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
@@ -18,14 +17,14 @@ import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFo
 import { IModal, ModalKnapp } from '../../../types/ui';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe } from '../../../types/meldekort';
+import { Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { RouteComponentProps } from 'react-router';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
 
 interface MapStateToProps {
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
     innsending: InnsendingState;
 }
 
@@ -217,7 +216,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
     resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId = () => {
         const { aktivtMeldekort, innsending, resetSporsmalOgUtfylling } = this.props;
-        if ( aktivtMeldekort.meldekort.meldekortId !== innsending.meldekortId ) {
+        if ( aktivtMeldekort.meldekortId !== innsending.meldekortId ) {
             resetSporsmalOgUtfylling();
         }
     }
@@ -241,7 +240,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
     render() {
         const { innsending, aktivtMeldekort } = this.props;
-        const meldegruppeErAAP = aktivtMeldekort.meldekort.meldegruppe === Meldegruppe.ATTF;
+        const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
         const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
         return (
             <main>
@@ -324,9 +323,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
 // TODO: Bytt til å hente meldekortDetaljer fra Store
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    const meldekort: AktivtMeldekortState = {meldekort: state.aktivtMeldekort.meldekort};
     return {
-        aktivtMeldekort: meldekort,
+        aktivtMeldekort: state.aktivtMeldekort,
         innsending: state.innsending
     };
 };

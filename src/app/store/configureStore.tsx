@@ -6,7 +6,7 @@ import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
 
-import aktivtMeldekortReducer, { AktivtMeldekortState } from '../reducers/aktivtMeldekortReducer';
+import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
 import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
 import personReducer from '../reducers/personReducer';
@@ -31,6 +31,8 @@ import menyReducer from '../reducers/menyReducer';
 import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
+import meldekortReducer from '../reducers/meldekortReducer';
+import { Meldekort, SendteMeldekortState } from '../types/meldekort';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -52,12 +54,14 @@ export interface RootState {
     person: Person;
     personStatus: PersonStatusState;
     meldekortdetaljer: MeldekortdetaljerState;
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
     historiskeMeldekort: HistoriskeMeldekortState;
     innsending: InnsendingState;
     meldeform: MeldeformState;
     meny: MenyState;
     ui: UIState;
+    meldekort: SendteMeldekortState;
+
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -75,6 +79,7 @@ const appReducer = combineReducers({
     meny: menyReducer,
     meldeform: meldeformReducer,
     ui: uiReducer,
+    meldekort: meldekortReducer
 });
 
 const rootReducer = (state: any, action: any) => {

@@ -13,7 +13,7 @@ const hentKorrigertId: AppEpic = (action$, state$) =>
         filter(isActionOf([InnsendingActions.hentKorrigertId.request])),
         withLatestFrom(state$),
         switchMap(([action, state]) =>
-            from(fetchKorrigertId(state.aktivtMeldekort.meldekort.meldekortId)).pipe(
+            from(fetchKorrigertId(state.aktivtMeldekort.meldekortId)).pipe(
                 map(InnsendingActions.hentKorrigertId.success),
                 catchError(error =>
                     of(InnsendingActions.hentKorrigertId.failure(error), MeldekortActions.apiKallFeilet(error))

@@ -3,7 +3,6 @@ import EtikettBase from 'nav-frontend-etiketter';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import PeriodeBanner from '../../../components/periodeBanner/periodeBanner';
 import Tabell from '../../../components/tabell/tabell';
-import { AktivtMeldekortState } from '../../../reducers/aktivtMeldekortReducer';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { finnRiktigEtikettType } from '../../../utils/statusEtikettUtil';
@@ -18,14 +17,15 @@ import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { Meldegruppe, Meldekort } from '../../../types/meldekort';
+import { DetaljRad, Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
+import MobilTabell from '../../../components/mobilTabell/mobilTabell';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
     router: Router;
 }
 
@@ -35,19 +35,26 @@ interface MapDispatchToProps {
 
 type Props = MapDispatchToProps&MapStateToProps;
 
-class Detaljer extends React.Component<Props> {
+class Detaljer extends React.Component<Props, {windowSize: number}> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            windowSize: window.innerWidth
+        };
+    }
 
-    settTabellrader = (meldekort: Meldekort) => {
-        return [{
+    settTabellrader = (meldekort: Meldekort): DetaljRad => {
+        return {
+            meldekortid: meldekort.meldekortId,
             mottattDato: formaterDato(meldekort.mottattDato),
             kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
             bruttoBelop: formaterBelop(meldekort.bruttoBelop),
             kortType: mapKortTypeTilTekst(meldekort.kortType)
-        }];
+        };
     }
 
     sjekkAktivtMeldekortOgRedirect = () => {
-        if (this.props.aktivtMeldekort.meldekort.meldekortId === 0) {
+        if (this.props.aktivtMeldekort.meldekortId === 0) {
             const pathname = this.props.router.location.pathname;
             const tidligereMeldekort = '/tidligere-meldekort';
             pathname !== tidligereMeldekort && history.push(tidligereMeldekort);
@@ -57,12 +64,19 @@ class Detaljer extends React.Component<Props> {
     componentDidMount() {
         this.props.hentMeldekortdetaljer();
         this.sjekkAktivtMeldekortOgRedirect();
+        window.addEventListener('resize', this.handleWindowSize);
+
     }
+
+    handleWindowSize = () =>
+        this.setState({
+            windowSize: window.innerWidth
+        })
 
     innhold = () => {
 
         const { meldekortdetaljer, aktivtMeldekort } = this.props;
-        const rows = this.settTabellrader(aktivtMeldekort.meldekort);
+        const rows = this.settTabellrader(aktivtMeldekort);
         const columns = [
             {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
@@ -76,7 +90,9 @@ class Detaljer extends React.Component<Props> {
             {key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop"/>},
             {key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype"/>}
         ];
-        let { meldegruppe } = aktivtMeldekort.meldekort;
+        const { meldegruppe } = aktivtMeldekort;
+
+        const erDesktopEllerTablet = this.state.windowSize > 768;
 
         return (
             <>
@@ -84,7 +100,17 @@ class Detaljer extends React.Component<Props> {
                 <PeriodeBanner/>
                 <section className="seksjon">
                     <div className="tabell-detaljer">
-                        <Tabell rows={rows} columns={columns}/>
+                        {erDesktopEllerTablet ? (
+                            <Tabell
+                                rows={[rows]}
+                                columns={columns}
+                            />
+                        ) : (
+                            <MobilTabell
+                                row={rows}
+                                columns={columns}
+                            />
+                        )}
                     </div>
                 </section>
                 {meldekortdetaljer.meldekortdetaljer.id !== '' ?
@@ -107,13 +133,13 @@ class Detaljer extends React.Component<Props> {
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
-                    {aktivtMeldekort.meldekort.korrigerbart ?
+                    {aktivtMeldekort.korrigerbart ?
                         <NavKnapp
                             type={knappTyper.standard}
                             nestePath={router.location.pathname + '/korriger'}
                             tekstid={'korriger.meldekort'}
                             className={'navigasjonsknapp'}
-                            nesteAktivtMeldekort={aktivtMeldekort.meldekort}
+                            nesteAktivtMeldekort={aktivtMeldekort}
                             nesteInnsendingstype={Innsendingstyper.korrigering}
                         /> : null
                     }

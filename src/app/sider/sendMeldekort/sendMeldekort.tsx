@@ -8,11 +8,11 @@ import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Element, Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
+import { formaterDato, formaterUkeOgDatoPeriode, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
-import { KortStatus, Meldekort } from '../../types/meldekort';
+import { KortStatus, Meldekort, SendtMeldekort } from '../../types/meldekort';
 import { PersonActions } from '../../actions/person';
 import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
@@ -21,11 +21,15 @@ import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
 import { Person } from '../../types/person';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import { erMeldekortSendtInnFor } from '../../utils/meldekortUtils';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import veileder from '../../ikoner/veileder.svg';
 
 interface MapStateToProps {
    person: Person;
    baksystemFeilmelding: BaksystemFeilmelding;
    router: Router;
+   sendteMeldekort: SendtMeldekort[];
 }
 interface MapDispatchToProps {
     hentPerson: () => void;
@@ -55,23 +59,27 @@ class SendMeldekort extends React.Component<Props, any> {
         return false;
     }
 
-    filtrerMeldekortListe = () => {
+    filtrerMeldekortListe = (): Meldekort[] => {
         if (typeof this.props.person.meldekort === 'undefined') {
             return [];
         }
-        return this.props.person.meldekort.filter((meldekortObj) =>
-             (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
-               (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
+        return this.props.person.meldekort.filter((meldekortObj) => {
+                if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
+                    if (meldekortObj.meldeperiode.kanKortSendes) {
+                        return !erMeldekortSendtInnFor(meldekortObj, this.props.sendteMeldekort);
+                    }
+                }
+                return false;
+            });
     }
 
     hentMeldekortRaderFraPerson = () => {
         let radliste: MeldekortRad[] = [];
 
-        let { meldekort } = this.props.person;
-        if (meldekort != null) {
-            meldekort.map((meldekortObj) => {
+        if (this.filtrerMeldekortListe() != null) {
+            this.filtrerMeldekortListe().map((meldekortObj) => {
                 if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
-                    if (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)) {
+                    if (meldekortObj.meldeperiode.kanKortSendes) {
                         radliste.push({
                            periode: hentUkePeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
                            dato: hentDatoPeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
@@ -90,20 +98,33 @@ class SendMeldekort extends React.Component<Props, any> {
         this.props.hentPerson();
     }
 
+    meldekortSomIkkeKanSendesInnEnda = (): Meldekort[] => {
+        if (this.filtrerMeldekortListe().length === 0) {
+            return this.props.person.meldekort.filter(mk => {
+                return (!mk.meldeperiode.kanKortSendes && (mk.kortStatus === KortStatus.OPPRE || mk.kortStatus === KortStatus.SENDT));
+            });
+        }
+        return [];
+
+    }
+
     hentMeldingOmMeldekortSomIkkeErKlare  = (rows: MeldekortRad[], person: Person) => {
-        if (rows.length === 0 && person.meldekort !== undefined) {
-            let meldekortId = this.forTidligASende(person.meldekort);
-            let meldekort = person.meldekort.filter((m) => m.meldekortId === meldekortId);
-            if (meldekort.length !== 0) {
+        let meldekortliste = this.filtrerMeldekortListe();
+        if (rows.length === 0 && meldekortliste !== undefined) {
+            let meldekortId = this.forTidligASende(meldekortliste);
+            let meldekort = meldekortliste.filter((m) => m.meldekortId === meldekortId);
+            let meldekortSomIkkeKanSendesEnda = this.meldekortSomIkkeKanSendesInnEnda();
+            if (meldekort.length === 0 && meldekortSomIkkeKanSendesEnda.length !== 0) {
+                console.log(meldekortSomIkkeKanSendesEnda);
                 return (
                     <div className="send-meldekort-varsel">
                         <Normaltekst>
                             <FormattedMessage id="overskrift.nesteMeldekort"/>
                             <FormattedMessage id="sendMeldekort.info.innsendingStatus.kanSendes"/>
-                            {formaterDato(meldekort[0].meldeperiode.kortKanSendesFra)}
+                            {formaterDato(meldekortSomIkkeKanSendesEnda[0].meldeperiode.kortKanSendesFra)}
                         </Normaltekst>
                         <Element>
-                            {formaterUkeOgDatoPeriode(meldekort[0].meldeperiode.fra, meldekort[0].meldeperiode.til)}
+                            {formaterUkeOgDatoPeriode(meldekortSomIkkeKanSendesEnda[0].meldeperiode.fra, meldekortSomIkkeKanSendesEnda[0].meldeperiode.til)}
                         </Element>
                         <FormattedMessage id="sendMeldekort.info.ingenKlare"/>
                     </div>
@@ -137,7 +158,11 @@ class SendMeldekort extends React.Component<Props, any> {
                 );
             }
         } else {
-            return this.hentMeldingOmMeldekortSomIkkeErKlare(rows, this.props.person);
+            return (
+                <Veilederpanel svg={<img alt="" src={veileder}/>}>
+                    {this.hentMeldingOmMeldekortSomIkkeErKlare(rows, this.props.person)}
+                </Veilederpanel>
+            );
         }
     }
 
@@ -160,7 +185,7 @@ class SendMeldekort extends React.Component<Props, any> {
         }
         meldekortListe.map((meldekort) => {
             if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
-                if (kanMeldekortSendesInn(meldekort.meldeperiode.kortKanSendesFra) === false) {
+                if (!meldekort.meldeperiode.kanKortSendes) {
                     meldekortId = meldekort.meldekortId;
                 }
             }
@@ -233,7 +258,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         person: state.person,
         router: selectRouter(state),
-        baksystemFeilmelding: selectFeilmelding(state)
+        baksystemFeilmelding: selectFeilmelding(state),
+        sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };
 

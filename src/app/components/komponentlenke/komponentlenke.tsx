@@ -3,7 +3,6 @@ import 'nav-frontend-lenker-style';
 import { history, RootState } from '../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { AktivtMeldekortState } from '../../reducers/aktivtMeldekortReducer';
 import { selectRouter } from '../../selectors/router';
 import { Router } from '../../types/router';
 import { Meldekort } from '../../types/meldekort';
@@ -17,7 +16,7 @@ interface KomponentlenkeProps {
 }
 
 interface MapStateToProps {
-    aktivtMeldekort: AktivtMeldekortState;
+    aktivtMeldekort: Meldekort;
     router: Router;
 }
 
@@ -49,8 +48,8 @@ class Komponentlenke extends React.Component<ReduxType> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-        let meldekort: AktivtMeldekortState = {
-            meldekort: state.aktivtMeldekort.meldekort
+        let meldekort: Meldekort = {
+            ...state.aktivtMeldekort
         };
         return {
             aktivtMeldekort: meldekort,

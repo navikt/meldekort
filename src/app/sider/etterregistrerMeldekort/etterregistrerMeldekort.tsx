@@ -12,11 +12,12 @@ import { Router } from '../../types/router';
 import Tabell from '../../components/tabell/tabell';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { KortStatus, Meldekort } from '../../types/meldekort';
-import { hentDatoPeriode, hentUkePeriode, kanMeldekortSendesInn } from '../../utils/dates';
+import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
 import { Person } from '../../types/person';
 import { Redirect } from 'react-router';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import { hentIntl } from '../../utils/intlUtil';
 
 interface MapStateToProps {
     person: Person;
@@ -55,7 +56,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         }
         return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) =>
             (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
-            (kanMeldekortSendesInn(meldekortObj.meldeperiode.kortKanSendesFra)));
+            (meldekortObj.meldeperiode.kanKortSendes));
     }
 
     hentMeldekortRaderFraPerson = () => {
@@ -89,7 +90,9 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         return !ettMeldekort ? (
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel className="seksjon"> {rows.length} meldekort klar for etteregistrering </Innholdstittel>
+                    <Innholdstittel className="seksjon">
+                        {hentIntl().formatMessage({id: 'overskrift.etterregistrering.innsending'})}
+                    </Innholdstittel>
                     <Sprakvelger/>
                 </section>
                 <section className="seksjon">

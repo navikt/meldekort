@@ -13,6 +13,7 @@
         "fra": "2018-12-31T12:00:00+01:00",
         "til": "2019-01-13T12:00:00+01:00",
         "kortKanSendesFra": "2019-01-12T12:00:00+01:00",
+        "kanKortSendes": false,
         "periodeKode": "201901"
       },
       "meldegruppe": "DAGP",
@@ -29,6 +30,7 @@
         "fra": "2019-01-14T12:00:00+01:00",
         "til": "2019-01-27T12:00:00+01:00",
         "kortKanSendesFra": "2019-01-26T12:00:00+01:00",
+        "kanKortSendes": true,
         "periodeKode": "201903"
       },
       "meldegruppe": "ATTF",
@@ -43,6 +45,7 @@
         "fra": "2019-01-28T12:00:00+01:00",
         "til": "2019-02-10T12:00:00+01:00",
         "kortKanSendesFra": "2019-02-09T12:00:00+01:00",
+        "kanKortSendes": true,
         "periodeKode": "201905"
       },
       "meldegruppe": "DAGP",
@@ -57,22 +60,39 @@
         "fra": "2019-02-11T12:00:00+01:00",
         "til": "2019-02-24T12:00:00+01:00",
         "kortKanSendesFra": "2019-02-23T12:00:00+01:00",
+        "kanKortSendes": true,
         "periodeKode": "201907"
       },
       "meldegruppe": "DAGP",
       "kortStatus": "OPPRE",
       "erForskuddsPeriode": false,
       "korrigerbart": true
+    },
+    {
+      "meldekortId": 1011121318,
+      "kortType": "ELEKTRONISK",
+      "meldeperiode": {
+        "fra": "2019-02-11T12:00:00+01:00",
+        "til": "2019-02-24T12:00:00+01:00",
+        "kortKanSendesFra": "2019-02-23T12:00:00+01:00",
+        "kanKortSendes": false,
+        "periodeKode": "201907"
+      },
+      "meldegruppe": "DAGP",
+      "kortStatus": "OPPRE",
+      "erForskuddsPeriode": false,
+      "korrigerbart": false
     }
   ],
   "etterregistrerteMeldekort": [
     {
-      "meldekortId": 1011121315,
+      "meldekortId": 1011121325,
       "kortType": "ELEKTRONISK",
       "meldeperiode": {
         "fra": "2019-01-14T12:00:00+01:00",
         "til": "2019-01-27T12:00:00+01:00",
         "kortKanSendesFra": "2019-01-26T12:00:00+01:00",
+        "kanKortSendes": true,
         "periodeKode": "201903"
       },
       "meldegruppe": "ATTF",
@@ -81,12 +101,13 @@
       "korrigerbart": true
     },
     {
-      "meldekortId": 1011121316,
+      "meldekortId": 1011121326,
       "kortType": "ELEKTRONISK",
       "meldeperiode": {
         "fra": "2019-01-28T12:00:00+01:00",
         "til": "2019-02-10T12:00:00+01:00",
         "kortKanSendesFra": "2019-02-09T12:00:00+01:00",
+        "kanKortSendes": true,
         "periodeKode": "201905"
       },
       "meldegruppe": "DAGP",
@@ -95,12 +116,13 @@
       "korrigerbart": true
     },
     {
-      "meldekortId": 1011121317,
+      "meldekortId": 1011121327,
       "kortType": "ELEKTRONISK",
       "meldeperiode": {
         "fra": "2019-02-11T12:00:00+01:00",
         "til": "2019-02-24T12:00:00+01:00",
         "kortKanSendesFra": "2019-02-23T12:00:00+01:00",
+        "kanKortSendes": true,
         "periodeKode": "201907"
       },
       "meldegruppe": "DAGP",

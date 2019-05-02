@@ -14,12 +14,14 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 interface MapStateToProps {
     router: Router;
     innsendingstypeFraStore: Innsendingstyper | null;
+    aktivtMeldekort: Meldekort;
 }
 
 interface MapDispatchToProps {
     leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
     resetInnsending: () => void;
+    leggTilMeldekortId: (meldekortId: number) => void;
 }
 
 interface NavKnappProps {
@@ -72,6 +74,7 @@ class NavKnapp extends React.Component<Props> {
                 validert = this.props.validering();
             }
             if (validert) {
+                console.log('Validert!')
                 const path = router.location.pathname;
                 const params = path.split('/');
                 const nestePathParams = nestePath.split('/');
@@ -83,11 +86,15 @@ class NavKnapp extends React.Component<Props> {
                     if (!erPaKvittering) {
                         nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
                     } else {
+                        this.props.resetInnsending();
                         nyPath = nestePath;
+                        if (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined && typeof nesteAktivtMeldekort !== 'undefined') {
+                            this.props.leggTilMeldekortId(nesteAktivtMeldekort.meldekortId);
+                        }
                     }
-                } else {
-                    (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined)
-                    && this.props.settInnsendingstype(nesteInnsendingstype);
+                }
+                if (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined) {
+                    this.props.settInnsendingstype(nesteInnsendingstype);
                     nyPath = nestePath;
                 }
                 history.push(nyPath);
@@ -114,6 +121,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         router: selectRouter(state),
         innsendingstypeFraStore: state.innsending.innsendingstype,
+        aktivtMeldekort: state.aktivtMeldekort
     };
 };
 
@@ -123,7 +131,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
         settInnsendingstype: (innsendingstype: Innsendingstyper) =>
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
-        resetInnsending: () => dispatch(InnsendingActions.resetInnsending())
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+        leggTilMeldekortId: (meldekortId: number) =>
+            dispatch(InnsendingActions.leggTilMeldekortId(meldekortId))
     };
 };
 
