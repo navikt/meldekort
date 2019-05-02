@@ -49,10 +49,14 @@ interface MapDispatchToProps {
 
 type Props = MapDispatchToProps&MapStateToProps;
 
-class App extends React.Component<Props> {
+interface AppState {
+    henterPersonInfo: boolean;
+}
+
+class App extends React.Component<Props, AppState> {
     constructor(props: any) {
         super(props);
-
+        this.state = { henterPersonInfo: false };
         this.props.hentPersonStatus();
     }
 
@@ -66,8 +70,9 @@ class App extends React.Component<Props> {
                 </div>
             );
         }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
-            if (this.props.person.personId === 0) {
+            if (this.props.person.personId === 0 && !this.state.henterPersonInfo) {
                 this.props.hentPerson();
+                this.setState({ henterPersonInfo: true });
             }
             return (
                 <div>
