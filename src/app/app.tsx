@@ -21,7 +21,6 @@ import { MenyPunkt } from './utils/menyConfig';
 import { MenyActions } from './actions/meny';
 import { Router } from './types/router';
 import { selectRouter } from './selectors/router';
-import { isEmpty } from 'ramda';
 import { hentIntl } from './utils/intlUtil';
 import classNames from 'classnames';
 import { PersonActions } from './actions/person';
@@ -105,24 +104,10 @@ class App extends React.Component<Props> {
         }
     }
 
-    /*settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
-        const menypunktliste = menypunkter.map(menypunkt => {
-            if (menypunkt.tittel === 'endreMeldeform') {
-                return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
-            } else if (menypunkt.tittel === 'etterregistrering') {
-                return {...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort)};
-            }
-            return menypunkt;
-        });
-
-        this.props.settMenyPunkter(menypunktliste);
-    }*/
-
     componentDidMount() {
         const { hentPersonStatus, hentPerson, person, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
-        // this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
     }
 
     public render() {
