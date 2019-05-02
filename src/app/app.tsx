@@ -67,7 +67,9 @@ class App extends React.Component<Props> {
                 </div>
             );
         }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
-            this.props.hentPerson();
+            if (this.props.person.personId === 0) {
+                this.props.hentPerson();
+            }
             return (
                 <div>
                     <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
@@ -103,7 +105,7 @@ class App extends React.Component<Props> {
         }
     }
 
-    settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
+    /*settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
         const menypunktliste = menypunkter.map(menypunkt => {
             if (menypunkt.tittel === 'endreMeldeform') {
                 return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
@@ -114,13 +116,13 @@ class App extends React.Component<Props> {
         });
 
         this.props.settMenyPunkter(menypunktliste);
-    }
+    }*/
 
     componentDidMount() {
         const { hentPersonStatus, hentPerson, person, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
-        this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
+        // this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
     }
 
     public render() {

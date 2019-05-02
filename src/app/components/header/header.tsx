@@ -44,8 +44,6 @@ class Header extends React.Component<HeaderProps> {
     oppdatertMeny = () => {
          const { meny, person } = this.props;
          const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
-             console.log('TRIGGERD!');
-             console.log(person);
              if (menypunkt.tittel === 'endreMeldeform') {
                  return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
              } else if (menypunkt.tittel === 'etterregistrering') {

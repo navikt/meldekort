@@ -39,8 +39,11 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
 
     const begrunnelseClass = props.erFeil ? 'feilmelding' : '';
 
+    const { valgtArsak } = props.begrunnelse;
+
     return (
         <div className={'seksjon begrunnelse ' + begrunnelseClass}>
+            {console.log('valgt arsak: ', valgtArsak)}
             <Select
                 label={
                     <>
@@ -53,10 +56,11 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
                     </>
                 }
                 onChange={handleOnChange}
+                value={valgtArsak}
             >
                 <option value={''}> {hentIntl().formatMessage({id: 'begrunnelse.velgArsak'})}</option>
                 {options.map(opt => (
-                    <option key={opt}> {opt} </option>
+                    <option value={opt.trim()} key={opt}> {opt} </option>
                 ))}
             </Select>
             {props.erFeil && (<span className={'rodTekst'}>{hentIntl().formatMessage({id: 'begrunnelse.required'})}</span>)}

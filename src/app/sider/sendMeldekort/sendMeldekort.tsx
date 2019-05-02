@@ -115,7 +115,6 @@ class SendMeldekort extends React.Component<Props, any> {
             let meldekort = meldekortliste.filter((m) => m.meldekortId === meldekortId);
             let meldekortSomIkkeKanSendesEnda = this.meldekortSomIkkeKanSendesInnEnda();
             if (meldekort.length === 0 && meldekortSomIkkeKanSendesEnda.length !== 0) {
-                console.log(meldekortSomIkkeKanSendesEnda);
                 return (
                     <div className="send-meldekort-varsel">
                         <Normaltekst>

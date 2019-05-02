@@ -81,8 +81,6 @@ class Kvittering extends React.Component<KvitteringsProps> {
         const nestePath = urlParams.join('/');
         const meldekort = this.meldekortSomKanSendes(person.meldekort);
         const etterregistrerteMeldekort = this.meldekortSomKanSendes(person.etterregistrerteMeldekort);
-        console.log('meldekort som kan sendes: ', meldekort);
-        console.log('etterregistrerteMeldekort som kan sendes: ', etterregistrerteMeldekort);
         const harBrukerFlereMeldekort = meldekort.length > 0;
         const harBrukerFlereEtterregistrerteMeldekort = etterregistrerteMeldekort.length > 0;
         const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(

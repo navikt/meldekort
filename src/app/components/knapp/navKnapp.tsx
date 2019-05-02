@@ -74,7 +74,6 @@ class NavKnapp extends React.Component<Props> {
                 validert = this.props.validering();
             }
             if (validert) {
-                console.log('Validert!')
                 const path = router.location.pathname;
                 const params = path.split('/');
                 const nestePathParams = nestePath.split('/');
