@@ -12,7 +12,6 @@ import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
-import { useEffect, useState } from 'react';
 import { isEmpty } from 'ramda';
 
 interface MapStateToProps {
@@ -32,51 +31,64 @@ interface BannerProps {
 
 type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
-const Header: React.FunctionComponent<HeaderProps> = (props) => {
+class Header extends React.Component<HeaderProps> {
 
-    const {router, meny, person} = props;
-    const [oppdaterMeny, settMeny] = useState(meny.alleMenyPunkter);
-
-    const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
-        if (menypunkt.tittel === 'endreMeldeform') {
-            return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
-        } else if (menypunkt.tittel === 'etterregistrering') {
-            return {...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort)};
+    componentDidUpdate(prevProps: Readonly<MapStateToProps & MapDispatchToProps & BannerProps>): void {
+        const { person } = this.props;
+        if ((person.meldeform !== prevProps.person.meldeform) ||
+            (person.etterregistrerteMeldekort !== prevProps.person.etterregistrerteMeldekort)) {
+            this.oppdatertMeny();
         }
-        return menypunkt;
-    });
+    }
 
-    useEffect(() => {
-            props.settMenyPunkter(oppdatertMeny);
-        },
-              [oppdaterMeny]
-    );
+    oppdatertMeny = () => {
+         const { meny, person } = this.props;
+         const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
+             console.log('TRIGGERD!');
+             console.log(person);
+             if (menypunkt.tittel === 'endreMeldeform') {
+                 return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
+             } else if (menypunkt.tittel === 'etterregistrering') {
+                 return {...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort)};
+             }
+             return menypunkt;
+         });
+         this.props.settMenyPunkter(oppdatertMeny);
+     }
 
-    const params = router.location.pathname.split('/');
-    const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
-    const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
+     hentMenypunkter = () => {
+        return this.props.meny.alleMenyPunkter.filter( menypunkt => !menypunkt.disabled);
+     }
 
-    return (
+    render() {
+        const {router, tittel} = this.props;
+        const params = router.location.pathname.split('/');
+        const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
+        const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
+
+        return (
         <header className={headerClass}>
             <div className="banner-container">
                 <div className="banner-content">
                     <div className={'banner-title'}>
-                        <Sidetittel>{props.tittel}</Sidetittel>
+                        <Sidetittel>{tittel}</Sidetittel>
                     </div>
                     <MobilMenyToggle/>
                 </div>
                 {!harPathInnsending ? (
-                    <MobilMeny menypunkter={meny.alleMenyPunkter.filter( menypunkt => !menypunkt.disabled)}/>
+                    <MobilMeny menypunkter={this.hentMenypunkter()}/>
                 ) : <></>
                 }
             </div>
             {!harPathInnsending ? (
-                <HovedMeny menypunkter={meny.alleMenyPunkter.filter( menypunkt => !menypunkt.disabled)}/>
-                ) : <></>
+                <HovedMeny menypunkter={this.hentMenypunkter()}/>
+            ) : <></>
             }
         </header>
     );
-};
+
+    }
+}
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
@@ -96,5 +108,5 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     };
 };
 
-Header.displayName = 'Header';
+// Header.displayName = 'Header';
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

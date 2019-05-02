@@ -24,6 +24,8 @@ import { selectRouter } from './selectors/router';
 import { isEmpty } from 'ramda';
 import { hentIntl } from './utils/intlUtil';
 import classNames from 'classnames';
+import { PersonActions } from './actions/person';
+import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 
 if (erMock()) {
     setupMock();
@@ -38,6 +40,7 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
+    hentPerson: () => void;
     hentPersonStatus: () => void;
     settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
     settMenyPunkter: ( menypunkter: MenyPunkt[]) => void;
@@ -54,11 +57,6 @@ class App extends React.Component<Props> {
         this.props.hentPersonStatus();
     }
 
-    erBrukerRegistrertIArena = (): boolean => {
-        let arbeidssokerStatus = this.props.personStatus.personStatus.statusArbeidsoker;
-        return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
-    }
-
     settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
             return (
@@ -68,7 +66,8 @@ class App extends React.Component<Props> {
                 }
                 </div>
             );
-        }  else if (this.erBrukerRegistrertIArena()) {
+        }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
+            this.props.hentPerson();
             return (
                 <div>
                     <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
@@ -118,7 +117,7 @@ class App extends React.Component<Props> {
     }
 
     componentDidMount() {
-        const { hentPersonStatus, person, meny, router  } = this.props;
+        const { hentPersonStatus, hentPerson, person, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
         this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
@@ -148,6 +147,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
+        hentPerson: () => dispatch(PersonActions.hentPerson.request()),
         hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
         settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
         settMenyPunkter: (menypunkter: MenyPunkt[]) => dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),
