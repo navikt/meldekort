@@ -41,6 +41,7 @@ const MobilMeny: React.FunctionComponent<MobilMenyProps&MapStateToProps&MapDispa
                             <li
                                 className={'navlist-item'}
                                 onClick={() => onChange(menypunkt)}
+                                key={menypunkt.tittel}
                             >
                                 <div
                                     className={classNames('item-wrapper', {
