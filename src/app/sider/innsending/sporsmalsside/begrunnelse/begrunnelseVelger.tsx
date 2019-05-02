@@ -43,7 +43,6 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
 
     return (
         <div className={'seksjon begrunnelse ' + begrunnelseClass}>
-            {console.log('valgt arsak: ', valgtArsak)}
             <Select
                 label={
                     <>

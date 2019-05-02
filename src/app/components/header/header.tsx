@@ -61,7 +61,7 @@ class Header extends React.Component<HeaderProps> {
     render() {
         const {router, tittel} = this.props;
         const params = router.location.pathname.split('/');
-        const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korrigering' ;
+        const harPathInnsending = params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korriger' ;
         const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
 
         return (
