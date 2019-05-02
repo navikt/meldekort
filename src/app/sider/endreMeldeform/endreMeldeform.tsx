@@ -11,6 +11,7 @@ import { Dispatch } from 'redux';
 import { MeldeformActions } from '../../actions/meldeform';
 import { connect } from 'react-redux';
 import { MeldeformState } from '../../reducers/meldeformReducer';
+import { Redirect } from 'react-router';
 
 interface MapStateToProps {
     person: Person;
@@ -36,7 +37,7 @@ class EndreMeldeform extends React.Component<EndreMeldeformProps, any> {
     }
 
     render() {
-        return(
+        return this.props.person.meldeform === MeldeForm.PAPIR ? (
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel> {hentIntl().formatMessage({id: 'overskrift.endreMeldeform'})} </Innholdstittel>
@@ -75,7 +76,7 @@ class EndreMeldeform extends React.Component<EndreMeldeformProps, any> {
                     />
                 </section>
             </main>
-        );
+        ) : <Redirect to="/om-meldekort"/>;
     }
 }
 

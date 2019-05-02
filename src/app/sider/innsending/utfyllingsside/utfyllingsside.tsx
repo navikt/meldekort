@@ -223,7 +223,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                     />
                 </section>
             </main>
-        ) : <Redirect exact={true} to="/send-meldekort"/>;
+        ) : <Redirect exact={true} to="/om-meldekort"/>;
 
     }
 }

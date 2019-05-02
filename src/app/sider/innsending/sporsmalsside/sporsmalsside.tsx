@@ -297,7 +297,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         />
                     </section>
                 </main>
-            ) : <Redirect exact={true} to="/send-meldekort"/>;
+            ) : <Redirect exact={true} to="/om-meldekort"/>;
     }
 
     ikkeFortsetteRegistrertKnapper = (): ModalKnapp[] => {

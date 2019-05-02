@@ -265,7 +265,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                         />
                     </section>
                 </main>
-            ) : <Redirect exact={true} to="/send-meldekort"/>;
+            ) : <Redirect exact={true} to="/om-meldekort"/>;
         }
     }
 }

@@ -96,7 +96,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
             {key: 'dato', label: 'Dato'}
         ];
         const ettMeldekort = this.harEttMeldekort();
-        return !ettMeldekort ? (
+        return rows.length === 0 ? <Redirect to="/om-meldekort"/> : (!ettMeldekort ? (
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel className="seksjon"> {rows.length} meldekort klar for etteregistrering </Innholdstittel>
@@ -124,7 +124,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
                     />
                 </section>
             </main>
-        ) : <Redirect exact={true} from="/etterregistrer-meldekort" to="/etterregistrer-meldekort/innsending"/>;
+        ) : <Redirect exact={true} from="/etterregistrer-meldekort" to="/etterregistrer-meldekort/innsending"/>);
     }
 }
 
