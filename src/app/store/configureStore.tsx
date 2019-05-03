@@ -33,6 +33,8 @@ import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, SendteMeldekortState } from '../types/meldekort';
+import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
+import personInfoEpics from '../epics/personInfoEpics';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -53,6 +55,7 @@ export interface RootState {
     router: RouterState;
     person: Person;
     personStatus: PersonStatusState;
+    personInfo: PersonInfoState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: Meldekort;
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -72,6 +75,7 @@ const appReducer = combineReducers({
     router: connectRouter(history),
     person: personReducer,
     personStatus: personStatusReducer,
+    personInfo: personInfoReducer,
     meldekortdetaljer: meldekortdetaljerReducer,
     aktivtMeldekort: aktivtMeldekortReducer,
     historiskeMeldekort: historiskeMeldekortReducer,
@@ -124,7 +128,7 @@ const persistConfig = {
     key: `meldekort:${packageConfig.redux_version}`,
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    blacklist: ['locales', 'ui'],
+    blacklist: ['locales', 'ui', 'personInfo'],
     transforms: [encryptor]
 };
 
@@ -142,6 +146,7 @@ epicMiddleware.run(
     combineEpics(
         personEpics,
         personStatusEpics,
+        personInfoEpics,
         historiskeMeldekortEpics,
         innsendingEpics,
         meldekortdetaljerEpics,

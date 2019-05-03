@@ -27,11 +27,8 @@ type EndreMeldeformProps = MapStateToProps & MapDispatchToProps;
 class EndreMeldeform extends React.Component<EndreMeldeformProps, any> {
 
     sendEndringAvMeldeform = (): boolean => {
-        const { fodselsnr, personId } = this.props.person;
         this.props.endreMeldeform({
-            fnr: fodselsnr,
-            meldeformNavn: MeldeForm.ELEKTRONISK.valueOf(),
-            personId: personId
+            meldeformNavn: MeldeForm.ELEKTRONISK.valueOf()
         });
         return true;
     }

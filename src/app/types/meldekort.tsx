@@ -1,7 +1,4 @@
 /* INTERFACES */
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../utils/mapper';
-import { formaterDato } from '../utils/dates';
-import { formaterBelop } from '../utils/numberFormat';
 
 export interface Meldekort {
     meldekortId: number;
@@ -26,8 +23,6 @@ export interface SendtMeldekort {
 // hentMeldekortDetaljer
 export interface Meldekortdetaljer {
     id: string;
-    personId: number;
-    fodselsnr: string;
     meldekortId: number;
     meldeperiode: string;
     arkivnokkel: string;
@@ -60,9 +55,6 @@ export interface MeldekortdetaljerInnsending {
     begrunnelse: string;
     signatur: boolean;
 
-    fnr: string;
-    personId: number;
-    ipAdresse?: string;
     sesjonsId: string;
 }
 

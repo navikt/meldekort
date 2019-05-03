@@ -7,6 +7,7 @@ import personstatus from './responses/personstatus.json';
 import korrigertid from './responses/korrigertid.json';
 import valideringsresultat from './responses/valideringsresultat.json';
 import meldeperiode from './responses/meldeperiode.json';
+import personinfo from './responses/personinfo.json';
 
 export default () => {
 
@@ -40,6 +41,10 @@ export default () => {
         ...personstatus
     });
 
+    fetchMock.get(Konstanter().hentPersonInfoApiUri, {
+        ...personinfo
+    });
+
     fetchMock.get(Konstanter().hentKorrigertMeldekortIdApiUri, korrigertid);
 
     fetchMock.post(Konstanter().sendMeldekortApiUri, {
@@ -49,5 +54,4 @@ export default () => {
     fetchMock.post(Konstanter().sendMeldeformApiUri, {
         ...meldeperiode
     });
-
 };

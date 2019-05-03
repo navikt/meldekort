@@ -2,10 +2,6 @@ import { Meldekort } from './meldekort';
 
 // fetchMeldekort
 export interface Person {
-    personId: number;
-    fodselsnr: string;
-    etternavn: string;
-    fornavn: string;
     maalformkode: string;
     meldeform: MeldeForm;
     meldekort: Meldekort[];
@@ -13,6 +9,13 @@ export interface Person {
     fravaer: Fravaer[];
     id: string;
     antallGjenstaaendeFeriedager: number;
+}
+
+export interface PersonInfo {
+    personId: number;
+    foedselsnr: string;
+    etternavn: string;
+    fornavn: string;
 }
 
 // hentPersonstatus
@@ -23,9 +26,7 @@ export interface PersonStatus {
 }
 
 export interface MeldeformDetaljerInn {
-    fnr: string;
     meldeformNavn: string;
-    personId: number;
 }
 
 export interface Meldeperiode {

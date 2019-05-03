@@ -19,7 +19,7 @@ import { Router } from '../../types/router';
 import { selectFeilmelding } from '../../selectors/ui';
 import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
-import { Person } from '../../types/person';
+import { MeldeForm, Person } from '../../types/person';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 import Veilederpanel from 'nav-frontend-veilederpanel';
@@ -166,7 +166,7 @@ class SendMeldekort extends React.Component<Props, any> {
     }
 
     ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (rows: MeldekortRad[], columns: any) => {
-        if (this.props.person.personId === 0) {
+        if (this.props.person.meldeform === MeldeForm.IKKE_SATT) {
             return (
                 <div className="meldekort-spinner">
                     <NavFrontendSpinner type="XL"/>

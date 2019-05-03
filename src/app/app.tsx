@@ -70,7 +70,7 @@ class App extends React.Component<Props, AppState> {
                 </div>
             );
         }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
-            if (this.props.person.personId === 0 && !this.state.henterPersonInfo) {
+            if (this.props.person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
                 this.props.hentPerson();
                 this.setState({ henterPersonInfo: true });
             }

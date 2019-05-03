@@ -34,7 +34,8 @@ export const Side: React.FunctionComponent<SideProps> = ({
 
 const mapStateToProps = (state: RootState) => {
     return {
-        person: state.person
+        person: state.person,
+        personInfo: state.personInfo.personInfo
     };
 };
 
@@ -45,7 +46,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
         return null;
     }
 
-    const { fornavn, etternavn, fodselsnr } = props.person;
+    const { fornavn, etternavn, foedselsnr } = props.personInfo;
     const printTekst = hentIntl().formatMessage({id: 'overskrift.meldekort.sendt'});
 
     return (
@@ -66,7 +67,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
                             <FormattedMessage id={'meldekort.for'}/>
                         </Ingress>
                         <Innholdstittel className="flex-innhold sentrert">
-                            <span>{`${fornavn} ${etternavn} (${fodselsnr})`}</span>
+                            <span>{`${fornavn} ${etternavn} (${foedselsnr})`}</span>
                         </Innholdstittel>
                     </>
                 }

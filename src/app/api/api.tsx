@@ -1,7 +1,7 @@
 import Environment from '../utils/env';
 import Konstanter from '../utils/consts';
 import { erMock } from '../mock/utils';
-import { MeldeformDetaljerInn, Meldeperiode, Person, PersonStatus } from '../types/person';
+import { MeldeformDetaljerInn, Meldeperiode, Person, PersonInfo, PersonStatus } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
 import { Meldekort, Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
 import { AxiosResponse } from 'axios';
@@ -48,9 +48,13 @@ export function fetchMeldekortdetaljer(id: number): Promise<Meldekortdetaljer> {
     return fetchGet(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
 }
 
-export const fetchPersonstatus = (): Promise<PersonStatus> => {
+export function fetchPersonstatus(): Promise<PersonStatus> {
     return fetchGet(Konstanter().hentPersonStatusApiUri);
 };
+
+export function fetchPersoninfo(): Promise<PersonInfo> {
+    return fetchGet(Konstanter().hentPersonInfoApiUri);
+}
 
 export function fetchKorrigertId(id: number): Promise<number> {
     return fetchGet(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));

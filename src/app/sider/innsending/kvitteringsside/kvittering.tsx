@@ -12,7 +12,7 @@ import { Dispatch } from 'redux';
 import { selectRouter } from '../../../selectors/router';
 import { connect } from 'react-redux';
 import { Router } from '../../../types/router';
-import { Person } from '../../../types/person';
+import { Person, PersonInfo } from '../../../types/person';
 import { isEmpty } from 'ramda';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import { hentIntl } from '../../../utils/intlUtil';
@@ -25,6 +25,8 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { scrollTilElement } from '../../../utils/scroll';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
+import { PersonInfoActions } from '../../../actions/personInfo';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
     router: Router;
@@ -33,6 +35,7 @@ interface MapStateToProps {
     innsending: InnsendingState;
     innsendingstype: Innsendingstyper | null;
     sendteMeldekort: SendteMeldekortState;
+    personInfo: PersonInfo;
 }
 
 interface PropsVerdier {
@@ -46,6 +49,7 @@ interface MapDispatchToProps {
     leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) => void;
     settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
     leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) => void;
+    hentPersonInfo: () => void;
 }
 
 type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToProps;
@@ -53,6 +57,7 @@ type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToPro
 class Kvittering extends React.Component<KvitteringsProps> {
 
     componentDidMount() {
+        this.props.hentPersonInfo();
         scrollTilElement(undefined, 'auto');
         let oppdatertSendteMeldekort = this.props.sendteMeldekort;
         let { meldekortId, kortType } = this.props.aktivtMeldekort;
@@ -151,7 +156,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
     }
 
     visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort) => {
-        const { person} = this.props;
+        const { personInfo } = this.props;
         const { meldekortdetaljerInnsending } = this.props.innsending;
         const ukeOgPeriode = formaterUkeOgDatoPeriode(meldekortdetaljerInnsending!.meldeperiode.fra, meldekortdetaljerInnsending!.meldeperiode.til);
         const meldekortErMottatt = hentIntl().formatMessage(
@@ -162,7 +167,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
             <div className="oppsummeringsTekster">
                 <Ingress>
                     <span>
-                        {hentIntl().formatMessage({id: 'meldekort.for'}) + person.fornavn + ' ' + person.etternavn  + ' (' + person.fodselsnr + ')'}
+                        {hentIntl().formatMessage({id: 'meldekort.for'}) + personInfo.fornavn + ' ' + personInfo.etternavn  + ' (' + personInfo.foedselsnr + ')'}
                     </span>
                 </Ingress>
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
@@ -204,7 +209,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
     render() {
         const { knappTekstid, nestePath, nesteAktivtMeldekort, nesteInnsendingstype } = this.returnerPropsVerdier();
 
-        return(
+        return this.props.personInfo.personId !== 0 ? (
             <main>
                 {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
                 <section className="seksjon flex-innhold sentrert noPrint kvitteringsKnapper">
@@ -225,7 +230,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
                     <PrintKnapp erKvittering={true} innholdRenderer={this.innhold} prerenderInnhold={true}/>
                 </section>
             </main>
-        );
+        ) : <div className="meldekort-spinner"><NavFrontendSpinner type="XL"/></div>;
     }
 }
 
@@ -236,7 +241,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
         innsending: state.innsending,
         innsendingstype: state.innsending.innsendingstype,
         person: state.person,
-        sendteMeldekort: state.meldekort
+        sendteMeldekort: state.meldekort,
+        personInfo: state.personInfo.personInfo
     };
 };
 
@@ -248,6 +254,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
         leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>
             dispatch(MeldekortActions.leggTilInnsendtMeldekort(sendteMeldekort)),
+        hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request())
     };
 };
 

@@ -67,8 +67,6 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         let mDet = {
             meldekortdetaljer: {
                 id: '',
-                personId: person.personId,
-                fodselsnr: person.fodselsnr,
                 meldekortId: this.erInnsendingKorrigering() ? innsending.korrigertMeldekortId : aktivtMeldekort.meldekortId,
                 meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
                 arkivnokkel: '1-ELEKTRONISK',
@@ -109,8 +107,6 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
             begrunnelse: meldekortdetaljer.begrunnelse,
             signatur: meldekortdetaljer.sporsmal.signatur,
-            fnr: meldekortdetaljer.fodselsnr,
-            personId: meldekortdetaljer.personId,
             sesjonsId: 'test', // TODO: Denne må settes til noe fornuftig. Mulig vi må lage en egen sesjonsId.
             fravaersdager: this.hentFravaersdager(meldekortdetaljer, aktivtMeldekort)
         };
