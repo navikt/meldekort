@@ -6,7 +6,6 @@ import { hentIntl } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { RootState, history } from '../../store/configureStore';
-import { useEffect } from 'react';
 
 interface MapStateToProps {
     valgtMenyPunkt: MenyPunkt;
@@ -35,7 +34,7 @@ const HovedMeny: React.FunctionComponent<Props> = (props) => {
             <div className="mainNav__wrapper">
                 <ul>
                     {
-                        menypunkter.filter((item: MenyPunkt) => item.urlparam && item.urlparam !== '/new-project').map((item: MenyPunkt, index: any) =>
+                        menypunkter.filter((item: MenyPunkt) => item.urlparam && item.urlparam !== '/new-project').map((item: MenyPunkt) =>
                             (
                                 <li key={item.tittel}>
                                     <button

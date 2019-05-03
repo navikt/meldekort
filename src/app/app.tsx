@@ -7,7 +7,7 @@ import MeldekortRoutes from './sider/meldekortRoutes';
 import setupMock from './mock/setup-mock';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
-import { MeldeForm, Person } from './types/person';
+import { Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
 import { PersonStatusState } from './reducers/personStatusReducer';
 import { connect } from 'react-redux';
@@ -105,12 +105,13 @@ class App extends React.Component<Props, AppState> {
         for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
             if (meny.alleMenyPunkter[i].urlparam === urlparam) {
                 const menypunkt = meny.alleMenyPunkter[i];
+                this.props.settValgtMenyPunkt(menypunkt);
             }
         }
     }
 
     componentDidMount() {
-        const { hentPersonStatus, hentPerson, person, meny, router  } = this.props;
+        const { hentPersonStatus, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
     }

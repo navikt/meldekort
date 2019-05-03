@@ -1,8 +1,4 @@
 /* INTERFACES */
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../utils/mapper';
-import { formaterDato } from '../utils/dates';
-import { formaterBelop } from '../utils/numberFormat';
-
 export interface Meldekort {
     meldekortId: number;
     kortType: KortType;
