@@ -11,17 +11,19 @@ import { connect } from 'react-redux';
 import { Router } from '../../types/router';
 import Tabell from '../../components/tabell/tabell';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
-import { KortStatus, Meldekort } from '../../types/meldekort';
+import { KortStatus, Meldekort, SendtMeldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
 import { Person } from '../../types/person';
 import { Redirect } from 'react-router';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 import { hentIntl } from '../../utils/intlUtil';
 
 interface MapStateToProps {
     person: Person;
     router: Router;
+    sendteMeldekort: SendtMeldekort[];
 }
 interface MapDispatchToProps {
     hentPerson: () => void;
@@ -54,28 +56,37 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         if (typeof this.props.person.etterregistrerteMeldekort === 'undefined') {
             return [];
         }
-        return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) =>
-            (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) &&
-            (meldekortObj.meldeperiode.kanKortSendes));
+        return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) => {
+            if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
+                if (meldekortObj.meldeperiode.kanKortSendes) {
+                    return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
+                }
+            }
+            return false;
+            });
     }
 
     hentMeldekortRaderFraPerson = () => {
-        let meldekortListe = this.props.person.etterregistrerteMeldekort;
+        let meldekortListe = this.filtrerMeldekortListe();
         let radliste = [];
         for (let i = 0; i < meldekortListe.length; i++) {
             if (meldekortListe[i].kortStatus === KortStatus.OPPRE || meldekortListe[i].kortStatus === KortStatus.SENDT) {
-                let rad: MeldekortRad = {
-                    periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
-                    dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
-                };
-                radliste.push(rad);
+                if (meldekortListe[i].meldeperiode.kanKortSendes) {
+                    let rad: MeldekortRad = {
+                        periode: hentUkePeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                        dato: hentDatoPeriode(meldekortListe[i].meldeperiode.fra, meldekortListe[i].meldeperiode.til),
+                    };
+                    radliste.push(rad);
+                }
             }
         }
         return radliste;
     }
 
     componentDidMount() {
-        this.props.resetInnsending();
+        if (this.filtrerMeldekortListe().length !== 1) {
+            this.props.resetInnsending();
+        }
         this.props.hentPerson();
     }
 
@@ -85,9 +96,8 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
             {key: 'periode', label: 'Periode'},
             {key: 'dato', label: 'Dato'}
         ];
-        const { etterregistrerteMeldekort } = this.props.person;
         const ettMeldekort = this.harEttMeldekort();
-        return !ettMeldekort ? (
+        return rows.length === 0 ? <Redirect to="/om-meldekort"/> : (!ettMeldekort ? (
             <main className="sideinnhold">
                 <section className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel className="seksjon">
@@ -112,12 +122,12 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
                         type={knappTyper.hoved}
                         nestePath={this.props.router.location.pathname + '/innsending'}
                         tekstid={'overskrift.etterregistrertMeldekort'}
-                        nesteAktivtMeldekort={etterregistrerteMeldekort[0]}
+                        nesteAktivtMeldekort={this.filtrerMeldekortListe()[0]}
                         nesteInnsendingstype={Innsendingstyper.etterregistrering}
                     />
                 </section>
             </main>
-        ) : <Redirect exact={true} from="/etterregistrer-meldekort" to="/etterregistrer-meldekort/innsending"/>;
+        ) : <Redirect exact={true} from="/etterregistrer-meldekort" to="/etterregistrer-meldekort/innsending"/>);
     }
 }
 
@@ -125,6 +135,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         person: state.person,
         router: selectRouter(state),
+        sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };
 

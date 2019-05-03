@@ -21,9 +21,10 @@ import { MenyPunkt } from './utils/menyConfig';
 import { MenyActions } from './actions/meny';
 import { Router } from './types/router';
 import { selectRouter } from './selectors/router';
-import { isEmpty } from 'ramda';
 import { hentIntl } from './utils/intlUtil';
 import classNames from 'classnames';
+import { PersonActions } from './actions/person';
+import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 
 if (erMock()) {
     setupMock();
@@ -38,6 +39,7 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
+    hentPerson: () => void;
     hentPersonStatus: () => void;
     settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
     settMenyPunkter: ( menypunkter: MenyPunkt[]) => void;
@@ -47,16 +49,15 @@ interface MapDispatchToProps {
 
 type Props = MapDispatchToProps&MapStateToProps;
 
-class App extends React.Component<Props> {
+interface AppState {
+    henterPersonInfo: boolean;
+}
+
+class App extends React.Component<Props, AppState> {
     constructor(props: any) {
         super(props);
-
+        this.state = { henterPersonInfo: false };
         this.props.hentPersonStatus();
-    }
-
-    erBrukerRegistrertIArena = (): boolean => {
-        let arbeidssokerStatus = this.props.personStatus.personStatus.statusArbeidsoker;
-        return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
     }
 
     settInnhold = () => {
@@ -68,7 +69,11 @@ class App extends React.Component<Props> {
                 }
                 </div>
             );
-        }  else if (this.erBrukerRegistrertIArena()) {
+        }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
+            if (this.props.person.personId === 0 && !this.state.henterPersonInfo) {
+                this.props.hentPerson();
+                this.setState({ henterPersonInfo: true });
+            }
             return (
                 <div>
                     <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
@@ -104,24 +109,10 @@ class App extends React.Component<Props> {
         }
     }
 
-    settMenypunkterBasertPaPerson = (person: Person, menypunkter: MenyPunkt[]) => {
-        const menypunktliste = menypunkter.map(menypunkt => {
-            if (menypunkt.tittel === 'endreMeldeform') {
-                return {...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR};
-            } else if (menypunkt.tittel === 'etterregistrering') {
-                return {...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort)};
-            }
-            return menypunkt;
-        });
-
-        this.props.settMenyPunkter(menypunktliste);
-    }
-
     componentDidMount() {
-        const { hentPersonStatus, person, meny, router  } = this.props;
+        const { hentPersonStatus, hentPerson, person, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
-        this.settMenypunkterBasertPaPerson(person, meny.alleMenyPunkter);
     }
 
     public render() {
@@ -148,6 +139,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
+        hentPerson: () => dispatch(PersonActions.hentPerson.request()),
         hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
         settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
         settMenyPunkter: (menypunkter: MenyPunkt[]) => dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),

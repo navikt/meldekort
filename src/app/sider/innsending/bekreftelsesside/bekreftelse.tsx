@@ -19,7 +19,8 @@ import {
     Meldekort,
     MeldekortDag,
     Meldekortdetaljer as MDetaljer,
-    MeldekortdetaljerInnsending
+    MeldekortdetaljerInnsending,
+    SendtMeldekort
 } from '../../../types/meldekort';
 import { hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
@@ -27,11 +28,13 @@ import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
 import { kalkulerDato } from '../../../utils/dates';
 import { Redirect } from 'react-router';
+import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: Meldekort;
     person: Person;
+    sendteMeldekort: SendtMeldekort[];
 }
 
 interface MapDispatchToProps {
@@ -193,6 +196,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     }
 
     render() {
+        let { aktivtMeldekort, sendteMeldekort } = this.props;
         let { meldegruppe } = this.props.aktivtMeldekort;
         let { valideringsResultat } = this.props.innsending;
         let { meldekortdetaljer } = this.state.meldekortdetaljer;
@@ -206,7 +210,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="kvittering"/>
             );
         } else {
-            return (
+            return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
                 <main>
                     <div className="ikkeSendt">
                         <AlertStripe type={'info'} solid={true}>
@@ -261,7 +265,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                         />
                     </section>
                 </main>
-            );
+            ) : <Redirect exact={true} to="/om-meldekort"/>;
         }
     }
 }
@@ -271,6 +275,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort,
         person: state.person,
+        sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };
 

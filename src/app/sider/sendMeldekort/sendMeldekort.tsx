@@ -21,7 +21,7 @@ import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
 import { Person } from '../../types/person';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
-import { erMeldekortSendtInnFor } from '../../utils/meldekortUtils';
+import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import veileder from '../../ikoner/veileder.svg';
 
@@ -66,7 +66,7 @@ class SendMeldekort extends React.Component<Props, any> {
         return this.props.person.meldekort.filter((meldekortObj) => {
                 if (meldekortObj.kortStatus === KortStatus.OPPRE || meldekortObj.kortStatus === KortStatus.SENDT) {
                     if (meldekortObj.meldeperiode.kanKortSendes) {
-                        return !erMeldekortSendtInnFor(meldekortObj, this.props.sendteMeldekort);
+                        return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
                     }
                 }
                 return false;
@@ -115,7 +115,6 @@ class SendMeldekort extends React.Component<Props, any> {
             let meldekort = meldekortliste.filter((m) => m.meldekortId === meldekortId);
             let meldekortSomIkkeKanSendesEnda = this.meldekortSomIkkeKanSendesInnEnda();
             if (meldekort.length === 0 && meldekortSomIkkeKanSendesEnda.length !== 0) {
-                console.log(meldekortSomIkkeKanSendesEnda);
                 return (
                     <div className="send-meldekort-varsel">
                         <Normaltekst>
