@@ -40,3 +40,25 @@ const Environment = () => {
 };
 
 export default Environment;
+
+export function getEnviromentVariable(
+    variableName: string,
+    ignoreIfMissing: boolean = false,
+    stripDomain: boolean = false
+) {
+    const meldekort = 'meldekort';
+    const value =
+        window[meldekort][variableName] ||
+        window[meldekort][variableName.toLowerCase()];
+
+    if (!value && !ignoreIfMissing) {
+        throw new Error(`Mangler: ${variableName}`);
+    }
+
+    if (stripDomain && value) {
+        const url = new URL(value);
+        return `${url.pathname}${url.search}`;
+    }
+
+    return value;
+}

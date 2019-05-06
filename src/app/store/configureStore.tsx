@@ -35,6 +35,7 @@ import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, SendteMeldekortState } from '../types/meldekort';
 import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
+import { getEnviromentVariable } from '../utils/env';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -109,7 +110,8 @@ const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSI
 
 const hentNokkel = (): string => {
     // TODO: Denne blir alltid undefined. Fikser dette i egen branch.
-    let nokkel = process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_PASSWORD;
+    let nokkel = getEnviromentVariable('PUBLIC_MELDEKORTSESSIONSTORAGE_PASSWORD');
+    console.log()
     if (typeof nokkel === 'undefined') {
         nokkel = 'test';
     }
