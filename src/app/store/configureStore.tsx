@@ -110,8 +110,8 @@ const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSI
 
 const hentNokkel = (): string => {
     // TODO: Denne blir alltid undefined. Fikser dette i egen branch.
-    let nokkel = getEnviromentVariable('PUBLIC_MELDEKORTSESSIONSTORAGE_PASSWORD');
-    console.log()
+    let nokkel = getEnviromentVariable('MELDEKORTSESSIONSTORAGE_PASSWORD');
+    console.log('hentNokkel kalles');
     if (typeof nokkel === 'undefined') {
         nokkel = 'test';
     }
