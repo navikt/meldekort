@@ -43,8 +43,8 @@ const renderMenuItem = (sprakobj: SprakObj) => {
   );
 };
 
-const Sprakvelger: React.FunctionComponent<MergedProps> = (
-  { locale, locs, updateIntl}) => {
+const Sprakvelger: React.FunctionComponent<MergedProps> = (props) => {
+  const { locale, locs, updateIntl} = props;
   const sprakArray = [locs.nb, locs.en];
 
   const handleSelection = (value: JSX.Element[]) => {
