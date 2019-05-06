@@ -13,7 +13,7 @@ export interface Person {
 
 export interface PersonInfo {
     personId: number;
-    foedselsnr: string;
+    fodselsnr: string;
     etternavn: string;
     fornavn: string;
 }

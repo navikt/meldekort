@@ -46,7 +46,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
         return null;
     }
 
-    const { fornavn, etternavn, foedselsnr } = props.personInfo;
+    const { fornavn, etternavn, fodselsnr } = props.personInfo;
     const printTekst = hentIntl().formatMessage({id: 'overskrift.meldekort.sendt'});
 
     return (
@@ -67,7 +67,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
                             <FormattedMessage id={'meldekort.for'}/>
                         </Ingress>
                         <Innholdstittel className="flex-innhold sentrert">
-                            <span>{`${fornavn} ${etternavn} (${foedselsnr})`}</span>
+                            <span>{`${fornavn} ${etternavn} (${fodselsnr})`}</span>
                         </Innholdstittel>
                     </>
                 }

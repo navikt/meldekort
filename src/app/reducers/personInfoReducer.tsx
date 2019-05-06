@@ -9,7 +9,7 @@ export interface PersonInfoState {
 const initialState: PersonInfoState = {
     personInfo: {
         personId: 0,
-        foedselsnr: '',
+        fodselsnr: '',
         etternavn: '',
         fornavn: ''
     }

@@ -167,7 +167,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
             <div className="oppsummeringsTekster">
                 <Ingress>
                     <span>
-                        {hentIntl().formatMessage({id: 'meldekort.for'}) + personInfo.fornavn + ' ' + personInfo.etternavn  + ' (' + personInfo.foedselsnr + ')'}
+                        {hentIntl().formatMessage({id: 'meldekort.for'}) + personInfo.fornavn + ' ' + personInfo.etternavn  + ' (' + personInfo.fodselsnr + ')'}
                     </span>
                 </Ingress>
                 <Ingress><span>{hentIntl().formatMessage({id: 'meldekort.for.perioden'}) + ukeOgPeriode}</span></Ingress>
