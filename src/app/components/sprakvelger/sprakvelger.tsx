@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { RootState } from '../../store/configureStore';
-import { Select } from 'nav-frontend-skjema';
+import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
+
 import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 import EngelskFlaggSVG from './EngelskFlaggSVG';
 import NorskFlaggSVG from './NorskFlaggSVG';
+import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
+import { SprakObj } from '../../reducers/localesReducer';
 
 const mapStateToProps = ({ intl, locales }: RootState) => {
   return {
@@ -22,47 +25,58 @@ const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
   };
 };
 
-type ReduxType = ReturnType<typeof mapStateToProps> &
+type MergedProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-/*const renderMenuItem = (code: ) => {
+const renderMenuItem = (sprakobj: SprakObj) => {
   return (
-    <li key={code}>
+    <li key={sprakobj.label} value={sprakobj.label}>
       <MenuItem className="languageToggle__menu__item">
         <div className="languageToggle__button__flag">
-          {code === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}
+          {sprakobj.label === 'nb' ? <NorskFlaggSVG/> : <EngelskFlaggSVG />}
         </div>
-        <div id={`languageCode_${code}`} className="languageToggle__button__language">
-          {getLanguageTextFromCode(code, intl)}
+        <div id={`languagesprakobj_${sprakobj}`} className="languageToggle__button__language">
+          {sprakobj.tittel}
         </div>
       </MenuItem>
     </li>
   );
-};*/
+};
 
-const Sprakvelger: React.FunctionComponent<ReduxType> = (props) => {
+const Sprakvelger: React.FunctionComponent<MergedProps> = (
+  { locale, locs, updateIntl}) => {
+  const sprakArray = [locs.nb, locs.en];
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    props.updateIntl(
-      event.target.value,
-      props.locs[event.target.value].tekster
-    );
+  const handleSelection = (value: JSX.Element[]) => {
+    const erNorskValgtSprak = (value[1].props.children === 'Norsk');
+    const sprak: string = (erNorskValgtSprak) ? locs.nb.label : locs.en.label;
+    const tekster: {} = (erNorskValgtSprak) ? locs.nb.tekster : locs.en.tekster;
+    updateIntl(sprak, tekster);
   };
 
-  const { locale, locs } = props;
-  const locsArray = [locs.nb, locs.en];
-
   return (
-    <div className="sprakvelger-container">
-      <Select label="" value={locale} onChange={handleOnChange}>
-        {locsArray.map(loc => {
-          return (
-            <option key={loc.label} value={loc.label}>
-              {loc.tittel}
-            </option>
-          );
-        })}
-      </Select>
+    <div className="languageToggle">
+      <Wrapper
+        className="languageToggle__wrapper"
+        onSelection={(value: JSX.Element[]) =>
+          handleSelection(value)
+        }
+      >
+        <Button className="languageToggle__button">
+          <div className="languageToggle__button__flag">
+            {locale === 'nb' ? <NorskFlaggSVG/> : <EngelskFlaggSVG />}
+          </div>
+          <div className="languageToggle__button__language">
+            {locale === 'nb' ? locs.nb.tittel : locs.en.tittel}
+          </div>
+          <div>
+            <NedChevron />
+          </div>
+        </Button>
+        <Menu className="languageToggle__menu">
+          <ul>{sprakArray.map((sprakObj) => renderMenuItem(sprakObj))}</ul>
+        </Menu>
+      </Wrapper>
     </div>
   );
 };
