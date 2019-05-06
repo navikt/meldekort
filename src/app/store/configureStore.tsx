@@ -35,7 +35,8 @@ import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, SendteMeldekortState } from '../types/meldekort';
 import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
-import { getEnviromentVariable } from '../utils/env';
+import { hentEnvSetting } from '../utils/env';
+import { erLocalhost } from '../mock/utils';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -109,13 +110,7 @@ let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const hentNokkel = (): string => {
-    // TODO: Denne blir alltid undefined. Fikser dette i egen branch.
-    let nokkel = getEnviromentVariable('MELDEKORTSESSIONSTORAGE_PASSWORD');
-    console.log('hentNokkel kalles');
-    if (typeof nokkel === 'undefined') {
-        nokkel = 'test';
-    }
-    return nokkel;
+    return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
 };
 
 const encryptor = createEncryptor({

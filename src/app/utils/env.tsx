@@ -1,4 +1,5 @@
 import { erLocalhost, erMock } from '../mock/utils';
+import Konstanter from './consts';
 
 const Environment = () => {
 
@@ -41,24 +42,25 @@ const Environment = () => {
 
 export default Environment;
 
-export function getEnviromentVariable(
+export function hentEnvSetting(
     variableName: string,
-    ignoreIfMissing: boolean = false,
-    stripDomain: boolean = false
 ) {
     const meldekort = 'meldekort';
-    const value =
-        window[meldekort][variableName] ||
-        window[meldekort][variableName.toLowerCase()];
 
-    if (!value && !ignoreIfMissing) {
-        throw new Error(`Mangler: ${variableName}`);
-    }
+    let varName1 = `${variableName}_${Konstanter().pas}`;
+    let varName2 = `${variableName}_${Konstanter().use}`;
 
-    if (stripDomain && value) {
-        const url = new URL(value);
-        return `${url.pathname}${url.search}`;
-    }
+    const value1 =
+        window[meldekort][varName1] ||
+        window[meldekort][varName1];
 
-    return value;
+    const value2 =
+        window[meldekort][varName2] ||
+        window[meldekort][varName2];
+
+    return getKey(value1, value2);
+}
+
+function getKey(one:  string, two: string) {
+    return btoa(`${one}:${two}`);
 }

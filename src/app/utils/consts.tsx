@@ -11,7 +11,9 @@ const Konstanter = () => {
         metodeGet: 'GET',
         metodePost: 'POST',
         forsteUke: 1,
-        andreUke: 2
+        andreUke: 2,
+        pas: 'PASSWORD',
+        use: 'USERNAME',
     };
 };
 

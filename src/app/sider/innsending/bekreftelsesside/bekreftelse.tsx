@@ -29,11 +29,15 @@ import { Dispatch } from 'redux';
 import { kalkulerDato } from '../../../utils/dates';
 import { Redirect } from 'react-router';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
+import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper';
+import { selectFeilmelding } from '../../../selectors/ui';
+import { BaksystemFeilmelding } from '../../../types/ui';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: Meldekort;
     person: Person;
+    baksystemFeilmelding: BaksystemFeilmelding;
     sendteMeldekort: SendtMeldekort[];
 }
 
@@ -63,7 +67,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     }
 
     konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
-        let { aktivtMeldekort, innsending, person } = this.props;
+        let { aktivtMeldekort, innsending } = this.props;
         let mDet = {
             meldekortdetaljer: {
                 id: '',
@@ -208,6 +212,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         } else {
             return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
                 <main>
+                    {this.props.baksystemFeilmelding.visFeilmelding ?
+                        <UIAlertstripeWrapper/> : null
+                    }
                     <div className="ikkeSendt">
                         <AlertStripe type={'info'} solid={true}>
                         <span>{
@@ -271,6 +278,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort,
         person: state.person,
+        baksystemFeilmelding: selectFeilmelding(state),
         sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };

@@ -14,6 +14,7 @@ import { MeldeformActions } from '../actions/meldeform';
 import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 import { PersonActions } from '../actions/person';
 import { PersonStatusActions } from '../actions/personStatus';
+import { obsFeilmeldingContent } from '../components/feil/obsFeilmeldingContent';
 
 const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
@@ -42,6 +43,17 @@ const handterFeiletApiKall: AppEpic = action$ =>
                 return [
                     UiActions.visBaksystemFeilmelding({
                         content: () => baksystemFeilmeldingContent(),
+                        visFeilmelding: true
+                    }),
+                ];
+            } else if (
+                axiosResponse &&
+                axiosResponse.status !== undefined &&
+                axiosResponse.status >= 400
+            ) {
+                return [
+                    UiActions.visBaksystemFeilmelding({
+                        content: () => obsFeilmeldingContent(),
                         visFeilmelding: true
                     }),
                 ];

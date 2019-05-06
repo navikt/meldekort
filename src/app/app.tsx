@@ -61,7 +61,7 @@ class App extends React.Component<Props, AppState> {
     }
 
     settInnhold = () => {
-        if (this.props.personStatus.personStatus.id === '') { // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
+        if (this.props.personStatus.personStatus.id === '') {
             return (
                 <div className="main-container">
                 {this.props.baksystemFeilmelding.visFeilmelding ?
@@ -110,7 +110,7 @@ class App extends React.Component<Props, AppState> {
     }
 
     componentDidMount() {
-        const { hentPersonStatus, hentPerson, person, meny, router  } = this.props;
+        const { hentPersonStatus, meny, router  } = this.props;
         hentPersonStatus();
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
     }
