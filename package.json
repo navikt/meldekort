@@ -70,7 +70,6 @@
     "nav-frontend-veileder-style": "^2.0.6",
     "nav-frontend-veilederpanel": "^0.1.10",
     "nav-frontend-veilederpanel-style": "0.0.14",
-    "prettier": "^1.17.0",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",

@@ -1,30 +1,30 @@
-import * as React from "react";
-import { Route, Switch } from "react-router";
-import { ConnectedRouter } from "connected-react-router";
-import { history, RootState } from "./store/configureStore";
-import Header from "./components/header/header";
-import MeldekortRoutes from "./sider/meldekortRoutes";
-import setupMock from "./mock/setup-mock";
-import { Dispatch } from "redux";
-import { erMock } from "./mock/utils";
-import { MeldeForm, Person } from "./types/person";
-import { PersonStatusActions } from "./actions/personStatus";
-import { PersonStatusState } from "./reducers/personStatusReducer";
-import { connect } from "react-redux";
-import Feilside from "./components/feilside/feilside";
-import UIModalWrapper from "./components/modal/UIModalWrapper";
-import { BaksystemFeilmelding } from "./types/ui";
-import { selectFeilmelding } from "./selectors/ui";
-import UIAlertstripeWrapper from "./components/feil/UIAlertstripeWrapper";
-import { MenyState } from "./types/meny";
-import { MenyPunkt } from "./utils/menyConfig";
-import { MenyActions } from "./actions/meny";
-import { Router } from "./types/router";
-import { selectRouter } from "./selectors/router";
-import { hentIntl } from "./utils/intlUtil";
-import classNames from "classnames";
-import { PersonActions } from "./actions/person";
-import { erBrukerRegistrertIArena } from "./utils/meldekortUtils";
+import * as React from 'react';
+import { Route, Switch } from 'react-router';
+import { ConnectedRouter } from 'connected-react-router';
+import { history, RootState } from './store/configureStore';
+import Header from './components/header/header';
+import MeldekortRoutes from './sider/meldekortRoutes';
+import setupMock from './mock/setup-mock';
+import { Dispatch } from 'redux';
+import { erMock } from './mock/utils';
+import { Person } from './types/person';
+import { PersonStatusActions } from './actions/personStatus';
+import { PersonStatusState } from './reducers/personStatusReducer';
+import { connect } from 'react-redux';
+import Feilside from './components/feilside/feilside';
+import UIModalWrapper from './components/modal/UIModalWrapper';
+import { BaksystemFeilmelding } from './types/ui';
+import { selectFeilmelding } from './selectors/ui';
+import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
+import { MenyState } from './types/meny';
+import { MenyPunkt } from './utils/menyConfig';
+import { MenyActions } from './actions/meny';
+import { Router } from './types/router';
+import { selectRouter } from './selectors/router';
+import { hentIntl } from './utils/intlUtil';
+import classNames from 'classnames';
+import { PersonActions } from './actions/person';
+import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 
 if (erMock()) {
   setupMock();
@@ -60,10 +60,10 @@ class App extends React.Component<Props, AppState> {
   }
 
   settInnhold = () => {
-    if (this.props.personStatus.personStatus.id === "") {
+    if (this.props.personStatus.personStatus.id === '') {
       // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
       return (
-        <div className="main-container">
+        <div className={'main-container'}>
           {this.props.baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
           ) : (
@@ -83,7 +83,7 @@ class App extends React.Component<Props, AppState> {
       return (
         <div>
           <Header
-            tittel={hentIntl().formatMessage({ id: "overskrift.meldekort" })}
+            tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })}
           />
           <div
             className={classNames({ overlay: this.props.meny.erApen })}
@@ -92,10 +92,10 @@ class App extends React.Component<Props, AppState> {
               this.props.toggleMeny(!this.props.meny.erApen)
             }
           >
-            <div className={"main-container"}>
+            <div className={'main-container'}>
               <ConnectedRouter history={history}>
                 <Switch>
-                  <Route path="/" component={MeldekortRoutes} />
+                  <Route path={'/'} component={MeldekortRoutes} />
                 </Switch>
               </ConnectedRouter>
             </div>
@@ -104,21 +104,21 @@ class App extends React.Component<Props, AppState> {
       );
     } else {
       return (
-        <div className="main-container">
+        <div className={'main-container'}>
           <Feilside />
         </div>
       );
     }
-  };
+  }
 
   settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
-    const urlparam = "/" + url.split("/")[1];
+    const urlparam = '/' + url.split('/')[1];
     for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
       if (meny.alleMenyPunkter[i].urlparam === urlparam) {
         const menypunkt = meny.alleMenyPunkter[i];
       }
     }
-  };
+  }
 
   componentDidMount() {
     const { hentPersonStatus, meny, router } = this.props;
