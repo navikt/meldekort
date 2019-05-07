@@ -9,9 +9,7 @@ export interface MeldeformState {
 
 const initialState: MeldeformState = {
     meldeformDetaljer: {
-        fnr: '',
         meldeformNavn: MeldeForm.IKKE_SATT.valueOf(),
-        personId: 0
     },
     meldeperiode: {
         id: '',

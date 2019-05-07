@@ -3,10 +3,6 @@ import { getType } from 'typesafe-actions';
 import { PersonActions, PersonActionTypes } from '../actions/person';
 
 const initialState: Person = {
-    personId: 0,
-    fodselsnr: '',
-    etternavn: '',
-    fornavn: '',
     maalformkode: '',
     meldeform: MeldeForm.IKKE_SATT,
     meldekort: [],

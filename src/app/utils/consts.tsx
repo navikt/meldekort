@@ -3,6 +3,7 @@ const Konstanter = () => {
         hentHistoriskeMeldekortApiUri: 'person/historiskemeldekort',
         hentMeldekortdetaljerApiUri: 'meldekort/{id}',
         hentPersonStatusApiUri: 'person/status',
+        hentPersonInfoApiUri: 'person/info',
         hentMeldekortApiUri: 'person/meldekort',
         sendMeldekortApiUri: 'person/meldekort',
         sendMeldeformApiUri: 'person/meldeform',
@@ -10,7 +11,9 @@ const Konstanter = () => {
         metodeGet: 'GET',
         metodePost: 'POST',
         forsteUke: 1,
-        andreUke: 2
+        andreUke: 2,
+        pas: 'PASSWORD',
+        use: 'USERNAME',
     };
 };
 

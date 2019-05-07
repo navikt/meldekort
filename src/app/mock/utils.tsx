@@ -4,5 +4,11 @@ export function erLocalhost() {
 }
 
 export function erMock(): boolean {
+    let meldekort = 'meldekort';
+    window[meldekort] = {
+        MELDEKORTSESSIONSTORAGE_USERNAME: 'username',
+        MELDEKORTSESSIONSTORAGE_PASSWORD: 'password',
+    };
+
     return process.env.REACT_APP_MOCK_FULL === 'true';
 }

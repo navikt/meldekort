@@ -7,7 +7,7 @@ import MeldekortRoutes from './sider/meldekortRoutes';
 import setupMock from './mock/setup-mock';
 import { Dispatch } from 'redux';
 import { erMock } from './mock/utils';
-import { Person } from './types/person';
+import { MeldeForm, Person } from './types/person';
 import { PersonStatusActions } from './actions/personStatus';
 import { PersonStatusState } from './reducers/personStatusReducer';
 import { connect } from 'react-redux';
@@ -59,57 +59,45 @@ class App extends React.Component<Props, AppState> {
     this.props.hentPersonStatus();
   }
 
-  settInnhold = () => {
-    if (this.props.personStatus.personStatus.id === '') {
-      // TODO: Denne testen burde kanskje endres. Må se an hvordan vi gjør det med feilhåndtering.
-      return (
-        <div className={'main-container'}>
-          {this.props.baksystemFeilmelding.visFeilmelding ? (
-            <UIAlertstripeWrapper />
-          ) : (
-            <Feilside />
-          )}
-        </div>
-      );
-    } else if (
-      erBrukerRegistrertIArena(
-        this.props.personStatus.personStatus.statusArbeidsoker
-      )
-    ) {
-      if (this.props.person.personId === 0 && !this.state.henterPersonInfo) {
-        this.props.hentPerson();
-        this.setState({ henterPersonInfo: true });
-      }
-      return (
-        <div>
-          <Header
-            tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })}
-          />
-          <div
-            className={classNames({ overlay: this.props.meny.erApen })}
-            onClick={() =>
-              this.props.meny.erApen &&
-              this.props.toggleMeny(!this.props.meny.erApen)
+    settInnhold = () => {
+        if (this.props.personStatus.personStatus.id === '') {
+            return (
+                <div className="main-container">
+                {this.props.baksystemFeilmelding.visFeilmelding ?
+                    <UIAlertstripeWrapper/> : <Feilside/>
+                }
+                </div>
+            );
+        }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
+            if (this.props.person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
+                this.props.hentPerson();
+                this.setState({ henterPersonInfo: true });
             }
-          >
-            <div className={'main-container'}>
-              <ConnectedRouter history={history}>
-                <Switch>
-                  <Route path={'/'} component={MeldekortRoutes} />
-                </Switch>
-              </ConnectedRouter>
-            </div>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className={'main-container'}>
-          <Feilside />
-        </div>
-      );
+            return (
+                <div>
+                    <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
+                    <div
+                        className={classNames({overlay: this.props.meny.erApen})}
+                        onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
+                    >
+                        <div className={'main-container'}>
+                            <ConnectedRouter history={history}>
+                                <Switch>
+                                    <Route path="/" component={MeldekortRoutes}/>
+                                </Switch>
+                            </ConnectedRouter>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else {
+             return (
+                 <div className="main-container">
+                    <Feilside/>
+                 </div>
+             );
+        }
     }
-  }
 
   settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
     const urlparam = '/' + url.split('/')[1];
@@ -120,11 +108,11 @@ class App extends React.Component<Props, AppState> {
     }
   }
 
-  componentDidMount() {
-    const { hentPersonStatus, meny, router } = this.props;
-    hentPersonStatus();
-    this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
-  }
+    componentDidMount() {
+        const { hentPersonStatus, meny, router  } = this.props;
+        hentPersonStatus();
+        this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
+    }
 
   public render() {
     return (

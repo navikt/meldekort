@@ -17,8 +17,6 @@ const initialState: InnsendingState = {
     utfylteDager: hentUtfyltDagConfig(),
     meldekortdetaljer: {
         id: '',
-        personId: 0,
-        fodselsnr: '',
         meldekortId: 0,
         meldeperiode: '',
         arkivnokkel: '',

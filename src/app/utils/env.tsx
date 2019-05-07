@@ -1,4 +1,5 @@
 import { erLocalhost, erMock } from '../mock/utils';
+import Konstanter from './consts';
 
 const Environment = () => {
 
@@ -40,3 +41,26 @@ const Environment = () => {
 };
 
 export default Environment;
+
+export function hentEnvSetting(
+    variableName: string,
+) {
+    const meldekort = 'meldekort';
+
+    const varName1 = `${variableName}_${Konstanter().pas}`;
+    const varName2 = `${variableName}_${Konstanter().use}`;
+
+    const value1 =
+        window[meldekort][varName1] ||
+        window[meldekort][varName1];
+
+    const value2 =
+        window[meldekort][varName2] ||
+        window[meldekort][varName2];
+
+    return getKey(value1, value2);
+}
+
+function getKey(one:  string, two: string) {
+    return btoa(`${one}:${two}`);
+}

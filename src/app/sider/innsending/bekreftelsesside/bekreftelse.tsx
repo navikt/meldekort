@@ -29,11 +29,15 @@ import { Dispatch } from 'redux';
 import { kalkulerDato } from '../../../utils/dates';
 import { Redirect } from 'react-router';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
+import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper';
+import { selectFeilmelding } from '../../../selectors/ui';
+import { BaksystemFeilmelding } from '../../../types/ui';
 
 interface MapStateToProps {
     innsending: InnsendingState;
     aktivtMeldekort: Meldekort;
     person: Person;
+    baksystemFeilmelding: BaksystemFeilmelding;
     sendteMeldekort: SendtMeldekort[];
 }
 
@@ -63,12 +67,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     }
 
     konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
-        let { aktivtMeldekort, innsending, person } = this.props;
+        let { aktivtMeldekort, innsending } = this.props;
         let mDet = {
             meldekortdetaljer: {
                 id: '',
-                personId: person.personId,
-                fodselsnr: person.fodselsnr,
                 meldekortId: this.erInnsendingKorrigering() ? innsending.korrigertMeldekortId : aktivtMeldekort.meldekortId,
                 meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
                 arkivnokkel: '1-ELEKTRONISK',
@@ -109,8 +111,6 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
             begrunnelse: meldekortdetaljer.begrunnelse,
             signatur: meldekortdetaljer.sporsmal.signatur,
-            fnr: meldekortdetaljer.fodselsnr,
-            personId: meldekortdetaljer.personId,
             sesjonsId: 'test', // TODO: Denne må settes til noe fornuftig. Mulig vi må lage en egen sesjonsId.
             fravaersdager: this.hentFravaersdager(meldekortdetaljer, aktivtMeldekort)
         };
@@ -212,6 +212,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         } else {
             return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
                 <main>
+                    {this.props.baksystemFeilmelding.visFeilmelding ?
+                        <UIAlertstripeWrapper/> : null
+                    }
                     <div className="ikkeSendt">
                         <AlertStripe type={'info'} solid={true}>
                         <span>{
@@ -275,6 +278,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort,
         person: state.person,
+        baksystemFeilmelding: selectFeilmelding(state),
         sendteMeldekort: state.meldekort.sendteMeldekort
     };
 };

@@ -22,15 +22,19 @@ import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
 import MobilTabell from '../../../components/mobilTabell/mobilTabell';
+import { PersonInfoActions } from '../../../actions/personInfo';
+import { PersonInfo } from '../../../types/person';
 
 interface MapStateToProps {
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: Meldekort;
     router: Router;
+    personInfo: PersonInfo;
 }
 
 interface MapDispatchToProps {
     hentMeldekortdetaljer: () => void;
+    hentPersonInfo: () => void;
 }
 
 type Props = MapDispatchToProps&MapStateToProps;
@@ -65,7 +69,9 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
         this.props.hentMeldekortdetaljer();
         this.sjekkAktivtMeldekortOgRedirect();
         window.addEventListener('resize', this.handleWindowSize);
-
+        if (this.props.personInfo.personId === 0) {
+            this.props.hentPersonInfo();
+        }
     }
 
     handleWindowSize = () =>
@@ -154,13 +160,15 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         meldekortdetaljer: state.meldekortdetaljer,
         aktivtMeldekort: state.aktivtMeldekort,
-        router: selectRouter(state)
+        router: selectRouter(state),
+        personInfo: state.personInfo.personInfo
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentMeldekortdetaljer: () => dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+        hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request())
     };
 };
 

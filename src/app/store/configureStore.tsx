@@ -33,6 +33,10 @@ import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, SendteMeldekortState } from '../types/meldekort';
+import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
+import personInfoEpics from '../epics/personInfoEpics';
+import { hentEnvSetting } from '../utils/env';
+import { erLocalhost } from '../mock/utils';
 
 export const history = createBrowserHistory({
     basename: '/meldekort'
@@ -53,6 +57,7 @@ export interface RootState {
     router: RouterState;
     person: Person;
     personStatus: PersonStatusState;
+    personInfo: PersonInfoState;
     meldekortdetaljer: MeldekortdetaljerState;
     aktivtMeldekort: Meldekort;
     historiskeMeldekort: HistoriskeMeldekortState;
@@ -72,6 +77,7 @@ const appReducer = combineReducers({
     router: connectRouter(history),
     person: personReducer,
     personStatus: personStatusReducer,
+    personInfo: personInfoReducer,
     meldekortdetaljer: meldekortdetaljerReducer,
     aktivtMeldekort: aktivtMeldekortReducer,
     historiskeMeldekort: historiskeMeldekortReducer,
@@ -104,12 +110,7 @@ let middleware: any[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const hentNokkel = (): string => {
-    // TODO: Denne blir alltid undefined. Fikser dette i egen branch.
-    let nokkel = process.env.REACT_APP_MELDEKORTSESSIONSTORAGE_PASSWORD;
-    if (typeof nokkel === 'undefined') {
-        nokkel = 'test';
-    }
-    return nokkel;
+    return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
 };
 
 const encryptor = createEncryptor({
@@ -124,7 +125,7 @@ const persistConfig = {
     key: `meldekort:${packageConfig.redux_version}`,
     storage,
     // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    blacklist: ['locales', 'ui'],
+    blacklist: ['locales', 'ui', 'personInfo'],
     transforms: [encryptor]
 };
 
@@ -142,6 +143,7 @@ epicMiddleware.run(
     combineEpics(
         personEpics,
         personStatusEpics,
+        personInfoEpics,
         historiskeMeldekortEpics,
         innsendingEpics,
         meldekortdetaljerEpics,
