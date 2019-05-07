@@ -118,7 +118,9 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
             pathname === `/tidligere-meldekort/detaljer/korriger/kvittering` ?
             `noPrint` : undefined;
 
-        return (
+        return this.props.innsending.innsendingstype === null ?
+            <Redirect to={'/om-meldekort'}/> :
+            (
             <div className="sideinnhold">
                 <PeriodeBanner className={noPrint}/>
                 <StegBanner/>

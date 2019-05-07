@@ -1,4 +1,4 @@
-import { Meldekort, SendtMeldekort } from '../types/meldekort';
+import { KortStatus, Meldekort, SendtMeldekort } from '../types/meldekort';
 
 export const erMeldekortSendtInnTidligere = (
     meldekort: Meldekort,

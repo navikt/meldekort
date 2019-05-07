@@ -6,7 +6,7 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe, Meldekort, SendteMeldekortState, SendtMeldekort } from '../../../types/meldekort';
+import { KortStatus, Meldegruppe, Meldekort, SendteMeldekortState, SendtMeldekort } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
 import { Dispatch } from 'redux';
 import { selectRouter } from '../../../selectors/router';
@@ -152,7 +152,22 @@ class Kvittering extends React.Component<KvitteringsProps> {
     nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
         if ( nesteAktivtMeldekort !== undefined) {
             return hentIntl().formatMessage({id: 'sendt.meldekortKanSendes'}, {[0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra)});
+        } else if (this.props.innsendingstype === Innsendingstyper.innsending && this.props.person.meldekort.length > 0) {
+            let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(this.props.person.meldekort);
+            if (mkListe.length > 0) {
+                return hentIntl().formatMessage({id: 'sendt.meldekortKanSendes'}, {[0]: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra)});
+            }
+        } else if (this.props.innsendingstype === Innsendingstyper.etterregistrering && this.props.person.etterregistrerteMeldekort.length > 0) {
+            let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(this.props.person.etterregistrerteMeldekort);
+            if (mkListe.length > 0) {
+                return hentIntl().formatMessage({id: 'sendt.meldekortKanSendes'}, {[0]: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra)});
+            }
         }
+    }
+
+    hentMeldekortSomIkkeKanSendesEnda = (meldekortListe: Meldekort[]): Meldekort[] => {
+        return meldekortListe.filter(meldekort =>
+            (meldekort.kortStatus === KortStatus.SENDT || meldekort.kortStatus === KortStatus.OPPRE) && !meldekort.meldeperiode.kanKortSendes);
     }
 
     visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort) => {
