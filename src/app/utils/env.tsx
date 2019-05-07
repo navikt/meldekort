@@ -47,8 +47,8 @@ export function hentEnvSetting(
 ) {
     const meldekort = 'meldekort';
 
-    let varName1 = `${variableName}_${Konstanter().pas}`;
-    let varName2 = `${variableName}_${Konstanter().use}`;
+    const varName1 = `${variableName}_${Konstanter().pas}`;
+    const varName2 = `${variableName}_${Konstanter().use}`;
 
     const value1 =
         window[meldekort][varName1] ||
