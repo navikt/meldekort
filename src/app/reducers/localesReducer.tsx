@@ -1,17 +1,15 @@
 import { LocalesActions } from '../types/locales';
 import tekster from '../tekster/kompilerte-tekster';
 
+export interface SprakObj {
+  label: string;
+  tittel: string;
+  tekster: {};
+}
+
 export interface LocalesState {
-    nb: {
-        label: string,
-        tittel: string,
-        tekster: {}
-    };
-    en: {
-        label: string,
-        tittel: string,
-        tekster: {}
-    };
+    nb: SprakObj;
+    en: SprakObj;
 }
 
 const initialState: LocalesState = {

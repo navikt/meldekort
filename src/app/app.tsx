@@ -27,38 +27,37 @@ import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 
 if (erMock()) {
-    setupMock();
+  setupMock();
 }
 
 interface MapStateToProps {
-    router: Router;
-    personStatus: PersonStatusState;
-    baksystemFeilmelding: BaksystemFeilmelding;
-    person: Person;
-    meny: MenyState;
+  router: Router;
+  personStatus: PersonStatusState;
+  baksystemFeilmelding: BaksystemFeilmelding;
+  person: Person;
+  meny: MenyState;
 }
 
 interface MapDispatchToProps {
-    hentPerson: () => void;
-    hentPersonStatus: () => void;
-    settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
-    settMenyPunkter: ( menypunkter: MenyPunkt[]) => void;
-    toggleMeny: (erApen: boolean) => void;
-
+  hentPerson: () => void;
+  hentPersonStatus: () => void;
+  settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
+  settMenyPunkter: (menypunkter: MenyPunkt[]) => void;
+  toggleMeny: (erApen: boolean) => void;
 }
 
-type Props = MapDispatchToProps&MapStateToProps;
+type Props = MapDispatchToProps & MapStateToProps;
 
 interface AppState {
-    henterPersonInfo: boolean;
+  henterPersonInfo: boolean;
 }
 
 class App extends React.Component<Props, AppState> {
-    constructor(props: any) {
-        super(props);
-        this.state = { henterPersonInfo: false };
-        this.props.hentPersonStatus();
-    }
+  constructor(props: any) {
+    super(props);
+    this.state = { henterPersonInfo: false };
+    this.props.hentPersonStatus();
+  }
 
     settInnhold = () => {
         if (this.props.personStatus.personStatus.id === '') {
@@ -100,14 +99,14 @@ class App extends React.Component<Props, AppState> {
         }
     }
 
-    settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
-        const urlparam = '/' + url.split('/')[1];
-        for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
-            if (meny.alleMenyPunkter[i].urlparam === urlparam) {
-                const menypunkt = meny.alleMenyPunkter[i];
-            }
-        }
+  settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
+    const urlparam = '/' + url.split('/')[1];
+    for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
+      if (meny.alleMenyPunkter[i].urlparam === urlparam) {
+        const menypunkt = meny.alleMenyPunkter[i];
+      }
     }
+  }
 
     componentDidMount() {
         const { hentPersonStatus, meny, router  } = this.props;
@@ -115,39 +114,40 @@ class App extends React.Component<Props, AppState> {
         this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
     }
 
-    public render() {
-
-        return(
-            <div>
-                <UIModalWrapper/>
-                {this.settInnhold()}
-            </div>
-        );
-    }
+  public render() {
+    return (
+      <div>
+        <UIModalWrapper />
+        {this.settInnhold()}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        router: selectRouter(state),
-        personStatus: state.personStatus,
-        person: state.person,
-        baksystemFeilmelding: selectFeilmelding(state),
-        meny: state.meny
-
-    };
+  return {
+    router: selectRouter(state),
+    personStatus: state.personStatus,
+    person: state.person,
+    baksystemFeilmelding: selectFeilmelding(state),
+    meny: state.meny
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        hentPerson: () => dispatch(PersonActions.hentPerson.request()),
-        hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
-        settValgtMenyPunkt: (menypunkt: MenyPunkt) => dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
-        settMenyPunkter: (menypunkter: MenyPunkt[]) => dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),
-        toggleMeny: (erApen: boolean) => dispatch(MenyActions.toggleMeny(erApen)),
-    };
+  return {
+    hentPerson: () => dispatch(PersonActions.hentPerson.request()),
+    hentPersonStatus: () =>
+      dispatch(PersonStatusActions.hentPersonStatus.request()),
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
+      dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
+    settMenyPunkter: (menypunkter: MenyPunkt[]) =>
+      dispatch(MenyActions.settAktiveMenyPunkter(menypunkter)),
+    toggleMeny: (erApen: boolean) => dispatch(MenyActions.toggleMeny(erApen))
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App);

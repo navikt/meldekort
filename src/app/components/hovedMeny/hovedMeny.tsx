@@ -6,7 +6,6 @@ import { hentIntl } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { RootState, history } from '../../store/configureStore';
-import { useEffect } from 'react';
 
 interface MapStateToProps {
     valgtMenyPunkt: MenyPunkt;
