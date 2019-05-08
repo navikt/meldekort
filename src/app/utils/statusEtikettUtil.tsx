@@ -6,8 +6,7 @@ export const finnRiktigEtikettKlasse = (statustekst: string): string => {
   if (statustekst == null) {
     status = 'info';
   }
-  if (status === 'Klar til beregning' || status === 'Til behandling'
-    || status === 'Til manuell saksbehandling') {
+  if (status === 'Klar til beregning' || status === 'Til behandling') {
     status = '__informativ';
   } else if (status === 'Kortet er beregnet') {
     status = '__positiv';
@@ -17,4 +16,4 @@ export const finnRiktigEtikettKlasse = (statustekst: string): string => {
     status =  '__fokusert';
   }
   return 'etikettbase' + status;
-}
+};
