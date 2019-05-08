@@ -4,8 +4,8 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import { ukeTekst } from '../../utils/dates';
 import { hentUkedagerSomStringListe } from '../../utils/ukedager';
-import Aktivitetsrad from '../../sider/innsending/utfyllingsside/utfylling/aktivitet/aktivitetsrad';
-import Arbeidsrad from '../../sider/innsending/utfyllingsside/utfylling/arbeid/arbeidsrad';
+import Aktivitetsrad from '../../sider/innsending/2-utfyllingsside/utfylling/aktivitet/aktivitetsrad';
+import Arbeidsrad from '../../sider/innsending/2-utfyllingsside/utfylling/arbeid/arbeidsrad';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 

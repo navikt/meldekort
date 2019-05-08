@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { finnRiktigEtikettType } from '../../utils/statusEtikettUtil';
+import { finnRiktigEtikettKlasse } from '../../utils/statusEtikettUtil';
 import EtikettBase from 'nav-frontend-etiketter';
 import Komponentlenke from '../../components/komponentlenke/komponentlenke';
 import { DetaljRad, HistoriskeMeldekortRad } from '../../types/meldekort';
@@ -21,7 +21,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = (props) => {
         for (let i in rowData) {
             if (i === header.key && header.key === 'status') {
                 tableData = (
-                    <EtikettBase type={finnRiktigEtikettType(rowData[i])}>
+                    <EtikettBase type={'info'} className={finnRiktigEtikettKlasse(rowData[i])}>
                         {rowData[i]}
                     </EtikettBase>);
             } else if (i === header.key && header.key === 'periode' && rowData.periode) {
@@ -50,7 +50,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = (props) => {
         for (let i in rowData) {
             if (i === header.key && header.key === 'kortStatus') {
                 tableData = (
-                    <EtikettBase type={finnRiktigEtikettType(rowData[i])}>
+                    <EtikettBase type={'info'} className={finnRiktigEtikettKlasse(rowData[i])}>
                         {rowData[i]}
                     </EtikettBase>);
             } else if (i === header.key ) {
