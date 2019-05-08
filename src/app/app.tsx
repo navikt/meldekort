@@ -99,19 +99,9 @@ class App extends React.Component<Props, AppState> {
         }
     }
 
-  settAktivMenuPunktBasertPaUrl = (meny: MenyState, url: string): void => {
-    const urlparam = '/' + url.split('/')[1];
-    for (let i = 0; i < meny.alleMenyPunkter.length; i++) {
-      if (meny.alleMenyPunkter[i].urlparam === urlparam) {
-        const menypunkt = meny.alleMenyPunkter[i];
-      }
-    }
-  }
-
     componentDidMount() {
-        const { hentPersonStatus, meny, router  } = this.props;
+        const { hentPersonStatus } = this.props;
         hentPersonStatus();
-        this.settAktivMenuPunktBasertPaUrl(meny, router.location.pathname);
     }
 
   public render() {
