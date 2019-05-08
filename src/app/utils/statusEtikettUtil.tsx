@@ -1,6 +1,3 @@
-
-// TODO: Endres når vi vet mer om fargekodene.
-
 export const finnRiktigEtikettKlasse = (statustekst: string): string => {
   let status = statustekst.trim();
   if (statustekst == null) {
