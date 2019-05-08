@@ -5,7 +5,7 @@ import PeriodeBanner from '../../../components/periodeBanner/periodeBanner';
 import Tabell from '../../../components/tabell/tabell';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { finnRiktigEtikettType } from '../../../utils/statusEtikettUtil';
+import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../../store/configureStore';
@@ -88,8 +88,10 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
             {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
                     return (
                         <EtikettBase
-                            type={finnRiktigEtikettType(row.kortStatus)}
-                        > {row.kortStatus}
+                            type={'info'}
+                            className={finnRiktigEtikettKlasse(row.kortStatus)}
+                        >
+                          {row.kortStatus}
                         </EtikettBase>
                     );
                 }},

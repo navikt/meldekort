@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Bekreftelse from './bekreftelsesside/bekreftelse';
-import Kvittering from './kvitteringsside/kvittering';
+import Bekreftelse from './3-bekreftelsesside/bekreftelse';
+import Kvittering from './4-kvitteringsside/kvittering';
 import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
-import Sporsmalsside from './sporsmalsside/sporsmalsside';
+import Sporsmalsside from './1-sporsmalsside/sporsmalsside';
 import StegBanner from '../../components/stegBanner/stegBanner';
-import Utfylling from './utfyllingsside/utfyllingsside';
+import Utfylling from './2-utfyllingsside/utfyllingsside';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
@@ -12,9 +12,9 @@ import { InnsendingState, Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal } from '../../types/meldekort';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { RootState } from '../../store/configureStore';
-import { Sporsmal as Spm } from './sporsmalsside/sporsmal/sporsmalConfig';
+import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
-import { UtfyltDag } from './utfyllingsside/utfylling/utfyllingConfig';
+import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyllingConfig';
 import { hentUkedagerSomStringListe } from '../../utils/ukedager';
 import { RouterState } from 'connected-react-router';
 

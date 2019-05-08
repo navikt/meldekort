@@ -11,7 +11,7 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { BaksystemFeilmelding, IngenTidligereMeldekort } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { finnRiktigEtikettType } from '../../utils/statusEtikettUtil';
+import { finnRiktigEtikettKlasse } from '../../utils/statusEtikettUtil';
 import { formaterBelop } from '../../utils/numberFormat';
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
@@ -81,8 +81,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
             {key: 'status', label: <FormattedMessage id="overskrift.status" />, cell: function( row: any, columnKey: any) {
                     return (
                         <EtikettBase
-                            type={finnRiktigEtikettType(row.status)}
-                        > {row.status}
+                            className={finnRiktigEtikettKlasse(row.status)}
+                            type={'info'}
+                        >
+                          {row.status}
                         </EtikettBase>
                     );
                 }},
