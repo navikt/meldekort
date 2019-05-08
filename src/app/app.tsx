@@ -100,7 +100,7 @@ class App extends React.Component<Props, AppState> {
     }
 
     componentDidMount() {
-        const { hentPersonStatus, meny, router  } = this.props;
+        const { hentPersonStatus  } = this.props;
         hentPersonStatus();
     }
 
