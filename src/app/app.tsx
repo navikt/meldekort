@@ -59,49 +59,48 @@ class App extends React.Component<Props, AppState> {
     this.props.hentPersonStatus();
   }
 
-    settInnhold = () => {
-        if (this.props.personStatus.personStatus.id === '') {
-            return (
-                <div className="main-container">
-                {this.props.baksystemFeilmelding.visFeilmelding ?
-                    <UIAlertstripeWrapper/> : <Feilside/>
-                }
-                </div>
-            );
-        }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
-            if (this.props.person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
-                this.props.hentPerson();
-                this.setState({ henterPersonInfo: true });
-            }
-            return (
-                <div>
-                    <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
-                    <div
-                        className={classNames({overlay: this.props.meny.erApen})}
-                        onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
-                    >
-                        <div className={'main-container'}>
-                            <ConnectedRouter history={history}>
-                                <Switch>
-                                    <Route path="/" component={MeldekortRoutes}/>
-                                </Switch>
-                            </ConnectedRouter>
-                        </div>
-                    </div>
-                </div>
-            );
-        } else {
-             return (
-                 <div className="main-container">
-                    <Feilside/>
-                 </div>
-             );
-        }
-    }
+  settInnhold = () => {
+      if (this.props.personStatus.personStatus.id === '') {
+          return (
+              <div className="main-container">
+              {this.props.baksystemFeilmelding.visFeilmelding ?
+                  <UIAlertstripeWrapper/> : <Feilside/>
+              }
+              </div>
+          );
+      }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
+          if (this.props.person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
+              this.props.hentPerson();
+              this.setState({ henterPersonInfo: true });
+          }
+          return (
+              <div>
+                  <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
+                  <div
+                      className={classNames({overlay: this.props.meny.erApen})}
+                      onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
+                  >
+                      <div className={'main-container'}>
+                          <ConnectedRouter history={history}>
+                              <Switch>
+                                  <Route path="/" component={MeldekortRoutes}/>
+                              </Switch>
+                          </ConnectedRouter>
+                      </div>
+                  </div>
+              </div>
+          );
+      } else {
+           return (
+               <div className="main-container">
+                  <Feilside/>
+               </div>
+           );
+      }
+  }
 
     componentDidMount() {
-        const { hentPersonStatus  } = this.props;
-        hentPersonStatus();
+        this.props.hentPersonStatus();
     }
 
   public render() {
