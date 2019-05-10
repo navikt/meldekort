@@ -182,7 +182,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <section className="seksjon flex-innhold sentrert utfylling">
+                <section className="seksjon flex-innhold sentrert utfylling-container">
                     <div id="feilmelding">
                         {this.hentFeilmeldinger()}
                     </div>

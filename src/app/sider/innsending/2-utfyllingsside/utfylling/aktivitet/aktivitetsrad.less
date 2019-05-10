@@ -1,17 +1,25 @@
 .aktivitetsrad {
-  display: flex;
+  /*display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  border-left: solid 9px;
   margin-right: 0.25rem;
-  margin-left: 0.25rem;
+  margin-left: 0.25rem;*/
+
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(auto, auto);
+  background-color: pink;
+  border-left: solid 9px;
   min-height: 4rem;
 
   .kategori_forklaring {
-    display: block;
+    /*display: block;
     padding-left: 0.8rem;
-    width: 18rem;
+    width: 18rem;*/
+    grid-column: 1/2;
 
     .utvidetInformasjon {
       margin-bottom: 0.5rem;
@@ -19,18 +27,23 @@
   }
 
   .inputrad {
-    display: inline-flex;
-    justify-content: flex-end;
-    margin-left: 0.5em;
+    grid-column: 2/3;
+    background-color: green;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .skjemaelement {
+      margin: 0;
+    }
   }
 }
 
 .flex-container {
-  display: inline-block;
+  /*display: inline-block;
   width: 3rem;
   height: 2.5rem;
   margin-right: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem;*/
 }
 
 .feilIRad {
@@ -40,6 +53,9 @@
   padding-bottom: 0.5rem;
   border-radius: 0.25rem;
 }
+
+
+
 @media @tablet {
   .aktivitetsrad {
     display: flex;
@@ -58,7 +74,7 @@
   }
 
   .flex-container {
-    display: inline-block;
+    /*display: inline-block;
     flex-direction: column-reverse;
     direction: ltr;
     justify-content: flex-start;
@@ -66,7 +82,7 @@
     height: 3rem;
     text-align: center;
     margin-right: 1.2rem;
-    margin-left: 0.5rem;
+    margin-left: 0.5rem;*/
   }
 
   .feilIRad {
@@ -101,7 +117,7 @@
   }
 
   .flex-container {
-    display: inline-block;
+    /*display: inline-block;
     flex-direction: column-reverse;
     direction: ltr;
     justify-content: flex-start;
@@ -109,7 +125,7 @@
     height: 3rem;
     text-align: center;
     margin-right: 0.8rem;
-    margin-left: 0.5rem;
+    margin-left: 0.5rem;*/
   }
 
   .feilIRad {

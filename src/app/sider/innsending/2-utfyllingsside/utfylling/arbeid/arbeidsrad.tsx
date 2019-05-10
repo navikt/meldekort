@@ -130,9 +130,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
     render() {
         return (
-            <div>
+            <>
                 {this.innhold()}
-            </div>
+            </>
         );
     }
 }

@@ -1,13 +1,19 @@
 .arbeidsrad {
-  display: flex;
+  /*display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: wrap;*/
+  /*margin-right: 0.25rem;
+  margin-left: 0.25rem;*/
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(auto, auto);
+
+  min-height: 4rem;
   border-left: solid 9px #99c2e8;
   border-top: 1px solid #c6c2bf;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
-  min-height: 4rem;
   // height: 4rem;
 
   .kategori_forklaring {
@@ -27,9 +33,9 @@
 }
 
 .arbeidInput {
-  display: inline-block;
+  /*display: inline-block;
   margin-right: 1rem;
-  padding-top: 0.2rem;
+  padding-top: 0.2rem;*/
 
   .input--xs {
     width: 3rem;
@@ -40,8 +46,8 @@
 
 @media @tablet {
   .arbeidInput {
-    margin-right: 0.5rem;
-    height: auto;
+    /*margin-right: 0.5rem;
+    height: auto;*/
 
     .input--xs {
       width: 2.7rem;
@@ -49,7 +55,6 @@
   }
 
   .arbeidsrad {
-    display: flex;
 
     .inputrad_arbeid {
       display: inline-flex;
@@ -61,13 +66,6 @@
       width: auto;
       padding-left: 0.5rem;
     }
-  }
-}
-
-@media @tablet {
-  .arbeidsrad {
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
   }
 }
 
