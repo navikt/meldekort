@@ -87,7 +87,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
                     <Aktivitetsrad
                         ukeNummer={props.ukenummer}
                         tekstId="utfylling.tiltak"
-                        forklaingId={'forklaring.utfylling.tiltak'}
+                        forklaringId={'forklaring.utfylling.tiltak'}
                         aap={props.erAap}
                         feil={props.utfyllingFeil.feilIKurs.feil}
                     /> : null
@@ -96,7 +96,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
                     <Aktivitetsrad
                         ukeNummer={props.ukenummer}
                         tekstId="utfylling.syk"
-                        forklaingId={'forklaring.utfylling.syk'}
+                        forklaringId={'forklaring.utfylling.syk'}
                         aap={props.erAap}
                         feil={props.utfyllingFeil.feilISyk.feil}
                     /> : null
@@ -105,7 +105,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
                     <Aktivitetsrad
                         ukeNummer={props.ukenummer}
                         tekstId="utfylling.ferieFravar"
-                        forklaingId={'forklaring.utfylling.ferieFravar'}
+                        forklaringId={'forklaring.utfylling.ferieFravar'}
                         aap={props.erAap}
                         feil={props.utfyllingFeil.feilIFerie.feil}
                     /> : null

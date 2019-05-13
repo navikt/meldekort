@@ -1,49 +1,40 @@
 .aktivitetsrad {
-  /*display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;*/
-
-  grid-column: 1 / 3;
-  grid-row: 3 / 4;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: minmax(auto, auto);
-  background-color: pink;
+  .kolonne-1-til-3();
+  .to-kolonner();
+  border-top: 1px solid #c6c2bf;
   border-left: solid 9px;
   min-height: 4rem;
+  grid-auto-rows: minmax(auto, auto);
+
+  &:last-child {
+    border-bottom: solid 1px #c6c2bf;
+  }
 
   .kategori_forklaring {
-    /*display: block;
-    padding-left: 0.8rem;
-    width: 18rem;*/
-    grid-column: 1/2;
+    padding: .25rem 1rem .25rem 1rem;
 
+    .tittel {
+      padding-top: .3rem;
+    }
     .utvidetInformasjon {
-      margin-bottom: 0.5rem;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
     }
   }
 
   .inputrad {
-    grid-column: 2/3;
-    background-color: green;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    .syv-kolonner();
 
-    .skjemaelement {
-      margin: 0;
+    .utfylling-checkboks {
+      justify-self: center;
+
+      label.skjemaelement__label {
+        &::before {
+          margin: 0.25rem;
+        }
+      }
     }
   }
-}
-
-.flex-container {
-  /*display: inline-block;
-  width: 3rem;
-  height: 2.5rem;
-  margin-right: 1rem;
-  padding-bottom: 1rem;*/
 }
 
 .feilIRad {
@@ -54,35 +45,16 @@
   border-radius: 0.25rem;
 }
 
-
-
 @media @tablet {
   .aktivitetsrad {
-    display: flex;
-    height: auto;
 
     .inputrad {
-      display: inline-flex;
-      margin-left: auto;
+
     }
 
     .kategori_forklaring {
-      display: inline-block;
-      width: auto;
-      padding-left: 0.5rem;
-    }
-  }
 
-  .flex-container {
-    /*display: inline-block;
-    flex-direction: column-reverse;
-    direction: ltr;
-    justify-content: flex-start;
-    width: 24px;
-    height: 3rem;
-    text-align: center;
-    margin-right: 1.2rem;
-    margin-left: 0.5rem;*/
+    }
   }
 
   .feilIRad {
@@ -101,31 +73,12 @@
 
 @media @phone {
   .aktivitetsrad {
-    display: flex;
-    height: auto;
-    margin-right: 0;
-    margin-left: 0;
 
     .inputrad {
-      display: flex;
-      margin-left: auto;
-    }
 
+    }
     .kategori_forklaring {
-      padding-top: 1rem;
     }
-  }
-
-  .flex-container {
-    /*display: inline-block;
-    flex-direction: column-reverse;
-    direction: ltr;
-    justify-content: flex-start;
-    width: 24px;
-    height: 3rem;
-    text-align: center;
-    margin-right: 0.8rem;
-    margin-left: 0.5rem;*/
   }
 
   .feilIRad {

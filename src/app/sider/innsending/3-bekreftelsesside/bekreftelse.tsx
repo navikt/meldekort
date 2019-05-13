@@ -244,7 +244,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                     >
                         <Normaltekst><FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')}/></Normaltekst>
                     </BekreftCheckboksPanel>
-                    <section className="seksjon flex-innhold sentrert">
+                    <section className="seksjon flex-innhold sentrert innsending-knapper">
                         <NavKnapp
                             type={knappTyper.hoved}
                             nestePath={'/innsending/kvittering'}
@@ -264,7 +264,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                             type={knappTyper.flat}
                             nestePath={'/om-meldekort'}
                             tekstid={'naviger.avbryt'}
-                            className={'navigasjonsknapp'}
+                            className={'navigasjonsknapp avbryt'}
                         />
                     </section>
                 </main>

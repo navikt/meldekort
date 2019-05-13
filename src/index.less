@@ -115,16 +115,9 @@ body {
           &.sentrert {
             justify-content: center;
 
-            .navigasjonsknapp {
-              margin-right: 2rem;
-              &:last-child {
-                margin-left: 0;
-              }
-            }
           }
         }
         .seksjon {
-          display: block;
           margin-bottom: 2rem;
 
           &:last-child {
@@ -139,8 +132,21 @@ body {
             }
           }
 
-          &.knapper {
+          &.innsending-knapper {
+            display: grid;
+            grid-template-columns: repeat(2, 200px);
+            grid-template-rows: minmax(auto, auto);
 
+            .navigasjonsknapp {
+              margin: auto;
+              min-width: 175px;
+
+              &.avbryt {
+                margin-top: 1rem;
+                grid-column-start: 1;
+                grid-column-end: 3;
+              }
+            }
           }
         }
       }

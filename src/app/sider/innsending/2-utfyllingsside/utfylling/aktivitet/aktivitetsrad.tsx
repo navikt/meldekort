@@ -24,7 +24,7 @@ interface RadProps {
     tekstId: string;
     ukeNummer: number;
     aap: boolean;
-    forklaingId: string;
+    forklaringId: string;
 }
 
 type AktivitetsradProps = RadProps & FeilIDager & MapStateToProps & MapDispatchToProps;
@@ -80,12 +80,12 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
         return checked;
     }
 
-    setFelter = () => {
+    settFelter = () => {
         return hentUkedagerSomStringListe().map((dag) => {
             let ukedag = konverterUkedag(dag);
             return (
                 <Checkbox
-                    className="flex-container"
+                    className="utfylling-checkboks"
                     key={ukedag}
                     label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
                     checked={this.isChecked(ukedag)}
@@ -109,19 +109,19 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     }
 
     innhold = () => {
-        let { tekstId, aap, forklaingId } = this.props;
+        let { tekstId, aap, forklaringId } = this.props;
         return (
             <div className="aktivitetsrad" style={this.hentFarge()}>
                 <div className="kategori_forklaring">
-                    <Undertittel>
+                    <Undertittel className={'tittel'}>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
                     <UtvidetInformasjon>
-                        <FormattedHTMLMessage id={aap ? forklaingId + '-AAP' : forklaingId} />
+                        <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                     </UtvidetInformasjon>
                 </div>
                 <div className="inputrad">
-                    {this.setFelter()}
+                    {this.settFelter()}
                 </div>
             </div>
         );

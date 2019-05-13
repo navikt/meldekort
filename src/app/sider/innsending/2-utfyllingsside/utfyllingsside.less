@@ -1,39 +1,52 @@
+/*********** LESS FUNKSJONER ***************/
+.kolonne-1-til-3 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.kolonne-2-til-3() {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.to-kolonner() {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.syv-kolonner() {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/************* VANLIG LESS ***************/
 
 .utfylling-container {
   display: block;
+  width: 100%;
 
   .ukepanel {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 50% 50%;
     grid-auto-rows: minmax(auto, auto);
 
     .ukedager {
-      grid-column: 2/3;
-      grid-row: 1/2;
-      /*display: flex;
-      justify-content: flex-end;
-      margin-right: 3.5rem;
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 0.2rem;*/
+      .kolonne-2-til-3();
+      .syv-kolonner();
+
+      border-left: solid 4px white;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+
       abbr {
-        background-color: #e79999;
-      }
-    }
-    .aktivitetsrad {
-      border-top: 1px solid #c6c2bf;
-
-      &:last-child {
-
-        border-bottom: solid 1px #c6c2bf;
+        justify-self: center;
       }
     }
 
     .uketittel {
       margin-bottom: 2rem;
     }
-
-
   }
 }
 
@@ -63,35 +76,31 @@
   }
 }
 
-input[type=number]::-webkit-inner-spin-button,
+/*input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+}*/
 
 input[type=number] {
   -moz-appearance: textfield;
 }
 
-@media @phone {
+@media @tablet {
   .ukepanel {
     .ukedager {
-      margin-right: 1.2rem;
 
       abbr {
-        margin-left: 2.25rem;
       }
     }
   }
 }
 
-@media @tablet {
+@media @phone {
   .ukepanel {
     .ukedager {
-      margin-right: 2rem;
 
       abbr {
-        margin-left: 2.65rem;
       }
     }
   }

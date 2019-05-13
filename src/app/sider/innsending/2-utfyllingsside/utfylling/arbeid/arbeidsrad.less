@@ -1,96 +1,81 @@
 .arbeidsrad {
-  /*display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;*/
-  /*margin-right: 0.25rem;
-  margin-left: 0.25rem;*/
-  grid-column: 1 / 3;
-  grid-row: 2 / 3;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: minmax(auto, auto);
+  .kolonne-1-til-3();
+  .to-kolonner();
 
   min-height: 4rem;
   border-left: solid 9px #99c2e8;
   border-top: 1px solid #c6c2bf;
-  // height: 4rem;
 
   .kategori_forklaring {
     display: block;
-    padding-left: 0.8rem;
-    width: 18rem;
-
+    padding-left: 1rem;
+    padding-right: 1rem;
+    // width: 18rem;
+    .tittel {
+      padding-top: .3rem;
+    }
     .utvidetInformasjon {
-      margin-bottom: 0.5rem;
+      padding-top: .3rem;
+
     }
   }
 
   .inputrad_arbeid {
-    display: inline-flex;
-    justify-content: flex-end;
-  }
-}
+    .syv-kolonner();
 
-.arbeidInput {
-  /*display: inline-block;
-  margin-right: 1rem;
-  padding-top: 0.2rem;*/
+    .skjemaelement {
+      justify-self: center;
+      margin-bottom: .2rem;
+      margin-top: .2rem;
 
-  .input--xs {
-    width: 3rem;
-    height: 2.5rem;
-    text-align: center;
+      &.arbeidInput {
+
+        .input--xs {
+          width: 3rem;
+          height: 2.5rem;
+          text-align: center;
+        }
+      }
+    }
   }
 }
 
 @media @tablet {
   .arbeidInput {
-    /*margin-right: 0.5rem;
-    height: auto;*/
 
     .input--xs {
-      width: 2.7rem;
     }
   }
 
   .arbeidsrad {
 
-    .inputrad_arbeid {
-      display: inline-flex;
-      margin-left: auto;
-    }
-
     .kategori_forklaring {
-      display: inline-flex;
-      width: auto;
-      padding-left: 0.5rem;
+
+    }
+    .inputrad_arbeid {
+
+      .skjemaelement {
+      }
     }
   }
 }
 
 @media @phone {
   .arbeidInput {
-    margin-right: 0;
+    // margin-right: 0;
 
     .input--xs {
-      width: 2.7rem;
+      // width: 2.7rem;
     }
   }
 
   .arbeidsrad {
-    display: flex;
-    height: auto;
-    margin-right: 0;
-    margin-left: 0;
 
     .inputrad_arbeid {
-      display: block;
-      margin-left: 0.6rem;
+
     }
 
     .kategori_forklaring {
-      padding-top: 1rem;
     }
   }
 }

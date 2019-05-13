@@ -114,7 +114,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         return (
             <div className="arbeidsrad" style={{backgroundColor: feil ? '#e79999' : '', borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none'}}>
                 <div className="kategori_forklaring">
-                    <Undertittel>
+                    <Undertittel className={'tittel'}>
                         <FormattedHTMLMessage id={tekstId}/>
                     </Undertittel>
                     <UtvidetInformasjon>

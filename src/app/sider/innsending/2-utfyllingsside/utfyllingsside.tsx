@@ -182,26 +182,28 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                     <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
                     <Sprakvelger/>
                 </section>
-                <section className="seksjon flex-innhold sentrert utfylling-container">
+                <section className="seksjon flex-innhold sentrert">
                     <div id="feilmelding">
                         {this.hentFeilmeldinger()}
                     </div>
-                    <UkePanel
-                        ukenummer={Konstanter().forsteUke}
-                        faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
-                        datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
-                        utfyllingFeil={this.state}
-                        erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
-                    />
-                    <UkePanel
-                        ukenummer={Konstanter().andreUke}
-                        faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
-                        datoTittel={hentDatoForForsteUke(meldeperiode.til)}
-                        utfyllingFeil={this.state}
-                        erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
-                    />
+                    <div className={'utfylling-container'}>
+                        <UkePanel
+                            ukenummer={Konstanter().forsteUke}
+                            faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
+                            datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
+                            utfyllingFeil={this.state}
+                            erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
+                        />
+                        <UkePanel
+                            ukenummer={Konstanter().andreUke}
+                            faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
+                            datoTittel={hentDatoForForsteUke(meldeperiode.til)}
+                            utfyllingFeil={this.state}
+                            erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
+                        />
+                    </div>
                 </section>
-                <section className="seksjon flex-innhold sentrert">
+                <section className="seksjon flex-innhold sentrert innsending-knapper">
                     <NavKnapp
                         type={knappTyper.hoved}
                         nestePath={'/bekreftelse'}
@@ -219,7 +221,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                         type={knappTyper.flat}
                         nestePath={'/om-meldekort'}
                         tekstid={'naviger.avbryt'}
-                        className={'navigasjonsknapp'}
+                        className={'navigasjonsknapp avbryt'}
                     />
                 </section>
             </main>
