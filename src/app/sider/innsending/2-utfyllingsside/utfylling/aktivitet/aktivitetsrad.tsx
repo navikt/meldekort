@@ -30,39 +30,40 @@ interface RadProps {
 type AktivitetsradProps = RadProps & FeilIDager & MapStateToProps & MapDispatchToProps;
 
 class Aktivitetsrad extends React.Component<AktivitetsradProps> {
-
     setVerdi = (ukedag: string) => {
-        const oppdaterteDager = this.props.innsending.utfylteDager.map( dag => {
+        const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
             if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
                 switch (this.props.tekstId) {
                     case 'utfylling.tiltak':
                         return {
                             ...dag,
-                            kurs: !(dag.kurs)
+                            kurs: !dag.kurs,
                         };
                     case 'utfylling.syk':
-                       return {
-                           ...dag,
-                            syk: !(dag.syk)
-                       };
+                        return {
+                            ...dag,
+                            syk: !dag.syk,
+                        };
                     case 'utfylling.ferieFravar':
                         return {
                             ...dag,
-                            annetFravaer: !(dag.annetFravaer)
+                            annetFravaer: !dag.annetFravaer,
                         };
                     default:
                         return {
-                            ...dag
+                            ...dag,
                         };
                 }
             }
-            return {...dag};
+            return { ...dag };
         });
         this.props.oppdaterDager(oppdaterteDager);
-    }
+    };
 
     isChecked = (ukedag: string): boolean => {
-        let valgtDag = this.props.innsending.utfylteDager.filter(dag => dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim()));
+        let valgtDag = this.props.innsending.utfylteDager.filter(
+            dag => dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())
+        );
         let checked: boolean = false;
         switch (this.props.tekstId) {
             case 'utfylling.tiltak':
@@ -78,61 +79,59 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 break;
         }
         return checked;
-    }
+    };
 
     settFelter = () => {
-        return hentUkedagerSomStringListe().map((dag) => {
+        return hentUkedagerSomStringListe().map(dag => {
             let ukedag = konverterUkedag(dag);
             return (
                 <Checkbox
                     className="utfylling-checkboks"
                     key={ukedag}
-                    label={<span className="vekk">{dag} {hentIntl().formatMessage({id: this.props.tekstId})}</span>}
+                    label={
+                        <span className="vekk">
+                            {dag} {hentIntl().formatMessage({ id: this.props.tekstId })}
+                        </span>
+                    }
                     checked={this.isChecked(ukedag)}
-                    onChange={() => { this.setVerdi(ukedag); }}
+                    onChange={() => {
+                        this.setVerdi(ukedag);
+                    }}
                 />
             );
         });
-    }
+    };
 
     hentFarge = () => {
         switch (this.props.tekstId) {
             case 'utfylling.tiltak':
-                return {borderLeftColor: '#ffe9cc', backgroundColor: this.props.feil ? '#e79999' : ''};
+                return { borderLeftColor: '#ffe9cc', backgroundColor: this.props.feil ? '#e79999' : '' };
             case 'utfylling.syk':
-                return {borderLeftColor: '#6ab889', backgroundColor: this.props.feil ? '#e79999' : ''};
+                return { borderLeftColor: '#6ab889', backgroundColor: this.props.feil ? '#e79999' : '' };
             case 'utfylling.ferieFravar':
-                return {borderLeftColor: '#c1b5d0', backgroundColor: this.props.feil ? '#e79999' : ''};
+                return { borderLeftColor: '#c1b5d0', backgroundColor: this.props.feil ? '#e79999' : '' };
             default:
                 break;
         }
-    }
+    };
 
     innhold = () => {
         let { tekstId, aap, forklaringId } = this.props;
         return (
             <div className="aktivitetsrad" style={this.hentFarge()}>
-                <div className="kategori_forklaring">
-                    <Undertittel className={'tittel'}>
-                        <FormattedHTMLMessage id={tekstId}/>
-                    </Undertittel>
-                    <UtvidetInformasjon>
-                        <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
-                    </UtvidetInformasjon>
-                </div>
-                <div className="inputrad">
-                    {this.settFelter()}
-                </div>
+                <Undertittel className={'tittel'}>
+                    <FormattedHTMLMessage id={tekstId} />
+                </Undertittel>
+                <div className="inputrad">{this.settFelter()}</div>
+                <UtvidetInformasjon>
+                    <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
+                </UtvidetInformasjon>
             </div>
         );
-    }
+    };
 
     render() {
-        return (
-            <>
-                {this.innhold()}
-            </>
-        );
+        return <>{this.innhold()}</>;
     }
 }
 
@@ -144,9 +143,11 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
-        oppdaterDager: (utfylteDager: UtfyltDag[]) =>
-            dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager))
+        oppdaterDager: (utfylteDager: UtfyltDag[]) => dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(Aktivitetsrad);
+export default connect(
+    mapStateToProps,
+    mapDispatcherToProps
+)(Aktivitetsrad);

@@ -23,11 +23,15 @@ interface MapStateToProps {
 
 type UkePanelProps = Props & MapStateToProps;
 
-const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
+const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
     const hentUkedager = () => {
-        return hentUkedagerSomStringListe().map((dag) => {
+        return hentUkedagerSomStringListe().map((dag, index) => {
             return (
-                <abbr className="bold" key={'ukedager-' + dag} title={dag}>{dag.toUpperCase()[0]}</abbr>
+                <Ingress key={dag + index}>
+                    <abbr key={'ukedager-' + dag} title={dag}>
+                        {dag.toUpperCase()[0]}
+                    </abbr>
+                </Ingress>
             );
         });
     };
@@ -37,7 +41,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
         props.innsending.sporsmalsobjekter.map(sporsmalobj => {
             sporsmalListe.push({
                 kategori: sporsmalobj.kategori,
-                svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja')
+                svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
             });
         });
         return sporsmalListe;
@@ -45,7 +49,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
 
     const sjekkSporsmal = (kategori: string): boolean => {
         let sporsmalListe = hentSporsmal();
-        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
+        let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
@@ -65,10 +69,8 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
             ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
         >
             <div className="ukepanel">
-                <div className="ukedager">
-                    {hentUkedager()}
-                </div>
-                {sjekkSporsmal('arbeid') ?
+                <div className="ukedager">{hentUkedager()}</div>
+                {sjekkSporsmal('arbeid') ? (
                     <Arbeidsrad
                         ukeNummer={props.ukenummer}
                         feil={props.utfyllingFeil.feilIArbeid.feil}
@@ -81,39 +83,38 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
                             !sjekkSporsmal('forhindret') &&
                             !sjekkSporsmal('ferieFravar')
                         }
-                    /> : null
-                }
-                {sjekkSporsmal('aktivitetArbeid') ?
+                    />
+                ) : null}
+                {sjekkSporsmal('aktivitetArbeid') ? (
                     <Aktivitetsrad
                         ukeNummer={props.ukenummer}
                         tekstId="utfylling.tiltak"
                         forklaringId={'forklaring.utfylling.tiltak'}
                         aap={props.erAap}
                         feil={props.utfyllingFeil.feilIKurs.feil}
-                    /> : null
-                }
-                {sjekkSporsmal('forhindret') ?
+                    />
+                ) : null}
+                {sjekkSporsmal('forhindret') ? (
                     <Aktivitetsrad
                         ukeNummer={props.ukenummer}
                         tekstId="utfylling.syk"
                         forklaringId={'forklaring.utfylling.syk'}
                         aap={props.erAap}
                         feil={props.utfyllingFeil.feilISyk.feil}
-                    /> : null
-                }
-                {sjekkSporsmal('ferieFravar') ?
+                    />
+                ) : null}
+                {sjekkSporsmal('ferieFravar') ? (
                     <Aktivitetsrad
                         ukeNummer={props.ukenummer}
                         tekstId="utfylling.ferieFravar"
                         forklaringId={'forklaring.utfylling.ferieFravar'}
                         aap={props.erAap}
                         feil={props.utfyllingFeil.feilIFerie.feil}
-                    /> : null
-                }
+                    />
+                ) : null}
             </div>
         </EkspanderbartpanelBase>
     );
-
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
@@ -122,4 +123,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps, null)(UkePanel);
+export default connect(
+    mapStateToProps,
+    null
+)(UkePanel);

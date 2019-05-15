@@ -2,26 +2,19 @@
   .kolonne-1-til-3();
   .to-kolonner();
 
-  min-height: 4rem;
   border-left: solid 9px #99c2e8;
   border-top: 1px solid #c6c2bf;
+  padding-left: 1.5rem;
 
-  .kategori_forklaring {
-    display: block;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    // width: 18rem;
-    .tittel {
-      padding-top: .3rem;
-    }
-    .utvidetInformasjon {
-      padding-top: .3rem;
+  .tittel {
+    padding-top: .3rem;
+    align-self: end;
+    padding-bottom: 1rem;
 
-    }
   }
-
   .inputrad_arbeid {
     .syv-kolonner();
+    margin-top: 1.2rem;
 
     .skjemaelement {
       justify-self: center;
@@ -38,9 +31,18 @@
       }
     }
   }
+  .utvidetInformasjon {
+    .kolonne-1-til-3();
+    padding-bottom: .5rem;
+
+    &.utvidetInformasjon--apen{
+      margin-top: .5rem;
+    }
+  }
+
 }
 
-@media @tablet {
+/*@media @tablet {
   .arbeidInput {
 
     .input--xs {
@@ -58,24 +60,21 @@
       }
     }
   }
-}
+}*/
 
 @media @phone {
-  .arbeidInput {
-    // margin-right: 0;
-
-    .input--xs {
-      // width: 2.7rem;
-    }
-  }
 
   .arbeidsrad {
+    .to-rader();
 
-    .inputrad_arbeid {
-
-    }
 
     .kategori_forklaring {
+      .to-kolonner();
+      grid-template-columns: 1fr 100px;
+
+    }
+    .inputrad_arbeid {
+
     }
   }
 }

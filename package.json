@@ -71,6 +71,7 @@
     "nav-frontend-veileder-style": "^2.0.6",
     "nav-frontend-veilederpanel": "^0.1.10",
     "nav-frontend-veilederpanel-style": "0.0.14",
+    "prettier": "^1.17.1",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
@@ -95,6 +96,7 @@
     "redux-persist-transform-encrypt": "^2.0.1",
     "rxjs": "^6.4.0",
     "ts-react-json-table": "^0.1.1",
+    "tslint-config-prettier": "^1.15.0",
     "typesafe-actions": "^3.0.0",
     "typescript": "^3.3.1"
   },
