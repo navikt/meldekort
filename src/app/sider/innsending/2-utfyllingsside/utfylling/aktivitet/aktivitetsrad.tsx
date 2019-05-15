@@ -122,10 +122,10 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 <Undertittel className={'tittel'}>
                     <FormattedHTMLMessage id={tekstId} />
                 </Undertittel>
-                <div className="inputrad">{this.settFelter()}</div>
                 <UtvidetInformasjon>
                     <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                 </UtvidetInformasjon>
+                <div className="inputrad">{this.settFelter()}</div>
             </div>
         );
     };

@@ -130,10 +130,10 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                 <Undertittel className={'tittel'}>
                     <FormattedHTMLMessage id={tekstId} />
                 </Undertittel>
-                <div className="inputrad_arbeid">{this.settFelter()}</div>
                 <UtvidetInformasjon>
                     <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                 </UtvidetInformasjon>
+                <div className="inputrad_arbeid">{this.settFelter()}</div>
             </div>
         );
     };

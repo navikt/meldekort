@@ -12,9 +12,21 @@
     padding-bottom: 1rem;
 
   }
+  .utvidetInformasjon {
+    .kolonne-1-til-3();
+    padding-bottom: .5rem;
+
+    &.utvidetInformasjon--apen{
+      margin-top: .5rem;
+    }
+  }
+
   .inputrad_arbeid {
+    .kolonne-2-til-3();
     .syv-kolonner();
     margin-top: 1.2rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
 
     .skjemaelement {
       justify-self: center;
@@ -31,15 +43,6 @@
       }
     }
   }
-  .utvidetInformasjon {
-    .kolonne-1-til-3();
-    padding-bottom: .5rem;
-
-    &.utvidetInformasjon--apen{
-      margin-top: .5rem;
-    }
-  }
-
 }
 
 /*@media @tablet {

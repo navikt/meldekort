@@ -17,21 +17,6 @@
     align-self: center;
 
   }
-  .inputrad {
-    .syv-kolonner();
-    margin-top: .5rem;
-    margin-bottom: .5rem;
-
-    .utfylling-checkboks {
-      justify-self: center;
-
-      label.skjemaelement__label {
-        &::before {
-          margin: 0.25rem;
-        }
-      }
-    }
-  }
   .utvidetInformasjon {
     .kolonne-1-til-3();
 
@@ -43,6 +28,24 @@
     }
   }
 
+  .inputrad {
+    .kolonne-2-til-3();
+    .syv-kolonner();
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    .utfylling-checkboks {
+      justify-self: center;
+
+      label.skjemaelement__label {
+        &::before {
+          margin: 0.25rem;
+        }
+      }
+    }
+  }
 }
 
 .feilIRad {
