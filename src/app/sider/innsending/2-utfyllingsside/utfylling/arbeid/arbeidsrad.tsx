@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { hentUkedagerSomStringListe, konverterUkedag, matchUkedager } from '../../../../../utils/ukedager';
+import {
+    hentUkedager,
+    hentUkedagerSomStringListe,
+    konverterUkedag,
+    matchUkedager,
+} from '../../../../../utils/ukedager';
 import { FormattedHTMLMessage } from 'react-intl';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyllingConfig';
@@ -133,6 +138,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
                 <UtvidetInformasjon>
                     <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                 </UtvidetInformasjon>
+                <div className="ukedager__mobil">{hentUkedager()}</div>
                 <div className="inputrad_arbeid">{this.settFelter()}</div>
             </div>
         );

@@ -3,24 +3,19 @@
   .to-kolonner();
   border-top: 1px solid #c6c2bf;
   border-left: solid 9px;
-  padding-left: 1.5rem;
   grid-auto-rows: minmax(auto, auto);
+  width: 100%;
+  padding: 0 1rem 0 1rem;
 
   &:last-child {
     border-bottom: solid 1px #c6c2bf;
   }
 
   .tittel {
-    padding-top: 1.5rem;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    align-self: center;
-
+    align-self: end;
   }
   .utvidetInformasjon {
     .kolonne-1-til-3();
-
-    padding-top: .3rem;
     padding-bottom: .5rem;
 
     &.utvidetInformasjon--apen{
@@ -56,22 +51,11 @@
   border-radius: 0.25rem;
 }
 
-@media @tablet {
+@media @tablet, @desktop {
   .aktivitetsrad {
 
-
-    .kategori_forklaring {
-      .tittel {
-
-      }
-      .utvidetInformasjon {
-
-      }
-    }
-    .inputrad {
-      .utfylling-checkboks {
-
-      }
+    .ukedager {
+      display: none;
     }
   }
 
@@ -84,28 +68,39 @@
 
 @media @phone {
   .aktivitetsrad {
-    .to-rader();
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
 
-    .kategori_forklaring {
-      .to-kolonner();
-      grid-template-columns: 1fr 100px;
-      padding: .25rem 1rem .25rem 1rem;
+    .tittel {
+      padding-top: 1rem;
+      align-self: left;
+      order: 1;
 
-      .tittel {
-        padding-top: .3rem;
+    }
+    .utvidetInformasjon {
+      order: 2;
+
+      &--apen {
+
       }
-      .utvidetInformasjon {
-        padding-top: .3rem;
-        padding-bottom: .3rem;
+    }
 
-        &__apen {
-          .kolonne-1-til-3();
-        }
+    .ukedager__mobil {
+      .syv-kolonner();
+      margin-top: 1rem;
+      order: 3;
+
+      .typo-ingress {
+        justify-self: center;
+
       }
     }
 
     .inputrad {
       .syv-kolonner();
+      order: 4;
+      margin: 0 0 2rem 0;
 
       .utfylling-checkboks {
         justify-self: center;
@@ -115,6 +110,51 @@
             margin: 0.25rem;
           }
         }
+      }
+    }
+  }
+}
+
+@media @small-phone {
+  .aktivitetsrad {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 100%;
+
+
+    .tittel {
+      padding-top: 1rem;
+
+    }
+    .utvidetInformasjon {
+      padding-top: .5rem;
+
+      &--apen {
+
+      }
+    }
+
+    .ukedager__mobil {
+      .syv-kolonner();
+      margin-top: 1rem;
+
+      .typo-ingress {
+        justify-self: center;
+        abbr {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .inputrad {
+      .syv-kolonner();
+
+      margin: 0 0 2rem 0;
+
+      .utfylling-checkboks {
+        justify-self: center;
+
       }
     }
   }

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import { ukeTekst } from '../../utils/dates';
-import { hentUkedagerSomStringListe } from '../../utils/ukedager';
+import { hentUkedager } from '../../utils/ukedager';
 import Aktivitetsrad from '../../sider/innsending/2-utfyllingsside/utfylling/aktivitet/aktivitetsrad';
 import Arbeidsrad from '../../sider/innsending/2-utfyllingsside/utfylling/arbeid/arbeidsrad';
 import { RootState } from '../../store/configureStore';
@@ -24,18 +24,6 @@ interface MapStateToProps {
 type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
-    const hentUkedager = () => {
-        return hentUkedagerSomStringListe().map((dag, index) => {
-            return (
-                <Ingress key={dag + index}>
-                    <abbr key={'ukedager-' + dag} title={dag}>
-                        {dag.toUpperCase()[0]}
-                    </abbr>
-                </Ingress>
-            );
-        });
-    };
-
     const hentSporsmal = (): SpmSvar[] => {
         let sporsmalListe: SpmSvar[] = [];
         props.innsending.sporsmalsobjekter.map(sporsmalobj => {
@@ -69,7 +57,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
         >
             <div className="ukepanel">
-                <div className="ukedager">{hentUkedager()}</div>
+                <div className="ukedager__desktop">{hentUkedager()}</div>
                 {sjekkSporsmal('arbeid') ? (
                     <Arbeidsrad
                         ukeNummer={props.ukenummer}

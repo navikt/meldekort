@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
-import { hentUkedagerSomStringListe, konverterUkedag, matchUkedager } from '../../../../../utils/ukedager';
+import {
+    hentUkedager,
+    hentUkedagerSomStringListe,
+    konverterUkedag,
+    matchUkedager,
+} from '../../../../../utils/ukedager';
 import { Checkbox } from 'nav-frontend-skjema';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyllingConfig';
@@ -125,6 +130,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
                 <UtvidetInformasjon>
                     <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
                 </UtvidetInformasjon>
+                <div className="ukedager__mobil">{hentUkedager()}</div>
                 <div className="inputrad">{this.settFelter()}</div>
             </div>
         );

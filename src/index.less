@@ -139,7 +139,7 @@ body {
 
             .navigasjonsknapp {
               margin: auto;
-              min-width: 175px;
+              min-width: 165px;
 
               &.avbryt {
                 margin-top: 1rem;
@@ -216,6 +216,19 @@ body {
 
             .item {
               margin-bottom: 0.75rem;
+            }
+
+            &.innsending-knapper {
+              grid-template-columns: repeat(2, 1fr);
+
+              .navigasjonsknapp {
+                margin: auto;
+                min-width: 140px;
+
+                &.avbryt {
+                  margin-top: .5rem;
+                }
+              }
             }
           }
         }
