@@ -2,6 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import * as React from 'react';
 import { hentIntl } from './intlUtil';
 import { guid } from 'nav-frontend-js-utils';
+import Ingress from 'nav-frontend-typografi/lib/ingress';
 
 export const hentUkedagerSomElementListe = (): JSX.Element[] => {
     return [
@@ -38,6 +39,18 @@ export const konverterUkedag = (ukedag: string): string => {
         return hentNorskeUkedager()[index];
     }
     return ukedag.trim();
+};
+
+export const hentUkedager = () => {
+    return hentUkedagerSomStringListe().map((dag, index) => {
+        return (
+            <Ingress key={dag + index}>
+                <abbr key={'ukedager-' + dag} title={dag}>
+                    {dag.toUpperCase()[0]}
+                </abbr>
+            </Ingress>
+        );
+    });
 };
 
 export const hentNorskeUkedager = (): string[] => {
