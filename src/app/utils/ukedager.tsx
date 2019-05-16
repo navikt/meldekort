@@ -33,15 +33,7 @@ export const matchUkedager = (norskUkedag: string, testUkedag: string): boolean 
 };
 
 export const konverterUkedag = (ukedag: string): string => {
-    let index = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-    ].indexOf(ukedag.trim());
+    let index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].indexOf(ukedag.trim());
     if (index >= 0) {
         return hentNorskeUkedager()[index];
     }
