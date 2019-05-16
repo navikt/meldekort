@@ -9,13 +9,15 @@ export interface PersonStatusState {
 const initialState: PersonStatusState = {
     personStatus: {
         id: '',
-        statusArbeidsoker: '',
-        statusYtelse: ''
-    }
+        statusArbeidsoker: 'venter_pa_data',
+        statusYtelse: '',
+    },
 };
 
-const personStatusReducer = (state: PersonStatusState = initialState,
-                             action: PersonStatusActionTypes): PersonStatusState => {
+const personStatusReducer = (
+    state: PersonStatusState = initialState,
+    action: PersonStatusActionTypes
+): PersonStatusState => {
     switch (action.type) {
         case getType(PersonStatusActions.hentPersonStatus.success):
             return {

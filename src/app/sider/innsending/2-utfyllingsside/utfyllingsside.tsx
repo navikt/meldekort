@@ -41,7 +41,8 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
             feilIFerie: { feil: false },
             feilIArbeidetTimerHeleHalve: false,
             feilIArbeidetTimer: false,
-            feilIDager: []};
+            feilIDager: [],
+        };
     }
 
     componentDidMount() {
@@ -53,27 +54,27 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
             sporsmalListe.push({
                 kategori: sporsmalobj.kategori,
-                svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja')
+                svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
             });
         });
         return sporsmalListe;
-    }
+    };
 
     sjekkSporsmal = (kategori: string): boolean => {
         let sporsmalListe = this.hentSporsmal();
-        let sporsmal = sporsmalListe.filter( spm => spm.kategori === kategori);
+        let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
         if (sporsmal.length !== 0) {
             return sporsmal[0].svar;
         }
         return false;
-    }
+    };
 
     validerAntallTimerForDag = (dager: UtfyltDag[]): boolean => {
         let feil: string[] = [];
         let feilIArbeidetTimer = false;
         let feilIArbeidetTimerHeleHalve = false;
 
-        dager.map( dag => {
+        dager.map(dag => {
             if (typeof dag.arbeidetTimer !== 'undefined') {
                 if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
                     feil.push(dag.dag + dag.uke);
@@ -84,9 +85,13 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                 }
             }
         });
-        this.setState({feilIDager: feil, feilIArbeidetTimerHeleHalve: feilIArbeidetTimerHeleHalve, feilIArbeidetTimer: feilIArbeidetTimer});
+        this.setState({
+            feilIDager: feil,
+            feilIArbeidetTimerHeleHalve: feilIArbeidetTimerHeleHalve,
+            feilIArbeidetTimer: feilIArbeidetTimer,
+        });
         return feil.length === 0;
-    }
+    };
 
     valider = (): boolean => {
         this.props.resetValideringsresultat();
@@ -112,10 +117,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         });
 
         this.setState({
-             feilIArbeid: { feil: !arbeidet },
-             feilIKurs: { feil: !kurs },
-             feilISyk: { feil: !syk },
-             feilIFerie: { feil: !ferie }
+            feilIArbeid: { feil: !arbeidet },
+            feilIKurs: { feil: !kurs },
+            feilISyk: { feil: !syk },
+            feilIFerie: { feil: !ferie },
         });
 
         let resultat = arbeidet && kurs && syk && ferie && feilITimer;
@@ -123,34 +128,56 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
             scrollTilElement('feilmelding');
         }
         return resultat;
-    }
+    };
 
     hentFeilmeldinger = () => {
-        let { feilIArbeid, feilIKurs, feilISyk, feilIFerie, feilIArbeidetTimer, feilIArbeidetTimerHeleHalve} = this.state;
+        let {
+            feilIArbeid,
+            feilIKurs,
+            feilISyk,
+            feilIFerie,
+            feilIArbeidetTimer,
+            feilIArbeidetTimerHeleHalve,
+        } = this.state;
         const { valideringsResultat } = this.props.innsending;
-        if (feilIArbeid.feil || feilIKurs.feil || feilISyk.feil || feilIFerie.feil || feilIArbeidetTimer || feilIArbeidetTimerHeleHalve) {
-            let feiltekst = hentIntl().formatMessage({id: 'utfylling.ingenDagerUtfylt'});
+        if (
+            feilIArbeid.feil ||
+            feilIKurs.feil ||
+            feilISyk.feil ||
+            feilIFerie.feil ||
+            feilIArbeidetTimer ||
+            feilIArbeidetTimerHeleHalve
+        ) {
+            let feiltekst = hentIntl().formatMessage({ id: 'utfylling.ingenDagerUtfylt' });
             return (
                 <AlertStripe className={'utfyllingFeil'} type={'advarsel'} solid={true}>
                     <ul>
-                        {feilIArbeid.feil ?
-                            <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.arbeid'}).trim()}"`}</li> : null
-                        }
-                        {feilIKurs.feil ?
-                            <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.tiltak'}).trim()}"`}</li> : null
-                        }
-                        {feilISyk.feil ?
-                            <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.syk'}).trim()}"`}</li> : null
-                        }
-                        {feilIFerie.feil ?
-                            <li>{`${feiltekst} "${hentIntl().formatMessage({id: 'utfylling.ferieFravar'}).trim()}"`}</li> : null
-                        }
-                        {feilIArbeidetTimerHeleHalve ?
-                            <li>{`${hentIntl().formatMessage({id: 'arbeidTimer.heleEllerHalveTallValidator'})}`}</li> : null
-                        }
-                        {feilIArbeidetTimer ?
-                            <li>{`${hentIntl().formatMessage({id: 'arbeidTimer.rangeValidator.range'})}`}</li> : null
-                        }
+                        {feilIArbeid.feil ? (
+                            <li>{`${feiltekst} "${hentIntl()
+                                .formatMessage({ id: 'utfylling.arbeid' })
+                                .trim()}"`}</li>
+                        ) : null}
+                        {feilIKurs.feil ? (
+                            <li>{`${feiltekst} "${hentIntl()
+                                .formatMessage({ id: 'utfylling.tiltak' })
+                                .trim()}"`}</li>
+                        ) : null}
+                        {feilISyk.feil ? (
+                            <li>{`${feiltekst} "${hentIntl()
+                                .formatMessage({ id: 'utfylling.syk' })
+                                .trim()}"`}</li>
+                        ) : null}
+                        {feilIFerie.feil ? (
+                            <li>{`${feiltekst} "${hentIntl()
+                                .formatMessage({ id: 'utfylling.ferieFravar' })
+                                .trim()}"`}</li>
+                        ) : null}
+                        {feilIArbeidetTimerHeleHalve ? (
+                            <li>{`${hentIntl().formatMessage({ id: 'arbeidTimer.heleEllerHalveTallValidator' })}`}</li>
+                        ) : null}
+                        {feilIArbeidetTimer ? (
+                            <li>{`${hentIntl().formatMessage({ id: 'arbeidTimer.rangeValidator.range' })}`}</li>
+                        ) : null}
                     </ul>
                 </AlertStripe>
             );
@@ -159,18 +186,16 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                 return (
                     <AlertStripe className={'utfyllingFeil'} type={'advarsel'} solid={true}>
                         <ul>
-                            {
-                                valideringsResultat.arsakskoder.map(arsakskode => {
-                                    return ( <li key={arsakskode.kode}>{arsakskode.tekst}</li> );
-                                })
-                            }
+                            {valideringsResultat.arsakskoder.map(arsakskode => {
+                                return <li key={arsakskode.kode}>{arsakskode.tekst}</li>;
+                            })}
                         </ul>
                     </AlertStripe>
                 );
             }
         }
         return null;
-    }
+    };
 
     render() {
         let { aktivtMeldekort, sendteMeldekort } = this.props;
@@ -179,13 +204,13 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
             <main>
                 <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
-                    <Innholdstittel><FormattedMessage id="overskrift.steg2" /></Innholdstittel>
-                    <Sprakvelger/>
+                    <Innholdstittel>
+                        <FormattedMessage id="overskrift.steg2" />
+                    </Innholdstittel>
+                    <Sprakvelger />
                 </section>
                 <section className="seksjon flex-innhold sentrert">
-                    <div id="feilmelding">
-                        {this.hentFeilmeldinger()}
-                    </div>
+                    <div id="feilmelding">{this.hentFeilmeldinger()}</div>
                     <div className={'utfylling-container'}>
                         <UkePanel
                             ukenummer={Konstanter().forsteUke}
@@ -225,8 +250,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                     />
                 </section>
             </main>
-        ) : <Redirect exact={true} to="/om-meldekort"/>;
-
+        ) : (
+            <Redirect exact={true} to="/om-meldekort" />
+        );
     }
 }
 
@@ -234,7 +260,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
         innsending: state.innsending,
         aktivtMeldekort: state.aktivtMeldekort,
-        sendteMeldekort: state.meldekort.sendteMeldekort
+        sendteMeldekort: state.meldekort.sendteMeldekort,
     };
 };
 
@@ -243,4 +269,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         resetValideringsresultat: () => dispatch(InnsendingActions.resetValideringsresultat()),
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Utfyllingsside);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Utfyllingsside);

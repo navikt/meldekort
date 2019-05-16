@@ -95,6 +95,7 @@
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
     "rxjs": "^6.4.0",
+    "snyk": "^1.165.0",
     "ts-react-json-table": "^0.1.1",
     "tslint-config-prettier": "^1.15.0",
     "typesafe-actions": "^3.0.0",
@@ -106,7 +107,9 @@
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
-    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
+    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "browserslist": [
     ">0.2%",
@@ -130,5 +133,6 @@
       "array-callback-return": "off",
       "no-useless-concat": "off"
     }
-  }
+  },
+  "snyk": true
 }
