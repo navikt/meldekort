@@ -14,7 +14,7 @@ You must submit the employment status form at the scheduled submission day. Sche
 You may already submit the employment status form the last Saturday or Sunday on the status form (Saturday/Sunday week 2).
 </p>
 <p>
-You find your next submission deadline at “Din side”.
+You find your next submission deadline at “Ditt NAV”.
 </p>
 <a name=siste_frist></a>
 <b>When is final submission deadline without reduced payout?</b>
@@ -22,7 +22,7 @@ You find your next submission deadline at “Din side”.
 Final submission deadline is Monday one week after the period on the employment status form (Monday week 4) at 23:00 h.
 </p>
 <p>
-If you have passed your normal submission deadline without sending the employment status form, you can visit “Din Side” and find the final submission deadline without reduced payout.
+If you have passed your normal submission deadline without sending the employment status form, you can visit “Ditt NAV” and find the final submission deadline without reduced payout.
 </p>
 <p>
 If you submit your employment status form later that the provided deadline, your submission is too late. Unemployment benefits and work assessment allowance will be reduced. You lose the right to benefits from the normal submission date (Monday week 3) until the day you actually send the employment status form, folketrygdloven § 4-8 and § 11-7.
@@ -44,7 +44,7 @@ When you have registered an employment status form you may correct the forms we 
 Payout occurs 1-2 business days after receiving your employment status form, provided that you have been  granted the benefits.
 </p>
 <p>
-At “Din side” you will see whether your benefits have been calculated or not based on your employment status form.
+At “Ditt NAV” you will see whether your benefits have been calculated or not based on your employment status form.
 </p>
 <p>
 If your payment is not calculated the day after sending the employment status form, please contact NAV at 55 55 33 33 to clarify what has happened.
@@ -52,7 +52,7 @@ If your payment is not calculated the day after sending the employment status fo
 <a name=hvor_mye></a>
 <b>How much will I receive?</b>
 <p>
-When your employment status form is calculated, you can see gross payment at “Din side”.
+When your employment status form is calculated, you can see gross payment at “Ditt NAV”.
 </p> 
 <p>
 Gross payment is the benefits before tax and other withholdings. The amount is calculated based on your daily rate (from the decision on your benefit) and the information you have given on the employment status form.

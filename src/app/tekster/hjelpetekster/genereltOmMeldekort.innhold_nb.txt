@@ -12,7 +12,7 @@ Du skal sende meldekortet på fastsatt meldingsdag. Det er mandag etter perioden
 På nav.no kan du sende meldekortet allerede den siste lørdag/søndag i perioden på kortet (lørdag/søndag i uke 2).
 </p>
 <p>
-På "Din side" ser du når neste meldekort kan sendes.
+På "Ditt NAV" ser du når neste meldekort kan sendes.
 </p>
 <a name=siste_frist></a>
 <h2>Når er siste frist for å sende meldekort uten trekk?</h2>
@@ -20,7 +20,7 @@ På "Din side" ser du når neste meldekort kan sendes.
 Siste frist for å sende inn meldekortet til riktig tid er mandag en uke etter perioden på kortet (mandag i uke 4) kl 23.00.
 </p>
 <p>
-Når den vanlige fastsatte meldingsdagen er passert uten at du har sendt inn kortet, ser du siste frist for å sende inn meldekortet uten trekk i ytelsen på «Din side».
+Når den vanlige fastsatte meldingsdagen er passert uten at du har sendt inn kortet, ser du siste frist for å sende inn meldekortet uten trekk i ytelsen på «Ditt NAV».
 </p>
 <p>
 Sender du kortet senere enn dette, har du meldt deg for sent. Du mister retten til dagpenger og arbeidsavklaringspenger fra den dagen du skulle ha meldt deg (mandag i uke 3) til du melder deg igjen. Se folketrygdloven § 4-8 og § 11-7.
@@ -42,7 +42,7 @@ Etter at du har sendt meldekortet, kan du korrigere meldekortene for de ti siste
 Utbetaling skjer normalt 1-2 virkedager etter at meldekortet er mottatt. Dette er forutsatt at du har fått innvilget en ytelse.
 </p>
 <p>
-På «Din side» ser du om meldekortet er beregnet eller ikke.
+På «Ditt NAV» ser du om meldekortet er beregnet eller ikke.
 </p>
 <p>
 Er ikke meldekortet beregnet dagen etter at du sendte det, bør du kontakte NAV på 55 55 33 33 for å få avklart hva som har skjedd.
@@ -50,7 +50,7 @@ Er ikke meldekortet beregnet dagen etter at du sendte det, bør du kontakte NAV 
 <a name=hvor_mye></a>
 <h2>Hvor mye får jeg utbetalt?</h2>
 <p>
-Når meldekortet er beregnet, ser du brutto beregnet ytelse på «Din side».
+Når meldekortet er beregnet, ser du brutto beregnet ytelse på «Ditt NAV».
 </p>
 <p>
 Brutto beløp er ytelsen før skattetrekk og eventuelle andre trekk. Beløpet er beregnet ut i fra hvilken dagsats du har, samt eventuelle tilleggsopplysninger du har oppgitt på meldekortet.

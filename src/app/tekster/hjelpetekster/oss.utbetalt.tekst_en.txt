@@ -1,5 +1,5 @@
 <p>
-When your employment status form is calculated, you can see gross payment at “Din side”.
+When your employment status form is calculated, you can see gross payment at “Ditt NAV”.
 </p>
 <p>
 Gross payment is the benefits before tax and other withholdings. The amount is calculated based on your daily rate (from the decision on your benefit) and the information you have given on the employment status form.
