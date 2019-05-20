@@ -74,9 +74,9 @@
 @sm-max: (@md-min - 1);
 @md-max: (@lg-min - 1);
 
-@small-phone:   ~"only screen and (max-width: @{xs-min})";
-@phone:   ~"only screen and (max-width: @{xs-max})";
-@tablet:  ~"only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})";
+@small-phone: ~"only screen and (max-width: @{xs-min})";
+@phone: ~"only screen and (max-width: @{xs-max})";
+@tablet: ~"only screen and (min-width: @{sm-min}) and (max-width: @{sm-max})";
 @desktop: ~"only screen and (min-width: @{md-min})";
 
 /*
@@ -85,14 +85,13 @@
 -----------------------------
 */
 
-
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   background-color: white;
 
   #meldekort-root {
-
-    .main-container, .main-container.overlay {
+    .main-container,
+    .main-container.overlay {
       z-index: 100;
       margin-right: auto;
       margin-left: auto;
@@ -183,7 +182,6 @@ body {
 
             .item {
               margin-bottom: 1rem;
-
             }
           }
         }
