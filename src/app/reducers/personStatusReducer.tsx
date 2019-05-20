@@ -9,9 +9,9 @@ export interface PersonStatusState {
 const initialState: PersonStatusState = {
     personStatus: {
         id: '',
-        statusArbeidsoker: '',
-        statusYtelse: '',
-    },
+        statusArbeidsoker: 'venter_pa_data',
+        statusYtelse: ''
+    }
 };
 
 const personStatusReducer = (
