@@ -43,9 +43,7 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
     oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) => void;
-    settMeldekortdetaljerInnsending: (
-        meldekortdetaljerInnsending: MeldekortdetaljerInnsending
-    ) => void;
+    settMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
     kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
 }
 
@@ -81,14 +79,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                     : aktivtMeldekort.meldekortId,
                 meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
                 arkivnokkel: '1-ELEKTRONISK',
-                kortType: this.erInnsendingKorrigering()
-                    ? KortType.KORRIGERT_ELEKTRONISK
-                    : aktivtMeldekort.kortType,
+                kortType: this.erInnsendingKorrigering() ? KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.kortType,
                 meldeDato: new Date(),
                 lestDato: new Date(),
-                begrunnelse: this.erInnsendingKorrigering()
-                    ? innsending.begrunnelse.valgtArsak
-                    : '',
+                begrunnelse: this.erInnsendingKorrigering() ? innsending.begrunnelse.valgtArsak : '',
                 sporsmal: {
                     arbeidet:
                         innsending.sporsmalsobjekter[0].checked === undefined
@@ -146,10 +140,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         let fravar: Fravaer[] = [];
         meldekortdetaljer.sporsmal.meldekortDager.map(meldekortDag => {
             let dato = kalkulerDato(meldekort.meldeperiode.fra, meldekortDag.dag);
-            if (
-                typeof meldekortDag.arbeidetTimerSum !== 'undefined' &&
-                meldekortDag.arbeidetTimerSum > 0
-            ) {
+            if (typeof meldekortDag.arbeidetTimerSum !== 'undefined' && meldekortDag.arbeidetTimerSum > 0) {
                 fravar.push({
                     dag: dato,
                     type: { typeFravaer: FravaerTypeEnum.ARBEIDS_FRAVAER },
@@ -185,10 +176,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         this.props.innsending.utfylteDager.map(utfyltDag => {
             meldekortdager.push({
                 dag: dagTeller,
-                arbeidetTimerSum:
-                    typeof utfyltDag.arbeidetTimer === 'undefined'
-                        ? 0
-                        : Number(utfyltDag.arbeidetTimer),
+                arbeidetTimerSum: typeof utfyltDag.arbeidetTimer === 'undefined' ? 0 : Number(utfyltDag.arbeidetTimer),
                 syk: utfyltDag.syk,
                 kurs: utfyltDag.kurs,
                 annetFravaer: utfyltDag.annetFravaer,
@@ -200,8 +188,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     settChecked = () => {
         let detaljer = this.state.meldekortdetaljer;
-        detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer.sporsmal
-            .signatur;
+        detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer.sporsmal.signatur;
         if (detaljer.meldekortdetaljer.sporsmal.signatur) {
             this.setState({ feilmelding: '' });
         }
@@ -247,9 +234,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         } else {
             return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
                 <main>
-                    {this.props.baksystemFeilmelding.visFeilmelding ? (
-                        <UIAlertstripeWrapper />
-                    ) : null}
+                    {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : null}
                     <div className="ikkeSendt">
                         <AlertStripe type={'info'} solid={true}>
                             <span>
@@ -299,11 +284,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                         />
                         <NavKnapp
                             type={knappTyper.standard}
-                            nestePath={
-                                this.hoppOverUtfylling()
-                                    ? '/innsending/sporsmal'
-                                    : '/innsending/utfylling'
-                            }
+                            nestePath={this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'}
                             tekstid={'naviger.forrige'}
                             className={'navigasjonsknapp'}
                         />
@@ -336,12 +317,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) =>
             dispatch(InnsendingActions.oppdaterMeldekortdetaljer(mdetaljer)),
-        settMeldekortdetaljerInnsending: (
-            meldekortdetaljerInnsending: MeldekortdetaljerInnsending
-        ) =>
-            dispatch(
-                InnsendingActions.settMeldekortdetaljerInnsending(meldekortdetaljerInnsending)
-            ),
+        settMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
+            dispatch(InnsendingActions.settMeldekortdetaljerInnsending(meldekortdetaljerInnsending)),
         kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
             dispatch(InnsendingActions.kontrollerMeldekort.request(meldekortdetaljerInnsending)),
     };
