@@ -1,89 +1,80 @@
 .arbeidsrad {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  .kolonne-1-til-3();
+  .to-kolonner();
+
+  width: 100%;
   border-left: solid 9px #99c2e8;
   border-top: 1px solid #c6c2bf;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
-  min-height: 4rem;
-  // height: 4rem;
+  padding: 0 1rem 0 1rem;
 
-  .kategori_forklaring {
-    display: block;
-    padding-left: 0.8rem;
-    width: 18rem;
-
-    .utvidetInformasjon {
-      margin-bottom: 0.5rem;
+  .tittel {
+    align-self: end;
+    padding-bottom: .5rem;
+  }
+  .utvidetInformasjon {
+    .kolonne-1-til-3();
+    padding-bottom: .5rem;
+    &.utvidetInformasjon--apen{
+      margin-top: .5rem;
     }
   }
 
   .inputrad_arbeid {
-    display: inline-flex;
-    justify-content: flex-end;
-  }
-}
+    .kolonne-2-til-3();
+    .syv-kolonner();
+    margin-top: 1.2rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
 
-.arbeidInput {
-  display: inline-block;
-  margin-right: 1rem;
-  padding-top: 0.2rem;
+    .skjemaelement {
+      justify-self: center;
+      margin-bottom: .2rem;
+      margin-top: .2rem;
 
-  .input--xs {
-    width: 3rem;
-    height: 2.5rem;
-    text-align: center;
-  }
-}
-
-@media @tablet {
-  .arbeidInput {
-    margin-right: 0.5rem;
-    height: auto;
-
-    .input--xs {
-      width: 2.7rem;
-    }
-  }
-
-  .arbeidsrad {
-    display: flex;
-
-    .inputrad_arbeid {
-      display: inline-flex;
-      margin-left: auto;
-    }
-
-    .kategori_forklaring {
-      display: inline-flex;
-      width: auto;
-      padding-left: 0.5rem;
+      &.arbeidInput {
+        .input--xs {
+          width: 3rem;
+          height: 2.5rem;
+          text-align: center;
+        }
+      }
     }
   }
 }
 
 @media @phone {
-  .arbeidInput {
-    margin-right: 0;
-
-    .input--xs {
-      width: 2.7rem;
-    }
-  }
-
   .arbeidsrad {
     display: flex;
-    height: auto;
+    flex-direction: column;
+    align-self: flex-start;
 
-    .inputrad_arbeid {
-      display: block;
-      margin-left: 0.6rem;
+    .tittel {
+      padding-top: 1rem;
+    }
+    .utvidetInformasjon {
+      padding-bottom: 1rem;
     }
 
-    .kategori_forklaring {
-      padding-top: 1rem;
+    .ukedager__mobil {
+      .syv-kolonner();
+      .typo-ingress {
+        justify-self: center;
+      }
+    }
+
+    .inputrad_arbeid {
+      .syv-kolonner();
+      margin: 0 0 1rem;
+      .skjemaelement {
+        margin: 0;
+        &.arbeidInput {
+
+          .skjemaelement__input.input--xs {
+            width: 2.25rem;
+            height: 2rem;
+          }
+        }
+      }
     }
   }
 }

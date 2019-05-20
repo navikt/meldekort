@@ -1,8 +1,7 @@
 
 .languageToggle {
   display: flex;
-  justify-content: center;
-  padding: 0.5rem;
+  justify-content: flex-end;
 
   &__wrapper {
     min-width: 165px;
@@ -79,6 +78,16 @@
         outline: none;
         box-shadow: 0 0 0 3px @orangeFocus;
       }
+    }
+  }
+
+  @media @small-phone {
+    &__wrapper {
+      min-width: 130px;
+    }
+
+    &__button {
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     }
   }
 }

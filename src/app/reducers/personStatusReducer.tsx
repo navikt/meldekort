@@ -14,8 +14,10 @@ const initialState: PersonStatusState = {
     }
 };
 
-const personStatusReducer = (state: PersonStatusState = initialState,
-                             action: PersonStatusActionTypes): PersonStatusState => {
+const personStatusReducer = (
+    state: PersonStatusState = initialState,
+    action: PersonStatusActionTypes
+): PersonStatusState => {
     switch (action.type) {
         case getType(PersonStatusActions.hentPersonStatus.success):
             return {

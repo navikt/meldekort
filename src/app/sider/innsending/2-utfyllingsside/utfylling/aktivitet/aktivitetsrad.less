@@ -1,36 +1,46 @@
 .aktivitetsrad {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  .kolonne-1-til-3();
+  .to-kolonner();
+  border-top: 1px solid #c6c2bf;
   border-left: solid 9px;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
-  min-height: 4rem;
+  grid-auto-rows: minmax(auto, auto);
+  width: 100%;
+  padding: 0 1rem 0 1rem;
 
-  .kategori_forklaring {
-    display: block;
-    padding-left: 0.8rem;
-    width: 18rem;
+  &:last-child {
+    border-bottom: solid 1px #c6c2bf;
+  }
 
-    .utvidetInformasjon {
-      margin-bottom: 0.5rem;
+  .tittel {
+    align-self: end;
+  }
+  .utvidetInformasjon {
+    .kolonne-1-til-3();
+    padding-bottom: .5rem;
+
+    &.utvidetInformasjon--apen{
+      margin-top: 1rem;
     }
   }
 
   .inputrad {
-    display: inline-flex;
-    justify-content: flex-end;
-    margin-left: 0.5em;
-  }
-}
+    .kolonne-2-til-3();
+    .syv-kolonner();
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    grid-row-start: 1;
+    grid-row-end: 2;
 
-.flex-container {
-  display: inline-block;
-  width: 3rem;
-  height: 2.5rem;
-  margin-right: 1rem;
-  padding-bottom: 1rem;
+    .utfylling-checkboks {
+      justify-self: center;
+
+      label.skjemaelement__label {
+        &::before {
+          margin: 0.25rem;
+        }
+      }
+    }
+  }
 }
 
 .feilIRad {
@@ -40,33 +50,12 @@
   padding-bottom: 0.5rem;
   border-radius: 0.25rem;
 }
-@media @tablet {
+
+@media @tablet, @desktop {
   .aktivitetsrad {
-    display: flex;
-    height: auto;
-
-    .inputrad {
-      display: inline-flex;
-      margin-left: auto;
+    .ukedager {
+      display: none;
     }
-
-    .kategori_forklaring {
-      display: inline-block;
-      width: auto;
-      padding-left: 0.5rem;
-    }
-  }
-
-  .flex-container {
-    display: inline-block;
-    flex-direction: column-reverse;
-    direction: ltr;
-    justify-content: flex-start;
-    width: 24px;
-    height: 3rem;
-    text-align: center;
-    margin-right: 1.2rem;
-    margin-left: 0.5rem;
   }
 
   .feilIRad {
@@ -79,33 +68,70 @@
 @media @phone {
   .aktivitetsrad {
     display: flex;
-    height: auto;
+    flex-direction: column;
+    align-self: flex-start;
+
+    .tittel {
+      padding-top: 1rem;
+      align-self: left;
+    }
+
+    .ukedager__mobil {
+      .syv-kolonner();
+      margin-top: 1rem;
+      .typo-ingress {
+        justify-self: center;
+      }
+    }
 
     .inputrad {
-      display: flex;
-      margin-left: auto;
-    }
+      .syv-kolonner();
+      margin: 0 0 2rem 0;
 
-    .kategori_forklaring {
+      .utfylling-checkboks {
+        justify-self: center;
+
+        label.skjemaelement__label {
+          &::before {
+            margin: 0.25rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media @small-phone {
+  .aktivitetsrad {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 100%;
+
+    .tittel {
       padding-top: 1rem;
     }
-  }
+    .utvidetInformasjon {
+      padding-top: .5rem;
+    }
 
-  .flex-container {
-    display: inline-block;
-    flex-direction: column-reverse;
-    direction: ltr;
-    justify-content: flex-start;
-    width: 24px;
-    height: 3rem;
-    text-align: center;
-    margin-right: 0.8rem;
-    margin-left: 0.5rem;
-  }
+    .ukedager__mobil {
+      .syv-kolonner();
+      margin-top: 1rem;
 
-  .feilIRad {
-    margin-right: 0;
-    margin-left: 0;
-    padding-left: 0;
+      .typo-ingress {
+        justify-self: center;
+      }
+    }
+
+    .inputrad {
+      .syv-kolonner();
+      margin: 0 0 2rem 0;
+
+      .utfylling-checkboks {
+        justify-self: center;
+
+      }
+    }
   }
 }

@@ -115,14 +115,6 @@ body {
           &.sentrert {
             justify-content: center;
 
-            .navigasjonsknapp {
-              margin-right: 2rem;
-              // margin-bottom: 2rem;
-
-              &:last-child {
-                margin-left: 0;
-              }
-            }
           }
         }
         .seksjon {
@@ -137,6 +129,23 @@ body {
 
             &:last-child {
               margin-bottom: 0;
+            }
+          }
+
+          &.innsending-knapper {
+            display: grid;
+            grid-template-columns: repeat(2, 200px);
+            grid-template-rows: minmax(auto, auto);
+
+            .navigasjonsknapp {
+              margin: auto;
+              min-width: 165px;
+
+              &.avbryt {
+                margin-top: 1rem;
+                grid-column-start: 1;
+                grid-column-end: 3;
+              }
             }
           }
         }
@@ -188,11 +197,32 @@ body {
         padding: @padding-vertical-sm;
 
         .sideinnhold {
+          .flex-innhold {
+            &.tittel-sprakvelger {
+              display: grid;
+              grid-template-rows: 1fr;
+              grid-template-columns: 1fr 1fr;
+            }
+          }
+
           .seksjon {
             margin-bottom: 1rem;
 
             .item {
               margin-bottom: 0.75rem;
+            }
+
+            &.innsending-knapper {
+              grid-template-columns: repeat(2, 1fr);
+
+              .navigasjonsknapp {
+                margin: auto;
+                min-width: 140px;
+
+                &.avbryt {
+                  margin-top: .5rem;
+                }
+              }
             }
           }
         }

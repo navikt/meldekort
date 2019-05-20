@@ -72,22 +72,22 @@ class App extends React.Component<Props, AppState> {
                     }
                 </div>
             );
-        }  else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
+        } else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
             if (this.props.person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
                 this.props.hentPerson();
                 this.setState({ henterPersonInfo: true });
             }
             return (
                 <div>
-                    <Header tittel={hentIntl().formatMessage({id: 'overskrift.meldekort'})}/>
+                    <Header tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })} />
                     <div
-                        className={classNames({overlay: this.props.meny.erApen})}
+                        className={classNames({ overlay: this.props.meny.erApen })}
                         onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
                     >
                         <div className={'main-container'}>
                             <ConnectedRouter history={history}>
                                 <Switch>
-                                    <Route path="/" component={MeldekortRoutes}/>
+                                    <Route path="/" component={MeldekortRoutes} />
                                 </Switch>
                             </ConnectedRouter>
                         </div>
@@ -101,7 +101,7 @@ class App extends React.Component<Props, AppState> {
                 </div>
             );
         }
-    }
+    };
 
     componentDidMount() {
         this.props.hentPersonStatus();
