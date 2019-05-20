@@ -28,18 +28,19 @@ const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
 type MergedProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-const renderMenuItem = (sprakobj: SprakObj) => {
-  return (
-    <li key={sprakobj.label} value={sprakobj.label}>
-      <MenuItem className="languageToggle__menu__item">
-        <div className="languageToggle__button__flag">
-          {sprakobj.label === 'nb' ? <NorskFlaggSVG/> : <EngelskFlaggSVG />}
-        </div>
-        <div id={`languagesprakobj_${sprakobj}`} className="languageToggle__button__language">
-          {sprakobj.tittel}
-        </div>
-      </MenuItem>
-    </li>
+const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
+  const erSprakObjValgtSprakObj = sprakobj.label === valgtSprak;
+  return !erSprakObjValgtSprakObj && (
+      <li key={sprakobj.label} value={sprakobj.label}>
+          <MenuItem className="languageToggle__menu__item">
+              <div className="languageToggle__button__flag">
+                  {sprakobj.label === 'nb' ? <NorskFlaggSVG/> : <EngelskFlaggSVG/>}
+              </div>
+              <div id={`languagesprakobj_${sprakobj}`} className="languageToggle__button__language">
+                  {sprakobj.tittel}
+              </div>
+          </MenuItem>
+      </li>
   );
 };
 
@@ -74,7 +75,7 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = (props) => {
           </div>
         </Button>
         <Menu className="languageToggle__menu">
-          <ul>{sprakArray.map((sprakObj) => renderMenuItem(sprakObj))}</ul>
+          <ul>{sprakArray.map((sprakObj) => renderMenuItem(sprakObj, locale))}</ul>
         </Menu>
       </Wrapper>
     </div>
