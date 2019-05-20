@@ -25,7 +25,6 @@ import { hentIntl } from './utils/intlUtil';
 import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
-import NavFrontendSpinner from 'nav-frontend-spinner';
 
 if (erMock()) {
     setupMock();
@@ -64,13 +63,7 @@ class App extends React.Component<Props, AppState> {
         if (this.props.personStatus.personStatus.id === '') {
             return (
                 <div className="main-container">
-                    {this.props.baksystemFeilmelding.visFeilmelding ? (
-                        <UIAlertstripeWrapper />
-                    ) : this.props.personStatus.personStatus.statusArbeidsoker === 'venter_pa_data' ? (
-                        <NavFrontendSpinner type={'XL'} />
-                    ) : (
-                        <Feilside />
-                    )}{' '}
+                    {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : <Feilside />}
                 </div>
             );
         } else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
