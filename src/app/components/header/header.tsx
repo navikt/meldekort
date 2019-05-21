@@ -84,7 +84,6 @@ class Header extends React.Component<HeaderProps> {
             }
         </header>
     );
-
     }
 }
 
