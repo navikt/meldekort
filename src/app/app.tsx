@@ -104,7 +104,12 @@ class App extends React.Component<Props, AppState> {
     };
 
     componentDidMount() {
-        this.props.hentPersonStatus();
+        const { meny, hentPersonStatus, settValgtMenyPunkt } = this.props;
+        const valgtMenyPunkt = meny.alleMenyPunkter.find(mp => mp.urlparam === window.location.pathname.slice(10));
+        if (typeof valgtMenyPunkt !== 'undefined') {
+            settValgtMenyPunkt(valgtMenyPunkt);
+        }
+        hentPersonStatus();
     }
 
     public render() {
