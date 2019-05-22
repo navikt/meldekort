@@ -180,7 +180,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
         if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert || feilIBegrunnelse) {
             return (
-                <AlertStripe type={'advarsel'} solid={true}>
+                <AlertStripe type={'advarsel'}>
                     <ul>
                         {feilIBegrunnelse ?
                             <li>{`${hentIntl().formatMessage({id: 'begrunnelse.required'})}`}</li> : null
