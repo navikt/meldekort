@@ -109,7 +109,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     content = () => {
         if (this.props.ingenTidligereMeldekort.harTidligereMeldekort === false) {
             return (
-                <AlertStripe type={'info'}>
+                <AlertStripe type={'advarsel'}>
                     <FormattedHTMLMessage id="tidligereMeldekort.harIngen"/>
                 </AlertStripe>
             );

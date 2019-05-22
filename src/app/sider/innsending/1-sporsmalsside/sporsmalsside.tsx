@@ -180,7 +180,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
         if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert || feilIBegrunnelse) {
             return (
-                <AlertStripe type={'advarsel'}>
+                <AlertStripe type={'feil'}>
                     <ul>
                         {feilIBegrunnelse ?
                             <li>{`${hentIntl().formatMessage({id: 'begrunnelse.required'})}`}</li> : null
@@ -277,7 +277,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     )}
                     <section className="seksjon">
                         <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                        <AlertStripe type="info">
+                        <AlertStripe type="advarsel">
                             <FormattedHTMLMessage id="sporsmal.registrertMerknad"/>
                         </AlertStripe>
                     </section>

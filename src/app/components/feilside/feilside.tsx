@@ -11,7 +11,7 @@ class Feilside extends React.Component<{}> {
                     <FormattedHTMLMessage id="ikke.tilgang.overskrift"/>
                 </Innholdstittel>
                 <section className="seksjon flex-innhold sentrert">
-                    <AlertStripe type="info" >
+                    <AlertStripe type="feil" >
                         <FormattedHTMLMessage id="ikke.tilgang.tekst"/>
                     </AlertStripe>
                 </section>
