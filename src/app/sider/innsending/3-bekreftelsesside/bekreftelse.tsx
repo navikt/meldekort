@@ -292,7 +292,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                             type={knappTyper.flat}
                             nestePath={'/om-meldekort'}
                             tekstid={'naviger.avbryt'}
-                            className={'navigasjonsknapp avbryt'}
+                            className={'navigasjonsknapp'}
                         />
                     </section>
                 </main>

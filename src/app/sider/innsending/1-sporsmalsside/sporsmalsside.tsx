@@ -281,7 +281,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                             <FormattedHTMLMessage id="sporsmal.registrertMerknad"/>
                         </AlertStripe>
                     </section>
-                    <section className="seksjon flex-innhold sentrert">
+                    <section className="seksjon flex-innhold sentrert innsending-knapper">
                         <NavKnapp
                             type={knappTyper.hoved}
                             nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}

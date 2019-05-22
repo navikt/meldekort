@@ -134,7 +134,7 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
         return(
             <div className="sideinnhold innhold-detaljer">
                 {this.innhold()}
-                <section className="seksjon flex-innhold sentrert noPrint">
+                <section className="seksjon flex-innhold sentrert noPrint innsending-knapper">
                     <NavKnapp
                         type={knappTyper.hoved}
                         nestePath={'/tidligere-meldekort'}
