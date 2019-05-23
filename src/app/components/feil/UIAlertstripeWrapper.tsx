@@ -21,7 +21,7 @@ const UIAlertstripeWrapper: React.FunctionComponent<UIAlertstripeWrapperProps> =
     return (
         <div className={'alertstripe_wrapper'}>
             {baksystemFeilmelding.visFeilmelding ?
-                <AlertStripe type="advarsel" solid={true}>
+                <AlertStripe type="feil">
                     <div>{baksystemFeilmelding.content()}</div>
                 </AlertStripe> : null
             }

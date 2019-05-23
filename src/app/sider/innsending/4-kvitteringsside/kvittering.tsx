@@ -227,7 +227,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         return this.props.personInfo.personId !== 0 ? (
             <main>
                 {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
-                <section className="seksjon flex-innhold sentrert noPrint kvitteringsKnapper">
+                <section className="seksjon flex-innhold sentrert noPrint innsending-knapper lang-knapper">
                     <NavKnapp
                         type={knappTyper.hoved}
                         className={'navigasjonsknapp'}

@@ -150,7 +150,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         ) {
             let feiltekst = hentIntl().formatMessage({ id: 'utfylling.ingenDagerUtfylt' });
             return (
-                <AlertStripe className={'utfyllingFeil'} type={'advarsel'} solid={true}>
+                <AlertStripe className={'utfyllingFeil'} type={'feil'}>
                     <ul>
                         {feilIArbeid.feil ? (
                             <li>{`${feiltekst} "${hentIntl()
@@ -184,7 +184,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         } else if (typeof valideringsResultat !== 'undefined') {
             if (valideringsResultat.status === 'FEIL') {
                 return (
-                    <AlertStripe className={'utfyllingFeil'} type={'advarsel'} solid={true}>
+                    <AlertStripe className={'utfyllingFeil'} type={'feil'}>
                         <ul>
                             {valideringsResultat.arsakskoder.map(arsakskode => {
                                 return <li key={arsakskode.kode}>{arsakskode.tekst}</li>;
@@ -246,7 +246,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                         type={knappTyper.flat}
                         nestePath={'/om-meldekort'}
                         tekstid={'naviger.avbryt'}
-                        className={'navigasjonsknapp avbryt'}
+                        className={'navigasjonsknapp'}
                     />
                 </section>
             </main>

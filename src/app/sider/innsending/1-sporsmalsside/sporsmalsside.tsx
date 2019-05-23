@@ -180,7 +180,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
         if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert || feilIBegrunnelse) {
             return (
-                <AlertStripe type={'advarsel'} solid={true}>
+                <AlertStripe type={'feil'}>
                     <ul>
                         {feilIBegrunnelse ?
                             <li>{`${hentIntl().formatMessage({id: 'begrunnelse.required'})}`}</li> : null
@@ -277,11 +277,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     )}
                     <section className="seksjon">
                         <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                        <AlertStripe type="info">
+                        <AlertStripe type="advarsel">
                             <FormattedHTMLMessage id="sporsmal.registrertMerknad"/>
                         </AlertStripe>
                     </section>
-                    <section className="seksjon flex-innhold sentrert">
+                    <section className="seksjon flex-innhold sentrert innsending-knapper">
                         <NavKnapp
                             type={knappTyper.hoved}
                             nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
