@@ -105,7 +105,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     componentDidMount() {
         this.settMeldekortIdBasertPaInnsendingstype();
         this.settSporsmalOgUtfyllingHvisKorrigering();
-        if (this.props.innsending.innsendingstype !== Innsendingstyper.innsending) {
+        if (this.props.innsending.innsendingstype === Innsendingstyper.korrigering) {
             this.props.hentMeldekortdetaljer();
         }
     }
