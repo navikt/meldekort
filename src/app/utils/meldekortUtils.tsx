@@ -1,4 +1,5 @@
-import { KortStatus, Meldekort, SendtMeldekort } from '../types/meldekort';
+import { Meldekort, SendtMeldekort } from '../types/meldekort';
+import { Innsendingstyper } from '../types/innsending';
 
 export const erMeldekortSendtInnTidligere = (
     meldekort: Meldekort,
@@ -16,8 +17,13 @@ export const erMeldekortSendtInnTidligere = (
 
 export const erAktivtMeldekortGyldig = (
     meldekort: Meldekort,
-    sendteMeldekort: SendtMeldekort[]): boolean => {
-    if (meldekort.meldekortId !== 0) {
+    sendteMeldekort: SendtMeldekort[],
+    innsendingsType: Innsendingstyper | null): boolean => {
+    if (innsendingsType === null) {
+        return false;
+    } else if (innsendingsType === Innsendingstyper.korrigering) {
+        return true;
+    } else if (meldekort.meldekortId !== 0) {
         return !erMeldekortSendtInnTidligere(meldekort, sendteMeldekort);
     }
     return false;
