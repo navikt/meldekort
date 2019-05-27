@@ -1,4 +1,4 @@
-import './polyfill.js';
+import './app/utils/polyfill.js';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.less';
