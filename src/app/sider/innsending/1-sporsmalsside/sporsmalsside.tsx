@@ -244,7 +244,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         const { innsending, aktivtMeldekort, sendteMeldekort } = this.props;
         const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
         const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
-        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
+        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, innsending.innsendingstype) ? (
                 <main>
                     <section className="seksjon flex-innhold sentrert">
                         {brukermelding.length > 1 ?
