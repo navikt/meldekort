@@ -201,7 +201,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         let { aktivtMeldekort, sendteMeldekort } = this.props;
         let { meldeperiode } = aktivtMeldekort;
 
-        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
+        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, this.props.innsending.innsendingstype) ? (
             <main>
                 <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
                     <Innholdstittel>

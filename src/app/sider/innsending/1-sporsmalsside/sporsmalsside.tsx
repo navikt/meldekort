@@ -244,7 +244,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         const { innsending, aktivtMeldekort, sendteMeldekort } = this.props;
         const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
         const brukermelding = hentIntl().formatMessage({id: 'meldekort.bruker.melding'});
-        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
+        return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, innsending.innsendingstype) ? (
                 <main>
                     <section className="seksjon flex-innhold sentrert">
                         {brukermelding.length > 1 ?
@@ -257,7 +257,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                         <Innholdstittel><FormattedMessage id="overskrift.steg1"/></Innholdstittel>
                         <Sprakvelger/>
                     </section>
-                    <section className="seksjon alert">
+                    <section className="seksjon">
                         <Veilederpanel kompakt={true} svg={<img alt="Veilder" src={veileder}/>}>
                             <div className="item">
                                 <FormattedMessage id="sporsmal.lesVeiledning"/>
@@ -277,9 +277,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
                     )}
                     <section className="seksjon">
                         <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending}/>
-                        <AlertStripe type="advarsel">
-                            <FormattedHTMLMessage id="sporsmal.registrertMerknad"/>
-                        </AlertStripe>
+                        {innsending.innsendingstype === Innsendingstyper.innsending ?
+                            <AlertStripe type="advarsel">
+                                <FormattedHTMLMessage id="sporsmal.registrertMerknad"/>
+                            </AlertStripe> : null
+                        }
+
                     </section>
                     <section className="seksjon flex-innhold sentrert innsending-knapper">
                         <NavKnapp

@@ -260,14 +260,20 @@ body {
               display: grid;
               grid-template-rows: 1fr;
               grid-template-columns: auto auto;
+              grid-column-gap: .5rem;
+
+              h1, .languageToggle {
+                margin: 0;
+                align-self: center;
+              }
             }
           }
 
           .seksjon {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
 
             .item {
-              margin-bottom: 0.75rem;
+              margin-bottom: 1rem;
             }
 
             &.innsending-knapper {

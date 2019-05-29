@@ -9,15 +9,36 @@ import { InnsendingActions } from '../../actions/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { hentIntl } from '../../utils/intlUtil';
+import { MenyActions } from '../../actions/meny';
+import { MenyPunkt } from '../../utils/menyConfig';
+import { MenyState } from '../../types/meny';
+import { Router } from '../../types/router';
+import { PersonStatusState } from '../../reducers/personStatusReducer';
+import { BaksystemFeilmelding } from '../../types/ui';
+import { Person } from '../../types/person';
+import { RootState } from '../../store/configureStore';
+import { selectRouter } from '../../selectors/router';
+import { selectFeilmelding } from '../../selectors/ui';
+
+interface MapStateToProps {
+    router: Router;
+    meny: MenyState;
+}
 
 interface MapDispatchToProps {
     resetInnsending: () => void;
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
-class OmMeldekort extends React.Component<MapDispatchToProps, any> {
+class OmMeldekort extends React.Component<MapDispatchToProps&MapStateToProps, any> {
 
     componentDidMount() {
-        this.props.resetInnsending();
+        const { resetInnsending, meny, settValgtMenyPunkt} = this.props;
+        resetInnsending();
+        const valgtMenyPunkt = meny.alleMenyPunkter.find(mp => mp.urlparam === window.location.pathname.slice(10));
+        if (typeof valgtMenyPunkt !== 'undefined') {
+            settValgtMenyPunkt(valgtMenyPunkt);
+        }
     }
 
     render() {
@@ -51,10 +72,19 @@ class OmMeldekort extends React.Component<MapDispatchToProps, any> {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+const mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+        router: selectRouter(state),
+        meny: state.meny
     };
 };
 
-export default connect(null, mapDispatchToProps)(OmMeldekort);
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+    return {
+        resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
+        settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
+            dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OmMeldekort);
