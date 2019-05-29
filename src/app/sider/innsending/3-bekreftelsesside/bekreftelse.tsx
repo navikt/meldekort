@@ -232,7 +232,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="kvittering" />
             );
         } else {
-            return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort) ? (
+            return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, this.props.innsending.innsendingstype) ? (
                 <main>
                     {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : null}
                     <div className="ikkeSendt">
