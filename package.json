@@ -1,12 +1,9 @@
 {
-  "name": "meldekort-cra-ts",
+  "name": "meldekort",
   "version": "0.1.0",
   "private": true,
   "homepage": "/meldekort",
   "dependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
     "@craco/craco": "^3.4.1",
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
@@ -26,7 +23,6 @@
     "acorn": "^6.1.0",
     "ajv": "^6.6.2",
     "axios": "^0.18.0",
-    "babel-loader": "^8.0.2",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
