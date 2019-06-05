@@ -27,11 +27,11 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
                         <FormattedMessage id={'korrigering.registrert.merknad'}/> : null
                     }
                 </Undertittel>
-                    <>
-                        <UtvidetInformasjon>
-                            <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
-                        </UtvidetInformasjon>
-                    </>
+                <>
+                    <UtvidetInformasjon>
+                        <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
+                    </UtvidetInformasjon>
+                </>
             </div>
 
             <RadioPanelGruppe

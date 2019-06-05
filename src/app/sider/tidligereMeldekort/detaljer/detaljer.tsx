@@ -121,9 +121,13 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
                         )}
                     </div>
                 </section>
-                {meldekortdetaljer.meldekortdetaljer.id !== '' ?
-                    <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer.meldekortdetaljer} erAap={meldegruppe === Meldegruppe.ATTF}/> :
-                    <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div> }
+                <section className="seksjon">
+                    {
+                        meldekortdetaljer.meldekortdetaljer.id !== '' ?
+                        <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer.meldekortdetaljer} erAap={meldegruppe === Meldegruppe.ATTF}/> :
+                        <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div>
+                    }
+                </section>
 
             </>
         );

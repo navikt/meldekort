@@ -209,7 +209,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = (props) => {
 
     return (
         <div className="meldekortdetaljer">
-            <div className="sporsmal">
+            <div className="sporsmalsvisning">
                 {visBegrunnelse()}
                 <Sporsmalvisning sporsmalOgSvar={sporsmalOgSvar()}/>
             </div>
