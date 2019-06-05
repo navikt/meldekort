@@ -83,9 +83,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
             .map( sporsmalobj => this.lagSporsmal(sporsmalobj, AAP, innsending.innsendingstype ));
 
         return(
-            <div>
-                {sporsmalsgruppe}
-            </div>
+            {sporsmalsgruppe}
         );
     }
 }

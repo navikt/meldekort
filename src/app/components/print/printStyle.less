@@ -1,6 +1,6 @@
 
 .utskrift {
-  display: none !important;
+  display: none;
 }
 
 @media print {
@@ -12,36 +12,31 @@
   .hodefot .sitefooter,
   .banner-container,
   .noPrint {
-    display: none !important;
+    display: none;
   }
 
   .pagewrapper {
-    display: none !important;
-    min-height: 0 !important;
+    display: none;
+    min-height: 0;
   }
 
   .utskrift {
-    display: block !important;
+    display: block;
 
     &__hode {
-      display: block !important;
       text-align: center;
-      margin-bottom: 15mm;
+      margin-bottom: 2vh;
 
       img {
         margin-bottom: 1rem;
       }
     }
     &__innhold {
-      padding-bottom: 20mm;
-    }
-    &__side {
-      padding-top: 10mm;
-      page-break-after: always;
+       // padding-bottom: 20mm;
     }
 
     .noPrint {
-      display: none !important;
+      display: none;
     }
     .tabell-detaljer {
       margin: 0;
@@ -52,42 +47,45 @@
 
       .etikett--suksess {
         padding-left: 0;
-        margin-bottom: 0 !important;
+        margin-bottom: 0;
       }
     }
     span, h1, h2, hr, p, td, div, section {
-      font-size: 12px !important;
-      margin-top: 0 !important;
-      margin-bottom: 1rem !important;
-      line-height: 14px !important;
+      font-size: 12px;
+      margin-top: 0;
+      // margin-bottom: 1rem;
+      line-height: 14px;
 
       h1, h1 span, h2, h2 span{
-        font-size: 16px !important;
+        font-size: 16px;
       }
     }
     .periodeBanner {
-      margin-bottom: 1rem !important;
-      text-align: center !important;
+      margin-bottom: 1rem;
+      text-align: center;
       h1, p, p span {
-        margin-bottom: 0.2rem !important;
+        margin-bottom: 0.2rem;
+        border: solid 1px lightcoral;
       }
     }
     .oppsummeringsTekster {
       text-align: center;
-      margin-top: 0.5rem !important;
+      margin-top: 0.5rem;
     }
     .meldekortdetaljer {
-      .sporsmal, .ukevisning .uke {
-        padding-bottom: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
-        .uketittel {
-          text-align: center !important;
+
+      .ukevisning {
+        .seksjon {
+          background-color: #99c2e8;
         }
       }
-      .dagliste {
-        margin-bottom: 0.1rem !important;
-        line-height: 12px !important;
-        font-size: 12px !important;
+      .sporsmal, .ukevisning .uke {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        .uketittel {
+          text-align: center;
+          background-color: #e79999;
+        }
       }
     }
   }
@@ -106,6 +104,6 @@
   }
 
   @media print {
-    display: none !important;
+    display: none;
   }
 }
