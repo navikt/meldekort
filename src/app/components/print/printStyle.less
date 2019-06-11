@@ -1,109 +1,119 @@
-
 .utskrift {
-  display: none;
+    display: none;
 }
 
 @media print {
-
-  header,
-  nav,
-  footer,
-  .hodefot .siteheader,
-  .hodefot .sitefooter,
-  .banner-container,
-  .noPrint {
-    display: none;
-  }
-
-  .pagewrapper {
-    display: none;
-    min-height: 0;
-  }
-
-  .utskrift {
-    display: block;
-
-    &__hode {
-      text-align: center;
-      margin-bottom: 2vh;
-
-      img {
-        margin-bottom: 1rem;
-      }
-    }
-    &__innhold {
-       // padding-bottom: 20mm;
-    }
-
+    header,
+    nav,
+    footer,
+    .hodefot .siteheader,
+    .hodefot .sitefooter,
+    .banner-container,
     .noPrint {
-      display: none;
+        display: none;
     }
-    .tabell-detaljer {
-      margin: 0;
-    }
-    .tabell .jsonTable td, .tabell .jsonTable th {
-      padding-top: 0;
-      padding-bottom: 0;
 
-      .etikett--suksess {
-        padding-left: 0;
-        margin-bottom: 0;
-      }
+    .pagewrapper {
+        display: none;
+        min-height: 0;
     }
-    span, h1, h2, hr, p, td, div, section {
-      font-size: 12px;
-      margin-top: 0;
-      // margin-bottom: 1rem;
-      line-height: 14px;
 
-      h1, h1 span, h2, h2 span{
-        font-size: 16px;
-      }
-    }
-    .periodeBanner {
-      margin-bottom: 1rem;
-      text-align: center;
-      h1, p, p span {
-        margin-bottom: 0.2rem;
-        border: solid 1px lightcoral;
-      }
-    }
-    .oppsummeringsTekster {
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-    .meldekortdetaljer {
+    .utskrift {
+        display: block;
 
-      .ukevisning {
-        .seksjon {
-          background-color: #99c2e8;
+        &__hode {
+            text-align: center;
+            margin-bottom: 2vh;
+
+            img {
+                margin-bottom: 1rem;
+            }
         }
-      }
-      .sporsmal, .ukevisning .uke {
-        padding-bottom: 0;
-        margin-bottom: 0;
-        .uketittel {
-          text-align: center;
-          background-color: #e79999;
+        &__innhold {
+            // padding-bottom: 20mm;
         }
-      }
+
+        .noPrint {
+            display: none;
+        }
+        .tabell-detaljer {
+            margin: 0;
+        }
+        .tabell .jsonTable td,
+        .tabell .jsonTable th {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            .etikett--suksess {
+                padding-left: 0;
+                margin-bottom: 0;
+            }
+        }
+        span,
+        h1,
+        h2,
+        hr,
+        p,
+        td,
+        div,
+        section {
+            font-size: 12px;
+            margin-top: 0;
+            // margin-bottom: 1rem;
+            line-height: 14px;
+
+            h1,
+            h1 span,
+            h2,
+            h2 span {
+                font-size: 16px;
+            }
+        }
+        .periodeBanner {
+            margin-bottom: 1rem;
+            text-align: center;
+            h1,
+            p,
+            p span {
+                margin-bottom: 0.2rem;
+                border: solid 1px lightcoral;
+            }
+        }
+        .oppsummeringsTekster {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        .meldekortdetaljer {
+            .ukevisning {
+                .seksjon {
+                    background-color: #99c2e8;
+                }
+            }
+            .sporsmal,
+            .ukevisning .uke {
+                padding-bottom: 0;
+                margin-bottom: 0;
+                .uketittel {
+                    text-align: center;
+                    background-color: #e79999;
+                }
+            }
+        }
     }
-  }
 }
 
 #meldekort-root {
+    .onlyPrint {
+        display: none;
+    }
 
-  .onlyPrint {
-    display: none;
-  }
+    .printLogo {
+        height: 20px;
+        margin-right: 0.5rem;
+        padding-bottom: 0.2rem;
+    }
 
-  .printLogo {
-    height: 20px;
-    margin-right: 0.5rem;
-    padding-bottom: 0.2rem;
-  }
-
-  @media print {
-    display: none;
-  }
+    @media print {
+        display: none;
+    }
 }
