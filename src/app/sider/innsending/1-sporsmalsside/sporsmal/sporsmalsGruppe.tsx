@@ -84,7 +84,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
       this.lagSporsmal(sporsmalobj, AAP, innsending.innsendingstype)
     );
 
-    return <>{sporsmalsgruppe};</>;
+    return <>{sporsmalsgruppe}</>;
   }
 }
 

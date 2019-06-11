@@ -9,7 +9,7 @@ interface Props {
   sporsmalOgSvar: SporsmalOgSvar[];
 }
 
-const Sporsmalvisning: React.FunctionComponent<Props> = props => {
+const SporsmalVisning: React.FunctionComponent<Props> = props => {
   const hentTekstForSvar = (svar: boolean) => {
     if (svar) {
       return <FormattedMessage id="diverse.ja" />;
@@ -22,7 +22,7 @@ const Sporsmalvisning: React.FunctionComponent<Props> = props => {
       {props.sporsmalOgSvar.map(sporsmalOgSvar => {
         return (
           <section key={sporsmalOgSvar.sporsmalId} className="sporsmalsgruppe">
-            <div className="sflex-sporsmal-hjelpetekst-container">
+            <div className="flex-sporsmal-hjelpetekst-container">
               <Undertittel>
                 <FormattedMessage id={sporsmalOgSvar.sporsmalId} />
                 {sporsmalOgSvar.formatertDato ? <span>{sporsmalOgSvar.formatertDato}?</span> : null}
@@ -40,4 +40,4 @@ const Sporsmalvisning: React.FunctionComponent<Props> = props => {
   );
 };
 
-export default Sporsmalvisning;
+export default SporsmalVisning;

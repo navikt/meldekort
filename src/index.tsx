@@ -17,16 +17,16 @@ addLocaleData([...nbLocaleData, ...enLocaleData]);
 const rootElement = document.getElementById('meldekort-root');
 
 const render = (Component: React.ComponentType<{}>) => {
-    ReactDOM.render(
-        <Provider store={store}>
-            <PersistGate persistor={persistor} loading={<div />}>
-                <IntlProvider locale="nb" defaultLocale="nb">
-                    <Component />
-                </IntlProvider>
-            </PersistGate>
-        </Provider>,
-        rootElement
-    );
+  ReactDOM.render(
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={<div />}>
+        <IntlProvider locale="nb" defaultLocale="nb">
+          <Component />
+        </IntlProvider>
+      </PersistGate>
+    </Provider>,
+    rootElement
+  );
 };
 
 render(App);

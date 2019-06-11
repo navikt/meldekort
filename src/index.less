@@ -83,43 +83,43 @@
 -----------------------------
 */
 .kolonne-1-til-3 {
-    grid-column-start: 1;
-    grid-column-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .kolonne-2-til-3() {
-    grid-column-start: 2;
-    grid-column-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 .kolonne-1-til-2() {
-    grid-column-start: 1;
-    grid-column-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
 }
 
 .rad-1-til-2() {
-    grid-row-start: 1;
-    grid-row-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 .rad-3-til-4() {
-    grid-row-start: 3;
-    grid-row-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
 .to-kolonner() {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .to-rader() {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
 }
 
 .syv-kolonner() {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 /*
 -----------------------------
@@ -128,188 +128,188 @@
 */
 
 body {
-    font-family: "Source Sans Pro", sans-serif;
-    background-color: white;
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: white;
 
+  #meldekort-root {
+    .main-container,
+    .main-container.overlay {
+      z-index: 100;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: @width-container;
+
+      .sideinnhold {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 0 3rem 0;
+
+        .flex-innhold {
+          display: flex;
+          flex-wrap: wrap;
+
+          &.tittel-sprakvelger {
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          &.sentrert {
+            justify-content: center;
+          }
+        }
+        .seksjon {
+          margin-bottom: 2rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .item {
+            margin-bottom: 1rem;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+
+          &.innsending-knapper {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(200px, 300px));
+            grid-template-rows: minmax(auto, auto);
+            grid-row-gap: 1rem;
+            grid-column-gap: 2rem;
+
+            .navigasjonsknapp {
+              min-width: 165px;
+
+              &:nth-child(1) {
+                grid-column-start: 1;
+                grid-column-end: 2;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                justify-self: end;
+              }
+              &:nth-child(2) {
+                grid-column-start: 2;
+                grid-column-end: 3;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                justify-self: start;
+              }
+              &:nth-child(3) {
+                grid-column-start: 1;
+                grid-column-end: 3;
+                grid-row-start: 2;
+                grid-row-end: 3;
+                justify-self: center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .sentrert-tekst {
+    text-align: center;
+  }
+
+  @media @desktop {
     #meldekort-root {
-        .main-container,
-        .main-container.overlay {
-            z-index: 100;
-            margin-right: auto;
-            margin-left: auto;
-            max-width: @width-container;
+      .main-container {
+        display: flex;
+        align-content: center;
+        justify-content: center;
 
-            .sideinnhold {
-                display: flex;
-                flex-direction: column;
-                padding: 2rem 0 3rem 0;
-
-                .flex-innhold {
-                    display: flex;
-                    flex-wrap: wrap;
-
-                    &.tittel-sprakvelger {
-                        justify-content: space-between;
-                        align-items: center;
-                    }
-
-                    &.sentrert {
-                        justify-content: center;
-                    }
-                }
-                .seksjon {
-                    margin-bottom: 2rem;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-
-                    .item {
-                        margin-bottom: 1rem;
-
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-                    }
-
-                    &.innsending-knapper {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(200px, 300px));
-                        grid-template-rows: minmax(auto, auto);
-                        grid-row-gap: 1rem;
-                        grid-column-gap: 2rem;
-
-                        .navigasjonsknapp {
-                            min-width: 165px;
-
-                            &:nth-child(1) {
-                                grid-column-start: 1;
-                                grid-column-end: 2;
-                                grid-row-start: 1;
-                                grid-row-end: 2;
-                                justify-self: end;
-                            }
-                            &:nth-child(2) {
-                                grid-column-start: 2;
-                                grid-column-end: 3;
-                                grid-row-start: 1;
-                                grid-row-end: 2;
-                                justify-self: start;
-                            }
-                            &:nth-child(3) {
-                                grid-column-start: 1;
-                                grid-column-end: 3;
-                                grid-row-start: 2;
-                                grid-row-end: 3;
-                                justify-self: center;
-                            }
-                        }
-                    }
-                }
-            }
+        .sideinnhold {
+          width: 800px;
         }
+      }
     }
-    .sentrert-tekst {
-        text-align: center;
-    }
+  }
 
-    @media @desktop {
-        #meldekort-root {
-            .main-container {
-                display: flex;
-                align-content: center;
-                justify-content: center;
+  @media @tablet {
+    #meldekort-root {
+      .main-container {
+        padding: @padding-vertical-md;
 
-                .sideinnhold {
-                    width: 800px;
-                }
+        .sideinnhold {
+          padding: 2rem 0 2rem 0;
+
+          .seksjon {
+            margin-bottom: 1.5rem;
+
+            .item {
+              margin-bottom: 1rem;
             }
+          }
         }
+      }
     }
+  }
 
-    @media @tablet {
-        #meldekort-root {
-            .main-container {
-                padding: @padding-vertical-md;
+  @media @small-phone {
+    #meldekort-root {
+      .main-container {
+        padding: @padding-vertical-sm;
 
-                .sideinnhold {
-                    padding: 2rem 0 2rem 0;
+        .sideinnhold {
+          .flex-innhold {
+            &.tittel-sprakvelger {
+              display: grid;
+              grid-template-rows: 1fr;
+              grid-template-columns: auto auto;
+              grid-column-gap: 0.5rem;
 
-                    .seksjon {
-                        margin-bottom: 1.5rem;
-
-                        .item {
-                            margin-bottom: 1rem;
-                        }
-                    }
-                }
+              h1,
+              .languageToggle {
+                margin: 0;
+                align-self: center;
+              }
             }
-        }
-    }
+          }
 
-    @media @small-phone {
-        #meldekort-root {
-            .main-container {
-                padding: @padding-vertical-sm;
+          .seksjon {
+            margin-bottom: 1.5rem;
 
-                .sideinnhold {
-                    .flex-innhold {
-                        &.tittel-sprakvelger {
-                            display: grid;
-                            grid-template-rows: 1fr;
-                            grid-template-columns: auto auto;
-                            grid-column-gap: 0.5rem;
-
-                            h1,
-                            .languageToggle {
-                                margin: 0;
-                                align-self: center;
-                            }
-                        }
-                    }
-
-                    .seksjon {
-                        margin-bottom: 1.5rem;
-
-                        .item {
-                            margin-bottom: 1rem;
-                        }
-
-                        &.innsending-knapper {
-                            grid-template-columns: repeat(2, minmax(150px, 300px));
-                            grid-row-gap: 1rem;
-                            grid-column-gap: 1rem;
-
-                            &.lang-knapper {
-                                grid-template-columns: 1fr;
-                                grid-template-row: minmax(auto, auto);
-                                .navigasjonsknapp {
-                                    min-width: 140px;
-
-                                    &:nth-child(1) {
-                                        .kolonne-1-til-2();
-                                        grid-row-start: 1;
-                                        grid-row-end: 2;
-                                        justify-self: center;
-                                    }
-                                    &:nth-child(2) {
-                                        .kolonne-1-til-2();
-                                        grid-row-start: 2;
-                                        grid-row-end: 3;
-                                        justify-self: center;
-                                    }
-                                    &:nth-child(3) {
-                                        .kolonne-1-til-2();
-                                        grid-row-start: 3;
-                                        grid-row-end: 4;
-                                        justify-self: center;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            .item {
+              margin-bottom: 1rem;
             }
+
+            &.innsending-knapper {
+              grid-template-columns: repeat(2, minmax(150px, 300px));
+              grid-row-gap: 1rem;
+              grid-column-gap: 1rem;
+
+              &.lang-knapper {
+                grid-template-columns: 1fr;
+                grid-template-row: minmax(auto, auto);
+                .navigasjonsknapp {
+                  min-width: 140px;
+
+                  &:nth-child(1) {
+                    .kolonne-1-til-2();
+                    grid-row-start: 1;
+                    grid-row-end: 2;
+                    justify-self: center;
+                  }
+                  &:nth-child(2) {
+                    .kolonne-1-til-2();
+                    grid-row-start: 2;
+                    grid-row-end: 3;
+                    justify-self: center;
+                  }
+                  &:nth-child(3) {
+                    .kolonne-1-til-2();
+                    grid-row-start: 3;
+                    grid-row-end: 4;
+                    justify-self: center;
+                  }
+                }
+              }
+            }
+          }
         }
+      }
     }
+  }
 }

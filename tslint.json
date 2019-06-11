@@ -24,7 +24,7 @@
     "indent": [
       true,
       "spaces",
-      4
+      2
     ],
     "interface-name": [
       true,
@@ -36,7 +36,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      160
+      120
     ],
     "member-ordering": [
       true,
