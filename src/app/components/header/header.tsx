@@ -1,6 +1,6 @@
 import * as React from 'react';
-import HovedMeny from '../hovedMeny/hovedMeny';
-import MobilMeny from '../mobilMeny/mobilMeny';
+import HovedMeny from '../meny/desktop/hovedMeny';
+import MobilMeny from '../meny/mobil/mobilMeny';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { MeldeForm, Person } from '../../types/person';
@@ -11,7 +11,7 @@ import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
-import MobilMenyToggle from '../mobilMeny/mobilMenyToggle';
+import MobilMenyToggle from '../meny/mobil/mobilMenyToggle';
 import { isEmpty } from 'ramda';
 
 interface MapStateToProps {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import EtikettBase from 'nav-frontend-etiketter';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import PeriodeBanner from '../../../components/periodeBanner/periodeBanner';
-import Tabell from '../../../components/tabell/tabell';
+import Tabell from '../../../components/tabell/desktop/tabell';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
@@ -21,7 +21,7 @@ import { DetaljRad, Meldegruppe, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
-import MobilTabell from '../../../components/mobilTabell/mobilTabell';
+import MobilTabell from '../../../components/tabell/mobil/mobilTabell';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import { PersonInfo } from '../../../types/person';
 

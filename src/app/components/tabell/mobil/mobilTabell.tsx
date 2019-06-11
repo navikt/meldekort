@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { finnRiktigEtikettKlasse } from '../../utils/statusEtikettUtil';
+import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import EtikettBase from 'nav-frontend-etiketter';
-import Komponentlenke from '../../components/komponentlenke/komponentlenke';
-import { DetaljRad, HistoriskeMeldekortRad } from '../../types/meldekort';
+import Komponentlenke from '../../komponentlenke/komponentlenke';
+import { DetaljRad, HistoriskeMeldekortRad } from '../../../types/meldekort';
 
 interface MobilTabellProps {
     rows?: HistoriskeMeldekortRad[] ;

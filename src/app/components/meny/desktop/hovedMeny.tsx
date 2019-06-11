@@ -2,10 +2,10 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { hentIntl } from '../../utils/intlUtil';
-import { MenyActions } from '../../actions/meny';
-import { MenyPunkt } from '../../utils/menyConfig';
-import { RootState, history } from '../../store/configureStore';
+import { hentIntl } from '../../../utils/intlUtil';
+import { MenyActions } from '../../../actions/meny';
+import { MenyPunkt } from '../../../utils/menyConfig';
+import { RootState, history } from '../../../store/configureStore';
 
 interface MapStateToProps {
     valgtMenyPunkt: MenyPunkt;

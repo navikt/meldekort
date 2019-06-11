@@ -11,8 +11,8 @@ import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { Undertittel } from 'nav-frontend-typografi';
 
-import BegrunnelseVisning from './begrunnelse/begrunnelsesvisning';
-import Sporsmalvisning from '../sporsmalsoppsummering/sporsmalvisning';
+import BegrunnelseVisning from './oppsummering/begrunnelse';
+import SporsmalVisning from './oppsummering/sporsmal';
 import { hentUkedagerSomStringListe } from '../../utils/ukedager';
 import { hentIntl } from '../../utils/intlUtil';
 import UtvidetInformasjon from '../utvidetinformasjon/utvidetInformasjon';
@@ -214,7 +214,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = props => {
     <div className="meldekortdetaljer">
       <div className="sporsmalsvisning">
         <BegrunnelseVisning begrunnelse={props.meldekortdetaljer.begrunnelse} />
-        <Sporsmalvisning sporsmalOgSvar={sporsmalOgSvar()} />
+        <SporsmalVisning sporsmalOgSvar={sporsmalOgSvar()} />
       </div>
       <div className="ukevisning">
         {hentUkeListe(props.meldekortdetaljer.sporsmal.meldekortDager.slice(0, 7), 1)}
