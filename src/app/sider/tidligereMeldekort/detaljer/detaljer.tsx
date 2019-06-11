@@ -37,13 +37,13 @@ interface MapDispatchToProps {
     hentPersonInfo: () => void;
 }
 
-type Props = MapDispatchToProps&MapStateToProps;
+type Props = MapDispatchToProps & MapStateToProps;
 
-class Detaljer extends React.Component<Props, {windowSize: number}> {
+class Detaljer extends React.Component<Props, { windowSize: number }> {
     constructor(props: any) {
         super(props);
         this.state = {
-            windowSize: window.innerWidth
+            windowSize: window.innerWidth,
         };
     }
 
@@ -53,9 +53,9 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
             mottattDato: formaterDato(meldekort.mottattDato),
             kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
             bruttoBelop: formaterBelop(meldekort.bruttoBelop),
-            kortType: mapKortTypeTilTekst(meldekort.kortType)
+            kortType: mapKortTypeTilTekst(meldekort.kortType),
         };
-    }
+    };
 
     sjekkAktivtMeldekortOgRedirect = () => {
         if (this.props.aktivtMeldekort.meldekortId === 0) {
@@ -63,7 +63,7 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
             const tidligereMeldekort = '/tidligere-meldekort';
             pathname !== tidligereMeldekort && history.push(tidligereMeldekort);
         }
-    }
+    };
 
     componentDidMount() {
         this.props.hentMeldekortdetaljer();
@@ -76,27 +76,27 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
 
     handleWindowSize = () =>
         this.setState({
-            windowSize: window.innerWidth
-        })
+            windowSize: window.innerWidth,
+        });
 
     innhold = () => {
-
         const { meldekortdetaljer, aktivtMeldekort } = this.props;
         const rows = this.settTabellrader(aktivtMeldekort);
         const columns = [
-            {key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt"/>},
-            {key: 'kortStatus', label: <FormattedMessage id="overskrift.status"/>, cell: function( row: any, columnKey: any) {
+            { key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt" /> },
+            {
+                key: 'kortStatus',
+                label: <FormattedMessage id="overskrift.status" />,
+                cell: function(row: any, columnKey: any) {
                     return (
-                        <EtikettBase
-                            type={'info'}
-                            className={finnRiktigEtikettKlasse(row.kortStatus)}
-                        >
-                          {row.kortStatus}
+                        <EtikettBase type={'info'} className={finnRiktigEtikettKlasse(row.kortStatus)}>
+                            {row.kortStatus}
                         </EtikettBase>
                     );
-                }},
-            {key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop"/>},
-            {key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype"/>}
+                },
+            },
+            { key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop" /> },
+            { key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype" /> },
         ];
         const { meldegruppe } = aktivtMeldekort;
 
@@ -104,38 +104,36 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
 
         return (
             <>
-                <img alt="" className="noPrint" src={utklippstavle}/>
-                <PeriodeBanner/>
+                <img alt="" className="noPrint" src={utklippstavle} />
+                <PeriodeBanner />
                 <section className="seksjon">
                     <div className="tabell-detaljer">
                         {erDesktopEllerTablet ? (
-                            <Tabell
-                                rows={[rows]}
-                                columns={columns}
-                            />
+                            <Tabell rows={[rows]} columns={columns} />
                         ) : (
-                            <MobilTabell
-                                row={rows}
-                                columns={columns}
-                            />
+                            <MobilTabell row={rows} columns={columns} />
                         )}
                     </div>
                 </section>
                 <section className="seksjon">
-                    {
-                        meldekortdetaljer.meldekortdetaljer.id !== '' ?
-                        <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer.meldekortdetaljer} erAap={meldegruppe === Meldegruppe.ATTF}/> :
-                        <div className="meldekort-spinner"><NavFrontendSpinner type={'XL'}/></div>
-                    }
+                    {meldekortdetaljer.meldekortdetaljer.id !== '' ? (
+                        <Meldekortdetaljer
+                            meldekortdetaljer={meldekortdetaljer.meldekortdetaljer}
+                            erAap={meldegruppe === Meldegruppe.ATTF}
+                        />
+                    ) : (
+                        <div className="meldekort-spinner">
+                            <NavFrontendSpinner type={'XL'} />
+                        </div>
+                    )}
                 </section>
-
             </>
         );
-    }
+    };
 
     render() {
         const { aktivtMeldekort, router } = this.props;
-        return(
+        return (
             <div className="sideinnhold innhold-detaljer">
                 {this.innhold()}
                 <section className="seksjon flex-innhold sentrert noPrint innsending-knapper">
@@ -145,7 +143,7 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
                         tekstid={'naviger.forrige'}
                         className={'navigasjonsknapp'}
                     />
-                    {aktivtMeldekort.korrigerbart ?
+                    {aktivtMeldekort.korrigerbart ? (
                         <NavKnapp
                             type={knappTyper.standard}
                             nestePath={router.location.pathname + '/korriger'}
@@ -153,9 +151,9 @@ class Detaljer extends React.Component<Props, {windowSize: number}> {
                             className={'navigasjonsknapp'}
                             nesteAktivtMeldekort={aktivtMeldekort}
                             nesteInnsendingstype={Innsendingstyper.korrigering}
-                        /> : null
-                    }
-                    <PrintKnapp innholdRenderer={this.innhold} prerenderInnhold={true}/>
+                        />
+                    ) : null}
+                    <PrintKnapp innholdRenderer={this.innhold} prerenderInnhold={true} />
                 </section>
             </div>
         );
@@ -167,14 +165,14 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
         meldekortdetaljer: state.meldekortdetaljer,
         aktivtMeldekort: state.aktivtMeldekort,
         router: selectRouter(state),
-        personInfo: state.personInfo.personInfo
+        personInfo: state.personInfo.personInfo,
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         hentMeldekortdetaljer: () => dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
-        hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request())
+        hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
     };
 };
 
