@@ -32,6 +32,7 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper';
 import { selectFeilmelding } from '../../../selectors/ui';
 import { BaksystemFeilmelding } from '../../../types/ui';
+import { UiActions } from '../../../actions/ui';
 
 interface MapStateToProps {
     innsending: InnsendingState;
@@ -45,6 +46,7 @@ interface MapDispatchToProps {
     oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) => void;
     settMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
     kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
+    skjulBaksystemFeilmelding: () => void;
 }
 
 type BekreftelseProps = MapStateToProps & MapDispatchToProps;
@@ -196,6 +198,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     };
 
     valider = (): boolean => {
+        this.props.skjulBaksystemFeilmelding();
         let sign = this.state.meldekortdetaljer.meldekortdetaljer.sporsmal.signatur;
 
         if (!sign) {
@@ -218,6 +221,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         return !sporsmal.arbeidet && !sporsmal.kurs && !sporsmal.syk && !sporsmal.annetFravaer;
     };
 
+    sjekkBaksystemFeilmelding() {
+        if (this.props.baksystemFeilmelding.visFeilmelding && this.state.senderMeldekort) {
+            scrollTilElement(undefined, 'auto');
+            this.setState({ senderMeldekort: false });
+        }
+    }
+
     render() {
         let { aktivtMeldekort, sendteMeldekort } = this.props;
         let { meldegruppe } = this.props.aktivtMeldekort;
@@ -232,6 +242,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="kvittering" />
             );
         } else {
+            this.sjekkBaksystemFeilmelding();
             return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, this.props.innsending.innsendingstype) ? (
                 <main>
                     {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : null}
@@ -321,6 +332,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
             dispatch(InnsendingActions.settMeldekortdetaljerInnsending(meldekortdetaljerInnsending)),
         kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
             dispatch(InnsendingActions.kontrollerMeldekort.request(meldekortdetaljerInnsending)),
+        skjulBaksystemFeilmelding: () => dispatch(UiActions.skjulBaksystemFeilmelding()),
     };
 };
 
