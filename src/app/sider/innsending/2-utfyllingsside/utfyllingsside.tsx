@@ -8,7 +8,7 @@ import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsendi
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import Konstanter from '../../../utils/consts';
-import { UtfyltDag } from './utfylling/utfyllingConfig';
+import { UtfyltDag } from './utfylling/utfyltDagConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
@@ -131,7 +131,14 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
   };
 
   hentFeilmeldinger = () => {
-    let { feilIArbeid, feilIKurs, feilISyk, feilIFerie, feilIArbeidetTimer, feilIArbeidetTimerHeleHalve } = this.state;
+    let {
+      feilIArbeid,
+      feilIKurs,
+      feilISyk,
+      feilIFerie,
+      feilIArbeidetTimer,
+      feilIArbeidetTimerHeleHalve,
+    } = this.state;
     const { valideringsResultat } = this.props.innsending;
     if (
       feilIArbeid.feil ||
@@ -166,7 +173,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
                 .trim()}"`}</li>
             ) : null}
             {feilIArbeidetTimerHeleHalve ? (
-              <li>{`${hentIntl().formatMessage({ id: 'arbeidTimer.heleEllerHalveTallValidator' })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.heleEllerHalveTallValidator',
+              })}`}</li>
             ) : null}
             {feilIArbeidetTimer ? (
               <li>{`${hentIntl().formatMessage({ id: 'arbeidTimer.rangeValidator.range' })}`}</li>
@@ -194,7 +203,11 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     let { aktivtMeldekort, sendteMeldekort } = this.props;
     let { meldeperiode } = aktivtMeldekort;
 
-    return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, this.props.innsending.innsendingstype) ? (
+    return erAktivtMeldekortGyldig(
+      aktivtMeldekort,
+      sendteMeldekort,
+      this.props.innsending.innsendingstype
+    ) ? (
       <main>
         <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>

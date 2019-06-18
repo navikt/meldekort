@@ -14,7 +14,7 @@ import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { RootState } from '../../store/configureStore';
 import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
-import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyllingConfig';
+import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { hentUkedagerSomStringListe } from '../../utils/ukedager';
 import { RouterState } from 'connected-react-router';
 
@@ -105,7 +105,10 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal.map(spm => {
       for (let i = 0; i < listeMedSporsmal.length; i++) {
         if (spm.kategori === listeMedSporsmal[i].kategori) {
-          return { ...spm, checked: this.settCheckedBasertPaBoolean(spm.kategori, listeMedSporsmal[i].checked) };
+          return {
+            ...spm,
+            checked: this.settCheckedBasertPaBoolean(spm.kategori, listeMedSporsmal[i].checked),
+          };
         }
       }
       return { ...spm };
@@ -135,7 +138,11 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
         <PeriodeBanner className={noPrint} />
         <StegBanner />
         <Switch>
-          <Route exact={true} path={`${match.url}` + '/sporsmal'} render={props => <Sporsmalsside {...props} />} />
+          <Route
+            exact={true}
+            path={`${match.url}` + '/sporsmal'}
+            render={props => <Sporsmalsside {...props} />}
+          />
           <Route
             path={`${match.url}` + '/utfylling'}
             render={(props: RouteComponentProps<any>) => <Utfylling {...props} />}
@@ -166,10 +173,13 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    settMeldekortId: (meldekortId: number) => dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
+    settMeldekortId: (meldekortId: number) =>
+      dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
     hentKorrigertId: () => dispatch(InnsendingActions.hentKorrigertId.request()),
-    oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
-    oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
+    oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
+      dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
+    oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) =>
+      dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentMeldekortdetaljer: () => dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
   };
 };

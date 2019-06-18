@@ -2,7 +2,7 @@ import { InnsendingState } from '../types/innsending';
 import { InnsendingActions, InnsendingActionsTypes } from '../actions/innsending';
 import { getType } from 'typesafe-actions';
 import { hentSporsmalConfig } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { hentUtfyltDagConfig } from '../sider/innsending/2-utfyllingsside/utfylling/utfyllingConfig';
+import { hentUtfyltDagConfig } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { KortType } from '../types/meldekort';
 
 const initialState: InnsendingState = {

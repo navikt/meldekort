@@ -6,7 +6,7 @@ import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyllingConfig';
+import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';

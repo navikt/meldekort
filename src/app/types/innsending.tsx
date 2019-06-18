@@ -1,5 +1,5 @@
 import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyllingConfig';
+import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from './meldekort';
 
 export interface InnsendingState {
