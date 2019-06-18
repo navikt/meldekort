@@ -11,20 +11,22 @@ interface Props {
   ukeNr: number;
 }
 
-const Ukeliste: React.FunctionComponent<Props> = ({ ukeNr, erAap, meldekortDager, aktivtMeldekort }) => {
-  let uke: string = '';
-  if (ukeNr === 1) {
-    uke = hentNummerOgDatoForForsteUke(aktivtMeldekort.meldeperiode.fra);
-  } else if (ukeNr === 2) {
-    uke = hentNummerOgDatoForAndreUke(aktivtMeldekort.meldeperiode.til);
-  }
-
+const Ukeliste: React.FunctionComponent<Props> = ({
+  ukeNr,
+  erAap,
+  meldekortDager,
+  aktivtMeldekort,
+}) => {
   const dagListe = hentDagliste(meldekortDager, erAap);
 
   if (dagListe.length > 0) {
     return (
       <div className="uke">
-        <Undertittel className="uketittel flex-innhold sentrert">{uke}</Undertittel>
+        <Undertittel className="uketittel flex-innhold sentrert">
+          {ukeNr === 1
+            ? hentNummerOgDatoForForsteUke(aktivtMeldekort.meldeperiode.fra)
+            : hentNummerOgDatoForAndreUke(aktivtMeldekort.meldeperiode.til)}
+        </Undertittel>
         <hr className="detaljerborder noPrint" />
         <>{dagListe}</>
       </div>
