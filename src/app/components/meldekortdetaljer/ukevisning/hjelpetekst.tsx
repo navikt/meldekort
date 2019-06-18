@@ -14,56 +14,33 @@ const Hjelpetekst: React.FunctionComponent<Props> = props => {
   if (props.erAap) {
     aap = '-AAP';
   }
+
+  const hentTekst = (utfyllingTekstid: string, forklaringTekstid: string) => {
+    return (
+      <span>
+        <span className={'overskrift-hjelpetekst'}>
+          <strong>
+            {hentIntl()
+              .formatMessage({ id: utfyllingTekstid })
+              .toUpperCase()}
+          </strong>
+        </span>
+        <FormattedHTMLMessage id={forklaringTekstid + aap} />
+      </span>
+    );
+  };
   return (
     <span className={'meldekortdetaljer-utfyllt-hjelpetekster'}>
-      {props.meldekortDag.arbeidetTimerSum > 0 ? (
-        <span>
-          <span className={'overskrift-hjelpetekst'}>
-            <strong>
-              {hentIntl()
-                .formatMessage({ id: 'utfylling.arbeid' })
-                .toUpperCase()}
-            </strong>
-          </span>
-          <FormattedHTMLMessage id={'forklaring.utfylling.arbeid' + aap} />
-        </span>
-      ) : null}
-      {props.meldekortDag.kurs ? (
-        <span>
-          <span className={'overskrift-hjelpetekst'}>
-            <strong>
-              {hentIntl()
-                .formatMessage({ id: 'utfylling.tiltak' })
-                .toUpperCase()}
-            </strong>
-          </span>
-          <FormattedHTMLMessage id={'forklaring.utfylling.tiltak' + aap} />
-        </span>
-      ) : null}
-      {props.meldekortDag.syk ? (
-        <span>
-          <span className={'overskrift-hjelpetekst'}>
-            <strong>
-              {hentIntl()
-                .formatMessage({ id: 'utfylling.syk' })
-                .toUpperCase()}
-            </strong>
-          </span>
-          <FormattedHTMLMessage id={'forklaring.utfylling.syk' + aap} />
-        </span>
-      ) : null}
-      {props.meldekortDag.annetFravaer ? (
-        <span>
-          <span className={'overskrift-hjelpetekst'}>
-            <strong>
-              {hentIntl()
-                .formatMessage({ id: 'utfylling.ferieFravar' })
-                .toUpperCase()}
-            </strong>
-          </span>
-          <FormattedHTMLMessage id={'forklaring.utfylling.ferieFravar' + aap} />
-        </span>
-      ) : null}
+      {props.meldekortDag.arbeidetTimerSum > 0
+        ? hentTekst('utfylling.arbeid', 'forklaring.utfylling.arbeid')
+        : null}
+      {props.meldekortDag.kurs
+        ? hentTekst('utfylling.tiltak', 'forklaring.utfylling.tiltak')
+        : null}
+      {props.meldekortDag.syk ? hentTekst('utfylling.syk', 'forklaring.utfylling.syk') : null}
+      {props.meldekortDag.annetFravaer
+        ? hentTekst('utfylling.ferieFravar', 'forklaring.utfylling.ferieFravar')
+        : null}
     </span>
   );
 };
