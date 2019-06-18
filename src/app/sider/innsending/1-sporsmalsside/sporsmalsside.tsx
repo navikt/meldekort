@@ -52,19 +52,35 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const syk = this.sjekkOmSporsmalErUtfylt(kategorier[2]);
     const ferie = this.sjekkOmSporsmalErUtfylt(kategorier[3]);
     const registrert = this.sjekkOmSporsmalErUtfylt(kategorier[4]);
-    const begrunnelseValgt = begrunnelse.valgtArsak === '' && innsendingstype === Innsendingstyper.korrigering;
+    const begrunnelseValgt =
+      begrunnelse.valgtArsak === '' && innsendingstype === Innsendingstyper.korrigering;
     const nySporsmalsobjekterState = sporsmalsobjekter.map(sporsmalsobj => {
       switch (sporsmalsobj.kategori) {
         case kategorier[0]:
-          return { ...sporsmalsobj, feil: { erFeil: !arbeidet, feilmeldingId: sporsmalsobj.feil.feilmeldingId } };
+          return {
+            ...sporsmalsobj,
+            feil: { erFeil: !arbeidet, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+          };
         case kategorier[1]:
-          return { ...sporsmalsobj, feil: { erFeil: !kurs, feilmeldingId: sporsmalsobj.feil.feilmeldingId } };
+          return {
+            ...sporsmalsobj,
+            feil: { erFeil: !kurs, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+          };
         case kategorier[2]:
-          return { ...sporsmalsobj, feil: { erFeil: !syk, feilmeldingId: sporsmalsobj.feil.feilmeldingId } };
+          return {
+            ...sporsmalsobj,
+            feil: { erFeil: !syk, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+          };
         case kategorier[3]:
-          return { ...sporsmalsobj, feil: { erFeil: !ferie, feilmeldingId: sporsmalsobj.feil.feilmeldingId } };
+          return {
+            ...sporsmalsobj,
+            feil: { erFeil: !ferie, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+          };
         case kategorier[4]:
-          return { ...sporsmalsobj, feil: { erFeil: !registrert, feilmeldingId: sporsmalsobj.feil.feilmeldingId } };
+          return {
+            ...sporsmalsobj,
+            feil: { erFeil: !registrert, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+          };
         default:
           return { ...sporsmalsobj };
       }
@@ -179,20 +195,39 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
     const feilIBegrunnelse = begrunnelse.erFeil && innsendingstype === Innsendingstyper.korrigering;
 
-    if (feilIArbeid || feillIKurs || feilISyk || feilIFerie || feilIRegistrert || feilIBegrunnelse) {
+    if (
+      feilIArbeid ||
+      feillIKurs ||
+      feilISyk ||
+      feilIFerie ||
+      feilIRegistrert ||
+      feilIBegrunnelse
+    ) {
       return (
         <AlertStripe type={'feil'}>
           <ul>
-            {feilIBegrunnelse ? <li>{`${hentIntl().formatMessage({ id: 'begrunnelse.required' })}`}</li> : null}
-            {feilIArbeid ? <li>{`${hentIntl().formatMessage({ id: 'arbeidet.required' })}`}</li> : null}
+            {feilIBegrunnelse ? (
+              <li>{`${hentIntl().formatMessage({ id: 'begrunnelse.required' })}`}</li>
+            ) : null}
+            {feilIArbeid ? (
+              <li>{`${hentIntl().formatMessage({ id: 'arbeidet.required' })}`}</li>
+            ) : null}
             {feillIKurs ? (
-              <li>{`${hentIntl().formatMessage({ id: 'kurs.required' + (aap ? '-AAP' : '') })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'kurs.required' + (aap ? '-AAP' : ''),
+              })}`}</li>
             ) : null}
-            {feilISyk ? <li>{`${hentIntl().formatMessage({ id: 'syk.required' + (aap ? '-AAP' : '') })}`}</li> : null}
+            {feilISyk ? (
+              <li>{`${hentIntl().formatMessage({ id: 'syk.required' + (aap ? '-AAP' : '') })}`}</li>
+            ) : null}
             {feilIFerie ? (
-              <li>{`${hentIntl().formatMessage({ id: 'annetFravar.required' + (aap ? '-AAP' : '') })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'annetFravar.required' + (aap ? '-AAP' : ''),
+              })}`}</li>
             ) : null}
-            {feilIRegistrert ? <li>{`${hentIntl().formatMessage({ id: 'fortsetteRegistrert.required' })}`}</li> : null}
+            {feilIRegistrert ? (
+              <li>{`${hentIntl().formatMessage({ id: 'fortsetteRegistrert.required' })}`}</li>
+            ) : null}
           </ul>
         </AlertStripe>
       );
@@ -238,7 +273,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, innsending.innsendingstype) ? (
       <main>
         <section className="seksjon flex-innhold sentrert">
-          {brukermelding.length > 1 ? <AlertStripe type={'info'}>{brukermelding}</AlertStripe> : null}
+          {brukermelding.length > 1 ? (
+            <AlertStripe type={'info'}>{brukermelding}</AlertStripe>
+          ) : null}
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
@@ -297,7 +334,10 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     return [
       {
         action: () => {
-          history.push('/send-meldekort/innsending/' + (this.hoppeOverUtfylling() ? 'bekreftelse' : 'utfylling'));
+          history.push(
+            '/send-meldekort/innsending/' +
+              (this.hoppeOverUtfylling() ? 'bekreftelse' : 'utfylling')
+          );
           this.props.skjulModal();
         },
         label: hentIntl().formatMessage({ id: 'overskrift.bekreftOgFortsett' }),
@@ -325,12 +365,15 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) => dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
+    oppdaterSvar: (sporsmalsobjekter: Sporsmal[]) =>
+      dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
     skjulModal: () => dispatch(UiActions.skjulModal()),
     visModal: (modal: IModal) => dispatch(UiActions.visModal(modal)),
     resetSporsmalOgUtfylling: () => dispatch(InnsendingActions.resetSporsmalOgUtfylling()),
-    settBegrunnelse: (begrunnelsesobj: Begrunnelse) => dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj)),
-    oppdaterDager: (utfylteDager: UtfyltDag[]) => dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
+    settBegrunnelse: (begrunnelsesobj: Begrunnelse) =>
+      dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj)),
+    oppdaterDager: (utfylteDager: UtfyltDag[]) =>
+      dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
   };
 };
 

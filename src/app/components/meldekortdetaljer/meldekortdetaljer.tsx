@@ -54,7 +54,6 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({ aktivtMeldekort, er
     hentNestePeriodeMedUkerOgDato(aktivtMeldekort.meldeperiode.fra, aktivtMeldekort.meldeperiode.til),
     erAap
   );
-  console.log(sporsmalOgSvar);
 
   return (
     <div className="meldekortdetaljer">
