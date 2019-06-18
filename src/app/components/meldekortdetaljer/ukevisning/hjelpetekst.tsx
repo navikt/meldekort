@@ -2,18 +2,15 @@ import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import { hentIntl } from '../../../utils/intlUtil';
 import { MeldekortDag } from '../../../types/meldekort';
+import { hentAapStreng } from '../../../utils/teksterUtil';
 
 interface Props {
   meldekortDag: MeldekortDag;
   erAap: boolean;
 }
 
-const Hjelpetekst: React.FunctionComponent<Props> = props => {
-  let aap = '';
-
-  if (props.erAap) {
-    aap = '-AAP';
-  }
+const Hjelpetekst: React.FunctionComponent<Props> = ({ meldekortDag, erAap }) => {
+  const aap = hentAapStreng(erAap);
 
   const hentTekst = (utfyllingTekstid: string, forklaringTekstid: string) => {
     return (
@@ -31,14 +28,12 @@ const Hjelpetekst: React.FunctionComponent<Props> = props => {
   };
   return (
     <span className={'meldekortdetaljer-utfyllt-hjelpetekster'}>
-      {props.meldekortDag.arbeidetTimerSum > 0
+      {meldekortDag.arbeidetTimerSum > 0
         ? hentTekst('utfylling.arbeid', 'forklaring.utfylling.arbeid')
         : null}
-      {props.meldekortDag.kurs
-        ? hentTekst('utfylling.tiltak', 'forklaring.utfylling.tiltak')
-        : null}
-      {props.meldekortDag.syk ? hentTekst('utfylling.syk', 'forklaring.utfylling.syk') : null}
-      {props.meldekortDag.annetFravaer
+      {meldekortDag.kurs ? hentTekst('utfylling.tiltak', 'forklaring.utfylling.tiltak') : null}
+      {meldekortDag.syk ? hentTekst('utfylling.syk', 'forklaring.utfylling.syk') : null}
+      {meldekortDag.annetFravaer
         ? hentTekst('utfylling.ferieFravar', 'forklaring.utfylling.ferieFravar')
         : null}
     </span>

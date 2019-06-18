@@ -6,7 +6,11 @@ import { connect } from 'react-redux';
 import BegrunnelseVisning from './begrunnelsevisning/begrunnelse';
 import SporsmalOgSvarVisning from './sporsmalvisning/sporsmalOgSvar';
 import Ukeliste from './ukevisning/ukeliste';
-import { hentSporsmalConfig, Sporsmal } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
+import {
+  hentSporsmalConfig,
+  Sporsmal,
+} from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
+import { hentAapStreng } from '../../utils/teksterUtil';
 
 interface ErAap {
   erAap: boolean;
@@ -20,7 +24,11 @@ const mapStateToProps = (state: RootState) => {
 
 type Props = MeldekortdetaljerState & ErAap & ReturnType<typeof mapStateToProps>;
 
-const Meldekortdetaljer: React.FunctionComponent<Props> = ({ aktivtMeldekort, erAap, meldekortdetaljer }) => {
+const Meldekortdetaljer: React.FunctionComponent<Props> = ({
+  aktivtMeldekort,
+  erAap,
+  meldekortdetaljer,
+}) => {
   const config = hentSporsmalConfig();
   const meldekortdager = meldekortdetaljer.sporsmal.meldekortDager;
 
@@ -34,10 +42,8 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({ aktivtMeldekort, er
   };
 
   const hentSporsmalOgSvar = (formatertDato: string, erAap: boolean) => {
-    let aap = '';
-    if (erAap) {
-      aap = '-AAP';
-    }
+    const aap = hentAapStreng(erAap);
+
     const sporsmalOgSvarConfig = config.map(sporsmalsObj => {
       return {
         kategori: sporsmalsObj.kategori,
@@ -51,7 +57,10 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({ aktivtMeldekort, er
   };
 
   const sporsmalOgSvar = hentSporsmalOgSvar(
-    hentNestePeriodeMedUkerOgDato(aktivtMeldekort.meldeperiode.fra, aktivtMeldekort.meldeperiode.til),
+    hentNestePeriodeMedUkerOgDato(
+      aktivtMeldekort.meldeperiode.fra,
+      aktivtMeldekort.meldeperiode.til
+    ),
     erAap
   );
 
