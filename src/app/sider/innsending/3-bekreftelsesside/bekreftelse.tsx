@@ -253,9 +253,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 {`${hentIntl().formatMessage({
                   id: 'overskrift.steg3.info.ikkeSendt',
                 })}
-                             ${hentIntl().formatMessage({
-                               id: 'overskrift.steg3.info.bekreftVerdier',
-                             })}`}
+                  ${hentIntl().formatMessage({
+                    id: 'overskrift.steg3.info.bekreftVerdier',
+                  })}`}
               </span>
             </AlertStripe>
           </div>

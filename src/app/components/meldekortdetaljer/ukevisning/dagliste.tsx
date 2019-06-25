@@ -19,13 +19,24 @@ const sjekkOmDetFinnesFlereElementer = (element: string, meldekortDag: Meldekort
   }
 };
 
+const returnerAktivitetTekst = (meldekortDag: MeldekortDag, aktivitet: string, tekstid: string) => {
+  return `${hentIntl()
+    .formatMessage({ id: tekstid })
+    .trim()}${sjekkOmDetFinnesFlereElementer(aktivitet, meldekortDag) ? ', ' : ''}`;
+};
+
 export const hentDagliste = (meldekortdager: MeldekortDag[], erAap: boolean): JSX.Element[] => {
   const dagListe = [];
   let ukedager = hentUkedagerSomStringListe();
 
   for (let i = 0; i < meldekortdager.length; i++) {
     let meldekortDag = meldekortdager[i];
-    if (meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.annetFravaer || meldekortDag.syk) {
+    const harAktivitet =
+      meldekortDag.arbeidetTimerSum > 0 ||
+      meldekortDag.kurs ||
+      meldekortDag.annetFravaer ||
+      meldekortDag.syk;
+    if (harAktivitet) {
       let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
       dagListe.push(
         <div className="dagliste" key={guid()}>
@@ -37,26 +48,22 @@ export const hentDagliste = (meldekortdager: MeldekortDag[], erAap: boolean): JS
                                 ${meldekortDag.arbeidetTimerSum}
                                 ${hentIntl()
                                   .formatMessage({ id: 'overskrift.timer' })
-                                  .trim()}${sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : ''}`
+                                  .trim()}${
+                    sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : ''
+                  }`
                 : null}
               {meldekortDag.kurs
-                ? `${hentIntl()
-                    .formatMessage({ id: 'utfylling.tiltak' })
-                    .trim()}${sjekkOmDetFinnesFlereElementer('kurs', meldekortDag) ? ', ' : ''}`
+                ? returnerAktivitetTekst(meldekortDag, 'kurs', 'utfylling.tiltak')
                 : null}
               {meldekortDag.syk
-                ? `${hentIntl()
-                    .formatMessage({ id: 'utfylling.syk' })
-                    .trim()}${sjekkOmDetFinnesFlereElementer('syk', meldekortDag) ? ', ' : ''}`
+                ? returnerAktivitetTekst(meldekortDag, 'syk', 'utfylling.syk')
                 : null}
               {meldekortDag.annetFravaer
-                ? `${hentIntl()
-                    .formatMessage({ id: 'utfylling.ferieFravar' })
-                    .trim()}`
+                ? returnerAktivitetTekst(meldekortDag, '', 'utfylling.ferieFravar')
                 : null}
             </span>
           </div>
-          {meldekortDag.arbeidetTimerSum > 0 || meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer ? (
+          {harAktivitet ? (
             <UtvidetInformasjon>
               <Hjelpetekst meldekortDag={meldekortDag} erAap={erAap} />
             </UtvidetInformasjon>
