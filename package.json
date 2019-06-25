@@ -2,7 +2,7 @@
   "name": "meldekort",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/meldekort",
+  "homepage": "/meldekort-ver",
   "dependencies": {
     "@craco/craco": "^5.2.1",
     "@types/classnames": "^2.2.7",

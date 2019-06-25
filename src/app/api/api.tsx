@@ -34,7 +34,7 @@ const fetchPost = async (url: string, data: any) => {
             return response.data;
         });
     }
-}
+};
 
 export const fetchMeldekort = (): Promise<Person> => {
     return fetchGet(Konstanter().hentMeldekortApiUri);
@@ -50,7 +50,7 @@ export function fetchMeldekortdetaljer(id: number): Promise<Meldekortdetaljer> {
 
 export function fetchPersonstatus(): Promise<PersonStatus> {
     return fetchGet(Konstanter().hentPersonStatusApiUri);
-};
+}
 
 export function fetchPersoninfo(): Promise<PersonInfo> {
     return fetchGet(Konstanter().hentPersonInfoApiUri);

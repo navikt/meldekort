@@ -8,14 +8,14 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: meldekort/internal/isAlive
+    path: meldekort-ver/internal/isAlive
     initialDelay: 60
   readiness:
-    path: meldekort/internal/isReady
+    path: meldekort-ver/internal/isReady
     initialDelay: 60
 prometheus:
   enabled: true
-  path: meldekort/internal/metrics
+  path: meldekort-ver/internal/metrics
 ingress:
   enabled: true
 resources:

@@ -1,2 +1,2 @@
-https://${DomainName}/meldekort/*
-https://${DomainName}/meldekort
+https://${DomainName}/meldekort-ver/*
+https://${DomainName}/meldekort-ver
