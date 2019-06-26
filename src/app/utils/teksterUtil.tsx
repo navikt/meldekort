@@ -4,10 +4,10 @@ export const hentAapStreng = (erAap: boolean): string => {
   return erAap ? '-AAP' : '';
 };
 
-export const finnesIntlId = (id: string) => {
-  if (hentIntl().formatMessage({ id: id }) !== id) {
-    return id;
+export const finnesIntlId = (tekstid: string): string => {
+  if (hentIntl().formatMessage({ id: tekstid }) !== tekstid) {
+    return tekstid;
   } else {
-    return id.slice(0, -4);
+    return tekstid.slice(0, -4);
   }
 };

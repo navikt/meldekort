@@ -25,7 +25,6 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({ sporsmalOgSvar 
   return (
     <>
       {sporsmalOgSvar.map(spm => {
-        console.log(sporsmalOgSvar);
         return (
           <section key={spm.sporsmal} className="sporsmalsgruppe">
             <div className="flex-sporsmal-hjelpetekst-container">

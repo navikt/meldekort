@@ -48,7 +48,8 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
       if (
         sporsmalsobj[key] !== sporsmalsobj.kategori &&
         sporsmalsobj[key] !== sporsmalsobj.feil &&
-        sporsmalsobj[key] !== sporsmalsobj.checked
+        sporsmalsobj[key] !== sporsmalsobj.checked &&
+        sporsmalsobj[key] !== sporsmalsobj.id
       ) {
         sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + tekstendelse);
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
