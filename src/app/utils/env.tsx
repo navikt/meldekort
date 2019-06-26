@@ -45,7 +45,7 @@ export default Environment;
 export function hentEnvSetting(
     variableName: string,
 ) {
-    const meldekort = 'meldekort';
+    const meldekort = 'meldekort-ver';
 
     const varName1 = `${variableName}_${Konstanter().pas}`;
     const varName2 = `${variableName}_${Konstanter().use}`;
