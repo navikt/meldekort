@@ -49,7 +49,6 @@ interface MapDispatchToProps {
   ) => void;
   kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
   skjulBaksystemFeilmelding: () => void;
-
 }
 
 type BekreftelseProps = MapStateToProps & MapDispatchToProps;
@@ -74,49 +73,51 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     scrollTilElement(undefined, 'auto');
   }
 
-    konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
-        let { aktivtMeldekort, innsending } = this.props;
-        let mDet = {
-            meldekortdetaljer: {
-                id: '',
-                meldekortId: this.erInnsendingKorrigering()
-                    ? innsending.korrigertMeldekortId
-                    : aktivtMeldekort.meldekortId,
-                meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
-                arkivnokkel: '1-ELEKTRONISK',
-                kortType: this.erInnsendingKorrigering() ? KortType.KORRIGERT_ELEKTRONISK : aktivtMeldekort.kortType,
-                meldeDato: new Date(),
-                lestDato: new Date(),
-                begrunnelse: this.erInnsendingKorrigering() ? innsending.begrunnelse.valgtArsak : '',
-                sporsmal: {
-                    arbeidet:
-                        innsending.sporsmalsobjekter[0].checked === undefined
-                            ? false
-                            : innsending.sporsmalsobjekter[0].checked.endsWith('ja'),
-                    kurs:
-                        innsending.sporsmalsobjekter[1].checked === undefined
-                            ? false
-                            : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
-                    syk:
-                        innsending.sporsmalsobjekter[2].checked === undefined
-                            ? false
-                            : innsending.sporsmalsobjekter[2].checked.endsWith('ja'),
-                    annetFravaer:
-                        innsending.sporsmalsobjekter[3].checked === undefined
-                            ? false
-                            : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
-                    arbeidssoker:
-                        innsending.sporsmalsobjekter[4].checked === undefined
-                            ? false
-                            : innsending.sporsmalsobjekter[4].checked.endsWith('ja'),
-                    signatur: false,
-                    meldekortDager: this.hentMeldekortDager(),
-                },
-            },
-        };
-        this.props.oppdaterMeldekortdetaljer(mDet.meldekortdetaljer);
-        return mDet;
+  konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
+    let { aktivtMeldekort, innsending } = this.props;
+    let mDet = {
+      meldekortdetaljer: {
+        id: '',
+        meldekortId: this.erInnsendingKorrigering()
+          ? innsending.korrigertMeldekortId
+          : aktivtMeldekort.meldekortId,
+        meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
+        arkivnokkel: '1-ELEKTRONISK',
+        kortType: this.erInnsendingKorrigering()
+          ? KortType.KORRIGERT_ELEKTRONISK
+          : aktivtMeldekort.kortType,
+        meldeDato: new Date(),
+        lestDato: new Date(),
+        begrunnelse: this.erInnsendingKorrigering() ? innsending.begrunnelse.valgtArsak : '',
+        sporsmal: {
+          arbeidet:
+            innsending.sporsmalsobjekter[0].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[0].checked.endsWith('ja'),
+          kurs:
+            innsending.sporsmalsobjekter[1].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
+          syk:
+            innsending.sporsmalsobjekter[2].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[2].checked.endsWith('ja'),
+          annetFravaer:
+            innsending.sporsmalsobjekter[3].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
+          arbeidssoker:
+            innsending.sporsmalsobjekter[4].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[4].checked.endsWith('ja'),
+          signatur: false,
+          meldekortDager: this.hentMeldekortDager(),
+        },
+      },
     };
+    this.props.oppdaterMeldekortdetaljer(mDet.meldekortdetaljer);
+    return mDet;
+  };
 
   erInnsendingKorrigering = (): boolean => {
     return this.props.innsending.innsendingstype === Innsendingstyper.korrigering;
@@ -229,10 +230,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   };
 
   sjekkBaksystemFeilmelding() {
-      if (this.props.baksystemFeilmelding.visFeilmelding && this.state.senderMeldekort) {
-          scrollTilElement(undefined, 'auto');
-          this.setState({ senderMeldekort: false });
-      }
+    if (this.props.baksystemFeilmelding.visFeilmelding && this.state.senderMeldekort) {
+      scrollTilElement(undefined, 'auto');
+      this.setState({ senderMeldekort: false });
+    }
   }
 
   render() {
@@ -249,8 +250,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="kvittering" />
       );
     } else {
-        this.sjekkBaksystemFeilmelding();
-        return erAktivtMeldekortGyldig(
+      this.sjekkBaksystemFeilmelding();
+      return erAktivtMeldekortGyldig(
         aktivtMeldekort,
         sendteMeldekort,
         this.props.innsending.innsendingstype
