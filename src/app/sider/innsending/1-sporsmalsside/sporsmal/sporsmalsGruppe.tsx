@@ -3,13 +3,13 @@ import * as React from 'react';
 import Sporsmal from './sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { hentIntl } from '../../../../utils/intlUtil';
 import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
 import { InnsendingActions } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
 import { Meldekort } from '../../../../types/meldekort';
+import { finnesIntlId, hentAapStreng } from '../../../../utils/teksterUtil';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -41,16 +41,8 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     this.props.oppdaterSvar(nySporsmalsobjekterState);
   };
 
-  finnesIntlId = (id: string) => {
-    if (hentIntl().formatMessage({ id: id }) !== id) {
-      return id;
-    } else {
-      return id.slice(0, -4);
-    }
-  };
-
   lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean, innsendingstype: Innsendingstyper | null) => {
-    const tekstendelse = erAAP ? '-AAP' : '';
+    const tekstendelse = hentAapStreng(erAAP);
     let skalVareDisabled: boolean = false;
     for (let key in sporsmalsobj) {
       if (
@@ -58,10 +50,13 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         sporsmalsobj[key] !== sporsmalsobj.feil &&
         sporsmalsobj[key] !== sporsmalsobj.checked
       ) {
-        sporsmalsobj[key] = this.finnesIntlId(sporsmalsobj[key] + tekstendelse);
+        sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + tekstendelse);
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
-        sporsmalsobj.feil.feilmeldingId = this.finnesIntlId(sporsmalsobj.feil.feilmeldingId);
-      } else if (sporsmalsobj[key] === 'registrert' && innsendingstype !== Innsendingstyper.innsending) {
+        sporsmalsobj.feil.feilmeldingId = finnesIntlId(sporsmalsobj.feil.feilmeldingId);
+      } else if (
+        sporsmalsobj[key] === 'registrert' &&
+        innsendingstype !== Innsendingstyper.innsending
+      ) {
         skalVareDisabled = true;
       }
     }
@@ -73,7 +68,11 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         checked={sporsmalsobj.checked}
         disabled={skalVareDisabled}
         sporsmalOnChange={this.sporsmalOnChange}
-        formatertDato={sporsmalsobj.kategori === 'registrert' ? hentNestePeriodeMedUkerOgDato(fra, til) : undefined}
+        formatertDato={
+          sporsmalsobj.kategori === 'registrert'
+            ? hentNestePeriodeMedUkerOgDato(fra, til)
+            : undefined
+        }
       />
     );
   };
@@ -96,7 +95,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    oppdaterSvar: (sporsmalsobjekt: Spm[]) => dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekt)),
+    oppdaterSvar: (sporsmalsobjekt: Spm[]) =>
+      dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekt)),
   };
 };
 

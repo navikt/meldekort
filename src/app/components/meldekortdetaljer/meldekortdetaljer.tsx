@@ -6,11 +6,8 @@ import { connect } from 'react-redux';
 import BegrunnelseVisning from './begrunnelsevisning/begrunnelse';
 import SporsmalOgSvarVisning from './sporsmalvisning/sporsmalOgSvar';
 import Ukeliste from './ukevisning/ukeliste';
-import {
-  hentSporsmalConfig,
-  Sporsmal,
-} from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { hentAapStreng } from '../../utils/teksterUtil';
+import { hentSporsmalConfig } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
+import { finnesIntlId, hentAapStreng } from '../../utils/teksterUtil';
 
 interface ErAap {
   erAap: boolean;
@@ -47,8 +44,8 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
     const sporsmalOgSvarConfig = config.map(sporsmalsObj => {
       return {
         kategori: sporsmalsObj.kategori,
-        sporsmal: sporsmalsObj.sporsmal + aap,
-        forklaring: sporsmalsObj.forklaring + aap,
+        sporsmal: finnesIntlId(sporsmalsObj.sporsmal + aap),
+        forklaring: finnesIntlId(sporsmalsObj.forklaring + aap),
         svar: hentSvar(sporsmalsObj.id),
         formatertDato: sporsmalsObj.kategori === 'registrert' ? formatertDato : undefined,
       };
