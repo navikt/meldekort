@@ -6,7 +6,7 @@ import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
-import { KortStatus, Meldegruppe, Meldekort, SendteMeldekortState, SendtMeldekort } from '../../../types/meldekort';
+import { KortStatus, Meldegruppe, Meldekort, MeldekortState, SendtMeldekort } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
 import { Dispatch } from 'redux';
 import { selectRouter } from '../../../selectors/router';
@@ -34,7 +34,7 @@ interface MapStateToProps {
     aktivtMeldekort: Meldekort;
     innsending: InnsendingState;
     innsendingstype: Innsendingstyper | null;
-    sendteMeldekort: SendteMeldekortState;
+    sendteMeldekort: MeldekortState;
     personInfo: PersonInfo;
 }
 

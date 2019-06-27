@@ -4,7 +4,8 @@ import { AppEpic } from '../store/configureStore';
 import { AxiosResponse } from 'axios';
 import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmeldingContent';
 import { combineEpics } from 'redux-observable';
-import { concatMap, filter } from 'rxjs/operators';
+import { from, of } from 'rxjs';
+import { catchError, concatMap, filter, map, switchMap } from 'rxjs/operators';
 import { HistoriskeMeldekortActions } from '../actions/historiskeMeldekort';
 import { InnsendingActions } from '../actions/innsending';
 import { isActionOf } from 'typesafe-actions';
@@ -17,6 +18,7 @@ import { PersonActions } from '../actions/person';
 import { PersonStatusActions } from '../actions/personStatus';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
+import { fetchInfomelding } from '../api/api';
 
 const handterFeiletApiKall: AppEpic = action$ =>
     action$.pipe(
@@ -108,8 +110,21 @@ const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
         })
     );
 
+const hentInfomelding: AppEpic = action$ =>
+    action$.pipe(
+        filter(isActionOf(MeldekortActions.hentInfomelding.request)),
+        switchMap(() =>
+        from(fetchInfomelding()).pipe(
+            map(MeldekortActions.hentInfomelding.success),
+            catchError(error =>
+                of(MeldekortActions.hentInfomelding.failure(error), MeldekortActions.apiKallFeilet(error))
+            )
+        ))
+    );
+
 export default combineEpics(
     handterFeiletApiKall,
     fjernFeilmelding,
     sjekkOmBrukerHarTidligereMeldekort,
+    hentInfomelding,
 );

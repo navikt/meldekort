@@ -32,7 +32,7 @@ import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
-import { Meldekort, SendteMeldekortState } from '../types/meldekort';
+import { Meldekort, MeldekortState } from '../types/meldekort';
 import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
@@ -65,7 +65,7 @@ export interface RootState {
     meldeform: MeldeformState;
     meny: MenyState;
     ui: UIState;
-    meldekort: SendteMeldekortState;
+    meldekort: MeldekortState;
 
 }
 

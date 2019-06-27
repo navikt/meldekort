@@ -3,7 +3,13 @@ import Konstanter from '../utils/consts';
 import { erMock } from '../mock/utils';
 import { MeldeformDetaljerInn, Meldeperiode, Person, PersonInfo, PersonStatus } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
-import { Meldekort, Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
+import {
+    Infomelding,
+    Meldekort,
+    Meldekortdetaljer,
+    MeldekortdetaljerInnsending,
+    ValideringsResultat
+} from '../types/meldekort';
 import { AxiosResponse } from 'axios';
 
 const fetchGet = async (url: string) => {
@@ -58,6 +64,10 @@ export function fetchPersoninfo(): Promise<PersonInfo> {
 
 export function fetchKorrigertId(id: number): Promise<number> {
     return fetchGet(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+}
+
+export function fetchInfomelding(): Promise<Infomelding> {
+    return fetchGet(Konstanter().hentInfomelding);
 }
 
 export function postMeldekort(meldekortdetaljer: MeldekortdetaljerInnsending): Promise<ValideringsResultat> {

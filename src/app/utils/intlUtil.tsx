@@ -11,3 +11,7 @@ export const hentIntl = () => {
     const { intl } = intlProvider.getChildContext();
     return intl;
 };
+
+export const hentLocale = () => {
+    return store.getState().intl.locale;
+};
