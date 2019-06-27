@@ -27,7 +27,7 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({ sporsmalOgSvar 
       {sporsmalOgSvar.map(spm => {
         return (
           <section key={spm.sporsmal} className="sporsmalsgruppe">
-            <div className="flex-sporsmal-hjelpetekst-container">
+            <div className="sporsmalstekst">
               <Undertittel>
                 <FormattedMessage id={spm.sporsmal} />
                 {spm.formatertDato ? <span>{spm.formatertDato}?</span> : null}
