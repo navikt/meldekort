@@ -22,7 +22,7 @@ const Ukeliste: React.FunctionComponent<Props> = ({
   if (dagListe.length > 0) {
     return (
       <div className="uke">
-        <Undertittel className="uketittel flex-innhold sentrert">
+        <Undertittel className="uketittel">
           {ukeNr === 1
             ? hentNummerOgDatoForForsteUke(aktivtMeldekort.meldeperiode.fra)
             : hentNummerOgDatoForAndreUke(aktivtMeldekort.meldeperiode.til)}

@@ -106,13 +106,16 @@
   grid-row-end: 4;
 }
 
-.to-kolonner() {
+.cssgrid() {
+  display: -ms-grid;
   display: grid;
+}
+
+.to-kolonner() {
   grid-template-columns: repeat(2, 1fr);
 }
 
 .to-rader() {
-  display: grid;
   grid-template-rows: repeat(2, 1fr);
 }
 

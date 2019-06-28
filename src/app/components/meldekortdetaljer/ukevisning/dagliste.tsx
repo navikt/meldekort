@@ -41,8 +41,8 @@ export const hentDagliste = (meldekortdager: MeldekortDag[], erAap: boolean): JS
       dagListe.push(
         <div className="dagliste" key={guid()}>
           <div className="dagliste__dager">
-            <strong>{ukedag}:&nbsp;</strong>
-            <span>
+            <strong className={'ukedag'}>{ukedag}:&nbsp;</strong>
+            <span className={'aktiviteter'}>
               {meldekortDag.arbeidetTimerSum > 0
                 ? `${hentIntl().formatMessage({ id: 'utfylling.arbeid' })}
                                 ${meldekortDag.arbeidetTimerSum}

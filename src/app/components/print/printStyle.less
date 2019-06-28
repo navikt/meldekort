@@ -98,16 +98,32 @@
         }
       }
       .ukevisning {
-        .seksjon {
-          background-color: #99c2e8;
-        }
-      }
-      .sporsmal,
-      .ukevisning .uke {
-        padding-bottom: 0;
-        margin-bottom: 0;
-        .uketittel {
-          text-align: center;
+        border-bottom: 1px solid #d1d1d1;
+        .cssgrid();
+        grid-template-columns: repeat(2, auto);
+
+        .uke {
+          padding-bottom: 2rem;
+          margin-bottom: 0;
+          border-bottom: none;
+          .uketittel {
+            margin-top: 1rem;
+            text-align: center;
+          }
+          .dagliste {
+            margin-bottom: 0.5rem;
+            .dagliste__dager {
+              .cssgrid();
+              grid-template-columns: 3rem auto;
+              .ukedag {
+              }
+              .aktiviteter {
+              }
+            }
+          }
+          &:last-child {
+            padding-left: 1rem;
+          }
         }
       }
     }
