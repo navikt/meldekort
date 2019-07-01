@@ -1,9 +1,13 @@
 import { hentIntl } from './intlUtil';
 
-export function hentTekster(tekstId: string, erAap: boolean) {
-    if (erAap) {
-        return hentIntl().formatMessage({id: tekstId + '-AAP'});
-    } else {
-        return hentIntl().formatMessage({id: tekstId});
-    }
-}
+export const hentAapStreng = (erAap: boolean): string => {
+  return erAap ? '-AAP' : '';
+};
+
+export const finnesIntlId = (tekstid: string): string => {
+  if (hentIntl().formatMessage({ id: tekstid }) !== tekstid) {
+    return tekstid;
+  } else {
+    return tekstid.slice(0, -4);
+  }
+};

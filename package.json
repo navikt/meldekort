@@ -97,7 +97,8 @@
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
-    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start"
+    "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
+    "prettier": "`prettier '**/*.{js,less}'  --write`"
   },
   "browserslist": [
     ">0.2%",
@@ -111,6 +112,9 @@
     "tslint": "^5.12.1",
     "tslint-react": "^3.6.0",
     "yet-another-fetch-mock": "^2.4.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "2.0.7"
   },
   "eslintConfig": {
     "rules": {

@@ -20,14 +20,9 @@ export interface SideProps extends ClassAttributes<any> {
     tittel?: string;
 }
 
-export const Side: React.FunctionComponent<SideProps> = ({
-    children,
-    tittel
-}) => (
+export const Side: React.FunctionComponent<SideProps> = ({ children, tittel }) => (
     <div className="utskrift__side">
-        { tittel && (
-            <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>
-        )}
+        {tittel && <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>}
         {children}
     </div>
 );
@@ -35,7 +30,7 @@ export const Side: React.FunctionComponent<SideProps> = ({
 const mapStateToProps = (state: RootState) => {
     return {
         person: state.person,
-        personInfo: state.personInfo.personInfo
+        personInfo: state.personInfo.personInfo,
     };
 };
 
@@ -47,35 +42,31 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
     }
 
     const { fornavn, etternavn, fodselsnr } = props.personInfo;
-    const printTekst = hentIntl().formatMessage({id: 'overskrift.meldekort.sendt'});
+    const printTekst = hentIntl().formatMessage({ id: 'overskrift.meldekort.sendt' });
 
     return (
         <div className="utskrift" role="presentation">
             <div className="utskrift__hode">
-                <img
-                    src={NavLogo}
-                    alt=""
-                    width="90"
-                    height="56"
-                />
-                {props.erKvittering ?
-                    <Innholdstittel className="flex-innhold sentrert">
-                        {printTekst}
-                    </Innholdstittel> :
+                <img src={NavLogo} alt="" width="90" height="56" />
+                {props.erKvittering ? (
+                    <Innholdstittel className="flex-innhold sentrert">{printTekst}</Innholdstittel>
+                ) : (
                     <>
                         <Ingress className="flex-innhold sentrert">
-                            <FormattedMessage id={'meldekort.for'}/>
+                            <FormattedMessage id={'meldekort.for'} />
                         </Ingress>
                         <Innholdstittel className="flex-innhold sentrert">
                             <span>{`${fornavn} ${etternavn} (${fodselsnr})`}</span>
                         </Innholdstittel>
                     </>
-                }
+                )}
             </div>
             <div className="utskrift__innhold">{props.children}</div>
         </div>
-
     );
 };
 
-export default connect(mapStateToProps, null)(Utskrift);
+export default connect(
+    mapStateToProps,
+    null
+)(Utskrift);

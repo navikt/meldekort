@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { MenyPunkt } from '../../utils/menyConfig';
-import { history, RootState } from '../../store/configureStore';
-import { selectRouter } from '../../selectors/router';
+import { MenyPunkt } from '../../../utils/menyConfig';
+import { history, RootState } from '../../../store/configureStore';
+import { selectRouter } from '../../../selectors/router';
 import { connect } from 'react-redux';
-import { Router } from '../../types/router';
-import { hentIntl } from '../../utils/intlUtil';
-import { MenyActions } from '../../actions/meny';
+import { Router } from '../../../types/router';
+import { hentIntl } from '../../../utils/intlUtil';
+import { MenyActions } from '../../../actions/meny';
 import { Dispatch } from 'redux';
 import classNames from 'classnames';
 import { Collapse } from 'react-collapse';

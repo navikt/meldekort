@@ -1,79 +1,55 @@
-
 .meldekortdetaljer {
-  .sporsmal {
+  padding-top: 1rem;
+
+  .sporsmalsvisning {
     padding-bottom: 2rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid #d1d1d1;
 
-    .seksjon {
+    .sporsmalsgruppe {
+      margin-bottom: 1rem;
       .typo-element {
         font-size: 1.1rem;
         margin-bottom: 1rem;
+      }
+      &:last-child {
+        margin-bottom: 0;
       }
 
       img {
         height: 24px;
         margin-right: 0.5rem;
       }
-    }
-    .flex-sporsmal-hjelpetekst-container {
-      display: block;
-      margin-bottom: 1rem;
+      .sporsmalstekst {
+        display: block;
+        margin-bottom: 1rem;
+      }
     }
   }
   .ukevisning {
-
-    &__uke {
-      margin-bottom: 2rem;
+    .detaljerborder {
+      width: 2rem;
+      border: 0.5px solid #000000;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
+    .uke {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #d1d1d1;
 
-    .meldekortdetaljer-utfyllt-hjelpetekster {
-      ul {
-        list-style-type: initial;
+      .uketittel {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
       }
-      strong {
-        font-size: 20px;
+      .dagliste {
+        margin-bottom: 1rem;
       }
-      .overskrift-hjelpetekst {
-        display: block;
-        margin-top: 1rem;
+
+      .utfylling {
+        margin-left: 0.2rem;
       }
     }
-
-     .uke {
-       padding-bottom: 2rem;
-       margin-bottom: 2rem;
-       border-bottom: 1px solid #d1d1d1;
-
-       .dagliste {
-         margin-bottom: 1rem;
-       }
-
-       .utfylling {
-         margin-left: 0.2rem;
-       }
-     }
-     .uketittel {
-       margin-top: 2rem;
-     }
-     .detaljerborder {
-       width: 2rem;
-       border: 0.5px solid #000000;
-       margin-top: 2rem;
-     }
-      ul {
-        list-style-type: none;
-        padding-left: 1rem;
-
-        li {
-          .typo-element {
-            display: inline-block;
-            width: 7rem;
-          }
-          div{
-            display: inline-block;
-          }
-        }
-      }
-   }
- }
+  }
+}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import Tabell from '../../components/tabell/tabell';
+import Tabell from '../../components/tabell/desktop/tabell';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
