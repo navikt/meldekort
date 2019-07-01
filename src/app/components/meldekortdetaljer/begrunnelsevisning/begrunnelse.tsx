@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { RootState } from '../../../store/configureStore';
-import { connect } from 'react-redux';
 import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
