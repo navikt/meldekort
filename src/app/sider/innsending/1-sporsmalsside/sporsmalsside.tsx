@@ -259,13 +259,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     this.props.hentInfomelding();
     this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
     if (this.props.innsending.innsendingstype === Innsendingstyper.etterregistrering) {
-        const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter
-                .map( spmObj => {
-                        if (spmObj.kategori === kategorier[4]) {
-                            return { ...spmObj, checked: kategorier[4] + '.ja' };
-                        } else {
-                            return { ...spmObj };
-
+      const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter.map(spmObj => {
+        if (spmObj.kategori === kategorier[4]) {
+          return { ...spmObj, checked: kategorier[4] + '.ja' };
+        } else {
+          return { ...spmObj };
         }
       });
       this.props.oppdaterSvar(nySporsmalsobjektState);
@@ -365,7 +363,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
     aktivtMeldekort: state.aktivtMeldekort,
     innsending: state.innsending,
-    sendteMeldekort: state.meldekort.sendteMeldekort, infomelding: state.meldekort.infomelding
+    sendteMeldekort: state.meldekort.sendteMeldekort,
+    infomelding: state.meldekort.infomelding,
   };
 };
 
@@ -380,8 +379,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj)),
     oppdaterDager: (utfylteDager: UtfyltDag[]) =>
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
-      hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request())
-    };
+    hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
+  };
 };
 
 export default connect(
