@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { RootState } from '../../store/configureStore';
+import { RootState } from '../../../store/configureStore';
 import { Dispatch } from 'redux';
-import { MenyActions } from '../../actions/meny';
+import { MenyActions } from '../../../actions/meny';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
