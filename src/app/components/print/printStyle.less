@@ -1,10 +1,8 @@
-
 .utskrift {
-  display: none !important;
+  display: none;
 }
 
 @media print {
-
   header,
   nav,
   footer,
@@ -12,89 +10,124 @@
   .hodefot .sitefooter,
   .banner-container,
   .noPrint {
-    display: none !important;
+    display: none;
   }
 
   .pagewrapper {
-    display: none !important;
-    min-height: 0 !important;
+    display: none;
+    min-height: 0;
   }
 
   .utskrift {
-    display: block !important;
+    display: block;
 
     &__hode {
-      display: block !important;
       text-align: center;
-      margin-bottom: 15mm;
+      margin-bottom: 2vh;
 
       img {
         margin-bottom: 1rem;
       }
     }
-    &__innhold {
-      padding-bottom: 20mm;
-    }
-    &__side {
-      padding-top: 10mm;
-      page-break-after: always;
-    }
 
     .noPrint {
-      display: none !important;
+      display: none;
     }
     .tabell-detaljer {
       margin: 0;
     }
-    .tabell .jsonTable td, .tabell .jsonTable th {
+    .tabell .jsonTable td,
+    .tabell .jsonTable th {
       padding-top: 0;
       padding-bottom: 0;
 
       .etikett--suksess {
         padding-left: 0;
-        margin-bottom: 0 !important;
+        margin-bottom: 0;
       }
     }
-    span, h1, h2, hr, p, td, div, section {
-      font-size: 12px !important;
-      margin-top: 0 !important;
-      margin-bottom: 1rem !important;
-      line-height: 14px !important;
+    span,
+    h1,
+    h2,
+    hr,
+    p,
+    td,
+    div,
+    section {
+      font-size: 12px;
+      margin-top: 0;
+      // margin-bottom: 1rem;
+      line-height: 14px;
 
-      h1, h1 span, h2, h2 span{
-        font-size: 16px !important;
+      h1,
+      h1 span,
+      h2,
+      h2 span {
+        font-size: 16px;
       }
     }
     .periodeBanner {
-      margin-bottom: 1rem !important;
-      text-align: center !important;
-      h1, p, p span {
-        margin-bottom: 0.2rem !important;
+      margin-bottom: 1rem;
+      text-align: center;
+      h1,
+      p,
+      p span {
+        margin-bottom: 0.2rem;
       }
     }
     .oppsummeringsTekster {
       text-align: center;
-      margin-top: 0.5rem !important;
+      margin-top: 0.5rem;
     }
     .meldekortdetaljer {
-      .sporsmal, .ukevisning .uke {
-        padding-bottom: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
-        .uketittel {
-          text-align: center !important;
+      .sporsmalsvisning {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        .sporsmalsgruppe {
+          margin-bottom: 0.75rem;
+
+          img {
+            height: 1.25rem;
+          }
+          .sporsmalstekst {
+            margin-bottom: 0.5rem;
+          }
         }
       }
-      .dagliste {
-        margin-bottom: 0.1rem !important;
-        line-height: 12px !important;
-        font-size: 12px !important;
+      .ukevisning {
+        border-bottom: 1px solid #d1d1d1;
+        .cssgrid();
+        grid-template-columns: repeat(2, auto);
+
+        .uke {
+          padding-bottom: 2rem;
+          margin-bottom: 0;
+          border-bottom: none;
+          .uketittel {
+            margin-top: 1rem;
+            text-align: center;
+          }
+          .dagliste {
+            margin-bottom: 0.5rem;
+            .dagliste__dager {
+              .cssgrid();
+              grid-template-columns: 3rem auto;
+              .ukedag {
+              }
+              .aktiviteter {
+              }
+            }
+          }
+          &:last-child {
+            padding-left: 1rem;
+          }
+        }
       }
     }
   }
 }
 
 #meldekort-root {
-
   .onlyPrint {
     display: none;
   }
@@ -106,6 +139,6 @@
   }
 
   @media print {
-    display: none !important;
+    display: none;
   }
 }

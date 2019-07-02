@@ -1,6 +1,9 @@
 
 export function formaterBelop(belop?: number): string {
     if (typeof belop === 'number') {
+        if (belop === 0) {
+            return '';
+        }
         let desimaler = 2;
         let desimalSeparator = ',';
         let tusenSeparator = ' ';

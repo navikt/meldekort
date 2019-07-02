@@ -9,7 +9,7 @@ import { Dispatch } from 'redux';
 import { selectRouter } from '../../selectors/router';
 import { connect } from 'react-redux';
 import { Router } from '../../types/router';
-import Tabell from '../../components/tabell/tabell';
+import Tabell from '../../components/tabell/desktop/tabell';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { KortStatus, Meldekort, SendtMeldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
