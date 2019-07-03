@@ -234,26 +234,28 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
             />
           </div>
         </section>
-        <section className="seksjon flex-innhold sentrert innsending-knapper">
-          <NavKnapp
-            type={knappTyper.hoved}
-            nestePath={'/bekreftelse'}
-            tekstid={'naviger.neste'}
-            className={'navigasjonsknapp'}
-            validering={this.valider}
-          />
-          <NavKnapp
-            type={knappTyper.standard}
-            nestePath={'/sporsmal'}
-            tekstid={'naviger.forrige'}
-            className={'navigasjonsknapp'}
-          />
-          <NavKnapp
-            type={knappTyper.flat}
-            nestePath={'/om-meldekort'}
-            tekstid={'naviger.avbryt'}
-            className={'navigasjonsknapp'}
-          />
+        <section className="seksjon flex-innhold sentrert">
+          <div className={'knapper-container'}>
+            <NavKnapp
+              type={knappTyper.hoved}
+              nestePath={'/bekreftelse'}
+              tekstid={'naviger.neste'}
+              className={'navigasjonsknapp'}
+              validering={this.valider}
+            />
+            <NavKnapp
+              type={knappTyper.standard}
+              nestePath={'/sporsmal'}
+              tekstid={'naviger.forrige'}
+              className={'navigasjonsknapp'}
+            />
+            <NavKnapp
+              type={knappTyper.flat}
+              nestePath={'/om-meldekort'}
+              tekstid={'naviger.avbryt'}
+              className={'navigasjonsknapp'}
+            />
+          </div>
         </section>
       </main>
     ) : (

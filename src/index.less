@@ -82,7 +82,7 @@
    CSS GRID FUNKSJONER
 -----------------------------
 */
-.kolonne-1-til-3 {
+.kolonne-1-til-3() {
   grid-column-start: 1;
   grid-column-end: 3;
 }
@@ -174,8 +174,7 @@ body {
               margin-bottom: 0;
             }
           }
-
-          &.innsending-knapper {
+          .knapper-container {
             display: grid;
             grid-template-columns: repeat(2, minmax(200px, 300px));
             grid-template-rows: minmax(auto, auto);
@@ -244,13 +243,24 @@ body {
             .item {
               margin-bottom: 1rem;
             }
+            .knapper-container {
+              &.lang-knapper {
+                grid-template-columns: 1fr;
+
+                .navigasjonsknapp {
+                  min-width: 140px;
+
+                  .knapperUnderHverandre();
+                }
+              }
+            }
           }
         }
       }
     }
   }
 
-  @media @small-phone {
+  @media @small-phone, @phone {
     #meldekort-root {
       .main-container {
         padding: @padding-vertical-sm;
@@ -278,35 +288,14 @@ body {
               margin-bottom: 1rem;
             }
 
-            &.innsending-knapper {
-              grid-template-columns: repeat(2, minmax(150px, 300px));
-              grid-row-gap: 1rem;
-              grid-column-gap: 1rem;
-
+            .knapper-container {
               &.lang-knapper {
                 grid-template-columns: 1fr;
                 grid-template-row: minmax(auto, auto);
                 .navigasjonsknapp {
                   min-width: 140px;
 
-                  &:nth-child(1) {
-                    .kolonne-1-til-2();
-                    grid-row-start: 1;
-                    grid-row-end: 2;
-                    justify-self: center;
-                  }
-                  &:nth-child(2) {
-                    .kolonne-1-til-2();
-                    grid-row-start: 2;
-                    grid-row-end: 3;
-                    justify-self: center;
-                  }
-                  &:nth-child(3) {
-                    .kolonne-1-til-2();
-                    grid-row-start: 3;
-                    grid-row-end: 4;
-                    justify-self: center;
-                  }
+                  .knapperUnderHverandre();
                 }
               }
             }
@@ -314,5 +303,26 @@ body {
         }
       }
     }
+  }
+}
+
+.knapperUnderHverandre() {
+  &:nth-child(1) {
+    .kolonne-1-til-2();
+    grid-row-start: 1;
+    grid-row-end: 2;
+    justify-self: center;
+  }
+  &:nth-child(2) {
+    .kolonne-1-til-2();
+    grid-row-start: 2;
+    grid-row-end: 3;
+    justify-self: center;
+  }
+  &:nth-child(3) {
+    .kolonne-1-til-2();
+    grid-row-start: 3;
+    grid-row-end: 4;
+    justify-self: center;
   }
 }

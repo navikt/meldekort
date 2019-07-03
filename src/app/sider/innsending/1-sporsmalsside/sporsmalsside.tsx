@@ -309,20 +309,22 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             </AlertStripe>
           ) : null}
         </section>
-        <section className="seksjon flex-innhold sentrert innsending-knapper">
-          <NavKnapp
-            type={knappTyper.hoved}
-            nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
-            tekstid={'naviger.neste'}
-            className={'navigasjonsknapp'}
-            validering={this.valider}
-          />
-          <NavKnapp
-            type={knappTyper.flat}
-            nestePath={'/om-meldekort'}
-            tekstid={'naviger.avbryt'}
-            className={'navigasjonsknapp'}
-          />
+        <section className="seksjon flex-innhold sentrert">
+          <div className={'knapper-container'}>
+            <NavKnapp
+              type={knappTyper.hoved}
+              nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
+              tekstid={'naviger.neste'}
+              className={'navigasjonsknapp'}
+              validering={this.valider}
+            />
+            <NavKnapp
+              type={knappTyper.flat}
+              nestePath={'/om-meldekort'}
+              tekstid={'naviger.avbryt'}
+              className={'navigasjonsknapp'}
+            />
+          </div>
         </section>
       </main>
     ) : (
