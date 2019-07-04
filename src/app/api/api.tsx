@@ -10,6 +10,7 @@ import {
 } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
 import {
+  Infomelding,
   Meldekort,
   Meldekortdetaljer,
   MeldekortdetaljerInnsending,
@@ -19,10 +20,7 @@ import { AxiosResponse } from 'axios';
 
 const fetchGet = async (url: string) => {
   if (erMock()) {
-    console.log('ydddo');
     return fetch(Environment().apiUrl + url).then(response => {
-      console.log('jepp');
-      console.log(response);
       return response.json();
     });
   } else {
@@ -80,6 +78,10 @@ export function fetchPersoninfo(): Promise<PersonInfo> {
 
 export function fetchKorrigertId(id: number): Promise<number> {
   return fetchGet(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+}
+
+export function fetchInfomelding(): Promise<Infomelding> {
+  return fetchGet(Konstanter().hentInfomelding);
 }
 
 export function postMeldekort(
