@@ -137,7 +137,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
-      sesjonsId: 'test', // TODO: Denne må settes til noe fornuftig. Mulig vi må lage en egen sesjonsId.
+      sesjonsId: '',
       fravaersdager: this.hentFravaersdager(meldekortdetaljer, aktivtMeldekort),
     };
   };
@@ -293,30 +293,32 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
               <FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')} />
             </Normaltekst>
           </BekreftCheckboksPanel>
-          <section className="seksjon flex-innhold sentrert innsending-knapper">
-            <NavKnapp
-              type={knappTyper.hoved}
-              nestePath={'/innsending/kvittering'}
-              tekstid={'naviger.send'}
-              className={'navigasjonsknapp'}
-              validering={this.valider}
-              spinner={this.state.senderMeldekort}
-              disabled={this.state.senderMeldekort}
-            />
-            <NavKnapp
-              type={knappTyper.standard}
-              nestePath={
-                this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'
-              }
-              tekstid={'naviger.forrige'}
-              className={'navigasjonsknapp'}
-            />
-            <NavKnapp
-              type={knappTyper.flat}
-              nestePath={'/om-meldekort'}
-              tekstid={'naviger.avbryt'}
-              className={'navigasjonsknapp'}
-            />
+          <section className="seksjon flex-innhold sentrert">
+            <div className={'knapper-container'}>
+              <NavKnapp
+                type={knappTyper.hoved}
+                nestePath={'/innsending/kvittering'}
+                tekstid={'naviger.send'}
+                className={'navigasjonsknapp'}
+                validering={this.valider}
+                spinner={this.state.senderMeldekort}
+                disabled={this.state.senderMeldekort}
+              />
+              <NavKnapp
+                type={knappTyper.standard}
+                nestePath={
+                  this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'
+                }
+                tekstid={'naviger.forrige'}
+                className={'navigasjonsknapp'}
+              />
+              <NavKnapp
+                type={knappTyper.flat}
+                nestePath={'/om-meldekort'}
+                tekstid={'naviger.avbryt'}
+                className={'navigasjonsknapp'}
+              />
+            </div>
           </section>
         </main>
       ) : (

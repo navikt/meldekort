@@ -3,31 +3,36 @@ import { AktivtMeldekortActions, AktivtMeldekortActionsTypes } from '../actions/
 import { getType } from 'typesafe-actions';
 
 const initialState: Meldekort = {
-        meldekortId: 0,
-        kortType: KortType.RETUR,
-        meldeperiode: {
-            til: new Date(),
-            fra: new Date(),
-            kortKanSendesFra: new Date(),
-            kanKortSendes: false,
-            periodeKode: ''
-        },
-        meldegruppe: Meldegruppe.ATTF,
-        kortStatus: KortStatus.VENTE,
-        bruttoBelop: 0,
-        mottattDato: new Date(),
-        korrigerbart: false
+  meldekortId: 0,
+  kortType: KortType.RETUR,
+  meldeperiode: {
+    til: new Date(),
+    fra: new Date(),
+    kortKanSendesFra: new Date(),
+    kanKortSendes: false,
+    periodeKode: '',
+  },
+  meldegruppe: Meldegruppe.ATTF,
+  kortStatus: KortStatus.VENTE,
+  bruttoBelop: 0,
+  mottattDato: new Date(),
+  korrigerbart: false,
 };
 
-const aktivtMeldekortReducer = (state: Meldekort = initialState,
-                                action: AktivtMeldekortActionsTypes): Meldekort => {
-    switch (action.type) {
-        case getType(AktivtMeldekortActions.oppdaterAktivtMeldekort):
-            return { ...state, ...action.payload };
+const aktivtMeldekortReducer = (
+  state: Meldekort = initialState,
+  action: AktivtMeldekortActionsTypes
+): Meldekort => {
+  switch (action.type) {
+    case getType(AktivtMeldekortActions.oppdaterAktivtMeldekort):
+      return { ...state, ...action.payload };
 
-        default:
-            return state;
-    }
+    case getType(AktivtMeldekortActions.resetAktivtMeldekort):
+      return { ...initialState };
+
+    default:
+      return state;
+  }
 };
 
 export default aktivtMeldekortReducer;

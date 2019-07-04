@@ -11,23 +11,25 @@ import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../.
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { hentIntl } from '../../../utils/intlUtil';
+import { hentIntl, hentLocale } from '../../../utils/intlUtil';
 import { history, RootState } from '../../../store/configureStore';
 import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
 import { IModal, ModalKnapp } from '../../../types/ui';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
-import { Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
+import { Infomelding, Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
 import { Redirect, RouteComponentProps } from 'react-router';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
+import { MeldekortActions } from '../../../actions/meldekort';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
   sendteMeldekort: SendtMeldekort[];
+  infomelding: Infomelding;
 }
 
 interface MapDispatchToProps {
@@ -37,6 +39,7 @@ interface MapDispatchToProps {
   visModal: (modal: IModal) => void;
   settBegrunnelse: (begrunnelse: Begrunnelse) => void;
   oppdaterDager: (utfylteDager: UtfyltDag[]) => void;
+  hentInfomelding: () => void;
 }
 
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps & RouteComponentProps;
@@ -253,6 +256,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
+    this.props.hentInfomelding();
     this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
     if (this.props.innsending.innsendingstype === Innsendingstyper.etterregistrering) {
       const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter.map(spmObj => {
@@ -267,9 +271,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   }
 
   render() {
-    const { innsending, aktivtMeldekort, sendteMeldekort } = this.props;
+    const { innsending, aktivtMeldekort, sendteMeldekort, infomelding } = this.props;
     const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
-    const brukermelding = hentIntl().formatMessage({ id: 'meldekort.bruker.melding' });
+    const brukermelding = hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
     return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, innsending.innsendingstype) ? (
       <main>
         <section className="seksjon flex-innhold sentrert">
@@ -309,20 +313,22 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             </AlertStripe>
           ) : null}
         </section>
-        <section className="seksjon flex-innhold sentrert innsending-knapper">
-          <NavKnapp
-            type={knappTyper.hoved}
-            nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
-            tekstid={'naviger.neste'}
-            className={'navigasjonsknapp'}
-            validering={this.valider}
-          />
-          <NavKnapp
-            type={knappTyper.flat}
-            nestePath={'/om-meldekort'}
-            tekstid={'naviger.avbryt'}
-            className={'navigasjonsknapp'}
-          />
+        <section className="seksjon flex-innhold sentrert">
+          <div className={'knapper-container'}>
+            <NavKnapp
+              type={knappTyper.hoved}
+              nestePath={this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'}
+              tekstid={'naviger.neste'}
+              className={'navigasjonsknapp'}
+              validering={this.valider}
+            />
+            <NavKnapp
+              type={knappTyper.flat}
+              nestePath={'/om-meldekort'}
+              tekstid={'naviger.avbryt'}
+              className={'navigasjonsknapp'}
+            />
+          </div>
         </section>
       </main>
     ) : (
@@ -360,6 +366,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     aktivtMeldekort: state.aktivtMeldekort,
     innsending: state.innsending,
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    infomelding: state.meldekort.infomelding,
   };
 };
 
@@ -374,6 +381,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.settBegrunnelse(begrunnelsesobj)),
     oppdaterDager: (utfylteDager: UtfyltDag[]) =>
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
+    hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
   };
 };
 
