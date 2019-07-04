@@ -24,6 +24,7 @@ import PrintKnapp from '../../../components/print/printKnapp';
 import MobilTabell from '../../../components/tabell/mobil/mobilTabell';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import { PersonInfo } from '../../../types/person';
+import classNames from 'classnames';
 
 interface MapStateToProps {
   meldekortdetaljer: MeldekortdetaljerState;
@@ -133,27 +134,32 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
   render() {
     const { aktivtMeldekort, router } = this.props;
+    const knappeKlasser = classNames('knapper-container', {
+      'lang-knapper': aktivtMeldekort.korrigerbart,
+    });
     return (
       <div className="sideinnhold innhold-detaljer">
         {this.innhold()}
-        <section className="seksjon flex-innhold sentrert noPrint innsending-knapper">
-          <NavKnapp
-            type={knappTyper.hoved}
-            nestePath={'/tidligere-meldekort'}
-            tekstid={'naviger.forrige'}
-            className={'navigasjonsknapp'}
-          />
-          {aktivtMeldekort.korrigerbart ? (
+        <section className="seksjon flex-innhold sentrert noPrint">
+          <div className={knappeKlasser}>
             <NavKnapp
-              type={knappTyper.standard}
-              nestePath={router.location.pathname + '/korriger'}
-              tekstid={'korriger.meldekort'}
+              type={knappTyper.hoved}
+              nestePath={'/tidligere-meldekort'}
+              tekstid={'naviger.forrige'}
               className={'navigasjonsknapp'}
-              nesteAktivtMeldekort={aktivtMeldekort}
-              nesteInnsendingstype={Innsendingstyper.korrigering}
             />
-          ) : null}
-          <PrintKnapp innholdRenderer={this.innhold} prerenderInnhold={true} />
+            {aktivtMeldekort.korrigerbart ? (
+              <NavKnapp
+                type={knappTyper.standard}
+                nestePath={router.location.pathname + '/korriger'}
+                tekstid={'korriger.meldekort'}
+                className={'navigasjonsknapp'}
+                nesteAktivtMeldekort={aktivtMeldekort}
+                nesteInnsendingstype={Innsendingstyper.korrigering}
+              />
+            ) : null}
+            <PrintKnapp innholdRenderer={this.innhold} prerenderInnhold={true} />
+          </div>
         </section>
       </div>
     );
