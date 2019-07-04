@@ -7,8 +7,12 @@ import { persistStore, persistReducer } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
 
 import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
-import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
-import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
+import historiskeMeldekortReducer, {
+  HistoriskeMeldekortState,
+} from '../reducers/historiskeMeldekortReducer';
+import meldekortdetaljerReducer, {
+  MeldekortdetaljerState,
+} from '../reducers/meldekortdetaljerReducer';
 import personReducer from '../reducers/personReducer';
 import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
 import tekster from '../tekster/kompilerte-tekster';
@@ -32,7 +36,7 @@ import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
 import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
-import { Meldekort, SendteMeldekortState } from '../types/meldekort';
+import { Meldekort, MeldekortState } from '../types/meldekort';
 import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
@@ -44,111 +48,110 @@ export const history = createBrowserHistory({
 const packageConfig = require('../../../package.json');
 
 const initialState = {
-    intl: {
-        locale: 'nb',
-        messages: tekster.nb
-    }
+  intl: {
+    locale: 'nb',
+    messages: tekster.nb,
+  },
 };
 
 export interface RootState {
-    locales: LocalesState;
-    intl: IntlState;
-    router: RouterState;
-    person: Person;
-    personStatus: PersonStatusState;
-    personInfo: PersonInfoState;
-    meldekortdetaljer: MeldekortdetaljerState;
-    aktivtMeldekort: Meldekort;
-    historiskeMeldekort: HistoriskeMeldekortState;
-    innsending: InnsendingState;
-    meldeform: MeldeformState;
-    meny: MenyState;
-    ui: UIState;
-    meldekort: SendteMeldekortState;
-
+  locales: LocalesState;
+  intl: IntlState;
+  router: RouterState;
+  person: Person;
+  personStatus: PersonStatusState;
+  personInfo: PersonInfoState;
+  meldekortdetaljer: MeldekortdetaljerState;
+  aktivtMeldekort: Meldekort;
+  historiskeMeldekort: HistoriskeMeldekortState;
+  innsending: InnsendingState;
+  meldeform: MeldeformState;
+  meny: MenyState;
+  ui: UIState;
+  meldekort: MeldekortState;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
 
 const appReducer = combineReducers({
-    locales: localesReducer,
-    intl: intlReducer,
-    router: connectRouter(history),
-    person: personReducer,
-    personStatus: personStatusReducer,
-    personInfo: personInfoReducer,
-    meldekortdetaljer: meldekortdetaljerReducer,
-    aktivtMeldekort: aktivtMeldekortReducer,
-    historiskeMeldekort: historiskeMeldekortReducer,
-    innsending: innsendingReducer,
-    meny: menyReducer,
-    meldeform: meldeformReducer,
-    ui: uiReducer,
-    meldekort: meldekortReducer
+  locales: localesReducer,
+  intl: intlReducer,
+  router: connectRouter(history),
+  person: personReducer,
+  personStatus: personStatusReducer,
+  personInfo: personInfoReducer,
+  meldekortdetaljer: meldekortdetaljerReducer,
+  aktivtMeldekort: aktivtMeldekortReducer,
+  historiskeMeldekort: historiskeMeldekortReducer,
+  innsending: innsendingReducer,
+  meny: menyReducer,
+  meldeform: meldeformReducer,
+  ui: uiReducer,
+  meldekort: meldekortReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
-    if (action.type === MeldekortTypeKeys.API_KALL_FEILET) {
-        if
-        (
-            action.payload.response &&
-            action.payload.response.status !== undefined &&
-            action.payload.response.status === 401
-        ) {
-            const { intl } = state;
-            state = { intl };
-            storage.removeItem('persist:meldekort:undefined');
-        }
-
+  if (action.type === MeldekortTypeKeys.API_KALL_FEILET) {
+    if (
+      action.payload.response &&
+      action.payload.response.status !== undefined &&
+      action.payload.response.status === 401
+    ) {
+      const { intl } = state;
+      state = { intl };
+      storage.removeItem('persist:meldekort:undefined');
     }
-    return appReducer(state, action);
+  }
+  return appReducer(state, action);
 };
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 let middleware: any[] = [routerMiddleware(history), epicMiddleware];
-const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer: typeof compose =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const hentNokkel = (): string => {
-    return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
+  return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
 };
 
 const encryptor = createEncryptor({
-    secretKey: hentNokkel(),
-    onError: function (error: any) {
-        console.log('Det skjedde en feil med kryptering!', error);
-        storage.removeItem('persist:meldekort:undefined');
-    }
+  secretKey: hentNokkel(),
+  onError: function(error: any) {
+    console.log('Det skjedde en feil med kryptering!', error);
+    storage.removeItem('persist:meldekort:undefined');
+  },
 });
 
 const persistConfig = {
-    key: `meldekort:${packageConfig.redux_version}`,
-    storage,
-    // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-    blacklist: ['locales', 'ui', 'personInfo'],
-    transforms: [encryptor]
+  key: `meldekort:${packageConfig.redux_version}`,
+  storage,
+  // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
+  blacklist: ['locales', 'ui', 'personInfo'],
+  transforms: [encryptor],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history));
 
-const store = createStore(persistedReducer,
-                          initialState as any,
-                          composeEnhancer(appliedMiddleware)
+const store = createStore(
+  persistedReducer,
+  initialState as any,
+  composeEnhancer(appliedMiddleware)
 );
 
 const persistor = persistStore(store);
 
 epicMiddleware.run(
-    combineEpics(
-        personEpics,
-        personStatusEpics,
-        personInfoEpics,
-        historiskeMeldekortEpics,
-        innsendingEpics,
-        meldekortdetaljerEpics,
-        meldekortEpics,
-        meldeformEpics
-    )
+  combineEpics(
+    personEpics,
+    personStatusEpics,
+    personInfoEpics,
+    historiskeMeldekortEpics,
+    innsendingEpics,
+    meldekortdetaljerEpics,
+    meldekortEpics,
+    meldeformEpics
+  )
 );
 
 export { store, persistor };
