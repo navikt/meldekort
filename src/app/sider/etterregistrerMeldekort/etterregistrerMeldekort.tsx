@@ -128,7 +128,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
           <NavKnapp
             type={knappTyper.hoved}
             nestePath={this.props.router.location.pathname + '/innsending'}
-            tekstid={'overskrift.etterregistrertMeldekort'}
+            tekstid={'naviger.neste'}
             nesteAktivtMeldekort={this.filtrerMeldekortListe()[0]}
             nesteInnsendingstype={Innsendingstyper.etterregistrering}
           />

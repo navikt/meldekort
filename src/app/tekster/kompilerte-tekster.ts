@@ -115,6 +115,8 @@
     'kurs.required': 'Spørsmålet om du har deltatt på tiltak eller kurs/utdanning må besvares ',
     kurs: ' ',
     loggut: 'Logg ut ',
+    'meldekort.bruker.melding':
+      'Grunnet systemvedlikehold vil det ikke være mulig å sende meldekort i perioden fredag 01.06.18 fra kl. 23.00 til lørdag 02.06.18 kl. 16.00. ',
     'meldekort.for.perioden': 'Meldekort for perioden ',
     'meldekort.for': 'Meldekort for ',
     'meldekort.status.feil': 'Til manuell saksbehandling ',
@@ -450,6 +452,8 @@
       'The question of whether you participated in any employment schemes, courses or education must be answered ',
     kurs: ' ',
     loggut: 'Log out ',
+    'meldekort.bruker.melding':
+      'Due to system maintenance, the system will be down lasting from Friday 01.06.18 23.00 p.m. until Saturday 02.06.18 16.00 p.m. ',
     'meldekort.for.perioden': 'Employment status form for period ',
     'meldekort.for': 'Card for ',
     'meldekort.status.feil': 'Til manuell saksbehandling ',
