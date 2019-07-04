@@ -1,4 +1,4 @@
-import FetchMock, { Middleware, MiddlewareUtils } from 'yet-another-fetch-mock';
+import { prefferedAxios } from '../types/fetch';
 import Konstanter from '../utils/consts';
 import person from './responses/person.json';
 import historiskeMeldekort from './responses/historiskemeldekort.json';
@@ -9,53 +9,45 @@ import valideringsresultat from './responses/valideringsresultat.json';
 import meldeperiode from './responses/meldeperiode.json';
 import personinfo from './responses/personinfo.json';
 import infomelding from './responses/infomelding.json';
+import MockAdapter from 'axios-mock-adapter';
+import Environment from '../utils/env';
 
 export default () => {
-  const loggingMiddleware: Middleware = (request, response) => {
-    console.log(request.url, response);
-    return response;
-  };
+  const apiUrl = Environment().apiUrl;
 
-  const fetchMock = FetchMock.configure({
-    enableFallback: true,
-    middleware: MiddlewareUtils.combine(
-      MiddlewareUtils.delayMiddleware(200),
-      MiddlewareUtils.failurerateMiddleware(0.01),
-      loggingMiddleware
-    ),
-  });
+  let mock = new MockAdapter(prefferedAxios);
 
   console.log('### MOCK AKTIVERT ###');
 
-  fetchMock.get(Konstanter().hentMeldekortApiUri, {
+  mock.onGet(apiUrl + Konstanter().hentMeldekortApiUri).reply(200, {
     ...person,
   });
 
-  fetchMock.get(Konstanter().hentHistoriskeMeldekortApiUri, historiskeMeldekort);
+  mock.onGet(apiUrl + Konstanter().hentHistoriskeMeldekortApiUri).reply(200, historiskeMeldekort);
 
-  fetchMock.get(Konstanter().hentMeldekortdetaljerApiUri, {
+  mock.onGet(apiUrl + Konstanter().hentMeldekortdetaljerApiUri).reply(200, {
     ...meldekortdetaljer,
   });
 
-  fetchMock.get(Konstanter().hentPersonStatusApiUri, {
+  mock.onGet(apiUrl + Konstanter().hentPersonStatusApiUri).reply(200, {
     ...personstatus,
   });
 
-  fetchMock.get(Konstanter().hentPersonInfoApiUri, {
+  mock.onGet(apiUrl + Konstanter().hentPersonInfoApiUri).reply(200, {
     ...personinfo,
   });
 
-  fetchMock.get(Konstanter().hentKorrigertMeldekortIdApiUri, korrigertid);
+  mock.onGet(apiUrl + Konstanter().hentKorrigertMeldekortIdApiUri).reply(200, korrigertid);
 
-  fetchMock.get(Konstanter().hentInfomelding, {
+  mock.onGet(apiUrl + Konstanter().hentInfomelding).reply(200, {
     ...infomelding,
   });
 
-  fetchMock.post(Konstanter().sendMeldekortApiUri, {
+  mock.onPost(apiUrl + Konstanter().sendMeldekortApiUri).reply(200, {
     ...valideringsresultat,
   });
 
-  fetchMock.post(Konstanter().sendMeldeformApiUri, {
+  mock.onPost(apiUrl + Konstanter().sendMeldeformApiUri).reply(200, {
     ...meldeperiode,
   });
 };

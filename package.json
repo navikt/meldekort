@@ -108,6 +108,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^23.3.12",
+    "axios-mock-adapter": "^1.17.0",
     "cross-env": "^5.2.0",
     "tslint": "^5.12.1",
     "tslint-react": "^3.6.0",
