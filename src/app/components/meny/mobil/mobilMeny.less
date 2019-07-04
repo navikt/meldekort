@@ -12,7 +12,7 @@ nav.mobilMeny {
         font-weight: 500;
         list-style: none;
         padding: 5px 5px 3px 5px;
-        transition: all ease-in-out .75s;
+        transition: all ease-in-out 0.75s;
 
         .item-wrapper {
           display: inline-flex;
@@ -21,17 +21,17 @@ nav.mobilMeny {
           position: relative;
 
           &:after {
-            content: '';
+            content: "";
             display: block;
             height: 4px;
             margin: 5px auto 0 auto;
             width: 0;
-            background:  transparent;
-            transition: width .8s ease;
+            background: transparent;
+            transition: width 0.8s ease;
           }
           &:hover:after {
             width: 100%;
-            background: #E9E7E7;
+            background: #e9e7e7;
           }
 
           &.active {
@@ -47,7 +47,6 @@ nav.mobilMeny {
       }
     }
     @media @small-phone {
-
       ul.mobilMeny-navlist {
         grid-template-columns: 1fr;
 
@@ -57,8 +56,8 @@ nav.mobilMeny {
       }
     }
 
-    @media @desktop, @tablet{
-        display: none;
+    @media @desktop {
+      display: none;
     }
   }
 }

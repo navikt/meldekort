@@ -16,44 +16,31 @@ import {
   MeldekortdetaljerInnsending,
   ValideringsResultat,
 } from '../types/meldekort';
-import { AxiosResponse } from 'axios';
 
 const fetchGet = async (url: string) => {
-  if (erMock()) {
-    return fetch(Environment().apiUrl + url).then(response => {
-      return response.json();
+  return prefferedAxios
+    .get(Environment().apiUrl + url, {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      withCredentials: true,
+    })
+    .then(response => {
+      return response.data;
     });
-  } else {
-    return prefferedAxios
-      .get(Environment().apiUrl + url, {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-        withCredentials: true,
-      })
-      .then(response => {
-        return response.data;
-      });
-  }
 };
 
 const fetchPost = async (url: string, data: any) => {
-  if (erMock()) {
-    return fetch(url, { method: 'POST', body: data }).then(response => {
-      return response.json();
+  return prefferedAxios
+    .post(Environment().apiUrl + url, data, {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      withCredentials: true,
+    })
+    .then(response => {
+      return response.data;
     });
-  } else {
-    return prefferedAxios
-      .post(Environment().apiUrl + url, data, {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-        withCredentials: true,
-      })
-      .then((response: AxiosResponse<ValideringsResultat>) => {
-        return response.data;
-      });
-  }
 };
 
 export const fetchMeldekort = (): Promise<Person> => {
