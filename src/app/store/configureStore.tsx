@@ -42,7 +42,7 @@ import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
 
 export const history = createBrowserHistory({
-    basename: '/meldekort-ver'
+  basename: '/meldekort-ver',
 });
 
 const packageConfig = require('../../../package.json');
