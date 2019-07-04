@@ -21,110 +21,111 @@ import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
 
 const handterFeiletApiKall: AppEpic = action$ =>
-    action$.pipe(
-        filter(isActionOf(MeldekortActions.apiKallFeilet)),
-        concatMap(action => {
-            const axiosResponse: AxiosResponse | undefined = action.payload.response;
-            if (
-                axiosResponse &&
-                axiosResponse.status !== undefined &&
-                axiosResponse.status === 401
-            ) {
-                updateIntl({locale: 'nb', messages: tekster.nb });
+  action$.pipe(
+    filter(isActionOf(MeldekortActions.apiKallFeilet)),
+    concatMap(action => {
+      const axiosResponse: AxiosResponse | undefined = action.payload.response;
+      if (axiosResponse && axiosResponse.status !== undefined && axiosResponse.status === 401) {
+        updateIntl({ locale: 'nb', messages: tekster.nb });
 
-                return [
-                    UiActions.visModal({
-                        content: () => loggInnContent(),
-                        onRequestClose: () => {
-                            window.location.assign(`${Environment().loginUrl}&redirect=${window.location.origin}/meldekort`);
-                        },
-                        visModal: true,
-                    }),
-                ];
-            } else if (
-                axiosResponse &&
-                axiosResponse.status !== undefined &&
-                axiosResponse.status === 500
-            ) {
-                return [
-                    UiActions.visBaksystemFeilmelding({
-                        content: () => baksystemFeilmeldingContent(),
-                        visFeilmelding: true
-                    }),
-                ];
-            } else if (
-                axiosResponse &&
-                axiosResponse.status !== undefined &&
-                axiosResponse.status >= 400
-            ) {
-                return [
-                    UiActions.visBaksystemFeilmelding({
-                        content: () => obsFeilmeldingContent(),
-                        visFeilmelding: true
-                    }),
-                ];
-            }
-            return [];
-        })
-    );
+        return [
+          UiActions.visModal({
+            content: () => loggInnContent(),
+            onRequestClose: () => {
+              window.location.assign(
+                `${Environment().loginUrl}&redirect=${window.location.origin}/meldekort`
+              );
+            },
+            visModal: true,
+          }),
+        ];
+      } else if (
+        axiosResponse &&
+        axiosResponse.status !== undefined &&
+        axiosResponse.status === 500
+      ) {
+        return [
+          UiActions.visBaksystemFeilmelding({
+            content: () => baksystemFeilmeldingContent(),
+            visFeilmelding: true,
+          }),
+        ];
+      } else if (
+        axiosResponse &&
+        axiosResponse.status !== undefined &&
+        axiosResponse.status >= 400
+      ) {
+        return [
+          UiActions.visBaksystemFeilmelding({
+            content: () => obsFeilmeldingContent(),
+            visFeilmelding: true,
+          }),
+        ];
+      }
+      return [];
+    })
+  );
 
 // Lista i isActionOf må inneholde alle actions som skal fjerne feilmelding.
 const fjernFeilmelding: AppEpic = action$ =>
-    action$.pipe(
-        filter(isActionOf([
-            HistoriskeMeldekortActions.hentHistoriskeMeldekort.success,
-            InnsendingActions.hentKorrigertId.success,
-            InnsendingActions.kontrollerMeldekort.success,
-            MeldeformActions.endreMeldeform.success,
-            MeldekortdetaljerActions.hentMeldekortdetaljer.success,
-            PersonActions.hentPerson.success,
-            PersonStatusActions.hentPersonStatus.success
-        ])),
-        concatMap( action => {
-            return [
-                UiActions.visBaksystemFeilmelding({
-                    content: () => '',
-                    visFeilmelding: false
-                })
-            ];
-        })
-    );
+  action$.pipe(
+    filter(
+      isActionOf([
+        HistoriskeMeldekortActions.hentHistoriskeMeldekort.success,
+        InnsendingActions.hentKorrigertId.success,
+        InnsendingActions.kontrollerMeldekort.success,
+        MeldeformActions.endreMeldeform.success,
+        MeldekortdetaljerActions.hentMeldekortdetaljer.success,
+        PersonActions.hentPerson.success,
+        PersonStatusActions.hentPersonStatus.success,
+      ])
+    ),
+    concatMap(action => {
+      return [
+        UiActions.visBaksystemFeilmelding({
+          content: () => '',
+          visFeilmelding: false,
+        }),
+      ];
+    })
+  );
 
 const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
-    action$.pipe(
-        filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)),
-        concatMap(action => {
-            if (action.payload.length === 0) {
-                return [
-                    UiActions.sjekkTidligereMeldekort({
-                        harTidligereMeldekort: false
-                    }),
-                ];
-            } else {
-                return [
-                    UiActions.sjekkTidligereMeldekort({
-                        harTidligereMeldekort: true
-                    }),
-                ];
-            }
-        })
-    );
+  action$.pipe(
+    filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)),
+    concatMap(action => {
+      if (action.payload.length === 0) {
+        return [
+          UiActions.sjekkTidligereMeldekort({
+            harTidligereMeldekort: false,
+          }),
+        ];
+      } else {
+        return [
+          UiActions.sjekkTidligereMeldekort({
+            harTidligereMeldekort: true,
+          }),
+        ];
+      }
+    })
+  );
 
 const hentInfomelding: AppEpic = action$ =>
-    action$.pipe(
-        filter(isActionOf(MeldekortActions.hentInfomelding.request)),
-        switchMap(() =>
-        from(fetchInfomelding()).pipe(
-            map(MeldekortActions.hentInfomelding.success),
-            catchError(error =>
-                of(MeldekortActions.hentInfomelding.failure(error), MeldekortActions.apiKallFeilet(error))
-            )
-        ))
-    );
+  action$.pipe(
+    filter(isActionOf(MeldekortActions.hentInfomelding.request)),
+    switchMap(() =>
+      from(fetchInfomelding()).pipe(
+        map(MeldekortActions.hentInfomelding.success),
+        catchError(error =>
+          of(MeldekortActions.hentInfomelding.failure(error), MeldekortActions.apiKallFeilet(error))
+        )
+      )
+    )
+  );
 
 export default combineEpics(
-    handterFeiletApiKall,
-    fjernFeilmelding,
-    sjekkOmBrukerHarTidligereMeldekort,
-    hentInfomelding,
+  handterFeiletApiKall,
+  fjernFeilmelding,
+  sjekkOmBrukerHarTidligereMeldekort,
+  hentInfomelding
 );
