@@ -11,8 +11,9 @@ export interface Meldekort {
   korrigerbart: boolean;
 }
 
-export interface SendteMeldekortState {
+export interface MeldekortState {
   sendteMeldekort: SendtMeldekort[];
+  infomelding: Infomelding;
 }
 
 export interface SendtMeldekort {
@@ -115,6 +116,11 @@ export interface DetaljRad {
   kortStatus: string;
   bruttoBelop: string;
   mottattDato: any;
+}
+
+export interface Infomelding {
+  norsk: String;
+  engelsk: String;
 }
 
 /* ENUMS */

@@ -8,6 +8,7 @@ import korrigertid from './responses/korrigertid.json';
 import valideringsresultat from './responses/valideringsresultat.json';
 import meldeperiode from './responses/meldeperiode.json';
 import personinfo from './responses/personinfo.json';
+import infomelding from './responses/infomelding.json';
 
 export default () => {
   const loggingMiddleware: Middleware = (request, response) => {
@@ -45,6 +46,10 @@ export default () => {
   });
 
   fetchMock.get(Konstanter().hentKorrigertMeldekortIdApiUri, korrigertid);
+
+  fetchMock.get(Konstanter().hentInfomelding, {
+    ...infomelding,
+  });
 
   fetchMock.post(Konstanter().sendMeldekortApiUri, {
     ...valideringsresultat,

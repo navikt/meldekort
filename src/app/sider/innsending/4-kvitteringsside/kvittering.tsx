@@ -10,7 +10,7 @@ import {
   KortStatus,
   Meldegruppe,
   Meldekort,
-  SendteMeldekortState,
+  MeldekortState,
   SendtMeldekort,
 } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
@@ -40,7 +40,7 @@ interface MapStateToProps {
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
   innsendingstype: Innsendingstyper | null;
-  sendteMeldekort: SendteMeldekortState;
+  sendteMeldekort: MeldekortState;
   personInfo: PersonInfo;
 }
 
