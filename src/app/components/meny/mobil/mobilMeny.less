@@ -1,4 +1,5 @@
 nav.mobilMeny {
+  margin: 0;
   background: white;
 
   .ReactCollapse--collapse {
@@ -46,7 +47,9 @@ nav.mobilMeny {
         }
       }
     }
-    @media @small-phone {
+  }
+  @media @small-phone {
+    .ReactCollapse--collapse {
       ul.mobilMeny-navlist {
         grid-template-columns: 1fr;
 
@@ -55,10 +58,12 @@ nav.mobilMeny {
         }
       }
     }
-
-    @media @desktop {
-      display: none;
-    }
+  }
+}
+@media @desktop {
+  nav.mobilMeny {
+    background-color: transparent;
+    display: none;
   }
 }
 
