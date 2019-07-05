@@ -104,7 +104,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     const erDesktop = this.state.windowSize > 768;
 
     const mobilTabellStyle = classNames('noPrint', { ikkeVis: erDesktop });
-    const vanligTabellStylle = classNames({ ikkeVisMenPrint: !erDesktop });
+    const vanligTabellStyle = classNames({ ikkeVisMenPrint: !erDesktop });
 
     return (
       <>
@@ -112,7 +112,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         <PeriodeBanner />
         <section className="seksjon">
           <div className="tabell-detaljer">
-            <div className={vanligTabellStylle}>
+            <div className={vanligTabellStyle}>
               <Tabell rows={[rows]} columns={columns} />
             </div>
             <div className={mobilTabellStyle}>
