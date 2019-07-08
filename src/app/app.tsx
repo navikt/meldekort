@@ -26,6 +26,7 @@ import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { isIE } from './utils/browsers';
 
 if (erMock()) {
   setupMock();
@@ -61,32 +62,38 @@ class App extends React.Component<Props, AppState> {
   }
 
   settInnhold = () => {
-    if (this.props.personStatus.personStatus.id === '') {
+    const { personStatus, baksystemFeilmelding, person, hentPerson, meny } = this.props;
+
+    if (personStatus.personStatus.id === '') {
       return (
         <div className="main-container">
-          {this.props.baksystemFeilmelding.visFeilmelding ? (
+          {baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
-          ) : this.props.personStatus.personStatus.statusArbeidsoker === 'venter_pa_data' ? (
+          ) : personStatus.personStatus.statusArbeidsoker === 'venter_pa_data' ? (
             <NavFrontendSpinner type={'XL'} />
           ) : (
             <Feilside />
           )}
         </div>
       );
-    } else if (erBrukerRegistrertIArena(this.props.personStatus.personStatus.statusArbeidsoker)) {
-      if (this.props.person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
-        this.props.hentPerson();
+    } else if (erBrukerRegistrertIArena(personStatus.personStatus.statusArbeidsoker)) {
+      if (person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
+        hentPerson();
         this.setState({ henterPersonInfo: true });
       }
 
+      const stylingMedIE = classNames('main-container', {
+        ie11: isIE,
+      });
+
       return (
-        <div>
+        <>
           <Header tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })} />
           <div
-            className={classNames({ overlay: this.props.meny.erApen })}
-            onClick={() => this.props.meny.erApen && this.props.toggleMeny(!this.props.meny.erApen)}
+            className={classNames('', { overlay: meny.erApen })}
+            onClick={() => meny.erApen && this.props.toggleMeny(!meny.erApen)}
           >
-            <div className={'main-container'}>
+            <div className={stylingMedIE}>
               <ConnectedRouter history={history}>
                 <Switch>
                   <Route path="/" component={MeldekortRoutes} />
@@ -94,7 +101,7 @@ class App extends React.Component<Props, AppState> {
               </ConnectedRouter>
             </div>
           </div>
-        </div>
+        </>
       );
     } else {
       return (
@@ -118,10 +125,10 @@ class App extends React.Component<Props, AppState> {
 
   public render() {
     return (
-      <div>
+      <>
         <UIModalWrapper />
         {this.settInnhold()}
-      </div>
+      </>
     );
   }
 }

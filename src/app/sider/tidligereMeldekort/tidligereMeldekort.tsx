@@ -81,7 +81,11 @@ class TidligereMeldekort extends React.Component<Props, State> {
         label: <FormattedMessage id="overskrift.periode" />,
         cell: function(row: any, column: any) {
           return (
-            <Komponentlenke lenketekst={row.periode} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort} />
+            <Komponentlenke
+              lenketekst={row.periode}
+              rute="/tidligere-meldekort/detaljer"
+              meldekort={row.meldekort}
+            />
           );
         },
       },
@@ -98,7 +102,11 @@ class TidligereMeldekort extends React.Component<Props, State> {
           );
         },
       },
-      { key: 'bruttobelop', label: <FormattedMessage id="overskrift.bruttoBelop" />, cell: 'bruttobelop' },
+      {
+        key: 'bruttobelop',
+        label: <FormattedMessage id="overskrift.bruttoBelop" />,
+        cell: 'bruttobelop',
+      },
     ];
 
     const erDesktopEllerTablet = this.state.windowSize > 768;
@@ -140,7 +148,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="sideinnhold">
+      <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
             <FormattedMessage id="overskrift.tidligereMeldekort" />
@@ -154,9 +162,13 @@ class TidligereMeldekort extends React.Component<Props, State> {
           <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
         </section>
         <section className="seksjon">
-          {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : this.content()}
+          {this.props.baksystemFeilmelding.visFeilmelding ? (
+            <UIAlertstripeWrapper />
+          ) : (
+            this.content()
+          )}
         </section>
-      </div>
+      </main>
     );
   }
 }
@@ -171,7 +183,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    hentHistoriskeMeldekort: () => dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
+    hentHistoriskeMeldekort: () =>
+      dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
     leggTilAktivtMeldekort: (meldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),

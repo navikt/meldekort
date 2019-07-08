@@ -40,7 +40,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
 
   render() {
     return (
-      <div className="sideinnhold">
+      <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
             <FormattedMessage id="overskrift.genereltOmMeldekort" />
@@ -82,7 +82,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
             </Normaltekst>
           </section>
         </Veilederpanel>
-      </div>
+      </main>
     );
   }
 }
