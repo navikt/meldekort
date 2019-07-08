@@ -55,6 +55,7 @@
    CONTAINER, MARGIN, PADDING
 -----------------------------------------
 */
+
 @width-container: @screen-desktop;
 
 @padding-vertical-md: 0 1rem 0 1rem;
@@ -82,6 +83,7 @@
 @tablet-landscape: ~"only screen and (min-width: 993px) and (max-width: @{lg-min})";
 @desktop: ~"only screen and (min-width: @{md-min})";
 
+// CSS styling for Flexbox fallback
 #meldekort-root {
   header.meldekort-header.ie11 {
     .banner-container {
@@ -95,8 +97,20 @@
   }
 
   div.main-container.ie11 {
-    // CSS styling for Flexbox fallback
-    main.sideinnhold {
+    .sideinnhold {
+      .seksjon {
+        .knapper-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          .navigasjonsknapp {
+            margin-right: 2rem;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
     }
   }
 }
