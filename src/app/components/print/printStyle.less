@@ -3,6 +3,11 @@
 }
 
 @media print {
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
   header,
   nav,
   footer,
@@ -26,6 +31,7 @@
       margin-bottom: 2vh;
 
       img {
+        margin-top: 1rem;
         margin-bottom: 1rem;
       }
     }
@@ -111,7 +117,7 @@
             margin-bottom: 0.5rem;
             .dagliste__dager {
               .cssgrid();
-              grid-template-columns: 3rem auto;
+              grid-template-columns: 4.25rem auto;
               .ukedag {
               }
               .aktiviteter {
