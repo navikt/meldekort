@@ -98,7 +98,8 @@
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
-    "prettier": "`prettier '**/*.{js,less}'  --write`"
+    "prettier": "`prettier '**/*.{js,less}'  --write`",
+    "test": "jest"
   },
   "browserslist": [
     ">0.2%",
@@ -107,9 +108,15 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/jest": "^23.3.12",
+    "@types/jest": "^23.3.14",
+    "@types/react-test-renderer": "^16.8.2",
     "axios-mock-adapter": "^1.17.0",
+    "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "react-test-renderer": "^16.8.6",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.12.1",
     "tslint-react": "^3.6.0",
     "yet-another-fetch-mock": "^2.4.1"
