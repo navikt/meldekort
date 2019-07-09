@@ -137,7 +137,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
-      sesjonsId: '',
+      sesjonsId: 'IKKE I BRUK',
       fravaersdager: this.hentFravaersdager(meldekortdetaljer, aktivtMeldekort),
     };
   };
