@@ -1,11 +1,30 @@
 // CSS styling for Flexbox fallback
 #meldekort-root {
-  header.meldekort-header.ie11 {
-    .banner-container {
-      display: flex;
-      justify-content: center;
-      .banner-content {
-        .banner-title {
+  .meldekort-header {
+    &.ie11 {
+      .banner-container {
+        display: flex;
+        justify-content: center;
+        .banner-content {
+          display: flex;
+          justify-content: center;
+
+          .banner-title {
+          }
+          .burger-menu-toggle {
+            @media @small-phone, @phone, @tablet {
+              background-color: #6ab889;
+              /*
+            display: none;
+            */
+            }
+          }
+        }
+        nav.mobilMeny {
+          background-color: transparent;
+          @media @small-phone, @phone, @tablet {
+            display: none;
+          }
         }
       }
     }

@@ -58,11 +58,15 @@ nav.mobilMeny {
       }
     }
   }
-}
-@media @desktop {
-  nav.mobilMeny {
-    background-color: transparent;
-    display: none;
+  @media @desktop {
+    nav.mobilMeny {
+      display: none;
+    }
+  }
+  &.ie11 {
+    @media @tablet, @small-phone, @phone {
+      display: block;
+    }
   }
 }
 
