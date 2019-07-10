@@ -1,13 +1,19 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import ProviderWrapper from '../utils/providerWrapper';
-import Hjelpetekst from '../../app/components/meldekortdetaljer/ukevisning/hjelpetekst';
-import { mkDagTEST } from '../utils/testData';
+import MobilTabell from '../../app/components/tabell/mobil/mobilTabell';
 
-it('Hjelpetekst', () => {
+it('Sprakvelger', () => {
   const tree = renderer.create(
     <ProviderWrapper>
-      <Hjelpetekst meldekortDag={mkDagTEST} erAap={true} />
+      <MobilTabell
+        columns={[
+          {
+            key: 'test',
+            label: <span>TEST</span>,
+          },
+        ]}
+      />
     </ProviderWrapper>
   );
   expect(tree).toMatchSnapshot();

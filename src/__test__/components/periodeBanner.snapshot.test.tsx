@@ -3,7 +3,7 @@ import * as renderer from 'react-test-renderer';
 import ProviderWrapper from '../utils/providerWrapper';
 import PeriodeBanner from '../../app/components/periodeBanner/periodeBanner';
 
-it('Sprakvelger', () => {
+it('PeriodeBanner', () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <PeriodeBanner />

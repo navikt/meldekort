@@ -1,20 +1,19 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import ProviderWrapper from '../utils/providerWrapper';
-import MobilTabell from '../../app/components/tabell/mobil/mobilTabell';
+import InfoToggler from '../../app/components/utvidetinformasjon/infoToggler/infoToggler';
 
-it('Sprakvelger', () => {
+it('InfoToggler', () => {
   const tree = renderer.create(
     <ProviderWrapper>
-      <MobilTabell columns={column} />
+      <InfoToggler
+        onToggle={() => {
+          return 1 + 1;
+        }}
+      >
+        <span>Test</span>
+      </InfoToggler>
     </ProviderWrapper>
   );
   expect(tree).toMatchSnapshot();
 });
-
-const column = [
-  {
-    key: 'test',
-    label: <span>TEST</span>,
-  },
-];

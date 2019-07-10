@@ -4,7 +4,7 @@ import ProviderWrapper from '../utils/providerWrapper';
 import HovedMeny from '../../app/components/meny/desktop/hovedMeny';
 import { menyPunkterTEST } from '../utils/testData';
 
-it('Sprakvelger', () => {
+it('HovedMeny', () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <HovedMeny menypunkter={menyPunkterTEST} />

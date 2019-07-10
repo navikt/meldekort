@@ -3,7 +3,7 @@ import * as renderer from 'react-test-renderer';
 import ProviderWrapper from '../utils/providerWrapper';
 import MobilMenyToggle from '../../app/components/meny/mobil/mobilMenyToggle';
 
-it('Sprakvelger', () => {
+it('MobilMenyToggle', () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <MobilMenyToggle />

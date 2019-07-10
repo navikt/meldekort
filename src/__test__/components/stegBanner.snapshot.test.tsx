@@ -6,7 +6,7 @@ import StegBanner from '../../app/components/stegBanner/stegBanner';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it('BegrunnelseVelger', () => {
+it('StegBanner', () => {
   const tree = shallow(
     <ProviderWrapper>
       <StegBanner />

@@ -3,7 +3,7 @@ import * as renderer from 'react-test-renderer';
 import ProviderWrapper from '../utils/providerWrapper';
 import DOMPortal from '../../app/components/print/DOMPortal';
 
-it('Sprakvelger', () => {
+it('DOMPortal', () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <DOMPortal />

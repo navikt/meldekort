@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StegBanner 1`] = `
+exports[`UtvidetInformasjon 1`] = `
 <Provider
   store={
     Object {
@@ -16,7 +16,11 @@ exports[`StegBanner 1`] = `
     defaultLocale="nb"
     locale="nb"
   >
-    <Connect(StegBanner) />
+    <UtvidetInformasjon>
+      <span>
+        Test
+      </span>
+    </UtvidetInformasjon>
   </Connect(IntlProvider)>
 </Provider>
 `;
