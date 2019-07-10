@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BegrunnelseVelger 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)
+    defaultLocale="nb"
+    locale="nb"
+  >
+    <Connect(StegBanner) />
+  </Connect(IntlProvider)>
+</Provider>
+`;

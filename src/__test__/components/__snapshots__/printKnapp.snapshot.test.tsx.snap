@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sprakvelger 1`] = `
+<div
+  className="navigasjonsknapp"
+>
+  <button
+    className="knapp knapp--flat"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    <img
+      alt="Skriv ut  logo"
+      className="printLogo"
+      src="print.svg"
+    />
+    Skriv ut 
+  </button>
+</div>
+`;

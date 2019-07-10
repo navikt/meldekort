@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sprakvelger 1`] = `
+<div
+  className="modal-overskrift"
+>
+  <Undertittel>
+    <FormattedMessage
+      id="sporsmal.bekreft"
+      values={Object {}}
+    />
+  </Undertittel>
+  <Veilederpanel
+    fargetema="advarsel"
+    svg={
+      <img
+        alt=""
+        src="veileder.svg"
+      />
+    }
+  >
+    <div
+      className="modal-tekst"
+    >
+      <Normaltekst>
+        <FormattedMessage
+          id="sporsmal.bekreftelse"
+          values={Object {}}
+        />
+      </Normaltekst>
+    </div>
+  </Veilederpanel>
+</div>
+`;

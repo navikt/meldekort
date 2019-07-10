@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sprakvelger 1`] = `
+<section
+  className="seksjon periodeBanner "
+>
+  <p
+    className="typo-ingress flex-innhold sentrert"
+  >
+    <span>
+      Meldekort for perioden 
+    </span>
+  </p>
+  <h1
+    className="typo-innholdstittel flex-innhold sentrert"
+  >
+    Uke  28 - 28
+  </h1>
+  <p
+    className="typo-normal flex-innhold sentrert"
+  >
+    10.07.2019 - 10.07.2019
+  </p>
+</section>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavKnapp 1`] = `
+<button
+  className="knapp knapp--hoved"
+  disabled={false}
+  onClick={[Function]}
+  type="submit"
+>
+  <span>
+    Neste 
+  </span>
+</button>
+`;

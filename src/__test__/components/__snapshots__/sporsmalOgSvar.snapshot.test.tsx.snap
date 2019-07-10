@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SporsmalOgSvarVisning 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)
+    defaultLocale="nb"
+    locale="nb"
+  >
+    <SporsmalOgSvarVisning
+      sporsmalOgSvar={
+        Array [
+          Object {
+            "forklaring": "forklaring.sporsmal.arbeid",
+            "formatertDato": "20.01.2019",
+            "kategori": "arbeid",
+            "sporsmal": "sporsmal.arbeid",
+            "svar": true,
+          },
+          Object {
+            "forklaring": "forklaring.sporsmal.aktivitetArbeid",
+            "formatertDato": "20.01.2019",
+            "kategori": "aktivitetArbeid",
+            "sporsmal": "sporsmal.aktivitetArbeid",
+            "svar": false,
+          },
+        ]
+      }
+    />
+  </Connect(IntlProvider)>
+</Provider>
+`;
