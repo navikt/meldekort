@@ -65,7 +65,9 @@ nav.mobilMeny {
   }
   &.ie11 {
     @media @tablet, @small-phone, @phone {
-      display: block;
+      nav.mobilMeny {
+        display: none;
+      }
     }
   }
 }
