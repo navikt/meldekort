@@ -40,7 +40,6 @@ import { Meldekort, MeldekortState } from '../types/meldekort';
 import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
-import { erLocalhost } from '../mock/utils';
 
 export const history = createBrowserHistory({
   basename: '/meldekort',

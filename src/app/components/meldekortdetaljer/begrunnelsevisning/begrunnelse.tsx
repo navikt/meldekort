@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { RootState } from '../../../store/configureStore';
-import { connect } from 'react-redux';
 import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
@@ -15,16 +13,14 @@ const BegrunnelseVisning: React.FunctionComponent<Props> = props => {
     const begrunnelse = String(props.begrunnelse);
     if (begrunnelse.length > 0) {
       return (
-        <section className="seksjon">
-          <div className="flex-sporsmal-hjelpetekst-container">
-            <Undertittel>
-              <FormattedMessage id={'korrigering.sporsmal.begrunnelse'} />
-            </Undertittel>
-            <UtvidetInformasjon>
-              <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
-            </UtvidetInformasjon>
-          </div>
-          <img alt={'checkmark'} src={checkMark} />
+        <section className="seksjon begrunnelse">
+          <Undertittel>
+            <FormattedMessage id={'korrigering.sporsmal.begrunnelse'} />
+          </Undertittel>
+          <UtvidetInformasjon>
+            <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
+          </UtvidetInformasjon>
+          <img className={'checkmark'} alt={'checkmark'} src={checkMark} />
           <span>{props.begrunnelse}</span>
         </section>
       );

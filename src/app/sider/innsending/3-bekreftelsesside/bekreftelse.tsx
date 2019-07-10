@@ -258,7 +258,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       ) ? (
         <main>
           {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : null}
-          <div className="ikkeSendt">
+          <section className={'seksjon'}>
             <AlertStripe type={'advarsel'}>
               <span>
                 {`${hentIntl().formatMessage({
@@ -269,7 +269,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                   })}`}
               </span>
             </AlertStripe>
-          </div>
+          </section>
           <div id="feilmelding">
             {this.state.feilmelding === '' ? null : (
               <AlertStripe type={'feil'}>{this.state.feilmelding}</AlertStripe>
