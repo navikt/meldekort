@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import SporsmalOgSvarVisning from '../../app/components/meldekortdetaljer/sporsmalvisning/sporsmalOgSvar';
-import { sporsmalOgSvarTest } from '../utils/testData';
+import { sporsmalOgSvarTest } from '../testSetup/testData';
 
 Enzyme.configure({ adapter: new Adapter() });
 

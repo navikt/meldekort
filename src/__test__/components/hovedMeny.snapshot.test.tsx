@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import HovedMeny from '../../app/components/meny/desktop/hovedMeny';
-import { menyPunkterTEST } from '../utils/testData';
+import { menyPunkterTEST } from '../testSetup/testData';
 
 it('HovedMeny', () => {
   const tree = renderer.create(

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import MobilTabell from '../../app/components/tabell/mobil/mobilTabell';
 
-it('Sprakvelger', () => {
+it('MobilTabell', () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <MobilTabell

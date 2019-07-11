@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import MobilMenyToggle from '../../app/components/meny/mobil/mobilMenyToggle';
 
 it('MobilMenyToggle', () => {

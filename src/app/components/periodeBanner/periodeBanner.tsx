@@ -9,38 +9,38 @@ import { connect } from 'react-redux';
 import { Meldekort } from '../../types/meldekort';
 
 interface MapStateToProps {
-    aktivtMeldekort: Meldekort;
+  aktivtMeldekort: Meldekort;
 }
 
 interface PeriodeBannerProps {
-    className?: string;
+  className?: string;
 }
 
 type Props = PeriodeBannerProps & MapStateToProps;
 
-const PeriodeBanner: React.FunctionComponent<Props> = (props) => {
-
-    const { meldeperiode } = props.aktivtMeldekort;
-    const { className = '' } = props;
-    return (
-        <section className={'seksjon periodeBanner ' + className}>
-            <Ingress className="flex-innhold sentrert">
-                <FormattedMessage id="meldekort.for.perioden"/>
-            </Ingress>
-            <Innholdstittel className="flex-innhold sentrert">
-                {hentUkePeriode(meldeperiode.fra, meldeperiode.til )}
-            </Innholdstittel>
-            <Normaltekst className="flex-innhold sentrert">
-                {hentDatoPeriode(meldeperiode.fra, meldeperiode.til )}
-                </Normaltekst>
-        </section>
-    );
+const PeriodeBanner: React.FunctionComponent<Props> = props => {
+  console.log(props.aktivtMeldekort);
+  const { meldeperiode } = props.aktivtMeldekort;
+  const { className = '' } = props;
+  return (
+    <section className={'seksjon periodeBanner ' + className}>
+      <Ingress className="flex-innhold sentrert">
+        <FormattedMessage id="meldekort.for.perioden" />
+      </Ingress>
+      <Innholdstittel className="flex-innhold sentrert">
+        {hentUkePeriode(meldeperiode.fra, meldeperiode.til)}
+      </Innholdstittel>
+      <Normaltekst className="flex-innhold sentrert">
+        {hentDatoPeriode(meldeperiode.fra, meldeperiode.til)}
+      </Normaltekst>
+    </section>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        aktivtMeldekort: state.aktivtMeldekort,
-    };
+  return {
+    aktivtMeldekort: state.aktivtMeldekort,
+  };
 };
 
 export default connect(mapStateToProps)(PeriodeBanner);

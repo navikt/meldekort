@@ -4,11 +4,12 @@ exports[`Meldekortdetaljer 1`] = `
 <Provider
   store={
     Object {
+      "clearActions": [Function],
       "dispatch": [Function],
+      "getActions": [Function],
       "getState": [Function],
       "replaceReducer": [Function],
       "subscribe": [Function],
-      Symbol(observable): [Function],
     }
   }
 >

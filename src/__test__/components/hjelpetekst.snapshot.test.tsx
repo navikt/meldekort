@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import Hjelpetekst from '../../app/components/meldekortdetaljer/ukevisning/hjelpetekst';
-import { mkDagTEST } from '../utils/testData';
+import { mkDagTEST } from '../testSetup/testData';
 
 it('Hjelpetekst', () => {
   const tree = renderer.create(

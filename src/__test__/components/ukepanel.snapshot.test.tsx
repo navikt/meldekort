@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import UkePanel from '../../app/components/ukepanel/ukepanel';
-import { utfyllingFeilTEST } from '../utils/testData';
+import { innsendingTEST, utfyllingFeilTEST } from '../testSetup/testData';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 it('UkePanel', () => {
   const tree = shallow(
-    <ProviderWrapper>
+    <ProviderWrapper initialStateName={'innsending'} initialState={innsendingTEST}>
       <UkePanel
         ukenummer={1}
         erAap={false}

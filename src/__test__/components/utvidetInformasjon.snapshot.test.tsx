@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ProviderWrapper from '../utils/providerWrapper';
+import ProviderWrapper from '../testSetup/providerWrapper';
 import UtvidetInformasjon from '../../app/components/utvidetinformasjon/utvidetInformasjon';
 
 Enzyme.configure({ adapter: new Adapter() });
