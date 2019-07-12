@@ -276,7 +276,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const brukermelding = hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
     return erAktivtMeldekortGyldig(aktivtMeldekort, sendteMeldekort, innsending.innsendingstype) ? (
       <main>
-        <section className="seksjon flex-innhold sentrert">
+        <section className="seksjon">
           {brukermelding.length > 1 ? (
             <AlertStripe type={'info'}>{brukermelding}</AlertStripe>
           ) : null}

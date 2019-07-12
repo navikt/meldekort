@@ -86,6 +86,8 @@
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
     "snyk": "^1.165.0",
+    "stylelint": "^10.1.0",
+    "stylelint-no-unsupported-browser-features": "^3.0.2",
     "ts-react-json-table": "^0.1.1",
     "tslint-config-prettier": "^1.15.0",
     "typesafe-actions": "^3.0.0",
@@ -105,7 +107,7 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
+    "ie >= 10",
     "not op_mini all"
   ],
   "devDependencies": {

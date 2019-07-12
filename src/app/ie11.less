@@ -1,0 +1,76 @@
+// CSS styling for Flexbox fallback
+#meldekort-root {
+  header.meldekort-header.ie11 {
+    .banner-container {
+      display: flex;
+      justify-content: center;
+      .banner-content {
+        .banner-title {
+        }
+      }
+    }
+  }
+
+  div.main-container.ie11 {
+    .sideinnhold {
+      .seksjon {
+        .knapper-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          .navigasjonsknapp {
+            margin-right: 2rem;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+        .utfylling-container {
+          .ekspanderbartPanel {
+            .ReactCollapse--collapse {
+              .ReactCollapse--content {
+                .ekspanderbartPanel__innhold {
+                  .ukepanel {
+                    display: flex;
+                    flex-direction: column;
+                    .ukedager__desktop {
+                      display: flex;
+                      justify-content: space-between;
+                      padding-left: 50%;
+                    }
+                    .arbeidsrad {
+                      .tittel {
+                        .rad-1-til-2();
+                      }
+                      .utvidetInformasjon {
+                        .rad-3-til-4();
+                      }
+                      .inputrad_arbeid {
+                        display: flex;
+                        justify-content: space-between;
+                      }
+                    }
+                    .aktivitetsrad {
+                      .tittel {
+                        .rad-1-til-2();
+                      }
+
+                      .utvidetInformasjon {
+                        .rad-3-til-4();
+                      }
+
+                      .inputrad {
+                        display: flex;
+                        justify-content: space-between;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
