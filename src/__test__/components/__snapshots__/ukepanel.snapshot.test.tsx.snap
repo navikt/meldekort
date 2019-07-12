@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UkePanel 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)
+    defaultLocale="nb"
+    locale="nb"
+  >
+    <Connect(UkePanel)
+      datoTittel="naviger.neste"
+      erAap={false}
+      faktiskUkeNummer="1"
+      ukenummer={1}
+      utfyllingFeil={
+        Object {
+          "feilIArbeid": Object {
+            "feil": true,
+            "feilmelding": "Test",
+          },
+          "feilIArbeidetTimer": true,
+          "feilIArbeidetTimerHeleHalve": true,
+          "feilIDager": Array [
+            "mandag",
+          ],
+          "feilIFerie": Object {
+            "feil": true,
+            "feilmelding": "Test",
+          },
+          "feilIKurs": Object {
+            "feil": true,
+            "feilmelding": "Test",
+          },
+          "feilISyk": Object {
+            "feil": true,
+            "feilmelding": "Test",
+          },
+        }
+      }
+    />
+  </Connect(IntlProvider)>
+</Provider>
+`;

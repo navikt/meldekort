@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EkspanderbartInnhold 1`] = `
+<div
+  className="ekspanderbartInnhold"
+  style={
+    Object {
+      "height": 0,
+      "overflow": "hidden",
+    }
+  }
+>
+  <div
+    className="ReactCollapse--content"
+  >
+    <div
+      aria-live="off"
+    >
+      <div />
+    </div>
+  </div>
+</div>
+`;

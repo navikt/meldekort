@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ObsFeilmeldingContent 1`] = `
+<div>
+  <Undertittel>
+    <FormattedMessage
+      id="obs.feilmelding.overskrift"
+      values={Object {}}
+    />
+  </Undertittel>
+  <FormattedMessage
+    id="obs.feilmelding"
+    values={Object {}}
+  />
+</div>
+`;

@@ -20,7 +20,7 @@ import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
-import { mapKortStatusTilTekst } from '../../utils/mapper';
+import { mapKortStatusTilTekst } from '../../utils/kortMapper';
 import { HistoriskeMeldekortRad, Meldekort } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';

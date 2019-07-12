@@ -100,7 +100,9 @@
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
-    "prettier": "`prettier '**/*.{js,less}'  --write`"
+    "prettier": "`prettier '**/*.{js,less}'  --write`",
+    "test": "CI=true react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom"
   },
   "browserslist": [
     ">0.2%",
@@ -109,9 +111,19 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/jest": "^23.3.12",
+    "@types/enzyme": "^3.10.2",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "24.0.15",
+    "@types/react-test-renderer": "^16.8.2",
+    "@types/redux-mock-store": "^1.0.1",
     "axios-mock-adapter": "^1.17.0",
+    "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "react-test-renderer": "^16.8.6",
+    "redux-mock-store": "^1.5.3",
     "tslint": "^5.12.1",
     "tslint-react": "^3.6.0",
     "yet-another-fetch-mock": "^2.4.1"
@@ -126,5 +138,14 @@
       "no-useless-concat": "off"
     }
   },
-  "snyk": true
+  "snyk": true,
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
 }

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`endreMeldeformBekreftelseContent 1`] = `
+<div
+  className="modal-overskrift"
+>
+  <Undertittel>
+    <FormattedMessage
+      id="overskrift.bekreftelse"
+      values={Object {}}
+    />
+  </Undertittel>
+  <Veilederpanel
+    fargetema="suksess"
+    svg={
+      <img
+        alt=""
+        src="veileder.svg"
+      />
+    }
+  >
+    <div
+      className="modal-tekst"
+    >
+      <Normaltekst>
+        Du har valgt å bytte til
+                            Elektronisk meldekort 
+      </Normaltekst>
+      <Normaltekst>
+        <FormattedMessage
+          id="endreMeldeform.kvittering.elektronisk.info"
+          values={Object {}}
+        />
+      </Normaltekst>
+    </div>
+  </Veilederpanel>
+</div>
+`;

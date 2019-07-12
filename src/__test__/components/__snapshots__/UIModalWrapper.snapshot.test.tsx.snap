@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UIModalWrapper 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)
+    defaultLocale="nb"
+    locale="nb"
+  >
+    <div
+      id="meldekort-root"
+    >
+      <Connect(UIModalWrapper) />
+    </div>
+  </Connect(IntlProvider)>
+</Provider>
+`;

@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabell 1`] = `
+<div
+  className="tabell"
+>
+  <div>
+    <div
+      style={
+        Object {
+          "overflow": "hidden",
+          "position": "relative",
+        }
+      }
+    >
+      <table
+        className="jsonTable"
+      >
+        <thead>
+          <tr>
+            <th
+              className="jsonColumn jsonColumn_En"
+              colSpan={1}
+              data-key="En"
+              onClick={[Function]}
+              rowSpan={null}
+            >
+              En
+            </th>
+            <th
+              className="jsonColumn jsonColumn_To"
+              colSpan={1}
+              data-key="To"
+              onClick={[Function]}
+              rowSpan={null}
+            >
+              To
+            </th>
+            <th
+              className="jsonColumn jsonColumn_Tre"
+              colSpan={1}
+              data-key="Tre"
+              onClick={[Function]}
+              rowSpan={null}
+            >
+              Tre
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            className="jsonRow jsonEven"
+            onClick={[Function]}
+          >
+            <td
+              className="jsonCell jsonCell_En"
+              data-key="En"
+              onClick={[Function]}
+            />
+            <td
+              className="jsonCell jsonCell_To"
+              data-key="To"
+              onClick={[Function]}
+            />
+            <td
+              className="jsonCell jsonCell_Tre"
+              data-key="Tre"
+              onClick={[Function]}
+            />
+          </tr>
+          <tr
+            className="jsonRow jsonOdd"
+            onClick={[Function]}
+          >
+            <td
+              className="jsonCell jsonCell_En"
+              data-key="En"
+              onClick={[Function]}
+            />
+            <td
+              className="jsonCell jsonCell_To"
+              data-key="To"
+              onClick={[Function]}
+            />
+            <td
+              className="jsonCell jsonCell_Tre"
+              data-key="Tre"
+              onClick={[Function]}
+            />
+          </tr>
+          <tr
+            className="jsonRow jsonEven"
+            onClick={[Function]}
+          >
+            <td
+              className="jsonCell jsonCell_En"
+              data-key="En"
+              onClick={[Function]}
+            />
+            <td
+              className="jsonCell jsonCell_To"
+              data-key="To"
+              onClick={[Function]}
+            />
+            <td
+              className="jsonCell jsonCell_Tre"
+              data-key="Tre"
+              onClick={[Function]}
+            />
+          </tr>
+        </tbody>
+        <tfoot />
+      </table>
+    </div>
+  </div>
+</div>
+`;
