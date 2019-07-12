@@ -20,7 +20,7 @@ import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
-import { mapKortStatusTilTekst } from '../../utils/mapper';
+import { mapKortStatusTilTekst } from '../../utils/kortMapper';
 import { HistoriskeMeldekortRad, Meldekort } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';
@@ -81,7 +81,11 @@ class TidligereMeldekort extends React.Component<Props, State> {
         label: <FormattedMessage id="overskrift.periode" />,
         cell: function(row: any, column: any) {
           return (
-            <Komponentlenke lenketekst={row.periode} rute="/tidligere-meldekort/detaljer" meldekort={row.meldekort} />
+            <Komponentlenke
+              lenketekst={row.periode}
+              rute="/tidligere-meldekort/detaljer"
+              meldekort={row.meldekort}
+            />
           );
         },
       },
@@ -98,7 +102,11 @@ class TidligereMeldekort extends React.Component<Props, State> {
           );
         },
       },
-      { key: 'bruttobelop', label: <FormattedMessage id="overskrift.bruttoBelop" />, cell: 'bruttobelop' },
+      {
+        key: 'bruttobelop',
+        label: <FormattedMessage id="overskrift.bruttoBelop" />,
+        cell: 'bruttobelop',
+      },
     ];
 
     const erDesktopEllerTablet = this.state.windowSize > 768;
@@ -154,7 +162,11 @@ class TidligereMeldekort extends React.Component<Props, State> {
           <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
         </section>
         <section className="seksjon">
-          {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : this.content()}
+          {this.props.baksystemFeilmelding.visFeilmelding ? (
+            <UIAlertstripeWrapper />
+          ) : (
+            this.content()
+          )}
         </section>
       </div>
     );
@@ -171,7 +183,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    hentHistoriskeMeldekort: () => dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
+    hentHistoriskeMeldekort: () =>
+      dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
     leggTilAktivtMeldekort: (meldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),
