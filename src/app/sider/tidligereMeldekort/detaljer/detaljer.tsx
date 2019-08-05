@@ -9,7 +9,7 @@ import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../../store/configureStore';
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/mapper';
+import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/kortMapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';

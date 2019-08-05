@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UIAlertstripeWrapper 1`] = `
+<div
+  className="alertstripe_wrapper"
+/>
+`;

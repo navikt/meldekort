@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HovedMeny 1`] = `
+<nav
+  className="mainNav"
+>
+  <div
+    className="mainNav__wrapper"
+  >
+    <ul>
+      <li>
+        <button
+          className="menypunkt underline active"
+          onClick={[Function]}
+        >
+          <span>
+            Send 
+          </span>
+        </button>
+      </li>
+      <li>
+        <button
+          className="menypunkt underline"
+          onClick={[Function]}
+        >
+          <span>
+            Tidligere meldekort 
+          </span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+`;

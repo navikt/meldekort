@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Meldekortdetaljer 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)
+    defaultLocale="nb"
+    locale="nb"
+  >
+    <Connect(Meldekortdetaljer)
+      erAap={true}
+      meldekortdetaljer={
+        Object {
+          "arkivnokkel": "",
+          "begrunnelse": "",
+          "id": "",
+          "kortType": "KORRIGERT_ELEKTRONISK",
+          "lestDato": 2019-01-01T09:00:00.000Z,
+          "meldeDato": 2019-01-01T09:00:00.000Z,
+          "meldekortId": 0,
+          "meldeperiode": "",
+          "sporsmal": Object {
+            "annetFravaer": false,
+            "arbeidet": false,
+            "arbeidssoker": false,
+            "kurs": false,
+            "meldekortDager": Array [],
+            "signatur": false,
+            "syk": false,
+          },
+        }
+      }
+    />
+  </Connect(IntlProvider)>
+</Provider>
+`;

@@ -13,6 +13,8 @@ import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../meny/mobil/mobilMenyToggle';
 import { isEmpty } from 'ramda';
+import classNames from 'classnames';
+import { isIE } from '../../utils/browsers';
 
 interface MapStateToProps {
   router: Router;
@@ -67,9 +69,11 @@ class Header extends React.Component<HeaderProps> {
     const harPathInnsending =
       params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korriger';
     const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
-
+    const stylingMedIE = classNames(headerClass, {
+      ie11: isIE,
+    });
     return (
-      <header className={headerClass}>
+      <header className={stylingMedIE}>
         <div className="banner-container">
           <div className="banner-content">
             <div className={'banner-title'}>

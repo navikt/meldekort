@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ukeliste 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)
+    defaultLocale="nb"
+    locale="nb"
+  >
+    <Ukeliste
+      aktivtMeldekort={
+        Object {
+          "bruttoBelop": 0,
+          "korrigerbart": true,
+          "kortStatus": "OPPRE",
+          "kortType": "ELEKTRONISK",
+          "meldegruppe": "DAGP",
+          "meldekortId": 1,
+          "meldeperiode": Object {
+            "fra": 2019-01-01T09:00:00.000Z,
+            "kanKortSendes": true,
+            "kortKanSendesFra": 2019-01-01T09:00:00.000Z,
+            "periodeKode": "201901",
+            "til": 2019-01-01T09:00:00.000Z,
+          },
+          "mottattDato": 2019-01-01T09:00:00.000Z,
+        }
+      }
+      erAap={true}
+      meldekortDager={
+        Array [
+          Object {
+            "annetFravaer": true,
+            "arbeidetTimerSum": 7.5,
+            "dag": 1,
+            "kurs": false,
+            "syk": false,
+          },
+        ]
+      }
+      ukeNr={1}
+    />
+  </Connect(IntlProvider)>
+</Provider>
+`;
