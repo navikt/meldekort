@@ -15,14 +15,14 @@ interface MapStateToProps {
 
 const MobilMenyToggle: React.FunctionComponent<MapDispatchToProps & MapStateToProps> = props => {
   return (
-    <div className={'burger-menu-toggle'} onClick={() => props.toggleMeny(!props.erApen)}>
+    <nav className={'burger-menu-toggle'} onClick={() => props.toggleMeny(!props.erApen)}>
       <div className={classNames('nav-icon', { open: props.erApen })}>
         <span />
         <span />
         <span />
         <span />
       </div>
-    </div>
+    </nav>
   );
 };
 
