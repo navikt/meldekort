@@ -46,7 +46,7 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
                   href={'#'}
                   aria-labelledby={'tab menypunkt'}
                 >
-                  <span>{hentIntl().formatMessage({ id: item.tekstid })}</span>
+                  {hentIntl().formatMessage({ id: item.tekstid })}
                 </Lenke>
               </li>
             ))}
