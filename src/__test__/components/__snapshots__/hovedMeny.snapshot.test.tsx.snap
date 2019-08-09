@@ -8,25 +8,29 @@ exports[`HovedMeny 1`] = `
     className="mainNav__wrapper"
   >
     <ul>
-      <li>
-        <button
-          className="menypunkt underline active"
+      <li
+        className="hovedMeny-item"
+      >
+        <a
+          aria-labelledby="tab menypunkt"
+          className="lenke menypunkt underline active"
+          href="#"
           onClick={[Function]}
         >
-          <span>
-            Send 
-          </span>
-        </button>
+          Send 
+        </a>
       </li>
-      <li>
-        <button
-          className="menypunkt underline"
+      <li
+        className="hovedMeny-item"
+      >
+        <a
+          aria-labelledby="tab menypunkt"
+          className="lenke menypunkt underline"
+          href="#"
           onClick={[Function]}
         >
-          <span>
-            Tidligere meldekort 
-          </span>
-        </button>
+          Tidligere meldekort 
+        </a>
       </li>
     </ul>
   </div>
