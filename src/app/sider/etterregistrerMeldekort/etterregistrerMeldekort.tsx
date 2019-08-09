@@ -107,7 +107,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     const columns = [{ key: 'periode', label: 'Periode' }, { key: 'dato', label: 'Dato' }];
     const ettMeldekort = this.harEttMeldekort();
     return this.props.person.meldeform === MeldeForm.IKKE_SATT ? (
-      <NavFrontendSpinner />
+      <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
     ) : rows.length === 0 ? (
       <Redirect to={'/om-meldekort'} />
     ) : !ettMeldekort ? (
