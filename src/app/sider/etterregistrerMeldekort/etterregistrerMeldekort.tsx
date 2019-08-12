@@ -14,11 +14,12 @@ import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { KortStatus, Meldekort, SendtMeldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
-import { Person } from '../../types/person';
+import { MeldeForm, Person } from '../../types/person';
 import { Redirect } from 'react-router';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 import { hentIntl } from '../../utils/intlUtil';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   person: Person;
@@ -105,8 +106,10 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     const rows = this.hentMeldekortRaderFraPerson();
     const columns = [{ key: 'periode', label: 'Periode' }, { key: 'dato', label: 'Dato' }];
     const ettMeldekort = this.harEttMeldekort();
-    return rows.length === 0 ? (
-      <Redirect to="/om-meldekort" />
+    return this.props.person.meldeform === MeldeForm.IKKE_SATT ? (
+      <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
+    ) : rows.length === 0 ? (
+      <Redirect to={'/om-meldekort'} />
     ) : !ettMeldekort ? (
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">

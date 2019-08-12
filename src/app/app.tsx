@@ -70,7 +70,7 @@ class App extends React.Component<Props, AppState> {
           {baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
           ) : personStatus.personStatus.statusArbeidsoker === 'venter_pa_data' ? (
-            <NavFrontendSpinner type={'XL'} />
+            <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
           ) : (
             <Feilside />
           )}
