@@ -83,7 +83,11 @@ const innsendingReducer = (
       return { ...state, begrunnelse: action.payload };
 
     case getType(InnsendingActions.settValideringsresultat):
-      return { ...state, ...action.payload, valideringsResultat: action.payload };
+      return {
+        ...state,
+        ...action.payload,
+        valideringsResultat: action.payload,
+      };
 
     case getType(InnsendingActions.kontrollerMeldekort.success):
       return { ...state, valideringsResultat: action.payload };

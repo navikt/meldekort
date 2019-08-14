@@ -102,7 +102,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     const listeMedSporsmal = mkdetaljerSporsmal!
       ? this.returnerListeMedMeldekortdetaljerSporsmal(mkdetaljerSporsmal)
       : [];
-    const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal.map(spm => {
+    const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal.map((spm) => {
       for (let i = 0; i < listeMedSporsmal.length; i++) {
         if (spm.kategori === listeMedSporsmal[i].kategori) {
           return {
@@ -141,7 +141,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
           <Route
             exact={true}
             path={`${match.url}` + '/sporsmal'}
-            render={props => <Sporsmalsside {...props} />}
+            render={(props) => <Sporsmalsside {...props} />}
           />
           <Route
             path={`${match.url}` + '/utfylling'}

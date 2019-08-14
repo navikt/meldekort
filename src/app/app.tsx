@@ -115,7 +115,7 @@ class App extends React.Component<Props, AppState> {
   componentDidMount() {
     const { meny, hentPersonStatus, settValgtMenyPunkt } = this.props;
     const valgtMenyPunkt = meny.alleMenyPunkter.find(
-      mp => mp.urlparam === window.location.pathname.slice(10)
+      (mp) => mp.urlparam === window.location.pathname.slice(10)
     );
     if (typeof valgtMenyPunkt !== 'undefined') {
       settValgtMenyPunkt(valgtMenyPunkt);

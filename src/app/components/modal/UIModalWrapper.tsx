@@ -9,60 +9,59 @@ import KnappBase from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 
 interface MapStateToProps {
-    modal: IModal;
+  modal: IModal;
 }
 
 interface MapDispatchToProps {
-    skjulModal: () => void;
+  skjulModal: () => void;
 }
 
 type UIModalWrapperProps = MapStateToProps & MapDispatchToProps;
 
 const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({ modal, skjulModal }) => {
-    Modal.setAppElement('#meldekort-root');
-    return (
-        <Modal
-            className={'uimodal'}
-            isOpen={modal.visModal}
-            onRequestClose={() => {
-                modal.onRequestClose ? modal.onRequestClose() : skjulModal();
-            }}
-            contentLabel={'ui-modal'}
-            closeButton={true}
-        >
-            <div className={'uimodal__content'}>{modal.content()}</div>
-            <div className={'uimodal__actions-knapp'}>
-                {modal.knapper &&
-                    modal.knapper.map((knapp: ModalKnapp) => {
-                        return (
-                            <KnappBase
-                                key={knapp.label}
-                                className={'uimodal__actions-knapp'}
-                                type={knapp.type}
-                                onClick={() => knapp.action()}
-                                children={knapp.label}
-                            />
-                        );
-                    })
-                }
-            </div>
-        </Modal>
-    );
+  Modal.setAppElement('#meldekort-root');
+  return (
+    <Modal
+      className={'uimodal'}
+      isOpen={modal.visModal}
+      onRequestClose={() => {
+        modal.onRequestClose ? modal.onRequestClose() : skjulModal();
+      }}
+      contentLabel={'ui-modal'}
+      closeButton={true}
+    >
+      <div className={'uimodal__content'}>{modal.content()}</div>
+      <div className={'uimodal__actions-knapp'}>
+        {modal.knapper &&
+          modal.knapper.map((knapp: ModalKnapp) => {
+            return (
+              <KnappBase
+                key={knapp.label}
+                className={'uimodal__actions-knapp'}
+                type={knapp.type}
+                onClick={() => knapp.action()}
+                children={knapp.label}
+              />
+            );
+          })}
+      </div>
+    </Modal>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        modal: selectModal(state),
-    };
+  return {
+    modal: selectModal(state),
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        skjulModal: () => dispatch(UiActions.skjulModal()),
-    };
+  return {
+    skjulModal: () => dispatch(UiActions.skjulModal()),
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UIModalWrapper);

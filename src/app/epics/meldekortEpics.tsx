@@ -20,10 +20,10 @@ import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
 
-const handterFeiletApiKall: AppEpic = action$ =>
+const handterFeiletApiKall: AppEpic = (action$) =>
   action$.pipe(
     filter(isActionOf(MeldekortActions.apiKallFeilet)),
-    concatMap(action => {
+    concatMap((action) => {
       const axiosResponse: AxiosResponse | undefined = action.payload.response;
       if (axiosResponse && axiosResponse.status !== undefined && axiosResponse.status === 401) {
         updateIntl({ locale: 'nb', messages: tekster.nb });
@@ -67,7 +67,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
   );
 
 // Lista i isActionOf må inneholde alle actions som skal fjerne feilmelding.
-const fjernFeilmelding: AppEpic = action$ =>
+const fjernFeilmelding: AppEpic = (action$) =>
   action$.pipe(
     filter(
       isActionOf([
@@ -80,7 +80,7 @@ const fjernFeilmelding: AppEpic = action$ =>
         PersonStatusActions.hentPersonStatus.success,
       ])
     ),
-    concatMap(action => {
+    concatMap((action) => {
       return [
         UiActions.visBaksystemFeilmelding({
           content: () => '',
@@ -90,10 +90,10 @@ const fjernFeilmelding: AppEpic = action$ =>
     })
   );
 
-const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
+const sjekkOmBrukerHarTidligereMeldekort: AppEpic = (action$) =>
   action$.pipe(
     filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)),
-    concatMap(action => {
+    concatMap((action) => {
       if (action.payload.length === 0) {
         return [
           UiActions.sjekkTidligereMeldekort({
@@ -110,13 +110,13 @@ const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
     })
   );
 
-const hentInfomelding: AppEpic = action$ =>
+const hentInfomelding: AppEpic = (action$) =>
   action$.pipe(
     filter(isActionOf(MeldekortActions.hentInfomelding.request)),
     switchMap(() =>
       from(fetchInfomelding()).pipe(
         map(MeldekortActions.hentInfomelding.success),
-        catchError(error =>
+        catchError((error) =>
           of(MeldekortActions.hentInfomelding.failure(error), MeldekortActions.apiKallFeilet(error))
         )
       )

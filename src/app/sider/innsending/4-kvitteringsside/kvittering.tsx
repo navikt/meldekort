@@ -155,7 +155,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
   };
 
   meldekortSomKanSendes = (meldekortListe: Meldekort[]): Meldekort[] => {
-    return meldekortListe.filter(meldekort => {
+    return meldekortListe.filter((meldekort) => {
       let kanSendes = meldekort.meldeperiode.kanKortSendes;
       if (kanSendes) {
         kanSendes = !erMeldekortSendtInnTidligere(
@@ -171,7 +171,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
     if (nesteAktivtMeldekort !== undefined) {
       return hentIntl().formatMessage(
         { id: 'sendt.meldekortKanSendes' },
-        { [0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra) }
+        {
+          [0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
+        }
       );
     } else if (
       this.props.innsendingstype === Innsendingstyper.innsending &&
@@ -202,7 +204,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
   hentMeldekortSomIkkeKanSendesEnda = (meldekortListe: Meldekort[]): Meldekort[] => {
     return meldekortListe.filter(
-      meldekort =>
+      (meldekort) =>
         (meldekort.kortStatus === KortStatus.SENDT || meldekort.kortStatus === KortStatus.OPPRE) &&
         !meldekort.meldeperiode.kanKortSendes
     );

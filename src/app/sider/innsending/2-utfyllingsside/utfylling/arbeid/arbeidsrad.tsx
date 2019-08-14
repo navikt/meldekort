@@ -37,7 +37,7 @@ type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToPr
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
   componentDidMount(): void {
-    let rensetUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
+    let rensetUtfylteDager = this.props.innsending.utfylteDager.map((utfyltDag) => {
       if (utfyltDag.arbeidetTimer === '0') {
         return {
           ...utfyltDag,
@@ -58,7 +58,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
       } else if (nyVerdi.includes(',')) {
         nyVerdi = nyVerdi.replace(',', '.');
       }
-      const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
+      const oppdaterteDager = this.props.innsending.utfylteDager.map((dag) => {
         if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
           return {
             ...dag,
@@ -73,7 +73,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
   finnIndex = (ukedag: string): number => {
     let dagObj = null;
-    this.props.innsending.utfylteDager.map(dag => {
+    this.props.innsending.utfylteDager.map((dag) => {
       if (matchUkedager(dag.dag, ukedag.trim()) && dag.uke === this.props.ukeNummer) {
         dagObj = dag;
       }
@@ -85,7 +85,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
   };
 
   settFelter = () => {
-    return hentUkedagerSomStringListe().map(dag => {
+    return hentUkedagerSomStringListe().map((dag) => {
       let ukedag = konverterUkedag(dag);
       let { utfylteDager } = this.props.innsending;
       let utfyltDagIndex = this.finnIndex(ukedag);
@@ -107,7 +107,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
               ? utfylteDager[utfyltDagIndex].arbeidetTimer
               : ''
           }
-          onChange={event => {
+          onChange={(event) => {
             this.setTimer(event, ukedag);
           }}
           feil={

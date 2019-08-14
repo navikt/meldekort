@@ -31,7 +31,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
     const { resetInnsending, meny, settValgtMenyPunkt } = this.props;
     resetInnsending();
     const valgtMenyPunkt = meny.alleMenyPunkter.find(
-      mp => mp.urlparam === window.location.pathname.slice(10)
+      (mp) => mp.urlparam === window.location.pathname.slice(10)
     );
     if (typeof valgtMenyPunkt !== 'undefined') {
       settValgtMenyPunkt(valgtMenyPunkt);
@@ -72,7 +72,9 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
                 values={{
                   0: 'https://www.nav.no',
                   1: hentIntl()
-                    .formatMessage({ id: 'genereltOmMeldekort.informasjonOmMeldekortLink' })
+                    .formatMessage({
+                      id: 'genereltOmMeldekort.informasjonOmMeldekortLink',
+                    })
                     .trim(),
                 }}
               />

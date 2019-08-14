@@ -25,7 +25,7 @@ const fetchGet = async (url: string) => {
       },
       withCredentials: true,
     })
-    .then(response => {
+    .then((response) => {
       return response.data;
     });
 };
@@ -38,7 +38,7 @@ const fetchPost = async (url: string, data: any) => {
       },
       withCredentials: true,
     })
-    .then(response => {
+    .then((response) => {
       return response.data;
     });
 };

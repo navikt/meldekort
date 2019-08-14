@@ -66,7 +66,7 @@ class SendMeldekort extends React.Component<Props, any> {
     if (typeof this.props.person.meldekort === 'undefined') {
       return [];
     }
-    return this.props.person.meldekort.filter(meldekortObj => {
+    return this.props.person.meldekort.filter((meldekortObj) => {
       if (
         meldekortObj.kortStatus === KortStatus.OPPRE ||
         meldekortObj.kortStatus === KortStatus.SENDT
@@ -83,7 +83,7 @@ class SendMeldekort extends React.Component<Props, any> {
     let radliste: MeldekortRad[] = [];
 
     if (this.filtrerMeldekortListe() != null) {
-      this.filtrerMeldekortListe().map(meldekortObj => {
+      this.filtrerMeldekortListe().map((meldekortObj) => {
         if (
           meldekortObj.kortStatus === KortStatus.OPPRE ||
           meldekortObj.kortStatus === KortStatus.SENDT
@@ -109,7 +109,7 @@ class SendMeldekort extends React.Component<Props, any> {
 
   meldekortSomIkkeKanSendesInnEnda = (): Meldekort[] => {
     if (this.filtrerMeldekortListe().length === 0) {
-      return this.props.person.meldekort.filter(mk => {
+      return this.props.person.meldekort.filter((mk) => {
         return (
           !mk.meldeperiode.kanKortSendes &&
           (mk.kortStatus === KortStatus.OPPRE || mk.kortStatus === KortStatus.SENDT)
@@ -123,7 +123,7 @@ class SendMeldekort extends React.Component<Props, any> {
     let meldekortliste = this.filtrerMeldekortListe();
     if (rows.length === 0 && meldekortliste !== undefined) {
       let meldekortId = this.forTidligASende(meldekortliste);
-      let meldekort = meldekortliste.filter(m => m.meldekortId === meldekortId);
+      let meldekort = meldekortliste.filter((m) => m.meldekortId === meldekortId);
       let meldekortSomIkkeKanSendesEnda = this.meldekortSomIkkeKanSendesInnEnda();
       if (meldekort.length === 0 && meldekortSomIkkeKanSendesEnda.length !== 0) {
         return (
@@ -200,7 +200,7 @@ class SendMeldekort extends React.Component<Props, any> {
     if (meldekortListe === undefined) {
       return meldekortId;
     }
-    meldekortListe.map(meldekort => {
+    meldekortListe.map((meldekort) => {
       if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
         if (!meldekort.meldeperiode.kanKortSendes) {
           meldekortId = meldekort.meldekortId;

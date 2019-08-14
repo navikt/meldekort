@@ -3,7 +3,11 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import {hentDatoForAndreUke, hentDatoForForsteUke, hentUkenummerForDato} from '../../../utils/dates';
+import {
+  hentDatoForAndreUke,
+  hentDatoForForsteUke,
+  hentUkenummerForDato,
+} from '../../../utils/dates';
 import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
@@ -51,7 +55,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
   hentSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.map((sporsmalobj) => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
@@ -62,7 +66,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
 
   sjekkSporsmal = (kategori: string): boolean => {
     let sporsmalListe = this.hentSporsmal();
-    let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
+    let sporsmal = sporsmalListe.filter((spm) => spm.kategori === kategori);
     if (sporsmal.length !== 0) {
       return sporsmal[0].svar;
     }
@@ -74,7 +78,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     let feilIArbeidetTimer = false;
     let feilIArbeidetTimerHeleHalve = false;
 
-    dager.map(dag => {
+    dager.map((dag) => {
       if (typeof dag.arbeidetTimer !== 'undefined') {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
           feil.push(dag.dag + dag.uke);
@@ -101,7 +105,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     let ferie = !this.sjekkSporsmal('ferieFravar');
     let feilITimer = this.validerAntallTimerForDag(this.props.innsending.utfylteDager);
 
-    this.props.innsending.utfylteDager.map(dag => {
+    this.props.innsending.utfylteDager.map((dag) => {
       if (!arbeidet && typeof dag.arbeidetTimer !== 'undefined' && Number(dag.arbeidetTimer) > 0) {
         arbeidet = true;
       }
@@ -148,7 +152,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
       feilIArbeidetTimer ||
       feilIArbeidetTimerHeleHalve
     ) {
-      let feiltekst = hentIntl().formatMessage({ id: 'utfylling.ingenDagerUtfylt' });
+      let feiltekst = hentIntl().formatMessage({
+        id: 'utfylling.ingenDagerUtfylt',
+      });
       return (
         <AlertStripe className={'utfyllingFeil'} type={'feil'}>
           <ul>
@@ -178,7 +184,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
               })}`}</li>
             ) : null}
             {feilIArbeidetTimer ? (
-              <li>{`${hentIntl().formatMessage({ id: 'arbeidTimer.rangeValidator.range' })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.rangeValidator.range',
+              })}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
@@ -188,7 +196,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         return (
           <AlertStripe className={'utfyllingFeil'} type={'feil'}>
             <ul>
-              {valideringsResultat.arsakskoder.map(arsakskode => {
+              {valideringsResultat.arsakskoder.map((arsakskode) => {
                 return <li key={arsakskode.kode}>{arsakskode.tekst}</li>;
               })}
             </ul>

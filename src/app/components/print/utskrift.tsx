@@ -38,13 +38,15 @@ const mapStateToProps = (state: RootState) => {
 
 type UtskriftProps = Props & ReturnType<typeof mapStateToProps>;
 
-const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
+const Utskrift: React.FunctionComponent<UtskriftProps> = (props) => {
   if (!props.active) {
     return null;
   }
 
   const { fornavn, etternavn, fodselsnr } = props.personInfo;
-  const printTekst = hentIntl().formatMessage({ id: 'overskrift.meldekort.sendt' });
+  const printTekst = hentIntl().formatMessage({
+    id: 'overskrift.meldekort.sendt',
+  });
   const stylingMedIE = classNames('utskrift', {
     ie11: isIE,
   });

@@ -28,7 +28,7 @@ type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
 
 class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
   sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>, value?: string) => {
-    const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter.map(sporsmalsobj => {
+    const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter.map((sporsmalsobj) => {
       const val = value !== undefined ? value : '';
       if (sporsmalsobj.kategori === val.split('.')[0]) {
         return {
@@ -80,7 +80,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
   render() {
     const { innsending, AAP } = this.props;
-    const sporsmalsgruppe = innsending.sporsmalsobjekter.map(sporsmalobj =>
+    const sporsmalsgruppe = innsending.sporsmalsobjekter.map((sporsmalobj) =>
       this.lagSporsmal(sporsmalobj, AAP, innsending.innsendingstype)
     );
 

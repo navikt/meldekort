@@ -56,7 +56,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     if (typeof this.props.person.etterregistrerteMeldekort === 'undefined') {
       return [];
     }
-    return this.props.person.etterregistrerteMeldekort.filter(meldekortObj => {
+    return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) => {
       if (
         meldekortObj.kortStatus === KortStatus.OPPRE ||
         meldekortObj.kortStatus === KortStatus.SENDT
@@ -114,7 +114,9 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel className="seksjon">
-            {hentIntl().formatMessage({ id: 'overskrift.etterregistrering.innsending' })}
+            {hentIntl().formatMessage({
+              id: 'overskrift.etterregistrering.innsending',
+            })}
           </Innholdstittel>
           <Sprakvelger />
         </section>

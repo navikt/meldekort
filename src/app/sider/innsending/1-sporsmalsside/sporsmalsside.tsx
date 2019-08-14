@@ -57,32 +57,47 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const registrert = this.sjekkOmSporsmalErUtfylt(kategorier[4]);
     const begrunnelseValgt =
       begrunnelse.valgtArsak === '' && innsendingstype === Innsendingstyper.korrigering;
-    const nySporsmalsobjekterState = sporsmalsobjekter.map(sporsmalsobj => {
+    const nySporsmalsobjekterState = sporsmalsobjekter.map((sporsmalsobj) => {
       switch (sporsmalsobj.kategori) {
         case kategorier[0]:
           return {
             ...sporsmalsobj,
-            feil: { erFeil: !arbeidet, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+            feil: {
+              erFeil: !arbeidet,
+              feilmeldingId: sporsmalsobj.feil.feilmeldingId,
+            },
           };
         case kategorier[1]:
           return {
             ...sporsmalsobj,
-            feil: { erFeil: !kurs, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+            feil: {
+              erFeil: !kurs,
+              feilmeldingId: sporsmalsobj.feil.feilmeldingId,
+            },
           };
         case kategorier[2]:
           return {
             ...sporsmalsobj,
-            feil: { erFeil: !syk, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+            feil: {
+              erFeil: !syk,
+              feilmeldingId: sporsmalsobj.feil.feilmeldingId,
+            },
           };
         case kategorier[3]:
           return {
             ...sporsmalsobj,
-            feil: { erFeil: !ferie, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+            feil: {
+              erFeil: !ferie,
+              feilmeldingId: sporsmalsobj.feil.feilmeldingId,
+            },
           };
         case kategorier[4]:
           return {
             ...sporsmalsobj,
-            feil: { erFeil: !registrert, feilmeldingId: sporsmalsobj.feil.feilmeldingId },
+            feil: {
+              erFeil: !registrert,
+              feilmeldingId: sporsmalsobj.feil.feilmeldingId,
+            },
           };
         default:
           return { ...sporsmalsobj };
@@ -119,7 +134,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       kurs: boolean,
       syk: boolean,
       ferie: boolean = true;
-    this.hentSvarPaaSporsmal().map(spm => {
+    this.hentSvarPaaSporsmal().map((spm) => {
       switch (spm.kategori) {
         case kategorier[0]:
           arbeidet = spm.svar;
@@ -137,7 +152,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
           break;
       }
     });
-    let oppdatertUtfylteDager = this.props.innsending.utfylteDager.map(utfyltDag => {
+    let oppdatertUtfylteDager = this.props.innsending.utfylteDager.map((utfyltDag) => {
       return {
         ...utfyltDag,
         arbeidetTimer: arbeidet ? utfyltDag.arbeidetTimer : undefined,
@@ -151,7 +166,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
   hentSvarPaaSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.map((sporsmalobj) => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
@@ -161,7 +176,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   };
 
   fortsetteRegistrert = (): boolean => {
-    const sporsmal = this.hentSvarPaaSporsmal().filter(spm => spm.kategori === kategorier[4]);
+    const sporsmal = this.hentSvarPaaSporsmal().filter((spm) => spm.kategori === kategorier[4]);
     if (sporsmal.length !== 0) {
       return sporsmal[0].svar;
     }
@@ -171,7 +186,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   hentSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
 
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.map((sporsmalobj) => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar: typeof sporsmalobj.checked !== 'undefined',
@@ -182,7 +197,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
   sjekkOmSporsmalErUtfylt = (kategori: string): boolean => {
     const sporsmalListe = this.hentSporsmal();
-    const sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
+    const sporsmal = sporsmalListe.filter((spm) => spm.kategori === kategori);
     if (sporsmal.length !== 0) {
       return sporsmal[0].svar;
     }
@@ -210,10 +225,14 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         <AlertStripe type={'feil'}>
           <ul>
             {feilIBegrunnelse ? (
-              <li>{`${hentIntl().formatMessage({ id: 'begrunnelse.required' })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'begrunnelse.required',
+              })}`}</li>
             ) : null}
             {feilIArbeid ? (
-              <li>{`${hentIntl().formatMessage({ id: 'arbeidet.required' })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidet.required',
+              })}`}</li>
             ) : null}
             {feillIKurs ? (
               <li>{`${hentIntl().formatMessage({
@@ -221,7 +240,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
               })}`}</li>
             ) : null}
             {feilISyk ? (
-              <li>{`${hentIntl().formatMessage({ id: 'syk.required' + (aap ? '-AAP' : '') })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'syk.required' + (aap ? '-AAP' : ''),
+              })}`}</li>
             ) : null}
             {feilIFerie ? (
               <li>{`${hentIntl().formatMessage({
@@ -229,7 +250,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
               })}`}</li>
             ) : null}
             {feilIRegistrert ? (
-              <li>{`${hentIntl().formatMessage({ id: 'fortsetteRegistrert.required' })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'fortsetteRegistrert.required',
+              })}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
@@ -239,7 +262,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
   hoppeOverUtfylling = (): boolean => {
     let jaSvar = false;
-    this.hentSvarPaaSporsmal().map(spm => {
+    this.hentSvarPaaSporsmal().map((spm) => {
       if (spm.kategori !== kategorier[4] && spm.svar && !jaSvar) {
         jaSvar = true;
       }
@@ -259,7 +282,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     this.props.hentInfomelding();
     this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
     if (this.props.innsending.innsendingstype === Innsendingstyper.etterregistrering) {
-      const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter.map(spmObj => {
+      const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter.map((spmObj) => {
         if (spmObj.kategori === kategorier[4]) {
           return { ...spmObj, checked: kategorier[4] + '.ja' };
         } else {

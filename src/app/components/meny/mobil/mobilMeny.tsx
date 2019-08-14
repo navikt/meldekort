@@ -26,9 +26,9 @@ interface MapDispatchToProps {
   toggleMeny: (erApen: boolean) => void;
 }
 
-const MobilMeny: React.FunctionComponent<
-  MobilMenyProps & MapStateToProps & MapDispatchToProps
-> = props => {
+const MobilMeny: React.FunctionComponent<MobilMenyProps & MapStateToProps & MapDispatchToProps> = (
+  props
+) => {
   const { settValgtMenyPunkt, toggleMeny, valgtMenyPunkt, menypunkter, erApen } = props;
 
   const onChange = (item: MenyPunkt) => {
@@ -40,7 +40,7 @@ const MobilMeny: React.FunctionComponent<
     <nav className={classNames('mobilMeny')}>
       <Collapse isOpened={props.erApen}>
         <ul className={classNames('mobilMeny-navlist', { open: erApen })}>
-          {menypunkter.map(menypunkt => (
+          {menypunkter.map((menypunkt) => (
             <li
               className={'navlist-item'}
               onClick={() => onChange(menypunkt)}

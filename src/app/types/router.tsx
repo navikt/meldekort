@@ -1,5 +1,5 @@
 export interface Router {
-    location: {
-        pathname: string;
-    };
+  location: {
+    pathname: string;
+  };
 }

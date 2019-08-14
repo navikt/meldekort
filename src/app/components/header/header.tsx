@@ -48,11 +48,14 @@ class Header extends React.Component<HeaderProps> {
 
   oppdatertMeny = () => {
     const { meny, person } = this.props;
-    const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
+    const oppdatertMeny = meny.alleMenyPunkter.map((menypunkt) => {
       if (menypunkt.tittel === 'endreMeldeform') {
         return { ...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR };
       } else if (menypunkt.tittel === 'etterregistrering') {
-        return { ...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort) };
+        return {
+          ...menypunkt,
+          disabled: isEmpty(person.etterregistrerteMeldekort),
+        };
       }
       return menypunkt;
     });
@@ -60,7 +63,7 @@ class Header extends React.Component<HeaderProps> {
   };
 
   hentMenypunkter = () => {
-    return this.props.meny.alleMenyPunkter.filter(menypunkt => !menypunkt.disabled);
+    return this.props.meny.alleMenyPunkter.filter((menypunkt) => !menypunkt.disabled);
   };
 
   render() {

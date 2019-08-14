@@ -41,7 +41,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   const hentSporsmalOgSvar = (formatertDato: string, erAap: boolean) => {
     const aap = hentAapStreng(erAap);
 
-    const sporsmalOgSvarConfig = config.map(sporsmalsObj => {
+    const sporsmalOgSvarConfig = config.map((sporsmalsObj) => {
       return {
         kategori: sporsmalsObj.kategori,
         sporsmal: finnesIntlId(sporsmalsObj.sporsmal + aap),

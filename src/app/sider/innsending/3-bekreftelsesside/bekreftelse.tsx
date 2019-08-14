@@ -144,7 +144,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   hentFravaersdager = (meldekortdetaljer: MDetaljer, meldekort: Meldekort): Fravaer[] => {
     let fravar: Fravaer[] = [];
-    meldekortdetaljer.sporsmal.meldekortDager.map(meldekortDag => {
+    meldekortdetaljer.sporsmal.meldekortDager.map((meldekortDag) => {
       let dato = kalkulerDato(meldekort.meldeperiode.fra, meldekortDag.dag);
       if (
         typeof meldekortDag.arbeidetTimerSum !== 'undefined' &&
@@ -182,7 +182,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   hentMeldekortDager = (): MeldekortDag[] => {
     let meldekortdager: MeldekortDag[] = [];
     let dagTeller = 0;
-    this.props.innsending.utfylteDager.map(utfyltDag => {
+    this.props.innsending.utfylteDager.map((utfyltDag) => {
       meldekortdager.push({
         dag: dagTeller,
         arbeidetTimerSum:

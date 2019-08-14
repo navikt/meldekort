@@ -55,7 +55,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   hentRaderFraHistoriskeMeldekort = () => {
     let radliste: HistoriskeMeldekortRad[] = [];
 
-    this.props.historiskeMeldekort.historiskeMeldekort.map(meldekort => {
+    this.props.historiskeMeldekort.historiskeMeldekort.map((meldekort) => {
       radliste.push({
         meldekort: meldekort,
         periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
@@ -89,8 +89,16 @@ class TidligereMeldekort extends React.Component<Props, State> {
           );
         },
       },
-      { key: 'dato', label: <FormattedMessage id="overskrift.dato" />, cell: 'dato' },
-      { key: 'mottatt', label: <FormattedMessage id="overskrift.mottatt" />, cell: 'mottatt' },
+      {
+        key: 'dato',
+        label: <FormattedMessage id="overskrift.dato" />,
+        cell: 'dato',
+      },
+      {
+        key: 'mottatt',
+        label: <FormattedMessage id="overskrift.mottatt" />,
+        cell: 'mottatt',
+      },
       {
         key: 'status',
         label: <FormattedMessage id="overskrift.status" />,

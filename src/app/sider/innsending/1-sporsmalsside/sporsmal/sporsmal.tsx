@@ -14,7 +14,7 @@ interface SporsmalProps {
   disabled: boolean;
 }
 
-const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
+const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
   return (
     <section className="seksjon sporsmal">
       <div className="flex-sporsmal-hjelpetekst-container">
@@ -49,7 +49,11 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
         onChange={props.sporsmalOnChange}
         feil={
           props.sporsmalsobjekt.feil.erFeil
-            ? { feilmelding: hentIntl().formatMessage({ id: props.sporsmalsobjekt.feil.feilmeldingId }) }
+            ? {
+                feilmelding: hentIntl().formatMessage({
+                  id: props.sporsmalsobjekt.feil.feilmeldingId,
+                }),
+              }
             : undefined
         }
       />

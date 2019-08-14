@@ -10,108 +10,108 @@ import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 
 interface Props {
-    ukenummer: number;
-    faktiskUkeNummer: string;
-    datoTittel: string;
-    utfyllingFeil: UtfyllingFeil;
-    erAap: boolean;
+  ukenummer: number;
+  faktiskUkeNummer: string;
+  datoTittel: string;
+  utfyllingFeil: UtfyllingFeil;
+  erAap: boolean;
 }
 
 interface MapStateToProps {
-    innsending: InnsendingState;
+  innsending: InnsendingState;
 }
 
 type UkePanelProps = Props & MapStateToProps;
 
-const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
-    const hentSporsmal = (): SpmSvar[] => {
-        let sporsmalListe: SpmSvar[] = [];
-        props.innsending.sporsmalsobjekter.map(sporsmalobj => {
-            sporsmalListe.push({
-                kategori: sporsmalobj.kategori,
-                svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
-            });
-        });
-        return sporsmalListe;
-    };
+const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
+  const hentSporsmal = (): SpmSvar[] => {
+    let sporsmalListe: SpmSvar[] = [];
+    props.innsending.sporsmalsobjekter.map((sporsmalobj) => {
+      sporsmalListe.push({
+        kategori: sporsmalobj.kategori,
+        svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
+      });
+    });
+    return sporsmalListe;
+  };
 
-    const sjekkSporsmal = (kategori: string): boolean => {
-        let sporsmalListe = hentSporsmal();
-        let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
-        if (sporsmal.length !== 0) {
-            return sporsmal[0].svar;
-        }
-        return false;
-    };
+  const sjekkSporsmal = (kategori: string): boolean => {
+    let sporsmalListe = hentSporsmal();
+    let sporsmal = sporsmalListe.filter((spm) => spm.kategori === kategori);
+    if (sporsmal.length !== 0) {
+      return sporsmal[0].svar;
+    }
+    return false;
+  };
 
-    return (
-        <EkspanderbartpanelBase
-            heading={
-                <div className="uketittel">
-                    <Innholdstittel>{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Innholdstittel>
-                    <Ingress>{props.datoTittel}</Ingress>
-                </div>
+  return (
+    <EkspanderbartpanelBase
+      heading={
+        <div className="uketittel">
+          <Innholdstittel>{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Innholdstittel>
+          <Ingress>{props.datoTittel}</Ingress>
+        </div>
+      }
+      border={true}
+      apen={true}
+      ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
+    >
+      <div className="ukepanel">
+        <div className="ukedager__desktop">{hentUkedager()}</div>
+        {sjekkSporsmal('arbeid') ? (
+          <Arbeidsrad
+            ukeNummer={props.ukenummer}
+            feil={props.utfyllingFeil.feilIArbeid.feil}
+            feilIDager={props.utfyllingFeil.feilIDager}
+            aap={props.erAap}
+            tekstId={'utfylling.arbeid'}
+            forklaringId={'forklaring.utfylling.arbeid'}
+            bareArbeid={
+              !sjekkSporsmal('aktivitetArbeid') &&
+              !sjekkSporsmal('forhindret') &&
+              !sjekkSporsmal('ferieFravar')
             }
-            border={true}
-            apen={true}
-            ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
-        >
-            <div className="ukepanel">
-                <div className="ukedager__desktop">{hentUkedager()}</div>
-                {sjekkSporsmal('arbeid') ? (
-                    <Arbeidsrad
-                        ukeNummer={props.ukenummer}
-                        feil={props.utfyllingFeil.feilIArbeid.feil}
-                        feilIDager={props.utfyllingFeil.feilIDager}
-                        aap={props.erAap}
-                        tekstId={'utfylling.arbeid'}
-                        forklaringId={'forklaring.utfylling.arbeid'}
-                        bareArbeid={
-                            !sjekkSporsmal('aktivitetArbeid') &&
-                            !sjekkSporsmal('forhindret') &&
-                            !sjekkSporsmal('ferieFravar')
-                        }
-                    />
-                ) : null}
-                {sjekkSporsmal('aktivitetArbeid') ? (
-                    <Aktivitetsrad
-                        ukeNummer={props.ukenummer}
-                        tekstId="utfylling.tiltak"
-                        forklaringId={'forklaring.utfylling.tiltak'}
-                        aap={props.erAap}
-                        feil={props.utfyllingFeil.feilIKurs.feil}
-                    />
-                ) : null}
-                {sjekkSporsmal('forhindret') ? (
-                    <Aktivitetsrad
-                        ukeNummer={props.ukenummer}
-                        tekstId="utfylling.syk"
-                        forklaringId={'forklaring.utfylling.syk'}
-                        aap={props.erAap}
-                        feil={props.utfyllingFeil.feilISyk.feil}
-                    />
-                ) : null}
-                {sjekkSporsmal('ferieFravar') ? (
-                    <Aktivitetsrad
-                        ukeNummer={props.ukenummer}
-                        tekstId="utfylling.ferieFravar"
-                        forklaringId={'forklaring.utfylling.ferieFravar'}
-                        aap={props.erAap}
-                        feil={props.utfyllingFeil.feilIFerie.feil}
-                    />
-                ) : null}
-            </div>
-        </EkspanderbartpanelBase>
-    );
+          />
+        ) : null}
+        {sjekkSporsmal('aktivitetArbeid') ? (
+          <Aktivitetsrad
+            ukeNummer={props.ukenummer}
+            tekstId="utfylling.tiltak"
+            forklaringId={'forklaring.utfylling.tiltak'}
+            aap={props.erAap}
+            feil={props.utfyllingFeil.feilIKurs.feil}
+          />
+        ) : null}
+        {sjekkSporsmal('forhindret') ? (
+          <Aktivitetsrad
+            ukeNummer={props.ukenummer}
+            tekstId="utfylling.syk"
+            forklaringId={'forklaring.utfylling.syk'}
+            aap={props.erAap}
+            feil={props.utfyllingFeil.feilISyk.feil}
+          />
+        ) : null}
+        {sjekkSporsmal('ferieFravar') ? (
+          <Aktivitetsrad
+            ukeNummer={props.ukenummer}
+            tekstId="utfylling.ferieFravar"
+            forklaringId={'forklaring.utfylling.ferieFravar'}
+            aap={props.erAap}
+            feil={props.utfyllingFeil.feilIFerie.feil}
+          />
+        ) : null}
+      </div>
+    </EkspanderbartpanelBase>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        innsending: state.innsending,
-    };
+  return {
+    innsending: state.innsending,
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    null
+  mapStateToProps,
+  null
 )(UkePanel);

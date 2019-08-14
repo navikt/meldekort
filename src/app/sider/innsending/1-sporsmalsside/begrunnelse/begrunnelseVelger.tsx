@@ -24,7 +24,7 @@ interface BegrunnselseProps {
 
 type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
-const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
+const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     props.settBegrunnelse({
       valgtArsak: event.target.value,
@@ -45,9 +45,15 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
       <Select
         label={
           <>
-            <Undertittel>{hentIntl().formatMessage({ id: 'korrigering.sporsmal.begrunnelse' })}</Undertittel>
+            <Undertittel>
+              {hentIntl().formatMessage({
+                id: 'korrigering.sporsmal.begrunnelse',
+              })}
+            </Undertittel>
             <UtvidetInformasjon>
-              {hentIntl().formatHTMLMessage({ id: 'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : '') })}
+              {hentIntl().formatHTMLMessage({
+                id: 'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : ''),
+              })}
             </UtvidetInformasjon>
           </>
         }
@@ -55,14 +61,18 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
         value={valgtArsak}
       >
         <option value={''}> {hentIntl().formatMessage({ id: 'begrunnelse.velgArsak' })}</option>
-        {options.map(opt => (
+        {options.map((opt) => (
           <option value={opt.trim()} key={opt}>
             {' '}
             {opt}{' '}
           </option>
         ))}
       </Select>
-      {props.erFeil && <span className={'rodTekst'}>{hentIntl().formatMessage({ id: 'begrunnelse.required' })}</span>}
+      {props.erFeil && (
+        <span className={'rodTekst'}>
+          {hentIntl().formatMessage({ id: 'begrunnelse.required' })}
+        </span>
+      )}
     </div>
   );
 };
@@ -75,7 +85,8 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    settBegrunnelse: (begrunnelse: Begrunnelse) => dispatch(InnsendingActions.settBegrunnelse(begrunnelse)),
+    settBegrunnelse: (begrunnelse: Begrunnelse) =>
+      dispatch(InnsendingActions.settBegrunnelse(begrunnelse)),
   };
 };
 

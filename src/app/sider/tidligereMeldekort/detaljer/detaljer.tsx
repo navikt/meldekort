@@ -84,7 +84,10 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     const { meldekortdetaljer, aktivtMeldekort } = this.props;
     const rows = this.settTabellrader(aktivtMeldekort);
     const columns = [
-      { key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt" /> },
+      {
+        key: 'mottattDato',
+        label: <FormattedMessage id="overskrift.mottatt" />,
+      },
       {
         key: 'kortStatus',
         label: <FormattedMessage id="overskrift.status" />,
@@ -96,8 +99,14 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
           );
         },
       },
-      { key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop" /> },
-      { key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype" /> },
+      {
+        key: 'bruttoBelop',
+        label: <FormattedMessage id="overskrift.bruttoBelop" />,
+      },
+      {
+        key: 'kortType',
+        label: <FormattedMessage id="overskrift.meldekorttype" />,
+      },
     ];
     const { meldegruppe } = aktivtMeldekort;
 
