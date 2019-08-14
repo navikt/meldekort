@@ -100,7 +100,7 @@
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
-    "prettier": "`prettier '**/*.{js,less}'  --write`",
+    "prettier": "`prettier '**/*.{tsxgst,less}'  --write`",
     "test": "CI=true react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom"
   },
