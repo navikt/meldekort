@@ -163,13 +163,12 @@ body {
             }
 
             .knapper-container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
               &.lang-knapper {
-                grid-template-columns: 1fr;
-                grid-template-row: minmax(auto, auto);
                 .navigasjonsknapp {
                   min-width: 140px;
-
-                  .knapperUnderHverandre();
                 }
               }
             }
