@@ -13,4 +13,5 @@ window['adrum-start-time'] = new Date().getTime();
         config.appKey = 'EUM-AAB-AWY';
     }
     config.xd = {enable: false};
+    config.spa = {"spa2": true};
 })(window['adrum-config'] || (window['adrum-config'] = {}));
