@@ -10,7 +10,13 @@ function readFile(dir, file) {
 }
 function createJson(katalog) {
   const tekster = getNbAndEnTexts(katalog);
-  return "/*tslint:disable*/export default {'nb':{" + tekster[0] + "},'en':{" + tekster[1] + '}};';
+  return (
+    "/*tslint:disable*/export default {'nb':{" +
+    tekster[0] +
+    "},'en':{" +
+    tekster[1] +
+    '}};'
+  );
 }
 
 function getNbAndEnTexts(dir) {
@@ -18,7 +24,7 @@ function getNbAndEnTexts(dir) {
 }
 
 function read(dir, nb, en) {
-  fs.readdirSync(dir).forEach((file) => {
+  fs.readdirSync(dir).forEach(file => {
     if (fs.statSync(path.join(dir, file)).isDirectory()) {
       [nb, en] = read(path.join(dir, file), nb, en);
     } else {

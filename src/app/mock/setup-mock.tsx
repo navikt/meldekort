@@ -23,7 +23,9 @@ export default () => {
     ...person,
   });
 
-  mock.onGet(apiUrl + Konstanter().hentHistoriskeMeldekortApiUri).reply(200, historiskeMeldekort);
+  mock
+    .onGet(apiUrl + Konstanter().hentHistoriskeMeldekortApiUri)
+    .reply(200, historiskeMeldekort);
 
   mock.onGet(apiUrl + Konstanter().hentMeldekortdetaljerApiUri).reply(200, {
     ...meldekortdetaljer,
@@ -37,7 +39,9 @@ export default () => {
     ...personinfo,
   });
 
-  mock.onGet(apiUrl + Konstanter().hentKorrigertMeldekortIdApiUri).reply(200, korrigertid);
+  mock
+    .onGet(apiUrl + Konstanter().hentKorrigertMeldekortIdApiUri)
+    .reply(200, korrigertid);
 
   mock.onGet(apiUrl + Konstanter().hentInfomelding).reply(200, {
     ...infomelding,

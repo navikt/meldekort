@@ -9,7 +9,10 @@ import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../../store/configureStore';
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/kortMapper';
+import {
+  mapKortStatusTilTekst,
+  mapKortTypeTilTekst,
+} from '../../../utils/kortMapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';
@@ -93,7 +96,10 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         label: <FormattedMessage id="overskrift.status" />,
         cell: function(row: any, columnKey: any) {
           return (
-            <EtikettBase type={'info'} className={finnRiktigEtikettKlasse(row.kortStatus)}>
+            <EtikettBase
+              type={'info'}
+              className={finnRiktigEtikettKlasse(row.kortStatus)}
+            >
               {row.kortStatus}
             </EtikettBase>
           );
@@ -171,7 +177,10 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
                 nesteInnsendingstype={Innsendingstyper.korrigering}
               />
             ) : null}
-            <PrintKnapp innholdRenderer={this.innhold} prerenderInnhold={true} />
+            <PrintKnapp
+              innholdRenderer={this.innhold}
+              prerenderInnhold={true}
+            />
           </div>
         </section>
       </div>
@@ -190,7 +199,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    hentMeldekortdetaljer: () => dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+    hentMeldekortdetaljer: () =>
+      dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
   };
 };

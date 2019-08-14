@@ -56,13 +56,16 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     if (typeof this.props.person.etterregistrerteMeldekort === 'undefined') {
       return [];
     }
-    return this.props.person.etterregistrerteMeldekort.filter((meldekortObj) => {
+    return this.props.person.etterregistrerteMeldekort.filter(meldekortObj => {
       if (
         meldekortObj.kortStatus === KortStatus.OPPRE ||
         meldekortObj.kortStatus === KortStatus.SENDT
       ) {
         if (meldekortObj.meldeperiode.kanKortSendes) {
-          return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
+          return !erMeldekortSendtInnTidligere(
+            meldekortObj,
+            this.props.sendteMeldekort
+          );
         }
       }
       return false;
@@ -104,7 +107,10 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
 
   render() {
     const rows = this.hentMeldekortRaderFraPerson();
-    const columns = [{ key: 'periode', label: 'Periode' }, { key: 'dato', label: 'Dato' }];
+    const columns = [
+      { key: 'periode', label: 'Periode' },
+      { key: 'dato', label: 'Dato' },
+    ];
     const ettMeldekort = this.harEttMeldekort();
     return this.props.person.meldeform === MeldeForm.IKKE_SATT ? (
       <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />

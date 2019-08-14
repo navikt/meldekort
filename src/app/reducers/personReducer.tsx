@@ -12,7 +12,10 @@ const initialState: Person = {
   antallGjenstaaendeFeriedager: 0,
 };
 
-const personReducer = (state: Person = initialState, action: PersonActionTypes): Person => {
+const personReducer = (
+  state: Person = initialState,
+  action: PersonActionTypes
+): Person => {
   switch (action.type) {
     case getType(PersonActions.hentPerson.success):
       return {

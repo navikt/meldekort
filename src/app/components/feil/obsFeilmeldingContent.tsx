@@ -5,7 +5,9 @@ import * as React from 'react';
 export const obsFeilmeldingContent = () => {
   return (
     <div>
-      <Undertittel children={<FormattedMessage id="obs.feilmelding.overskrift" />} />
+      <Undertittel
+        children={<FormattedMessage id="obs.feilmelding.overskrift" />}
+      />
       <FormattedMessage id={'obs.feilmelding'} />
     </div>
   );

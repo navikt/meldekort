@@ -9,7 +9,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
 import { InnsendingState, Innsendingstyper } from '../../types/innsending';
-import { Meldekort, MeldekortDag, Meldekortdetaljer, Sporsmal } from '../../types/meldekort';
+import {
+  Meldekort,
+  MeldekortDag,
+  Meldekortdetaljer,
+  Sporsmal,
+} from '../../types/meldekort';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { RootState } from '../../store/configureStore';
 import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
@@ -33,11 +38,18 @@ interface MapDispatchToProps {
   settMeldekortId: (meldekortId: number) => void;
 }
 
-type InnsendingRoutesProps = RouteComponentProps & MapStateToProps & MapDispatchToProps;
+type InnsendingRoutesProps = RouteComponentProps &
+  MapStateToProps &
+  MapDispatchToProps;
 
 class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
   settMeldekortIdBasertPaInnsendingstype = () => {
-    const { hentKorrigertId, innsending, settMeldekortId, aktivtMeldekort } = this.props;
+    const {
+      hentKorrigertId,
+      innsending,
+      settMeldekortId,
+      aktivtMeldekort,
+    } = this.props;
     if (innsending.innsendingstype === Innsendingstyper.korrigering) {
       hentKorrigertId();
       settMeldekortId(aktivtMeldekort.meldekortId);
@@ -47,7 +59,11 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
   };
 
   settSporsmalOgUtfyllingHvisKorrigering = () => {
-    const { innsending, oppdaterSporsmalsobjekter, oppdaterUtfylteDager } = this.props;
+    const {
+      innsending,
+      oppdaterSporsmalsobjekter,
+      oppdaterUtfylteDager,
+    } = this.props;
     if (innsending.innsendingstype === Innsendingstyper.korrigering) {
       const konverterteSporsmalsobjekter = this.konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal(
         this.props.meldekortdetaljer.sporsmal,
@@ -62,7 +78,9 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     }
   };
 
-  returnerListeMedMeldekortdetaljerSporsmal = (mkdetaljerSporsmal: Sporsmal) => {
+  returnerListeMedMeldekortdetaljerSporsmal = (
+    mkdetaljerSporsmal: Sporsmal
+  ) => {
     return [
       { kategori: 'arbeid', checked: mkdetaljerSporsmal.arbeidet },
       { kategori: 'aktivitetArbeid', checked: mkdetaljerSporsmal.kurs },
@@ -72,7 +90,10 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     ];
   };
 
-  settCheckedBasertPaBoolean = (kategoritekst: string, sporsmalValg: boolean) => {
+  settCheckedBasertPaBoolean = (
+    kategoritekst: string,
+    sporsmalValg: boolean
+  ) => {
     return sporsmalValg ? kategoritekst + '.ja' : kategoritekst + '.nei';
   };
 
@@ -102,17 +123,22 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     const listeMedSporsmal = mkdetaljerSporsmal!
       ? this.returnerListeMedMeldekortdetaljerSporsmal(mkdetaljerSporsmal)
       : [];
-    const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal.map((spm) => {
-      for (let i = 0; i < listeMedSporsmal.length; i++) {
-        if (spm.kategori === listeMedSporsmal[i].kategori) {
-          return {
-            ...spm,
-            checked: this.settCheckedBasertPaBoolean(spm.kategori, listeMedSporsmal[i].checked),
-          };
+    const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal.map(
+      spm => {
+        for (let i = 0; i < listeMedSporsmal.length; i++) {
+          if (spm.kategori === listeMedSporsmal[i].kategori) {
+            return {
+              ...spm,
+              checked: this.settCheckedBasertPaBoolean(
+                spm.kategori,
+                listeMedSporsmal[i].checked
+              ),
+            };
+          }
         }
+        return { ...spm };
       }
-      return { ...spm };
-    });
+    );
     return konvertertListeMedInnsendingSpm;
   };
 
@@ -141,21 +167,31 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
           <Route
             exact={true}
             path={`${match.url}` + '/sporsmal'}
-            render={(props) => <Sporsmalsside {...props} />}
+            render={props => <Sporsmalsside {...props} />}
           />
           <Route
             path={`${match.url}` + '/utfylling'}
-            render={(props: RouteComponentProps<any>) => <Utfylling {...props} />}
+            render={(props: RouteComponentProps<any>) => (
+              <Utfylling {...props} />
+            )}
           />
           <Route
             path={`${match.url}` + '/bekreftelse'}
-            render={(props: RouteComponentProps<any>) => <Bekreftelse {...props} />}
+            render={(props: RouteComponentProps<any>) => (
+              <Bekreftelse {...props} />
+            )}
           />
           <Route
             path={`${match.url}` + '/kvittering'}
-            render={(props: RouteComponentProps<any>) => <Kvittering {...props} />}
+            render={(props: RouteComponentProps<any>) => (
+              <Kvittering {...props} />
+            )}
           />
-          <Redirect exact={true} from={`${match.url}`} to={`${match.url}` + `/sporsmal`} />
+          <Redirect
+            exact={true}
+            from={`${match.url}`}
+            to={`${match.url}` + `/sporsmal`}
+          />
         </Switch>
       </div>
     );
@@ -175,12 +211,14 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
-    hentKorrigertId: () => dispatch(InnsendingActions.hentKorrigertId.request()),
+    hentKorrigertId: () =>
+      dispatch(InnsendingActions.hentKorrigertId.request()),
     oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
       dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
     oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) =>
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
-    hentMeldekortdetaljer: () => dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+    hentMeldekortdetaljer: () =>
+      dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
   };
 };
 

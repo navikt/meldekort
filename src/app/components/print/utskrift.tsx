@@ -22,9 +22,14 @@ export interface SideProps extends ClassAttributes<any> {
   tittel?: string;
 }
 
-export const Side: React.FunctionComponent<SideProps> = ({ children, tittel }) => (
+export const Side: React.FunctionComponent<SideProps> = ({
+  children,
+  tittel,
+}) => (
   <div className="utskrift__side">
-    {tittel && <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>}
+    {tittel && (
+      <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>
+    )}
     {children}
   </div>
 );
@@ -38,7 +43,7 @@ const mapStateToProps = (state: RootState) => {
 
 type UtskriftProps = Props & ReturnType<typeof mapStateToProps>;
 
-const Utskrift: React.FunctionComponent<UtskriftProps> = (props) => {
+const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
   if (!props.active) {
     return null;
   }
@@ -55,7 +60,9 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = (props) => {
       <div className="utskrift__hode">
         <img src={NavLogo} alt="" width="90" height="56" />
         {props.erKvittering ? (
-          <Innholdstittel className="flex-innhold sentrert">{printTekst}</Innholdstittel>
+          <Innholdstittel className="flex-innhold sentrert">
+            {printTekst}
+          </Innholdstittel>
         ) : (
           <>
             <Ingress className="flex-innhold sentrert">

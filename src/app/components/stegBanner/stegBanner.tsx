@@ -12,11 +12,13 @@ interface MapStateToProps {
 
 type StegBannerProps = MapStateToProps;
 
-const StegBanner: React.FunctionComponent<StegBannerProps> = (props) => {
+const StegBanner: React.FunctionComponent<StegBannerProps> = props => {
   let stegobjekter = [];
   const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
   const pathParams = props.router.location.pathname.split('/');
-  const aktivtSteg = routes.findIndex((steg) => steg === pathParams[pathParams.length - 1]);
+  const aktivtSteg = routes.findIndex(
+    steg => steg === pathParams[pathParams.length - 1]
+  );
 
   for (let i = 1; i < 5; i++) {
     const stegobj = Object.assign({

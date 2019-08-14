@@ -25,7 +25,7 @@ const fetchGet = async (url: string) => {
       },
       withCredentials: true,
     })
-    .then((response) => {
+    .then(response => {
       return response.data;
     });
 };
@@ -38,7 +38,7 @@ const fetchPost = async (url: string, data: any) => {
       },
       withCredentials: true,
     })
-    .then((response) => {
+    .then(response => {
       return response.data;
     });
 };
@@ -52,7 +52,9 @@ export function fetchHistoriskeMeldekort(): Promise<Meldekort[]> {
 }
 
 export function fetchMeldekortdetaljer(id: number): Promise<Meldekortdetaljer> {
-  return fetchGet(addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id));
+  return fetchGet(
+    addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id)
+  );
 }
 
 export function fetchPersonstatus(): Promise<PersonStatus> {
@@ -64,7 +66,9 @@ export function fetchPersoninfo(): Promise<PersonInfo> {
 }
 
 export function fetchKorrigertId(id: number): Promise<number> {
-  return fetchGet(addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id));
+  return fetchGet(
+    addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id)
+  );
 }
 
 export function fetchInfomelding(): Promise<Infomelding> {
@@ -77,7 +81,9 @@ export function postMeldekort(
   return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
 }
 
-export function postEndreMeldeform(meldeformdetaljer: MeldeformDetaljerInn): Promise<Meldeperiode> {
+export function postEndreMeldeform(
+  meldeformdetaljer: MeldeformDetaljerInn
+): Promise<Meldeperiode> {
   return fetchPost(Konstanter().sendMeldeformApiUri, meldeformdetaljer);
 }
 

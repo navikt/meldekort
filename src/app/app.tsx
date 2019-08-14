@@ -62,22 +62,34 @@ class App extends React.Component<Props, AppState> {
   }
 
   settInnhold = () => {
-    const { personStatus, baksystemFeilmelding, person, hentPerson, meny } = this.props;
+    const {
+      personStatus,
+      baksystemFeilmelding,
+      person,
+      hentPerson,
+      meny,
+    } = this.props;
 
     if (personStatus.personStatus.id === '') {
       return (
         <div className="main-container">
           {baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
-          ) : personStatus.personStatus.statusArbeidsoker === 'venter_pa_data' ? (
+          ) : personStatus.personStatus.statusArbeidsoker ===
+            'venter_pa_data' ? (
             <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
           ) : (
             <Feilside />
           )}
         </div>
       );
-    } else if (erBrukerRegistrertIArena(personStatus.personStatus.statusArbeidsoker)) {
-      if (person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
+    } else if (
+      erBrukerRegistrertIArena(personStatus.personStatus.statusArbeidsoker)
+    ) {
+      if (
+        person.meldeform === MeldeForm.IKKE_SATT &&
+        !this.state.henterPersonInfo
+      ) {
         hentPerson();
         this.setState({ henterPersonInfo: true });
       }
@@ -88,7 +100,9 @@ class App extends React.Component<Props, AppState> {
 
       return (
         <>
-          <Header tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })} />
+          <Header
+            tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })}
+          />
           <div
             className={classNames('', { overlay: meny.erApen })}
             onClick={() => meny.erApen && this.props.toggleMeny(!meny.erApen)}
@@ -115,7 +129,7 @@ class App extends React.Component<Props, AppState> {
   componentDidMount() {
     const { meny, hentPersonStatus, settValgtMenyPunkt } = this.props;
     const valgtMenyPunkt = meny.alleMenyPunkter.find(
-      (mp) => mp.urlparam === window.location.pathname.slice(10)
+      mp => mp.urlparam === window.location.pathname.slice(10)
     );
     if (typeof valgtMenyPunkt !== 'undefined') {
       settValgtMenyPunkt(valgtMenyPunkt);
@@ -146,7 +160,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     hentPerson: () => dispatch(PersonActions.hentPerson.request()),
-    hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
+    hentPersonStatus: () =>
+      dispatch(PersonStatusActions.hentPersonStatus.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
     settMenyPunkter: (menypunkter: MenyPunkt[]) =>

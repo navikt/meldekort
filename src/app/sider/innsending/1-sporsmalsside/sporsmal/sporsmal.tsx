@@ -14,14 +14,18 @@ interface SporsmalProps {
   disabled: boolean;
 }
 
-const Sporsmal: React.FunctionComponent<SporsmalProps> = (props) => {
+const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
   return (
     <section className="seksjon sporsmal">
       <div className="flex-sporsmal-hjelpetekst-container">
         <Undertittel>
           <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
-          {props.formatertDato ? <span> {props.formatertDato} ? </span> : null}{' '}
-          {props.disabled ? <FormattedMessage id={'korrigering.registrert.merknad'} /> : null}
+          {props.formatertDato ? (
+            <span> {props.formatertDato} ? </span>
+          ) : null}{' '}
+          {props.disabled ? (
+            <FormattedMessage id={'korrigering.registrert.merknad'} />
+          ) : null}
         </Undertittel>
         <>
           <UtvidetInformasjon>

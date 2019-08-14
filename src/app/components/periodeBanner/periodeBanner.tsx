@@ -18,7 +18,7 @@ interface PeriodeBannerProps {
 
 type Props = PeriodeBannerProps & MapStateToProps;
 
-const PeriodeBanner: React.FunctionComponent<Props> = (props) => {
+const PeriodeBanner: React.FunctionComponent<Props> = props => {
   const { meldeperiode } = props.aktivtMeldekort;
   const { className = '' } = props;
   return (

@@ -54,7 +54,10 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
     });
   };
 
-  componentDidUpdate(prevProps: Readonly<PrintKnappProps>, prevState: Readonly<State>) {
+  componentDidUpdate(
+    prevProps: Readonly<PrintKnappProps>,
+    prevState: Readonly<State>
+  ) {
     updateDocumentClass(this.state.active);
     if (!prevState.active && this.state.active) {
       if (this.printTimeoutId > 0) {
@@ -77,7 +80,11 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
             })
           }
         >
-          <img className="printLogo" src={printLogo} alt={this.tekst + ' logo'} />
+          <img
+            className="printLogo"
+            src={printLogo}
+            alt={this.tekst + ' logo'}
+          />
           {this.tekst}
         </Flatknapp>
         {prerenderInnhold || this.state.active ? (

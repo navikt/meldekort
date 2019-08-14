@@ -13,8 +13,13 @@ export enum FetchStatus {
   'FAILURE',
 }
 
-export function hentDataFraKilde<T>(fetchState: FetchState<T>, emptyVerdi: any): T {
-  return fetchState && fetchState.status === FetchStatus.SUCCESS ? fetchState.data : emptyVerdi;
+export function hentDataFraKilde<T>(
+  fetchState: FetchState<T>,
+  emptyVerdi: any
+): T {
+  return fetchState && fetchState.status === FetchStatus.SUCCESS
+    ? fetchState.data
+    : emptyVerdi;
 }
 
 export type FetchState<T> =

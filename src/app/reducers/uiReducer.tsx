@@ -1,4 +1,8 @@
-import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
+import {
+  BaksystemFeilmelding,
+  IModal,
+  IngenTidligereMeldekort,
+} from '../types/ui';
 import { UiActions, UiActionTypes } from '../actions/ui';
 import { getType } from 'typesafe-actions';
 
@@ -22,7 +26,10 @@ const initialState: UIState = {
   },
 };
 
-const uiReducer = (state: UIState = initialState, action: UiActionTypes): UIState => {
+const uiReducer = (
+  state: UIState = initialState,
+  action: UiActionTypes
+): UIState => {
   switch (action.type) {
     case getType(UiActions.visModal):
       return {

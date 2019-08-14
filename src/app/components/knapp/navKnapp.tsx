@@ -47,12 +47,17 @@ type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 class NavKnapp extends React.Component<Props> {
   harNestePathInnsending = (nestePathParams: string[]) => {
     return (
-      nestePathParams[nestePathParams.length - 1] === Innsendingstyper.innsending ||
-      nestePathParams[nestePathParams.length - 1] === Innsendingstyper.korrigering
+      nestePathParams[nestePathParams.length - 1] ===
+        Innsendingstyper.innsending ||
+      nestePathParams[nestePathParams.length - 1] ===
+        Innsendingstyper.korrigering
     );
   };
 
-  returnerNestePathInnenforInnsending = (params: string[], nestePathParams: string[]) => {
+  returnerNestePathInnenforInnsending = (
+    params: string[],
+    nestePathParams: string[]
+  ) => {
     const editedParams = params;
     editedParams.pop();
     editedParams.push(nestePathParams[nestePathParams.length - 1]);
@@ -91,7 +96,10 @@ class NavKnapp extends React.Component<Props> {
 
         if (erPaInnsending) {
           if (!erPaKvittering) {
-            nyPath = this.returnerNestePathInnenforInnsending(params, nestePathParams);
+            nyPath = this.returnerNestePathInnenforInnsending(
+              params,
+              nestePathParams
+            );
           } else {
             this.props.resetInnsending();
             nyPath = nestePath;
@@ -104,7 +112,10 @@ class NavKnapp extends React.Component<Props> {
             }
           }
         }
-        if (this.harNestePathInnsending(nestePathParams) && nesteInnsendingstype !== undefined) {
+        if (
+          this.harNestePathInnsending(nestePathParams) &&
+          nesteInnsendingstype !== undefined
+        ) {
           this.props.settInnsendingstype(nesteInnsendingstype);
         }
         if (!erPaInnsending) {
@@ -121,8 +132,14 @@ class NavKnapp extends React.Component<Props> {
         type={this.props.type}
         onClick={this.clickHandler}
         className={this.props.className}
-        spinner={typeof this.props.spinner === 'undefined' ? false : this.props.spinner}
-        disabled={typeof this.props.disabled === 'undefined' ? false : this.props.disabled}
+        spinner={
+          typeof this.props.spinner === 'undefined' ? false : this.props.spinner
+        }
+        disabled={
+          typeof this.props.disabled === 'undefined'
+            ? false
+            : this.props.disabled
+        }
       >
         <FormattedMessage id={this.props.tekstid} />
       </KnappBase>

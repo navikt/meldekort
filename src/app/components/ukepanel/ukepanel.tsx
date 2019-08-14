@@ -1,4 +1,8 @@
-import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../types/innsending';
+import {
+  InnsendingState,
+  SpmSvar,
+  UtfyllingFeil,
+} from '../../types/innsending';
 import * as React from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
@@ -23,13 +27,16 @@ interface MapStateToProps {
 
 type UkePanelProps = Props & MapStateToProps;
 
-const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
+const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   const hentSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
-    props.innsending.sporsmalsobjekter.map((sporsmalobj) => {
+    props.innsending.sporsmalsobjekter.map(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
-        svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
+        svar:
+          sporsmalobj.checked === undefined
+            ? false
+            : sporsmalobj.checked.endsWith('ja'),
       });
     });
     return sporsmalListe;
@@ -37,7 +44,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
 
   const sjekkSporsmal = (kategori: string): boolean => {
     let sporsmalListe = hentSporsmal();
-    let sporsmal = sporsmalListe.filter((spm) => spm.kategori === kategori);
+    let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
     if (sporsmal.length !== 0) {
       return sporsmal[0].svar;
     }
@@ -48,7 +55,9 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = (props) => {
     <EkspanderbartpanelBase
       heading={
         <div className="uketittel">
-          <Innholdstittel>{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Innholdstittel>
+          <Innholdstittel>{`${ukeTekst()} ${
+            props.faktiskUkeNummer
+          }`}</Innholdstittel>
           <Ingress>{props.datoTittel}</Ingress>
         </div>
       }

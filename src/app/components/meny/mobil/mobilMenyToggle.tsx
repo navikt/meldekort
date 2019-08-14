@@ -13,9 +13,14 @@ interface MapStateToProps {
   erApen: boolean;
 }
 
-const MobilMenyToggle: React.FunctionComponent<MapDispatchToProps & MapStateToProps> = (props) => {
+const MobilMenyToggle: React.FunctionComponent<
+  MapDispatchToProps & MapStateToProps
+> = props => {
   return (
-    <div className={'burger-menu-toggle'} onClick={() => props.toggleMeny(!props.erApen)}>
+    <div
+      className={'burger-menu-toggle'}
+      onClick={() => props.toggleMeny(!props.erApen)}
+    >
       <div className={classNames('nav-icon', { open: props.erApen })}>
         <span />
         <span />

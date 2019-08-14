@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../app/utils/kortMapper';
+import {
+  mapKortStatusTilTekst,
+  mapKortTypeTilTekst,
+} from '../../app/utils/kortMapper';
 import { KortStatus, KortType } from '../../app/types/meldekort';
 
 const ingen = 'Ingen beregning ';
@@ -29,8 +32,16 @@ it('mapKortTypeTilTekst', () => {
   expect(mapKortTypeTilTekst(KortType.ERSTATNING)).toBe('Erstatningskort ');
   expect(mapKortTypeTilTekst(KortType.ELEKTRONISK)).toBe('Elektronisk kort ');
   expect(mapKortTypeTilTekst(KortType.AAP)).toBe('Automatisk utfylt kort ');
-  expect(mapKortTypeTilTekst(KortType.ORDINAER_MANUELL)).toBe('Manuelt utfylt kort ');
-  expect(mapKortTypeTilTekst(KortType.MASKINELT_OPPDATERT)).toBe('Maskinelt oppdatert ');
-  expect(mapKortTypeTilTekst(KortType.MANUELL_ARENA)).toBe('Manuelt opprettet kort ');
-  expect(mapKortTypeTilTekst(KortType.KORRIGERT_ELEKTRONISK)).toBe('Elektronisk korrigert ');
+  expect(mapKortTypeTilTekst(KortType.ORDINAER_MANUELL)).toBe(
+    'Manuelt utfylt kort '
+  );
+  expect(mapKortTypeTilTekst(KortType.MASKINELT_OPPDATERT)).toBe(
+    'Maskinelt oppdatert '
+  );
+  expect(mapKortTypeTilTekst(KortType.MANUELL_ARENA)).toBe(
+    'Manuelt opprettet kort '
+  );
+  expect(mapKortTypeTilTekst(KortType.KORRIGERT_ELEKTRONISK)).toBe(
+    'Elektronisk korrigert '
+  );
 });

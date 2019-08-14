@@ -11,7 +11,7 @@ const removeCssHashPlugin = {
     context: { env, paths },
   }) => {
     const plugins = webpackConfig.plugins;
-    plugins.forEach((plugin) => {
+    plugins.forEach(plugin => {
       const options = plugin.options;
 
       if (!options) {

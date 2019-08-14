@@ -1,4 +1,8 @@
-import { ActionType, createAsyncAction, createStandardAction } from 'typesafe-actions';
+import {
+  ActionType,
+  createAsyncAction,
+  createStandardAction,
+} from 'typesafe-actions';
 import { MeldeformDetaljerInn, Meldeperiode } from '../types/person';
 import { AxiosError } from 'axios';
 
@@ -10,7 +14,9 @@ export enum MeldeformTypeKeys {
 }
 
 export const MeldeformActions = {
-  settMeldeform: createStandardAction(MeldeformTypeKeys.SETT_MELDEFORM)<MeldeformDetaljerInn>(),
+  settMeldeform: createStandardAction(MeldeformTypeKeys.SETT_MELDEFORM)<
+    MeldeformDetaljerInn
+  >(),
   endreMeldeform: createAsyncAction(
     MeldeformTypeKeys.ENDRE_MELDEFORM,
     MeldeformTypeKeys.ENDRE_MELDEFORM_OK,

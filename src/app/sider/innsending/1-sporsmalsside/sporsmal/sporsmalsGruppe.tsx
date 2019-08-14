@@ -3,7 +3,10 @@ import * as React from 'react';
 import Sporsmal from './sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
+import {
+  InnsendingState,
+  Innsendingstyper,
+} from '../../../../types/innsending';
 import { InnsendingActions } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';
@@ -27,21 +30,30 @@ interface Props {
 type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
 
 class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
-  sporsmalOnChange = (event: React.SyntheticEvent<EventTarget>, value?: string) => {
-    const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter.map((sporsmalsobj) => {
-      const val = value !== undefined ? value : '';
-      if (sporsmalsobj.kategori === val.split('.')[0]) {
-        return {
-          ...sporsmalsobj,
-          checked: value,
-        };
+  sporsmalOnChange = (
+    event: React.SyntheticEvent<EventTarget>,
+    value?: string
+  ) => {
+    const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter.map(
+      sporsmalsobj => {
+        const val = value !== undefined ? value : '';
+        if (sporsmalsobj.kategori === val.split('.')[0]) {
+          return {
+            ...sporsmalsobj,
+            checked: value,
+          };
+        }
+        return { ...sporsmalsobj };
       }
-      return { ...sporsmalsobj };
-    });
+    );
     this.props.oppdaterSvar(nySporsmalsobjekterState);
   };
 
-  lagSporsmal = (sporsmalsobj: Spm, erAAP: boolean, innsendingstype: Innsendingstyper | null) => {
+  lagSporsmal = (
+    sporsmalsobj: Spm,
+    erAAP: boolean,
+    innsendingstype: Innsendingstyper | null
+  ) => {
     const tekstendelse = hentAapStreng(erAAP);
     let skalVareDisabled: boolean = false;
     for (let key in sporsmalsobj) {
@@ -53,7 +65,9 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
       ) {
         sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + tekstendelse);
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
-        sporsmalsobj.feil.feilmeldingId = finnesIntlId(sporsmalsobj.feil.feilmeldingId);
+        sporsmalsobj.feil.feilmeldingId = finnesIntlId(
+          sporsmalsobj.feil.feilmeldingId
+        );
       } else if (
         sporsmalsobj[key] === 'registrert' &&
         innsendingstype !== Innsendingstyper.innsending
@@ -80,7 +94,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
   render() {
     const { innsending, AAP } = this.props;
-    const sporsmalsgruppe = innsending.sporsmalsobjekter.map((sporsmalobj) =>
+    const sporsmalsgruppe = innsending.sporsmalsobjekter.map(sporsmalobj =>
       this.lagSporsmal(sporsmalobj, AAP, innsending.innsendingstype)
     );
 

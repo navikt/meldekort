@@ -33,19 +33,24 @@ interface UkeProps {
   bareArbeid: boolean;
 }
 
-type ArbeidsradProps = UkeProps & FeilIDager & MapStateToProps & MapDispatchToProps;
+type ArbeidsradProps = UkeProps &
+  FeilIDager &
+  MapStateToProps &
+  MapDispatchToProps;
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
   componentDidMount(): void {
-    let rensetUtfylteDager = this.props.innsending.utfylteDager.map((utfyltDag) => {
-      if (utfyltDag.arbeidetTimer === '0') {
-        return {
-          ...utfyltDag,
-          arbeidetTimer: undefined,
-        };
+    let rensetUtfylteDager = this.props.innsending.utfylteDager.map(
+      utfyltDag => {
+        if (utfyltDag.arbeidetTimer === '0') {
+          return {
+            ...utfyltDag,
+            arbeidetTimer: undefined,
+          };
+        }
+        return { ...utfyltDag };
       }
-      return { ...utfyltDag };
-    });
+    );
     this.props.oppdaterDager(rensetUtfylteDager);
   }
 
@@ -58,8 +63,11 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
       } else if (nyVerdi.includes(',')) {
         nyVerdi = nyVerdi.replace(',', '.');
       }
-      const oppdaterteDager = this.props.innsending.utfylteDager.map((dag) => {
-        if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
+      const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
+        if (
+          dag.uke === this.props.ukeNummer &&
+          matchUkedager(dag.dag, ukedag.trim())
+        ) {
           return {
             ...dag,
             arbeidetTimer: event.target.value === '' ? undefined : nyVerdi,
@@ -73,8 +81,11 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
   finnIndex = (ukedag: string): number => {
     let dagObj = null;
-    this.props.innsending.utfylteDager.map((dag) => {
-      if (matchUkedager(dag.dag, ukedag.trim()) && dag.uke === this.props.ukeNummer) {
+    this.props.innsending.utfylteDager.map(dag => {
+      if (
+        matchUkedager(dag.dag, ukedag.trim()) &&
+        dag.uke === this.props.ukeNummer
+      ) {
         dagObj = dag;
       }
     });
@@ -85,7 +96,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
   };
 
   settFelter = () => {
-    return hentUkedagerSomStringListe().map((dag) => {
+    return hentUkedagerSomStringListe().map(dag => {
       let ukedag = konverterUkedag(dag);
       let { utfylteDager } = this.props.innsending;
       let utfyltDagIndex = this.finnIndex(ukedag);
@@ -107,12 +118,14 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
               ? utfylteDager[utfyltDagIndex].arbeidetTimer
               : ''
           }
-          onChange={(event) => {
+          onChange={event => {
             this.setTimer(event, ukedag);
           }}
           feil={
             typeof this.props.feilIDager !== 'undefined'
-              ? this.props.feilIDager.indexOf(ukedag.trim() + this.props.ukeNummer) >= 0
+              ? this.props.feilIDager.indexOf(
+                  ukedag.trim() + this.props.ukeNummer
+                ) >= 0
                 ? { feilmelding: '' }
                 : undefined
               : undefined
@@ -136,7 +149,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
+          <FormattedHTMLMessage
+            id={aap ? forklaringId + '-AAP' : forklaringId}
+          />
         </UtvidetInformasjon>
         <div className="ukedager__mobil">{hentUkedager()}</div>
         <div className="inputrad_arbeid">{this.settFelter()}</div>

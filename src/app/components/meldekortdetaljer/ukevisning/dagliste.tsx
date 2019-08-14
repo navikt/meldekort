@@ -6,7 +6,10 @@ import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
 import Hjelpetekst from './hjelpetekst';
 import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
 
-const sjekkOmDetFinnesFlereElementer = (element: string, meldekortDag: MeldekortDag) => {
+const sjekkOmDetFinnesFlereElementer = (
+  element: string,
+  meldekortDag: MeldekortDag
+) => {
   switch (element) {
     case 'arbeid':
       return meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer;
@@ -19,13 +22,22 @@ const sjekkOmDetFinnesFlereElementer = (element: string, meldekortDag: Meldekort
   }
 };
 
-const returnerAktivitetTekst = (meldekortDag: MeldekortDag, aktivitet: string, tekstid: string) => {
+const returnerAktivitetTekst = (
+  meldekortDag: MeldekortDag,
+  aktivitet: string,
+  tekstid: string
+) => {
   return `${hentIntl()
     .formatMessage({ id: tekstid })
-    .trim()}${sjekkOmDetFinnesFlereElementer(aktivitet, meldekortDag) ? ', ' : ''}`;
+    .trim()}${
+    sjekkOmDetFinnesFlereElementer(aktivitet, meldekortDag) ? ', ' : ''
+  }`;
 };
 
-export const hentDagliste = (meldekortdager: MeldekortDag[], erAap: boolean): JSX.Element[] => {
+export const hentDagliste = (
+  meldekortdager: MeldekortDag[],
+  erAap: boolean
+): JSX.Element[] => {
   const dagListe = [];
   let ukedager = hentUkedagerSomStringListe();
 
@@ -49,17 +61,27 @@ export const hentDagliste = (meldekortdager: MeldekortDag[], erAap: boolean): JS
                                 ${hentIntl()
                                   .formatMessage({ id: 'overskrift.timer' })
                                   .trim()}${
-                    sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag) ? ', ' : ''
+                    sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag)
+                      ? ', '
+                      : ''
                   }`
                 : null}
               {meldekortDag.kurs
-                ? returnerAktivitetTekst(meldekortDag, 'kurs', 'utfylling.tiltak')
+                ? returnerAktivitetTekst(
+                    meldekortDag,
+                    'kurs',
+                    'utfylling.tiltak'
+                  )
                 : null}
               {meldekortDag.syk
                 ? returnerAktivitetTekst(meldekortDag, 'syk', 'utfylling.syk')
                 : null}
               {meldekortDag.annetFravaer
-                ? returnerAktivitetTekst(meldekortDag, '', 'utfylling.ferieFravar')
+                ? returnerAktivitetTekst(
+                    meldekortDag,
+                    '',
+                    'utfylling.ferieFravar'
+                  )
                 : null}
             </span>
           </div>

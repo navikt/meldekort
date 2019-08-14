@@ -10,7 +10,9 @@ import { Innsendingstyper } from '../../app/types/innsending';
 
 it('erMeldekortSendtInnTidligere', () => {
   expect(
-    erMeldekortSendtInnTidligere(mkTEST, [{ meldekortId: 0, kortType: KortType.ELEKTRONISK }])
+    erMeldekortSendtInnTidligere(mkTEST, [
+      { meldekortId: 0, kortType: KortType.ELEKTRONISK },
+    ])
   ).toBe(false);
   expect(
     erMeldekortSendtInnTidligere(mkTEST, [
@@ -51,7 +53,11 @@ it('erAktivtMeldekortGyldig', () => {
     )
   ).toBe(true);
   expect(
-    erAktivtMeldekortGyldig(mkTEST, [{ meldekortId: 0, kortType: KortType.ELEKTRONISK }], null)
+    erAktivtMeldekortGyldig(
+      mkTEST,
+      [{ meldekortId: 0, kortType: KortType.ELEKTRONISK }],
+      null
+    )
   ).toBe(false);
 });
 

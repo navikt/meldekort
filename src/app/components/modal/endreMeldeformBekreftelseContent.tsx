@@ -8,7 +8,9 @@ import { hentIntl } from '../../utils/intlUtil';
 export const endreMeldeformBekreftelseContent = () => {
   return (
     <div className={'modal-overskrift'}>
-      <Undertittel children={<FormattedMessage id={'overskrift.bekreftelse'} />} />
+      <Undertittel
+        children={<FormattedMessage id={'overskrift.bekreftelse'} />}
+      />
       <Veilederpanel fargetema="suksess" svg={<img alt="" src={veileder} />}>
         <div className="modal-tekst">
           <Normaltekst>
@@ -20,7 +22,9 @@ export const endreMeldeformBekreftelseContent = () => {
                             })}`}
           </Normaltekst>
           <Normaltekst>
-            <FormattedMessage id={'endreMeldeform.kvittering.elektronisk.info'} />
+            <FormattedMessage
+              id={'endreMeldeform.kvittering.elektronisk.info'}
+            />
           </Normaltekst>
         </div>
       </Veilederpanel>

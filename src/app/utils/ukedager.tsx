@@ -29,7 +29,10 @@ export const hentUkedagerSomStringListe = (): string[] => {
   ];
 };
 
-export const matchUkedager = (norskUkedag: string, testUkedag: string): boolean => {
+export const matchUkedager = (
+  norskUkedag: string,
+  testUkedag: string
+): boolean => {
   return norskUkedag.trim() === konverterUkedag(testUkedag.trim());
 };
 
@@ -62,5 +65,13 @@ export const hentUkedager = () => {
 };
 
 export const hentNorskeUkedager = (): string[] => {
-  return ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'];
+  return [
+    'Mandag',
+    'Tirsdag',
+    'Onsdag',
+    'Torsdag',
+    'Fredag',
+    'Lørdag',
+    'Søndag',
+  ];
 };

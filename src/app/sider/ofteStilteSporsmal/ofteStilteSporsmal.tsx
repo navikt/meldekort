@@ -24,7 +24,10 @@ interface MapDispatchToProps {
   resetInnsending: () => void;
 }
 
-class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVisningState> {
+class OfteStilteSporsmal extends React.Component<
+  MapDispatchToProps,
+  SporsmalVisningState
+> {
   constructor(props: any) {
     super(props);
     this.state = { valgtSporsmalId: 0 };
@@ -63,7 +66,8 @@ class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVis
 
   handleClick = (sporsmalId: number) => {
     this.setState({
-      valgtSporsmalId: this.state.valgtSporsmalId === sporsmalId ? 0 : sporsmalId,
+      valgtSporsmalId:
+        this.state.valgtSporsmalId === sporsmalId ? 0 : sporsmalId,
     });
   };
 
@@ -87,7 +91,7 @@ class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVis
 
         <img className="oss-ikon" alt="" src={sporrende} />
         <section className="oss-seksjon seksjon">
-          {this.sporsmal().map((sporsmal) => {
+          {this.sporsmal().map(sporsmal => {
             return (
               <EkspanderbartpanelPure
                 key={sporsmal.id}

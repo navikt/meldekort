@@ -24,7 +24,7 @@ interface BegrunnselseProps {
 
 type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
-const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
+const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     props.settBegrunnelse({
       valgtArsak: event.target.value,
@@ -52,7 +52,8 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
             </Undertittel>
             <UtvidetInformasjon>
               {hentIntl().formatHTMLMessage({
-                id: 'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : ''),
+                id:
+                  'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : ''),
               })}
             </UtvidetInformasjon>
           </>
@@ -60,8 +61,11 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = (props) => {
         onChange={handleOnChange}
         value={valgtArsak}
       >
-        <option value={''}> {hentIntl().formatMessage({ id: 'begrunnelse.velgArsak' })}</option>
-        {options.map((opt) => (
+        <option value={''}>
+          {' '}
+          {hentIntl().formatMessage({ id: 'begrunnelse.velgArsak' })}
+        </option>
+        {options.map(opt => (
           <option value={opt.trim()} key={opt}>
             {' '}
             {opt}{' '}

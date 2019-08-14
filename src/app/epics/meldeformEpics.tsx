@@ -1,5 +1,12 @@
 import { AppEpic } from '../store/configureStore';
-import { catchError, concatMap, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  filter,
+  map,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { isActionOf } from 'typesafe-actions';
 import { postEndreMeldeform } from '../api/api';
 import { combineEpics } from 'redux-observable';
@@ -16,17 +23,20 @@ const endreMeldeform: AppEpic = (action$, state$) =>
     switchMap(([action]) =>
       from(postEndreMeldeform(action.payload)).pipe(
         map(MeldeformActions.endreMeldeform.success),
-        catchError((error) =>
-          of(MeldeformActions.endreMeldeform.failure(error), MeldekortActions.apiKallFeilet(error))
+        catchError(error =>
+          of(
+            MeldeformActions.endreMeldeform.failure(error),
+            MeldekortActions.apiKallFeilet(error)
+          )
         )
       )
     )
   );
 
-const handterEndretMeldeformBekreftelse: AppEpic = (action$) =>
+const handterEndretMeldeformBekreftelse: AppEpic = action$ =>
   action$.pipe(
     filter(isActionOf(MeldeformActions.endreMeldeform.success)),
-    concatMap((action) => {
+    concatMap(action => {
       return [
         UiActions.visModal({
           content: () => endreMeldeformBekreftelseContent(),

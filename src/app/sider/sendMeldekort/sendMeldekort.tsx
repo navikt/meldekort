@@ -7,7 +7,12 @@ import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Element, Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import {
+  Element,
+  Ingress,
+  Innholdstittel,
+  Normaltekst,
+} from 'nav-frontend-typografi';
 import {
   formaterDato,
   formaterUkeOgDatoPeriode,
@@ -66,13 +71,16 @@ class SendMeldekort extends React.Component<Props, any> {
     if (typeof this.props.person.meldekort === 'undefined') {
       return [];
     }
-    return this.props.person.meldekort.filter((meldekortObj) => {
+    return this.props.person.meldekort.filter(meldekortObj => {
       if (
         meldekortObj.kortStatus === KortStatus.OPPRE ||
         meldekortObj.kortStatus === KortStatus.SENDT
       ) {
         if (meldekortObj.meldeperiode.kanKortSendes) {
-          return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
+          return !erMeldekortSendtInnTidligere(
+            meldekortObj,
+            this.props.sendteMeldekort
+          );
         }
       }
       return false;
@@ -83,15 +91,21 @@ class SendMeldekort extends React.Component<Props, any> {
     let radliste: MeldekortRad[] = [];
 
     if (this.filtrerMeldekortListe() != null) {
-      this.filtrerMeldekortListe().map((meldekortObj) => {
+      this.filtrerMeldekortListe().map(meldekortObj => {
         if (
           meldekortObj.kortStatus === KortStatus.OPPRE ||
           meldekortObj.kortStatus === KortStatus.SENDT
         ) {
           if (meldekortObj.meldeperiode.kanKortSendes) {
             radliste.push({
-              periode: hentUkePeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
-              dato: hentDatoPeriode(meldekortObj.meldeperiode.fra, meldekortObj.meldeperiode.til),
+              periode: hentUkePeriode(
+                meldekortObj.meldeperiode.fra,
+                meldekortObj.meldeperiode.til
+              ),
+              dato: hentDatoPeriode(
+                meldekortObj.meldeperiode.fra,
+                meldekortObj.meldeperiode.til
+              ),
             });
           }
         }
@@ -109,29 +123,38 @@ class SendMeldekort extends React.Component<Props, any> {
 
   meldekortSomIkkeKanSendesInnEnda = (): Meldekort[] => {
     if (this.filtrerMeldekortListe().length === 0) {
-      return this.props.person.meldekort.filter((mk) => {
+      return this.props.person.meldekort.filter(mk => {
         return (
           !mk.meldeperiode.kanKortSendes &&
-          (mk.kortStatus === KortStatus.OPPRE || mk.kortStatus === KortStatus.SENDT)
+          (mk.kortStatus === KortStatus.OPPRE ||
+            mk.kortStatus === KortStatus.SENDT)
         );
       });
     }
     return [];
   };
 
-  hentMeldingOmMeldekortSomIkkeErKlare = (rows: MeldekortRad[], person: Person) => {
+  hentMeldingOmMeldekortSomIkkeErKlare = (
+    rows: MeldekortRad[],
+    person: Person
+  ) => {
     let meldekortliste = this.filtrerMeldekortListe();
     if (rows.length === 0 && meldekortliste !== undefined) {
       let meldekortId = this.forTidligASende(meldekortliste);
-      let meldekort = meldekortliste.filter((m) => m.meldekortId === meldekortId);
+      let meldekort = meldekortliste.filter(m => m.meldekortId === meldekortId);
       let meldekortSomIkkeKanSendesEnda = this.meldekortSomIkkeKanSendesInnEnda();
-      if (meldekort.length === 0 && meldekortSomIkkeKanSendesEnda.length !== 0) {
+      if (
+        meldekort.length === 0 &&
+        meldekortSomIkkeKanSendesEnda.length !== 0
+      ) {
         return (
           <div className="send-meldekort-varsel">
             <Normaltekst>
               <FormattedMessage id="overskrift.nesteMeldekort" />
               <FormattedMessage id="sendMeldekort.info.innsendingStatus.kanSendes" />
-              {formaterDato(meldekortSomIkkeKanSendesEnda[0].meldeperiode.kortKanSendesFra)}
+              {formaterDato(
+                meldekortSomIkkeKanSendesEnda[0].meldeperiode.kortKanSendesFra
+              )}
             </Normaltekst>
             <Element>
               {formaterUkeOgDatoPeriode(
@@ -183,7 +206,10 @@ class SendMeldekort extends React.Component<Props, any> {
     }
   };
 
-  ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (rows: MeldekortRad[], columns: any) => {
+  ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (
+    rows: MeldekortRad[],
+    columns: any
+  ) => {
     if (this.props.person.meldeform === MeldeForm.IKKE_SATT) {
       return (
         <div className="meldekort-spinner">
@@ -200,8 +226,11 @@ class SendMeldekort extends React.Component<Props, any> {
     if (meldekortListe === undefined) {
       return meldekortId;
     }
-    meldekortListe.map((meldekort) => {
-      if (meldekort.kortStatus === KortStatus.OPPRE || meldekort.kortStatus === KortStatus.SENDT) {
+    meldekortListe.map(meldekort => {
+      if (
+        meldekort.kortStatus === KortStatus.OPPRE ||
+        meldekort.kortStatus === KortStatus.SENDT
+      ) {
         if (!meldekort.meldeperiode.kanKortSendes) {
           meldekortId = meldekort.meldekortId;
         }
@@ -249,7 +278,10 @@ class SendMeldekort extends React.Component<Props, any> {
 
   render() {
     const rows = this.hentMeldekortRaderFraPerson();
-    const columns = [{ key: 'periode', label: 'Periode' }, { key: 'dato', label: 'Dato' }];
+    const columns = [
+      { key: 'periode', label: 'Periode' },
+      { key: 'dato', label: 'Dato' },
+    ];
 
     const ettMeldekort = this.harEttMeldekort();
 
@@ -266,12 +298,19 @@ class SendMeldekort extends React.Component<Props, any> {
           {this.props.baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
           ) : (
-            this.ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(rows, columns)
+            this.ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(
+              rows,
+              columns
+            )
           )}
         </section>
       </main>
     ) : (
-      <Redirect exact={true} from="/send-meldekort" to="/send-meldekort/innsending" />
+      <Redirect
+        exact={true}
+        from="/send-meldekort"
+        to="/send-meldekort/innsending"
+      />
     );
   }
 }

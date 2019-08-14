@@ -19,7 +19,9 @@ export const formaterDato = (dato: Date) => {
 };
 // Format: Uke 1-2
 export const hentUkePeriode = (fraDato: Date, tilDato: Date): string => {
-  return `${ukeTekst()}${hentUkenummerForDato(fraDato)} - ${hentUkenummerForDato(tilDato)}`;
+  return `${ukeTekst()}${hentUkenummerForDato(
+    fraDato
+  )} - ${hentUkenummerForDato(tilDato)}`;
 };
 
 // Format: DD.MM.YYYY - DD.MM.YYYY
@@ -47,29 +49,40 @@ export const hentDatoForUkestartIAndreUke = (periodeSlutt: Date) => {
 };
 
 export const hentDatoForForsteUke = (fraDato: Date): string => {
-  let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(fraDato)}`;
+  let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(
+    fraDato
+  )}`;
   return `${periode}`;
 };
 
 export const hentDatoForAndreUke = (tilDato: Date): string => {
-  let periode = `${hentDatoForUkestartIAndreUke(tilDato)} - ${formaterDato(tilDato)}`;
+  let periode = `${hentDatoForUkestartIAndreUke(tilDato)} - ${formaterDato(
+    tilDato
+  )}`;
   return `${periode}`;
 };
 
 export const hentNummerOgDatoForForsteUke = (fraDato: Date): string => {
   let ukenr = hentUkenummerForDato(fraDato);
-  let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(fraDato)}`;
+  let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(
+    fraDato
+  )}`;
   return `${ukeTekst()}${ukenr} (${periode})`;
 };
 
 export const hentNummerOgDatoForAndreUke = (tilDato: Date): string => {
   let ukenr = hentUkenummerForDato(tilDato);
-  let periode = `${hentDatoForUkestartIAndreUke(tilDato)} - ${formaterDato(tilDato)}`;
+  let periode = `${hentDatoForUkestartIAndreUke(tilDato)} - ${formaterDato(
+    tilDato
+  )}`;
 
   return `${ukeTekst()}${ukenr} (${periode})`;
 };
 
-export const hentNestePeriodeMedUkerOgDato = (fraDato: Date, tilDato: Date): string => {
+export const hentNestePeriodeMedUkerOgDato = (
+  fraDato: Date,
+  tilDato: Date
+): string => {
   let momentNesteFra = moment(fraDato).add(14, 'days');
   let momentNesteTil = moment(tilDato).add(14, 'days');
 

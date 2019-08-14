@@ -18,7 +18,10 @@ interface MapDispatchToProps {
 
 type UIModalWrapperProps = MapStateToProps & MapDispatchToProps;
 
-const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({ modal, skjulModal }) => {
+const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({
+  modal,
+  skjulModal,
+}) => {
   Modal.setAppElement('#meldekort-root');
   return (
     <Modal

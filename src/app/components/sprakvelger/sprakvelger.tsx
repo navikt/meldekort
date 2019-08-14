@@ -20,11 +20,13 @@ const mapStateToProps = ({ intl, locales }: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
   return {
-    updateIntl: (locale: any, messages: any) => dispatch(updateIntl({ locale, messages })),
+    updateIntl: (locale: any, messages: any) =>
+      dispatch(updateIntl({ locale, messages })),
   };
 };
 
-type MergedProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
+type MergedProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
 
 const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
   const erSprakObjValgtSprakObj = sprakobj.label === valgtSprak;
@@ -35,7 +37,10 @@ const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
           <div className="languageToggle__button__flag">
             {sprakobj.label === 'nb' ? <NorskFlaggSVG /> : <EngelskFlaggSVG />}
           </div>
-          <div id={`languagesprakobj_${sprakobj}`} className="languageToggle__button__language">
+          <div
+            id={`languagesprakobj_${sprakobj}`}
+            className="languageToggle__button__language"
+          >
             {sprakobj.tittel}
           </div>
         </MenuItem>
@@ -44,7 +49,7 @@ const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
   );
 };
 
-const Sprakvelger: React.FunctionComponent<MergedProps> = (props) => {
+const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
   const { locale, locs, updateIntl } = props;
   const sprakArray = [locs.nb, locs.en];
 
@@ -73,7 +78,9 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = (props) => {
           </div>
         </Button>
         <Menu className="languageToggle__menu">
-          <ul>{sprakArray.map((sprakObj) => renderMenuItem(sprakObj, locale))}</ul>
+          <ul>
+            {sprakArray.map(sprakObj => renderMenuItem(sprakObj, locale))}
+          </ul>
         </Menu>
       </Wrapper>
     </div>

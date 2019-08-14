@@ -11,7 +11,7 @@ interface Props {
   initialStateName?: string;
 }
 
-const ProviderWrapper: React.FunctionComponent<Props> = (props) => {
+const ProviderWrapper: React.FunctionComponent<Props> = props => {
   let testStore;
   if (props.initialState !== undefined) {
     let { initialState, initialStateName } = props;

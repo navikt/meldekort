@@ -61,7 +61,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
   return {
     leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
-    resetAktivtMeldekort: () => dispatch(AktivtMeldekortActions.resetAktivtMeldekort()),
+    resetAktivtMeldekort: () =>
+      dispatch(AktivtMeldekortActions.resetAktivtMeldekort()),
   };
 };
 

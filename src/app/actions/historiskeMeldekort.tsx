@@ -16,4 +16,6 @@ export const HistoriskeMeldekortActions = {
   )<void, Meldekort[], AxiosError>(),
 };
 
-export type HistoriskeMeldekortActionTypes = ActionType<typeof HistoriskeMeldekortActions>;
+export type HistoriskeMeldekortActionTypes = ActionType<
+  typeof HistoriskeMeldekortActions
+>;

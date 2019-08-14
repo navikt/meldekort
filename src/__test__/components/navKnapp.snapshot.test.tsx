@@ -6,7 +6,11 @@ import NavKnapp, { knappTyper } from '../../app/components/knapp/navKnapp';
 it('NavKnapp', () => {
   const tree = renderer.create(
     <ProviderWrapper>
-      <NavKnapp type={knappTyper.hoved} nestePath={'/test'} tekstid={'naviger.neste'} />
+      <NavKnapp
+        type={knappTyper.hoved}
+        nestePath={'/test'}
+        tekstid={'naviger.neste'}
+      />
     </ProviderWrapper>
   );
   expect(tree).toMatchSnapshot();

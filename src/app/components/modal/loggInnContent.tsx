@@ -7,7 +7,9 @@ import { FormattedMessage } from 'react-intl';
 export const loggInnContent = () => {
   return (
     <div className="modal-overskrift">
-      <Undertittel children={<FormattedMessage id={'melding.loggInn.overskrift'} />} />
+      <Undertittel
+        children={<FormattedMessage id={'melding.loggInn.overskrift'} />}
+      />
       <Veilederpanel fargetema="advarsel" svg={<img alt="" src={veileder} />}>
         <div className="modal-tekst">
           <Normaltekst>

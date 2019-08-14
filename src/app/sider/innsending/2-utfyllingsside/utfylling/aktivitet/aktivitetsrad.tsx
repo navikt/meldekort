@@ -32,12 +32,18 @@ interface RadProps {
   forklaringId: string;
 }
 
-type AktivitetsradProps = RadProps & FeilIDager & MapStateToProps & MapDispatchToProps;
+type AktivitetsradProps = RadProps &
+  FeilIDager &
+  MapStateToProps &
+  MapDispatchToProps;
 
 class Aktivitetsrad extends React.Component<AktivitetsradProps> {
   setVerdi = (ukedag: string) => {
-    const oppdaterteDager = this.props.innsending.utfylteDager.map((dag) => {
-      if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
+    const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
+      if (
+        dag.uke === this.props.ukeNummer &&
+        matchUkedager(dag.dag, ukedag.trim())
+      ) {
         switch (this.props.tekstId) {
           case 'utfylling.tiltak':
             return {
@@ -67,7 +73,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
   isChecked = (ukedag: string): boolean => {
     let valgtDag = this.props.innsending.utfylteDager.filter(
-      (dag) => dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())
+      dag =>
+        dag.uke === this.props.ukeNummer &&
+        matchUkedager(dag.dag, ukedag.trim())
     );
     let checked: boolean = false;
     switch (this.props.tekstId) {
@@ -87,7 +95,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
   };
 
   settFelter = () => {
-    return hentUkedagerSomStringListe().map((dag) => {
+    return hentUkedagerSomStringListe().map(dag => {
       let ukedag = konverterUkedag(dag);
       return (
         <Checkbox
@@ -137,7 +145,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
+          <FormattedHTMLMessage
+            id={aap ? forklaringId + '-AAP' : forklaringId}
+          />
         </UtvidetInformasjon>
         <div className="ukedager__mobil">{hentUkedager()}</div>
         <div className="inputrad">{this.settFelter()}</div>

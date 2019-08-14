@@ -9,7 +9,10 @@ const initialState: MenyState = {
   erApen: true,
 };
 
-const menyReducer = (state: MenyState = initialState, action: MenyActionTypes): MenyState => {
+const menyReducer = (
+  state: MenyState = initialState,
+  action: MenyActionTypes
+): MenyState => {
   switch (action.type) {
     case getType(MenyActions.settValgtMenyPunkt):
       return { ...state, valgtMenyPunkt: action.payload };

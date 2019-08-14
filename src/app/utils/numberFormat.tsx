@@ -6,7 +6,10 @@ export function formaterBelop(belop?: number): string {
     let desimaler = 2;
     let desimalSeparator = ',';
     let tusenSeparator = ' ';
-    let i = parseInt(Math.abs(Number(belop) || 0).toFixed(desimaler), 10).toString();
+    let i = parseInt(
+      Math.abs(Number(belop) || 0).toFixed(desimaler),
+      10
+    ).toString();
     let j = i.length > 3 ? i.length % 3 : 0;
 
     return (

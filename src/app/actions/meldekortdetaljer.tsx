@@ -16,4 +16,6 @@ export const MeldekortdetaljerActions = {
   )<void, Meldekortdetaljer, AxiosError>(),
 };
 
-export type MeldekortdetaljerActionTypes = ActionType<typeof MeldekortdetaljerActions>;
+export type MeldekortdetaljerActionTypes = ActionType<
+  typeof MeldekortdetaljerActions
+>;

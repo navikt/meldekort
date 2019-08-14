@@ -26,10 +26,16 @@ interface MapDispatchToProps {
   toggleMeny: (erApen: boolean) => void;
 }
 
-const MobilMeny: React.FunctionComponent<MobilMenyProps & MapStateToProps & MapDispatchToProps> = (
-  props
-) => {
-  const { settValgtMenyPunkt, toggleMeny, valgtMenyPunkt, menypunkter, erApen } = props;
+const MobilMeny: React.FunctionComponent<
+  MobilMenyProps & MapStateToProps & MapDispatchToProps
+> = props => {
+  const {
+    settValgtMenyPunkt,
+    toggleMeny,
+    valgtMenyPunkt,
+    menypunkter,
+    erApen,
+  } = props;
 
   const onChange = (item: MenyPunkt) => {
     settValgtMenyPunkt(item);
@@ -40,7 +46,7 @@ const MobilMeny: React.FunctionComponent<MobilMenyProps & MapStateToProps & MapD
     <nav className={classNames('mobilMeny')}>
       <Collapse isOpened={props.erApen}>
         <ul className={classNames('mobilMeny-navlist', { open: erApen })}>
-          {menypunkter.map((menypunkt) => (
+          {menypunkter.map(menypunkt => (
             <li
               className={'navlist-item'}
               onClick={() => onChange(menypunkt)}
@@ -59,7 +65,10 @@ const MobilMeny: React.FunctionComponent<MobilMenyProps & MapStateToProps & MapD
           ))}
         </ul>
       </Collapse>
-      <div className={classNames('overlay', { on: erApen })} onClick={() => toggleMeny(false)} />
+      <div
+        className={classNames('overlay', { on: erApen })}
+        onClick={() => toggleMeny(false)}
+      />
     </nav>
   );
 };
