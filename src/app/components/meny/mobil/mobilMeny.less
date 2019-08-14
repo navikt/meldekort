@@ -32,16 +32,23 @@ nav.mobilMeny {
           }
           &:hover:after {
             width: 100%;
-            background: #e9e7e7;
+            font-weight: bold;
+            background: @navBlaLighten60;
           }
 
           &.active {
-            color: black;
             font-weight: bold;
+            color: black;
             &:after {
               height: 4px;
               background: @navBla;
               width: 100%;
+            }
+          }
+          &:focus {
+            color: white;
+            &:after {
+              background: @white;
             }
           }
         }

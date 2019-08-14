@@ -3,7 +3,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates';
+import {hentDatoForAndreUke, hentDatoForForsteUke, hentUkenummerForDato} from '../../../utils/dates';
 import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
@@ -228,7 +228,7 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
             <UkePanel
               ukenummer={Konstanter().andreUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
-              datoTittel={hentDatoForForsteUke(meldeperiode.til)}
+              datoTittel={hentDatoForAndreUke(meldeperiode.til)}
               utfyllingFeil={this.state}
               erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
             />
