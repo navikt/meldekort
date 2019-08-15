@@ -10,7 +10,12 @@ Enzyme.configure({ adapter: new Adapter() });
 it('Ukeliste', () => {
   const tree = shallow(
     <ProviderWrapper>
-      <Ukeliste aktivtMeldekort={mkTEST} erAap={true} meldekortDager={mkDagerTEST} ukeNr={1} />
+      <Ukeliste
+        aktivtMeldekort={mkTEST}
+        erAap={true}
+        meldekortDager={mkDagerTEST}
+        ukeNr={1}
+      />
     </ProviderWrapper>
   );
   expect(tree).toMatchSnapshot();

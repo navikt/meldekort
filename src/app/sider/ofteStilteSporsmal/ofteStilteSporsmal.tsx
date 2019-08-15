@@ -24,7 +24,10 @@ interface MapDispatchToProps {
   resetInnsending: () => void;
 }
 
-class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVisningState> {
+class OfteStilteSporsmal extends React.Component<
+  MapDispatchToProps,
+  SporsmalVisningState
+> {
   constructor(props: any) {
     super(props);
     this.state = { valgtSporsmalId: 0 };
@@ -33,17 +36,38 @@ class OfteStilteSporsmal extends React.Component<MapDispatchToProps, SporsmalVis
 
   sporsmal = (): SporsmalProps[] => {
     return [
-      { overskriftId: 'oss.sende.overskrift', tekstId: 'oss.sende.tekst', id: 1 },
-      { overskriftId: 'oss.frist.overskrift', tekstId: 'oss.frist.tekst', id: 2 },
-      { overskriftId: 'oss.korrigere.overskrift', tekstId: 'oss.korrigere.tekst', id: 3 },
-      { overskriftId: 'oss.pengene.overskrift', tekstId: 'oss.pengene.tekst', id: 4 },
-      { overskriftId: 'oss.utbetalt.overskrift', tekstId: 'oss.utbetalt.tekst', id: 5 },
+      {
+        overskriftId: 'oss.sende.overskrift',
+        tekstId: 'oss.sende.tekst',
+        id: 1,
+      },
+      {
+        overskriftId: 'oss.frist.overskrift',
+        tekstId: 'oss.frist.tekst',
+        id: 2,
+      },
+      {
+        overskriftId: 'oss.korrigere.overskrift',
+        tekstId: 'oss.korrigere.tekst',
+        id: 3,
+      },
+      {
+        overskriftId: 'oss.pengene.overskrift',
+        tekstId: 'oss.pengene.tekst',
+        id: 4,
+      },
+      {
+        overskriftId: 'oss.utbetalt.overskrift',
+        tekstId: 'oss.utbetalt.tekst',
+        id: 5,
+      },
     ];
   };
 
   handleClick = (sporsmalId: number) => {
     this.setState({
-      valgtSporsmalId: this.state.valgtSporsmalId === sporsmalId ? 0 : sporsmalId,
+      valgtSporsmalId:
+        this.state.valgtSporsmalId === sporsmalId ? 0 : sporsmalId,
     });
   };
 

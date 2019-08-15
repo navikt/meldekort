@@ -14,7 +14,9 @@ interface Props {
   }[];
 }
 
-const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({ sporsmalOgSvar }) => {
+const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
+  sporsmalOgSvar,
+}) => {
   const hentTekstForSvar = (svar: boolean) => {
     if (svar) {
       return <FormattedMessage id="diverse.ja" />;

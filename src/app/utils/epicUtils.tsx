@@ -22,5 +22,5 @@ import { FetchState, FetchStatus } from '../types/fetch';
  * )
  */
 export function fromAsync<R>(asyncFn: () => Promise<R>) {
-    return from(asyncFn());
+  return from(asyncFn());
 }

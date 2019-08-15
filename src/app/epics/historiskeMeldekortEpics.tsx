@@ -8,16 +8,21 @@ import { combineEpics } from 'redux-observable';
 import { MeldekortActions } from '../actions/meldekort';
 
 const hentHistoriskeMeldekort: AppEpic = action$ =>
-    action$.pipe(
-        filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request)),
-        switchMap(() =>
-            from(fetchHistoriskeMeldekort()).pipe(
-                map(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success),
-                catchError(error =>
-                    of(HistoriskeMeldekortActions.hentHistoriskeMeldekort.failure(error), MeldekortActions.apiKallFeilet(error))
-                )
-            )
+  action$.pipe(
+    filter(
+      isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request)
+    ),
+    switchMap(() =>
+      from(fetchHistoriskeMeldekort()).pipe(
+        map(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success),
+        catchError(error =>
+          of(
+            HistoriskeMeldekortActions.hentHistoriskeMeldekort.failure(error),
+            MeldekortActions.apiKallFeilet(error)
+          )
         )
-    );
+      )
+    )
+  );
 
 export default combineEpics(hentHistoriskeMeldekort);

@@ -9,7 +9,11 @@ import {
   MeldekortDag,
   Meldeperiode,
 } from '../../app/types/meldekort';
-import { Feilmelding, InnsendingState, UtfyllingFeil } from '../../app/types/innsending';
+import {
+  Feilmelding,
+  InnsendingState,
+  UtfyllingFeil,
+} from '../../app/types/innsending';
 import { hentSporsmalConfig } from '../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 

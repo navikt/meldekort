@@ -47,7 +47,9 @@ interface MapDispatchToProps {
   settMeldekortdetaljerInnsending: (
     meldekortdetaljerInnsending: MeldekortdetaljerInnsending
   ) => void;
-  kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) => void;
+  kontrollerMeldekort: (
+    meldekortdetaljerInnsending: MeldekortdetaljerInnsending
+  ) => void;
   skjulBaksystemFeilmelding: () => void;
 }
 
@@ -88,7 +90,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           : aktivtMeldekort.kortType,
         meldeDato: new Date(),
         lestDato: new Date(),
-        begrunnelse: this.erInnsendingKorrigering() ? innsending.begrunnelse.valgtArsak : '',
+        begrunnelse: this.erInnsendingKorrigering()
+          ? innsending.begrunnelse.valgtArsak
+          : '',
         sporsmal: {
           arbeidet:
             innsending.sporsmalsobjekter[0].checked === undefined
@@ -120,7 +124,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   };
 
   erInnsendingKorrigering = (): boolean => {
-    return this.props.innsending.innsendingstype === Innsendingstyper.korrigering;
+    return (
+      this.props.innsending.innsendingstype === Innsendingstyper.korrigering
+    );
   };
 
   konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
@@ -134,7 +140,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       mottattDato: meldekortdetaljer.meldeDato,
       meldeperiode: aktivtMeldekort.meldeperiode,
       erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
-      korrigerbart: this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
+      korrigerbart:
+        this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
       sesjonsId: 'IKKE I BRUK',
@@ -142,7 +149,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     };
   };
 
-  hentFravaersdager = (meldekortdetaljer: MDetaljer, meldekort: Meldekort): Fravaer[] => {
+  hentFravaersdager = (
+    meldekortdetaljer: MDetaljer,
+    meldekort: Meldekort
+  ): Fravaer[] => {
     let fravar: Fravaer[] = [];
     meldekortdetaljer.sporsmal.meldekortDager.map(meldekortDag => {
       let dato = kalkulerDato(meldekort.meldeperiode.fra, meldekortDag.dag);
@@ -186,7 +196,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       meldekortdager.push({
         dag: dagTeller,
         arbeidetTimerSum:
-          typeof utfyltDag.arbeidetTimer === 'undefined' ? 0 : Number(utfyltDag.arbeidetTimer),
+          typeof utfyltDag.arbeidetTimer === 'undefined'
+            ? 0
+            : Number(utfyltDag.arbeidetTimer),
         syk: utfyltDag.syk,
         kurs: utfyltDag.kurs,
         annetFravaer: utfyltDag.annetFravaer,
@@ -198,7 +210,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   settChecked = () => {
     let detaljer = this.state.meldekortdetaljer;
-    detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer.sporsmal.signatur;
+    detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer
+      .sporsmal.signatur;
     if (detaljer.meldekortdetaljer.sporsmal.signatur) {
       this.setState({ feilmelding: '' });
     }
@@ -217,7 +230,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     } else {
       this.setState({ senderMeldekort: true });
       let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
-      this.props.oppdaterMeldekortdetaljer(this.state.meldekortdetaljer.meldekortdetaljer);
+      this.props.oppdaterMeldekortdetaljer(
+        this.state.meldekortdetaljer.meldekortdetaljer
+      );
       this.props.settMeldekortdetaljerInnsending(mDetaljerInn);
       this.props.kontrollerMeldekort(mDetaljerInn);
     }
@@ -226,11 +241,19 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   hoppOverUtfylling = () => {
     let { sporsmal } = this.props.innsending.meldekortdetaljer;
-    return !sporsmal.arbeidet && !sporsmal.kurs && !sporsmal.syk && !sporsmal.annetFravaer;
+    return (
+      !sporsmal.arbeidet &&
+      !sporsmal.kurs &&
+      !sporsmal.syk &&
+      !sporsmal.annetFravaer
+    );
   };
 
   sjekkBaksystemFeilmelding() {
-    if (this.props.baksystemFeilmelding.visFeilmelding && this.state.senderMeldekort) {
+    if (
+      this.props.baksystemFeilmelding.visFeilmelding &&
+      this.state.senderMeldekort
+    ) {
       scrollTilElement(undefined, 'auto');
       this.setState({ senderMeldekort: false });
     }
@@ -245,9 +268,17 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     let aap = meldegruppe === Meldegruppe.ATTF;
     if (typeof valideringsResultat !== 'undefined') {
       return valideringsResultat.status === 'FEIL' ? (
-        <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="utfylling" />
+        <Redirect
+          exact={true}
+          from="send-meldekort/innsending/bekreft"
+          to="utfylling"
+        />
       ) : (
-        <Redirect exact={true} from="send-meldekort/innsending/bekreft" to="kvittering" />
+        <Redirect
+          exact={true}
+          from="send-meldekort/innsending/bekreft"
+          to="kvittering"
+        />
       );
     } else {
       this.sjekkBaksystemFeilmelding();
@@ -257,7 +288,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         this.props.innsending.innsendingstype
       ) ? (
         <main>
-          {this.props.baksystemFeilmelding.visFeilmelding ? <UIAlertstripeWrapper /> : null}
+          {this.props.baksystemFeilmelding.visFeilmelding ? (
+            <UIAlertstripeWrapper />
+          ) : null}
           <section className={'seksjon'}>
             <AlertStripe type={'advarsel'}>
               <span>
@@ -283,7 +316,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             </Innholdstittel>
             <Sprakvelger />
           </section>
-          <Meldekortdetaljer meldekortdetaljer={meldekortdetaljer} erAap={aap} />
+          <Meldekortdetaljer
+            meldekortdetaljer={meldekortdetaljer}
+            erAap={aap}
+          />
           <BekreftCheckboksPanel
             className={'bekreftInfo'}
             onChange={() => this.settChecked()}
@@ -292,7 +328,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             feil={feilmelding === '' ? undefined : { feilmelding: feilmelding }}
           >
             <Normaltekst>
-              <FormattedHTMLMessage id={'utfylling.bekreft' + (aap ? '-AAP' : '')} />
+              <FormattedHTMLMessage
+                id={'utfylling.bekreft' + (aap ? '-AAP' : '')}
+              />
             </Normaltekst>
           </BekreftCheckboksPanel>
           <section className="seksjon flex-innhold sentrert">
@@ -309,7 +347,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
               <NavKnapp
                 type={knappTyper.standard}
                 nestePath={
-                  this.hoppOverUtfylling() ? '/innsending/sporsmal' : '/innsending/utfylling'
+                  this.hoppOverUtfylling()
+                    ? '/innsending/sporsmal'
+                    : '/innsending/utfylling'
                 }
                 tekstid={'naviger.forrige'}
                 className={'navigasjonsknapp'}
@@ -344,11 +384,24 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     oppdaterMeldekortdetaljer: (mdetaljer: MDetaljer) =>
       dispatch(InnsendingActions.oppdaterMeldekortdetaljer(mdetaljer)),
-    settMeldekortdetaljerInnsending: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
-      dispatch(InnsendingActions.settMeldekortdetaljerInnsending(meldekortdetaljerInnsending)),
-    kontrollerMeldekort: (meldekortdetaljerInnsending: MeldekortdetaljerInnsending) =>
-      dispatch(InnsendingActions.kontrollerMeldekort.request(meldekortdetaljerInnsending)),
-    skjulBaksystemFeilmelding: () => dispatch(UiActions.skjulBaksystemFeilmelding()),
+    settMeldekortdetaljerInnsending: (
+      meldekortdetaljerInnsending: MeldekortdetaljerInnsending
+    ) =>
+      dispatch(
+        InnsendingActions.settMeldekortdetaljerInnsending(
+          meldekortdetaljerInnsending
+        )
+      ),
+    kontrollerMeldekort: (
+      meldekortdetaljerInnsending: MeldekortdetaljerInnsending
+    ) =>
+      dispatch(
+        InnsendingActions.kontrollerMeldekort.request(
+          meldekortdetaljerInnsending
+        )
+      ),
+    skjulBaksystemFeilmelding: () =>
+      dispatch(UiActions.skjulBaksystemFeilmelding()),
   };
 };
 

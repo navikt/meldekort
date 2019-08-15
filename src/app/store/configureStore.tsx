@@ -1,7 +1,17 @@
 import storage from 'redux-persist/lib/storage/session';
 
-import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router';
+import {
+  Action,
+  applyMiddleware,
+  combineReducers,
+  compose,
+  createStore,
+} from 'redux';
+import {
+  connectRouter,
+  routerMiddleware,
+  RouterState,
+} from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { persistStore, persistReducer } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
@@ -14,9 +24,14 @@ import meldekortdetaljerReducer, {
   MeldekortdetaljerState,
 } from '../reducers/meldekortdetaljerReducer';
 import personReducer from '../reducers/personReducer';
-import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
+import personStatusReducer, {
+  PersonStatusState,
+} from '../reducers/personStatusReducer';
 import tekster from '../tekster/kompilerte-tekster';
-import { default as localesReducer, LocalesState } from '../reducers/localesReducer';
+import {
+  default as localesReducer,
+  LocalesState,
+} from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
 
 import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
@@ -37,7 +52,9 @@ import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, MeldekortState } from '../types/meldekort';
-import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
+import personInfoReducer, {
+  PersonInfoState,
+} from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
 
@@ -131,7 +148,10 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const appliedMiddleware = applyMiddleware(...middleware, routerMiddleware(history));
+const appliedMiddleware = applyMiddleware(
+  ...middleware,
+  routerMiddleware(history)
+);
 
 const store = createStore(
   persistedReducer,

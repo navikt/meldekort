@@ -23,7 +23,11 @@ import { isEmpty } from 'ramda';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
-import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
+import {
+  formaterDato,
+  formaterUkeOgDatoPeriode,
+  hentTid,
+} from '../../../utils/dates';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import Environment from '../../../utils/env';
 import PrintKnapp from '../../../components/print/printKnapp';
@@ -58,7 +62,9 @@ interface MapDispatchToProps {
   hentPersonInfo: () => void;
 }
 
-type KvitteringsProps = RouteComponentProps & MapDispatchToProps & MapStateToProps;
+type KvitteringsProps = RouteComponentProps &
+  MapDispatchToProps &
+  MapStateToProps;
 
 class Kvittering extends React.Component<KvitteringsProps> {
   componentDidMount() {
@@ -67,7 +73,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
     let oppdatertSendteMeldekort = this.props.sendteMeldekort;
     let { meldekortId, kortType } = this.props.aktivtMeldekort;
     oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
-    this.props.leggTilInnsendtMeldekort(oppdatertSendteMeldekort.sendteMeldekort);
+    this.props.leggTilInnsendtMeldekort(
+      oppdatertSendteMeldekort.sendteMeldekort
+    );
   }
 
   returnerMeldekortListaMedFlereMeldekortIgjen = (
@@ -97,9 +105,12 @@ class Kvittering extends React.Component<KvitteringsProps> {
     urlParams.pop();
     const nestePath = urlParams.join('/');
     const meldekort = this.meldekortSomKanSendes(person.meldekort);
-    const etterregistrerteMeldekort = this.meldekortSomKanSendes(person.etterregistrerteMeldekort);
+    const etterregistrerteMeldekort = this.meldekortSomKanSendes(
+      person.etterregistrerteMeldekort
+    );
     const harBrukerFlereMeldekort = meldekort.length > 0;
-    const harBrukerFlereEtterregistrerteMeldekort = etterregistrerteMeldekort.length > 0;
+    const harBrukerFlereEtterregistrerteMeldekort =
+      etterregistrerteMeldekort.length > 0;
     const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(
       meldekort,
       Innsendingstyper.innsending,
@@ -171,13 +182,17 @@ class Kvittering extends React.Component<KvitteringsProps> {
     if (nesteAktivtMeldekort !== undefined) {
       return hentIntl().formatMessage(
         { id: 'sendt.meldekortKanSendes' },
-        { [0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra) }
+        {
+          [0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
+        }
       );
     } else if (
       this.props.innsendingstype === Innsendingstyper.innsending &&
       this.props.person.meldekort.length > 0
     ) {
-      let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(this.props.person.meldekort);
+      let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(
+        this.props.person.meldekort
+      );
       if (mkListe.length > 0) {
         return hentIntl().formatMessage(
           { id: 'sendt.meldekortKanSendes' },
@@ -200,10 +215,13 @@ class Kvittering extends React.Component<KvitteringsProps> {
     }
   };
 
-  hentMeldekortSomIkkeKanSendesEnda = (meldekortListe: Meldekort[]): Meldekort[] => {
+  hentMeldekortSomIkkeKanSendesEnda = (
+    meldekortListe: Meldekort[]
+  ): Meldekort[] => {
     return meldekortListe.filter(
       meldekort =>
-        (meldekort.kortStatus === KortStatus.SENDT || meldekort.kortStatus === KortStatus.OPPRE) &&
+        (meldekort.kortStatus === KortStatus.SENDT ||
+          meldekort.kortStatus === KortStatus.OPPRE) &&
         !meldekort.meldeperiode.kanKortSendes
     );
   };
@@ -237,7 +255,10 @@ class Kvittering extends React.Component<KvitteringsProps> {
           </span>
         </Ingress>
         <Ingress>
-          <span>{hentIntl().formatMessage({ id: 'meldekort.for.perioden' }) + ukeOgPeriode}</span>
+          <span>
+            {hentIntl().formatMessage({ id: 'meldekort.for.perioden' }) +
+              ukeOgPeriode}
+          </span>
         </Ingress>
         <Ingress>
           <span>{meldekortErMottatt}</span>
@@ -251,7 +272,10 @@ class Kvittering extends React.Component<KvitteringsProps> {
     );
   };
 
-  innhold = (nesteAktivtMeldekort?: Meldekort, nesteInnsendingstype?: Innsendingstyper) => {
+  innhold = (
+    nesteAktivtMeldekort?: Meldekort,
+    nesteInnsendingstype?: Innsendingstyper
+  ) => {
     const { innsendingstype, innsending, aktivtMeldekort } = this.props;
     return (
       <>
@@ -264,7 +288,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        <section className="seksjon">{this.visOppsummeringsTekster(nesteAktivtMeldekort!)}</section>
+        <section className="seksjon">
+          {this.visOppsummeringsTekster(nesteAktivtMeldekort!)}
+        </section>
         <section className="seksjon">
           <Meldekortdetaljer
             meldekortdetaljer={innsending.meldekortdetaljer}

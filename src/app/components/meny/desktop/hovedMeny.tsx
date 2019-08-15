@@ -35,7 +35,10 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
       <div className="mainNav__wrapper">
         <ul>
           {menypunkter
-            .filter((item: MenyPunkt) => item.urlparam && item.urlparam !== '/new-project')
+            .filter(
+              (item: MenyPunkt) =>
+                item.urlparam && item.urlparam !== '/new-project'
+            )
             .map((item: MenyPunkt, index: any) => (
               <li key={item.tittel} className={'hovedMeny-item'}>
                 <Lenke

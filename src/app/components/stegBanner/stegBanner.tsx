@@ -7,44 +7,44 @@ import { Router } from '../../types/router';
 import { hentIntl } from '../../utils/intlUtil';
 
 interface MapStateToProps {
-    router: Router;
+  router: Router;
 }
 
-type StegBannerProps =  MapStateToProps;
+type StegBannerProps = MapStateToProps;
 
-const StegBanner: React.FunctionComponent<StegBannerProps> = (props) => {
+const StegBanner: React.FunctionComponent<StegBannerProps> = props => {
+  let stegobjekter = [];
+  const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
+  const pathParams = props.router.location.pathname.split('/');
+  const aktivtSteg = routes.findIndex(
+    steg => steg === pathParams[pathParams.length - 1]
+  );
 
-    let stegobjekter = [];
-    const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
-    const pathParams = props.router.location.pathname.split('/');
-    const aktivtSteg = routes.findIndex( steg => steg === pathParams[pathParams.length - 1]);
+  for (let i = 1; i < 5; i++) {
+    const stegobj = Object.assign({
+      index: i,
+      label: hentIntl().formatMessage({ id: 'overskrift.steg' + i }),
+    });
+    stegobjekter.push(stegobj);
+  }
 
-    for (let i = 1; i < 5; i++) {
-        const stegobj = Object.assign(
-            {
-                'index': i,
-                'label': hentIntl().formatMessage({id: 'overskrift.steg' + i}),
-            });
-        stegobjekter.push(stegobj);
-    }
-
-    return (
-        <section className="seksjon stegbanner noPrint">
-            <Stegindikator
-                steg={stegobjekter}
-                aktivtSteg={aktivtSteg}
-                kompakt={true}
-                visLabel={true}
-                autoResponsiv={true}
-            />
-        </section>
-    );
+  return (
+    <section className="seksjon stegbanner noPrint">
+      <Stegindikator
+        steg={stegobjekter}
+        aktivtSteg={aktivtSteg}
+        kompakt={true}
+        visLabel={true}
+        autoResponsiv={true}
+      />
+    </section>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        router: selectRouter(state),
-    };
+  return {
+    router: selectRouter(state),
+  };
 };
 
 export default connect(mapStateToProps)(StegBanner);

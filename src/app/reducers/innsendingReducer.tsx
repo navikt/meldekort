@@ -1,5 +1,8 @@
 import { InnsendingState } from '../types/innsending';
-import { InnsendingActions, InnsendingActionsTypes } from '../actions/innsending';
+import {
+  InnsendingActions,
+  InnsendingActionsTypes,
+} from '../actions/innsending';
 import { getType } from 'typesafe-actions';
 import { hentSporsmalConfig } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
@@ -83,7 +86,11 @@ const innsendingReducer = (
       return { ...state, begrunnelse: action.payload };
 
     case getType(InnsendingActions.settValideringsresultat):
-      return { ...state, ...action.payload, valideringsResultat: action.payload };
+      return {
+        ...state,
+        ...action.payload,
+        valideringsResultat: action.payload,
+      };
 
     case getType(InnsendingActions.kontrollerMeldekort.success):
       return { ...state, valideringsResultat: action.payload };

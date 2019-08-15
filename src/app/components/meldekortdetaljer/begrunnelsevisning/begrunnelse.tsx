@@ -8,7 +8,7 @@ interface Props {
   begrunnelse: string;
 }
 
-const BegrunnelseVisning: React.FunctionComponent<Props> = props => {
+const BegrunnelseVisning: React.FunctionComponent<Props> = (props) => {
   if (typeof props.begrunnelse !== 'undefined') {
     const begrunnelse = String(props.begrunnelse);
     if (begrunnelse.length > 0) {

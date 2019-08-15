@@ -62,7 +62,10 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         meldekortObj.kortStatus === KortStatus.SENDT
       ) {
         if (meldekortObj.meldeperiode.kanKortSendes) {
-          return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
+          return !erMeldekortSendtInnTidligere(
+            meldekortObj,
+            this.props.sendteMeldekort
+          );
         }
       }
       return false;
@@ -104,7 +107,10 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
 
   render() {
     const rows = this.hentMeldekortRaderFraPerson();
-    const columns = [{ key: 'periode', label: 'Periode' }, { key: 'dato', label: 'Dato' }];
+    const columns = [
+      { key: 'periode', label: 'Periode' },
+      { key: 'dato', label: 'Dato' },
+    ];
     const ettMeldekort = this.harEttMeldekort();
     return this.props.person.meldeform === MeldeForm.IKKE_SATT ? (
       <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
@@ -114,7 +120,9 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel className="seksjon">
-            {hentIntl().formatMessage({ id: 'overskrift.etterregistrering.innsending' })}
+            {hentIntl().formatMessage({
+              id: 'overskrift.etterregistrering.innsending',
+            })}
           </Innholdstittel>
           <Sprakvelger />
         </section>

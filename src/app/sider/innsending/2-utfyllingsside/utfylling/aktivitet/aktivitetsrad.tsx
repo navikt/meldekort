@@ -32,12 +32,18 @@ interface RadProps {
   forklaringId: string;
 }
 
-type AktivitetsradProps = RadProps & FeilIDager & MapStateToProps & MapDispatchToProps;
+type AktivitetsradProps = RadProps &
+  FeilIDager &
+  MapStateToProps &
+  MapDispatchToProps;
 
 class Aktivitetsrad extends React.Component<AktivitetsradProps> {
   setVerdi = (ukedag: string) => {
     const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
-      if (dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())) {
+      if (
+        dag.uke === this.props.ukeNummer &&
+        matchUkedager(dag.dag, ukedag.trim())
+      ) {
         switch (this.props.tekstId) {
           case 'utfylling.tiltak':
             return {
@@ -67,7 +73,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
   isChecked = (ukedag: string): boolean => {
     let valgtDag = this.props.innsending.utfylteDager.filter(
-      dag => dag.uke === this.props.ukeNummer && matchUkedager(dag.dag, ukedag.trim())
+      dag =>
+        dag.uke === this.props.ukeNummer &&
+        matchUkedager(dag.dag, ukedag.trim())
     );
     let checked: boolean = false;
     switch (this.props.tekstId) {
@@ -110,11 +118,20 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
   hentFarge = () => {
     switch (this.props.tekstId) {
       case 'utfylling.tiltak':
-        return { borderLeftColor: '#ffe9cc', backgroundColor: this.props.feil ? '#e79999' : '' };
+        return {
+          borderLeftColor: '#ffe9cc',
+          backgroundColor: this.props.feil ? '#e79999' : '',
+        };
       case 'utfylling.syk':
-        return { borderLeftColor: '#6ab889', backgroundColor: this.props.feil ? '#e79999' : '' };
+        return {
+          borderLeftColor: '#6ab889',
+          backgroundColor: this.props.feil ? '#e79999' : '',
+        };
       case 'utfylling.ferieFravar':
-        return { borderLeftColor: '#c1b5d0', backgroundColor: this.props.feil ? '#e79999' : '' };
+        return {
+          borderLeftColor: '#c1b5d0',
+          backgroundColor: this.props.feil ? '#e79999' : '',
+        };
       default:
         break;
     }
@@ -128,7 +145,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage id={aap ? forklaringId + '-AAP' : forklaringId} />
+          <FormattedHTMLMessage
+            id={aap ? forklaringId + '-AAP' : forklaringId}
+          />
         </UtvidetInformasjon>
         <div className="ukedager__mobil">{hentUkedager()}</div>
         <div className="inputrad">{this.settFelter()}</div>

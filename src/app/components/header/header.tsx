@@ -40,7 +40,8 @@ class Header extends React.Component<HeaderProps> {
     const { person } = this.props;
     if (
       person.meldeform !== prevProps.person.meldeform ||
-      person.etterregistrerteMeldekort !== prevProps.person.etterregistrerteMeldekort
+      person.etterregistrerteMeldekort !==
+        prevProps.person.etterregistrerteMeldekort
     ) {
       this.oppdatertMeny();
     }
@@ -52,7 +53,10 @@ class Header extends React.Component<HeaderProps> {
       if (menypunkt.tittel === 'endreMeldeform') {
         return { ...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR };
       } else if (menypunkt.tittel === 'etterregistrering') {
-        return { ...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort) };
+        return {
+          ...menypunkt,
+          disabled: isEmpty(person.etterregistrerteMeldekort),
+        };
       }
       return menypunkt;
     });
@@ -60,15 +64,20 @@ class Header extends React.Component<HeaderProps> {
   };
 
   hentMenypunkter = () => {
-    return this.props.meny.alleMenyPunkter.filter(menypunkt => !menypunkt.disabled);
+    return this.props.meny.alleMenyPunkter.filter(
+      menypunkt => !menypunkt.disabled
+    );
   };
 
   render() {
     const { router, tittel } = this.props;
     const params = router.location.pathname.split('/');
     const harPathInnsending =
-      params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korriger';
-    const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
+      params[params.length - 2] === 'innsending' ||
+      params[params.length - 2] === 'korriger';
+    const headerClass = harPathInnsending
+      ? 'meldekort-header__innsending'
+      : 'meldekort-header';
     const stylingMedIE = classNames(headerClass, {
       ie11: isIE,
     });
@@ -81,9 +90,17 @@ class Header extends React.Component<HeaderProps> {
             </div>
             <MobilMenyToggle />
           </div>
-          {!harPathInnsending ? <MobilMeny menypunkter={this.hentMenypunkter()} /> : <></>}
+          {!harPathInnsending ? (
+            <MobilMeny menypunkter={this.hentMenypunkter()} />
+          ) : (
+            <></>
+          )}
         </div>
-        {!harPathInnsending ? <HovedMeny menypunkter={this.hentMenypunkter()} /> : <></>}
+        {!harPathInnsending ? (
+          <HovedMeny menypunkter={this.hentMenypunkter()} />
+        ) : (
+          <></>
+        )}
       </header>
     );
   }

@@ -8,40 +8,42 @@ import { UiActions } from '../../actions/ui';
 import { connect } from 'react-redux';
 
 interface MapStateToProps {
-    baksystemFeilmelding: BaksystemFeilmelding;
+  baksystemFeilmelding: BaksystemFeilmelding;
 }
 
 interface MapDispatchToProps {
-    skjulFeilmelding: () => void;
+  skjulFeilmelding: () => void;
 }
 
 type UIAlertstripeWrapperProps = MapStateToProps & MapDispatchToProps;
 
-const UIAlertstripeWrapper: React.FunctionComponent<UIAlertstripeWrapperProps> = ({ baksystemFeilmelding, skjulFeilmelding }) => {
-    return (
-        <div className={'alertstripe_wrapper'}>
-            {baksystemFeilmelding.visFeilmelding ?
-                <AlertStripe type="feil">
-                    <div>{baksystemFeilmelding.content()}</div>
-                </AlertStripe> : null
-            }
-        </div>
-    );
+const UIAlertstripeWrapper: React.FunctionComponent<
+  UIAlertstripeWrapperProps
+> = ({ baksystemFeilmelding, skjulFeilmelding }) => {
+  return (
+    <div className={'alertstripe_wrapper'}>
+      {baksystemFeilmelding.visFeilmelding ? (
+        <AlertStripe type="feil">
+          <div>{baksystemFeilmelding.content()}</div>
+        </AlertStripe>
+      ) : null}
+    </div>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        baksystemFeilmelding: selectFeilmelding(state),
-    };
+  return {
+    baksystemFeilmelding: selectFeilmelding(state),
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        skjulFeilmelding: () => dispatch(UiActions.skjulBaksystemFeilmelding()),
-    };
+  return {
+    skjulFeilmelding: () => dispatch(UiActions.skjulBaksystemFeilmelding()),
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UIAlertstripeWrapper);

@@ -7,12 +7,14 @@ export enum AktivtMeldekortTypeKeys {
 }
 
 export const AktivtMeldekortActions = {
-  oppdaterAktivtMeldekort: createStandardAction(AktivtMeldekortTypeKeys.LEGG_TIL_AKTIVT_MELDEKORT)<
-    Meldekort
-  >(),
-  resetAktivtMeldekort: createStandardAction(AktivtMeldekortTypeKeys.RESET_AKTIVT_MELDEKORT)<
-    void
-  >(),
+  oppdaterAktivtMeldekort: createStandardAction(
+    AktivtMeldekortTypeKeys.LEGG_TIL_AKTIVT_MELDEKORT
+  )<Meldekort>(),
+  resetAktivtMeldekort: createStandardAction(
+    AktivtMeldekortTypeKeys.RESET_AKTIVT_MELDEKORT
+  )<void>(),
 };
 
-export type AktivtMeldekortActionsTypes = ActionType<typeof AktivtMeldekortActions>;
+export type AktivtMeldekortActionsTypes = ActionType<
+  typeof AktivtMeldekortActions
+>;

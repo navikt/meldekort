@@ -3,44 +3,50 @@ import classNames from 'classnames';
 import { Collapse } from 'react-collapse';
 
 export interface OwnProps {
-    /** Innholdet som skal vises */
-    children: React.ReactNode;
-    /** Overstyre state for om den skal vises eller ikke */
-    erApen?: boolean;
-    /** Default off */
-    ariaLive?: 'assertive' | 'polite' | 'off';
-    /** Om skjul/vis skal animeres. Default true */
-    animert?: boolean;
-    /** Om noe av innholdet er ekspandertbart */
-    harEkspanderbartInnhold?: boolean;
+  /** Innholdet som skal vises */
+  children: React.ReactNode;
+  /** Overstyre state for om den skal vises eller ikke */
+  erApen?: boolean;
+  /** Default off */
+  ariaLive?: 'assertive' | 'polite' | 'off';
+  /** Om skjul/vis skal animeres. Default true */
+  animert?: boolean;
+  /** Om noe av innholdet er ekspandertbart */
+  harEkspanderbartInnhold?: boolean;
 }
 
 const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
-    children,
-    animert = true,
-    harEkspanderbartInnhold = false,
-    erApen = false,
-    ariaLive = 'off'
+  children,
+  animert = true,
+  harEkspanderbartInnhold = false,
+  erApen = false,
+  ariaLive = 'off',
 }) => {
-    const content = (
-        <div aria-live={ariaLive}>
-            {erApen ? <div className={'ekspanderbart__tekst'}>{children}</div> : <div />}
-        </div>);
+  const content = (
+    <div aria-live={ariaLive}>
+      {erApen ? (
+        <div className={'ekspanderbart__tekst'}>{children}</div>
+      ) : (
+        <div />
+      )}
+    </div>
+  );
 
-    if (!animert) {
-        return content;
-    }
-    return (
-        <Collapse
-            isOpened={erApen}
-            springConfig={{ stiffness: 250, damping: 30 }}
-            className={classNames('ekspanderbartInnhold', {
-                'ekspanderbartInnhold--apen': erApen})}
-            hasNestedCollapse={harEkspanderbartInnhold}
-        >
-            {content}
-        </Collapse>
-    );
+  if (!animert) {
+    return content;
+  }
+  return (
+    <Collapse
+      isOpened={erApen}
+      springConfig={{ stiffness: 250, damping: 30 }}
+      className={classNames('ekspanderbartInnhold', {
+        'ekspanderbartInnhold--apen': erApen,
+      })}
+      hasNestedCollapse={harEkspanderbartInnhold}
+    >
+      {content}
+    </Collapse>
+  );
 };
 
 export default EkspanderbartInnhold;

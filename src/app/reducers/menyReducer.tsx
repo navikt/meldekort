@@ -4,26 +4,28 @@ import { MenyActions, MenyActionTypes } from '../actions/meny';
 import { getType } from 'typesafe-actions';
 
 const initialState: MenyState = {
-    valgtMenyPunkt: menyConfig[0],
-    alleMenyPunkter: menyConfig,
-    erApen: true,
+  valgtMenyPunkt: menyConfig[0],
+  alleMenyPunkter: menyConfig,
+  erApen: true,
 };
 
-const menyReducer = (state: MenyState = initialState,
-                     action: MenyActionTypes): MenyState => {
-    switch (action.type) {
-        case getType(MenyActions.settValgtMenyPunkt):
-            return { ...state, valgtMenyPunkt: action.payload };
+const menyReducer = (
+  state: MenyState = initialState,
+  action: MenyActionTypes
+): MenyState => {
+  switch (action.type) {
+    case getType(MenyActions.settValgtMenyPunkt):
+      return { ...state, valgtMenyPunkt: action.payload };
 
-        case getType(MenyActions.settAktiveMenyPunkter):
-            return { ...state, alleMenyPunkter: action.payload };
+    case getType(MenyActions.settAktiveMenyPunkter):
+      return { ...state, alleMenyPunkter: action.payload };
 
-        case getType(MenyActions.toggleMeny):
-            return { ...state, erApen: action.payload };
+    case getType(MenyActions.toggleMeny):
+      return { ...state, erApen: action.payload };
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };
 
 export default menyReducer;

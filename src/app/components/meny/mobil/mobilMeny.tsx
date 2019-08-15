@@ -29,7 +29,13 @@ interface MapDispatchToProps {
 const MobilMeny: React.FunctionComponent<
   MobilMenyProps & MapStateToProps & MapDispatchToProps
 > = props => {
-  const { settValgtMenyPunkt, toggleMeny, valgtMenyPunkt, menypunkter, erApen } = props;
+  const {
+    settValgtMenyPunkt,
+    toggleMeny,
+    valgtMenyPunkt,
+    menypunkter,
+    erApen,
+  } = props;
 
   const onChange = (item: MenyPunkt) => {
     settValgtMenyPunkt(item);
@@ -59,7 +65,10 @@ const MobilMeny: React.FunctionComponent<
           ))}
         </ul>
       </Collapse>
-      <div className={classNames('overlay', { on: erApen })} onClick={() => toggleMeny(false)} />
+      <div
+        className={classNames('overlay', { on: erApen })}
+        onClick={() => toggleMeny(false)}
+      />
     </nav>
   );
 };

@@ -33,6 +33,8 @@ export const erAktivtMeldekortGyldig = (
   return false;
 };
 
-export const erBrukerRegistrertIArena = (arbeidssokerStatus: string): boolean => {
+export const erBrukerRegistrertIArena = (
+  arbeidssokerStatus: string
+): boolean => {
   return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
 };

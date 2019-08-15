@@ -25,7 +25,11 @@ const handterFeiletApiKall: AppEpic = action$ =>
     filter(isActionOf(MeldekortActions.apiKallFeilet)),
     concatMap(action => {
       const axiosResponse: AxiosResponse | undefined = action.payload.response;
-      if (axiosResponse && axiosResponse.status !== undefined && axiosResponse.status === 401) {
+      if (
+        axiosResponse &&
+        axiosResponse.status !== undefined &&
+        axiosResponse.status === 401
+      ) {
         updateIntl({ locale: 'nb', messages: tekster.nb });
 
         return [
@@ -33,7 +37,9 @@ const handterFeiletApiKall: AppEpic = action$ =>
             content: () => loggInnContent(),
             onRequestClose: () => {
               window.location.assign(
-                `${Environment().loginUrl}&redirect=${window.location.origin}/meldekort`
+                `${Environment().loginUrl}&redirect=${
+                  window.location.origin
+                }/meldekort`
               );
             },
             visModal: true,
@@ -92,7 +98,9 @@ const fjernFeilmelding: AppEpic = action$ =>
 
 const sjekkOmBrukerHarTidligereMeldekort: AppEpic = action$ =>
   action$.pipe(
-    filter(isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)),
+    filter(
+      isActionOf(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)
+    ),
     concatMap(action => {
       if (action.payload.length === 0) {
         return [
@@ -117,7 +125,10 @@ const hentInfomelding: AppEpic = action$ =>
       from(fetchInfomelding()).pipe(
         map(MeldekortActions.hentInfomelding.success),
         catchError(error =>
-          of(MeldekortActions.hentInfomelding.failure(error), MeldekortActions.apiKallFeilet(error))
+          of(
+            MeldekortActions.hentInfomelding.failure(error),
+            MeldekortActions.apiKallFeilet(error)
+          )
         )
       )
     )
