@@ -8,18 +8,20 @@ interface Props {
   begrunnelse: string;
 }
 
-const BegrunnelseVisning: React.FunctionComponent<Props> = (props) => {
+const BegrunnelseVisning: React.FunctionComponent<Props> = props => {
   if (typeof props.begrunnelse !== 'undefined') {
     const begrunnelse = String(props.begrunnelse);
     if (begrunnelse.length > 0) {
       return (
-        <section className="seksjon begrunnelse">
-          <Undertittel>
-            <FormattedMessage id={'korrigering.sporsmal.begrunnelse'} />
-          </Undertittel>
-          <UtvidetInformasjon>
-            <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
-          </UtvidetInformasjon>
+        <section className="begrunnelse">
+          <div className="sporsmalstekst">
+            <Undertittel>
+              <FormattedMessage id={'korrigering.sporsmal.begrunnelse'} />
+            </Undertittel>
+            <UtvidetInformasjon>
+              <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
+            </UtvidetInformasjon>
+          </div>
           <img className={'checkmark'} alt={'checkmark'} src={checkMark} />
           <span>{props.begrunnelse}</span>
         </section>
