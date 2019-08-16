@@ -268,7 +268,7 @@
     'sporsmal.ingenMeldekortASende':
       'Det er ingen tilgjengelige meldekort å sende inn ',
     'sporsmal.lesVeiledning':
-      'Du må lese veiledningstekstene før du fyller ut feltene i meldekortet. Du finner dem ved å klikke på spørsmålstegnene. ',
+      'Du må lese veiledningstekstene før du fyller ut feltene i meldekortet. Du finner dem ved å klikke på "Les mer" under hvert spørsmål. ',
     'sporsmal.registrertMerknad':
       'Merk: Hvis du svarer <strong>Nei</strong> vil du ikke lenger få bistand eller utbetalinger fra NAV ',
     'sporsmal.registrert':
@@ -392,7 +392,7 @@
     'feilmelding.baksystem':
       'We are having problems with our systems, and therefore can not show you your employment status forms. Please try again later. ',
     'forklaring.sporsmal.aktivitetArbeid-AAP':
-      'Click <strong>Yes</strong> if you have participated in activities you and NAV agreed on. <br> <br> This includes <ul>     <li>employment schemes</li>s     <li>active medical treatment</li>     <li>training or education</li>     <li>other activities.</li> </ul> <br> <br> Click <strong>Yes</strong> if you take part in activities you and NAV have not agreed on. This includes <ul>     <li>courses and/or training </li>     <li>Education </li>     <li>Self-study </li> </ul> Click <strong>No</strong> if you have not performed the agreed activity. <br> <br> Click <strong>No</strong> if you do not have any agreed activities during the term on the report card. This also applies if you have no other course or education planned in this period of time. ',
+      'Click <strong>Yes</strong> if you have participated in activities you and NAV agreed on. <br> <br> This includes <ul>     <li>employment schemes</li>     <li>active medical treatment</li>     <li>training or education</li>     <li>other activities.</li> </ul> <br> <br> Click <strong>Yes</strong> if you take part in activities you and NAV have not agreed on. This includes <ul>     <li>courses and/or training </li>     <li>Education </li>     <li>Self-study </li> </ul> Click <strong>No</strong> if you have not performed the agreed activity. <br> <br> Click <strong>No</strong> if you do not have any agreed activities during the term on the report card. This also applies if you have no other course or education planned in this period of time. ',
     'forklaring.sporsmal.aktivitetArbeid':
       'Click <strong>Yes</strong> if you have participated in employment schemes, courses or training/education. With employment schemes we mean labour market schemes such as an AMO course or a  Job Club. Do not record other activities from your activity plan, such as information meetings with NAV or jobs you have applied for. <br> <br> Click <strong>Yes</strong> if NAV has approved you receiving unemployment benefits while attending education. <br> <br> Click <strong>Yes</strong> if you have attended courses or education that you have not agreed upon with NAV. This also applies to self-study. <br> <br> Click <strong>No</strong> If you have not participated in employment schemes, courses or training/education. ',
     'forklaring.sporsmal.arbeid-AAP':
@@ -624,7 +624,7 @@
     'sporsmal.ingenMeldekortASende':
       'There are no available employment status form to send. ',
     'sporsmal.lesVeiledning':
-      'You must read the guidance notes before filling out the fields in the employment status form. You will find these by clicking on the question marks. ',
+      'You must read the guidance notes before filling out the fields in the employment status form. You will find these by clicking "Read more" under each question. ',
     'sporsmal.registrertMerknad':
       'Note: If you click <strong>No</strong>, you will no longer receive assistance or benefits. ',
     'sporsmal.registrert':
