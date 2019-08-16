@@ -19,9 +19,10 @@ export function scrollTilElement(
     });
   } catch (e) {
     try {
-      if (typeof elementid !== 'undefined') {
-        document.getElementById(elementid)!.scrollIntoView();
+      if (typeof elementid === 'undefined') {
+        elementid = 'periodebanner';
       }
+      document.getElementById(elementid)!.scrollIntoView();
     } catch (e) {
       console.log('Kunne ikke scrolle');
     }
