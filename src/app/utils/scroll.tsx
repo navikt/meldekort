@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export function scrollTilElement(
   elementid?: string,
   oppforsel: ScrollBehavior = 'smooth'
@@ -10,8 +12,18 @@ export function scrollTilElement(
       window.scrollY;
   }
 
-  window.scroll({
-    top: elementPos,
-    behavior: typeof oppforsel === 'undefined' ? 'smooth' : oppforsel,
-  });
+  try {
+    window.scroll({
+      top: elementPos,
+      behavior: typeof oppforsel === 'undefined' ? 'smooth' : oppforsel,
+    });
+  } catch (e) {
+    try {
+      if (typeof elementid !== 'undefined') {
+        document.getElementById(elementid)!.scrollIntoView();
+      }
+    } catch (e) {
+      console.log('Kunne ikke scrolle');
+    }
+  }
 }
