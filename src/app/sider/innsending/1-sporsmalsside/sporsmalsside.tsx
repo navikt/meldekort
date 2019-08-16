@@ -392,9 +392,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         <section className="seksjon">
           <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending} />
           {innsending.innsendingstype === Innsendingstyper.innsending ? (
-            <AlertStripe type="advarsel">
-              <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
-            </AlertStripe>
+            <div className="alertstripe_registrert">
+              <AlertStripe type="advarsel">
+                <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
+              </AlertStripe>
+            </div>
           ) : null}
         </section>
         <section className="seksjon flex-innhold sentrert">
