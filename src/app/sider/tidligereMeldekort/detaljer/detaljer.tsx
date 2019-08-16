@@ -70,8 +70,8 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   componentDidMount() {
-    this.props.hentMeldekortdetaljer();
     this.sjekkAktivtMeldekortOgRedirect();
+    this.props.hentMeldekortdetaljer();
     window.addEventListener('resize', this.handleWindowSize);
     if (this.props.personInfo.personId === 0) {
       this.props.hentPersonInfo();
