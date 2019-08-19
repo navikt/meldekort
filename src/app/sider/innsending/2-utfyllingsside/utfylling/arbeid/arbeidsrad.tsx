@@ -113,7 +113,6 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
           bredde="XS"
           step={0.5}
           type={'text'}
-          inputMode={'numeric'}
           value={
             typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined'
               ? utfylteDager[utfyltDagIndex].arbeidetTimer
