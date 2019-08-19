@@ -1,5 +1,5 @@
 // Edge
-const isEdge = window.navigator.userAgent.indexOf('Edge') !== -1;
+export const isEdge = window.navigator.userAgent.indexOf('Edge') !== -1;
 
 // Internet Explorer 6-11
 export const isIE =
@@ -7,3 +7,6 @@ export const isIE =
 
 // Firefox
 export const isFireFox = window.navigator.userAgent.indexOf('Mozilla') !== -1;
+
+// Safari
+export const isSafari = window.navigator.userAgent.indexOf('Safari') !== -1;

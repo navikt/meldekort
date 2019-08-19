@@ -14,7 +14,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../meny/mobil/mobilMenyToggle';
 import { isEmpty } from 'ramda';
 import classNames from 'classnames';
-import { isIE } from '../../utils/browsers';
+import { isEdge, isIE, isSafari } from '../../utils/browsers';
 
 interface MapStateToProps {
   router: Router;
@@ -79,7 +79,7 @@ class Header extends React.Component<HeaderProps> {
       ? 'meldekort-header__innsending'
       : 'meldekort-header';
     const stylingMedIE = classNames(headerClass, {
-      ie11: isIE,
+      ie11: isIE || isEdge || isSafari,
     });
     return (
       <header className={stylingMedIE}>

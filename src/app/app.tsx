@@ -26,7 +26,7 @@ import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { isIE } from './utils/browsers';
+import { isIE, isEdge, isSafari } from './utils/browsers';
 
 if (erMock()) {
   setupMock();
@@ -95,7 +95,7 @@ class App extends React.Component<Props, AppState> {
       }
 
       const stylingMedIE = classNames('main-container', {
-        ie11: isIE,
+        ie11: isIE || isEdge || isSafari,
       });
 
       return (
