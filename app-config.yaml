@@ -23,8 +23,8 @@ resources:
     cpu: 3
     memory: 1024Mi
   requests:
-    cpu: 200m
-    memory: 512Mi
+    cpu: 500m
+    memory: 768Mi
 fasitResources:
   used:
     - alias: appres.cms

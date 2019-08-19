@@ -102,7 +102,8 @@
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
     "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
     "test": "CI=true react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom"
+    "test:watch": "react-scripts test --env=jsdom",
+    "test:reload": "react-scripts test -u"
   },
   "browserslist": [
     ">0.2%",
