@@ -53,7 +53,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
     id: 'overskrift.meldekort.sendt',
   });
   const stylingMedIE = classNames('utskrift', {
-    ie11: isIE,
+    browserSpecificStyling: isIE,
   });
   return (
     <div className={stylingMedIE} role="presentation">

@@ -1,12 +1,28 @@
-// Edge
-export const isEdge = window.navigator.userAgent.indexOf('Edge') !== -1;
+import * as Bowser from 'bowser';
 
-// Internet Explorer 6-11
-export const isIE =
-  window.navigator.userAgent.indexOf('Trident') !== -1 && !isEdge;
+const browserObject = Bowser.getParser(window.navigator.userAgent);
+const browserName = browserObject.getBrowserName();
+const browserVersion = browserObject.getBrowserVersion();
 
-// Firefox
-export const isFireFox = window.navigator.userAgent.indexOf('Mozilla') !== -1;
+const getMajorVersion = browserVersion
+  ? parseInt(browserVersion.split('.')[0], 0)
+  : false;
 
 // Safari
-export const isSafari = window.navigator.userAgent.indexOf('Safari') !== -1;
+export const isOldSafari = browserName === 'Safari' && getMajorVersion === 9;
+
+export const isSafari = browserName === 'Safari' && getMajorVersion > 9;
+
+// Edge
+export const isOldEdge = browserName === 'Edge' && getMajorVersion === 15;
+export const isEdge = browserName === 'Edge' && getMajorVersion > 15;
+
+// Internet Explorer 6-11
+export const isIE = browserName === 'Trident';
+
+// Firefox
+export const isFirefox = browserName === 'Firefox';
+
+// Chrome
+export const isChrome = browserName === 'Chrome';
+export const isOldChrome = browserName === 'Chrome' && getMajorVersion < 65;
