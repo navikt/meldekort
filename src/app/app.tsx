@@ -108,13 +108,13 @@ class App extends React.Component<Props, AppState> {
             className={classNames('', { overlay: meny.erApen })}
             onClick={() => meny.erApen && this.props.toggleMeny(!meny.erApen)}
           >
-            <disv className={browserSpecificStyling}>
+            <div className={browserSpecificStyling}>
               <ConnectedRouter history={history}>
                 <Switch>
                   <Route path="/" component={MeldekortRoutes} />
                 </Switch>
               </ConnectedRouter>
-            </disv>
+            </div>
           </div>
         </>
       );
