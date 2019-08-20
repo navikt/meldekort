@@ -28,8 +28,11 @@ import MobilTabell from '../../../components/tabell/mobil/mobilTabell';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import { PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
+import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
+import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 
 interface MapStateToProps {
+  historiskeMeldekort: HistoriskeMeldekortState;
   meldekortdetaljer: MeldekortdetaljerState;
   aktivtMeldekort: Meldekort;
   router: Router;
@@ -40,6 +43,7 @@ interface MapDispatchToProps {
   hentMeldekortdetaljer: () => void;
   resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
+  resettAktivtMeldekort: () => void;
 }
 
 type Props = MapDispatchToProps & MapStateToProps;
@@ -63,12 +67,16 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAktivtMeldekortOgRedirect = () => {
-    if (this.props.aktivtMeldekort.meldekortId === 0) {
-      const pathname = this.props.router.location.pathname;
-      const tidligereMeldekort = '/tidligere-meldekort';
-      pathname !== tidligereMeldekort && history.push(tidligereMeldekort);
-    } else {
+    const { historiskeMeldekort, aktivtMeldekort } = this.props;
+    if (
+      aktivtMeldekort.meldekortId !== 0 &&
+      historiskeMeldekort.historiskeMeldekort.filter(
+        mk => mk.meldekortId === aktivtMeldekort.meldekortId
+      ).length > 0
+    ) {
       this.props.hentMeldekortdetaljer();
+    } else {
+      history.push('/tidligere-meldekort');
     }
   };
 
@@ -79,6 +87,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     if (this.props.personInfo.personId === 0) {
       this.props.hentPersonInfo();
     }
+  }
+
+  componentWillUnmount(): void {
+    this.props.resettMeldekortdetaljer();
+    this.props.resettAktivtMeldekort();
   }
 
   handleWindowSize = () =>
@@ -206,6 +219,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
+    historiskeMeldekort: state.historiskeMeldekort,
     meldekortdetaljer: state.meldekortdetaljer,
     aktivtMeldekort: state.aktivtMeldekort,
     router: selectRouter(state),
@@ -218,8 +232,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentMeldekortdetaljer: () =>
       dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
     resettMeldekortdetaljer: () =>
-      dispatch(MeldekortdetaljerActions.resetMeldekortdetaljer()),
+      dispatch(MeldekortdetaljerActions.resettMeldekortdetaljer()),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
+    resettAktivtMeldekort: () =>
+      dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
   };
 };
 

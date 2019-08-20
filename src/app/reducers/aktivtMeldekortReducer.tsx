@@ -35,7 +35,7 @@ const aktivtMeldekortReducer = (
     case getType(AktivtMeldekortActions.oppdaterAktivtMeldekort):
       return { ...state, ...action.payload };
 
-    case getType(AktivtMeldekortActions.resetAktivtMeldekort):
+    case getType(AktivtMeldekortActions.resettAktivtMeldekort):
       return { ...initialState };
 
     default:

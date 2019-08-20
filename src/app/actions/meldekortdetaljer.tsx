@@ -19,7 +19,7 @@ export const MeldekortdetaljerActions = {
     MeldekortdetaljerTypeKeys.HENT_MELDEKORTDETALJER_OK,
     MeldekortdetaljerTypeKeys.HENT_MELDEKORTDETALJER_FEILET
   )<void, Meldekortdetaljer, AxiosError>(),
-  resetMeldekortdetaljer: createStandardAction(
+  resettMeldekortdetaljer: createStandardAction(
     MeldekortdetaljerTypeKeys.RESETT_MELDEKORTDETALJER
   )<void>(),
 };

@@ -21,7 +21,7 @@ interface MapStateToProps {
 }
 
 interface MapDispatcherToProps {
-  resetAktivtMeldekort: () => void;
+  resettAktivtMeldekort: () => void;
   leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
@@ -29,10 +29,9 @@ type ReduxType = KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
 class Komponentlenke extends React.Component<ReduxType> {
   clickHandler = () => {
+    this.props.resettAktivtMeldekort();
     if (this.props.meldekort) {
       this.props.leggTilAktivtMeldekort(this.props.meldekort);
-    } else {
-      this.props.resetAktivtMeldekort();
     }
 
     const pathname = this.props.router.location.pathname;
@@ -62,8 +61,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
   return {
     leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
-    resetAktivtMeldekort: () =>
-      dispatch(AktivtMeldekortActions.resetAktivtMeldekort()),
+    resettAktivtMeldekort: () =>
+      dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
   };
 };
 

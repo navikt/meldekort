@@ -19,6 +19,7 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
   leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+  resettAktivtMeldekort: () => void;
   settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
   resetInnsending: () => void;
   leggTilMeldekortId: (meldekortId: number) => void;
@@ -80,6 +81,7 @@ class NavKnapp extends React.Component<Props> {
     } else {
       nesteAktivtMeldekort !== undefined &&
         nesteInnsendingstype !== undefined &&
+        this.props.resettAktivtMeldekort() &&
         this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
 
       let validert: boolean = true;
@@ -159,6 +161,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
+    resettAktivtMeldekort: () =>
+      dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     settInnsendingstype: (innsendingstype: Innsendingstyper) =>
       dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
