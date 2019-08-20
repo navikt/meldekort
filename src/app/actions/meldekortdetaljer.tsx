@@ -5,7 +5,6 @@ import {
 } from 'typesafe-actions';
 import { AxiosError } from 'axios';
 import { Meldekortdetaljer } from '../types/meldekort';
-import { AktivtMeldekortTypeKeys } from './aktivtMeldekort';
 
 export enum MeldekortdetaljerTypeKeys {
   HENT_MELDEKORTDETALJER = 'HENT_MELDEKORTDETALJER',
@@ -21,7 +20,7 @@ export const MeldekortdetaljerActions = {
     MeldekortdetaljerTypeKeys.HENT_MELDEKORTDETALJER_FEILET
   )<void, Meldekortdetaljer, AxiosError>(),
   resetMeldekortdetaljer: createStandardAction(
-    AktivtMeldekortTypeKeys.RESET_AKTIVT_MELDEKORT
+    MeldekortdetaljerTypeKeys.RESETT_MELDEKORTDETALJER
   )<void>(),
 };
 
