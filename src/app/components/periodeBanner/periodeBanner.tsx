@@ -22,7 +22,10 @@ const PeriodeBanner: React.FunctionComponent<Props> = props => {
   const { meldeperiode } = props.aktivtMeldekort;
   const { className = '' } = props;
   return (
-    <section className={'seksjon periodeBanner ' + className}>
+    <section
+      id="periodebanner"
+      className={'seksjon periodeBanner ' + className}
+    >
       <Ingress className="flex-innhold sentrert">
         <FormattedMessage id="meldekort.for.perioden" />
       </Ingress>
