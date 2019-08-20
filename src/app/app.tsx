@@ -26,7 +26,7 @@ import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { isIE } from './utils/browsers';
+import { isIE, isOldSafari, isOldEdge } from './utils/browsers';
 
 if (erMock()) {
   setupMock();
@@ -94,8 +94,9 @@ class App extends React.Component<Props, AppState> {
         this.setState({ henterPersonInfo: true });
       }
 
-      const stylingMedIE = classNames('main-container', {
-        ie11: isIE,
+      const browserSpecificStyling = classNames('main-container', {
+        ieStyling: isIE,
+        oldBrowserStyling: isOldSafari || isOldEdge,
       });
 
       return (
@@ -107,7 +108,7 @@ class App extends React.Component<Props, AppState> {
             className={classNames('', { overlay: meny.erApen })}
             onClick={() => meny.erApen && this.props.toggleMeny(!meny.erApen)}
           >
-            <div className={stylingMedIE}>
+            <div className={browserSpecificStyling}>
               <ConnectedRouter history={history}>
                 <Switch>
                   <Route path="/" component={MeldekortRoutes} />
