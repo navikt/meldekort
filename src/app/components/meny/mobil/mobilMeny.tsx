@@ -43,18 +43,18 @@ const MobilMeny: React.FunctionComponent<
   };
 
   return (
-    <nav className={classNames('mobilMeny')}>
+    <nav className={classNames('mobilmeny')}>
       <Collapse isOpened={props.erApen}>
-        <ul className={classNames('mobilMeny-navlist', { open: erApen })}>
+        <ul className={classNames('mobilmeny__navlist', { open: erApen })}>
           {menypunkter.map(menypunkt => (
             <li
-              className={'navlist-item'}
+              className={'mobilmeny__item'}
               onClick={() => onChange(menypunkt)}
               key={menypunkt.tittel}
               aria-labelledby={'navlink'}
             >
               <Lenke
-                className={classNames('item-wrapper', {
+                className={classNames('item--link', {
                   active: valgtMenyPunkt.tittel === menypunkt.tittel,
                 })}
                 href={'#'}

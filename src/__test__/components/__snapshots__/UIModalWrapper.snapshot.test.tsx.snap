@@ -17,7 +17,7 @@ exports[`UIModalWrapper 1`] = `
     locale="nb"
   >
     <div
-      id="meldekort-root"
+      id="meldekort__root"
     >
       <Connect(UIModalWrapper) />
     </div>

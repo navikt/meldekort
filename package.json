@@ -104,7 +104,8 @@
     "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
     "test": "CI=true react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "test:reload": "react-scripts test -u"
+    "test:reload": "react-scripts test -u",
+    "comb": "csscomb *.less"
   },
   "browserslist": [
     ">0.2%",

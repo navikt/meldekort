@@ -1,17 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MobilMenyToggle 1`] = `
-<div
-  className="burger-menu-toggle"
+<nav
+  className="mobilmeny-toggle"
   onClick={[Function]}
 >
   <div
-    className="nav-icon open"
+    className="mobilmeny-toggle__icon open"
   >
-    <span />
-    <span />
-    <span />
-    <span />
+    <span
+      className="line"
+    />
+    <span
+      className="line"
+    />
+    <span
+      className="line"
+    />
+    <span
+      className="line"
+    />
   </div>
-</div>
+</nav>
 `;
