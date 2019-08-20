@@ -38,6 +38,7 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
   hentMeldekortdetaljer: () => void;
+  resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
 }
 
@@ -63,15 +64,25 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
   sjekkAktivtMeldekortOgRedirect = () => {
     if (this.props.aktivtMeldekort.meldekortId === 0) {
+      console.log('aktivt medlekortid er null. Redirecter');
+      // console.log('aktivt meldekortid: ', this.props.aktivtMeldekort.meldekortId);
       const pathname = this.props.router.location.pathname;
       const tidligereMeldekort = '/tidligere-meldekort';
       pathname !== tidligereMeldekort && history.push(tidligereMeldekort);
+    } else {
+      console.log('Aktivt meldekortid er ikke null. Henter medlekortdetaljer');
+      console.log(
+        'aktivt meldekortid: ',
+        this.props.aktivtMeldekort.meldekortId
+      );
+      this.props.hentMeldekortdetaljer();
     }
   };
 
   componentDidMount() {
+    console.log('Resetter meldekortdetaljer');
+    this.props.resettMeldekortdetaljer();
     this.sjekkAktivtMeldekortOgRedirect();
-    this.props.hentMeldekortdetaljer();
     window.addEventListener('resize', this.handleWindowSize);
     if (this.props.personInfo.personId === 0) {
       this.props.hentPersonInfo();
@@ -83,8 +94,31 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       windowSize: window.innerWidth,
     });
 
+  samstemmMeldekortId = () => {
+    console.log('Samstemmer');
+    const { meldekortdetaljer, aktivtMeldekort } = this.props;
+    if (meldekortdetaljer.meldekortdetaljer.id !== '') {
+      console.log('Meldekortdetaljer.id er ikke tom!');
+      if (
+        aktivtMeldekort.meldekortId !==
+        meldekortdetaljer.meldekortdetaljer.meldekortId
+      ) {
+        console.log(
+          'Aktivt meldekortid er ikke lik som meldekortdetaljer.meldekortid. Redirecter.'
+        );
+        console.log('aktivt meldekortid: ', aktivtMeldekort.meldekortId);
+        console.log(
+          'meldekortdetaljer meldekortid: ',
+          meldekortdetaljer.meldekortdetaljer.meldekortId
+        );
+        history.push('/tidligere-meldekort');
+      }
+    }
+  };
+
   innhold = () => {
     const { meldekortdetaljer, aktivtMeldekort } = this.props;
+    this.samstemmMeldekortId();
     const rows = this.settTabellrader(aktivtMeldekort);
     const columns = [
       {
@@ -201,6 +235,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     hentMeldekortdetaljer: () =>
       dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+    resettMeldekortdetaljer: () =>
+      dispatch(MeldekortdetaljerActions.resetMeldekortdetaljer()),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
   };
 };

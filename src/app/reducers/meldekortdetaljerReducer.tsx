@@ -40,6 +40,8 @@ const meldekortdetaljerReducer = (
       return {
         meldekortdetaljer: action.payload,
       };
+    case getType(MeldekortdetaljerActions.resetMeldekortdetaljer):
+      return { ...initialState };
 
     default:
       return state;
