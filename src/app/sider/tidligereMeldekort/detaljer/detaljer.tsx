@@ -89,11 +89,6 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     }
   }
 
-  componentWillUnmount(): void {
-    this.props.resettMeldekortdetaljer();
-    this.props.resettAktivtMeldekort();
-  }
-
   handleWindowSize = () =>
     this.setState({
       windowSize: window.innerWidth,
