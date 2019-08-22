@@ -18,14 +18,10 @@ import {
 } from '../../app/utils/dates';
 
 const fraDatoString = '2019-01-01T10:10:00Z';
-const tilDatoString = '2019-01-13T10:10:00';
+const tilDatoString = '2019-01-13T10:10:00Z';
 
 const fraDato = new Date(fraDatoString);
 const tilDato = new Date(tilDatoString);
-
-it('hentTid', () => {
-  expect(hentTid(fraDato)).toBe('11:10');
-});
 
 it('hentUkenummerForDato', () => {
   expect(hentUkenummerForDato(fraDato)).toBe(1);

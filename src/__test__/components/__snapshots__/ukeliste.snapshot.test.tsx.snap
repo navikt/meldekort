@@ -26,13 +26,13 @@ exports[`Ukeliste 1`] = `
           "meldegruppe": "DAGP",
           "meldekortId": 1,
           "meldeperiode": Object {
-            "fra": 2019-01-01T09:00:00.000Z,
+            "fra": 2019-01-01T10:00:00.000Z,
             "kanKortSendes": true,
-            "kortKanSendesFra": 2019-01-01T09:00:00.000Z,
+            "kortKanSendesFra": 2019-01-01T10:00:00.000Z,
             "periodeKode": "201901",
-            "til": 2019-01-01T09:00:00.000Z,
+            "til": 2019-01-01T10:00:00.000Z,
           },
-          "mottattDato": 2019-01-01T09:00:00.000Z,
+          "mottattDato": 2019-01-01T10:00:00.000Z,
         }
       }
       erAap={true}
