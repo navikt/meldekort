@@ -18,7 +18,7 @@ export const isOldEdge = browserName === 'Edge' && getMajorVersion === 15;
 export const isEdge = browserName === 'Edge' && getMajorVersion > 15;
 
 // Internet Explorer 6-11
-export const isIE = browserName === 'Trident';
+export const isIE = browserName === 'Internet Explorer';
 
 // Firefox
 export const isFirefox = browserName === 'Firefox';
