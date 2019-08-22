@@ -17,14 +17,14 @@ import {
   ukeTekst,
 } from '../../app/utils/dates';
 
-const fraDatoString = '2019-01-01T10:10:00';
+const fraDatoString = '2019-01-01T10:10:00Z';
 const tilDatoString = '2019-01-13T10:10:00';
 
 const fraDato = new Date(fraDatoString);
 const tilDato = new Date(tilDatoString);
 
 it('hentTid', () => {
-  expect(hentTid(fraDato)).toBe('10:10');
+  expect(hentTid(fraDato)).toBe('11:10');
 });
 
 it('hentUkenummerForDato', () => {
@@ -89,6 +89,6 @@ it('ukeTekst', () => {
 
 it('kalkulerDato', () => {
   expect(kalkulerDato(fraDato, 6)).toStrictEqual(
-    new Date('2019-01-07T09:10:00.000Z')
+    new Date('2019-01-07T10:10:00.000Z')
   );
 });
