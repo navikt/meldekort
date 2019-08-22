@@ -102,8 +102,9 @@
       }
       .ukevisning {
         border-bottom: 1px solid #d1d1d1;
-        .cssgrid();
+        display: grid;
         grid-template-columns: repeat(2, auto);
+        grid-template-rows: minmax(auto, auto);
 
         .uke {
           padding-bottom: 2rem;
@@ -116,8 +117,9 @@
           .dagliste {
             margin-bottom: 0.5rem;
             .dagliste__dager {
-              .cssgrid();
+              display: grid;
               grid-template-columns: 4.25rem auto;
+              grid-template-rows: minmax(auto, auto);
               .ukedag {
               }
               .aktiviteter {

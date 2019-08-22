@@ -179,7 +179,7 @@ class Utfyllingsside extends React.Component<
         id: 'utfylling.ingenDagerUtfylt',
       });
       return (
-        <AlertStripe className={'utfyllingFeil'} type={'feil'}>
+        <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
           <ul>
             {feilIArbeid.feil ? (
               <li>{`${feiltekst} "${hentIntl()
@@ -217,7 +217,7 @@ class Utfyllingsside extends React.Component<
     } else if (typeof valideringsResultat !== 'undefined') {
       if (valideringsResultat.status === 'FEIL') {
         return (
-          <AlertStripe className={'utfyllingFeil'} type={'feil'}>
+          <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
             <ul>
               {valideringsResultat.arsakskoder.map(arsakskode => {
                 return <li key={arsakskode.kode}>{arsakskode.tekst}</li>;
@@ -251,7 +251,7 @@ class Utfyllingsside extends React.Component<
         </section>
         <section className="seksjon">
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
-          <div className={'utfylling-container'}>
+          <div className={'utfylling-content'}>
             <UkePanel
               ukenummer={Konstanter().forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}

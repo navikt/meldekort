@@ -54,7 +54,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   return (
     <EkspanderbartpanelBase
       heading={
-        <div className="uketittel">
+        <div className="uke__tittel">
           <Innholdstittel>{`${ukeTekst()} ${
             props.faktiskUkeNummer
           }`}</Innholdstittel>
@@ -65,8 +65,8 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
       apen={true}
       ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
     >
-      <div className="ukepanel">
-        <div className="ukedager__desktop">{hentUkedager()}</div>
+      <div className="uke__panel">
+        <div className="ukedager--desktop">{hentUkedager()}</div>
         {sjekkSporsmal('arbeid') ? (
           <Arbeidsrad
             ukeNummer={props.ukenummer}

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export function scrollTilElement(
   elementid?: string,
   oppforsel: ScrollBehavior = 'smooth'

@@ -305,7 +305,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           </section>
           <div id="feilmelding">
             {this.state.feilmelding === '' ? null : (
-              <AlertStripe type={'feil'} className={'utfyllingFeil'}>
+              <AlertStripe type={'feil'} className={'utfylling__feilmelding'}>
                 {this.state.feilmelding}
               </AlertStripe>
             )}

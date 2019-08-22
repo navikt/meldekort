@@ -103,7 +103,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
       return (
         <Input
-          className="arbeidInput"
+          className="arbeid__inputfelt"
           key={ukedag}
           label={
             <span className="vekk">
@@ -145,7 +145,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
           borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none',
         }}
       >
-        <Undertittel className={'tittel'}>
+        <Undertittel className={'arbeidsrad__tittel'}>
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
@@ -153,8 +153,8 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
             id={aap ? forklaringId + '-AAP' : forklaringId}
           />
         </UtvidetInformasjon>
-        <div className="ukedager__mobil">{hentUkedager()}</div>
-        <div className="inputrad_arbeid">{this.settFelter()}</div>
+        <div className="ukedager--mobil">{hentUkedager()}</div>
+        <div className="arbeidsrad__inputfelter">{this.settFelter()}</div>
       </div>
     );
   };

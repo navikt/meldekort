@@ -1,4 +1,4 @@
-.utfylling-container {
+.utfylling-content {
   display: block;
   width: 100%;
 
@@ -6,49 +6,86 @@
     margin-bottom: 2rem;
   }
 
-  .uketittel {
-    padding-left: 1rem;
+  .uke {
+    &__panel {
+      margin: 0 1rem 1rem 1rem;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: minmax(auto, auto);
+    }
+    &__tittel {
+      padding-left: 1rem;
+    }
   }
-
-  .ukepanel {
-    margin: 0 1rem 1rem 1rem;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-auto-rows: minmax(auto, auto);
-
-    .ukedager__desktop {
+  .ukedager {
+    &--desktop {
       .kolonne-2-til-3();
-      .syv-kolonner();
-
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: minmax(auto, auto);
       border-left: solid 4px white;
       padding: 0 1rem 0.5rem 0;
-
       .typo-ingress {
         justify-self: center;
-
         abbr {
           font-weight: bold;
+        }
+      }
+    }
+    &--mobil {
+      @media @tablet, @desktop {
+        display: none;
+      }
+    }
+  }
+
+  @media @tablet {
+    .ekspanderbartPanel {
+      &__innhold {
+        padding: 0 !important;
+      }
+    }
+    .uke {
+      &__panel {
+        margin: 0 0 0;
+      }
+    }
+  }
+
+  @media @phone, @small-phone {
+    .ekspanderbartPanel {
+      margin-bottom: 2rem;
+      &__innhold {
+        padding: 0 !important;
+      }
+    }
+    .uke {
+      &__panel {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+      }
+    }
+    .ukedager {
+      &--desktop {
+        display: none;
+      }
+      &--mobil {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: minmax(auto, auto);
+        margin-top: 1rem;
+        .typo-ingress {
+          justify-self: center;
         }
       }
     }
   }
 }
 
-// Denne settes på et span-element som inneholder navnet på raden, inni label til inputfelt og checboxer
-// for at skjermlesere skal kunne vite hvilken rad og hvilken dag man er på.
-.vekk {
-  position: absolute;
-  left: -3000px;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0;
-  border: 0;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  z-index: -1000;
-}
-
-.utfyllingFeil {
+.utfylling__feilmelding {
   margin-bottom: 2rem;
 }
 
@@ -61,47 +98,16 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-
-@media @tablet, @desktop {
-  .utfylling-container {
-    .ukepanel {
-      .ukedager__mobil {
-        display: none;
-      }
-    }
-  }
-}
-
-@media @tablet {
-  .utfylling-container {
-    .ekspanderbartPanel {
-      &__innhold {
-        padding: 0 !important;
-      }
-    }
-    .ukepanel {
-      margin: 0 0 0;
-    }
-  }
-}
-
-@media @phone {
-  .utfylling-container {
-    .ekspanderbartPanel {
-      margin-bottom: 2rem;
-
-      &__innhold {
-        padding: 0 !important;
-      }
-    }
-    .ukepanel {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-
-      .ukedager__desktop {
-        display: none;
-      }
-    }
-  }
+// Denne settes på et span-element som inneholder navnet på raden, inni label til inputfelt og checboxer
+// for at skjermlesere skal kunne vite hvilken rad og hvilken dag man er på.
+.vekk {
+  position: absolute;
+  left: -3000px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  z-index: -1000;
 }
