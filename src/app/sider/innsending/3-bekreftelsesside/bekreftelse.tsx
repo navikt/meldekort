@@ -103,13 +103,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
               ? false
               : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
           syk:
-            innsending.sporsmalsobjekter[3].checked === undefined
-              ? false
-              : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
-          annetFravaer:
             innsending.sporsmalsobjekter[2].checked === undefined
               ? false
               : innsending.sporsmalsobjekter[2].checked.endsWith('ja'),
+          annetFravaer:
+            innsending.sporsmalsobjekter[3].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
           arbeidssoker:
             innsending.sporsmalsobjekter[4].checked === undefined
               ? false
