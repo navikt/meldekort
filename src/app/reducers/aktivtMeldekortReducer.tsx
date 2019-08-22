@@ -1,5 +1,13 @@
-import { KortStatus, KortType, Meldegruppe, Meldekort } from '../types/meldekort';
-import { AktivtMeldekortActions, AktivtMeldekortActionsTypes } from '../actions/aktivtMeldekort';
+import {
+  KortStatus,
+  KortType,
+  Meldegruppe,
+  Meldekort,
+} from '../types/meldekort';
+import {
+  AktivtMeldekortActions,
+  AktivtMeldekortActionsTypes,
+} from '../actions/aktivtMeldekort';
 import { getType } from 'typesafe-actions';
 
 const initialState: Meldekort = {
@@ -27,7 +35,7 @@ const aktivtMeldekortReducer = (
     case getType(AktivtMeldekortActions.oppdaterAktivtMeldekort):
       return { ...state, ...action.payload };
 
-    case getType(AktivtMeldekortActions.resetAktivtMeldekort):
+    case getType(AktivtMeldekortActions.resettAktivtMeldekort):
       return { ...initialState };
 
     default:

@@ -23,6 +23,8 @@
     "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
+    "be-pretty": "^0.9.3",
+    "bowser": "^2.5.3",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
     "craco-less": "^1.8.0",
@@ -61,7 +63,6 @@
     "nav-frontend-veileder-style": "^2.0.6",
     "nav-frontend-veilederpanel": "^0.1.10",
     "nav-frontend-veilederpanel-style": "0.0.14",
-    "prettier": "^1.17.1",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
@@ -85,7 +86,7 @@
     "redux-observable": "^1.0.0",
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
-    "snyk": "^1.165.0",
+    "snyk": "^1.213.0",
     "stylelint": "^10.1.0",
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "ts-react-json-table": "^0.1.1",
@@ -100,9 +101,10 @@
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
-    "prettier": "`prettier '**/*.{js,less}'  --write`",
+    "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
     "test": "CI=true react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom"
+    "test:watch": "react-scripts test --env=jsdom",
+    "test:reload": "react-scripts test -u"
   },
   "browserslist": [
     ">0.2%",
@@ -122,6 +124,9 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
+    "husky": "^3.0.3",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
     "react-test-renderer": "^16.8.6",
     "redux-mock-store": "^1.5.3",
     "tslint": "^5.12.1",
@@ -147,5 +152,10 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

@@ -1,23 +1,23 @@
 import * as React from 'react';
 
 interface TabellProps {
-    rows: {}[];
-    columns: {}[];
-    className?: string;
+  rows: {}[];
+  columns: {}[];
+  className?: string;
 }
 
-const Tabell: React.FunctionComponent<TabellProps> = (props) => {
-    const JsonTable = require('ts-react-json-table');
+const Tabell: React.FunctionComponent<TabellProps> = props => {
+  const JsonTable = require('ts-react-json-table');
 
-    return (
-        <div className={'tabell'}>
-            <JsonTable
-                rows={props.rows}
-                columns={props.columns}
-                className={props.className}
-            />
-        </div>
-    );
+  return (
+    <div className={'tabell'}>
+      <JsonTable
+        rows={props.rows}
+        columns={props.columns}
+        className={props.className}
+      />
+    </div>
+  );
 };
 
 export default Tabell;

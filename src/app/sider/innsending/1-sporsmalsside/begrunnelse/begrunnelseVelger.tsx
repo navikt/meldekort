@@ -45,16 +45,26 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
       <Select
         label={
           <>
-            <Undertittel>{hentIntl().formatMessage({ id: 'korrigering.sporsmal.begrunnelse' })}</Undertittel>
+            <Undertittel>
+              {hentIntl().formatMessage({
+                id: 'korrigering.sporsmal.begrunnelse',
+              })}
+            </Undertittel>
             <UtvidetInformasjon>
-              {hentIntl().formatHTMLMessage({ id: 'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : '') })}
+              {hentIntl().formatHTMLMessage({
+                id:
+                  'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : ''),
+              })}
             </UtvidetInformasjon>
           </>
         }
         onChange={handleOnChange}
         value={valgtArsak}
       >
-        <option value={''}> {hentIntl().formatMessage({ id: 'begrunnelse.velgArsak' })}</option>
+        <option value={''}>
+          {' '}
+          {hentIntl().formatMessage({ id: 'begrunnelse.velgArsak' })}
+        </option>
         {options.map(opt => (
           <option value={opt.trim()} key={opt}>
             {' '}
@@ -62,7 +72,11 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
           </option>
         ))}
       </Select>
-      {props.erFeil && <span className={'rodTekst'}>{hentIntl().formatMessage({ id: 'begrunnelse.required' })}</span>}
+      {props.erFeil && (
+        <span className={'rodTekst'}>
+          {hentIntl().formatMessage({ id: 'begrunnelse.required' })}
+        </span>
+      )}
     </div>
   );
 };
@@ -75,7 +89,8 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    settBegrunnelse: (begrunnelse: Begrunnelse) => dispatch(InnsendingActions.settBegrunnelse(begrunnelse)),
+    settBegrunnelse: (begrunnelse: Begrunnelse) =>
+      dispatch(InnsendingActions.settBegrunnelse(begrunnelse)),
   };
 };
 

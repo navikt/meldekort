@@ -1,30 +1,34 @@
 import { Meldekort } from '../types/meldekort';
 import { getType } from 'typesafe-actions';
-import { HistoriskeMeldekortActions, HistoriskeMeldekortActionTypes } from '../actions/historiskeMeldekort';
+import {
+  HistoriskeMeldekortActions,
+  HistoriskeMeldekortActionTypes,
+} from '../actions/historiskeMeldekort';
 
 export interface HistoriskeMeldekortState {
-    historiskeMeldekort: Meldekort[];
-    ingenTidligereMeldekort: boolean;
+  historiskeMeldekort: Meldekort[];
+  ingenTidligereMeldekort: boolean;
 }
 
 const initalState: HistoriskeMeldekortState = {
-    historiskeMeldekort: [],
-    ingenTidligereMeldekort: false
+  historiskeMeldekort: [],
+  ingenTidligereMeldekort: false,
 };
 
-const historiskeMeldekortReducer = (state: HistoriskeMeldekortState = initalState,
-                                    action: HistoriskeMeldekortActionTypes): HistoriskeMeldekortState => {
-    switch (action.type) {
-        case getType(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success):
+const historiskeMeldekortReducer = (
+  state: HistoriskeMeldekortState = initalState,
+  action: HistoriskeMeldekortActionTypes
+): HistoriskeMeldekortState => {
+  switch (action.type) {
+    case getType(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success):
+      return {
+        historiskeMeldekort: action.payload,
+        ingenTidligereMeldekort: initalState.ingenTidligereMeldekort,
+      };
 
-            return {
-                historiskeMeldekort: action.payload,
-                ingenTidligereMeldekort: initalState.ingenTidligereMeldekort
-            };
-
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };
 
 export default historiskeMeldekortReducer;

@@ -14,7 +14,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../meny/mobil/mobilMenyToggle';
 import { isEmpty } from 'ramda';
 import classNames from 'classnames';
-import { isIE } from '../../utils/browsers';
+import { isIE, isOldEdge, isOldSafari } from '../../utils/browsers';
 
 interface MapStateToProps {
   router: Router;
@@ -40,7 +40,8 @@ class Header extends React.Component<HeaderProps> {
     const { person } = this.props;
     if (
       person.meldeform !== prevProps.person.meldeform ||
-      person.etterregistrerteMeldekort !== prevProps.person.etterregistrerteMeldekort
+      person.etterregistrerteMeldekort !==
+        prevProps.person.etterregistrerteMeldekort
     ) {
       this.oppdatertMeny();
     }
@@ -52,7 +53,10 @@ class Header extends React.Component<HeaderProps> {
       if (menypunkt.tittel === 'endreMeldeform') {
         return { ...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR };
       } else if (menypunkt.tittel === 'etterregistrering') {
-        return { ...menypunkt, disabled: isEmpty(person.etterregistrerteMeldekort) };
+        return {
+          ...menypunkt,
+          disabled: isEmpty(person.etterregistrerteMeldekort),
+        };
       }
       return menypunkt;
     });
@@ -60,20 +64,26 @@ class Header extends React.Component<HeaderProps> {
   };
 
   hentMenypunkter = () => {
-    return this.props.meny.alleMenyPunkter.filter(menypunkt => !menypunkt.disabled);
+    return this.props.meny.alleMenyPunkter.filter(
+      menypunkt => !menypunkt.disabled
+    );
   };
 
   render() {
     const { router, tittel } = this.props;
     const params = router.location.pathname.split('/');
     const harPathInnsending =
-      params[params.length - 2] === 'innsending' || params[params.length - 2] === 'korriger';
-    const headerClass = harPathInnsending ? 'meldekort-header__innsending' : 'meldekort-header';
-    const stylingMedIE = classNames(headerClass, {
-      ie11: isIE,
+      params[params.length - 2] === 'innsending' ||
+      params[params.length - 2] === 'korriger';
+    const headerClass = harPathInnsending
+      ? 'meldekort-header__innsending'
+      : 'meldekort-header';
+    const browserSpecificStyling = classNames(headerClass, {
+      ieStyling: isIE,
+      oldBrowserStyling: isOldEdge || isOldSafari,
     });
     return (
-      <header className={stylingMedIE}>
+      <header className={browserSpecificStyling}>
         <div className="banner-container">
           <div className="banner-content">
             <div className={'banner-title'}>
@@ -81,9 +91,17 @@ class Header extends React.Component<HeaderProps> {
             </div>
             <MobilMenyToggle />
           </div>
-          {!harPathInnsending ? <MobilMeny menypunkter={this.hentMenypunkter()} /> : <></>}
+          {!harPathInnsending ? (
+            <MobilMeny menypunkter={this.hentMenypunkter()} />
+          ) : (
+            <></>
+          )}
         </div>
-        {!harPathInnsending ? <HovedMeny menypunkter={this.hentMenypunkter()} /> : <></>}
+        {!harPathInnsending ? (
+          <HovedMeny menypunkter={this.hentMenypunkter()} />
+        ) : (
+          <></>
+        )}
       </header>
     );
   }

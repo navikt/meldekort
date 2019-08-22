@@ -3,6 +3,7 @@
 exports[`PeriodeBanner 1`] = `
 <section
   className="seksjon periodeBanner "
+  id="periodebanner"
 >
   <p
     className="typo-ingress flex-innhold sentrert"

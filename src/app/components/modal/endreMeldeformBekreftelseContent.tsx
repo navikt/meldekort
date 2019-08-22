@@ -6,20 +6,28 @@ import * as React from 'react';
 import { hentIntl } from '../../utils/intlUtil';
 
 export const endreMeldeformBekreftelseContent = () => {
-    return (
-        <div className={'modal-overskrift'}>
-            <Undertittel children={<FormattedMessage id={'overskrift.bekreftelse'}/>}/>
-            <Veilederpanel fargetema="suksess" svg={<img alt="" src={veileder}/>}>
-                <div className="modal-tekst">
-                    <Normaltekst>
-                        {`${hentIntl().formatMessage({id: 'endreMeldeform.valgtBytte'}).trim()}
-                            ${hentIntl().formatMessage({id: 'endreMeldeform.elektronisk'})}`}
-                    </Normaltekst>
-                    <Normaltekst>
-                        <FormattedMessage id={'endreMeldeform.kvittering.elektronisk.info'}/>
-                    </Normaltekst>
-                </div>
-            </Veilederpanel>
+  return (
+    <div className={'modal-overskrift'}>
+      <Undertittel
+        children={<FormattedMessage id={'overskrift.bekreftelse'} />}
+      />
+      <Veilederpanel fargetema="suksess" svg={<img alt="" src={veileder} />}>
+        <div className="modal-tekst">
+          <Normaltekst>
+            {`${hentIntl()
+              .formatMessage({ id: 'endreMeldeform.valgtBytte' })
+              .trim()}
+                            ${hentIntl().formatMessage({
+                              id: 'endreMeldeform.elektronisk',
+                            })}`}
+          </Normaltekst>
+          <Normaltekst>
+            <FormattedMessage
+              id={'endreMeldeform.kvittering.elektronisk.info'}
+            />
+          </Normaltekst>
         </div>
-    );
+      </Veilederpanel>
+    </div>
+  );
 };

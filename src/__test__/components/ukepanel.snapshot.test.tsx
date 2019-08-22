@@ -9,7 +9,10 @@ Enzyme.configure({ adapter: new Adapter() });
 
 it('UkePanel', () => {
   const tree = shallow(
-    <ProviderWrapper initialStateName={'innsending'} initialState={innsendingTEST}>
+    <ProviderWrapper
+      initialStateName={'innsending'}
+      initialState={innsendingTEST}
+    >
       <UkePanel
         ukenummer={1}
         erAap={false}

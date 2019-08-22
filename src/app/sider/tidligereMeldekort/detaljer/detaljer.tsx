@@ -9,7 +9,10 @@ import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../../store/configureStore';
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/kortMapper';
+import {
+  mapKortStatusTilTekst,
+  mapKortTypeTilTekst,
+} from '../../../utils/kortMapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import { Router } from '../../../types/router';
@@ -25,8 +28,11 @@ import MobilTabell from '../../../components/tabell/mobil/mobilTabell';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import { PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
+import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
+import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 
 interface MapStateToProps {
+  historiskeMeldekort: HistoriskeMeldekortState;
   meldekortdetaljer: MeldekortdetaljerState;
   aktivtMeldekort: Meldekort;
   router: Router;
@@ -35,7 +41,9 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
   hentMeldekortdetaljer: () => void;
+  resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
+  resettAktivtMeldekort: () => void;
 }
 
 type Props = MapDispatchToProps & MapStateToProps;
@@ -59,15 +67,21 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAktivtMeldekortOgRedirect = () => {
-    if (this.props.aktivtMeldekort.meldekortId === 0) {
-      const pathname = this.props.router.location.pathname;
-      const tidligereMeldekort = '/tidligere-meldekort';
-      pathname !== tidligereMeldekort && history.push(tidligereMeldekort);
+    const { historiskeMeldekort, aktivtMeldekort } = this.props;
+    if (
+      aktivtMeldekort.meldekortId !== 0 &&
+      historiskeMeldekort.historiskeMeldekort.filter(
+        mk => mk.meldekortId === aktivtMeldekort.meldekortId
+      ).length > 0
+    ) {
+      this.props.hentMeldekortdetaljer();
+    } else {
+      history.push('/tidligere-meldekort');
     }
   };
 
   componentDidMount() {
-    this.props.hentMeldekortdetaljer();
+    this.props.resettMeldekortdetaljer();
     this.sjekkAktivtMeldekortOgRedirect();
     window.addEventListener('resize', this.handleWindowSize);
     if (this.props.personInfo.personId === 0) {
@@ -80,24 +94,49 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       windowSize: window.innerWidth,
     });
 
+  samstemmMeldekortId = () => {
+    const { meldekortdetaljer, aktivtMeldekort } = this.props;
+    if (meldekortdetaljer.meldekortdetaljer.id !== '') {
+      if (
+        aktivtMeldekort.meldekortId !==
+        meldekortdetaljer.meldekortdetaljer.meldekortId
+      ) {
+        history.push('/tidligere-meldekort');
+      }
+    }
+  };
+
   innhold = () => {
     const { meldekortdetaljer, aktivtMeldekort } = this.props;
+    this.samstemmMeldekortId();
     const rows = this.settTabellrader(aktivtMeldekort);
     const columns = [
-      { key: 'mottattDato', label: <FormattedMessage id="overskrift.mottatt" /> },
+      {
+        key: 'mottattDato',
+        label: <FormattedMessage id="overskrift.mottatt" />,
+      },
       {
         key: 'kortStatus',
         label: <FormattedMessage id="overskrift.status" />,
         cell: function(row: any, columnKey: any) {
           return (
-            <EtikettBase type={'info'} className={finnRiktigEtikettKlasse(row.kortStatus)}>
+            <EtikettBase
+              type={'info'}
+              className={finnRiktigEtikettKlasse(row.kortStatus)}
+            >
               {row.kortStatus}
             </EtikettBase>
           );
         },
       },
-      { key: 'bruttoBelop', label: <FormattedMessage id="overskrift.bruttoBelop" /> },
-      { key: 'kortType', label: <FormattedMessage id="overskrift.meldekorttype" /> },
+      {
+        key: 'bruttoBelop',
+        label: <FormattedMessage id="overskrift.bruttoBelop" />,
+      },
+      {
+        key: 'kortType',
+        label: <FormattedMessage id="overskrift.meldekorttype" />,
+      },
     ];
     const { meldegruppe } = aktivtMeldekort;
 
@@ -162,7 +201,10 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
                 nesteInnsendingstype={Innsendingstyper.korrigering}
               />
             ) : null}
-            <PrintKnapp innholdRenderer={this.innhold} prerenderInnhold={true} />
+            <PrintKnapp
+              innholdRenderer={this.innhold}
+              prerenderInnhold={true}
+            />
           </div>
         </section>
       </div>
@@ -172,6 +214,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
+    historiskeMeldekort: state.historiskeMeldekort,
     meldekortdetaljer: state.meldekortdetaljer,
     aktivtMeldekort: state.aktivtMeldekort,
     router: selectRouter(state),
@@ -181,8 +224,13 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    hentMeldekortdetaljer: () => dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+    hentMeldekortdetaljer: () =>
+      dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+    resettMeldekortdetaljer: () =>
+      dispatch(MeldekortdetaljerActions.resettMeldekortdetaljer()),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
+    resettAktivtMeldekort: () =>
+      dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
   };
 };
 

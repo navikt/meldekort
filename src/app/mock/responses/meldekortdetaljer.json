@@ -1,12 +1,13 @@
 {
   "personId": 123456,
   "fodselsnr": "11111111111",
-  "meldekortId": 1011121314,
+  "meldekortId": 1111111111,
   "meldeperiode": "201851",
   "arkivnokkel": "1-ELEKTRONISK",
   "kortType": "ELEKTRONISK",
   "meldeDato": "2018-12-26T12:00:00+01:00",
   "lestDato": "2018-12-26T12:00:00+01:00",
+  "begrunnelse": "Syk",
   "sporsmal": {
     "arbeidssoker": true,
     "arbeidet": true,

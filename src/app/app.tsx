@@ -26,7 +26,7 @@ import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { isIE } from './utils/browsers';
+import { isIE, isOldSafari, isOldEdge } from './utils/browsers';
 
 if (erMock()) {
   setupMock();
@@ -62,38 +62,53 @@ class App extends React.Component<Props, AppState> {
   }
 
   settInnhold = () => {
-    const { personStatus, baksystemFeilmelding, person, hentPerson, meny } = this.props;
+    const {
+      personStatus,
+      baksystemFeilmelding,
+      person,
+      hentPerson,
+      meny,
+    } = this.props;
 
     if (personStatus.personStatus.id === '') {
       return (
         <div className="main-container">
           {baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
-          ) : personStatus.personStatus.statusArbeidsoker === 'venter_pa_data' ? (
-            <NavFrontendSpinner type={'XL'} />
+          ) : personStatus.personStatus.statusArbeidsoker ===
+            'venter_pa_data' ? (
+            <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
           ) : (
             <Feilside />
           )}
         </div>
       );
-    } else if (erBrukerRegistrertIArena(personStatus.personStatus.statusArbeidsoker)) {
-      if (person.meldeform === MeldeForm.IKKE_SATT && !this.state.henterPersonInfo) {
+    } else if (
+      erBrukerRegistrertIArena(personStatus.personStatus.statusArbeidsoker)
+    ) {
+      if (
+        person.meldeform === MeldeForm.IKKE_SATT &&
+        !this.state.henterPersonInfo
+      ) {
         hentPerson();
         this.setState({ henterPersonInfo: true });
       }
 
-      const stylingMedIE = classNames('main-container', {
-        ie11: isIE,
+      const browserSpecificStyling = classNames('main-container', {
+        ieStyling: isIE,
+        oldBrowserStyling: isOldSafari || isOldEdge,
       });
 
       return (
         <>
-          <Header tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })} />
+          <Header
+            tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })}
+          />
           <div
             className={classNames('', { overlay: meny.erApen })}
             onClick={() => meny.erApen && this.props.toggleMeny(!meny.erApen)}
           >
-            <div className={stylingMedIE}>
+            <div className={browserSpecificStyling}>
               <ConnectedRouter history={history}>
                 <Switch>
                   <Route path="/" component={MeldekortRoutes} />
@@ -146,7 +161,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     hentPerson: () => dispatch(PersonActions.hentPerson.request()),
-    hentPersonStatus: () => dispatch(PersonStatusActions.hentPersonStatus.request()),
+    hentPersonStatus: () =>
+      dispatch(PersonStatusActions.hentPersonStatus.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
     settMenyPunkter: (menypunkter: MenyPunkt[]) =>

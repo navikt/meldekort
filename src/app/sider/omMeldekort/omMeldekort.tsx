@@ -26,7 +26,10 @@ interface MapDispatchToProps {
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
-class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, any> {
+class OmMeldekort extends React.Component<
+  MapDispatchToProps & MapStateToProps,
+  any
+> {
   componentDidMount() {
     const { resetInnsending, meny, settValgtMenyPunkt } = this.props;
     resetInnsending();
@@ -47,7 +50,11 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        <Veilederpanel type={'plakat'} kompakt={true} svg={<img alt={'Veileder'} src={veileder} />}>
+        <Veilederpanel
+          type={'plakat'}
+          kompakt={true}
+          svg={<img alt={'Veileder'} src={veileder} />}
+        >
           <section className="seksjon">
             <Normaltekst>
               <FormattedMessage id="genereltOmMeldekort.velkommen" />
@@ -72,7 +79,9 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
                 values={{
                   0: 'https://www.nav.no',
                   1: hentIntl()
-                    .formatMessage({ id: 'genereltOmMeldekort.informasjonOmMeldekortLink' })
+                    .formatMessage({
+                      id: 'genereltOmMeldekort.informasjonOmMeldekortLink',
+                    })
                     .trim(),
                 }}
               />

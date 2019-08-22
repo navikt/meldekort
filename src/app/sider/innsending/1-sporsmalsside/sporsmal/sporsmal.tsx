@@ -20,8 +20,12 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
       <div className="flex-sporsmal-hjelpetekst-container">
         <Undertittel>
           <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
-          {props.formatertDato ? <span> {props.formatertDato} ? </span> : null}{' '}
-          {props.disabled ? <FormattedMessage id={'korrigering.registrert.merknad'} /> : null}
+          {props.formatertDato ? (
+            <span> {props.formatertDato} ? </span>
+          ) : null}{' '}
+          {props.disabled ? (
+            <FormattedMessage id={'korrigering.registrert.merknad'} />
+          ) : null}
         </Undertittel>
         <>
           <UtvidetInformasjon>
@@ -49,7 +53,11 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
         onChange={props.sporsmalOnChange}
         feil={
           props.sporsmalsobjekt.feil.erFeil
-            ? { feilmelding: hentIntl().formatMessage({ id: props.sporsmalsobjekt.feil.feilmeldingId }) }
+            ? {
+                feilmelding: hentIntl().formatMessage({
+                  id: props.sporsmalsobjekt.feil.feilmeldingId,
+                }),
+              }
             : undefined
         }
       />

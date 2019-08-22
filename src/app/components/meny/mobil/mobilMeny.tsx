@@ -9,71 +9,87 @@ import { MenyActions } from '../../../actions/meny';
 import { Dispatch } from 'redux';
 import classNames from 'classnames';
 import { Collapse } from 'react-collapse';
+import Lenke from 'nav-frontend-lenker';
 
 interface MobilMenyProps {
-    menypunkter: MenyPunkt[];
+  menypunkter: MenyPunkt[];
 }
 
 interface MapStateToProps {
-    router: Router;
-    erApen: boolean;
-    valgtMenyPunkt: MenyPunkt;
+  router: Router;
+  erApen: boolean;
+  valgtMenyPunkt: MenyPunkt;
 }
 
 interface MapDispatchToProps {
-    settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
-    toggleMeny: (erApen: boolean) => void;
+  settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
+  toggleMeny: (erApen: boolean) => void;
 }
 
-const MobilMeny: React.FunctionComponent<MobilMenyProps&MapStateToProps&MapDispatchToProps> = (props) => {
-    const {settValgtMenyPunkt, toggleMeny, valgtMenyPunkt, menypunkter, erApen} = props;
+const MobilMeny: React.FunctionComponent<
+  MobilMenyProps & MapStateToProps & MapDispatchToProps
+> = props => {
+  const {
+    settValgtMenyPunkt,
+    toggleMeny,
+    valgtMenyPunkt,
+    menypunkter,
+    erApen,
+  } = props;
 
-    const onChange = (item: MenyPunkt) => {
-        settValgtMenyPunkt(item);
-        history.push(item.urlparam);
-    };
+  const onChange = (item: MenyPunkt) => {
+    settValgtMenyPunkt(item);
+    history.push(item.urlparam);
+  };
 
-    return (
-        <nav className={classNames('mobilMeny', )}>
-            <Collapse isOpened={props.erApen}>
-                    <ul className={classNames('mobilMeny-navlist', {open: erApen})}>
-                        {menypunkter.map( menypunkt => (
-                            <li
-                                className={'navlist-item'}
-                                onClick={() => onChange(menypunkt)}
-                                key={menypunkt.tittel}
-                            >
-                                <div
-                                    className={classNames('item-wrapper', {
-                                    active: valgtMenyPunkt.tittel === menypunkt.tittel
-                                })}
-                                >
-                                    {hentIntl().formatMessage({id: menypunkt.tekstid})}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-            </Collapse>
-            <div className={classNames('overlay', {on: erApen})} onClick={() => toggleMeny(false)}/>
-        </nav>
-    );
+  return (
+    <nav className={classNames('mobilMeny')}>
+      <Collapse isOpened={props.erApen}>
+        <ul className={classNames('mobilMeny-navlist', { open: erApen })}>
+          {menypunkter.map(menypunkt => (
+            <li
+              className={'navlist-item'}
+              onClick={() => onChange(menypunkt)}
+              key={menypunkt.tittel}
+              aria-labelledby={'navlink'}
+            >
+              <Lenke
+                className={classNames('item-wrapper', {
+                  active: valgtMenyPunkt.tittel === menypunkt.tittel,
+                })}
+                href={'#'}
+              >
+                {hentIntl().formatMessage({ id: menypunkt.tekstid })}
+              </Lenke>
+            </li>
+          ))}
+        </ul>
+      </Collapse>
+      <div
+        className={classNames('overlay', { on: erApen })}
+        onClick={() => toggleMeny(false)}
+      />
+    </nav>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-    return {
-        router: selectRouter(state),
-        erApen: state.meny.erApen,
-        valgtMenyPunkt: state.meny.valgtMenyPunkt
-    };
+  return {
+    router: selectRouter(state),
+    erApen: state.meny.erApen,
+    valgtMenyPunkt: state.meny.valgtMenyPunkt,
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
-            dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
-        toggleMeny: (erApen: boolean) =>
-            dispatch(MenyActions.toggleMeny(erApen)),
-    };
+  return {
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
+      dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
+    toggleMeny: (erApen: boolean) => dispatch(MenyActions.toggleMeny(erApen)),
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (MobilMeny);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MobilMeny);

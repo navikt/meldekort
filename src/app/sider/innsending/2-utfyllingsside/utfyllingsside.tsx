@@ -3,15 +3,27 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates';
-import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
+import {
+  hentDatoForAndreUke,
+  hentDatoForForsteUke,
+  hentUkenummerForDato,
+} from '../../../utils/dates';
+import {
+  InnsendingState,
+  SpmSvar,
+  UtfyllingFeil,
+} from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import Konstanter from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
+import {
+  Meldegruppe,
+  Meldekort,
+  SendtMeldekort,
+} from '../../../types/meldekort';
 import { scrollTilElement } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
@@ -31,7 +43,10 @@ interface MapDispatchToProps {
 
 type UtfyllingssideProps = MapStateToProps & MapDispatchToProps;
 
-class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil> {
+class Utfyllingsside extends React.Component<
+  UtfyllingssideProps,
+  UtfyllingFeil
+> {
   constructor(props: UtfyllingssideProps) {
     super(props);
     this.state = {
@@ -54,7 +69,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
-        svar: sporsmalobj.checked === undefined ? false : sporsmalobj.checked.endsWith('ja'),
+        svar:
+          sporsmalobj.checked === undefined
+            ? false
+            : sporsmalobj.checked.endsWith('ja'),
       });
     });
     return sporsmalListe;
@@ -79,7 +97,10 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
           feil.push(dag.dag + dag.uke);
           feilIArbeidetTimerHeleHalve = true;
-        } else if (Number(dag.arbeidetTimer) > 24 || Number(dag.arbeidetTimer) < 0) {
+        } else if (
+          Number(dag.arbeidetTimer) > 24 ||
+          Number(dag.arbeidetTimer) < 0
+        ) {
           feil.push(dag.dag + dag.uke);
           feilIArbeidetTimer = true;
         }
@@ -99,10 +120,16 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
     let kurs = !this.sjekkSporsmal('aktivitetArbeid');
     let syk = !this.sjekkSporsmal('forhindret');
     let ferie = !this.sjekkSporsmal('ferieFravar');
-    let feilITimer = this.validerAntallTimerForDag(this.props.innsending.utfylteDager);
+    let feilITimer = this.validerAntallTimerForDag(
+      this.props.innsending.utfylteDager
+    );
 
     this.props.innsending.utfylteDager.map(dag => {
-      if (!arbeidet && typeof dag.arbeidetTimer !== 'undefined' && Number(dag.arbeidetTimer) > 0) {
+      if (
+        !arbeidet &&
+        typeof dag.arbeidetTimer !== 'undefined' &&
+        Number(dag.arbeidetTimer) > 0
+      ) {
         arbeidet = true;
       }
       if (!kurs && dag.kurs) {
@@ -148,7 +175,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
       feilIArbeidetTimer ||
       feilIArbeidetTimerHeleHalve
     ) {
-      let feiltekst = hentIntl().formatMessage({ id: 'utfylling.ingenDagerUtfylt' });
+      let feiltekst = hentIntl().formatMessage({
+        id: 'utfylling.ingenDagerUtfylt',
+      });
       return (
         <AlertStripe className={'utfyllingFeil'} type={'feil'}>
           <ul>
@@ -178,7 +207,9 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
               })}`}</li>
             ) : null}
             {feilIArbeidetTimer ? (
-              <li>{`${hentIntl().formatMessage({ id: 'arbeidTimer.rangeValidator.range' })}`}</li>
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.rangeValidator.range',
+              })}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
@@ -209,13 +240,16 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
       this.props.innsending.innsendingstype
     ) ? (
       <main>
-        <section id="tittel" className="seksjon flex-innhold tittel-sprakvelger">
+        <section
+          id="tittel"
+          className="seksjon flex-innhold tittel-sprakvelger"
+        >
           <Innholdstittel>
             <FormattedMessage id="overskrift.steg2" />
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        <section className="seksjon flex-innhold sentrert">
+        <section className="seksjon">
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
           <div className={'utfylling-container'}>
             <UkePanel
@@ -223,14 +257,18 @@ class Utfyllingsside extends React.Component<UtfyllingssideProps, UtfyllingFeil>
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
               datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
               utfyllingFeil={this.state}
-              erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
+              erAap={
+                this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF
+              }
             />
             <UkePanel
               ukenummer={Konstanter().andreUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
-              datoTittel={hentDatoForForsteUke(meldeperiode.til)}
+              datoTittel={hentDatoForAndreUke(meldeperiode.til)}
               utfyllingFeil={this.state}
-              erAap={this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
+              erAap={
+                this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF
+              }
             />
           </div>
         </section>
@@ -274,7 +312,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    resetValideringsresultat: () => dispatch(InnsendingActions.resetValideringsresultat()),
+    resetValideringsresultat: () =>
+      dispatch(InnsendingActions.resetValideringsresultat()),
   };
 };
 export default connect(

@@ -11,7 +11,8 @@
     'arbeidTimer.iConverter.Double': 'Ikke gyldig tall ',
     'arbeidTimer.rangeValidator.range': 'Antall timer er ugyldig ',
     arbeidTimer: ' ',
-    'arbeidet.required': 'Spørsmålet om du har vært i arbeid de siste 14 dagene må besvares ',
+    'arbeidet.required':
+      'Spørsmålet om du har vært i arbeid de siste 14 dagene må besvares ',
     arbeidet: ' ',
     'begrunnelse.required': 'Begrunnelse for korrigeringen må fylles ut. ',
     'begrunnelse.velgArsak': 'Velg en årsak... ',
@@ -93,7 +94,8 @@
     'genereltOmMeldekort.valg.endre':
       'Endre meldeform fra f.eks. papirmeldekort til elektronisk meldekort ',
     'genereltOmMeldekort.valg.sende': 'Sende elektroniske meldekort ',
-    'genereltOmMeldekort.valg.tidligere': 'Se på tidligere innsendte meldekort ',
+    'genereltOmMeldekort.valg.tidligere':
+      'Se på tidligere innsendte meldekort ',
     'genereltOmMeldekort.velge': 'Fra menyen kan du velge å: ',
     'genereltOmMeldekort.velkommen':
       'Velkommen til NAVs tjeneste for innsending av meldekort via internett. Vi ønsker at du skal få sendt inn meldekortene enkelt, raskt og sikkert. ',
@@ -112,7 +114,8 @@
       'Du må begrunne hvorfor du korrigerer meldekortet. Velg det alternativet som passer best fra nedtrekksmenyen. ',
     'kurs.required-AAP':
       'Spørsmålet om du har gjennomført avtalt aktivitet eller deltatt på kurs/utdanning må besvares ',
-    'kurs.required': 'Spørsmålet om du har deltatt på tiltak eller kurs/utdanning må besvares ',
+    'kurs.required':
+      'Spørsmålet om du har deltatt på tiltak eller kurs/utdanning må besvares ',
     kurs: ' ',
     loggut: 'Logg ut ',
     'meldekort.for.perioden': 'Meldekort for perioden ',
@@ -153,7 +156,8 @@
     'naviger.tilbake': 'Tilbake ',
     'obs.feilmelding.overskrift': 'Obs! ',
     'obs.feilmelding': 'Noe gikk galt. Vennligst prøv igjen senere. ',
-    'oss.frist.overskrift': 'Når er siste frist for å sende meldekort uten trekk? ',
+    'oss.frist.overskrift':
+      'Når er siste frist for å sende meldekort uten trekk? ',
     'oss.frist.tekst':
       '<p> Siste frist for å sende inn meldekortet til riktig tid er mandag en uke etter perioden på kortet (mandag i uke 4) kl 23.00. </p> <p> Når den vanlige fastsatte meldingsdagen er passert uten at du har sendt inn kortet, ser du siste frist for å sende inn meldekortet uten trekk i ytelsen på «Ditt NAV». </p> <p> Sender du kortet senere enn dette, har du meldt deg for sent. Du mister retten til dagpenger og arbeidsavklaringspenger fra den dagen du skulle ha meldt deg (mandag i uke 3) til du melder deg igjen. Se folketrygdloven § 4-8 og § 11-7. </p> ',
     'oss.korrigere.overskrift': 'Kan jeg korrigere opplysningene på kortet? ',
@@ -177,7 +181,8 @@
     'overskrift.dinSide': 'Gå til Ditt NAV ',
     'overskrift.elektroniskMeldekort': 'Elektroniske meldekort ',
     'overskrift.endreMeldeform': 'Endre meldeform ',
-    'overskrift.etterregistrering.innsending': 'Etterregistrering av meldekort ',
+    'overskrift.etterregistrering.innsending':
+      'Etterregistrering av meldekort ',
     'overskrift.etterregistrertMeldekort': 'Til innsending av meldekort ',
     'overskrift.genereltOmMeldekort': 'Generelt om meldekort ',
     'overskrift.innsendingMeldekort': 'Til innsending av meldekort ',
@@ -198,7 +203,8 @@
     'overskrift.status': 'Status ',
     'overskrift.steg1': 'Spørsmål ',
     'overskrift.steg2': 'Utfylling ',
-    'overskrift.steg3.info.bekreftVerdier': 'Vennligst bekreft at opplysningene er riktige. ',
+    'overskrift.steg3.info.bekreftVerdier':
+      'Vennligst bekreft at opplysningene er riktige. ',
     'overskrift.steg3.info.ikkeSendt': 'Meldekortet er ikke sendt enda. ',
     'overskrift.steg3': 'Bekreftelse ',
     'overskrift.steg4': 'Kvittering ',
@@ -212,7 +218,8 @@
     'sekundarmeny.omMeldekort': 'Om meldekort ',
     'sekundarmeny.send': 'Send Meldekort ',
     'sekundarmeny.tidligere': 'Tidligere meldekort ',
-    'sendEtterregistrerte.info.ingenKlare': 'Alle kort for tidligere perioder er sendt. ',
+    'sendEtterregistrerte.info.ingenKlare':
+      'Alle kort for tidligere perioder er sendt. ',
     'sendMeldekort.alert.forklaring':
       'De eldste meldekortene må fylles ut før du kan gå videre til de nyere. Klikk på "Start utfylling" nedenfor for å begynne nederst i bunken. ',
     'sendMeldekort.info.automatiskLedet':
@@ -221,14 +228,17 @@
       'Meldekortet du sender vil alltid være for den eldste perioden. ',
     'sendMeldekort.info.forMangeMeldekort.feilmelding':
       'På grunn av manglende innsending av meldekort, må du ta kontakt med ditt lokale NAV-kontor før du kan sende meldekort igjen. ',
-    'sendMeldekort.info.forMangeMeldekort': 'Du har ikke sendt inn fem eller flere meldekort. ',
-    'sendMeldekort.info.ingenKlare': 'Det er for tidlig å sende inn meldekort nå. ',
+    'sendMeldekort.info.forMangeMeldekort':
+      'Du har ikke sendt inn fem eller flere meldekort. ',
+    'sendMeldekort.info.ingenKlare':
+      'Det er for tidlig å sende inn meldekort nå. ',
     'sendMeldekort.info.innsendingStatus.kanSendes': 'kan sendes inn: ',
     'sendMeldekort.info.innsendingStatus.sendesSenest':
       '<span class="orange">Sendes inn senest:</span> ',
     'sendMeldekort.info.innsendingStatus.sendesSnarest':
       '<span class="orange">Sendes inn snarest!</span> ',
-    'sendMeldekort.info.kanSende': 'Du kan sende inn meldekort for følgende perioder: ',
+    'sendMeldekort.info.kanSende':
+      'Du kan sende inn meldekort for følgende perioder: ',
     'sendMeldekort.info.neste': 'Klikk på Neste for å sende meldekort. ',
     'sendMeldekort.knapp.startUtfylling': 'Start Utfylling ',
     'sendt.etterregistrering.info':
@@ -239,9 +249,10 @@
     'skrivUt.lukkVindu': 'Lukk vindu ',
     'sporsmal.aktivitetArbeid-AAP':
       'Har du gjennomført avtalt aktivitet eller deltatt på kurs/utdanning? ',
-    'sporsmal.aktivitetArbeid': 'Har du deltatt på tiltak eller kurs/utdanning? ',
+    'sporsmal.aktivitetArbeid':
+      'Har du deltatt på tiltak eller kurs/utdanning? ',
     'sporsmal.ansvarForRiktigUtfylling':
-      'Jeg er kjent med at jeg må oppgi riktige og fullstendige opplysninger. Gjør jeg ikke det kan det føre til at jeg må betale tilbake det jeg har fått feilaktig utbetalt. Jeg er også klar over at jeg kan bli anmeldt til politiet. ',
+      'Du må oppgi riktige og fullstendige opplysninger. Gjør du ikke det kan det føre til at du må betale tilbake det du feilaktig har fått utbetalt. Du kan også bli anmeldt til politiet. ',
     'sporsmal.arbeid': 'Har du vært i arbeid de siste 14 dagene? ',
     'sporsmal.bekreft': 'Bekreft valg ',
     'sporsmal.bekreftelse':
@@ -254,22 +265,26 @@
       'Har du vært forhindret fra å ta arbeid eller gjennomføre avtalt aktivitet fordi du har vært for syk? ',
     'sporsmal.forhindret':
       'Har du vært forhindret fra å ta arbeid, delta på tiltak eller være arbeidssøker fordi du har vært for syk? ',
-    'sporsmal.ingenMeldekortASende': 'Det er ingen tilgjengelige meldekort å sende inn ',
+    'sporsmal.ingenMeldekortASende':
+      'Det er ingen tilgjengelige meldekort å sende inn ',
     'sporsmal.lesVeiledning':
-      'Du må lese veiledningstekstene før du fyller ut feltene i meldekortet. Du finner dem ved å klikke på spørsmålstegnene. ',
+      'Du må lese veiledningstekstene før du fyller ut feltene i meldekortet. Du finner dem ved å klikke på "Les mer" under hvert spørsmål. ',
     'sporsmal.registrertMerknad':
       'Merk: Hvis du svarer <strong>Nei</strong> vil du ikke lenger få bistand eller utbetalinger fra NAV ',
-    'sporsmal.registrert': 'Ønsker du fortsatt å være registrert hos NAV de neste 14 dagene, uke ',
+    'sporsmal.registrert':
+      'Ønsker du fortsatt å være registrert hos NAV de neste 14 dagene, uke ',
     'sporsmal.tilbakeEndre': 'Tilbake og endre ',
     'sprakvelger.chooseLanguage': 'Language ',
     'sprakvelger.engelsk': 'Engelsk ',
     'sprakvelger.norsk': 'Norsk ',
     'svar.aktivitetArbeid.ja-AAP':
       'Ja, jeg har gjennomført avtalt aktivitet eller deltatt på kurs/utdanning ',
-    'svar.aktivitetArbeid.ja': 'Ja, jeg har deltatt på tiltak eller kurs/utdanning ',
+    'svar.aktivitetArbeid.ja':
+      'Ja, jeg har deltatt på tiltak eller kurs/utdanning ',
     'svar.aktivitetArbeid.nei-AAP':
       'Nei, jeg har ikke gjennomført avtalt aktivitet eller deltatt på kurs/utdanning ',
-    'svar.aktivitetArbeid.nei': 'Nei, jeg har ikke deltatt på tiltak eller kurs/utdanning ',
+    'svar.aktivitetArbeid.nei':
+      'Nei, jeg har ikke deltatt på tiltak eller kurs/utdanning ',
     'svar.arbeid.ja': 'Ja, jeg har vært i arbeid de siste 14 dagene ',
     'svar.arbeid.nei': 'Nei, jeg har ikke vært i arbeid de siste 14 dagene ',
     'svar.ferieFravar.ja-AAP':
@@ -288,8 +303,10 @@
       'Nei, jeg har ikke vært forhindret fra å ta arbeid eller gjennomføre avtalt aktivitet fordi jeg har vært for syk ',
     'svar.forhindret.nei':
       'Nei, jeg har ikke vært forhindret fra å ta arbeid, delta på tiltak eller være arbeidssøker fordi jeg har vært for syk ',
-    'svar.registrert.ja': 'Ja, jeg ønsker å være registrert hos NAV de neste 14 dagene ',
-    'svar.registrert.nei': 'Nei, jeg ønsker ikke å være registrert hos NAV de neste 14 dagene ',
+    'svar.registrert.ja':
+      'Ja, jeg ønsker å være registrert hos NAV de neste 14 dagene ',
+    'svar.registrert.nei':
+      'Nei, jeg ønsker ikke å være registrert hos NAV de neste 14 dagene ',
     'syk.required-AAP':
       'Spørsmålet om du har vært forhindret fra å ta arbeid eller gjennomføre avtalt aktivitet fordi du har vært for syk må besvares ',
     'syk.required':
@@ -320,7 +337,8 @@
       'Jeg er kjent med at hvis opplysningene jeg har oppgitt ikke er riktige og fullstendige kan det føre til at jeg må betale tilbake det jeg har fått feilaktig utbetalt. Jeg er også klar over at jeg kan bli anmeldt til politiet. ',
     'utfylling.bekreft.feil':
       'Bekreftelse for at du har lest og forstått veiledningstekstene må fylles ut. ',
-    'utfylling.bekreftAnsvar': 'Jeg bekrefter at jeg har lest og forstått veiledningstekstene. ',
+    'utfylling.bekreftAnsvar':
+      'Jeg bekrefter at jeg har lest og forstått veiledningstekstene. ',
     'utfylling.bekreft':
       'Jeg er kjent med at hvis opplysningene jeg har oppgitt ikke er riktige og fullstendige kan jeg miste retten til stønad fra NAV. <br> Jeg er også klar over at jeg må betale tilbake det jeg har fått feilaktig utbetalt, og at jeg kan bli anmeldt til politiet. ',
     'utfylling.ferieFravar': 'Ferie og annet fravær enn sykdom ',
@@ -356,7 +374,8 @@
     'endreMeldeform.benytter': 'You are currently using ',
     'endreMeldeform.bytte': 'Do you want to change to ',
     'endreMeldeform.elektronisk': 'Electronic employment status form ',
-    'endreMeldeform.endre': 'Do you want to change the way you send employment status form? ',
+    'endreMeldeform.endre':
+      'Do you want to change the way you send employment status form? ',
     'endreMeldeform.info.elektronisk':
       'If you choose electronic employment status form, you send via nav.no. Most people choose electronic status form because it is simple, you get guidance and you are alarmed of any information is missing. You normally receive the payment 1-2 business days after posting the status form at nav.no ',
     'endreMeldeform.info':
@@ -365,14 +384,15 @@
       'Change applies immediately. Are any employment status forms available, you may send the form today. ',
     'endreMeldeform.papir': 'Paper employment status form ',
     'endreMeldeform.valgtBytte': 'You have decided to change to ',
-    'etterregistrering.sporsmal.begrunnelse': 'Comment on this employment form: ',
+    'etterregistrering.sporsmal.begrunnelse':
+      'Comment on this employment form: ',
     'feilmelding.alleredeSendtInn':
       'The employment status form for this period is already registered. You cannot send this employment status form. ',
     'feilmelding.baksystem.overskrift': 'System error ',
     'feilmelding.baksystem':
-      'We are having problems with our systems, and therefore can not show you your emplyment status forms. Please try again later. ',
+      'We are having problems with our systems, and therefore can not show you your employment status forms. Please try again later. ',
     'forklaring.sporsmal.aktivitetArbeid-AAP':
-      'Click <strong>Yes</strong> if you have participated in activities you and NAV agreed on. <br> <br> This includes <ul>     <li>employment schemes</li>s     <li>active medical treatment</li>     <li>training or education</li>     <li>other activities.</li> </ul> <br> <br> Click <strong>Yes</strong> if you take part in activities you and NAV have not agreed on. This includes <ul>     <li>courses and/or training </li>     <li>Education </li>     <li>Self-study </li> </ul> Click <strong>No</strong> if you have not performed the agreed activity. <br> <br> Click <strong>No</strong> if you do not have any agreed activities during the term on the report card. This also applies if you have no other course or education planned in this period of time. ',
+      'Click <strong>Yes</strong> if you have participated in activities you and NAV agreed on. <br> <br> This includes <ul>     <li>employment schemes</li>     <li>active medical treatment</li>     <li>training or education</li>     <li>other activities.</li> </ul> <br> <br> Click <strong>Yes</strong> if you take part in activities you and NAV have not agreed on. This includes <ul>     <li>courses and/or training </li>     <li>Education </li>     <li>Self-study </li> </ul> Click <strong>No</strong> if you have not performed the agreed activity. <br> <br> Click <strong>No</strong> if you do not have any agreed activities during the term on the report card. This also applies if you have no other course or education planned in this period of time. ',
     'forklaring.sporsmal.aktivitetArbeid':
       'Click <strong>Yes</strong> if you have participated in employment schemes, courses or training/education. With employment schemes we mean labour market schemes such as an AMO course or a  Job Club. Do not record other activities from your activity plan, such as information meetings with NAV or jobs you have applied for. <br> <br> Click <strong>Yes</strong> if NAV has approved you receiving unemployment benefits while attending education. <br> <br> Click <strong>Yes</strong> if you have attended courses or education that you have not agreed upon with NAV. This also applies to self-study. <br> <br> Click <strong>No</strong> If you have not participated in employment schemes, courses or training/education. ',
     'forklaring.sporsmal.arbeid-AAP':
@@ -431,7 +451,8 @@
     'genereltOmMeldekort.velge': 'You may choose from the menu: ',
     'genereltOmMeldekort.velkommen':
       'Welcome to NAVs service «Send employment status form». We want you to be able to submit your employment status forms easily, quickly and secure. ',
-    'ikke.registrert.overskrift': 'You must be registered to send Notification card. ',
+    'ikke.registrert.overskrift':
+      'You must be registered to send Notification card. ',
     'ikke.registrert.tekst':
       'For å være registrert som arbeidssøker eller for å få dagpenger, arbeidsavklaringspenger og tiltakspenger, må du sende meldekort hver 14. dag. Velg "Fortsett til registrering" hvis du vil registrere deg. ',
     'ikke.tilgang.overskrift': 'No access to notification card ',
@@ -488,7 +509,8 @@
     'naviger.tilbake': 'Back ',
     'obs.feilmelding.overskrift': 'Obs! ',
     'obs.feilmelding': 'Something went wrong. Please try again later. ',
-    'oss.frist.overskrift': 'When is final submission deadline without reduced payout? ',
+    'oss.frist.overskrift':
+      'When is final submission deadline without reduced payout? ',
     'oss.frist.tekst':
       '<p> Final submission deadline is Monday one week after the period on the employment status form (Monday week 4) at 23:00 h. </p> <p> If you have passed your normal submission deadline without sending the employment status form, you can visit “Ditt NAV” and find the final submission deadline without reduced payout. </p> <p> If you submit your employment status form later that the provided deadline, your submission is too late. Unemployment benefits and work assessment allowance will be reduced. You lose the right to benefits from the normal submission date (Monday week 3) until the day you actually send the employment status form, folketrygdloven § 4-8 and § 11-7. </p> ',
     'oss.korrigere.overskrift':
@@ -534,8 +556,10 @@
     'overskrift.status': 'Status ',
     'overskrift.steg1': 'Questions ',
     'overskrift.steg2': 'Fill in (supplement) ',
-    'overskrift.steg3.info.bekreftVerdier': 'Please confirm that the information is correct ',
-    'overskrift.steg3.info.ikkeSendt': 'The employment status form has not yet been sent ',
+    'overskrift.steg3.info.bekreftVerdier':
+      'Please confirm that the information is correct ',
+    'overskrift.steg3.info.ikkeSendt':
+      'The employment status form has not yet been sent ',
     'overskrift.steg3': 'Confirmation ',
     'overskrift.steg4': 'Receipt ',
     'overskrift.tidligereMeldekort': 'Previous employment status form ',
@@ -558,28 +582,33 @@
       'You will always send the employment status form concerning the oldest period. ',
     'sendMeldekort.info.forMangeMeldekort.feilmelding':
       'Due to lack of submitted employment status forms, please contact NAV. ',
-    'sendMeldekort.info.forMangeMeldekort': 'You have not sent 5 or more employment status forms ',
-    'sendMeldekort.info.ingenKlare': 'There are not yet any avaliable employment status forms ',
+    'sendMeldekort.info.forMangeMeldekort':
+      'You have not sent 5 or more employment status forms ',
+    'sendMeldekort.info.ingenKlare':
+      'There are not yet any avaliable employment status forms ',
     'sendMeldekort.info.innsendingStatus.kanSendes': 'may be sent: ',
     'sendMeldekort.info.innsendingStatus.sendesSenest':
       '<span class="orange">Final submission deadline without reduced payout!</span> ',
     'sendMeldekort.info.innsendingStatus.sendesSnarest':
       '<span class="red">Submit </span>immediately, your benefits may be reduced!! ',
-    'sendMeldekort.info.kanSende': 'You may send employment status forms concerning the period: ',
+    'sendMeldekort.info.kanSende':
+      'You may send employment status forms concerning the period: ',
     'sendMeldekort.info.neste': 'Click next to send employment status form. ',
     'sendMeldekort.knapp.startUtfylling': 'Begin filling out forms ',
     'sendt.etterregistrering.info':
       'Your employment status forms for one or more previous periods are ready to be sent. Click the button to send. ',
     'sendt.linkTilTidligereMeldekort': 'Employment form homescreen ',
-    'sendt.meldekortKanSendes': 'The next employment status form can be submitted on {0} ',
-    'sendt.mottatt.label': 'The Employment status form was received by NAV on {0} (at {1}) ',
+    'sendt.meldekortKanSendes':
+      'The next employment status form can be submitted on {0} ',
+    'sendt.mottatt.label':
+      'The Employment status form was received by NAV on {0} (at {1}) ',
     'skrivUt.lukkVindu': 'Close ',
     'sporsmal.aktivitetArbeid-AAP':
       'Have you completed an agreed activity or taken part in a course and/or training? ',
     'sporsmal.aktivitetArbeid':
       'Have you participated in any employment schemes, courses or education? ',
     'sporsmal.ansvarForRiktigUtfylling':
-      'I am aware that if the information I provide is not correct and complete, this may mean that I must pay back what I have received erroneously. I am also aware that I may be reported to the police. ',
+      'If the information you provide is not correct and complete, this may mean that you must pay back what you have received erroneously. You may also be reported to the police. ',
     'sporsmal.arbeid': 'Have you worked the past 14 days? ',
     'sporsmal.bekreft': 'Confirm choice ',
     'sporsmal.bekreftelse':
@@ -592,9 +621,10 @@
       'Have you been prevented from participating  in the activities you and NAV agreed on due to illness? ',
     'sporsmal.forhindret':
       'Have you been unable to work, participate in an employment scheme or apply for jobs due to illness? ',
-    'sporsmal.ingenMeldekortASende': 'There are no available employment status form to send. ',
+    'sporsmal.ingenMeldekortASende':
+      'There are no available employment status form to send. ',
     'sporsmal.lesVeiledning':
-      'You must read the guidance notes before filling out the fields in the employment status form. You will find these by clicking on the question marks. ',
+      'You must read the guidance notes before filling out the fields in the employment status form. You will find these by clicking "Read more" under each question. ',
     'sporsmal.registrertMerknad':
       'Note: If you click <strong>No</strong>, you will no longer receive assistance or benefits. ',
     'sporsmal.registrert':
@@ -605,10 +635,12 @@
     'sprakvelger.norsk': 'Norwegian ',
     'svar.aktivitetArbeid.ja-AAP':
       'Yes, I have completed an agreed activity or taken part in a course and/or training ',
-    'svar.aktivitetArbeid.ja': 'Yes, I have attended employment schemes or courses/education ',
+    'svar.aktivitetArbeid.ja':
+      'Yes, I have attended employment schemes or courses/education ',
     'svar.aktivitetArbeid.nei-AAP':
       'No, I have not completed an agreed activity or taken part in a course and/or training ',
-    'svar.aktivitetArbeid.nei': 'No, I have not attended employment schemes or courses/education ',
+    'svar.aktivitetArbeid.nei':
+      'No, I have not attended employment schemes or courses/education ',
     'svar.arbeid.ja': 'Yes, I have been working the last 14 days ',
     'svar.arbeid.nei': 'No, I have not been working the last 14 days ',
     'svar.ferieFravar.ja-AAP':
@@ -627,8 +659,10 @@
       'No, I have not been prevented from participating  in the activities I and NAV agreed on due to illness ',
     'svar.forhindret.nei':
       'No, I have not been unable to take on work, participate in an employment scheme, or apply for jobs due to illness ',
-    'svar.registrert.ja': 'Yes, I want to be registered at NAV the next 14 days ',
-    'svar.registrert.nei': 'No, I do not want to be registered at NAV the next 14 days ',
+    'svar.registrert.ja':
+      'Yes, I want to be registered at NAV the next 14 days ',
+    'svar.registrert.nei':
+      'No, I do not want to be registered at NAV the next 14 days ',
     'syk.required-AAP':
       'The question of whether you have been prevented from participating in the activities you and NAV agreed on due to illness must be answered ',
     'syk.required':
@@ -659,11 +693,13 @@
       'I am aware that if the information I have provided is not correct and complete, this may mean that I must pay back what I have received erroneously. I am also aware that I may be reported to the police. ',
     'utfylling.bekreft.feil':
       'Confirmation that you have read and understood the guidance notes must be filled in. ',
-    'utfylling.bekreftAnsvar': 'I confirm that I have read and understood the guidance notes. ',
+    'utfylling.bekreftAnsvar':
+      'I confirm that I have read and understood the guidance notes. ',
     'utfylling.bekreft':
       'I am aware that if the information I provide is not correct and complete, I may lose my entitlement to benefit. <br> <br> I am also aware that I must pay back what I have received erroneously and that I may be reported to the police. ',
     'utfylling.ferieFravar': 'Holiday and absence that is not due to illness ',
-    'utfylling.ingenDagerUtfylt': 'There has to be a value for at least one day for: ',
+    'utfylling.ingenDagerUtfylt':
+      'There has to be a value for at least one day for: ',
     'utfylling.syk': 'Illness ',
     'utfylling.tiltak': 'Activities: Schemes/courses/education ',
     'utfylling.ugyldigKombinasjon': 'Invalid combination of days ',

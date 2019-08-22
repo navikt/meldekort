@@ -22,9 +22,14 @@ export interface SideProps extends ClassAttributes<any> {
   tittel?: string;
 }
 
-export const Side: React.FunctionComponent<SideProps> = ({ children, tittel }) => (
+export const Side: React.FunctionComponent<SideProps> = ({
+  children,
+  tittel,
+}) => (
   <div className="utskrift__side">
-    {tittel && <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>}
+    {tittel && (
+      <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>
+    )}
     {children}
   </div>
 );
@@ -44,16 +49,20 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
   }
 
   const { fornavn, etternavn, fodselsnr } = props.personInfo;
-  const printTekst = hentIntl().formatMessage({ id: 'overskrift.meldekort.sendt' });
+  const printTekst = hentIntl().formatMessage({
+    id: 'overskrift.meldekort.sendt',
+  });
   const stylingMedIE = classNames('utskrift', {
-    ie11: isIE,
+    browserSpecificStyling: isIE,
   });
   return (
     <div className={stylingMedIE} role="presentation">
       <div className="utskrift__hode">
         <img src={NavLogo} alt="" width="90" height="56" />
         {props.erKvittering ? (
-          <Innholdstittel className="flex-innhold sentrert">{printTekst}</Innholdstittel>
+          <Innholdstittel className="flex-innhold sentrert">
+            {printTekst}
+          </Innholdstittel>
         ) : (
           <>
             <Ingress className="flex-innhold sentrert">

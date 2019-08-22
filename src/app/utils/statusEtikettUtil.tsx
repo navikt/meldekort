@@ -10,7 +10,7 @@ export const finnRiktigEtikettKlasse = (statustekst: string): string => {
   } else if (status === 'Ingen beregning') {
     status = '__fremhevet';
   } else {
-    status =  '__fokusert';
+    status = '__fokusert';
   }
   return 'etikettbase' + status;
 };

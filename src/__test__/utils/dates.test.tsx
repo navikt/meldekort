@@ -44,7 +44,9 @@ it('hentDatoPeriode', () => {
 });
 
 it('formaterUkeOgDatoPeriode', () => {
-  expect(formaterUkeOgDatoPeriode(fraDato, tilDato)).toBe('Uke 1 - 2 (01.01.2019 - 13.01.2019)');
+  expect(formaterUkeOgDatoPeriode(fraDato, tilDato)).toBe(
+    'Uke 1 - 2 (01.01.2019 - 13.01.2019)'
+  );
 });
 
 it('hentDatoForUkesluttIForsteUke', () => {
@@ -64,15 +66,21 @@ it('hentDatoForAndreUke', () => {
 });
 
 it('hentNummerOgDatoForForsteUke', () => {
-  expect(hentNummerOgDatoForForsteUke(fraDato)).toBe('Uke 1 (01.01.2019 - 07.01.2019)');
+  expect(hentNummerOgDatoForForsteUke(fraDato)).toBe(
+    'Uke 1 (01.01.2019 - 07.01.2019)'
+  );
 });
 
 it('hentNummerOgDatoForAndreUke', () => {
-  expect(hentNummerOgDatoForAndreUke(tilDato)).toBe('Uke 2 (07.01.2019 - 13.01.2019)');
+  expect(hentNummerOgDatoForAndreUke(tilDato)).toBe(
+    'Uke 2 (07.01.2019 - 13.01.2019)'
+  );
 });
 
 it('hentNestePeriodeMedUkerOgDato', () => {
-  expect(hentNestePeriodeMedUkerOgDato(fraDato, tilDato)).toBe('3-4 (15.01.2019 - 27.01.2019)');
+  expect(hentNestePeriodeMedUkerOgDato(fraDato, tilDato)).toBe(
+    '3-4 (15.01.2019 - 27.01.2019)'
+  );
 });
 
 it('ukeTekst', () => {
@@ -80,5 +88,7 @@ it('ukeTekst', () => {
 });
 
 it('kalkulerDato', () => {
-  expect(kalkulerDato(fraDato, 6)).toStrictEqual(new Date('2019-01-07T09:10:00.000Z'));
+  expect(kalkulerDato(fraDato, 6)).toStrictEqual(
+    new Date('2019-01-07T09:10:00.000Z')
+  );
 });

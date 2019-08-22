@@ -3,7 +3,7 @@ Click <strong>Yes</strong> if you have participated in activities you and NAV ag
 <br>
 This includes
 <ul>
-    <li>employment schemes</li>s
+    <li>employment schemes</li>
     <li>active medical treatment</li>
     <li>training or education</li>
     <li>other activities.</li>

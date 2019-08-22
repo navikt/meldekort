@@ -13,7 +13,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { finnRiktigEtikettKlasse } from '../../utils/statusEtikettUtil';
 import { formaterBelop } from '../../utils/numberFormat';
-import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
+import {
+  formaterDato,
+  hentDatoPeriode,
+  hentUkePeriode,
+} from '../../utils/dates';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { hentIntl } from '../../utils/intlUtil';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
@@ -23,7 +27,10 @@ import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
 import { HistoriskeMeldekortRad, Meldekort } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
-import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';
+import {
+  selectFeilmelding,
+  selectIngenTidligereMeldekort,
+} from '../../selectors/ui';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -58,10 +65,17 @@ class TidligereMeldekort extends React.Component<Props, State> {
     this.props.historiskeMeldekort.historiskeMeldekort.map(meldekort => {
       radliste.push({
         meldekort: meldekort,
-        periode: hentUkePeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
-        dato: hentDatoPeriode(meldekort.meldeperiode.fra, meldekort.meldeperiode.til),
+        periode: hentUkePeriode(
+          meldekort.meldeperiode.fra,
+          meldekort.meldeperiode.til
+        ),
+        dato: hentDatoPeriode(
+          meldekort.meldeperiode.fra,
+          meldekort.meldeperiode.til
+        ),
         mottatt:
-          typeof meldekort.mottattDato === 'undefined' || meldekort.mottattDato === null
+          typeof meldekort.mottattDato === 'undefined' ||
+          meldekort.mottattDato === null
             ? ''
             : formaterDato(meldekort.mottattDato),
         status: mapKortStatusTilTekst(meldekort.kortStatus),
@@ -89,14 +103,25 @@ class TidligereMeldekort extends React.Component<Props, State> {
           );
         },
       },
-      { key: 'dato', label: <FormattedMessage id="overskrift.dato" />, cell: 'dato' },
-      { key: 'mottatt', label: <FormattedMessage id="overskrift.mottatt" />, cell: 'mottatt' },
+      {
+        key: 'dato',
+        label: <FormattedMessage id="overskrift.dato" />,
+        cell: 'dato',
+      },
+      {
+        key: 'mottatt',
+        label: <FormattedMessage id="overskrift.mottatt" />,
+        cell: 'mottatt',
+      },
       {
         key: 'status',
         label: <FormattedMessage id="overskrift.status" />,
         cell: function(row: any, columnKey: any) {
           return (
-            <EtikettBase className={finnRiktigEtikettKlasse(row.status)} type={'info'}>
+            <EtikettBase
+              className={finnRiktigEtikettKlasse(row.status)}
+              type={'info'}
+            >
               {row.status}
             </EtikettBase>
           );

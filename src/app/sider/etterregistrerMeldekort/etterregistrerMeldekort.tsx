@@ -14,11 +14,12 @@ import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { KortStatus, Meldekort, SendtMeldekort } from '../../types/meldekort';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { Innsendingstyper } from '../../types/innsending';
-import { Person } from '../../types/person';
+import { MeldeForm, Person } from '../../types/person';
 import { Redirect } from 'react-router';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 import { hentIntl } from '../../utils/intlUtil';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   person: Person;
@@ -61,7 +62,10 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         meldekortObj.kortStatus === KortStatus.SENDT
       ) {
         if (meldekortObj.meldeperiode.kanKortSendes) {
-          return !erMeldekortSendtInnTidligere(meldekortObj, this.props.sendteMeldekort);
+          return !erMeldekortSendtInnTidligere(
+            meldekortObj,
+            this.props.sendteMeldekort
+          );
         }
       }
       return false;
@@ -103,15 +107,22 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
 
   render() {
     const rows = this.hentMeldekortRaderFraPerson();
-    const columns = [{ key: 'periode', label: 'Periode' }, { key: 'dato', label: 'Dato' }];
+    const columns = [
+      { key: 'periode', label: 'Periode' },
+      { key: 'dato', label: 'Dato' },
+    ];
     const ettMeldekort = this.harEttMeldekort();
-    return rows.length === 0 ? (
-      <Redirect to="/om-meldekort" />
+    return this.props.person.meldeform === MeldeForm.IKKE_SATT ? (
+      <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
+    ) : rows.length === 0 ? (
+      <Redirect to={'/om-meldekort'} />
     ) : !ettMeldekort ? (
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel className="seksjon">
-            {hentIntl().formatMessage({ id: 'overskrift.etterregistrering.innsending' })}
+            {hentIntl().formatMessage({
+              id: 'overskrift.etterregistrering.innsending',
+            })}
           </Innholdstittel>
           <Sprakvelger />
         </section>

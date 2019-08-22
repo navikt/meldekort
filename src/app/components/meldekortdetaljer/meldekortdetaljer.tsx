@@ -19,7 +19,9 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-type Props = MeldekortdetaljerState & ErAap & ReturnType<typeof mapStateToProps>;
+type Props = MeldekortdetaljerState &
+  ErAap &
+  ReturnType<typeof mapStateToProps>;
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   aktivtMeldekort,
@@ -47,7 +49,8 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
         sporsmal: finnesIntlId(sporsmalsObj.sporsmal + aap),
         forklaring: finnesIntlId(sporsmalsObj.forklaring + aap),
         svar: hentSvar(sporsmalsObj.id),
-        formatertDato: sporsmalsObj.kategori === 'registrert' ? formatertDato : undefined,
+        formatertDato:
+          sporsmalsObj.kategori === 'registrert' ? formatertDato : undefined,
       };
     });
     return sporsmalOgSvarConfig;

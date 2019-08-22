@@ -7,17 +7,20 @@ import { fetchPersonstatus } from '../api/api';
 import { combineEpics } from 'redux-observable';
 import { MeldekortActions } from '../actions/meldekort';
 
-const hentPersonStatus: AppEpic = action$ =>
-    action$.pipe(
-        filter(isActionOf(PersonStatusActions.hentPersonStatus.request)),
-        switchMap(() =>
-            from(fetchPersonstatus()).pipe(
-                map(PersonStatusActions.hentPersonStatus.success),
-                catchError( error =>
-                    of(PersonStatusActions.hentPersonStatus.failure(error), MeldekortActions.apiKallFeilet(error))
-                )
-            )
+const hentPersonStatus: AppEpic = (action$) =>
+  action$.pipe(
+    filter(isActionOf(PersonStatusActions.hentPersonStatus.request)),
+    switchMap(() =>
+      from(fetchPersonstatus()).pipe(
+        map(PersonStatusActions.hentPersonStatus.success),
+        catchError((error) =>
+          of(
+            PersonStatusActions.hentPersonStatus.failure(error),
+            MeldekortActions.apiKallFeilet(error)
+          )
         )
-    );
+      )
+    )
+  );
 
 export default combineEpics(hentPersonStatus);
