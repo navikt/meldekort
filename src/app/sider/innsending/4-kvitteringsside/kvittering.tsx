@@ -37,6 +37,8 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import Lenke from 'nav-frontend-lenker';
+import { finnesIntlId } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -320,14 +322,23 @@ class Kvittering extends React.Component<KvitteringsProps> {
         {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
-            <NavKnapp
-              type={knappTyper.hoved}
-              className={'navigasjonsknapp'}
-              tekstid={knappTekstid}
-              nestePath={nestePath}
-              nesteAktivtMeldekort={nesteAktivtMeldekort}
-              nesteInnsendingstype={nesteInnsendingstype}
-            />
+            {nestePath === Environment().dittNavUrl ? (
+              <a
+                className={'knapp navigasjonsknapp knapp--hoved'}
+                href={nestePath}
+              >
+                <FormattedMessage id={knappTekstid} />
+              </a>
+            ) : (
+              <NavKnapp
+                type={knappTyper.hoved}
+                className={'navigasjonsknapp'}
+                tekstid={knappTekstid}
+                nestePath={nestePath}
+                nesteAktivtMeldekort={nesteAktivtMeldekort}
+                nesteInnsendingstype={nesteInnsendingstype}
+              />
+            )}
             <NavKnapp
               type={knappTyper.standard}
               nestePath={'/tidligere-meldekort'}
