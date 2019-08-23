@@ -171,11 +171,7 @@ export enum FravaerTypeEnum {
   ARBEIDS_FRAVAER = 'A',
 }
 
-// Internt bruk
-
-export interface SporsmalOgSvar {
-  sporsmalId: string;
-  svar: boolean;
-  formatertDato?: string;
-  forklaring: string;
+export interface MeldekortRad {
+  periode: string;
+  dato: string;
 }

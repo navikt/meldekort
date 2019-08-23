@@ -1,6 +1,7 @@
 {
   "extends": [
-    "tslint-react"
+    "tslint-react",
+    "tslint-config-prettier"
   ],
   "rules": {
     "no-useless-computed-key": "off",
@@ -36,7 +37,8 @@
     "label-position": true,
     "max-line-length": [
       true,
-      120
+      {"limit": 200,
+        "ignore-pattern": "^import [^,]+ from |^export | implements"}
     ],
     "member-ordering": [
       true,
