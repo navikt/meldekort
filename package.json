@@ -95,7 +95,7 @@
     "typescript": "^3.3.1"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "CI=false craco build",
     "build:tekster": "node ./src/app/utils/build-tekster.js",
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
