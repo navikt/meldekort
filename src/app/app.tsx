@@ -26,7 +26,7 @@ import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { isIE, isOldSafari, isOldEdge } from './utils/browsers';
+import { isIE, isOldSafari, isOldEdge, isOldChrome } from './utils/browsers';
 
 if (erMock()) {
   setupMock();
@@ -96,7 +96,7 @@ class App extends React.Component<Props, AppState> {
 
       const browserSpecificStyling = classNames('main-container', {
         ieStyling: isIE,
-        oldBrowserStyling: isOldSafari || isOldEdge,
+        oldBrowserStyling: isOldSafari || isOldEdge || isOldChrome,
       });
 
       return (
