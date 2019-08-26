@@ -7,22 +7,12 @@ import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  Element,
-  Ingress,
-  Innholdstittel,
-  Normaltekst,
-} from 'nav-frontend-typografi';
+import { Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
-import {
-  KortStatus,
-  Meldekort,
-  MeldekortRad,
-  SendtMeldekort,
-} from '../../types/meldekort';
+import { Meldekort, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
 import { PersonActions } from '../../actions/person';
 import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
@@ -31,11 +21,14 @@ import { Redirect } from 'react-router';
 import { selectRouter } from '../../selectors/router';
 import { MeldeForm, Person } from '../../types/person';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
-import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import veileder from '../../ikoner/veileder.svg';
+import {
+  harKortStatusOPPRellerSENDT,
+  hentInnsendingsklareMeldekort,
+  hentMeldekortRaderFraPerson,
+} from '../../utils/meldekortUtils';
 import { useEffect } from 'react';
 import MeldingOmMeldekortSomIkkeErKlare from './MeldingOmIkkeKlareMeldekort';
+import InnsendingVisning from './InnsendingVisning';
 
 interface MapStateToProps {
   person: Person;
@@ -63,91 +56,14 @@ const SendMeldekort: React.FC<Props> = ({
   resetInnsending,
   settInnsendingstype,
 }) => {
-  const harEttMeldekort = () => {
-    let meldekortListe = filtrerMeldekortListe(person.meldekort);
-
-    if (meldekortListe.length === 1) {
-      leggTilAktivtMeldekort(meldekortListe[0]);
-      settInnsendingstype(Innsendingstyper.innsending);
-      return true;
-    }
-    return false;
-  };
-
-  const filtrerMeldekortListe = (meldekort: Meldekort[]): Meldekort[] => {
-    if (typeof meldekort === 'undefined') {
-      return [];
-    }
-    return meldekort.filter(meldekortObj => {
-      if (
-        meldekortObj.kortStatus === KortStatus.OPPRE ||
-        meldekortObj.kortStatus === KortStatus.SENDT
-      ) {
-        if (meldekortObj.meldeperiode.kanKortSendes) {
-          return !erMeldekortSendtInnTidligere(meldekortObj, sendteMeldekort);
-        }
-      }
-      return false;
-    });
-  };
-
-  const hentMeldekortRaderFraPerson = (
-    meldekort: Meldekort[]
-  ): MeldekortRad[] => {
-    let radliste: MeldekortRad[] = [];
-
-    if (filtrerMeldekortListe(meldekort) != null) {
-      const liste = filtrerMeldekortListe(meldekort).map(meldekortObj => {
-        if (
-          meldekortObj.kortStatus === KortStatus.OPPRE ||
-          meldekortObj.kortStatus === KortStatus.SENDT
-        ) {
-          if (meldekortObj.meldeperiode.kanKortSendes) {
-            radliste.push({
-              periode: hentUkePeriode(
-                meldekortObj.meldeperiode.fra,
-                meldekortObj.meldeperiode.til
-              ),
-              dato: hentDatoPeriode(
-                meldekortObj.meldeperiode.fra,
-                meldekortObj.meldeperiode.til
-              ),
-            });
-          }
-        }
-      });
-    }
-    /*    if (this.filtrerMeldekortListe(person.meldekort) != null) {
-      const rad = this.filtrerMeldekortListe(person.meldekort).map(meldekortObj => {
-        if (
-          meldekortObj.kortStatus === KortStatus.OPPRE ||
-          meldekortObj.kortStatus === KortStatus.SENDT
-        ) {
-          if (meldekortObj.meldeperiode.kanKortSendes) {
-            return {
-              periode: hentUkePeriode(
-                meldekortObj.meldeperiode.fra,
-                meldekortObj.meldeperiode.til
-              ),
-              dato: hentDatoPeriode(
-                meldekortObj.meldeperiode.fra,
-                meldekortObj.meldeperiode.til
-              ),
-            };
-          }
-        } else {
-          return null;
-        }
-      });
-      radliste.push(rad);
-    }*/
-    console.log('radliste:', radliste);
-    return radliste;
-  };
+  const innsendingsklareMeldekort = hentInnsendingsklareMeldekort(
+    person.meldekort,
+    sendteMeldekort
+  );
 
   // tslint:disable-next-statement
   useEffect(() => {
-    if (filtrerMeldekortListe(person.meldekort).length !== 1) {
+    if (innsendingsklareMeldekort.length !== 1) {
       resetInnsending();
     }
     hentPerson();
@@ -156,7 +72,14 @@ const SendMeldekort: React.FC<Props> = ({
   const hentFeilmeldingEllerData = (rows: MeldekortRad[], columns: any) => {
     if (rows.length > 0) {
       if (rows.length < 5) {
-        return hentTabellOgTilhorendeElementer(rows, columns);
+        return (
+          <InnsendingVisning
+            rows={rows}
+            columns={columns}
+            router={router}
+            innsendingsklareMeldekort={innsendingsklareMeldekort}
+          />
+        );
       } else {
         return (
           <div className="send-meldekort-varsel">
@@ -174,7 +97,7 @@ const SendMeldekort: React.FC<Props> = ({
         <MeldingOmMeldekortSomIkkeErKlare
           rows={rows}
           person={person}
-          filtrerMeldekortListe={filtrerMeldekortListe}
+          innsendingsklareMeldekort={innsendingsklareMeldekort}
         />
       );
     }
@@ -195,55 +118,22 @@ const SendMeldekort: React.FC<Props> = ({
     }
   };
 
-  const hentTabellOgTilhorendeElementer = (
-    rows: MeldekortRad[],
-    columns: any
-  ) => {
-    return (
-      <>
-        <div className="item">
-          <FormattedHTMLMessage id="sendMeldekort.info.kanSende" />
-        </div>
-        <section className="seksjon">
-          <div className="item">
-            <Tabell rows={rows} columns={columns} />
-          </div>
-        </section>
-        <section className="seksjon">
-          <div className="box">
-            <Normaltekst>
-              <FormattedHTMLMessage id="sendMeldekort.info.neste" />
-            </Normaltekst>
-            <Normaltekst>
-              <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden" />
-            </Normaltekst>
-            <Normaltekst>
-              <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet" />
-            </Normaltekst>
-          </div>
-        </section>
-        <section className="seksjon flex-innhold sentrert">
-          <NavKnapp
-            type={knappTyper.hoved}
-            nestePath={router.location.pathname + '/innsending'}
-            tekstid={'naviger.neste'}
-            nesteAktivtMeldekort={filtrerMeldekortListe(person.meldekort)[0]}
-            nesteInnsendingstype={Innsendingstyper.innsending}
-          />
-        </section>
-      </>
-    );
-  };
-
-  const rows = hentMeldekortRaderFraPerson(person.meldekort);
+  const rows = hentMeldekortRaderFraPerson(innsendingsklareMeldekort);
   const columns = [
     { key: 'periode', label: 'Periode' },
     { key: 'dato', label: 'Dato' },
   ];
 
-  const ettMeldekort = harEttMeldekort();
+  const harKunEttMeldekort = (meldekortListe: Meldekort[]) => {
+    if (meldekortListe.length === 1) {
+      leggTilAktivtMeldekort(meldekortListe[0]);
+      settInnsendingstype(Innsendingstyper.innsending);
+      return true;
+    }
+    return false;
+  };
 
-  return !ettMeldekort ? (
+  return !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>

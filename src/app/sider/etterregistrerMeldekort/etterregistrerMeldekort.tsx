@@ -20,6 +20,7 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { erMeldekortSendtInnTidligere } from '../../utils/meldekortUtils';
 import { hentIntl } from '../../utils/intlUtil';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { useEffect } from 'react';
 
 interface MapStateToProps {
   person: Person;
@@ -40,23 +41,23 @@ interface MeldekortRad {
 
 type Props = MapDispatchToProps & MapStateToProps;
 
-class EtterregistrerMeldekort extends React.Component<Props, any> {
-  harEttMeldekort = () => {
-    let meldekortListe = this.filtrerMeldekortListe();
+const EtterregistrerMeldekort: React.FC<Props> = props => {
+  const harEttMeldekort = () => {
+    let meldekortListe = filtrerMeldekortListe();
 
     if (meldekortListe.length === 1) {
-      this.props.leggTilAktivtMeldekort(meldekortListe[0]);
-      this.props.settInnsendingstype(Innsendingstyper.etterregistrering);
+      props.leggTilAktivtMeldekort(meldekortListe[0]);
+      props.settInnsendingstype(Innsendingstyper.etterregistrering);
       return true;
     }
     return false;
   };
 
-  filtrerMeldekortListe = (): Meldekort[] => {
-    if (typeof this.props.person.etterregistrerteMeldekort === 'undefined') {
+  const filtrerMeldekortListe = (): Meldekort[] => {
+    if (typeof props.person.etterregistrerteMeldekort === 'undefined') {
       return [];
     }
-    return this.props.person.etterregistrerteMeldekort.filter(meldekortObj => {
+    return props.person.etterregistrerteMeldekort.filter(meldekortObj => {
       if (
         meldekortObj.kortStatus === KortStatus.OPPRE ||
         meldekortObj.kortStatus === KortStatus.SENDT
@@ -64,7 +65,7 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
         if (meldekortObj.meldeperiode.kanKortSendes) {
           return !erMeldekortSendtInnTidligere(
             meldekortObj,
-            this.props.sendteMeldekort
+            props.sendteMeldekort
           );
         }
       }
@@ -72,8 +73,8 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     });
   };
 
-  hentMeldekortRaderFraPerson = () => {
-    let meldekortListe = this.filtrerMeldekortListe();
+  const hentMeldekortRaderFraPerson = () => {
+    let meldekortListe = filtrerMeldekortListe();
     let radliste = [];
     for (let i = 0; i < meldekortListe.length; i++) {
       if (
@@ -98,62 +99,61 @@ class EtterregistrerMeldekort extends React.Component<Props, any> {
     return radliste;
   };
 
-  componentDidMount() {
-    if (this.filtrerMeldekortListe().length !== 1) {
-      this.props.resetInnsending();
+  // tslint:disable-next-statement
+  useEffect(() => {
+    if (filtrerMeldekortListe().length !== 1) {
+      props.resetInnsending();
     }
-    this.props.hentPerson();
-  }
+    props.hentPerson();
+  }, []);
 
-  render() {
-    const rows = this.hentMeldekortRaderFraPerson();
-    const columns = [
-      { key: 'periode', label: 'Periode' },
-      { key: 'dato', label: 'Dato' },
-    ];
-    const ettMeldekort = this.harEttMeldekort();
-    return this.props.person.meldeform === MeldeForm.IKKE_SATT ? (
-      <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
-    ) : rows.length === 0 ? (
-      <Redirect to={'/om-meldekort'} />
-    ) : !ettMeldekort ? (
-      <main className="sideinnhold">
-        <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel className="seksjon">
-            {hentIntl().formatMessage({
-              id: 'overskrift.etterregistrering.innsending',
-            })}
-          </Innholdstittel>
-          <Sprakvelger />
-        </section>
-        <section className="seksjon">
-          <div className="item">
-            <FormattedHTMLMessage id="sendMeldekort.info.kanSende" />
-          </div>
-          <div className="item">
-            <Tabell rows={rows} columns={columns} />
-          </div>
-        </section>
+  const rows = hentMeldekortRaderFraPerson();
+  const columns = [
+    { key: 'periode', label: 'Periode' },
+    { key: 'dato', label: 'Dato' },
+  ];
+  const ettMeldekort = harEttMeldekort();
+  return props.person.meldeform === MeldeForm.IKKE_SATT ? (
+    <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
+  ) : rows.length === 0 ? (
+    <Redirect to={'/om-meldekort'} />
+  ) : !ettMeldekort ? (
+    <main className="sideinnhold">
+      <section className="seksjon flex-innhold tittel-sprakvelger">
+        <Innholdstittel className="seksjon">
+          {hentIntl().formatMessage({
+            id: 'overskrift.etterregistrering.innsending',
+          })}
+        </Innholdstittel>
+        <Sprakvelger />
+      </section>
+      <section className="seksjon">
+        <div className="item">
+          <FormattedHTMLMessage id="sendMeldekort.info.kanSende" />
+        </div>
+        <div className="item">
+          <Tabell rows={rows} columns={columns} />
+        </div>
+      </section>
 
-        <section className="seksjon flex-innhold sentrert">
-          <NavKnapp
-            type={knappTyper.hoved}
-            nestePath={this.props.router.location.pathname + '/innsending'}
-            tekstid={'naviger.neste'}
-            nesteAktivtMeldekort={this.filtrerMeldekortListe()[0]}
-            nesteInnsendingstype={Innsendingstyper.etterregistrering}
-          />
-        </section>
-      </main>
-    ) : (
-      <Redirect
-        exact={true}
-        from="/etterregistrer-meldekort"
-        to="/etterregistrer-meldekort/innsending"
-      />
-    );
-  }
-}
+      <section className="seksjon flex-innhold sentrert">
+        <NavKnapp
+          type={knappTyper.hoved}
+          nestePath={props.router.location.pathname + '/innsending'}
+          tekstid={'naviger.neste'}
+          nesteAktivtMeldekort={filtrerMeldekortListe()[0]}
+          nesteInnsendingstype={Innsendingstyper.etterregistrering}
+        />
+      </section>
+    </main>
+  ) : (
+    <Redirect
+      exact={true}
+      from="/etterregistrer-meldekort"
+      to="/etterregistrer-meldekort/innsending"
+    />
+  );
+};
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {

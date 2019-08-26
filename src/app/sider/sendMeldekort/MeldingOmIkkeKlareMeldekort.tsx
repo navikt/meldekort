@@ -1,36 +1,35 @@
 import * as React from 'react';
-import { KortStatus, Meldekort, MeldekortRad } from '../../types/meldekort';
+import { Meldekort, MeldekortRad } from '../../types/meldekort';
 import { Person } from '../../types/person';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { formaterDato, formaterUkeOgDatoPeriode } from '../../utils/dates';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import veileder from '../../ikoner/veileder.svg';
+import { harKortStatusOPPRellerSENDT } from '../../utils/meldekortUtils';
 
 interface Props {
   rows: MeldekortRad[];
   person: Person;
-  filtrerMeldekortListe: (meldekort: Meldekort[]) => Meldekort[];
+  innsendingsklareMeldekort: Meldekort[];
 }
 
 const MeldingOmMeldekortSomIkkeErKlare: React.FC<Props> = ({
   rows,
   person,
-  filtrerMeldekortListe,
+  innsendingsklareMeldekort,
 }) => {
-  let meldekortliste = filtrerMeldekortListe(person.meldekort);
+  let meldekortliste = innsendingsklareMeldekort;
 
-  const kortStatuserOPPRellerSENDT = (meldekort: Meldekort) =>
-    meldekort.kortStatus === KortStatus.OPPRE ||
-    meldekort.kortStatus === KortStatus.SENDT;
-
-  const forTidligASende = (meldekortListe: Meldekort[]): number => {
+  const hentIdTilNesteInnsendingsklareMeldekort = (
+    meldekortListe: Meldekort[]
+  ): number => {
     let meldekortId = 0;
     if (meldekortListe === undefined) {
       return meldekortId;
     }
     meldekortListe.map(meldekort => {
-      if (kortStatuserOPPRellerSENDT(meldekort)) {
+      if (harKortStatusOPPRellerSENDT(meldekort)) {
         if (!meldekort.meldeperiode.kanKortSendes) {
           meldekortId = meldekort.meldekortId;
         }
@@ -42,23 +41,37 @@ const MeldingOmMeldekortSomIkkeErKlare: React.FC<Props> = ({
   const meldekortSomIkkeKanSendesInnEnda = (
     meldekort: Meldekort[]
   ): Meldekort[] => {
-    if (filtrerMeldekortListe(meldekort).length === 0) {
+    if (meldekortliste.length === 0) {
       return meldekort.filter(mk => {
-        return !mk.meldeperiode.kanKortSendes && kortStatuserOPPRellerSENDT(mk);
+        return (
+          !mk.meldeperiode.kanKortSendes && harKortStatusOPPRellerSENDT(mk)
+        );
       });
     }
     return [];
   };
-  if (rows.length === 0 && meldekortliste !== undefined) {
-    let meldekortId = forTidligASende(meldekortliste);
-    let meldekort = meldekortliste.filter(m => m.meldekortId === meldekortId);
-    let meldekortSomIkkeKanSendesEnda = meldekortSomIkkeKanSendesInnEnda(
-      person.meldekort
-    );
-    if (meldekort.length === 0 && meldekortSomIkkeKanSendesEnda.length !== 0) {
-      return (
-        <Veilederpanel svg={<img alt="" src={veileder} />}>
-          <div className="send-meldekort-varsel">
+
+  const returnerVarselIngenMeldekortASende = (
+    <FormattedMessage id="sporsmal.ingenMeldekortASende" />
+  );
+
+  const visMeldingOmMeldekort = () => {
+    if (rows.length === 0 && meldekortliste !== undefined) {
+      const meldekortId = hentIdTilNesteInnsendingsklareMeldekort(
+        meldekortliste
+      );
+      const meldekort = meldekortliste.filter(
+        m => m.meldekortId === meldekortId
+      );
+      const meldekortSomIkkeKanSendesEnda = meldekortSomIkkeKanSendesInnEnda(
+        person.meldekort
+      );
+      if (
+        meldekort.length === 0 &&
+        meldekortSomIkkeKanSendesEnda.length !== 0
+      ) {
+        return (
+          <>
             <Normaltekst>
               <FormattedMessage id="overskrift.nesteMeldekort" />
               <FormattedMessage id="sendMeldekort.info.innsendingStatus.kanSendes" />
@@ -73,27 +86,21 @@ const MeldingOmMeldekortSomIkkeErKlare: React.FC<Props> = ({
               )}
             </Element>
             <FormattedMessage id="sendMeldekort.info.ingenKlare" />
-          </div>
-        </Veilederpanel>
-      );
+          </>
+        );
+      } else {
+        return returnerVarselIngenMeldekortASende;
+      }
     } else {
-      return (
-        <Veilederpanel svg={<img alt="" src={veileder} />}>
-          <div className="send-meldekort-varsel">
-            <FormattedMessage id="sporsmal.ingenMeldekortASende" />
-          </div>
-        </Veilederpanel>
-      );
+      return returnerVarselIngenMeldekortASende;
     }
-  } else {
-    return (
-      <Veilederpanel svg={<img alt="" src={veileder} />}>
-        <div className="send-meldekort-varsel">
-          <FormattedMessage id="sporsmal.ingenMeldekortASende" />
-        </div>
-      </Veilederpanel>
-    );
-  }
+  };
+
+  return (
+    <Veilederpanel svg={<img alt="veileder ikon" src={veileder} />}>
+      <div className="send-meldekort-varsel">{visMeldingOmMeldekort()}</div>
+    </Veilederpanel>
+  );
 };
 
 export default MeldingOmMeldekortSomIkkeErKlare;
