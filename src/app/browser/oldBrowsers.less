@@ -1,6 +1,6 @@
 // CSS styling for Flexbox fallback
 #meldekort-root {
-  header.meldekort-header.ieStyling {
+  header.meldekort-header.oldBrowserStyling {
     .banner-container {
       display: flex;
       justify-content: center;
@@ -11,7 +11,7 @@
     }
   }
 
-  div.main-container.ieStyling {
+  div.main-container.oldBrowserStyling {
     .sideinnhold {
       .seksjon {
         .knapper-container {
@@ -37,6 +37,10 @@
                       display: flex;
                       justify-content: space-between;
                       padding-left: 50%;
+
+                      @media @small-phone, @phone {
+                        display: none;
+                      }
                     }
                     .arbeidsrad {
                       .tittel {
@@ -49,7 +53,15 @@
                         display: flex;
                         justify-content: space-between;
                       }
+                      .ukedager__mobil {
+                        display: flex;
+                        justify-content: space-between;
+                        @media @desktop {
+                          display: none;
+                        }
+                      }
                     }
+
                     .aktivitetsrad {
                       .tittel {
                         .rad-1-til-2();
@@ -62,6 +74,13 @@
                       .inputrad {
                         display: flex;
                         justify-content: space-between;
+                      }
+                      .ukedager__mobil {
+                        display: flex;
+                        justify-content: space-between;
+                        @media @desktop {
+                          display: none;
+                        }
                       }
                     }
                   }
