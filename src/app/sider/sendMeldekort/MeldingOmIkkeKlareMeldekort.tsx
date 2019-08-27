@@ -28,11 +28,13 @@ function MeldingOmMeldekortSomIkkeErKlare({
     if (meldekortListe === undefined) {
       return meldekortId;
     }
-    meldekortListe.map(meldekort => {
-      if (harKortStatusOPPRellerSENDT(meldekort)) {
-        if (!meldekort.meldeperiode.kanKortSendes) {
-          meldekortId = meldekort.meldekortId;
-        }
+
+    meldekortListe.forEach(function(meldekort: Meldekort) {
+      if (
+        harKortStatusOPPRellerSENDT(meldekort) &&
+        !meldekort.meldeperiode.kanKortSendes
+      ) {
+        meldekortId = meldekort.meldekortId;
       }
     });
     return meldekortId;
