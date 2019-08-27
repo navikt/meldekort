@@ -14,11 +14,11 @@ interface Props {
   innsendingsklareMeldekort: Meldekort[];
 }
 
-const MeldingOmMeldekortSomIkkeErKlare: React.FC<Props> = ({
+function MeldingOmMeldekortSomIkkeErKlare({
   rows,
   person,
   innsendingsklareMeldekort,
-}) => {
+}: Props) {
   let meldekortliste = innsendingsklareMeldekort;
 
   const hentIdTilNesteInnsendingsklareMeldekort = (
@@ -101,6 +101,6 @@ const MeldingOmMeldekortSomIkkeErKlare: React.FC<Props> = ({
       <div className="send-meldekort-varsel">{visMeldingOmMeldekort()}</div>
     </Veilederpanel>
   );
-};
+}
 
 export default MeldingOmMeldekortSomIkkeErKlare;

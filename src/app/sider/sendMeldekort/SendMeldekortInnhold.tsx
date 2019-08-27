@@ -6,6 +6,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
 import { Router } from '../../types/router';
+import { BaksystemFeilmelding } from '../../types/ui';
 
 interface Props {
   rows: MeldekortRad[];
@@ -15,13 +16,14 @@ interface Props {
   ];
   router: Router;
   innsendingsklareMeldekort: Meldekort[];
+  baksystemFeilmelding: BaksystemFeilmelding;
 }
-const InnsendingsTabell: React.FC<Props> = ({
+function InnsendingsTabell({
   rows,
   columns,
   router,
   innsendingsklareMeldekort,
-}) => {
+}: Props) {
   return (
     <>
       <div className="item">
@@ -56,6 +58,6 @@ const InnsendingsTabell: React.FC<Props> = ({
       </section>
     </>
   );
-};
+}
 
 export default InnsendingsTabell;

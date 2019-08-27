@@ -1,15 +1,12 @@
 import * as React from 'react';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import Tabell from '../../components/tabell/desktop/tabell';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
 import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
@@ -22,13 +19,13 @@ import { selectRouter } from '../../selectors/router';
 import { MeldeForm, Person } from '../../types/person';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import {
-  harKortStatusOPPRellerSENDT,
   hentInnsendingsklareMeldekort,
   hentMeldekortRaderFraPerson,
+  hentPeriodeDatoKolonner,
 } from '../../utils/meldekortUtils';
 import { useEffect } from 'react';
 import MeldingOmMeldekortSomIkkeErKlare from './MeldingOmIkkeKlareMeldekort';
-import InnsendingVisning from './InnsendingVisning';
+import SendMeldekortInnhold from './SendMeldekortInnhold';
 
 interface MapStateToProps {
   person: Person;
@@ -46,7 +43,7 @@ interface MapDispatchToProps {
 type Props = MapDispatchToProps & MapStateToProps;
 
 // tslint:disable-next-line:max-line-length
-const SendMeldekort: React.FC<Props> = ({
+function SendMeldekort({
   person,
   baksystemFeilmelding,
   router,
@@ -55,29 +52,17 @@ const SendMeldekort: React.FC<Props> = ({
   leggTilAktivtMeldekort,
   resetInnsending,
   settInnsendingstype,
-}) => {
-  const innsendingsklareMeldekort = hentInnsendingsklareMeldekort(
-    person.meldekort,
-    sendteMeldekort
-  );
-
-  // tslint:disable-next-statement
-  useEffect(() => {
-    if (innsendingsklareMeldekort.length !== 1) {
-      resetInnsending();
-    }
-    hentPerson();
-  }, []);
-
+}: Props) {
   const hentFeilmeldingEllerData = (rows: MeldekortRad[], columns: any) => {
     if (rows.length > 0) {
       if (rows.length < 5) {
         return (
-          <InnsendingVisning
+          <SendMeldekortInnhold
             rows={rows}
             columns={columns}
             router={router}
             innsendingsklareMeldekort={innsendingsklareMeldekort}
+            baksystemFeilmelding={baksystemFeilmelding}
           />
         );
       } else {
@@ -103,27 +88,6 @@ const SendMeldekort: React.FC<Props> = ({
     }
   };
 
-  const ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell = (
-    rows: MeldekortRad[],
-    columns: any
-  ) => {
-    if (person.meldeform === MeldeForm.IKKE_SATT) {
-      return (
-        <div className="meldekort-spinner">
-          <NavFrontendSpinner type="XL" />
-        </div>
-      );
-    } else {
-      return hentFeilmeldingEllerData(rows, columns);
-    }
-  };
-
-  const rows = hentMeldekortRaderFraPerson(innsendingsklareMeldekort);
-  const columns = [
-    { key: 'periode', label: 'Periode' },
-    { key: 'dato', label: 'Dato' },
-  ];
-
   const harKunEttMeldekort = (meldekortListe: Meldekort[]) => {
     if (meldekortListe.length === 1) {
       leggTilAktivtMeldekort(meldekortListe[0]);
@@ -132,6 +96,21 @@ const SendMeldekort: React.FC<Props> = ({
     }
     return false;
   };
+
+  const innsendingsklareMeldekort = hentInnsendingsklareMeldekort(
+    person.meldekort,
+    sendteMeldekort
+  );
+  const rows = hentMeldekortRaderFraPerson(innsendingsklareMeldekort);
+  const columns = hentPeriodeDatoKolonner;
+
+  useEffect(() => {
+    if (innsendingsklareMeldekort.length !== 1) {
+      resetInnsending();
+    }
+    hentPerson();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <main className="sideinnhold">
@@ -145,8 +124,12 @@ const SendMeldekort: React.FC<Props> = ({
       <section className="seksjon">
         {baksystemFeilmelding.visFeilmelding ? (
           <UIAlertstripeWrapper />
+        ) : person.meldeform === MeldeForm.IKKE_SATT ? (
+          <div className="meldekort-spinner">
+            <NavFrontendSpinner type="XL" />
+          </div>
         ) : (
-          ventPaaDataOgReturnerSpinnerFeilmeldingEllerTabell(rows, columns)
+          hentFeilmeldingEllerData(rows, columns)
         )}
       </section>
     </main>
@@ -157,7 +140,7 @@ const SendMeldekort: React.FC<Props> = ({
       to="/send-meldekort/innsending"
     />
   );
-};
+}
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {

@@ -1,9 +1,11 @@
 {
   "extends": [
     "tslint-react",
-    "tslint-config-prettier"
+    "tslint-config-prettier",
+    "tslint-react-hooks"
   ],
   "rules": {
+    "react-hooks-nesting": "error",
     "no-useless-computed-key": "off",
     "array-callback-return": "off",
     "no-useless-concat": "off",

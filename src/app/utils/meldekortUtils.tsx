@@ -72,24 +72,28 @@ export const hentMeldekortRaderFraPerson = (
   let radliste: MeldekortRad[] = [];
 
   if (innsendingsklareMeldekort !== null) {
-    const liste = innsendingsklareMeldekort.map(meldekortObj => {
-      if (harKortStatusOPPRellerSENDT(meldekortObj)) {
-        if (meldekortObj.meldeperiode.kanKortSendes) {
-          radliste.push({
+    for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
+      if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
+        if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
+          let rad: MeldekortRad = {
             periode: hentUkePeriode(
-              meldekortObj.meldeperiode.fra,
-              meldekortObj.meldeperiode.til
+              innsendingsklareMeldekort[i].meldeperiode.fra,
+              innsendingsklareMeldekort[i].meldeperiode.til
             ),
             dato: hentDatoPeriode(
-              meldekortObj.meldeperiode.fra,
-              meldekortObj.meldeperiode.til
+              innsendingsklareMeldekort[i].meldeperiode.fra,
+              innsendingsklareMeldekort[i].meldeperiode.til
             ),
-          });
+          };
+          radliste.push(rad);
         }
       }
-      console.log('liste:', liste);
-      // TODO: liste blir undefined. Bytte til for-løkke i stedet for map?
-    });
+    }
   }
   return radliste;
 };
+
+export const hentPeriodeDatoKolonner = [
+  { key: 'periode', label: 'Periode' },
+  { key: 'dato', label: 'Dato' },
+];
