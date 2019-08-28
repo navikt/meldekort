@@ -1,42 +1,183 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:8.11
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+      - image: circleci/node:11.7.0
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
       - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
       - run: chmod +x ./cc-test-reporter
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-
+      - run:
+          name: Installerer npm pakker
+          command: npm ci
       - run: ./cc-test-reporter before-build
-      - run: npm run build && npm test
+      - run:
+          name: Bygger og tester meldekort
+          command: npm run build && npm test
       - run: ./cc-test-reporter after-build --exit-code $?
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build/*
+
+  bygg-og-push-docker:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
+      - run:
+          name: Bygger docker image
+          command: |
+            echo $IMAGE_NAME
+            docker build -t $IMAGE_NAME .
+      - run:
+          name: Pusher docker image
+          command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+
+  deploy-til-q1:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q1
+          ingress1: https://$REPO_NAME.nais.oera.no
+          ingress2: https://www.nav.no/$BASE_URL
+
+  deploy-til-q0:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q0
+          ingress1: https://$REPO_NAME.nais.oera.no
+          ingress2: https://www.nav.no/$BASE_URL
+
+  deploy-til-prod:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: prod-sbs
+          namespace: default
+          ingress1: https://$REPO_NAME.nais.oera.no
+          ingress2: https://www.nav.no/$BASE_URL
+
+commands:
+  deploy:
+    parameters:
+      cluster:
+        type: string
+      namespace:
+        type: string
+      ingress1:
+        type: string
+      ingress2:
+        type: string
+    steps:
+      - run:
+          name: Deployer til << parameters.cluster >> << parameters.namespace >>
+          command: |
+            echo $GH_DEPLOY_KEY | base64 -d | dos2unix > gh_deploy_key.pem
+            deployment-cli deploy create \
+                --team=meldekort \
+                --resource=nais.yaml \
+                --cluster=<< parameters.cluster >> \
+                --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
+                --var ingress1=<< parameters.ingress1 >> \
+                --var ingress2=<< parameters.ingress2 >> \
+                --var reponame=$REPO_NAME \
+                --var baseurl=/$BASE_URL \
+                --var version=$IMAGE_VERSION \
+                --var namespace=<< parameters.namespace >>
+                --key=gh_deploy_key.pem \
+                --ref=$COMMIT_SHORT \
+                --appid=39707
+
+  sett-miljovariabler:
+    steps:
+      - run:
+          name: Definerer git-referanse, versjonsnummer og repo-navn
+          command: |
+            echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
+            echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
+            echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
+            echo "export BASE_URL='soknader'" >> $BASH_ENV
+      - run:
+          name: Definerer nav op docker-image
+          command: |
+            echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
+
+workflow:
+  bygg_og_deploy:
+    jobs:
+      - build
+      - bygg-og-push
+      - bekreft-deploy-til-q1:
+          type: approval
+          requires:
+            - build
+            - bygg-og-push-docker
+          filters:
+            branches:
+              ignore: master
+      - deploy-til-q1:
+          name: manuell-deploy-til-q1
+          requires:
+            - bekreft-deploy-til-q1
+      - deploy-til-q1:
+          name: automatisk-deploy-til-q1
+          requires:
+            - build
+            - bygg-og-push-docker
+          filters:
+            branches:
+              only: master
+      - bekreft-deploy-til-q0:
+          type: approval
+          requires:
+            - build
+            - bygg-og-push-docker
+          filters:
+            branches:
+              ignore: master
+      - deploy-til-q0:
+          name: manuell-deploy-til-q0
+          requires:
+            - bekreft-deploy-til-q0
+      - deploy-til-q0:
+          name: automatisk-deploy-til-q0
+          requires:
+            - build
+            - bygg-og-push-docker
+          filters:
+            branches:
+              only: master
+      - bekreft-deploy-til-prod:
+          type: approval
+          requires:
+            - automatisk-deploy-til-q1
+            - automatisk-deploy-til-q0
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-til-prod:
+          requires:
+            - bekreft-deploy-til-prod
+          filters:
+            branches:
+              only:
+                - master
