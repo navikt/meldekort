@@ -14,7 +14,12 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../meny/mobil/mobilmenyToggle';
 import { isEmpty } from 'ramda';
 import classNames from 'classnames';
-import { isIE, isOldEdge, isOldSafari } from '../../utils/browsers';
+import {
+  isIE,
+  isOldChrome,
+  isOldEdge,
+  isOldSafari,
+} from '../../utils/browsers';
 
 interface MapStateToProps {
   router: Router;
@@ -80,7 +85,7 @@ class Header extends React.Component<HeaderProps> {
       : 'meldekort__header';
     const browserSpecificStyling = classNames(headerClass, {
       ieStyling: isIE,
-      oldBrowserStyling: isOldEdge || isOldSafari,
+      oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
     });
     return (
       <header className={browserSpecificStyling}>
