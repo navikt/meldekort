@@ -124,7 +124,7 @@ workflow:
   bygg_og_deploy:
     jobs:
       - build
-      - bygg-og-push
+      - bygg-og-push-docker
       - bekreft-deploy-til-q1:
           type: approval
           requires:
