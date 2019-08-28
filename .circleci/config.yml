@@ -120,7 +120,7 @@ commands:
           command: |
             echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
 
-workflow:
+workflows:
   bygg_og_deploy:
     jobs:
       - build
