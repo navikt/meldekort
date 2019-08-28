@@ -29,16 +29,18 @@ type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   const hentSporsmal = (): SpmSvar[] => {
-    let sporsmalListe: SpmSvar[] = [];
-    props.innsending.sporsmalsobjekter.map(sporsmalobj => {
-      sporsmalListe.push({
-        kategori: sporsmalobj.kategori,
-        svar:
-          sporsmalobj.checked === undefined
-            ? false
-            : sporsmalobj.checked.endsWith('ja'),
-      });
-    });
+    const sporsmalListe: SpmSvar[] = props.innsending.sporsmalsobjekter.map(
+      sporsmalobj => {
+        return {
+          kategori: sporsmalobj.kategori,
+          svar:
+            sporsmalobj.checked === undefined
+              ? false
+              : sporsmalobj.checked.endsWith('ja'),
+        };
+      }
+    );
+    console.log('testi', sporsmalListe);
     return sporsmalListe;
   };
 

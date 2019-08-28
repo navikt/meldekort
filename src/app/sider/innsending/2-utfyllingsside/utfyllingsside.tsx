@@ -66,7 +66,7 @@ class Utfyllingsside extends React.Component<
 
   hentSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar:
@@ -92,7 +92,7 @@ class Utfyllingsside extends React.Component<
     let feilIArbeidetTimer = false;
     let feilIArbeidetTimerHeleHalve = false;
 
-    dager.map(dag => {
+    dager.forEach(dag => {
       if (typeof dag.arbeidetTimer !== 'undefined') {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
           feil.push(dag.dag + dag.uke);
@@ -124,7 +124,7 @@ class Utfyllingsside extends React.Component<
       this.props.innsending.utfylteDager
     );
 
-    this.props.innsending.utfylteDager.map(dag => {
+    this.props.innsending.utfylteDager.forEach(dag => {
       if (
         !arbeidet &&
         typeof dag.arbeidetTimer !== 'undefined' &&

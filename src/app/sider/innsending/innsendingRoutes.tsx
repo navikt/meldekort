@@ -150,6 +150,8 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
   render() {
     const { match } = this.props;
     const { pathname } = this.props.router.location;
+    const currentPath = `${match.url}`;
+    console.log('currPath', currentPath);
 
     let noPrint =
       pathname === `/send-meldekort/innsending/kvittering` ||
@@ -166,31 +168,31 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
         <Switch>
           <Route
             exact={true}
-            path={`${match.url}` + '/sporsmal'}
+            path={currentPath + '/sporsmal'}
             render={props => <Sporsmalsside {...props} />}
           />
           <Route
-            path={`${match.url}` + '/utfylling'}
+            path={currentPath + '/utfylling'}
             render={(props: RouteComponentProps<any>) => (
               <Utfylling {...props} />
             )}
           />
           <Route
-            path={`${match.url}` + '/bekreftelse'}
+            path={currentPath + '/bekreftelse'}
             render={(props: RouteComponentProps<any>) => (
               <Bekreftelse {...props} />
             )}
           />
           <Route
-            path={`${match.url}` + '/kvittering'}
+            path={currentPath + '/kvittering'}
             render={(props: RouteComponentProps<any>) => (
               <Kvittering {...props} />
             )}
           />
           <Redirect
             exact={true}
-            from={`${match.url}`}
-            to={`${match.url}` + `/sporsmal`}
+            from={currentPath}
+            to={currentPath + `/sporsmal`}
           />
         </Switch>
       </div>
