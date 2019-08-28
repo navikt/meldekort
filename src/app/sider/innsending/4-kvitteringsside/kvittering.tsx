@@ -37,8 +37,6 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import Lenke from 'nav-frontend-lenker';
-import { finnesIntlId } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;

@@ -18,7 +18,7 @@ import {
 } from '../../utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { useEffect } from 'react';
-import EtterregistreringInnhold from './EtterregistreringInnhold';
+import EtterregistreringInnhold from './etterregistreringInnhold';
 
 interface MapStateToProps {
   person: Person;

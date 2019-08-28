@@ -24,8 +24,8 @@ import {
   hentPeriodeDatoKolonner,
 } from '../../utils/meldekortUtils';
 import { useEffect } from 'react';
-import MeldingOmMeldekortSomIkkeErKlare from './MeldingOmIkkeKlareMeldekort';
-import SendMeldekortInnhold from './SendMeldekortInnhold';
+import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
+import SendMeldekortInnhold from './sendMeldekortInnhold';
 
 interface MapStateToProps {
   person: Person;
@@ -42,7 +42,6 @@ interface MapDispatchToProps {
 
 type Props = MapDispatchToProps & MapStateToProps;
 
-// tslint:disable-next-line:max-line-length
 function SendMeldekort({
   person,
   baksystemFeilmelding,

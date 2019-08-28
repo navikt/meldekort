@@ -151,7 +151,6 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     const { match } = this.props;
     const { pathname } = this.props.router.location;
     const currentPath = `${match.url}`;
-    console.log('currPath', currentPath);
 
     let noPrint =
       pathname === `/send-meldekort/innsending/kvittering` ||

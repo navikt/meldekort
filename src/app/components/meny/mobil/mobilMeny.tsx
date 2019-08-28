@@ -54,7 +54,7 @@ const MobilMeny: React.FunctionComponent<
               aria-labelledby={'navlink'}
             >
               <Lenke
-                className={classNames('item--link', {
+                className={classNames('mobilmeny__lenke', {
                   active: valgtMenyPunkt.tittel === menypunkt.tittel,
                 })}
                 href={'#'}

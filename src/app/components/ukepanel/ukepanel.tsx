@@ -40,7 +40,6 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
         };
       }
     );
-    console.log('testi', sporsmalListe);
     return sporsmalListe;
   };
 

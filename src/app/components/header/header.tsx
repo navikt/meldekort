@@ -81,8 +81,8 @@ class Header extends React.Component<HeaderProps> {
       params[params.length - 2] === 'innsending' ||
       params[params.length - 2] === 'korriger';
     const headerClass = harPathInnsending
-      ? 'meldekort__header--innsending'
-      : 'meldekort__header';
+      ? 'meldekortHeader__innsending'
+      : 'meldekortHeader';
     const browserSpecificStyling = classNames(headerClass, {
       ieStyling: isIE,
       oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
