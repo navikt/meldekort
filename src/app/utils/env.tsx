@@ -18,14 +18,14 @@ const Environment = () => {
     };
   } else if (erMock()) {
     return {
-      dittNavUrl: '',
+      dittNavUrl: 'https://www.nav.no/person/dittnav',
       apiUrl: '',
       loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
     };
   } else if (erLocalhost()) {
     return {
-      dittNavUrl: '',
+      dittNavUrl: 'https://www.nav.no/person/dittnav',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',

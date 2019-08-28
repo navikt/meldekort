@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 it('UIModalWrapper', () => {
   const tree = shallow(
     <ProviderWrapper>
-      <div id="meldekort-root">
+      <div id="meldekort__root">
         <UIModalWrapper />
       </div>
     </ProviderWrapper>

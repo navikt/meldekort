@@ -1,5 +1,5 @@
 import * as React from 'react';
-import HovedMeny from '../meny/desktop/hovedMeny';
+import HovedMeny from '../meny/desktop/hovedmeny';
 import MobilMeny from '../meny/mobil/mobilMeny';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -11,10 +11,15 @@ import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
 import { Sidetittel } from 'nav-frontend-typografi';
-import MobilMenyToggle from '../meny/mobil/mobilMenyToggle';
+import MobilMenyToggle from '../meny/mobil/mobilmenyToggle';
 import { isEmpty } from 'ramda';
 import classNames from 'classnames';
-import { isIE, isOldEdge, isOldSafari } from '../../utils/browsers';
+import {
+  isIE,
+  isOldChrome,
+  isOldEdge,
+  isOldSafari,
+} from '../../utils/browsers';
 
 interface MapStateToProps {
   router: Router;
@@ -76,17 +81,17 @@ class Header extends React.Component<HeaderProps> {
       params[params.length - 2] === 'innsending' ||
       params[params.length - 2] === 'korriger';
     const headerClass = harPathInnsending
-      ? 'meldekort-header__innsending'
-      : 'meldekort-header';
+      ? 'meldekortHeader__innsending'
+      : 'meldekortHeader';
     const browserSpecificStyling = classNames(headerClass, {
       ieStyling: isIE,
-      oldBrowserStyling: isOldEdge || isOldSafari,
+      oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
     });
     return (
       <header className={browserSpecificStyling}>
-        <div className="banner-container">
-          <div className="banner-content">
-            <div className={'banner-title'}>
+        <div className="banner__container">
+          <div className="banner__content">
+            <div className={'banner__title'}>
               <Sidetittel>{tittel}</Sidetittel>
             </div>
             <MobilMenyToggle />

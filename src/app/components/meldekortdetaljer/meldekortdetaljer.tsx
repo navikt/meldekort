@@ -32,10 +32,9 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   const meldekortdager = meldekortdetaljer.sporsmal.meldekortDager;
 
   const hentSvar = (spmid: string) => {
-    for (let sporsmalKey in meldekortdetaljer.sporsmal) {
+    for (const sporsmalKey in meldekortdetaljer.sporsmal) {
       if (sporsmalKey === spmid) {
         return meldekortdetaljer.sporsmal[sporsmalKey];
-        break;
       }
     }
   };

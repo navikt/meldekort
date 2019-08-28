@@ -14,7 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 addLocaleData([...nbLocaleData, ...enLocaleData]);
 
-const rootElement = document.getElementById('meldekort-root');
+const rootElement = document.getElementById('meldekort__root');
 
 const render = (Component: React.ComponentType<{}>) => {
   ReactDOM.render(

@@ -1,10 +1,11 @@
 .aktivitetsrad {
-  .cssgrid();
-  .to-kolonner();
-  .kolonne-1-til-3();
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-start: 1;
+  grid-column-end: 3;
   border-top: 1px solid #c6c2bf;
   border-left: solid 9px;
-  grid-auto-rows: minmax(auto, auto);
+  grid-template-rows: minmax(auto, auto);
   width: 100%;
   padding: 0 1rem 0 1rem;
 
@@ -12,11 +13,12 @@
     border-bottom: solid 1px #c6c2bf;
   }
 
-  .tittel {
+  &__tittel {
     align-self: end;
   }
   .utvidetInformasjon {
-    .kolonne-1-til-3();
+    grid-column-start: 1;
+    grid-column-end: 3;
     padding-bottom: 0.5rem;
 
     &.utvidetInformasjon--apen {
@@ -24,15 +26,14 @@
     }
   }
 
-  .inputrad {
+  &__inputfelter {
     .kolonne-2-til-3();
     .syv-kolonner();
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    .rad-1-til-2();
 
-    .utfylling-checkboks {
+    .aktivitet__checkbox {
       justify-self: center;
 
       label.skjemaelement__label {
@@ -72,24 +73,16 @@
     flex-direction: column;
     align-self: flex-start;
 
-    .tittel {
+    &__tittel {
       padding-top: 1rem;
-      align-self: left;
+      align-self: flex-start;
     }
 
-    .ukedager__mobil {
-      .syv-kolonner();
-      margin-top: 1rem;
-      .typo-ingress {
-        justify-self: center;
-      }
-    }
-
-    .inputrad {
+    &__inputfelter {
       .syv-kolonner();
       margin: 0 0 2rem 0;
 
-      .utfylling-checkboks {
+      .aktivitet__checkbox {
         justify-self: center;
 
         label.skjemaelement__label {
@@ -109,27 +102,18 @@
     align-self: flex-start;
     width: 100%;
 
-    .tittel {
+    &__tittel {
       padding-top: 1rem;
     }
     .utvidetInformasjon {
       padding-top: 0.5rem;
     }
 
-    .ukedager__mobil {
-      .syv-kolonner();
-      margin-top: 1rem;
-
-      .typo-ingress {
-        justify-self: center;
-      }
-    }
-
-    .inputrad {
+    &__inputfelter {
       .syv-kolonner();
       margin: 0 0 2rem 0;
 
-      .utfylling-checkboks {
+      .aktivitet__checkbox {
         justify-self: center;
       }
     }

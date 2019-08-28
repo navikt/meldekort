@@ -66,7 +66,7 @@ class Utfyllingsside extends React.Component<
 
   hentSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar:
@@ -92,7 +92,7 @@ class Utfyllingsside extends React.Component<
     let feilIArbeidetTimer = false;
     let feilIArbeidetTimerHeleHalve = false;
 
-    dager.map(dag => {
+    dager.forEach(dag => {
       if (typeof dag.arbeidetTimer !== 'undefined') {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
           feil.push(dag.dag + dag.uke);
@@ -124,7 +124,7 @@ class Utfyllingsside extends React.Component<
       this.props.innsending.utfylteDager
     );
 
-    this.props.innsending.utfylteDager.map(dag => {
+    this.props.innsending.utfylteDager.forEach(dag => {
       if (
         !arbeidet &&
         typeof dag.arbeidetTimer !== 'undefined' &&
@@ -179,7 +179,7 @@ class Utfyllingsside extends React.Component<
         id: 'utfylling.ingenDagerUtfylt',
       });
       return (
-        <AlertStripe className={'utfyllingFeil'} type={'feil'}>
+        <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
           <ul>
             {feilIArbeid.feil ? (
               <li>{`${feiltekst} "${hentIntl()
@@ -217,7 +217,7 @@ class Utfyllingsside extends React.Component<
     } else if (typeof valideringsResultat !== 'undefined') {
       if (valideringsResultat.status === 'FEIL') {
         return (
-          <AlertStripe className={'utfyllingFeil'} type={'feil'}>
+          <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
             <ul>
               {valideringsResultat.arsakskoder.map(arsakskode => {
                 return <li key={arsakskode.kode}>{arsakskode.tekst}</li>;
@@ -251,7 +251,7 @@ class Utfyllingsside extends React.Component<
         </section>
         <section className="seksjon">
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
-          <div className={'utfylling-container'}>
+          <div className={'utfylling-content'}>
             <UkePanel
               ukenummer={Konstanter().forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}

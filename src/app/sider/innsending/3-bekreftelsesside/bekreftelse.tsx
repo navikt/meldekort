@@ -33,6 +33,7 @@ import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper'
 import { selectFeilmelding } from '../../../selectors/ui';
 import { BaksystemFeilmelding } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
+import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -103,13 +104,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
               ? false
               : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
           syk:
-            innsending.sporsmalsobjekter[3].checked === undefined
-              ? false
-              : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
-          annetFravaer:
             innsending.sporsmalsobjekter[2].checked === undefined
               ? false
               : innsending.sporsmalsobjekter[2].checked.endsWith('ja'),
+          annetFravaer:
+            innsending.sporsmalsobjekter[3].checked === undefined
+              ? false
+              : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
           arbeidssoker:
             innsending.sporsmalsobjekter[4].checked === undefined
               ? false
@@ -154,7 +155,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     meldekort: Meldekort
   ): Fravaer[] => {
     let fravar: Fravaer[] = [];
-    meldekortdetaljer.sporsmal.meldekortDager.map(meldekortDag => {
+    meldekortdetaljer.sporsmal.meldekortDager.forEach(meldekortDag => {
       let dato = kalkulerDato(meldekort.meldeperiode.fra, meldekortDag.dag);
       if (
         typeof meldekortDag.arbeidetTimerSum !== 'undefined' &&
@@ -179,6 +180,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           type: { typeFravaer: FravaerTypeEnum.KURS_UTDANNING },
         });
       }
+
       if (meldekortDag.annetFravaer) {
         fravar.push({
           dag: dato,
@@ -192,7 +194,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   hentMeldekortDager = (): MeldekortDag[] => {
     let meldekortdager: MeldekortDag[] = [];
     let dagTeller = 0;
-    this.props.innsending.utfylteDager.map(utfyltDag => {
+    this.props.innsending.utfylteDager.forEach(function(utfyltDag: UtfyltDag) {
       meldekortdager.push({
         dag: dagTeller,
         arbeidetTimerSum:
@@ -305,7 +307,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           </section>
           <div id="feilmelding">
             {this.state.feilmelding === '' ? null : (
-              <AlertStripe type={'feil'} className={'utfyllingFeil'}>
+              <AlertStripe type={'feil'} className={'utfylling__feilmelding'}>
                 {this.state.feilmelding}
               </AlertStripe>
             )}

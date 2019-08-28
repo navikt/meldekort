@@ -43,7 +43,7 @@ export const hentSporsmalConfig = () => {
       },
     },
     {
-      id: 'annetFravaer',
+      id: 'syk',
       kategori: 'forhindret',
       sporsmal: 'sporsmal.forhindret',
       ja: 'svar.forhindret.ja',
@@ -56,7 +56,7 @@ export const hentSporsmalConfig = () => {
       },
     },
     {
-      id: 'syk',
+      id: 'annetFravaer',
       kategori: 'ferieFravar',
       sporsmal: 'sporsmal.ferieFravar',
       ja: 'svar.ferieFravar.ja',

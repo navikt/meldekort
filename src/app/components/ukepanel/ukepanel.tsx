@@ -29,16 +29,17 @@ type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   const hentSporsmal = (): SpmSvar[] => {
-    let sporsmalListe: SpmSvar[] = [];
-    props.innsending.sporsmalsobjekter.map(sporsmalobj => {
-      sporsmalListe.push({
-        kategori: sporsmalobj.kategori,
-        svar:
-          sporsmalobj.checked === undefined
-            ? false
-            : sporsmalobj.checked.endsWith('ja'),
-      });
-    });
+    const sporsmalListe: SpmSvar[] = props.innsending.sporsmalsobjekter.map(
+      sporsmalobj => {
+        return {
+          kategori: sporsmalobj.kategori,
+          svar:
+            sporsmalobj.checked === undefined
+              ? false
+              : sporsmalobj.checked.endsWith('ja'),
+        };
+      }
+    );
     return sporsmalListe;
   };
 
@@ -54,7 +55,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   return (
     <EkspanderbartpanelBase
       heading={
-        <div className="uketittel">
+        <div className="uke__tittel">
           <Innholdstittel>{`${ukeTekst()} ${
             props.faktiskUkeNummer
           }`}</Innholdstittel>
@@ -65,8 +66,8 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
       apen={true}
       ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
     >
-      <div className="ukepanel">
-        <div className="ukedager__desktop">{hentUkedager()}</div>
+      <div className="uke__panel">
+        <div className="ukedager--desktop">{hentUkedager()}</div>
         {sjekkSporsmal('arbeid') ? (
           <Arbeidsrad
             ukeNummer={props.ukenummer}

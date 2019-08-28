@@ -1,5 +1,11 @@
-import { Meldekort, SendtMeldekort } from '../types/meldekort';
+import {
+  KortStatus,
+  Meldekort,
+  MeldekortRad,
+  SendtMeldekort,
+} from '../types/meldekort';
 import { Innsendingstyper } from '../types/innsending';
+import { hentDatoPeriode, hentUkePeriode } from './dates';
 
 export const erMeldekortSendtInnTidligere = (
   meldekort: Meldekort,
@@ -38,3 +44,56 @@ export const erBrukerRegistrertIArena = (
 ): boolean => {
   return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
 };
+
+export const harKortStatusOPPRellerSENDT = (meldekort: Meldekort) =>
+  meldekort.kortStatus === KortStatus.OPPRE ||
+  meldekort.kortStatus === KortStatus.SENDT;
+
+export const hentInnsendingsklareMeldekort = (
+  meldekort: Meldekort[],
+  sendteMeldekort: SendtMeldekort[]
+): Meldekort[] => {
+  if (typeof meldekort === 'undefined') {
+    return [];
+  }
+  return meldekort.filter(meldekortObj => {
+    if (harKortStatusOPPRellerSENDT(meldekortObj)) {
+      if (meldekortObj.meldeperiode.kanKortSendes) {
+        return !erMeldekortSendtInnTidligere(meldekortObj, sendteMeldekort);
+      }
+    }
+    return false;
+  });
+};
+
+export const hentMeldekortRaderFraPerson = (
+  innsendingsklareMeldekort: Meldekort[]
+): MeldekortRad[] => {
+  let radliste: MeldekortRad[] = [];
+
+  if (innsendingsklareMeldekort !== null) {
+    for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
+      if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
+        if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
+          let rad: MeldekortRad = {
+            periode: hentUkePeriode(
+              innsendingsklareMeldekort[i].meldeperiode.fra,
+              innsendingsklareMeldekort[i].meldeperiode.til
+            ),
+            dato: hentDatoPeriode(
+              innsendingsklareMeldekort[i].meldeperiode.fra,
+              innsendingsklareMeldekort[i].meldeperiode.til
+            ),
+          };
+          radliste.push(rad);
+        }
+      }
+    }
+  }
+  return radliste;
+};
+
+export const hentPeriodeDatoKolonner = [
+  { key: 'periode', label: 'Periode' },
+  { key: 'dato', label: 'Dato' },
+];

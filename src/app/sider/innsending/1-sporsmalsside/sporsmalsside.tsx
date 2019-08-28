@@ -158,7 +158,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       kurs: boolean,
       syk: boolean,
       ferie: boolean = true;
-    this.hentSvarPaaSporsmal().map(spm => {
+    this.hentSvarPaaSporsmal().forEach(spm => {
       switch (spm.kategori) {
         case kategorier[0]:
           arbeidet = spm.svar;
@@ -192,7 +192,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
   hentSvarPaaSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar:
@@ -217,7 +217,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   hentSporsmal = (): SpmSvar[] => {
     let sporsmalListe: SpmSvar[] = [];
 
-    this.props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+    this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
         svar: typeof sporsmalobj.checked !== 'undefined',
@@ -298,7 +298,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
 
   hoppeOverUtfylling = (): boolean => {
     let jaSvar = false;
-    this.hentSvarPaaSporsmal().map(spm => {
+    this.hentSvarPaaSporsmal().forEach(spm => {
       if (spm.kategori !== kategorier[4] && spm.svar && !jaSvar) {
         jaSvar = true;
       }

@@ -6,15 +6,16 @@
 
 body {
   font-family: "Source Sans Pro", sans-serif;
+
   background-color: white;
 
-  #meldekort-root {
+  #meldekort__root {
     .main-container,
     .main-container.overlay {
       z-index: 100;
+      max-width: @width-container;
       margin-right: auto;
       margin-left: auto;
-      max-width: @width-container;
 
       .sideinnhold {
         display: flex;
@@ -26,8 +27,8 @@ body {
           flex-wrap: wrap;
 
           &.tittel-sprakvelger {
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
           }
 
           &.sentrert {
@@ -50,6 +51,7 @@ body {
           }
           .knapper-container {
             display: grid;
+
             grid-template-columns: repeat(2, minmax(200px, 300px));
             grid-template-rows: minmax(auto, auto);
             grid-row-gap: 1rem;
@@ -59,24 +61,21 @@ body {
               min-width: 165px;
 
               &:nth-child(1) {
-                grid-column-start: 1;
-                grid-column-end: 2;
-                grid-row-start: 1;
-                grid-row-end: 2;
+                .kolonne-1-til-2;
+                .rad-1-til-2();
                 justify-self: end;
               }
               &:nth-child(2) {
                 grid-column-start: 2;
                 grid-column-end: 3;
-                grid-row-start: 1;
-                grid-row-end: 2;
+                .rad-1-til-2();
+
                 justify-self: start;
               }
               &:nth-child(3) {
                 grid-column-start: 1;
                 grid-column-end: 3;
-                grid-row-start: 2;
-                grid-row-end: 3;
+                .rad-3-til-4();
                 justify-self: center;
               }
             }
@@ -90,7 +89,7 @@ body {
   }
 
   @media @desktop {
-    #meldekort-root {
+    #meldekort__root {
       .main-container {
         display: flex;
         align-content: center;
@@ -104,7 +103,7 @@ body {
   }
 
   @media @tablet {
-    #meldekort-root {
+    #meldekort__root {
       .main-container {
         padding: @padding-vertical-md;
 
@@ -120,6 +119,7 @@ body {
             .knapper-container {
               &.lang-knapper {
                 grid-template-columns: 1fr;
+                grid-template-rows: minmax(auto, auto);
 
                 .navigasjonsknapp {
                   min-width: 140px;
@@ -135,7 +135,7 @@ body {
   }
 
   @media @small-phone, @phone {
-    #meldekort-root {
+    #meldekort__root {
       .main-container {
         padding: @padding-vertical-sm;
 
@@ -143,14 +143,16 @@ body {
           .flex-innhold {
             &.tittel-sprakvelger {
               display: grid;
+
               grid-template-rows: 1fr;
               grid-template-columns: auto auto;
               grid-column-gap: 0.5rem;
 
               h1,
               .languageToggle {
-                margin: 0;
                 align-self: center;
+
+                margin: 0;
               }
             }
           }
@@ -164,8 +166,8 @@ body {
 
             .knapper-container {
               display: flex;
-              flex-direction: column;
               align-items: center;
+              flex-direction: column;
               &.lang-knapper {
                 .navigasjonsknapp {
                   min-width: 140px;
@@ -182,8 +184,8 @@ body {
 .knapperUnderHverandre() {
   &:nth-child(1) {
     .kolonne-1-til-2();
-    grid-row-start: 1;
-    grid-row-end: 2;
+    .rad-1-til-2();
+
     justify-self: center;
   }
   &:nth-child(2) {
@@ -194,8 +196,7 @@ body {
   }
   &:nth-child(3) {
     .kolonne-1-til-2();
-    grid-row-start: 3;
-    grid-row-end: 4;
+    .rad-3-til-4();
     justify-self: center;
   }
 }

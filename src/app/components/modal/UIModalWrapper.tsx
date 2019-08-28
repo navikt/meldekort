@@ -22,7 +22,7 @@ const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({
   modal,
   skjulModal,
 }) => {
-  Modal.setAppElement('#meldekort-root');
+  Modal.setAppElement('#meldekort__root');
   return (
     <Modal
       className={'uimodal'}

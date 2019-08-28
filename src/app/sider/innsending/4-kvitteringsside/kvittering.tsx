@@ -183,7 +183,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
       return hentIntl().formatMessage(
         { id: 'sendt.meldekortKanSendes' },
         {
-          [0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
+          0: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
         }
       );
     } else if (
@@ -196,7 +196,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
       if (mkListe.length > 0) {
         return hentIntl().formatMessage(
           { id: 'sendt.meldekortKanSendes' },
-          { [0]: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
+          { 0: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
         );
       }
     } else if (
@@ -209,7 +209,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
       if (mkListe.length > 0) {
         return hentIntl().formatMessage(
           { id: 'sendt.meldekortKanSendes' },
-          { [0]: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
+          { 0: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
         );
       }
     }
@@ -236,8 +236,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
     const meldekortErMottatt = hentIntl().formatMessage(
       { id: 'sendt.mottatt.label' },
       {
-        [0]: formaterDato(meldekortdetaljerInnsending!.mottattDato),
-        [1]: hentTid(meldekortdetaljerInnsending!.mottattDato),
+        0: formaterDato(meldekortdetaljerInnsending!.mottattDato),
+        1: hentTid(meldekortdetaljerInnsending!.mottattDato),
       }
     );
 
@@ -320,14 +320,23 @@ class Kvittering extends React.Component<KvitteringsProps> {
         {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
-            <NavKnapp
-              type={knappTyper.hoved}
-              className={'navigasjonsknapp'}
-              tekstid={knappTekstid}
-              nestePath={nestePath}
-              nesteAktivtMeldekort={nesteAktivtMeldekort}
-              nesteInnsendingstype={nesteInnsendingstype}
-            />
+            {nestePath === Environment().dittNavUrl ? (
+              <a
+                className={'knapp navigasjonsknapp knapp--hoved'}
+                href={nestePath}
+              >
+                <FormattedMessage id={knappTekstid} />
+              </a>
+            ) : (
+              <NavKnapp
+                type={knappTyper.hoved}
+                className={'navigasjonsknapp'}
+                tekstid={knappTekstid}
+                nestePath={nestePath}
+                nesteAktivtMeldekort={nesteAktivtMeldekort}
+                nesteInnsendingstype={nesteInnsendingstype}
+              />
+            )}
             <NavKnapp
               type={knappTyper.standard}
               nestePath={'/tidligere-meldekort'}

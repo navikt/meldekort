@@ -99,7 +99,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
       let ukedag = konverterUkedag(dag);
       return (
         <Checkbox
-          className="utfylling-checkboks"
+          className="aktivitet__checkbox"
           key={ukedag}
           label={
             <span className="vekk">
@@ -141,7 +141,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     let { tekstId, aap, forklaringId } = this.props;
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
-        <Undertittel className={'tittel'}>
+        <Undertittel className={'aktivitetsrad__tittel'}>
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
@@ -149,8 +149,8 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
             id={aap ? forklaringId + '-AAP' : forklaringId}
           />
         </UtvidetInformasjon>
-        <div className="ukedager__mobil">{hentUkedager()}</div>
-        <div className="inputrad">{this.settFelter()}</div>
+        <div className="ukedager--mobil">{hentUkedager()}</div>
+        <div className="aktivitetsrad__inputfelter">{this.settFelter()}</div>
       </div>
     );
   };
