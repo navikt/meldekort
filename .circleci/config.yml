@@ -124,12 +124,15 @@ workflow:
   bygg_og_deploy:
     jobs:
       - build
-      - bygg-og-push-docker
+      - bygg-og-push-docker:
+          name: bygg_og_push
+          requires:
+            - build
       - bekreft-deploy-til-q1:
           type: approval
           requires:
             - build
-            - bygg-og-push-docker
+            - bygg_og_push
           filters:
             branches:
               ignore: master
@@ -141,7 +144,7 @@ workflow:
           name: automatisk-deploy-til-q1
           requires:
             - build
-            - bygg-og-push-docker
+            - bygg_og_push
           filters:
             branches:
               only: master
@@ -149,7 +152,7 @@ workflow:
           type: approval
           requires:
             - build
-            - bygg-og-push-docker
+            - bygg_og_push
           filters:
             branches:
               ignore: master
@@ -161,7 +164,7 @@ workflow:
           name: automatisk-deploy-til-q0
           requires:
             - build
-            - bygg-og-push-docker
+            - bygg_og_push
           filters:
             branches:
               only: master
