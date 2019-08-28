@@ -11,5 +11,4 @@ EXPOSE 8080
 FROM navikt/pus-decorator
 ENV APPLICATION_NAME=meldekort
 ENV FOOTER_TYPE=WITH_ALPHABET
-COPY --from=builder /source/node_modules ./node_modules
 COPY --from=builder /source/build /app
