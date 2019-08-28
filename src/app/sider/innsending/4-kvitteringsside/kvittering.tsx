@@ -37,8 +37,6 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import Lenke from 'nav-frontend-lenker';
-import { finnesIntlId } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -185,7 +183,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
       return hentIntl().formatMessage(
         { id: 'sendt.meldekortKanSendes' },
         {
-          [0]: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
+          0: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
         }
       );
     } else if (
@@ -198,7 +196,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
       if (mkListe.length > 0) {
         return hentIntl().formatMessage(
           { id: 'sendt.meldekortKanSendes' },
-          { [0]: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
+          { 0: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
         );
       }
     } else if (
@@ -211,7 +209,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
       if (mkListe.length > 0) {
         return hentIntl().formatMessage(
           { id: 'sendt.meldekortKanSendes' },
-          { [0]: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
+          { 0: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
         );
       }
     }
@@ -238,8 +236,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
     const meldekortErMottatt = hentIntl().formatMessage(
       { id: 'sendt.mottatt.label' },
       {
-        [0]: formaterDato(meldekortdetaljerInnsending!.mottattDato),
-        [1]: hentTid(meldekortdetaljerInnsending!.mottattDato),
+        0: formaterDato(meldekortdetaljerInnsending!.mottattDato),
+        1: hentTid(meldekortdetaljerInnsending!.mottattDato),
       }
     );
 

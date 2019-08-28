@@ -1,4 +1,5 @@
 // CSS styling for Flexbox fallback
+
 #meldekort-root {
   header.meldekort-header.ieStyling {
     .banner-container {
@@ -39,15 +40,15 @@
                       padding-left: 50%;
                     }
                     .arbeidsrad {
-                      .tittel {
+                      &__tittel {
                         .rad-1-til-2();
+                      }
+                      &__inputfelt {
+                        display: flex;
+                        justify-content: space-between;
                       }
                       .utvidetInformasjon {
                         .rad-3-til-4();
-                      }
-                      .inputrad_arbeid {
-                        display: flex;
-                        justify-content: space-between;
                       }
                     }
                     .aktivitetsrad {

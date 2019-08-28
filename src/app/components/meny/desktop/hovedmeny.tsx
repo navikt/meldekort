@@ -31,30 +31,25 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
   };
 
   return (
-    <nav className="mainNav">
-      <div className="mainNav__wrapper">
-        <ul>
-          {menypunkter
-            .filter(
-              (item: MenyPunkt) =>
-                item.urlparam && item.urlparam !== '/new-project'
-            )
-            .map((item: MenyPunkt, index: any) => (
-              <li key={item.tittel} className={'hovedMeny-item'}>
-                <Lenke
-                  onClick={() => onChange(item)}
-                  className={classNames('menypunkt underline', {
-                    active: valgtMenyPunkt.tittel === item.tittel,
-                  })}
-                  href={'#'}
-                  aria-labelledby={'tab menypunkt'}
-                >
-                  {hentIntl().formatMessage({ id: item.tekstid })}
-                </Lenke>
-              </li>
-            ))}
-        </ul>
-      </div>
+    <nav className="hovedmeny">
+      <ul className="hovedmeny__wrapper">
+        {menypunkter
+          .filter((item: MenyPunkt) => item.urlparam)
+          .map((item: MenyPunkt, index: any) => (
+            <li key={item.tittel} className={'hovedmeny__item'}>
+              <Lenke
+                onClick={() => onChange(item)}
+                className={classNames('hovedmeny__menypunkt', {
+                  active: valgtMenyPunkt.tittel === item.tittel,
+                })}
+                href={'#'}
+                aria-labelledby={'tab hovedmeny__menypunkt'}
+              >
+                {hentIntl().formatMessage({ id: item.tekstid })}
+              </Lenke>
+            </li>
+          ))}
+      </ul>
     </nav>
   );
 };

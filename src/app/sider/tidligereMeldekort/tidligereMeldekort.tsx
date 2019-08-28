@@ -62,7 +62,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   hentRaderFraHistoriskeMeldekort = () => {
     let radliste: HistoriskeMeldekortRad[] = [];
 
-    this.props.historiskeMeldekort.historiskeMeldekort.map(meldekort => {
+    this.props.historiskeMeldekort.historiskeMeldekort.forEach(meldekort => {
       radliste.push({
         meldekort: meldekort,
         periode: hentUkePeriode(

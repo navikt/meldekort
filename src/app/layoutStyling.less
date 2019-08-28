@@ -27,21 +27,9 @@
   grid-row-end: 4;
 }
 
-.cssgrid() {
-  display: -ms-grid;
-  display: grid;
-}
-
-.to-kolonner() {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.to-rader() {
-  grid-template-rows: repeat(2, 1fr);
-}
-
 .syv-kolonner() {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: minmax(auto, auto);
 }

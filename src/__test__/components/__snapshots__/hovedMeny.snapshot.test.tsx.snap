@@ -2,37 +2,35 @@
 
 exports[`HovedMeny 1`] = `
 <nav
-  className="mainNav"
+  className="hovedmeny"
 >
-  <div
-    className="mainNav__wrapper"
+  <ul
+    className="hovedmeny__wrapper"
   >
-    <ul>
-      <li
-        className="hovedMeny-item"
+    <li
+      className="hovedmeny__item"
+    >
+      <a
+        aria-labelledby="tab hovedmeny__menypunkt"
+        className="lenke hovedmeny__menypunkt active"
+        href="#"
+        onClick={[Function]}
       >
-        <a
-          aria-labelledby="tab menypunkt"
-          className="lenke menypunkt underline active"
-          href="#"
-          onClick={[Function]}
-        >
-          Send 
-        </a>
-      </li>
-      <li
-        className="hovedMeny-item"
+        Send 
+      </a>
+    </li>
+    <li
+      className="hovedmeny__item"
+    >
+      <a
+        aria-labelledby="tab hovedmeny__menypunkt"
+        className="lenke hovedmeny__menypunkt"
+        href="#"
+        onClick={[Function]}
       >
-        <a
-          aria-labelledby="tab menypunkt"
-          className="lenke menypunkt underline"
-          href="#"
-          onClick={[Function]}
-        >
-          Tidligere meldekort 
-        </a>
-      </li>
-    </ul>
-  </div>
+        Tidligere meldekort 
+      </a>
+    </li>
+  </ul>
 </nav>
 `;

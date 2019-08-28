@@ -1,44 +1,48 @@
 .arbeidsrad {
-  .cssgrid();
-  .kolonne-1-til-3();
-  .to-kolonner();
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: minmax(auto, auto);
 
   width: 100%;
   border-left: solid 9px #99c2e8;
   border-top: 1px solid #c6c2bf;
   padding: 0 1rem 0 1rem;
 
-  .tittel {
+  &__tittel {
     align-self: end;
     padding-bottom: 0.5rem;
   }
-  .utvidetInformasjon {
-    .kolonne-1-til-3();
-    padding-bottom: 0.5rem;
-    &.utvidetInformasjon--apen {
-      margin-top: 0.5rem;
+  &__inputfelter {
+    .kolonne-2-til-3();
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin-top: 1.2rem;
+    .rad-1-til-2();
+  }
+  .skjemaelement {
+    justify-self: center;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+
+    .arbeid__inputfelt {
+    }
+    .input--xs {
+      width: 2.5rem;
+      height: 2.5rem;
+      text-align: center;
     }
   }
 
-  .inputrad_arbeid {
-    .kolonne-2-til-3();
-    .syv-kolonner();
-    margin-top: 1.2rem;
-    grid-row-start: 1;
-    grid-row-end: 2;
-
-    .skjemaelement {
-      justify-self: center;
-      margin-bottom: 0.2rem;
-      margin-top: 0.2rem;
-
-      &.arbeidInput {
-        .input--xs {
-          width: 3rem;
-          height: 2.5rem;
-          text-align: center;
-        }
-      }
+  .utvidetInformasjon {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding-bottom: 0.5rem;
+    &.utvidetInformasjon--apen {
+      margin-top: 0.5rem;
     }
   }
 }
@@ -47,34 +51,26 @@
   .arbeidsrad {
     display: flex;
     flex-direction: column;
-    align-self: flex-start;
 
-    .tittel {
+    &__tittel {
+      align-self: flex-start;
       padding-top: 1rem;
+    }
+
+    &__inputfelter {
+      .syv-kolonner();
+      margin: 0 0 1rem;
+    }
+    .skjemaelement {
+      margin: 0;
+
+      .input--xs {
+        width: 2.25rem;
+        height: 2rem;
+      }
     }
     .utvidetInformasjon {
       padding-bottom: 1rem;
-    }
-
-    .ukedager__mobil {
-      .syv-kolonner();
-      .typo-ingress {
-        justify-self: center;
-      }
-    }
-
-    .inputrad_arbeid {
-      .syv-kolonner();
-      margin: 0 0 1rem;
-      .skjemaelement {
-        margin: 0;
-        &.arbeidInput {
-          .skjemaelement__input.input--xs {
-            width: 2.25rem;
-            height: 2rem;
-          }
-        }
-      }
     }
   }
 }

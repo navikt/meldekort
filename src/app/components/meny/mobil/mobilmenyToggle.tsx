@@ -17,17 +17,19 @@ const MobilMenyToggle: React.FunctionComponent<
   MapDispatchToProps & MapStateToProps
 > = props => {
   return (
-    <div
-      className={'burger-menu-toggle'}
+    <nav
+      className={'mobilmeny-toggle'}
       onClick={() => props.toggleMeny(!props.erApen)}
     >
-      <div className={classNames('nav-icon', { open: props.erApen })}>
-        <span />
-        <span />
-        <span />
-        <span />
+      <div
+        className={classNames('mobilmeny-toggle__icon', { open: props.erApen })}
+      >
+        <span className={'line'} />
+        <span className={'line'} />
+        <span className={'line'} />
+        <span className={'line'} />
       </div>
-    </div>
+    </nav>
   );
 };
 

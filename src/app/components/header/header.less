@@ -1,40 +1,41 @@
-.meldekort-header {
+.meldekortHeader {
   &__innsending {
     display: none;
   }
+}
 
-  .banner-container {
+.banner {
+  &__container {
     background-color: @navBlaLighten80;
     border-bottom: 2px solid @navBlaLighten60;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 2fr;
+  }
 
-    .banner-content {
-      display: grid;
-      grid-template-columns: 1fr 60px;
-      grid-template-rows: minmax(40px, auto);
-
-      .banner-title {
-        height: 100%;
-        justify-self: center;
-        padding: 0.5rem;
-      }
-    }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    grid-template-rows: minmax(40px, auto);
+  }
+  &__title {
+    height: 100%;
+    justify-self: center;
+    padding: 0.5rem;
   }
 }
 
 @media @small-phone {
-  .meldekort-header {
+  .meldekortHeader {
     border-bottom: none;
-    .banner-container {
-      .banner-content {
-        border-bottom: 2px solid @navBlaLighten60;
-        .banner-title {
-          width: 100%;
-        }
-      }
+  }
+  .banner {
+    &__content {
+      border-bottom: 2px solid @navBlaLighten60;
+    }
+    &__title {
+      width: 100%;
     }
   }
 }
