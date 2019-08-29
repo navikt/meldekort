@@ -5,16 +5,23 @@ jobs:
       - image: circleci/node:12.8.0
     steps:
       - checkout
-      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      - run: chmod +x ./cc-test-reporter
+      - run:
+          name: Setter opp rapportering til Code Climate
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
       - run:
           name: Installerer npm pakker
           command: npm ci
-      - run: ./cc-test-reporter before-build
+      - run:
+          name: Code Climate - Before Build
+          command: ./cc-test-reporter before-build
       - run:
           name: Bygger og tester meldekort
           command: npm run build && npm test
-      - run: ./cc-test-reporter after-build --exit-code $?
+      - run:
+          name: Code Climate - After Build
+          command: ./cc-test-reporter after-build --exit-code $?
       - persist_to_workspace:
           root: .
           paths:
@@ -115,7 +122,7 @@ commands:
             echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
             echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
             echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
-            echo "export BASE_URL='soknader'" >> $BASH_ENV
+            echo "export BASE_URL='meldekort'" >> $BASH_ENV
       - run:
           name: Definerer nav op docker-image
           command: |
