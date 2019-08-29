@@ -13,10 +13,10 @@ spec:
     - {{ingress1}}
     - {{ingress2}}
   liveness:
-    path: {{baseurl}}/internal/isAlive
+    path: {{team}}/internal/isAlive
     initialDelay: 10
   readiness:
-    path: {{baseurl}}/internal/isReady
+    path: {{team}}/internal/isReady
     initialDelay: 10
   vault:
     enabled: true
