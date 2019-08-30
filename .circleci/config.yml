@@ -47,7 +47,7 @@ jobs:
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_NAME
 
-  deploy-til-q1:
+  deploy-til-t3:
     docker:
       - image: navikt/deployment-cli:latest
     steps:
@@ -55,9 +55,9 @@ jobs:
       - sett-miljovariabler
       - deploy:
           cluster: dev-sbs
-          namespace: q1
-          ingress1: https://$REPO_NAME-q1.nais.oera-q.local
-          ingress2: https://www-q1.nav.no/$BASE_URL
+          namespace: t3
+          ingress1: https://$REPO_NAME-t3.nais.oera-q.local
+          ingress2: https://www-t3.nav.no/$BASE_URL
 
   deploy-til-q0:
     docker:
