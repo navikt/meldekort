@@ -251,7 +251,7 @@ class Utfyllingsside extends React.Component<
         </section>
         <section className="seksjon">
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
-          <div className={'utfylling-content'}>
+          <div className={'utfylling-container'}>
             <UkePanel
               ukenummer={Konstanter().forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}

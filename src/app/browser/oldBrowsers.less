@@ -1,93 +1,112 @@
 // CSS styling for Flexbox fallback
-#meldekort-root {
-  header.meldekortHeader.oldBrowserStyling {
-    .banner-container {
+.oldBrowserStyling {
+  // ------ BANNER / HEADER -----
+  .banner {
+    &__container {
       display: flex;
       justify-content: center;
-      .banner-content {
-        .banner-title {
-        }
+    }
+
+    &__content {
+    }
+
+    &__title {
+    }
+  }
+
+  // ------ KNAPPER-----
+  .knapper-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .navigasjonsknapp {
+      margin-bottom: 1.5rem;
+    }
+
+    @media @desktop, @tablet {
+      .navigasjonsknapp {
+        margin-right: 2rem;
       }
     }
   }
 
-  div.main-container.oldBrowserStyling {
-    .sideinnhold {
-      .seksjon {
-        .knapper-container {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          .navigasjonsknapp {
-            margin-right: 2rem;
-            &:last-child {
-              margin-right: 0;
-            }
-          }
+  // ------ UTFYLLINGSSIDEN -----
+  .utfylling-container {
+    .uke {
+      &__ panel {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__tittel {
+      }
+    }
+
+    .ukedager {
+      &--desktop {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 50%;
+
+        @media @small-phone, @phone, @tablet {
+          display: none;
         }
-        .utfylling-container {
-          .ekspanderbartPanel {
-            .ReactCollapse--collapse {
-              .ReactCollapse--content {
-                .ekspanderbartPanel__innhold {
-                  .ukepanel {
-                    display: flex;
-                    flex-direction: column;
-                    .ukedager__desktop {
-                      display: flex;
-                      justify-content: space-between;
-                      padding-left: 50%;
+      }
+      &--mobil {
+        display: flex;
+        justify-content: space-between;
+        @media @desktop {
+          display: none;
+        }
+      }
+    }
 
-                      @media @small-phone, @phone {
-                        display: none;
-                      }
-                    }
-                    .arbeidsrad {
-                      .tittel {
-                        .rad-1-til-2();
-                      }
-                      .utvidetInformasjon {
-                        .rad-3-til-4();
-                      }
-                      .inputrad_arbeid {
-                        display: flex;
-                        justify-content: space-between;
-                      }
-                      .ukedager__mobil {
-                        display: flex;
-                        justify-content: space-between;
-                        @media @desktop {
-                          display: none;
-                        }
-                      }
-                    }
+    .arbeidsrad {
+      padding-bottom: 1rem;
+      &__tittel {
+        padding-top: 1rem;
+        .rad-1-til-2();
+      }
 
-                    .aktivitetsrad {
-                      .tittel {
-                        .rad-1-til-2();
-                      }
+      &__inputfelter {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 1rem 50%;
+        margin-top: 0;
+      }
 
-                      .utvidetInformasjon {
-                        .rad-3-til-4();
-                      }
+      .utvidetInformasjon {
+        .rad-3-til-4();
+      }
 
-                      .inputrad {
-                        display: flex;
-                        justify-content: space-between;
-                      }
-                      .ukedager__mobil {
-                        display: flex;
-                        justify-content: space-between;
-                        @media @desktop {
-                          display: none;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+      @media @phone, @small-phone, @tablet {
+        &__inputfelter {
+          padding: 0;
+        }
+      }
+    }
+
+    .aktivitetsrad {
+      padding-bottom: 1rem;
+      &__tittel {
+        padding-top: 1rem;
+
+        .rad-1-til-2();
+      }
+
+      &__inputfelter {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 1rem 50%;
+        margin-top: 0;
+      }
+
+      .utvidetInformasjon {
+        .rad-3-til-4();
+      }
+      @media @phone, @small-phone, @tablet {
+        &__inputfelter {
+          padding: 0;
         }
       }
     }

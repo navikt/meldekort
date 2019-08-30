@@ -1,76 +1,93 @@
 // CSS styling for Flexbox fallback
-
-#meldekort-root {
-  header.meldekortHeader.ieStyling {
-    .banner-container {
+.ieStyling {
+  // ------ BANNER / HEADER -----
+  .banner {
+    &__container {
       display: flex;
       justify-content: center;
-      .banner-content {
-        .banner-title {
-        }
+    }
+
+    &__content {
+    }
+
+    &__title {
+    }
+  }
+
+  // ------ KNAPPER-----
+  .knapper-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .navigasjonsknapp {
+      margin-right: 2rem;
+
+      &:last-child {
+        margin-right: 0;
       }
     }
   }
 
-  div.main-container.ieStyling {
-    .sideinnhold {
-      .seksjon {
-        .knapper-container {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          .navigasjonsknapp {
-            margin-right: 2rem;
-            &:last-child {
-              margin-right: 0;
-            }
-          }
-        }
-        .utfylling-container {
-          .ekspanderbartPanel {
-            .ReactCollapse--collapse {
-              .ReactCollapse--content {
-                .ekspanderbartPanel__innhold {
-                  .ukepanel {
-                    display: flex;
-                    flex-direction: column;
-                    .ukedager__desktop {
-                      display: flex;
-                      justify-content: space-between;
-                      padding-left: 50%;
-                    }
-                    .arbeidsrad {
-                      &__tittel {
-                        .rad-1-til-2();
-                      }
-                      &__inputfelt {
-                        display: flex;
-                        justify-content: space-between;
-                      }
-                      .utvidetInformasjon {
-                        .rad-3-til-4();
-                      }
-                    }
-                    .aktivitetsrad {
-                      .tittel {
-                        .rad-1-til-2();
-                      }
+  // ------ UTFYLLINGSSIDEN -----
+  .utfylling-container {
+    background: #005b82;
+    .uke {
+      &__ panel {
+        display: flex;
+        flex-direction: column;
+      }
 
-                      .utvidetInformasjon {
-                        .rad-3-til-4();
-                      }
+      &__tittel {
+      }
+    }
 
-                      .inputrad {
-                        display: flex;
-                        justify-content: space-between;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+    .ukedager {
+      &--desktop {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 50%;
+
+        @media @small-phone, @phone {
+          display: none;
         }
+      }
+      &--mobil {
+        display: flex;
+        justify-content: space-between;
+        @media @desktop {
+          display: none;
+        }
+      }
+    }
+
+    .arbeidsrad {
+      &__tittel {
+        .rad-1-til-2();
+      }
+
+      &__inputfelter {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .utvidetInformasjon {
+        .rad-3-til-4();
+      }
+    }
+
+    .aktivitetsrad {
+      &__tittel {
+        .rad-1-til-2();
+      }
+
+      &__inputfelter {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .utvidetInformasjon {
+        .rad-3-til-4();
       }
     }
   }
