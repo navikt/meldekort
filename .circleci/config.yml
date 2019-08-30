@@ -56,8 +56,8 @@ jobs:
       - deploy:
           cluster: dev-sbs
           namespace: q1
-          ingress1: https://$REPO_NAME.nais.oera.no
-          ingress2: https://www.nav.no/$BASE_URL
+          ingress1: https://$REPO_NAME-q1.nais.oera-q.local
+          ingress2: https://www-q1.nav.no/$BASE_URL
 
   deploy-til-q0:
     docker:
@@ -68,8 +68,8 @@ jobs:
       - deploy:
           cluster: dev-sbs
           namespace: q0
-          ingress1: https://$REPO_NAME.nais.oera.no
-          ingress2: https://www.nav.no/$BASE_URL
+          ingress1: https://$REPO_NAME-q0.nais.oera-q.local
+          ingress2: https://www-q0.nav.no/$BASE_URL
 
   deploy-til-prod:
     docker:
