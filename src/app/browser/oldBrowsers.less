@@ -4,14 +4,29 @@
   .banner {
     &__container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
     }
-
     &__content {
+      display: flex;
+      justify-content: space-between;
     }
+  }
 
-    &__title {
+  // MOBILMENY
+
+  .mobilmeny {
+    &__navlist {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+  }
+
+  .mobilmenyToggle {
+    display: block;
+    height: 100%;
+    width: 60px;
   }
 
   // ------ KNAPPER-----
@@ -36,9 +51,6 @@
       &__ panel {
         display: flex;
         flex-direction: column;
-      }
-
-      &__tittel {
       }
     }
 

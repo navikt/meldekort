@@ -18,6 +18,8 @@ import {
   isIE,
   isOldChrome,
   isOldEdge,
+  isOldFirefox,
+  isOldIE,
   isOldSafari,
 } from '../../utils/browsers';
 
@@ -84,8 +86,8 @@ class Header extends React.Component<HeaderProps> {
       ? 'meldekortHeader meldekortHeader__innsending'
       : 'meldekortHeader';
     const browserSpecificStyling = classNames(headerClass, {
-      ieStyling: isIE,
-      oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
+      partialGridSupportedStyling: isIE || isOldEdge,
+      oldBrowserStyling: isOldSafari || isOldChrome || isOldIE || isOldFirefox,
     });
     return (
       <header className={browserSpecificStyling}>
