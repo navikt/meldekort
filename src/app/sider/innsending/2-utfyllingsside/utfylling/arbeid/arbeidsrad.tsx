@@ -83,7 +83,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     let dagObj = null;
     this.props.innsending.utfylteDager.forEach(dag => {
       if (
-        matchUkedager(dag.dag, ukedag.trim()) &&
+        matchUkedager(konverterUkedag(dag.dag), ukedag.trim()) &&
         dag.uke === this.props.ukeNummer
       ) {
         dagObj = dag;
@@ -101,7 +101,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
       let ukedag = konverterUkedag(dag);
       let { utfylteDager } = this.props.innsending;
       let utfyltDagIndex = this.finnIndex(ukedag);
-
+      console.log(utfylteDager);
+      console.log(ukedag);
+      console.log(utfyltDagIndex);
       return (
         <Input
           className="arbeid__inputfelt"
