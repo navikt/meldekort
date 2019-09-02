@@ -1,0 +1,1 @@
+Din nettleser ({0}) er utdatert og støttes ikke av Meldekort. Du vil kunne oppleve problemer hvis du fortsetter uten å oppdatere. Vi anbefaler at du oppdaterer eller bytter nettleseren din.

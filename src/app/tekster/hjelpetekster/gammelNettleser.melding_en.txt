@@ -1,0 +1,1 @@
+Your browser ({0}) is outdated and is not supported by Meldekort. You may experience problems if you continue without updating. We recommend that you update or change your browser.

@@ -20,6 +20,7 @@ import {
   isOldEdge,
   isOldSafari,
 } from '../../utils/browsers';
+import GammelNettleserMelding from '../gammelNetteleserMelding/gammelNettleserMelding';
 
 interface MapStateToProps {
   router: Router;
@@ -107,6 +108,7 @@ class Header extends React.Component<HeaderProps> {
         ) : (
           <></>
         )}
+        <GammelNettleserMelding />
       </header>
     );
   }
