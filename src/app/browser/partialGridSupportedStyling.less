@@ -4,41 +4,57 @@
   .banner {
     &__container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
     }
-
     &__content {
+      @media @small-phone, @phone, @tablet {
+        display: flex;
+        justify-content: space-between;
+      }
     }
+  }
 
-    &__title {
+  // -----MOBILMENY-----
+  .mobilmeny {
+    &__navlist {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .mobilmenyToggle {
+    display: block;
+    height: 100%;
+    width: 60px;
+    @media @desktop {
+      display: none;
     }
   }
 
   // ------ KNAPPER-----
   .knapper-container {
     width: 100%;
-    display: flex;
+    display: flex !important;
     justify-content: center;
-
     .navigasjonsknapp {
-      margin-right: 2rem;
+      margin-bottom: 1.5rem;
+    }
 
-      &:last-child {
-        margin-right: 0;
+    @media @desktop, @tablet {
+      .navigasjonsknapp {
+        margin-right: 2rem;
       }
     }
   }
 
   // ------ UTFYLLINGSSIDEN -----
   .utfylling-container {
-    background: #005b82;
     .uke {
-      &__ panel {
+      &__panel {
         display: flex;
         flex-direction: column;
-      }
-
-      &__tittel {
       }
     }
 
@@ -48,7 +64,7 @@
         justify-content: space-between;
         padding-left: 50%;
 
-        @media @small-phone, @phone {
+        @media @small-phone, @phone, @tablet {
           display: none;
         }
       }
@@ -62,32 +78,50 @@
     }
 
     .arbeidsrad {
+      padding-bottom: 1rem;
       &__tittel {
+        padding-top: 1rem;
         .rad-1-til-2();
       }
 
       &__inputfelter {
         display: flex;
         justify-content: space-between;
+        margin-top: 0;
       }
 
       .utvidetInformasjon {
         .rad-3-til-4();
+      }
+
+      @media @phone, @small-phone, @tablet {
+        &__inputfelter {
+          padding: 0;
+        }
       }
     }
 
     .aktivitetsrad {
+      padding-bottom: 1rem;
       &__tittel {
+        padding-top: 1rem;
+
         .rad-1-til-2();
       }
 
       &__inputfelter {
         display: flex;
         justify-content: space-between;
+        margin-top: 0;
       }
 
       .utvidetInformasjon {
         .rad-3-til-4();
+      }
+      @media @phone, @small-phone, @tablet {
+        &__inputfelter {
+          padding: 0;
+        }
       }
     }
   }

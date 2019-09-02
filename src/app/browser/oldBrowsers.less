@@ -13,8 +13,7 @@
     }
   }
 
-  // MOBILMENY
-
+  // -----MOBILMENY-----
   .mobilmeny {
     &__navlist {
       display: flex;
@@ -27,6 +26,9 @@
     display: block;
     height: 100%;
     width: 60px;
+    @media @desktop {
+      display: none;
+    }
   }
 
   // ------ KNAPPER-----
@@ -48,7 +50,7 @@
   // ------ UTFYLLINGSSIDEN -----
   .utfylling-container {
     .uke {
-      &__ panel {
+      &__panel {
         display: flex;
         flex-direction: column;
       }
