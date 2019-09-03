@@ -20,10 +20,7 @@ import { RootState } from '../../store/configureStore';
 import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
-import {
-  hentNorskeUkedager,
-  hentUkedagerSomStringListe,
-} from '../../utils/ukedager';
+import { hentNorskeUkedager } from '../../utils/ukedager';
 import { RouterState } from 'connected-react-router';
 
 interface MapStateToProps {
@@ -105,7 +102,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     utfylteDager: UtfyltDag[]
   ) => {
     const ukedagerSomListe = hentNorskeUkedager();
-    const konverterteUtfylteDager = utfylteDager.map((utfyltDag, index) => {
+    return utfylteDager.map((utfyltDag, index) => {
       return {
         ...utfyltDag,
         uke: index < 7 ? 1 : 2,
@@ -116,7 +113,6 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
         kurs: meldekortDager[index].kurs,
       };
     });
-    return konverterteUtfylteDager;
   };
 
   konverterMeldekortdetaljerSporsmalTilInnsendingSporsmal = (
@@ -126,23 +122,20 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     const listeMedSporsmal = mkdetaljerSporsmal!
       ? this.returnerListeMedMeldekortdetaljerSporsmal(mkdetaljerSporsmal)
       : [];
-    const konvertertListeMedInnsendingSpm: Spm[] = innsendingSporsmal.map(
-      spm => {
-        for (let i = 0; i < listeMedSporsmal.length; i++) {
-          if (spm.kategori === listeMedSporsmal[i].kategori) {
-            return {
-              ...spm,
-              checked: this.settCheckedBasertPaBoolean(
-                spm.kategori,
-                listeMedSporsmal[i].checked
-              ),
-            };
-          }
+    return innsendingSporsmal.map(spm => {
+      for (let i = 0; i < listeMedSporsmal.length; i++) {
+        if (spm.kategori === listeMedSporsmal[i].kategori) {
+          return {
+            ...spm,
+            checked: this.settCheckedBasertPaBoolean(
+              spm.kategori,
+              listeMedSporsmal[i].checked
+            ),
+          };
         }
-        return { ...spm };
       }
-    );
-    return konvertertListeMedInnsendingSpm;
+      return { ...spm };
+    });
   };
 
   componentDidMount() {

@@ -46,8 +46,18 @@ const innsendingReducer = (
   action: InnsendingActionsTypes
 ): InnsendingState => {
   switch (action.type) {
-    case getType(InnsendingActions.oppdaterUtfylteDager):
-      return { ...state, utfylteDager: action.payload };
+    case getType(InnsendingActions.oppdaterUtfylteDager): {
+      let rensetUtfylteDager = action.payload.map(utfyltDag => {
+        if (utfyltDag.arbeidetTimer === '0') {
+          return {
+            ...utfyltDag,
+            arbeidetTimer: undefined,
+          };
+        }
+        return { ...utfyltDag };
+      });
+      return { ...state, utfylteDager: rensetUtfylteDager };
+    }
 
     case getType(InnsendingActions.oppdaterSpm):
       return { ...state, sporsmalsobjekter: action.payload };
