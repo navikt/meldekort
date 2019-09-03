@@ -9,20 +9,22 @@ const getMajorVersion = browserVersion
   : false;
 
 // Safari
-export const isOldSafari = browserName === 'Safari' && getMajorVersion === 9;
-
-export const isSafari = browserName === 'Safari' && getMajorVersion > 9;
+export const isSafari = browserName === 'Safari';
+export const isOldSafari = browserName === 'Safari' && getMajorVersion < 10;
 
 // Edge
+export const isEdge = browserName === 'Microsoft Edge' && getMajorVersion < 16;
 export const isOldEdge =
-  browserName === 'Microsoft Edge' && getMajorVersion === 15;
-export const isEdge = browserName === 'Microsoft Edge' && getMajorVersion > 15;
+  browserName === 'Microsoft Edge' && getMajorVersion < 16;
 
 // Internet Explorer 6-11
 export const isIE = browserName === 'Internet Explorer';
+export const isOldIE =
+  browserName === 'Internet Explorer' && getMajorVersion < 10;
 
 // Firefox
 export const isFirefox = browserName === 'Firefox';
+export const isOldFirefox = browserName === 'Firefox' && getMajorVersion < 52;
 
 // Chrome
 export const isChrome = browserName === 'Chrome';
