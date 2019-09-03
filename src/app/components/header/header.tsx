@@ -15,6 +15,7 @@ import MobilMenyToggle from '../meny/mobil/mobilmenyToggle';
 import { isEmpty } from 'ramda';
 import classNames from 'classnames';
 import {
+  browserName,
   isIE,
   isOldChrome,
   isOldEdge,
@@ -95,6 +96,8 @@ class Header extends React.Component<HeaderProps> {
           <div className="banner__content">
             <div className={'banner__title'}>
               <Sidetittel>{tittel}</Sidetittel>
+              {console.log('Er safari?', browserName)}
+              <p>Er safari? {browserName}</p>
             </div>
             <MobilMenyToggle />
           </div>

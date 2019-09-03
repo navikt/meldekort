@@ -1,7 +1,7 @@
 import * as Bowser from 'bowser';
 
 const browserObject = Bowser.getParser(window.navigator.userAgent);
-const browserName = browserObject.getBrowserName();
+export const browserName = browserObject.getBrowserName();
 const browserVersion = browserObject.getBrowserVersion();
 
 const getMajorVersion = browserVersion
