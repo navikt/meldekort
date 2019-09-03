@@ -84,7 +84,7 @@
       'Spørsmålet om du vil fortsette å være registrert hos NAV de neste 14 dagene må besvares ',
     fortsetteRegistrert: ' ',
     'gammelNettleser.melding':
-      'Din nettleser ({0}) er utdatert og støttes ikke av Meldekort. Du vil kunne oppleve problemer hvis du fortsetter uten å oppdatere. Vi anbefaler at du oppdaterer eller bytter nettleseren din. ',
+      'Nettleseren din ({0}) er utdatert, og du trenger en oppdatert versjon for å sende inn meldekort. For å sikre at du ikke opplever problemer når du skal å sende inn meldekort, anbefaler vi at du oppdaterer eller bytter nettleseren din. ',
     'genereltOmMeldekort.informasjonOmMeldekortLink':
       '/no/Person/Arbeid/Dagpenger+ved+arbeidsloshet+og+permittering/Meldekort+hvordan+gjor+du+det ',
     'genereltOmMeldekort.innhold':
