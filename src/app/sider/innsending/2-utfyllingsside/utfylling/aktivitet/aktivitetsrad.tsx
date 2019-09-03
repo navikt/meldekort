@@ -42,7 +42,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
       if (
         dag.uke === this.props.ukeNummer &&
-        matchUkedager(konverterUkedag(dag.dag), ukedag.trim())
+        matchUkedager(dag.dag, ukedag.trim())
       ) {
         switch (this.props.tekstId) {
           case 'utfylling.tiltak':
@@ -75,7 +75,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     let valgtDag = this.props.innsending.utfylteDager.filter(
       dag =>
         dag.uke === this.props.ukeNummer &&
-        matchUkedager(konverterUkedag(dag.dag), ukedag.trim())
+        matchUkedager(dag.dag, ukedag.trim())
     );
     let checked: boolean = false;
     switch (this.props.tekstId) {

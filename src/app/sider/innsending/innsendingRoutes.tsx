@@ -20,7 +20,10 @@ import { RootState } from '../../store/configureStore';
 import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
-import { hentUkedagerSomStringListe } from '../../utils/ukedager';
+import {
+  hentNorskeUkedager,
+  hentUkedagerSomStringListe,
+} from '../../utils/ukedager';
 import { RouterState } from 'connected-react-router';
 
 interface MapStateToProps {
@@ -101,7 +104,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
     meldekortDager: MeldekortDag[],
     utfylteDager: UtfyltDag[]
   ) => {
-    const ukedagerSomListe = hentUkedagerSomStringListe();
+    const ukedagerSomListe = hentNorskeUkedager();
     const konverterteUtfylteDager = utfylteDager.map((utfyltDag, index) => {
       return {
         ...utfyltDag,

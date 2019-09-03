@@ -40,6 +40,7 @@ type ArbeidsradProps = UkeProps &
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
   componentDidMount(): void {
+    console.log('ComponentDidMount. Renser utfylte dager!');
     let rensetUtfylteDager = this.props.innsending.utfylteDager.map(
       utfyltDag => {
         if (utfyltDag.arbeidetTimer === '0') {
@@ -51,6 +52,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         return { ...utfyltDag };
       }
     );
+    console.log(rensetUtfylteDager);
     this.props.oppdaterDager(rensetUtfylteDager);
   }
 
@@ -83,7 +85,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     let dagObj = null;
     this.props.innsending.utfylteDager.forEach(dag => {
       if (
-        matchUkedager(konverterUkedag(dag.dag), ukedag.trim()) &&
+        matchUkedager(dag.dag, ukedag.trim()) &&
         dag.uke === this.props.ukeNummer
       ) {
         dagObj = dag;
@@ -101,9 +103,6 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
       let ukedag = konverterUkedag(dag);
       let { utfylteDager } = this.props.innsending;
       let utfyltDagIndex = this.finnIndex(ukedag);
-      console.log(utfylteDager);
-      console.log(ukedag);
-      console.log(utfyltDagIndex);
       return (
         <Input
           className="arbeid__inputfelt"
