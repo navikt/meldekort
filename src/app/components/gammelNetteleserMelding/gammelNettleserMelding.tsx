@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import { FormattedHTMLMessage } from 'react-intl';
-import { browserName, browserVersion } from '../../utils/browsers';
+import { browserName, browserVersion, OSName } from '../../utils/browsers';
 import { Nettlesere } from '../../utils/consts';
 
 const GammelNettleserMelding: React.FunctionComponent = () => {
@@ -39,11 +39,12 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
       default:
         return (
           <span>
-            {chrome()}, {firefox()}, {edge()}
+            {chrome()}, {firefox()} {OSName === 'Windows' ? ', ' + edge() : ''}
           </span>
         );
     }
   };
+
   return (
     <div className={'gammelNettleser'}>
       <AlertStripeAdvarsel>
