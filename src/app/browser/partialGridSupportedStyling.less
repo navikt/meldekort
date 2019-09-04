@@ -1,5 +1,5 @@
 // CSS styling for Flexbox fallback
-.oldBrowserStyling {
+.partialGridSupportedStyling {
   // ------ BANNER / HEADER -----
   .banner {
     &__container {
@@ -8,8 +8,10 @@
       justify-content: center;
     }
     &__content {
-      display: flex;
-      justify-content: space-between;
+      @media @small-phone, @phone, @tablet {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 
@@ -34,7 +36,7 @@
   // ------ KNAPPER-----
   .knapper-container {
     width: 100%;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     .navigasjonsknapp {
       margin-bottom: 1.5rem;
@@ -62,14 +64,14 @@
         justify-content: space-between;
         padding-left: 50%;
 
-        @media @small-phone, @phone, @tablet {
+        @media @small-phone, @phone {
           display: none;
         }
       }
       &--mobil {
         display: flex;
         justify-content: space-between;
-        @media @desktop {
+        @media @tablet, @desktop {
           display: none;
         }
       }
@@ -85,7 +87,6 @@
       &__inputfelter {
         display: flex;
         justify-content: space-between;
-        padding: 0 0 1rem 50%;
         margin-top: 0;
       }
 
@@ -111,7 +112,6 @@
       &__inputfelter {
         display: flex;
         justify-content: space-between;
-        padding: 0 0 1rem 50%;
         margin-top: 0;
       }
 

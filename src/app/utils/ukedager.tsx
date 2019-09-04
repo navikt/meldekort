@@ -33,7 +33,9 @@ export const matchUkedager = (
   norskUkedag: string,
   testUkedag: string
 ): boolean => {
-  return norskUkedag.trim() === konverterUkedag(testUkedag.trim());
+  return (
+    konverterUkedag(norskUkedag.trim()) === konverterUkedag(testUkedag.trim())
+  );
 };
 
 export const konverterUkedag = (ukedag: string): string => {

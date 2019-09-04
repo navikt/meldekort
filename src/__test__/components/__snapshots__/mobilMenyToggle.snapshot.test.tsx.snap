@@ -2,11 +2,11 @@
 
 exports[`MobilMenyToggle 1`] = `
 <nav
-  className="mobilmeny-toggle"
+  className="mobilmenyToggle"
   onClick={[Function]}
 >
   <div
-    className="mobilmeny-toggle__icon open"
+    className="mobilmenyToggle__burgericon open"
   >
     <span
       className="line"
