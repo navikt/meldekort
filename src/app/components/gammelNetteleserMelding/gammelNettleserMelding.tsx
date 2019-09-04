@@ -29,6 +29,7 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
   };
 
   const lenker = () => {
+    console.log(browserName);
     switch (browserName) {
       case 'Chrome':
         return chrome();
@@ -39,7 +40,8 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
       default:
         return (
           <span>
-            {chrome()}, {firefox()} {OSName === 'Windows' ? ', ' + edge() : ''}
+            {chrome()}, {firefox()}
+            {OSName === 'Windows' ? <span>, {edge()}</span> : ''}
           </span>
         );
     }
