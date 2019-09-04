@@ -2,27 +2,34 @@ import * as React from 'react';
 import KnappBase from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { RootState, history } from '../../store/configureStore';
+import { history, RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
-import { Meldekort } from '../../types/meldekort';
+import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
 import { Dispatch } from 'redux';
-import { Innsendingstyper } from '../../types/innsending';
+import { InnsendingState, Innsendingstyper } from '../../types/innsending';
 import { InnsendingActions } from '../../actions/innsending';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import { Sporsmal as Spm } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
+import { UtfyltDag } from '../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
+import { settSporsmalOgUtfyllingHvisKorrigering } from '../../utils/korrigeringUtils';
 
 interface MapStateToProps {
   router: Router;
   innsendingstypeFraStore: Innsendingstyper | null;
   aktivtMeldekort: Meldekort;
+  innsending: InnsendingState;
+  meldekortdetaljer: Meldekortdetaljer;
 }
 
 interface MapDispatchToProps {
   leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+  leggTilMeldekortId: (meldekortId: number) => void;
+  oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
+  oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => void;
+  resetInnsending: () => void;
   resettAktivtMeldekort: () => void;
   settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
-  resetInnsending: () => void;
-  leggTilMeldekortId: (meldekortId: number) => void;
 }
 
 interface NavKnappProps {
@@ -118,6 +125,18 @@ class NavKnapp extends React.Component<Props> {
           this.harNestePathInnsending(nestePathParams) &&
           nesteInnsendingstype !== undefined
         ) {
+          if (nesteInnsendingstype === Innsendingstyper.korrigering) {
+            const konverterteSporsmalOgDager = settSporsmalOgUtfyllingHvisKorrigering(
+              this.props.meldekortdetaljer,
+              this.props.innsending
+            );
+            this.props.oppdaterUtfylteDager(
+              konverterteSporsmalOgDager.utfylteDager
+            );
+            this.props.oppdaterSporsmalsobjekter(
+              konverterteSporsmalOgDager.sporsmalsobjekter
+            );
+          }
           this.props.settInnsendingstype(nesteInnsendingstype);
         }
         if (!erPaInnsending) {
@@ -154,6 +173,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     router: selectRouter(state),
     innsendingstypeFraStore: state.innsending.innsendingstype,
     aktivtMeldekort: state.aktivtMeldekort,
+    innsending: state.innsending,
+    meldekortdetaljer: state.meldekortdetaljer.meldekortdetaljer,
   };
 };
 
@@ -168,6 +189,10 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
     leggTilMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
+    oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
+      dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
+    oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) =>
+      dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
   };
 };
 
