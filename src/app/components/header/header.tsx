@@ -18,6 +18,8 @@ import {
   isIE,
   isOldChrome,
   isOldEdge,
+  isOldFirefox,
+  isOldIE,
   isOldSafari,
 } from '../../utils/browsers';
 import GammelNettleserMelding from '../gammelNetteleserMelding/gammelNettleserMelding';
@@ -82,11 +84,11 @@ class Header extends React.Component<HeaderProps> {
       params[params.length - 2] === 'innsending' ||
       params[params.length - 2] === 'korriger';
     const headerClass = harPathInnsending
-      ? 'meldekortHeader__innsending'
+      ? 'meldekortHeader meldekortHeader__innsending'
       : 'meldekortHeader';
     const browserSpecificStyling = classNames(headerClass, {
-      ieStyling: isIE,
-      oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
+      partialGridSupportedStyling: isIE || isOldEdge,
+      oldBrowserStyling: isOldSafari || isOldChrome || isOldIE || isOldFirefox,
     });
     return (
       <>

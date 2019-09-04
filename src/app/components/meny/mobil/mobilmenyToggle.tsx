@@ -18,11 +18,13 @@ const MobilMenyToggle: React.FunctionComponent<
 > = props => {
   return (
     <nav
-      className={'mobilmeny-toggle'}
+      className={'mobilmenyToggle'}
       onClick={() => props.toggleMeny(!props.erApen)}
     >
       <div
-        className={classNames('mobilmeny-toggle__icon', { open: props.erApen })}
+        className={classNames('mobilmenyToggle__burgericon', {
+          open: props.erApen,
+        })}
       >
         <span className={'line'} />
         <span className={'line'} />
