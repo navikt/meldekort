@@ -1,5 +1,5 @@
 import { prefferedAxios } from '../types/fetch';
-import Konstanter from '../utils/consts';
+import { Konstanter } from '../utils/consts';
 import person from './responses/person.json';
 import historiskeMeldekort from './responses/historiskemeldekort.json';
 import meldekortdetaljer from './responses/meldekortdetaljer.json';

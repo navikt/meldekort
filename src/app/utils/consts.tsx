@@ -1,4 +1,4 @@
-const Konstanter = () => {
+export const Konstanter = () => {
   return {
     hentHistoriskeMeldekortApiUri: 'person/historiskemeldekort',
     hentMeldekortdetaljerApiUri: 'meldekort/{id}',
@@ -18,4 +18,10 @@ const Konstanter = () => {
   };
 };
 
-export default Konstanter;
+export const Nettlesere = () => {
+  return {
+    chrome: 'https://www.chrome.com',
+    firefox: 'https://www.firefox.com',
+    edge: 'https://www.microsoft.com/nb-no/windows/microsoft-edge',
+  };
+};

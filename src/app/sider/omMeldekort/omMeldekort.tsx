@@ -3,7 +3,6 @@ import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-
 import veileder from '../../ikoner/veileder.svg';
 import { InnsendingActions } from '../../actions/innsending';
 import { connect } from 'react-redux';
