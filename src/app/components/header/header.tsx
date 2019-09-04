@@ -89,27 +89,29 @@ class Header extends React.Component<HeaderProps> {
       oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
     });
     return (
-      <header className={browserSpecificStyling}>
-        <div className="banner__container">
-          <div className="banner__content">
-            <div className={'banner__title'}>
-              <Sidetittel>{tittel}</Sidetittel>
+      <>
+        <header className={browserSpecificStyling}>
+          <div className="banner__container">
+            <div className="banner__content">
+              <div className={'banner__title'}>
+                <Sidetittel>{tittel}</Sidetittel>
+              </div>
+              <MobilMenyToggle />
             </div>
-            <MobilMenyToggle />
+            {!harPathInnsending ? (
+              <MobilMeny menypunkter={this.hentMenypunkter()} />
+            ) : (
+              <></>
+            )}
           </div>
           {!harPathInnsending ? (
-            <MobilMeny menypunkter={this.hentMenypunkter()} />
+            <HovedMeny menypunkter={this.hentMenypunkter()} />
           ) : (
             <></>
           )}
-        </div>
-        {!harPathInnsending ? (
-          <HovedMeny menypunkter={this.hentMenypunkter()} />
-        ) : (
-          <></>
-        )}
+        </header>
         <GammelNettleserMelding />
-      </header>
+      </>
     );
   }
 }

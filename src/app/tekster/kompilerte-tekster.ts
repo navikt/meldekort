@@ -84,7 +84,7 @@
       'Spørsmålet om du vil fortsette å være registrert hos NAV de neste 14 dagene må besvares ',
     fortsetteRegistrert: ' ',
     'gammelNettleser.melding':
-      'Nettleseren din ({0}) er utdatert, og du trenger en oppdatert versjon for å sende inn meldekort. For å sikre at du ikke opplever problemer når du skal å sende inn meldekort, anbefaler vi at du oppdaterer eller bytter nettleseren din. ',
+      'Nettleseren din ({0}) er utdatert, og du trenger en oppdatert versjon for å sende inn meldekort. For å sikre at du ikke opplever problemer når du skal sende inn meldekort, anbefaler vi at du oppdaterer eller bytter nettleseren din. ',
     'genereltOmMeldekort.informasjonOmMeldekortLink':
       '/no/Person/Arbeid/Dagpenger+ved+arbeidsloshet+og+permittering/Meldekort+hvordan+gjor+du+det ',
     'genereltOmMeldekort.innhold':
@@ -438,7 +438,7 @@
       'The question of whether you wish to continue being registered with NAV during the next 14 day period must be answered ',
     fortsetteRegistrert: ' ',
     'gammelNettleser.melding':
-      'Your browser ({0}) is outdated and is not supported by Meldekort. You may experience problems if you continue without updating. We recommend that you update or change your browser. ',
+      'Your browser ({0}) is outdated, and you will need an updated version to be able to send the employment status form. To ensure that you do not experience problems while sending your employment status form we recommend that you update or change your browser. ',
     'genereltOmMeldekort.informasjonOmMeldekortLink':
       '/no/Person/Arbeid/Dagpenger+ved+arbeidsloshet+og+permittering/Meldekort+hvordan+gjor+du+det ',
     'genereltOmMeldekort.innhold':
