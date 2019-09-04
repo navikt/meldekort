@@ -29,13 +29,13 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
   };
 
   const lenker = () => {
-    console.log(browserName);
     switch (browserName) {
       case 'Chrome':
         return chrome();
       case 'Firefox':
         return firefox();
-      case 'Microsoft Edge' || 'Internet Explorer':
+      case 'Microsoft Edge':
+      case 'Internet Explorer':
         return edge();
       default:
         return (
