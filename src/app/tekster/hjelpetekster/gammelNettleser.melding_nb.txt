@@ -1,0 +1,1 @@
+Nettleseren din ({0}) er utdatert, og du trenger en oppdatert versjon for å sende inn meldekort. For å sikre at du ikke opplever problemer når du skal sende inn meldekort, anbefaler vi at du oppdaterer eller bytter nettleseren din.

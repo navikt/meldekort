@@ -1,5 +1,5 @@
 import Environment from '../utils/env';
-import Konstanter from '../utils/consts';
+import { Konstanter } from '../utils/consts';
 import { erMock } from '../mock/utils';
 import {
   MeldeformDetaljerInn,

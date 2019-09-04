@@ -1,5 +1,5 @@
 import { erLocalhost, erMock } from '../mock/utils';
-import Konstanter from './consts';
+import { Konstanter } from './consts';
 
 const Environment = () => {
   if (window.location.hostname.indexOf('www-q0.nav.no') > -1) {
