@@ -34,7 +34,7 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
         return chrome();
       case 'Firefox':
         return firefox();
-      case 'Microsoft Edge':
+      case 'Microsoft Edge' || 'Internet Explorer':
         return edge();
       default:
         return (
