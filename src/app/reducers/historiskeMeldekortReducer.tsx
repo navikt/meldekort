@@ -19,15 +19,16 @@ const historiskeMeldekortReducer = (
   state: HistoriskeMeldekortState = initalState,
   action: HistoriskeMeldekortActionTypes
 ): HistoriskeMeldekortState => {
-  switch (action.type) {
-    case getType(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success):
-      return {
-        historiskeMeldekort: action.payload,
-        ingenTidligereMeldekort: initalState.ingenTidligereMeldekort,
-      };
-
-    default:
-      return state;
+  if (
+    action.type ===
+    getType(HistoriskeMeldekortActions.hentHistoriskeMeldekort.success)
+  ) {
+    return {
+      historiskeMeldekort: action.payload,
+      ingenTidligereMeldekort: initalState.ingenTidligereMeldekort,
+    };
+  } else {
+    return state;
   }
 };
 
