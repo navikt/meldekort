@@ -33,7 +33,7 @@ import {
 } from '../../selectors/ui';
 import { WeblogicActions } from '../../actions/weblogic';
 import { WeblogicPing } from '../../types/weblogic';
-import { WeblogicErNedeInfomelding } from '../../components/feil/weblogicErNedeInfomelding';
+import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;

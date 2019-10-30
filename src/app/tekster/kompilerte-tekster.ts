@@ -351,7 +351,7 @@
     'veiledning.les': 'Les mer ',
     'veiledning.lukk': 'Les mindre ',
     weblogicNedeInfomelding:
-      'Akuratt nå er et av baksystemene våre nede for vedlikehold. Du kan derfor ikke se tidligere innsendte meldekort nå. Det samme gjelder detaljer for meldekort og korrigering. Du kan fortsatt sende meldekort som vanlig. ',
+      'Akkurat nå er et av baksystemene våre nede for vedlikehold. Du kan derfor ikke se tidligere innsendte meldekort nå. Det samme gjelder detaljer for meldekort og korrigering. Du kan fortsatt sende meldekort som vanlig. ',
   },
   en: {
     'AutoLabel.CSS.error': ' ',
