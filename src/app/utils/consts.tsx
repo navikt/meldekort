@@ -9,6 +9,7 @@ export const Konstanter = () => {
     sendMeldeformApiUri: 'person/meldeform',
     hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
     hentInfomelding: 'meldekort/infomelding',
+    pingWeblogic: 'weblogic/ping',
     metodeGet: 'GET',
     metodePost: 'POST',
     forsteUke: 1,

@@ -30,6 +30,8 @@ import { PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
+import { WeblogicPing } from '../../../types/weblogic';
+import { WeblogicActions } from '../../../actions/weblogic';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -37,6 +39,7 @@ interface MapStateToProps {
   aktivtMeldekort: Meldekort;
   router: Router;
   personInfo: PersonInfo;
+  weblogic: WeblogicPing;
 }
 
 interface MapDispatchToProps {
@@ -44,6 +47,7 @@ interface MapDispatchToProps {
   resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
   resettAktivtMeldekort: () => void;
+  pingWeblogic: () => void;
 }
 
 type Props = MapDispatchToProps & MapStateToProps;
@@ -51,6 +55,7 @@ type Props = MapDispatchToProps & MapStateToProps;
 class Detaljer extends React.Component<Props, { windowSize: number }> {
   constructor(props: any) {
     super(props);
+    this.props.pingWeblogic();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -67,8 +72,9 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAktivtMeldekortOgRedirect = () => {
-    const { historiskeMeldekort, aktivtMeldekort } = this.props;
+    const { historiskeMeldekort, aktivtMeldekort, weblogic } = this.props;
     if (
+      weblogic.erWeblogicOppe &&
       aktivtMeldekort.meldekortId !== 0 &&
       historiskeMeldekort.historiskeMeldekort.filter(
         mk => mk.meldekortId === aktivtMeldekort.meldekortId
@@ -78,6 +84,14 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     } else {
       history.push('/tidligere-meldekort');
     }
+  };
+
+  sjekkAtWeblogicErOppe = (): boolean => {
+    let erOppe = this.props.weblogic.erWeblogicOppe.valueOf();
+    if (!erOppe) {
+      this.sjekkAktivtMeldekortOgRedirect();
+    }
+    return erOppe;
   };
 
   componentDidMount() {
@@ -199,6 +213,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
                 className={'navigasjonsknapp'}
                 nesteAktivtMeldekort={aktivtMeldekort}
                 nesteInnsendingstype={Innsendingstyper.korrigering}
+                validering={this.sjekkAtWeblogicErOppe}
               />
             ) : null}
             <PrintKnapp
@@ -219,6 +234,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     aktivtMeldekort: state.aktivtMeldekort,
     router: selectRouter(state),
     personInfo: state.personInfo.personInfo,
+    weblogic: state.weblogic,
   };
 };
 
@@ -231,6 +247,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
+    pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
   };
 };
 
