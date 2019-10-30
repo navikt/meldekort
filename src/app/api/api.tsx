@@ -16,6 +16,7 @@ import {
   MeldekortdetaljerInnsending,
   ValideringsResultat,
 } from '../types/meldekort';
+import { WeblogicPing } from '../types/weblogic';
 
 const fetchGet = async (url: string) => {
   return prefferedAxios
@@ -73,6 +74,10 @@ export function fetchKorrigertId(id: number): Promise<number> {
 
 export function fetchInfomelding(): Promise<Infomelding> {
   return fetchGet(Konstanter().hentInfomelding);
+}
+
+export function pingWeblogic(): Promise<WeblogicPing> {
+  return fetchGet(Konstanter().pingWeblogic);
 }
 
 export function postMeldekort(
