@@ -712,6 +712,6 @@
     'veiledning.les': 'Read more ',
     'veiledning.lukk': 'Read less ',
     weblogicNedeInfomelding:
-      'Right now, one of our systems is down for maintenance. Therefore, you cannot see previously submitted employment status forms now. The same goes for employment status form details and corrections. You can still send employment status forms as usual. ',
+      'Due to system maintenance you cannot view the employment status forms that you have previously sent or change them. You can still send employment status forms as usual. ',
   },
 };
