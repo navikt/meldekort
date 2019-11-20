@@ -23,7 +23,15 @@ const Environment = () => {
       loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
     };
-  } else if (erLocalhost()) {
+  } else if  (window.location.hostname.indexOf('www-q6.nav.no') > -1) {
+    return {
+      dittNavUrl: 'https://www-q6.nav.no/person/dittnav',
+      apiUrl: 'https://www-q6.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice-q.nav.no/slo',
+    };
+  }
+  else if (erLocalhost()) {
     return {
       dittNavUrl: 'https://www.nav.no/person/dittnav',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
