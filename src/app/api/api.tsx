@@ -83,8 +83,6 @@ export function pingWeblogic(): Promise<WeblogicPing> {
 export function postMeldekort(
   meldekortdetaljer: MeldekortdetaljerInnsending
 ): Promise<ValideringsResultat> {
-  console.log('Her kommer meldekortdetaljer');
-  console.log(JSON.stringify(meldekortdetaljer));
   return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
 }
 
