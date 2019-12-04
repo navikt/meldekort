@@ -54,7 +54,7 @@ function EtterregistrerMeldekort({
   };
 
   const innsendingsklareMeldekort = hentInnsendingsklareMeldekort(
-    person.meldekort,
+    person.etterregistrerteMeldekort,
     sendteMeldekort
   );
   const rows = hentMeldekortRaderFraPerson(innsendingsklareMeldekort);

@@ -18,8 +18,11 @@ import {
   isIE,
   isOldChrome,
   isOldEdge,
+  isOldFirefox,
+  isOldIE,
   isOldSafari,
 } from '../../utils/browsers';
+import GammelNettleserMelding from '../gammelNetteleserMelding/gammelNettleserMelding';
 
 interface MapStateToProps {
   router: Router;
@@ -81,33 +84,36 @@ class Header extends React.Component<HeaderProps> {
       params[params.length - 2] === 'innsending' ||
       params[params.length - 2] === 'korriger';
     const headerClass = harPathInnsending
-      ? 'meldekortHeader__innsending'
+      ? 'meldekortHeader meldekortHeader__innsending'
       : 'meldekortHeader';
     const browserSpecificStyling = classNames(headerClass, {
-      ieStyling: isIE,
-      oldBrowserStyling: isOldEdge || isOldSafari || isOldChrome,
+      partialGridSupportedStyling: isIE || isOldEdge,
+      oldBrowserStyling: isOldSafari || isOldChrome || isOldIE || isOldFirefox,
     });
     return (
-      <header className={browserSpecificStyling}>
-        <div className="banner__container">
-          <div className="banner__content">
-            <div className={'banner__title'}>
-              <Sidetittel>{tittel}</Sidetittel>
+      <>
+        <header className={browserSpecificStyling}>
+          <div className="banner__container">
+            <div className="banner__content">
+              <div className={'banner__title'}>
+                <Sidetittel>{tittel}</Sidetittel>
+              </div>
+              <MobilMenyToggle />
             </div>
-            <MobilMenyToggle />
+            {!harPathInnsending ? (
+              <MobilMeny menypunkter={this.hentMenypunkter()} />
+            ) : (
+              <></>
+            )}
           </div>
           {!harPathInnsending ? (
-            <MobilMeny menypunkter={this.hentMenypunkter()} />
+            <HovedMeny menypunkter={this.hentMenypunkter()} />
           ) : (
             <></>
           )}
-        </div>
-        {!harPathInnsending ? (
-          <HovedMeny menypunkter={this.hentMenypunkter()} />
-        ) : (
-          <></>
-        )}
-      </header>
+        </header>
+        <GammelNettleserMelding />
+      </>
     );
   }
 }

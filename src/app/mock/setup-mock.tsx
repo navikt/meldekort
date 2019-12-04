@@ -1,5 +1,5 @@
 import { prefferedAxios } from '../types/fetch';
-import Konstanter from '../utils/consts';
+import { Konstanter } from '../utils/consts';
 import person from './responses/person.json';
 import historiskeMeldekort from './responses/historiskemeldekort.json';
 import meldekortdetaljer from './responses/meldekortdetaljer.json';
@@ -9,6 +9,7 @@ import valideringsresultat from './responses/valideringsresultat.json';
 import meldeperiode from './responses/meldeperiode.json';
 import personinfo from './responses/personinfo.json';
 import infomelding from './responses/infomelding.json';
+import pingWeblogicJson from './responses/pingWeblogic.json';
 import MockAdapter from 'axios-mock-adapter';
 import Environment from '../utils/env';
 
@@ -45,6 +46,10 @@ export default () => {
 
   mock.onGet(apiUrl + Konstanter().hentInfomelding).reply(200, {
     ...infomelding,
+  });
+
+  mock.onGet(apiUrl + Konstanter().pingWeblogic).reply(200, {
+    ...pingWeblogicJson,
   });
 
   mock.onPost(apiUrl + Konstanter().sendMeldekortApiUri).reply(200, {

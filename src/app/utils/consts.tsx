@@ -1,4 +1,4 @@
-const Konstanter = () => {
+export const Konstanter = () => {
   return {
     hentHistoriskeMeldekortApiUri: 'person/historiskemeldekort',
     hentMeldekortdetaljerApiUri: 'meldekort/{id}',
@@ -9,6 +9,7 @@ const Konstanter = () => {
     sendMeldeformApiUri: 'person/meldeform',
     hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
     hentInfomelding: 'meldekort/infomelding',
+    pingWeblogic: 'weblogic/ping',
     metodeGet: 'GET',
     metodePost: 'POST',
     forsteUke: 1,
@@ -18,4 +19,10 @@ const Konstanter = () => {
   };
 };
 
-export default Konstanter;
+export const Nettlesere = () => {
+  return {
+    chrome: 'https://www.chrome.com',
+    firefox: 'https://www.firefox.com',
+    edge: 'https://www.microsoft.com/nb-no/windows/microsoft-edge',
+  };
+};

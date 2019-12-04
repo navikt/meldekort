@@ -15,7 +15,7 @@ import {
 } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
-import Konstanter from '../../../utils/consts';
+import { Konstanter } from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -251,7 +251,7 @@ class Utfyllingsside extends React.Component<
         </section>
         <section className="seksjon">
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
-          <div className={'utfylling-content'}>
+          <div className={'utfylling-container'}>
             <UkePanel
               ukenummer={Konstanter().forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}

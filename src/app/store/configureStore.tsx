@@ -57,6 +57,9 @@ import personInfoReducer, {
 } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
+import { WeblogicPing } from '../types/weblogic';
+import weblogicReducer from '../reducers/weblogicReducer';
+import weblogicEpics from '../epics/weblogicEpics';
 
 export const history = createBrowserHistory({
   basename: '/meldekort',
@@ -86,6 +89,7 @@ export interface RootState {
   meny: MenyState;
   ui: UIState;
   meldekort: MeldekortState;
+  weblogic: WeblogicPing;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -105,6 +109,7 @@ const appReducer = combineReducers({
   meldeform: meldeformReducer,
   ui: uiReducer,
   meldekort: meldekortReducer,
+  weblogic: weblogicReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -170,7 +175,8 @@ epicMiddleware.run(
     innsendingEpics,
     meldekortdetaljerEpics,
     meldekortEpics,
-    meldeformEpics
+    meldeformEpics,
+    weblogicEpics
   )
 );
 
