@@ -6,7 +6,7 @@ metadata:
   labels:
     team: {{team}}
 spec:
-  image: navikt/{{reponame}}:{{version}}
+  image: navikt/meldekort-frontend:{{version}}
   team: {{team}}
   port: 8080
   ingresses:
