@@ -19,6 +19,8 @@ export const mapKortStatusTilTekst = (status: KortStatus) => {
       return intl.formatMessage({ id: 'meldekort.status.fuopp' });
     case KortStatus.KLAR:
       return intl.formatMessage({ id: 'meldekort.status.klar' });
+    case KortStatus.KAND:
+      return intl.formatMessage({ id: 'meldekort.status.klar' });
     case KortStatus.IKKE:
       return intl.formatMessage({ id: 'meldekort.status.ikke' });
     case KortStatus.OVERM:

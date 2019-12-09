@@ -6,3 +6,8 @@ patch:
   SNYK-JS-AXIOS-174505:
     - axios:
         patched: '2019-05-15T13:10:14.387Z'
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - snyk > proxy-agent > https-proxy-agent:
+        patched: '2019-10-10T07:09:14.533Z'
+    - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
+        patched: '2019-10-10T07:09:14.533Z'

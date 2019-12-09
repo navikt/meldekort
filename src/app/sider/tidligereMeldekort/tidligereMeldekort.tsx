@@ -31,17 +31,22 @@ import {
   selectFeilmelding,
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
+import { WeblogicActions } from '../../actions/weblogic';
+import { WeblogicPing } from '../../types/weblogic';
+import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   baksystemFeilmelding: BaksystemFeilmelding;
+  weblogic: WeblogicPing;
 }
 
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
   leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+  pingWeblogic: () => void;
 }
 
 type State = {
@@ -54,6 +59,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.props.hentHistoriskeMeldekort();
+    this.props.pingWeblogic();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -144,7 +150,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   };
 
   content = () => {
-    if (this.props.ingenTidligereMeldekort.harTidligereMeldekort === false) {
+    if (!this.props.ingenTidligereMeldekort.harTidligereMeldekort) {
       return (
         <AlertStripe type={'advarsel'}>
           <FormattedHTMLMessage id="tidligereMeldekort.harIngen" />
@@ -160,6 +166,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
       );
     }
   };
+
   handleWindowSize = () =>
     this.setState({
       windowSize: window.innerWidth,
@@ -167,19 +174,16 @@ class TidligereMeldekort extends React.Component<Props, State> {
 
   componentDidMount() {
     this.props.resetInnsending();
-    this.props.hentHistoriskeMeldekort();
+    this.props.pingWeblogic();
+    if (this.props.weblogic.erWeblogicOppe) {
+      this.props.hentHistoriskeMeldekort();
+    }
     window.addEventListener('resize', this.handleWindowSize);
   }
 
-  render() {
+  tekstOgContent = () => {
     return (
-      <main className="sideinnhold">
-        <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel>
-            <FormattedMessage id="overskrift.tidligereMeldekort" />
-          </Innholdstittel>
-          <Sprakvelger />
-        </section>
+      <div>
         <section className="seksjon">
           <FormattedMessage id="tidligereMeldekort.forklaring" />
         </section>
@@ -193,6 +197,24 @@ class TidligereMeldekort extends React.Component<Props, State> {
             this.content()
           )}
         </section>
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <main className="sideinnhold">
+        <section className="seksjon flex-innhold tittel-sprakvelger">
+          <Innholdstittel>
+            <FormattedMessage id="overskrift.tidligereMeldekort" />
+          </Innholdstittel>
+          <Sprakvelger />
+        </section>
+        {this.props.weblogic.erWeblogicOppe ? (
+          this.tekstOgContent()
+        ) : (
+          <WeblogicErNedeInfomelding />
+        )}
       </main>
     );
   }
@@ -203,6 +225,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     historiskeMeldekort: state.historiskeMeldekort,
     ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
     baksystemFeilmelding: selectFeilmelding(state),
+    weblogic: state.weblogic,
   };
 };
 
@@ -213,6 +236,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
     leggTilAktivtMeldekort: (meldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),
+    pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
   };
 };
 

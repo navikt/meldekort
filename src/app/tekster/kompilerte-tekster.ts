@@ -350,6 +350,8 @@
     'utfylling.ugyldigKombinasjon': 'Ulovlig kombinasjon av dager: ',
     'veiledning.les': 'Les mer ',
     'veiledning.lukk': 'Les mindre ',
+    weblogicNedeInfomelding:
+      'Du kan for tiden ikke se meldekort du tidligere har sendt eller korrigere dem, på grunn av oppdateringer vi gjør i våre systemer. Du kan fortsatt sende meldekort som vanlig. ',
   },
   en: {
     'AutoLabel.CSS.error': ' ',
@@ -709,5 +711,7 @@
     'utfylling.ugyldigKombinasjon': 'Invalid combination of days ',
     'veiledning.les': 'Read more ',
     'veiledning.lukk': 'Read less ',
+    weblogicNedeInfomelding:
+      'Due to system maintenance you cannot view the employment status forms that you have previously sent or change them. You can still send employment status forms as usual. ',
   },
 };
