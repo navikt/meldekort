@@ -47,7 +47,7 @@ jobs:
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push $IMAGE_NAME
 
-  deploy-til-t3:
+  deploy-til-q1:
     docker:
       - image: navikt/deployment-cli:latest
     steps:
@@ -55,9 +55,9 @@ jobs:
       - sett-miljovariabler
       - deploy:
           cluster: dev-sbs
-          namespace: t3
-          ingress1: https://$REPO_NAME-t3.nais.oera-q.local
-          ingress2: https://www-t3.nav.no/$BASE_URL
+          namespace: q1
+          ingress1: https://$REPO_NAME-q1.nais.oera-q.local
+          ingress2: https://www-q1.nav.no/$BASE_URL
 
   deploy-til-q0:
     docker:
@@ -136,7 +136,7 @@ workflows:
           name: bygg_og_push
           requires:
             - build
-      - bekreft-deploy-til-t3:
+      - bekreft-deploy-til-q1:
           type: approval
           requires:
             - build
@@ -144,12 +144,12 @@ workflows:
           filters:
             branches:
               ignore: master
-      - deploy-til-t3:
-          name: manuell-deploy-til-t3
+      - deploy-til-q1:
+          name: manuell-deploy-til-q1
           requires:
-            - bekreft-deploy-til-t3
-      - deploy-til-t3:
-          name: automatisk-deploy-til-t3
+            - bekreft-deploy-til-q1
+      - deploy-til-q1:
+          name: automatisk-deploy-til-q1
           requires:
             - build
             - bygg_og_push
