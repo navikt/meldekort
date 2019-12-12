@@ -145,6 +145,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         knapper: this.ikkeFortsetteRegistrertKnapper(),
         visModal: true,
       });
+      this.resetEndredeKategorier();
       return false;
     }
 
@@ -448,7 +449,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   };
 }
 
-// TODO: Bytt til å hente meldekortDetaljer fra Store
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
     aktivtMeldekort: state.aktivtMeldekort,

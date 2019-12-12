@@ -96,14 +96,14 @@
     "typescript": "^3.3.1"
   },
   "scripts": {
-    "build": "craco build",
+    "build": "CI=false craco build",
     "build:tekster": "node ./src/app/utils/build-tekster.js",
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:tekster": "npm run build:tekster",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
     "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
-    "test": "CI=true react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --coverage --watchAll=false --w=1",
     "test:watch": "react-scripts test --env=jsdom",
     "test:reload": "react-scripts test -u",
     "comb": "csscomb *.less"

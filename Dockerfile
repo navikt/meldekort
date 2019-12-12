@@ -1,14 +1,14 @@
-FROM docker.adeo.no:5000/pus/node as builder
+FROM node:11-alpine as builder
 COPY . /source
-
-WORKDIR /source
-RUN npm install && npm run build
 ENV NODE_ENV production
 
-EXPOSE 8080
+WORKDIR /source
+
 CMD ["npm", "run", "server"]
 
-FROM docker.adeo.no:5000/pus/decorator
+EXPOSE 8080
+
+FROM navikt/pus-decorator
 ENV APPLICATION_NAME=meldekort
 ENV FOOTER_TYPE=WITH_ALPHABET
 COPY --from=builder /source/build /app

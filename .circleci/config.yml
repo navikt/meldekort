@@ -1,0 +1,189 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.8.0
+    steps:
+      - checkout
+      - run:
+          name: Setter opp rapportering til Code Climate
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Installerer npm pakker
+          command: npm ci
+      - run:
+          name: Code Climate - Before Build
+          command: ./cc-test-reporter before-build
+      - run:
+          name: Bygger og tester meldekort
+          command: npm run build && npm test
+      - run:
+          name: Code Climate - After Build
+          command: ./cc-test-reporter after-build --exit-code $?
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build/*
+
+  bygg-og-push-docker:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
+      - run:
+          name: Bygger docker image
+          command: |
+            echo $IMAGE_NAME
+            docker build -t $IMAGE_NAME .
+      - run:
+          name: Pusher docker image
+          command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push $IMAGE_NAME
+
+  deploy-til-q1:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q1
+          ingress1: https://$REPO_NAME-q1.nais.oera-q.local
+          ingress2: https://www-q1.nav.no/$BASE_URL
+
+  deploy-til-q0:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: dev-sbs
+          namespace: q0
+          ingress1: https://$REPO_NAME-q0.nais.oera-q.local
+          ingress2: https://www-q0.nav.no/$BASE_URL
+
+  deploy-til-prod:
+    docker:
+      - image: navikt/deployment-cli:latest
+    steps:
+      - checkout
+      - sett-miljovariabler
+      - deploy:
+          cluster: prod-sbs
+          namespace: default
+          ingress1: https://$REPO_NAME.nais.oera.no
+          ingress2: https://www.nav.no/$BASE_URL
+
+commands:
+  deploy:
+    parameters:
+      cluster:
+        type: string
+      namespace:
+        type: string
+      ingress1:
+        type: string
+      ingress2:
+        type: string
+    steps:
+      - run:
+          name: Deployer til << parameters.cluster >> << parameters.namespace >>
+          command: |
+            echo $GH_DEPLOY_KEY | base64 -d | dos2unix > gh_deploy_key.pem
+            deployment-cli deploy create \
+                --team=meldekort \
+                --resource=nais.yaml \
+                --cluster=<< parameters.cluster >> \
+                --repository=$CIRCLE_PROJECT_USERNAME/$REPO_NAME \
+                --var ingress1=<< parameters.ingress1 >> \
+                --var ingress2=<< parameters.ingress2 >> \
+                --var reponame=$REPO_NAME \
+                --var baseurl=/$BASE_URL \
+                --var version=$IMAGE_VERSION \
+                --var namespace=<< parameters.namespace >> \
+                --key=gh_deploy_key.pem \
+                --ref=$COMMIT_SHORT \
+                --appid=39707
+
+  sett-miljovariabler:
+    steps:
+      - run:
+          name: Definerer git-referanse, versjonsnummer og repo-navn
+          command: |
+            echo "export COMMIT_SHORT='$(git rev-parse --short HEAD)'" >> $BASH_ENV
+            echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
+            echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
+            echo "export BASE_URL='meldekort'" >> $BASH_ENV
+      - run:
+          name: Definerer nav op docker-image
+          command: |
+            echo "export IMAGE_NAME='$CIRCLE_PROJECT_USERNAME/$REPO_NAME:$IMAGE_VERSION'" >> $BASH_ENV
+
+workflows:
+  bygg_og_deploy:
+    jobs:
+      - build
+      - bygg-og-push-docker:
+          name: bygg_og_push
+          requires:
+            - build
+      - bekreft-deploy-til-q1:
+          type: approval
+          requires:
+            - build
+            - bygg_og_push
+          filters:
+            branches:
+              ignore: master
+      - deploy-til-q1:
+          name: manuell-deploy-til-q1
+          requires:
+            - bekreft-deploy-til-q1
+      - deploy-til-q1:
+          name: automatisk-deploy-til-q1
+          requires:
+            - build
+            - bygg_og_push
+          filters:
+            branches:
+              only: master
+      - bekreft-deploy-til-q0:
+          type: approval
+          requires:
+            - build
+            - bygg_og_push
+          filters:
+            branches:
+              ignore: master
+      - deploy-til-q0:
+          name: manuell-deploy-til-q0
+          requires:
+            - bekreft-deploy-til-q0
+      - deploy-til-q0:
+          name: automatisk-deploy-til-q0
+          requires:
+            - build
+            - bygg_og_push
+          filters:
+            branches:
+              only: master
+      - bekreft-deploy-til-prod:
+          type: approval
+          requires:
+            - build
+            - bygg_og_push
+            - manuell-deploy-til-q1
+            - manuell-deploy-til-q0
+      - deploy-til-prod:
+          name: manuell-deploy-til-prod
+          requires:
+            - bekreft-deploy-til-prod
