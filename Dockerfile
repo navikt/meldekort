@@ -10,5 +10,6 @@ EXPOSE 8080
 
 FROM navikt/pus-decorator
 ENV APPLICATION_NAME=meldekort
+ENV APPRES_CMS_URL=https://appres.nav.no/
 ENV FOOTER_TYPE=WITH_ALPHABET
 COPY --from=builder /source/build /app
