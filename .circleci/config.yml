@@ -123,6 +123,7 @@ commands:
             echo "export IMAGE_VERSION='$CIRCLE_WORKFLOW_ID-${CIRCLE_BRANCH////-}$CIRCLE_TAG'" >> $BASH_ENV
             echo "export REPO_NAME='$CIRCLE_PROJECT_REPONAME'" >> $BASH_ENV
             echo "export BASE_URL='meldekort'" >> $BASH_ENV
+            echo "export FOOTER_TYPE='WITH_ALPHABET'" >> $BASH_ENV
       - run:
           name: Definerer nav op docker-image
           command: |
