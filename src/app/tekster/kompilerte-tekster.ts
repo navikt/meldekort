@@ -1,19 +1,27 @@
 /*tslint:disable*/ export default {
   nb: {
-    'AutoLabel.CSS.error': ' ',
     'annetFravar.required-AAP':
       'Spørsmålet om du har hatt ferie eller fravær slik at du ikke har kunnet ta arbeid eller gjennomføre avtalt aktivitet må besvares ',
     'annetFravar.required':
       'Spørsmålet om du har hatt ferie eller fravær slik at du ikke har kunnet ta arbeid, delta på tiltak eller være arbeidssøker må besvares ',
     annetFravar: ' ',
-    'arbeidTimer.heleEllerHalveTallValidator':
-      'Antall timer er ugyldig. Gyldige verdier er hele og halve timer ',
-    'arbeidTimer.iConverter.Double': 'Ikke gyldig tall ',
-    'arbeidTimer.rangeValidator.range': 'Antall timer er ugyldig ',
-    arbeidTimer: ' ',
     'arbeidet.required':
       'Spørsmålet om du har vært i arbeid de siste 14 dagene må besvares ',
     arbeidet: ' ',
+    'arbeidTimer.heleEllerHalveTallValidator':
+      'Antall timer er ugyldig. Gyldige verdier er hele og halve timer ',
+    'arbeidTimer.iConverter.Double': 'Ikke gyldig tall ',
+    'arbeidTimer.kombinasjonAAPFravaerArbeidValidator':
+      'Du har angitt både arbeid og annet fravær på samme dag. ',
+    'arbeidTimer.kombinasjonAAPFravaerSykValidator':
+      'Du har krysset av både sykedag og annet fravær enn sykdom på samme dag. ',
+    'arbeidTimer.kombinasjonDagpFravaerArbeidValidator':
+      'Du har angitt både arbeid og annet fravær på samme dag. ',
+    'arbeidTimer.kombinasjonDagpSykArbeidValidator':
+      'Du har angitt både arbeid og sykedag på samme dag. ',
+    'arbeidTimer.rangeValidator.range': 'Antall timer er ugyldig ',
+    arbeidTimer: ' ',
+    'AutoLabel.CSS.error': ' ',
     'begrunnelse.required': 'Begrunnelse for korrigeringen må fylles ut. ',
     'begrunnelse.velgArsak': 'Velg en årsak... ',
     'diverse.ja': 'Ja ',
@@ -174,9 +182,9 @@
     'oss.utbetalt.overskrift': 'Hvor mye får jeg utbetalt? ',
     'oss.utbetalt.tekst':
       '<p> Når meldekortet er beregnet, ser du brutto beregnet ytelse på «Ditt NAV». </p> <p> Brutto beløp er ytelsen før skattetrekk og eventuelle andre trekk. Beløpet er beregnet ut i fra hvilken dagsats du har, samt eventuelle tilleggsopplysninger du har oppgitt på meldekortet. </p> <p> Vil du ha flere detaljer om de ytelsene som er beregnet og mer om hva som er trukket i skatt eller av andre grunner, ser du det i «Dine utbetalinger». </p> ',
+    'overskrift.bekreftelse': 'Bekreftelse ',
     'overskrift.bekreftOgFortsett': 'Bekreft og fortsett ',
     'overskrift.bekreftUtmelding': 'Bekreft utmelding ',
-    'overskrift.bekreftelse': 'Bekreftelse ',
     'overskrift.bruttoBelop': 'Brutto beløp ',
     'overskrift.dato': 'Dato ',
     'overskrift.detaljer': 'Detaljer ',
@@ -189,12 +197,12 @@
     'overskrift.genereltOmMeldekort': 'Generelt om meldekort ',
     'overskrift.innsendingMeldekort': 'Til innsending av meldekort ',
     'overskrift.innsending': 'Innsending av meldekort ',
-    'overskrift.meldekort.send': 'Bekreft og send ',
     'overskrift.meldekort.sendt.info':
       '<strong>NB:</strong> Du vil stå registrert som arbeidssøker inntil våre systemer oppdateres i natt ',
     'overskrift.meldekort.sendt': 'Kvittering for at meldekortet er sendt ',
-    'overskrift.meldekort': 'Meldekort ',
+    'overskrift.meldekort.send': 'Bekreft og send ',
     'overskrift.meldekorttype': 'Meldekorttype ',
+    'overskrift.meldekort': 'Meldekort ',
     'overskrift.mottatt': 'Mottatt ',
     'overskrift.nesteMeldekort': 'Neste meldekort ',
     'overskrift.ofteStilteSporsmal': 'Ofte stilte spørsmål ',
@@ -256,9 +264,9 @@
     'sporsmal.ansvarForRiktigUtfylling':
       'Du må oppgi riktige og fullstendige opplysninger. Gjør du ikke det kan det føre til at du må betale tilbake det du feilaktig har fått utbetalt. Du kan også bli anmeldt til politiet. ',
     'sporsmal.arbeid': 'Har du vært i arbeid de siste 14 dagene? ',
-    'sporsmal.bekreft': 'Bekreft valg ',
     'sporsmal.bekreftelse':
       'Du har svart at du ikke lenger ønsker å være registrert hos NAV. Det betyr at du ikke lenger vil motta bistand og/eller utbetalinger fra NAV. ',
+    'sporsmal.bekreft': 'Bekreft valg ',
     'sporsmal.ferieFravar-AAP':
       'Har du hatt ferie eller fravær slik at du ikke har kunnet ta arbeid eller gjennomføre avtalt aktivitet? ',
     'sporsmal.ferieFravar':
@@ -354,20 +362,28 @@
       'Du kan for tiden ikke se meldekort du tidligere har sendt eller korrigere dem, på grunn av oppdateringer vi gjør i våre systemer. Du kan fortsatt sende meldekort som vanlig. ',
   },
   en: {
-    'AutoLabel.CSS.error': ' ',
     'annetFravar.required-AAP':
       'The question of whether holiday or other absence made you unable to take on work or perform an agreed activity must be answered ',
     'annetFravar.required':
       'The question of whether holiday or other absence made you unable to take on work, participating in employment schemes or being a job seeker must be answered ',
     annetFravar: ' ',
-    'arbeidTimer.heleEllerHalveTallValidator':
-      'Invalid number of hours. Whole and half hours are valid values ',
-    'arbeidTimer.iConverter.Double': 'Invalid number ',
-    'arbeidTimer.rangeValidator.range': 'Invalid number of hours ',
-    arbeidTimer: ' ',
     'arbeidet.required':
       'The question of whether you have been working for the last 14 days must be answered ',
     arbeidet: ' ',
+    'arbeidTimer.heleEllerHalveTallValidator':
+      'Invalid number of hours. Whole and half hours are valid values ',
+    'arbeidTimer.iConverter.Double': 'Invalid number ',
+    'arbeidTimer.kombinasjonAAPFravaerArbeidValidator':
+      'You have specified both work and checked other absence on the same day. ',
+    'arbeidTimer.kombinasjonAAPFravaerSykValidator':
+      'You have specified both illness and other absence on the same day. ',
+    'arbeidTimer.kombinasjonDagpFravaerArbeidValidator':
+      'You have specified both work and other absence on the same day. ',
+    'arbeidTimer.kombinasjonDagpSykArbeidValidator':
+      'You have specified both work and illness on the same day. ',
+    'arbeidTimer.rangeValidator.range': 'Invalid number of hours ',
+    arbeidTimer: ' ',
+    'AutoLabel.CSS.error': ' ',
     'begrunnelse.required': 'You need to state the reason for the correction. ',
     'begrunnelse.velgArsak': 'Choose an alternative... ',
     'diverse.ja': 'Yes ',
@@ -532,9 +548,9 @@
     'oss.utbetalt.overskrift': 'How much will I receive? ',
     'oss.utbetalt.tekst':
       '<p> When your employment status form is calculated, you can see gross payment at “Ditt NAV”. </p> <p> Gross payment is the benefits before tax and other withholdings. The amount is calculated based on your daily rate (from the decision on your benefit) and the information you have given on the employment status form. </p> <p> Do you want to see more details on the calculated benefits, tax and other withholdings, please go to “Dine utbetalinger”. </p> ',
+    'overskrift.bekreftelse': 'Summary ',
     'overskrift.bekreftOgFortsett': 'Confirm and continue ',
     'overskrift.bekreftUtmelding': 'Confirm resignation ',
-    'overskrift.bekreftelse': 'Summary ',
     'overskrift.bruttoBelop': 'Gross amount ',
     'overskrift.dato': 'Date ',
     'overskrift.detaljer': 'Details ',
@@ -546,12 +562,12 @@
     'overskrift.genereltOmMeldekort': 'Employment status form in general ',
     'overskrift.innsendingMeldekort': 'Register previous periods ',
     'overskrift.innsending': 'To send employment status form ',
-    'overskrift.meldekort.send': 'Confirm and send ',
     'overskrift.meldekort.sendt.info':
       '<strong>NB:</strong>You will have status as job seeker until our systems are updated ',
     'overskrift.meldekort.sendt': 'Employment status form has been sent ',
-    'overskrift.meldekort': 'Employment status form ',
+    'overskrift.meldekort.send': 'Confirm and send ',
     'overskrift.meldekorttype': 'Type of form ',
+    'overskrift.meldekort': 'Employment status form ',
     'overskrift.mottatt': 'Received ',
     'overskrift.nesteMeldekort': 'Next employment status form ',
     'overskrift.ofteStilteSporsmal': 'Frequently Asked Questions ',
@@ -616,9 +632,9 @@
     'sporsmal.ansvarForRiktigUtfylling':
       'If the information you provide is not correct and complete, this may mean that you must pay back what you have received erroneously. You may also be reported to the police. ',
     'sporsmal.arbeid': 'Have you worked the past 14 days? ',
-    'sporsmal.bekreft': 'Confirm choice ',
     'sporsmal.bekreftelse':
       'You have answered that you no longer wish to be registered with NAV. This means that you will no longer receive assistance or benefits. ',
+    'sporsmal.bekreft': 'Confirm choice ',
     'sporsmal.ferieFravar-AAP':
       'Has holiday or other absence made you unable to take on work or perform an agreed activity? ',
     'sporsmal.ferieFravar':
