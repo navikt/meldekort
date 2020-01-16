@@ -56,10 +56,9 @@ class Utfyllingsside extends React.Component<
       feilIFerie: { feil: false },
       feilIArbeidetTimerHeleHalve: false,
       feilIArbeidetTimer: false,
-      feilKombinasjonDagpSykArbeid: false,
-      feilKombinasjonDagpFravaerArbeid: false,
-      feilKombinasjonAAPFravaerSyk: false,
-      feilKombinasjonAAPFravaerArbeid: false,
+      feilKombinasjonSykArbeid: false,
+      feilKombinasjonFravaerArbeid: false,
+      feilKombinasjonFravaerSyk: false,
       feilIDager: [],
     };
   }
@@ -93,21 +92,20 @@ class Utfyllingsside extends React.Component<
 
   validerVertikal = (dager: UtfyltDag[]): boolean => {
     let feil: string[] = [];
-    let feilKombinasjonDagpSykArbeid = false;
-    let feilKombinasjonDagpFravaerArbeid = false;
-    let feilKombinasjonAAPFravaerSyk = false;
-    let feilKombinasjonAAPFravaerArbeid = false;
+    let feilKombinasjonSykArbeid = false;
+    let feilKombinasjonFravaerSyk = false;
+    let feilKombinasjonFravaerArbeid = false;
 
     if (this.props.aktivtMeldekort.meldegruppe === Meldegruppe.DAGP) {
       dager.forEach(dag => {
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.syk) {
             feil.push(dag.dag + dag.uke);
-            feilKombinasjonDagpSykArbeid = true;
+            feilKombinasjonSykArbeid = true;
           }
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
             feil.push(dag.dag + dag.uke);
-            feilKombinasjonDagpFravaerArbeid = true;
+            feilKombinasjonFravaerArbeid = true;
           }
         }
       });
@@ -117,22 +115,21 @@ class Utfyllingsside extends React.Component<
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
             feil.push(dag.dag + dag.uke);
-            feilKombinasjonAAPFravaerArbeid = true;
+            feilKombinasjonFravaerArbeid = true;
           }
         }
         if (dag.syk && dag.annetFravaer) {
           feil.push(dag.dag + dag.uke);
-          feilKombinasjonAAPFravaerSyk = true;
+          feilKombinasjonFravaerSyk = true;
         }
       });
     }
 
     this.setState({
       feilIDager: feil,
-      feilKombinasjonDagpSykArbeid: feilKombinasjonDagpSykArbeid,
-      feilKombinasjonDagpFravaerArbeid: feilKombinasjonDagpFravaerArbeid,
-      feilKombinasjonAAPFravaerSyk: feilKombinasjonAAPFravaerSyk,
-      feilKombinasjonAAPFravaerArbeid: feilKombinasjonAAPFravaerArbeid,
+      feilKombinasjonSykArbeid: feilKombinasjonSykArbeid,
+      feilKombinasjonFravaerArbeid: feilKombinasjonFravaerArbeid,
+      feilKombinasjonFravaerSyk: feilKombinasjonFravaerSyk,
     });
     return feil.length === 0;
   };
@@ -217,10 +214,9 @@ class Utfyllingsside extends React.Component<
       feilIKurs,
       feilISyk,
       feilIFerie,
-      feilKombinasjonDagpSykArbeid,
-      feilKombinasjonDagpFravaerArbeid,
-      feilKombinasjonAAPFravaerArbeid,
-      feilKombinasjonAAPFravaerSyk,
+      feilKombinasjonSykArbeid,
+      feilKombinasjonFravaerArbeid,
+      feilKombinasjonFravaerSyk,
       feilIArbeidetTimer,
       feilIArbeidetTimerHeleHalve,
     } = this.state;
@@ -230,10 +226,9 @@ class Utfyllingsside extends React.Component<
       feilIKurs.feil ||
       feilISyk.feil ||
       feilIFerie.feil ||
-      feilKombinasjonDagpSykArbeid ||
-      feilKombinasjonDagpFravaerArbeid ||
-      feilKombinasjonAAPFravaerArbeid ||
-      feilKombinasjonAAPFravaerSyk ||
+      feilKombinasjonSykArbeid ||
+      feilKombinasjonFravaerArbeid ||
+      feilKombinasjonFravaerSyk ||
       feilIArbeidetTimer ||
       feilIArbeidetTimerHeleHalve
     ) {
@@ -268,25 +263,25 @@ class Utfyllingsside extends React.Component<
                 id: 'arbeidTimer.heleEllerHalveTallValidator',
               })}`}</li>
             ) : null}
-            {feilKombinasjonDagpSykArbeid ? (
+            {feilKombinasjonSykArbeid ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonDagpSykArbeidValidator',
+                id: 'arbeidTimer.kombinasjonSykArbeidValidator',
               })}`}</li>
             ) : null}
-            {feilKombinasjonDagpFravaerArbeid ? (
+            {feilKombinasjonFravaerArbeid ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonDagpFravaerArbeidValidator',
+                id: 'arbeidTimer.kombinasjonFravaerArbeidValidator',
               })}`}</li>
             ) : null}
 
-            {feilKombinasjonAAPFravaerArbeid ? (
+            {feilKombinasjonFravaerArbeid ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonAAPFravaerArbeidValidator',
+                id: 'arbeidTimer.kombinasjonFravaerArbeidValidator',
               })}`}</li>
             ) : null}
-            {feilKombinasjonAAPFravaerSyk ? (
+            {feilKombinasjonFravaerSyk ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonAAPFravaerSykValidator',
+                id: 'arbeidTimer.kombinasjonFravaerSykValidator',
               })}`}</li>
             ) : null}
 

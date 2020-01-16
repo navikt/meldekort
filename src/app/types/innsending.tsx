@@ -75,10 +75,9 @@ export interface UtfyllingFeil {
   feilIKurs: Feilmelding;
   feilISyk: Feilmelding;
   feilIFerie: Feilmelding;
-  feilKombinasjonDagpSykArbeid: boolean;
-  feilKombinasjonDagpFravaerArbeid: boolean;
-  feilKombinasjonAAPFravaerSyk: boolean;
-  feilKombinasjonAAPFravaerArbeid: boolean;
+  feilKombinasjonSykArbeid: boolean;
+  feilKombinasjonFravaerArbeid: boolean;
+  feilKombinasjonFravaerSyk: boolean;
   feilIArbeidetTimerHeleHalve: boolean;
   feilIArbeidetTimer: boolean;
   feilIDager: string[];

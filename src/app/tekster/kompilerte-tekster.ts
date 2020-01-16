@@ -11,13 +11,11 @@
     'arbeidTimer.heleEllerHalveTallValidator':
       'Antall timer er ugyldig. Gyldige verdier er hele og halve timer ',
     'arbeidTimer.iConverter.Double': 'Ikke gyldig tall ',
-    'arbeidTimer.kombinasjonAAPFravaerArbeidValidator':
+    'arbeidTimer.kombinasjonFravaerArbeidValidator':
       'Du har angitt både arbeid og annet fravær på samme dag. ',
-    'arbeidTimer.kombinasjonAAPFravaerSykValidator':
+    'arbeidTimer.kombinasjonFravaerSykValidator':
       'Du har krysset av både sykedag og annet fravær enn sykdom på samme dag. ',
-    'arbeidTimer.kombinasjonDagpFravaerArbeidValidator':
-      'Du har angitt både arbeid og annet fravær på samme dag. ',
-    'arbeidTimer.kombinasjonDagpSykArbeidValidator':
+    'arbeidTimer.kombinasjonSykArbeidValidator':
       'Du har angitt både arbeid og sykedag på samme dag. ',
     'arbeidTimer.rangeValidator.range': 'Antall timer er ugyldig ',
     arbeidTimer: ' ',
@@ -373,13 +371,11 @@
     'arbeidTimer.heleEllerHalveTallValidator':
       'Invalid number of hours. Whole and half hours are valid values ',
     'arbeidTimer.iConverter.Double': 'Invalid number ',
-    'arbeidTimer.kombinasjonAAPFravaerArbeidValidator':
-      'You have specified both work and checked other absence on the same day. ',
-    'arbeidTimer.kombinasjonAAPFravaerSykValidator':
-      'You have specified both illness and other absence on the same day. ',
-    'arbeidTimer.kombinasjonDagpFravaerArbeidValidator':
+    'arbeidTimer.kombinasjonFravaerArbeidValidator':
       'You have specified both work and other absence on the same day. ',
-    'arbeidTimer.kombinasjonDagpSykArbeidValidator':
+    'arbeidTimer.kombinasjonFravaerSykValidator':
+      'You have specified both illness and other absence on the same day. ',
+    'arbeidTimer.kombinasjonSykArbeidValidator':
       'You have specified both work and illness on the same day. ',
     'arbeidTimer.rangeValidator.range': 'Invalid number of hours ',
     arbeidTimer: ' ',
