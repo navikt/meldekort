@@ -124,6 +124,14 @@ class Utfyllingsside extends React.Component<
         }
       });
     }
+    if (this.props.aktivtMeldekort.meldegruppe === Meldegruppe.INDIV) {
+      dager.forEach(dag => {
+        if (dag.syk && dag.annetFravaer) {
+          feil.push(dag.dag + dag.uke);
+          feilKombinasjonFravaerSyk = true;
+        }
+      });
+    }
 
     this.setState({
       feilIDager: feil,
@@ -263,17 +271,12 @@ class Utfyllingsside extends React.Component<
                 id: 'arbeidTimer.heleEllerHalveTallValidator',
               })}`}</li>
             ) : null}
+
             {feilKombinasjonSykArbeid ? (
               <li>{`${hentIntl().formatMessage({
                 id: 'arbeidTimer.kombinasjonSykArbeidValidator',
               })}`}</li>
             ) : null}
-            {feilKombinasjonFravaerArbeid ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonFravaerArbeidValidator',
-              })}`}</li>
-            ) : null}
-
             {feilKombinasjonFravaerArbeid ? (
               <li>{`${hentIntl().formatMessage({
                 id: 'arbeidTimer.kombinasjonFravaerArbeidValidator',
