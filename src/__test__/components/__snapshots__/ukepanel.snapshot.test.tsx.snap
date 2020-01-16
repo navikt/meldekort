@@ -45,6 +45,10 @@ exports[`UkePanel 1`] = `
             "feil": true,
             "feilmelding": "Test",
           },
+          "feilKombinasjonAAPFravaerArbeid": false,
+          "feilKombinasjonAAPFravaerSyk": false,
+          "feilKombinasjonDagpFravaerArbeid": false,
+          "feilKombinasjonDagpSykArbeid": false,
         }
       }
     />
