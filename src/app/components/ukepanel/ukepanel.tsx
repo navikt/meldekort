@@ -12,6 +12,7 @@ import Aktivitetsrad from '../../sider/innsending/2-utfyllingsside/utfylling/akt
 import Arbeidsrad from '../../sider/innsending/2-utfyllingsside/utfylling/arbeid/arbeidsrad';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
+import { FravaerTypeEnum } from '../../types/meldekort';
 
 interface Props {
   ukenummer: number;
@@ -74,7 +75,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             feil={props.utfyllingFeil.feilIArbeid.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes('A'))}
+              .filter(r => r.rad.includes(FravaerTypeEnum.ARBEIDS_FRAVAER))}
             aap={props.erAap}
             tekstId={'utfylling.arbeid'}
             forklaringId={'forklaring.utfylling.arbeid'}
@@ -94,7 +95,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             feil={props.utfyllingFeil.feilIKurs.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes('T'))}
+              .filter(r => r.rad.includes(FravaerTypeEnum.KURS_UTDANNING))}
           />
         ) : null}
         {sjekkSporsmal('forhindret') ? (
@@ -106,7 +107,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             feil={props.utfyllingFeil.feilISyk.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes('S'))}
+              .filter(r => r.rad.includes(FravaerTypeEnum.SYKDOM))}
           />
         ) : null}
         {sjekkSporsmal('ferieFravar') ? (
@@ -118,7 +119,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             feil={props.utfyllingFeil.feilIFerie.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes('F'))}
+              .filter(r => r.rad.includes(FravaerTypeEnum.ANNET_FRAVAER))}
           />
         ) : null}
       </div>

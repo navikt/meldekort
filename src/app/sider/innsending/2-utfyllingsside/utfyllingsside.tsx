@@ -31,6 +31,7 @@ import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
+import { FravaerTypeEnum } from '../../../types/meldekort';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -102,11 +103,20 @@ class Utfyllingsside extends React.Component<
       dager.forEach(dag => {
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.syk) {
-            feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'AS' });
+            feil.push({
+              uke: dag.uke.toString(),
+              dag: dag.dag,
+              rad: FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.SYKDOM,
+            });
             feilKombinasjonSykArbeid = true;
           }
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
-            feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'AF' });
+            feil.push({
+              uke: dag.uke.toString(),
+              dag: dag.dag,
+              rad:
+                FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.ANNET_FRAVAER,
+            });
             feilKombinasjonFravaerArbeid = true;
           }
         }
@@ -116,12 +126,21 @@ class Utfyllingsside extends React.Component<
       dager.forEach(dag => {
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
-            feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'AF' });
+            feil.push({
+              uke: dag.uke.toString(),
+              dag: dag.dag,
+              rad:
+                FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.ANNET_FRAVAER,
+            });
             feilKombinasjonFravaerArbeid = true;
           }
         }
         if (dag.syk && dag.annetFravaer) {
-          feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'FS' });
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.SYKDOM + FravaerTypeEnum.ANNET_FRAVAER,
+          });
           feilKombinasjonFravaerSyk = true;
         }
       });
@@ -129,7 +148,11 @@ class Utfyllingsside extends React.Component<
     if (this.props.aktivtMeldekort.meldegruppe === Meldegruppe.INDIV) {
       dager.forEach(dag => {
         if (dag.syk && dag.annetFravaer) {
-          feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'FS' });
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.SYKDOM + FravaerTypeEnum.ANNET_FRAVAER,
+          });
           feilKombinasjonFravaerSyk = true;
         }
       });
@@ -152,13 +175,21 @@ class Utfyllingsside extends React.Component<
     dager.forEach(dag => {
       if (typeof dag.arbeidetTimer !== 'undefined') {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
-          feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'A' });
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.ARBEIDS_FRAVAER,
+          });
           feilIArbeidetTimerHeleHalve = true;
         } else if (
           Number(dag.arbeidetTimer) > 24 ||
           Number(dag.arbeidetTimer) < 0
         ) {
-          feil.push({ uke: dag.uke.toString(), dag: dag.dag, rad: 'A' });
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.ARBEIDS_FRAVAER,
+          });
           feilIArbeidetTimer = true;
         }
       }
