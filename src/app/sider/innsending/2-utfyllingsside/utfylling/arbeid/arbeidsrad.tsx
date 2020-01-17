@@ -83,9 +83,17 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
 
   settFelter = () => {
     return hentUkedagerSomStringListe().map(dag => {
+      let feilLokal: boolean = false;
       let ukedag = konverterUkedag(dag);
       let { utfylteDager } = this.props.innsending;
       let utfyltDagIndex = this.finnIndex(ukedag);
+      if (typeof this.props.feilIDager !== 'undefined') {
+        this.props.feilIDager.forEach(e =>
+          e.dag === ukedag.trim() && e.uke === this.props.ukeNummer.toString()
+            ? (feilLokal = true)
+            : null
+        );
+      }
       return (
         <Input
           className="arbeid__inputfelt"
@@ -108,9 +116,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
           }}
           feil={
             typeof this.props.feilIDager !== 'undefined'
-              ? this.props.feilIDager.indexOf(
-                  ukedag.trim() + this.props.ukeNummer
-                ) >= 0
+              ? feilLokal
                 ? { feilmelding: '' }
                 : undefined
               : undefined

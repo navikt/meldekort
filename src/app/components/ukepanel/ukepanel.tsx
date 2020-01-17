@@ -72,7 +72,9 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
           <Arbeidsrad
             ukeNummer={props.ukenummer}
             feil={props.utfyllingFeil.feilIArbeid.feil}
-            feilIDager={props.utfyllingFeil.feilIDager}
+            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+              .concat(props.utfyllingFeil.feilIDagerVertikal)
+              .filter(r => r.rad.includes('A'))}
             aap={props.erAap}
             tekstId={'utfylling.arbeid'}
             forklaringId={'forklaring.utfylling.arbeid'}
@@ -90,6 +92,9 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             forklaringId={'forklaring.utfylling.tiltak'}
             aap={props.erAap}
             feil={props.utfyllingFeil.feilIKurs.feil}
+            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+              .concat(props.utfyllingFeil.feilIDagerVertikal)
+              .filter(r => r.rad.includes('T'))}
           />
         ) : null}
         {sjekkSporsmal('forhindret') ? (
@@ -99,6 +104,9 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             forklaringId={'forklaring.utfylling.syk'}
             aap={props.erAap}
             feil={props.utfyllingFeil.feilISyk.feil}
+            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+              .concat(props.utfyllingFeil.feilIDagerVertikal)
+              .filter(r => r.rad.includes('S'))}
           />
         ) : null}
         {sjekkSporsmal('ferieFravar') ? (
@@ -108,6 +116,9 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             forklaringId={'forklaring.utfylling.ferieFravar'}
             aap={props.erAap}
             feil={props.utfyllingFeil.feilIFerie.feil}
+            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+              .concat(props.utfyllingFeil.feilIDagerVertikal)
+              .filter(r => r.rad.includes('F'))}
           />
         ) : null}
       </div>
