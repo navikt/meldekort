@@ -1,1 +1,1 @@
-Antall timer er ugyldig
+Antall timer er ugyldig, maksimum er 24 timer

@@ -1,1 +1,1 @@
-Du har krysset av både sykedag og annet fravær enn sykdom på samme dag.
+Du har krysset av både sykedag og ferie/annet fravær enn sykdom på samme dag

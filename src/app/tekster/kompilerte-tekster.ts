@@ -12,12 +12,13 @@
       'Antall timer er ugyldig. Gyldige verdier er hele og halve timer ',
     'arbeidTimer.iConverter.Double': 'Ikke gyldig tall ',
     'arbeidTimer.kombinasjonFravaerArbeidValidator':
-      'Du har angitt både arbeid og annet fravær på samme dag. ',
+      'Du har angitt både arbeid og annet fravær på samme dag ',
     'arbeidTimer.kombinasjonFravaerSykValidator':
-      'Du har krysset av både sykedag og annet fravær enn sykdom på samme dag. ',
+      'Du har krysset av både sykedag og annet fravær enn sykdom på samme dag ',
     'arbeidTimer.kombinasjonSykArbeidValidator':
-      'Du har angitt både arbeid og sykedag på samme dag. ',
-    'arbeidTimer.rangeValidator.range': 'Antall timer er ugyldig ',
+      'Du har angitt både arbeid og sykedag på samme dag ',
+    'arbeidTimer.rangeValidator.range':
+      'Antall timer er ugyldig, maksimum er 24 timer ',
     arbeidTimer: ' ',
     'AutoLabel.CSS.error': ' ',
     'begrunnelse.required': 'Begrunnelse for korrigeringen må fylles ut. ',
@@ -355,7 +356,7 @@
     'utfylling.tiltak': 'Tiltak/kurs/utdanning ',
     'utfylling.ugyldigKombinasjon': 'Ulovlig kombinasjon av dager: ',
     'veiledning.les': 'Les mer ',
-    'veiledning.lukk': 'Les mindre ',
+    'veiledning.lukk': 'Skjul tekst ',
     weblogicNedeInfomelding:
       'Du kan for tiden ikke se meldekort du tidligere har sendt eller korrigere dem, på grunn av oppdateringer vi gjør i våre systemer. Du kan fortsatt sende meldekort som vanlig. ',
   },
@@ -372,12 +373,13 @@
       'Invalid number of hours. Whole and half hours are valid values ',
     'arbeidTimer.iConverter.Double': 'Invalid number ',
     'arbeidTimer.kombinasjonFravaerArbeidValidator':
-      'You have specified both work and other absence on the same day. ',
+      'You have specified both work and other absence on the same day ',
     'arbeidTimer.kombinasjonFravaerSykValidator':
-      'You have specified both illness and other absence on the same day. ',
+      'You have specified both illness and other absence on the same day ',
     'arbeidTimer.kombinasjonSykArbeidValidator':
-      'You have specified both work and illness on the same day. ',
-    'arbeidTimer.rangeValidator.range': 'Invalid number of hours ',
+      'You have specified both work and illness on the same day ',
+    'arbeidTimer.rangeValidator.range':
+      'Invalid number of hours, the maximum is 24 ',
     arbeidTimer: ' ',
     'AutoLabel.CSS.error': ' ',
     'begrunnelse.required': 'You need to state the reason for the correction. ',
@@ -722,7 +724,7 @@
     'utfylling.tiltak': 'Activities: Schemes/courses/education ',
     'utfylling.ugyldigKombinasjon': 'Invalid combination of days ',
     'veiledning.les': 'Read more ',
-    'veiledning.lukk': 'Read less ',
+    'veiledning.lukk': 'Hide text ',
     weblogicNedeInfomelding:
       'Due to system maintenance you cannot view the employment status forms that you have previously sent or change them. You can still send employment status forms as usual. ',
   },

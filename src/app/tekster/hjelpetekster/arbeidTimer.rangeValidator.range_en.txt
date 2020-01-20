@@ -1,1 +1,1 @@
-Invalid number of hours
+Invalid number of hours, the maximum is 24

@@ -1,1 +1,1 @@
-You have specified both illness and other absence on the same day.
+You have specified both illness and holiday/other absence on the same day
