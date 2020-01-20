@@ -304,6 +304,11 @@ class Utfyllingsside extends React.Component<
                 id: 'arbeidTimer.heleEllerHalveTallValidator',
               })}`}</li>
             ) : null}
+            {feilIArbeidetTimer ? (
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.rangeValidator.range',
+              })}`}</li>
+            ) : null}
             {feilKombinasjonSykArbeid ? (
               <li>{`${hentIntl().formatMessage({
                 id: 'arbeidTimer.kombinasjonSykArbeidValidator',
@@ -317,11 +322,6 @@ class Utfyllingsside extends React.Component<
             {feilKombinasjonFravaerSyk ? (
               <li>{`${hentIntl().formatMessage({
                 id: 'arbeidTimer.kombinasjonFravaerSykValidator',
-              })}`}</li>
-            ) : null}
-            {feilIArbeidetTimer ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.rangeValidator.range',
               })}`}</li>
             ) : null}
           </ul>
