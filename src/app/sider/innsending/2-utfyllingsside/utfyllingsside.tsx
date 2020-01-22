@@ -175,31 +175,28 @@ class Utfyllingsside extends React.Component<
       feilIArbeidetTimer ||
       feilIArbeidetTimerHeleHalve
     ) {
-      let feiltekst = hentIntl().formatMessage({
-        id: 'utfylling.ingenDagerUtfylt',
-      });
       return (
         <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
           <ul>
             {feilIArbeid.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.arbeid' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.arbeid' })
+                .trim()}`}</li>
             ) : null}
             {feilIKurs.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.tiltak' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.tiltak' })
+                .trim()}`}</li>
             ) : null}
             {feilISyk.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.syk' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.syk' })
+                .trim()}`}</li>
             ) : null}
             {feilIFerie.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.ferieFravar' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.ferieFravar' })
+                .trim()}`}</li>
             ) : null}
             {feilIArbeidetTimerHeleHalve ? (
               <li>{`${hentIntl().formatMessage({
