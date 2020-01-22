@@ -43,7 +43,7 @@ export const mkDagTEST: MeldekortDag = {
   kurs: false,
 };
 
-const dateString = '2019-01-01T10:00:00';
+const dateString = '2019-01-01T10:00:00Z';
 
 export const mkDetaljerTEST = {
   id: '',

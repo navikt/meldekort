@@ -18,6 +18,10 @@ import {
   hentDatoPeriode,
   hentUkePeriode,
 } from '../../utils/dates';
+import { MenyPunkt } from '../../utils/menyConfig';
+import { MenyActions } from '../../actions/meny';
+import { MenyState } from '../../types/meny';
+
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { hentIntl } from '../../utils/intlUtil';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
@@ -40,6 +44,7 @@ interface MapStateToProps {
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   baksystemFeilmelding: BaksystemFeilmelding;
   weblogic: WeblogicPing;
+  meny: MenyState;
 }
 
 interface MapDispatchToProps {
@@ -47,6 +52,7 @@ interface MapDispatchToProps {
   resetInnsending: () => void;
   leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
   pingWeblogic: () => void;
+  settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
 type State = {
@@ -178,6 +184,12 @@ class TidligereMeldekort extends React.Component<Props, State> {
     if (this.props.weblogic.erWeblogicOppe) {
       this.props.hentHistoriskeMeldekort();
     }
+    const valgtMenyPunkt = this.props.meny.alleMenyPunkter.find(
+      mp => mp.urlparam === window.location.pathname.slice(10)
+    );
+    if (typeof valgtMenyPunkt !== 'undefined') {
+      this.props.settValgtMenyPunkt(valgtMenyPunkt);
+    }
     window.addEventListener('resize', this.handleWindowSize);
   }
 
@@ -226,6 +238,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
     baksystemFeilmelding: selectFeilmelding(state),
     weblogic: state.weblogic,
+    meny: state.meny,
   };
 };
 
@@ -237,6 +250,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     leggTilAktivtMeldekort: (meldekort: Meldekort) =>
       dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
+      dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
   };
 };
 

@@ -11,6 +11,7 @@ Spørsmål knyttet til koden eller prosjekt rettes mot:
 
 * My Thao Nguyen, my.thao.nguyen@nav.no
 * Yrjan Fraschetti, yrjan.fraschetti@nav.no
+* Geir Skjeret, geir.skjeret@nav.no
 
 ## For NAV-ansatte
 
