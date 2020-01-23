@@ -50,14 +50,14 @@ const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
 };
 
 const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
-  const { locale, locs, updateIntl } = props;
+  const { locale, locs } = props;
   const sprakArray = [locs.nb, locs.en];
 
   const handleSelection = (value: JSX.Element[]) => {
     const erNorskValgtSprak = value[1].props.children === 'Norsk';
     const sprak: string = erNorskValgtSprak ? locs.nb.label : locs.en.label;
     const tekster: {} = erNorskValgtSprak ? locs.nb.tekster : locs.en.tekster;
-    updateIntl(sprak, tekster);
+    props.updateIntl(sprak, tekster);
   };
 
   return (
