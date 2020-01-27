@@ -22,7 +22,7 @@ const tilDatoString = '2019-01-13T10:10:00Z';
 
 const fraDato = new Date(fraDatoString);
 const tilDato = new Date(tilDatoString);
-/*
+
 it('hentUkenummerForDato', () => {
   expect(hentUkenummerForDato(fraDato)).toBe(1);
 });
@@ -82,7 +82,7 @@ it('hentNestePeriodeMedUkerOgDato', () => {
 it('ukeTekst', () => {
   expect(ukeTekst()).toBe('Uke ');
 });
-*/
+
 it('kalkulerDato', () => {
   expect(kalkulerDato(fraDato, 6)).toStrictEqual(
     new Date('2019-01-07T10:10:00.000Z')
