@@ -52,13 +52,13 @@ function SendMeldekort({
   resetInnsending,
   settInnsendingstype,
 }: Props) {
-  const hentFeilmeldingEllerData = (rows: MeldekortRad[], columns: any) => {
-    if (rows.length > 0) {
-      if (rows.length < 5) {
+  const hentFeilmeldingEllerData = (rader: MeldekortRad[], kolonner: any) => {
+    if (rader.length > 0) {
+      if (rader.length < 5) {
         return (
           <SendMeldekortInnhold
-            rows={rows}
-            columns={columns}
+            rows={rader}
+            columns={kolonner}
             router={router}
             innsendingsklareMeldekort={innsendingsklareMeldekort}
             baksystemFeilmelding={baksystemFeilmelding}
@@ -79,7 +79,7 @@ function SendMeldekort({
     } else {
       return (
         <MeldingOmMeldekortSomIkkeErKlare
-          rows={rows}
+          rows={rader}
           person={person}
           innsendingsklareMeldekort={innsendingsklareMeldekort}
         />

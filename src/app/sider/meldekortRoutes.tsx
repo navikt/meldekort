@@ -14,7 +14,7 @@ const MeldekortRoutes: React.FunctionComponent = props => {
     <Switch>
       <Route
         path="/send-meldekort/innsending"
-        render={props => <InnsendingRoutes {...props} />}
+        render={renderProps => <InnsendingRoutes {...renderProps} />}
       />
       <Route
         exact={true}
@@ -24,7 +24,7 @@ const MeldekortRoutes: React.FunctionComponent = props => {
 
       <Route
         path="/etterregistrer-meldekort/innsending"
-        render={props => <InnsendingRoutes {...props} />}
+        render={renderProps => <InnsendingRoutes {...renderProps} />}
       />
       <Route
         path="/etterregistrer-meldekort"
@@ -33,15 +33,15 @@ const MeldekortRoutes: React.FunctionComponent = props => {
 
       <Route
         path="/tidligere-meldekort/detaljer/korriger"
-        render={props => <InnsendingRoutes {...props} />}
+        render={renderProps => <InnsendingRoutes {...renderProps} />}
       />
       <Route
         path="/tidligere-meldekort/detaljer"
-        render={props => <Detaljer {...props} />}
+        render={renderProps => <Detaljer {...renderProps} />}
       />
       <Route
         path="/tidligere-meldekort"
-        render={props => <TidligereMeldekort {...props} />}
+        render={renderProps => <TidligereMeldekort {...renderProps} />}
       />
 
       <Route

@@ -119,8 +119,8 @@ export interface DetaljRad {
 }
 
 export interface Infomelding {
-  norsk: String;
-  engelsk: String;
+  norsk: string;
+  engelsk: string;
 }
 
 /* ENUMS */
