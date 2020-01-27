@@ -26,3 +26,6 @@ yarn-error.log*
 .idea
 .idea/workspace.xml
 meldekort.iml
+
+# local config
+environment*.env
