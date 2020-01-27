@@ -6,6 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+      - name: Install packages
+        run: npm ci
+      - name: Build
+        run: npm run build && npm test
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
