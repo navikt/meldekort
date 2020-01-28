@@ -98,8 +98,9 @@ class Utfyllingsside extends React.Component<
     let feilKombinasjonSykArbeid = false;
     let feilKombinasjonFravaerSyk = false;
     let feilKombinasjonFravaerArbeid = false;
+    let { meldegruppe } = this.props.aktivtMeldekort;
 
-    if (this.props.aktivtMeldekort.meldegruppe === Meldegruppe.DAGP) {
+    if (meldegruppe === Meldegruppe.DAGP) {
       dager.forEach(dag => {
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.syk) {
@@ -122,7 +123,7 @@ class Utfyllingsside extends React.Component<
         }
       });
     }
-    if (this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF) {
+    if (meldegruppe === Meldegruppe.ATTF) {
       dager.forEach(dag => {
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
@@ -145,7 +146,7 @@ class Utfyllingsside extends React.Component<
         }
       });
     }
-    if (this.props.aktivtMeldekort.meldegruppe === Meldegruppe.INDIV) {
+    if (meldegruppe === Meldegruppe.INDIV) {
       dager.forEach(dag => {
         if (dag.syk && dag.annetFravaer) {
           feil.push({

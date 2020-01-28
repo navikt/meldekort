@@ -96,20 +96,20 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
   settFelter = () => {
     return hentUkedagerSomStringListe().map(dag => {
-      let feilLokal: boolean = false;
+      let erFeil: boolean = false;
 
       let ukedag = konverterUkedag(dag);
       if (typeof this.props.feilIDager !== 'undefined') {
         this.props.feilIDager.forEach(e =>
           e.dag === ukedag.trim() && e.uke === this.props.ukeNummer.toString()
-            ? (feilLokal = true)
+            ? (erFeil = true)
             : null
         );
       }
       return (
         <Checkbox
           className={
-            feilLokal ? 'aktivitet__checkbox_feil' : 'aktivitet__checkbox'
+            erFeil ? 'aktivitet__checkbox_feil' : 'aktivitet__checkbox'
           }
           key={ukedag}
           label={
@@ -123,7 +123,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
           }}
           feil={
             typeof this.props.feilIDager !== 'undefined'
-              ? feilLokal
+              ? erFeil
                 ? { feilmelding: '' }
                 : undefined
               : undefined
