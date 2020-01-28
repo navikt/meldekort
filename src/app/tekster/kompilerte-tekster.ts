@@ -351,7 +351,14 @@
     'utfylling.bekreft':
       'Jeg er kjent med at hvis opplysningene jeg har oppgitt ikke er riktige og fullstendige kan jeg miste retten til stønad fra NAV. <br> Jeg er også klar over at jeg må betale tilbake det jeg har fått feilaktig utbetalt, og at jeg kan bli anmeldt til politiet. ',
     'utfylling.ferieFravar': 'Ferie og annet fravær enn sykdom ',
-    'utfylling.ingenDagerUtfylt': 'Ingen dager er utfylt på: ',
+    'utfylling.mangler.arbeid':
+      'På forrige side anga du å ha vært i arbeid siste 14 dager, men du har ikke fylt inn noen timer på denne siden. For å korrigere, enten fyll inn timene her, eller gå tilbake til forrige side og korriger svaret. ',
+    'utfylling.mangler.ferieFravar':
+      'På forrige side anga du å ha hatt ferie eller fravær siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
+    'utfylling.mangler.syk':
+      'På forrige side anga du å ha vært syk siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
+    'utfylling.mangler.tiltak':
+      'På forrige side anga du å ha gjennomført avtalt aktivitet eller deltatt på kurs/utdanning siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
     'utfylling.syk': 'Syk ',
     'utfylling.tiltak': 'Tiltak/kurs/utdanning ',
     'utfylling.ugyldigKombinasjon': 'Ulovlig kombinasjon av dager: ',
@@ -718,8 +725,14 @@
     'utfylling.bekreft':
       'I am aware that if the information I provide is not correct and complete, I may lose my entitlement to benefit. <br> <br> I am also aware that I must pay back what I have received erroneously and that I may be reported to the police. ',
     'utfylling.ferieFravar': 'Holiday and absence that is not due to illness ',
-    'utfylling.ingenDagerUtfylt':
-      'There has to be a value for at least one day for: ',
+    'utfylling.mangler.arbeid':
+      "On the previous page you specified having worked the last 14 days, but you haven't filled in any hours on this page. To correct this, either fill in the hours on this page, or go back to the previous page and correct your answer. ",
+    'utfylling.mangler.ferieFravar':
+      "On the previous page you specified holiday or other absence the last 14 days, but you haven't marked any days on this page. To correct this, either mark the days on this page, or go back to the previous page and correct your answer. ",
+    'utfylling.mangler.syk':
+      "On the previous page you specified having been ill the last 14 days, but you haven't marked any days on this page. To correct this, either mark the days on this page, or go back to the previous page and correct your answer. ",
+    'utfylling.mangler.tiltak':
+      "On the previous page you specified having worked the last 14 days, but you haven't marked any days on this page. To correct this, either mark the days on this page, or go back to the previous page and correct your answer. ",
     'utfylling.syk': 'Illness ',
     'utfylling.tiltak': 'Activities: Schemes/courses/education ',
     'utfylling.ugyldigKombinasjon': 'Invalid combination of days ',
