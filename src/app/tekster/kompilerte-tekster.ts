@@ -732,7 +732,7 @@
     'utfylling.mangler.syk':
       "On the previous page you specified having been ill the last 14 days, but you haven't marked any days on this page. To correct this, either mark the days on this page, or go back to the previous page and correct your answer. ",
     'utfylling.mangler.tiltak':
-      "On the previous page you specified having worked the last 14 days, but you haven't marked any days on this page. To correct this, either mark the days on this page, or go back to the previous page and correct your answer. ",
+      "On the previous page you specified having participated in planned activities or courses/education the last 14 days, but you haven't marked any days on this page. To correct this, either mark the days on this page, or go back to the previous page and correct your answer. ",
     'utfylling.syk': 'Illness ',
     'utfylling.tiltak': 'Activities: Schemes/courses/education ',
     'utfylling.ugyldigKombinasjon': 'Invalid combination of days ',
