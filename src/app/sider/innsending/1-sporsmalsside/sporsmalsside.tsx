@@ -139,7 +139,10 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       return resultat;
     }
 
-    if (!this.fortsetteRegistrert()) {
+    if (
+      innsendingstype === Innsendingstyper.innsending &&
+      !this.fortsetteRegistrert()
+    ) {
       this.props.visModal({
         content: () => ikkeFortsetteRegistrertContent(),
         knapper: this.ikkeFortsetteRegistrertKnapper(),
