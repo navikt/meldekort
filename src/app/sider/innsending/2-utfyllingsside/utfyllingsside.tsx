@@ -361,9 +361,6 @@ class Utfyllingsside extends React.Component<
           <Sprakvelger />
         </section>
         <section className="seksjon">
-          <div id="ekstrainfo" className="seksjon">
-            Her skal du fylle inn detaljer for det du valgte på forrige side.
-          </div>
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
           <div className={'utfylling-container'}>
             <UkePanel
