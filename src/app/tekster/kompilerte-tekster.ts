@@ -14,7 +14,7 @@
     'arbeidTimer.kombinasjonFravaerArbeidValidator':
       'Du har angitt både arbeid og ferie/annet fravær på samme dag ',
     'arbeidTimer.kombinasjonFravaerSykValidator':
-      'Du har krysset av både sykedag og ferie/annet fravær enn sykdom på samme dag ',
+      'Du har angitt både sykedag og ferie/annet fravær enn sykdom på samme dag ',
     'arbeidTimer.kombinasjonSykArbeidValidator':
       'Du har angitt både arbeid og sykedag på samme dag ',
     'arbeidTimer.rangeValidator.range':
@@ -352,13 +352,13 @@
       'Jeg er kjent med at hvis opplysningene jeg har oppgitt ikke er riktige og fullstendige kan jeg miste retten til stønad fra NAV. <br> Jeg er også klar over at jeg må betale tilbake det jeg har fått feilaktig utbetalt, og at jeg kan bli anmeldt til politiet. ',
     'utfylling.ferieFravar': 'Ferie og annet fravær enn sykdom ',
     'utfylling.mangler.arbeid':
-      'På forrige side anga du å ha vært i arbeid siste 14 dager, men du har ikke fylt inn noen timer på denne siden. For å korrigere, enten fyll inn timene her, eller gå tilbake til forrige side og korriger svaret. ',
+      'På forrige side svarte du at du har vært i arbeid siste 14 dager, men du har ikke fylt inn noen timer på denne siden. For å korrigere, enten fyll inn timene her, eller gå tilbake til forrige side og korriger svaret. ',
     'utfylling.mangler.ferieFravar':
-      'På forrige side anga du å ha hatt ferie eller fravær siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
+      'På forrige side svarte du at du har hatt ferie eller fravær siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret ',
     'utfylling.mangler.syk':
-      'På forrige side anga du å ha vært syk siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
+      'På forrige side svarte du at du har vært syk siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
     'utfylling.mangler.tiltak':
-      'På forrige side anga du å ha gjennomført avtalt aktivitet eller deltatt på kurs/utdanning siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
+      'På forrige side svarte du at du har gjennomført avtalt aktivitet eller deltatt på kurs/utdanning siste 14 dager, men du har ikke krysset av hvilke dager det gjelder på denne siden. For å korrigere, enten kryss av dagene her, eller gå tilbake til forrige side og korriger svaret. ',
     'utfylling.syk': 'Syk ',
     'utfylling.tiltak': 'Tiltak/kurs/utdanning ',
     'utfylling.ugyldigKombinasjon': 'Ulovlig kombinasjon av dager: ',
