@@ -47,9 +47,9 @@ export function hentEnvSetting(variableName: string) {
   const varName1 = `${variableName}_${Konstanter().pas}`;
   const varName2 = `${variableName}_${Konstanter().use}`;
 
-  const value1 = window[meldekort][varName1] || window[meldekort][varName1];
+  const value1 = window[meldekort][varName1];
 
-  const value2 = window[meldekort][varName2] || window[meldekort][varName2];
+  const value2 = window[meldekort][varName2];
 
   return getKey(value1, value2);
 }

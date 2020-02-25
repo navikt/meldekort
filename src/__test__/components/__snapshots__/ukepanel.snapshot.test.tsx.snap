@@ -30,8 +30,19 @@ exports[`UkePanel 1`] = `
           },
           "feilIArbeidetTimer": true,
           "feilIArbeidetTimerHeleHalve": true,
-          "feilIDager": Array [
-            "mandag",
+          "feilIDagerHorisontal": Array [
+            Object {
+              "dag": "mandag",
+              "rad": "A",
+              "uke": "1",
+            },
+          ],
+          "feilIDagerVertikal": Array [
+            Object {
+              "dag": "tirsdag",
+              "rad": "S",
+              "uke": "1",
+            },
           ],
           "feilIFerie": Object {
             "feil": true,
@@ -45,6 +56,9 @@ exports[`UkePanel 1`] = `
             "feil": true,
             "feilmelding": "Test",
           },
+          "feilKombinasjonFravaerArbeid": false,
+          "feilKombinasjonFravaerSyk": false,
+          "feilKombinasjonSykArbeid": false,
         }
       }
     />

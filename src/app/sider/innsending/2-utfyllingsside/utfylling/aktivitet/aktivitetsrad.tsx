@@ -96,10 +96,21 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
 
   settFelter = () => {
     return hentUkedagerSomStringListe().map(dag => {
+      let erFeil: boolean = false;
+
       let ukedag = konverterUkedag(dag);
+      if (typeof this.props.feilIDager !== 'undefined') {
+        this.props.feilIDager.forEach(e =>
+          e.dag === ukedag.trim() && e.uke === this.props.ukeNummer.toString()
+            ? (erFeil = true)
+            : null
+        );
+      }
       return (
         <Checkbox
-          className="aktivitet__checkbox"
+          className={
+            erFeil ? 'aktivitet__checkbox_feil' : 'aktivitet__checkbox'
+          }
           key={ukedag}
           label={
             <span className="vekk">
@@ -110,6 +121,13 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
           onChange={() => {
             this.setVerdi(ukedag);
           }}
+          feil={
+            typeof this.props.feilIDager !== 'undefined'
+              ? erFeil
+                ? { feilmelding: '' }
+                : undefined
+              : undefined
+          }
         />
       );
     });

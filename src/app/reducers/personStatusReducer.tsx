@@ -21,14 +21,12 @@ const personStatusReducer = (
   state: PersonStatusState = initialState,
   action: PersonStatusActionTypes
 ): PersonStatusState => {
-  switch (action.type) {
-    case getType(PersonStatusActions.hentPersonStatus.success):
-      return {
-        personStatus: action.payload,
-      };
-
-    default:
-      return state;
+  if (action.type === getType(PersonStatusActions.hentPersonStatus.success)) {
+    return {
+      personStatus: action.payload,
+    };
+  } else {
+    return state;
   }
 };
 

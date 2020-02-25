@@ -12,6 +12,7 @@ import {
   InnsendingState,
   SpmSvar,
   UtfyllingFeil,
+  FeilKolonne,
 } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
@@ -30,6 +31,7 @@ import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
+import { FravaerTypeEnum } from '../../../types/meldekort';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -56,7 +58,11 @@ class Utfyllingsside extends React.Component<
       feilIFerie: { feil: false },
       feilIArbeidetTimerHeleHalve: false,
       feilIArbeidetTimer: false,
-      feilIDager: [],
+      feilKombinasjonSykArbeid: false,
+      feilKombinasjonFravaerArbeid: false,
+      feilKombinasjonFravaerSyk: false,
+      feilIDagerHorisontal: [],
+      feilIDagerVertikal: [],
     };
   }
 
@@ -87,27 +93,110 @@ class Utfyllingsside extends React.Component<
     return false;
   };
 
+  validerVertikal = (dager: UtfyltDag[]): boolean => {
+    let feil: FeilKolonne[] = [];
+    let feilKombinasjonSykArbeid = false;
+    let feilKombinasjonFravaerSyk = false;
+    let feilKombinasjonFravaerArbeid = false;
+    let { meldegruppe } = this.props.aktivtMeldekort;
+
+    if (meldegruppe === Meldegruppe.DAGP) {
+      dager.forEach(dag => {
+        if (typeof dag.arbeidetTimer !== 'undefined') {
+          if (Number(dag.arbeidetTimer) > 0 && dag.syk) {
+            feil.push({
+              uke: dag.uke.toString(),
+              dag: dag.dag,
+              rad: FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.SYKDOM,
+            });
+            feilKombinasjonSykArbeid = true;
+          }
+          if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
+            feil.push({
+              uke: dag.uke.toString(),
+              dag: dag.dag,
+              rad:
+                FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.ANNET_FRAVAER,
+            });
+            feilKombinasjonFravaerArbeid = true;
+          }
+        }
+      });
+    }
+    if (meldegruppe === Meldegruppe.ATTF) {
+      dager.forEach(dag => {
+        if (typeof dag.arbeidetTimer !== 'undefined') {
+          if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
+            feil.push({
+              uke: dag.uke.toString(),
+              dag: dag.dag,
+              rad:
+                FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.ANNET_FRAVAER,
+            });
+            feilKombinasjonFravaerArbeid = true;
+          }
+        }
+        if (dag.syk && dag.annetFravaer) {
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.SYKDOM + FravaerTypeEnum.ANNET_FRAVAER,
+          });
+          feilKombinasjonFravaerSyk = true;
+        }
+      });
+    }
+    if (meldegruppe === Meldegruppe.INDIV) {
+      dager.forEach(dag => {
+        if (dag.syk && dag.annetFravaer) {
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.SYKDOM + FravaerTypeEnum.ANNET_FRAVAER,
+          });
+          feilKombinasjonFravaerSyk = true;
+        }
+      });
+    }
+
+    this.setState({
+      feilIDagerVertikal: feil,
+      feilKombinasjonSykArbeid: feilKombinasjonSykArbeid,
+      feilKombinasjonFravaerArbeid: feilKombinasjonFravaerArbeid,
+      feilKombinasjonFravaerSyk: feilKombinasjonFravaerSyk,
+    });
+    return feil.length === 0;
+  };
+
   validerAntallTimerForDag = (dager: UtfyltDag[]): boolean => {
-    let feil: string[] = [];
+    let feil: FeilKolonne[] = [];
     let feilIArbeidetTimer = false;
     let feilIArbeidetTimerHeleHalve = false;
 
     dager.forEach(dag => {
       if (typeof dag.arbeidetTimer !== 'undefined') {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
-          feil.push(dag.dag + dag.uke);
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.ARBEIDS_FRAVAER,
+          });
           feilIArbeidetTimerHeleHalve = true;
         } else if (
           Number(dag.arbeidetTimer) > 24 ||
           Number(dag.arbeidetTimer) < 0
         ) {
-          feil.push(dag.dag + dag.uke);
+          feil.push({
+            uke: dag.uke.toString(),
+            dag: dag.dag,
+            rad: FravaerTypeEnum.ARBEIDS_FRAVAER,
+          });
           feilIArbeidetTimer = true;
         }
       }
     });
     this.setState({
-      feilIDager: feil,
+      feilIDagerHorisontal: feil,
       feilIArbeidetTimerHeleHalve: feilIArbeidetTimerHeleHalve,
       feilIArbeidetTimer: feilIArbeidetTimer,
     });
@@ -121,6 +210,9 @@ class Utfyllingsside extends React.Component<
     let syk = !this.sjekkSporsmal('forhindret');
     let ferie = !this.sjekkSporsmal('ferieFravar');
     let feilITimer = this.validerAntallTimerForDag(
+      this.props.innsending.utfylteDager
+    );
+    let feilIVertikal = this.validerVertikal(
       this.props.innsending.utfylteDager
     );
 
@@ -150,7 +242,8 @@ class Utfyllingsside extends React.Component<
       feilIFerie: { feil: !ferie },
     });
 
-    let resultat = arbeidet && kurs && syk && ferie && feilITimer;
+    let resultat =
+      arbeidet && kurs && syk && ferie && feilITimer && feilIVertikal;
     if (!resultat) {
       scrollTilElement('feilmelding');
     }
@@ -163,6 +256,9 @@ class Utfyllingsside extends React.Component<
       feilIKurs,
       feilISyk,
       feilIFerie,
+      feilKombinasjonSykArbeid,
+      feilKombinasjonFravaerArbeid,
+      feilKombinasjonFravaerSyk,
       feilIArbeidetTimer,
       feilIArbeidetTimerHeleHalve,
     } = this.state;
@@ -172,34 +268,34 @@ class Utfyllingsside extends React.Component<
       feilIKurs.feil ||
       feilISyk.feil ||
       feilIFerie.feil ||
+      feilKombinasjonSykArbeid ||
+      feilKombinasjonFravaerArbeid ||
+      feilKombinasjonFravaerSyk ||
       feilIArbeidetTimer ||
       feilIArbeidetTimerHeleHalve
     ) {
-      let feiltekst = hentIntl().formatMessage({
-        id: 'utfylling.ingenDagerUtfylt',
-      });
       return (
         <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
           <ul>
             {feilIArbeid.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.arbeid' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.arbeid' })
+                .trim()}`}</li>
             ) : null}
             {feilIKurs.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.tiltak' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.tiltak' })
+                .trim()}`}</li>
             ) : null}
             {feilISyk.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.syk' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.syk' })
+                .trim()}`}</li>
             ) : null}
             {feilIFerie.feil ? (
-              <li>{`${feiltekst} "${hentIntl()
-                .formatMessage({ id: 'utfylling.ferieFravar' })
-                .trim()}"`}</li>
+              <li>{`${hentIntl()
+                .formatMessage({ id: 'utfylling.mangler.ferieFravar' })
+                .trim()}`}</li>
             ) : null}
             {feilIArbeidetTimerHeleHalve ? (
               <li>{`${hentIntl().formatMessage({
@@ -209,6 +305,21 @@ class Utfyllingsside extends React.Component<
             {feilIArbeidetTimer ? (
               <li>{`${hentIntl().formatMessage({
                 id: 'arbeidTimer.rangeValidator.range',
+              })}`}</li>
+            ) : null}
+            {feilKombinasjonSykArbeid ? (
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.kombinasjonSykArbeidValidator',
+              })}`}</li>
+            ) : null}
+            {feilKombinasjonFravaerArbeid ? (
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.kombinasjonFravaerArbeidValidator',
+              })}`}</li>
+            ) : null}
+            {feilKombinasjonFravaerSyk ? (
+              <li>{`${hentIntl().formatMessage({
+                id: 'arbeidTimer.kombinasjonFravaerSykValidator',
               })}`}</li>
             ) : null}
           </ul>

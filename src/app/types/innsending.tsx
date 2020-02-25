@@ -21,7 +21,7 @@ export interface InnsendingState {
 export interface FeilIDager {
   feil: boolean;
   feilmelding?: string;
-  feilIDager?: string[];
+  feilIDager?: FeilKolonne[];
 }
 
 export interface SpmSvar {
@@ -70,12 +70,22 @@ export interface Feilmelding {
   feilmelding?: string;
 }
 
+export interface FeilKolonne {
+  uke: string;
+  dag: string;
+  rad: string;
+}
+
 export interface UtfyllingFeil {
   feilIArbeid: Feilmelding;
   feilIKurs: Feilmelding;
   feilISyk: Feilmelding;
   feilIFerie: Feilmelding;
+  feilKombinasjonSykArbeid: boolean;
+  feilKombinasjonFravaerArbeid: boolean;
+  feilKombinasjonFravaerSyk: boolean;
   feilIArbeidetTimerHeleHalve: boolean;
   feilIArbeidetTimer: boolean;
-  feilIDager: string[];
+  feilIDagerHorisontal: FeilKolonne[];
+  feilIDagerVertikal: FeilKolonne[];
 }

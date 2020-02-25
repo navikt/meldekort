@@ -121,9 +121,13 @@ export const utfyllingFeilTEST: UtfyllingFeil = {
   feilIKurs: feilmelding,
   feilISyk: feilmelding,
   feilIFerie: feilmelding,
+  feilKombinasjonSykArbeid: false,
+  feilKombinasjonFravaerArbeid: false,
+  feilKombinasjonFravaerSyk: false,
   feilIArbeidetTimerHeleHalve: true,
   feilIArbeidetTimer: true,
-  feilIDager: ['mandag'],
+  feilIDagerHorisontal: [{ uke: '1', dag: 'mandag', rad: 'A' }],
+  feilIDagerVertikal: [{ uke: '1', dag: 'tirsdag', rad: 'S' }],
 };
 
 export const innsendingTEST: InnsendingState = {

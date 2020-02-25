@@ -1,17 +1,11 @@
 import {
   KortStatus,
   Meldekort,
-  MeldekortDag,
-  Meldekortdetaljer,
   MeldekortRad,
   SendtMeldekort,
-  Sporsmal,
 } from '../types/meldekort';
-import { InnsendingState, Innsendingstyper } from '../types/innsending';
+import { Innsendingstyper } from '../types/innsending';
 import { hentDatoPeriode, hentUkePeriode } from './dates';
-import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
-import { hentNorskeUkedager } from './ukedager';
 
 export const erMeldekortSendtInnTidligere = (
   meldekort: Meldekort,

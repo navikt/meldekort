@@ -43,9 +43,9 @@ function EtterregistrerMeldekort({
   settInnsendingstype,
   leggTilAktivtMeldekort,
 }: Props) {
-  const harKunEttMeldekort = (innsendingsklareMeldekort: Meldekort[]) => {
-    if (innsendingsklareMeldekort.length === 1) {
-      leggTilAktivtMeldekort(innsendingsklareMeldekort[0]);
+  const harKunEttMeldekort = (meldekort: Meldekort[]) => {
+    if (meldekort.length === 1) {
+      leggTilAktivtMeldekort(meldekort[0]);
       settInnsendingstype(Innsendingstyper.etterregistrering);
       return true;
     } else {

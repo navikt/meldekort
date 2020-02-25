@@ -29,10 +29,7 @@ const localesReducer = (
   state: LocalesState = initialState,
   action: LocalesActions
 ): LocalesState => {
-  switch (action.type) {
-    default:
-      return state;
-  }
+  return state;
 };
 
 export default localesReducer;

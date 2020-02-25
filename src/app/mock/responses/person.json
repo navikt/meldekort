@@ -12,7 +12,7 @@
         "kanKortSendes": false,
         "periodeKode": "201901"
       },
-      "meldegruppe": "DAGP",
+      "meldegruppe": "INDIV",
       "kortStatus": "FERDI",
       "bruttoBelop": 13430,
       "erForskuddsPeriode": false,
@@ -29,7 +29,7 @@
         "kanKortSendes": true,
         "periodeKode": "201903"
       },
-      "meldegruppe": "ATTF",
+      "meldegruppe": "DAGP",
       "kortStatus": "OPPRE",
       "erForskuddsPeriode": false,
       "korrigerbart": true

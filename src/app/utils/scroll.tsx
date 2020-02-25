@@ -21,7 +21,7 @@ export function scrollTilElement(
         elementid = 'periodebanner';
       }
       document.getElementById(elementid)!.scrollIntoView();
-    } catch (e) {
+    } catch (e2) {
       console.log('Kunne ikke scrolle');
     }
   }
