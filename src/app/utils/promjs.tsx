@@ -4,6 +4,6 @@ import prom from 'promjs';
 const registry = prom();
 export const counterPagereqSporsmal = registry.create(
   'counter',
-  'page_requests',
-  'txt'
+  'MeldekortFrontend.counterPagereqSporsmal',
+  'counterPagereqSporsmal'
 );
