@@ -28,18 +28,6 @@
     'diverse.nei': 'Nei ',
     'diverse.show.info': '? hjelpetekst ',
     'diverse.tilbake': 'Til Ditt NAV ',
-    'endreMeldeform.benytter': 'Du benytter nå ',
-    'endreMeldeform.bytte': 'Ønsker du å bytte til ',
-    'endreMeldeform.elektronisk': 'Elektronisk meldekort ',
-    'endreMeldeform.endre': 'Ønsker du å endre meldeform? ',
-    'endreMeldeform.info.elektronisk':
-      'Velger du elektroniske meldekort kan du sende meldekort fra nav.no. Sending av elektroniske meldekort er enkelt og fleksibelt, og du får ytelsene raskere utbetalt. ',
-    'endreMeldeform.info':
-      'Det er to ulike måter å melde seg på - med elektroniske meldekort eller papirmeldekort. ',
-    'endreMeldeform.kvittering.elektronisk.info':
-      'Endringen gjelder umiddelbart. Har du meldekort som er tilgjengelig for innsending, kan du sende det nå. ',
-    'endreMeldeform.papir': 'Papirmeldekort ',
-    'endreMeldeform.valgtBytte': 'Du har valgt å bytte til ',
     'etterregistrering.sporsmal.begrunnelse': 'Kommentar på meldekortet: ',
     'feilmelding.alleredeSendtInn':
       'Meldekort for denne perioden er allerede sendt. Du kan derfor ikke sende dette meldekortet. ',
@@ -100,8 +88,6 @@
       'Du kan også finne mer informasjon om tjenesten på siden <a href="{0}{1}" target="_blank">Informasjon om meldekort</a>. ',
     'genereltOmMeldekort.oss':
       'Har du spørsmål om tjenesten se gjerne på vår side "Ofte stilte spørsmål". Der finner du svar på de vanligste spørsmålene vi får. ',
-    'genereltOmMeldekort.valg.endre':
-      'Endre meldeform fra f.eks. papirmeldekort til elektronisk meldekort ',
     'genereltOmMeldekort.valg.sende': 'Sende elektroniske meldekort ',
     'genereltOmMeldekort.valg.tidligere':
       'Se på tidligere innsendte meldekort ',
@@ -189,7 +175,6 @@
     'overskrift.detaljer': 'Detaljer ',
     'overskrift.dinSide': 'Gå til Ditt NAV ',
     'overskrift.elektroniskMeldekort': 'Elektroniske meldekort ',
-    'overskrift.endreMeldeform': 'Endre meldeform ',
     'overskrift.etterregistrering.innsending':
       'Etterregistrering av meldekort ',
     'overskrift.etterregistrertMeldekort': 'Til innsending av meldekort ',
@@ -221,7 +206,6 @@
     'overskrift.timerKort': 't ',
     'overskrift.timer': 'timer ',
     'overskrift.uke': 'Uke ',
-    'sekundarmeny.endreMeldeform': 'Endre meldeform ',
     'sekundarmeny.etterregistrer': 'Etterregistrere meldekort ',
     'sekundarmeny.faq': 'Ofte stilte spørsmål ',
     'sekundarmeny.omMeldekort': 'Om meldekort ',
@@ -396,19 +380,6 @@
     'diverse.nei': 'No ',
     'diverse.show.info': '? Guidance notes ',
     'diverse.tilbake': 'To Your page ',
-    'endreMeldeform.benytter': 'You are currently using ',
-    'endreMeldeform.bytte': 'Do you want to change to ',
-    'endreMeldeform.elektronisk': 'Electronic employment status form ',
-    'endreMeldeform.endre':
-      'Do you want to change the way you send employment status form? ',
-    'endreMeldeform.info.elektronisk':
-      'If you choose electronic employment status form, you send via nav.no. Most people choose electronic status form because it is simple, you get guidance and you are alarmed of any information is missing. You normally receive the payment 1-2 business days after posting the status form at nav.no ',
-    'endreMeldeform.info':
-      'You can choose between electronic employment status form  and paper status form ',
-    'endreMeldeform.kvittering.elektronisk.info':
-      'Change applies immediately. Are any employment status forms available, you may send the form today. ',
-    'endreMeldeform.papir': 'Paper employment status form ',
-    'endreMeldeform.valgtBytte': 'You have decided to change to ',
     'etterregistrering.sporsmal.begrunnelse':
       'Comment on this employment form: ',
     'feilmelding.alleredeSendtInn':
@@ -470,8 +441,6 @@
       'Read more about the service at <a href="{0}{1}" target="_blank">Information about employment status form</a>. ',
     'genereltOmMeldekort.oss':
       'Do you have questions? You may find the answer on Frequently asked questions. ',
-    'genereltOmMeldekort.valg.endre':
-      'Change from employment status form on paper to electronic via nav.no or vice versa ',
     'genereltOmMeldekort.valg.sende': 'Submit employment status form ',
     'genereltOmMeldekort.valg.tidligere':
       'Look at employment status forms you have submitted earlier ',
@@ -561,7 +530,6 @@
     'overskrift.detaljer': 'Details ',
     'overskrift.dinSide': 'Go to Your Page ',
     'overskrift.elektroniskMeldekort': 'Electronic employment status form ',
-    'overskrift.endreMeldeform': 'Change status form ',
     'overskrift.etterregistrering.innsending': 'Register previous periods ',
     'overskrift.etterregistrertMeldekort': 'Next employment status form ',
     'overskrift.genereltOmMeldekort': 'Employment status form in general ',
@@ -593,7 +561,6 @@
     'overskrift.timerKort': 'h ',
     'overskrift.timer': 'hours ',
     'overskrift.uke': 'Week ',
-    'sekundarmeny.endreMeldeform': 'Change status form ',
     'sekundarmeny.etterregistrer': 'Register previous periods ',
     'sekundarmeny.faq': 'Frequently asked questions ',
     'sekundarmeny.omMeldekort': 'About employment status form ',
