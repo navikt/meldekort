@@ -1,7 +1,6 @@
 <b><p style="color:#ee5522;">
 
-Meld fra de dagene du skulle vært på kurs.
-
+Registrer de dagene du skulle vært på kurs, men ikke kunne delta grunnet smitte eller smittevern.
 </p></b>
 
 Du skal føre opp dager du har deltatt på tiltak, kurs eller utdanning som du har avtalt med NAV.

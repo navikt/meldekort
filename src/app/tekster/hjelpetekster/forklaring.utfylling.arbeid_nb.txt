@@ -1,7 +1,6 @@
 <b><p style="color:#ee5522;">
 
-Har du hjemmekontor og jobber, skal du føre opp arbeid på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du føre opp de timene du skulle ha jobbet.
-
+Har du hjemmekontor og jobber, skal du registrere timer på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du registrere de timene du skulle ha jobbet.
 </p></b>
 
 Du skal registrere alle timene du har jobbet, både lønnet og ulønnet, også i egen næringsvirksomhet. Dette gjelder alle dager i uken, også lørdag og søndag, uansett når på døgnet du jobber.

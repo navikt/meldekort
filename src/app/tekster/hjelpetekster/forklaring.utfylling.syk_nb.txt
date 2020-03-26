@@ -1,6 +1,6 @@
 <b><p style="color:#ee5522;">
 
-Du skal ikke skal føre sykdom med mindre du er sykmeldt og skal ha sykepenger.
+Du skal ikke skal registrere sykdom med mindre du er sykmeldt og skal ha sykepenger.
 
 </p></b>
 Du skal registrere de dagene du har vært forhindret fra å ta arbeid på grunn av egen sykdom.

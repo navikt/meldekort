@@ -1,14 +1,19 @@
-Du skal svare <strong>Ja</strong> hvis du ikke har kunnet ta arbeid eller gjennomføre avtalt aktivitet, og dette ikke skyldes at du har vært syk. 
-<br>
+Du skal svare <strong>Ja</strong> hvis du ikke har kunnet ta arbeid eller gjennomføre avtalt aktivitet, og dette ikke skyldes at du har vært syk.
+<br><br>
+<b><p style="color:#ee5522;">
+
+Fravær fra jobb på grunn av karantene registreres på samme måte som fravær grunnet sykdom. Hjemmekontor regnes ikke som fravær.
+
+</b></p>
 <br>
 Det gjelder f.eks. hvis du har hatt ferie og derfor ikke kunnet gjennomføre avtalt aktivitet. Det gjelder også opphold i utlandet som ikke er godkjent av NAV.
 Er du statsborger i et EU/EØS-land og oppholder deg i et annet EU/EØS-land, skal oppholdet ikke godkjennes av NAV.
 <br>
 <br>
-Du skal svare <strong>Ja</strong> hvis du ikke har avtalt noen aktivitet med NAV i perioden, og ikke er tilgjengelig for NAV mens du skal være borte. 
+Du skal svare <strong>Ja</strong> hvis du ikke har avtalt noen aktivitet med NAV i perioden, og ikke er tilgjengelig for NAV mens du skal være borte.
 <br>
 <br>
-Fravær vil normalt føre til trekk i utbetalingen.  
+Fravær vil normalt føre til trekk i utbetalingen.
 <br>
 <br>
 Hvis du vil beholde arbeidsavklaringspengene i den perioden du er borte, må du ta kontakt med NAV i god tid på forhånd.

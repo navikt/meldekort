@@ -1,7 +1,12 @@
-Du skal svare <strong>Ja</strong> hvis du har vært syk og derfor har vært forhindret fra å ta arbeid. 
+Du skal svare <strong>Ja</strong> hvis du har vært syk og derfor har vært forhindret fra å ta arbeid.
+<br><br>
+<b><p style="color:#ee5522;">
+
+Du skal ikke svare ja med mindre du er sykmeldt og skal ha sykepenger.
+
+</b></p>
 <br>
-<br>
-Du skal svare <strong>Ja</strong> hvis du har vært for syk til å delta på tiltak, kurs eller utdanning som du har avtalt med NAV. 
+Du skal svare <strong>Ja</strong> hvis du har vært for syk til å delta på tiltak, kurs eller utdanning som du har avtalt med NAV.
 <br>
 <br>
 Du skal svare <strong>Nei</strong> hvis du ikke har vært syk.

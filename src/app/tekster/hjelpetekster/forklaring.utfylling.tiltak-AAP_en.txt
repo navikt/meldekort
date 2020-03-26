@@ -1,7 +1,6 @@
 <b><p style="color:#ee5522;">
 
-Register the days you should have participated in activities.
-
+Register the days you should have participated in activities, but were unable to participate due to contagion or contagion-preventing measures.
 </p></b>
 
 You need to register the days you have participated in activities you and NAV have agreed on.

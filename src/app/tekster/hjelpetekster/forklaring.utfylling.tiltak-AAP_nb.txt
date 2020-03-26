@@ -1,7 +1,6 @@
 <b><p style="color:#ee5522;">
 
-meld ja de dagene du skulle ha vært på tiltak.
-
+Registrer de dagene du skulle ha vært på tiltak, men ikke kunne delta grunnet smitte eller smittevern.
 </p></b>
 Du skal registrere alle de dagene du har gjennomført aktivitet som du har avtalt med NAV.
 <br>

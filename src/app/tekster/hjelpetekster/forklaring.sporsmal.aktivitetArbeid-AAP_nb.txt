@@ -1,12 +1,17 @@
-Du skal svare <strong>Ja</strong> hvis du har gjennomført den aktiviteten du har avtalt med NAV. 
+Du skal svare <strong>Ja</strong> hvis du har gjennomført den aktiviteten du har avtalt med NAV.
+<br><br>
+<b><p style="color:#ee5522;">
+
+Du skal svare Ja og registrere de dagene du skulle ha vært på tiltak, men ikke kunne delta grunnet smitte eller smittevern.
+
+</b></p>
 <br>
-<br>
-Aktiviteten kan være 
+Aktiviteten kan være
 <ul>
 <li> arbeidsrettede tiltak </li>
 <li> medisinsk behandling </li>
 <li> utdanning </li>
-<li> annen aktivitet </li> 
+<li> annen aktivitet </li>
 </ul>
 Du skal svare <strong>Ja</strong> hvis du deltar på aktiviteter du ikke har avtalt med NAV. Dette kan være
 <ul>
@@ -17,4 +22,4 @@ Du skal svare <strong>Ja</strong> hvis du deltar på aktiviteter du ikke har avt
 Du skal svare <strong>Nei</strong> hvis du ikke har gjennomført den aktiviteten som du avtalte med NAV.
 <br>
 <br>
-Du skal svare <strong>Nei</strong> hvis du ikke har avtalt noen aktivitet med NAV. 
+Du skal svare <strong>Nei</strong> hvis du ikke har avtalt noen aktivitet med NAV.

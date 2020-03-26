@@ -1,7 +1,6 @@
 <b><p style="color:#ee5522;">
 
-Absence from work due to quarantine should be registered in the same way as illness. This does not apply when you are working from home.
-
+Absence from work due to quarantine should be registered in the same way as absence due to illness. Working from home is not considered absence.
 </p></b>
 
 You need to register if other reasons than your illness have made you unable to take on jobs or to participate in agreed activities.

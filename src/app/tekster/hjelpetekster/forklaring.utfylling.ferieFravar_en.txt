@@ -1,7 +1,6 @@
 <b><p style="color:#ee5522;">
 
-If you are unable to work or participate in activities due to contagion or as a result of measures to prevent contagion, this will not be deducted from your benefits. Therefore, do not register this as absence.
-
+If you are unable to work or participate in activities due to contagion or as a result of contagion-preventing measures, this will not be deducted from your benefits. Therefore, do not register this as absence.
 </p></b>
 You need to register if other reasons than your illness have made you unable to take on jobs.
 <br>
