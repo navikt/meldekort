@@ -1,7 +1,12 @@
+<b><p style="color:#ee5522;">
+
+If you work from home, register your hours like you normally would. If you are absent from work due to quarantine, but still receive payment, register the hours that you should have worked.
+
+</p></b>
 You must register the hours you have been working, both paid und unpaid, even if you are self-employed. This applies to all days of the week, including Saturday and Sunday, regardless if it is day, evening or night.
 <br>
 <br>
-The exception is if you are paid for a higher number of hours than you have actually worked. You then need to register the amount of hours you are paid for. 
+The exception is if you are paid for a higher number of hours than you have actually worked. You then need to register the amount of hours you are paid for.
 <br>
 <br>
 If you work a specific percentage, convert it to hours. A full time job is normally 37,5 hours per week.
@@ -15,6 +20,6 @@ If you work shifts, you register the average of hours per shift for the term.
 <br>
 Please contact NAV if you
 <ul>
-<li> are unsure how many hours to register </li> 
+<li> are unsure how many hours to register </li>
 <li> participate in part-time employment schemes or measures where you receive payment </li>
 <ul>

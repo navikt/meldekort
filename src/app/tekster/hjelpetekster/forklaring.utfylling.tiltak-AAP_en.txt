@@ -1,4 +1,10 @@
-You need to register the days you have participated in activities you and NAV have agreed on. 
+<b><p style="color:#ee5522;">
+
+Register the days you should have participated in activities.
+
+</p></b>
+
+You need to register the days you have participated in activities you and NAV have agreed on.
 <br>
 This includes
 <ul>

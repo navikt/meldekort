@@ -1,3 +1,9 @@
+<b><p style="color:#ee5522;">
+
+Har du hjemmekontor og jobber, skal du føre opp arbeid på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du føre opp de timene du skulle ha jobbet.
+
+</p></b>
+
 Du skal registrere alle timene du har jobbet, både lønnet og ulønnet, også i egen næringsvirksomhet. Dette gjelder alle dager i uken, også lørdag og søndag, uansett når på døgnet du jobber.
 <br>
 <br>
@@ -10,6 +16,7 @@ Hvis du har en prosentstilling, må du regne den om til timer. Full stilling er 
 Jobber du akkurat 50 prosent, skal du registrere 18,5 timer den ene uken og 19 timer den andre uken.
 <br>
 <br>
+
 Hvis du jobber turnus eller skift, skal du registrere et gjennomsnitt for turnusperioden.
 <br>
 <br>

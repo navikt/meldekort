@@ -1,4 +1,10 @@
-Du skal føre opp dager du har deltatt på tiltak, kurs eller utdanning som du har avtalt med NAV. 
+<b><p style="color:#ee5522;">
+
+Meld fra de dagene du skulle vært på kurs.
+
+</p></b>
+
+Du skal føre opp dager du har deltatt på tiltak, kurs eller utdanning som du har avtalt med NAV.
 <br>
 <br>
 Du skal føre opp dager du er på kurs, tar utdanning eller driver med selvstudium som ikke er avtalt med NAV.

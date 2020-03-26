@@ -1,4 +1,9 @@
-Du skal registrere de dagene du har vært forhindret fra å ta arbeid på grunn av egen sykdom. 
+<b><p style="color:#ee5522;">
+
+Du skal ikke skal føre sykdom med mindre du er sykmeldt og skal ha sykepenger.
+
+</p></b>
+Du skal registrere de dagene du har vært forhindret fra å ta arbeid på grunn av egen sykdom.
 <br>
 <br>
-Du skal registrere de dagene du har vært for syk til å delta på tiltak, kurs eller utdanning du har avtalt med NAV. 
+Du skal registrere de dagene du har vært for syk til å delta på tiltak, kurs eller utdanning du har avtalt med NAV.

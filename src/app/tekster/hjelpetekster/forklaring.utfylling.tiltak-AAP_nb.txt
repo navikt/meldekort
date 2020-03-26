@@ -1,7 +1,12 @@
-Du skal registrere alle de dagene du har gjennomført aktivitet som du har avtalt med NAV. 
+<b><p style="color:#ee5522;">
+
+meld ja de dagene du skulle ha vært på tiltak.
+
+</p></b>
+Du skal registrere alle de dagene du har gjennomført aktivitet som du har avtalt med NAV.
 <br>
 <br>
-Med aktivitet mener vi 
+Med aktivitet mener vi
 <ul>
 <li> arbeidsrettede tiltak </li>
 <li> medisinsk behandling  </li>

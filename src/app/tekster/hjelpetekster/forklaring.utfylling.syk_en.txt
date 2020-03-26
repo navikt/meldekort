@@ -1,3 +1,9 @@
+<b><p style="color:#ee5522;">
+
+Do not register illness unless you are on sick leave and receive illness benefits.
+
+</p></b>
+
 You need to register the days you have unable to take on work due to illness.
 <br>
 <br>
