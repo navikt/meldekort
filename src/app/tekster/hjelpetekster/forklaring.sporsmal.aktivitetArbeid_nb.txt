@@ -2,7 +2,7 @@ Du skal svare <strong>Ja</strong> hvis du har deltatt på tiltak, kurs eller utd
 <br><br>
 <b><p style="color:#ee5522;">
 
-Du skal registrere de dagene du skulle ha vært på tiltak, men ikke kunne delta grunnet smitte eller smittevern.
+Du skal registrere de dagene du skulle har vært på tiltak eller kurs/utdanning, men ikke kunne delta på grunn av smitte eller av hensyn til smittevern
 
 </b></p>
 <br>

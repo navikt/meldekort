@@ -2,7 +2,9 @@ Du skal svare <strong>Ja</strong> hvis det er andre grunner enn egen sykdom til 
 <br><br>
 <b><p style="color:#ee5522;">
 
-Du skal svare Nei om du ikke kan jobbe eller delta på aktiviteter som følge av smitte eller av hensyn til smittevern.
+Du skal svare Nei om du ikke kan jobbe eller delta på aktiviteter på grunn av smitte
+eller av hensyn til smittevern.
+
 </b></p>
 <br>
 Du skal også svare <strong>Ja</strong> hvis du ikke ønsker å være tilgjengelig for arbeidsmarkedet eller NAV på dager uten planlagt aktivitet.
