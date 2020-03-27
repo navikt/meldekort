@@ -34,6 +34,7 @@ import { selectFeilmelding } from '../../../selectors/ui';
 import { BaksystemFeilmelding } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
 import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
+import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -290,6 +291,11 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         this.props.innsending.innsendingstype
       ) ? (
         <main>
+          <NAVChatBot
+            customerKey="41155"
+            queueKey="Q_CHAT_BOT"
+            configId="599f9e7c-7f6b-4569-81a1-27202c419953"
+          />
           {this.props.baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
           ) : null}
