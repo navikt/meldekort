@@ -5,6 +5,7 @@
   "homepage": "/meldekort",
   "dependencies": {
     "@craco/craco": "^5.2.1",
+    "@navikt/nav-chatbot": "^1.2.1",
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/node": "^10.12.18",

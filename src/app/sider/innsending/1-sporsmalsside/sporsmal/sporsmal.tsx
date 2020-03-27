@@ -5,6 +5,7 @@ import { RadioPanelGruppe } from 'nav-frontend-skjema';
 import { hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
+import NAVChatBot from '@navikt/nav-chatbot';
 
 interface SporsmalProps {
   sporsmalsobjekt: Spm;
@@ -27,6 +28,11 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
             <FormattedMessage id={'korrigering.registrert.merknad'} />
           ) : null}
         </Undertittel>
+        <NAVChatBot
+          customerKey="41155"
+          queueKey="Q_CHAT_BOT"
+          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
+        />
         <>
           <UtvidetInformasjon>
             <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
