@@ -2,7 +2,7 @@ Du skal svare <strong>Ja</strong> hvis du har gjennomført den aktiviteten du ha
 <br><br>
 <b><p style="color:#ee5522;">
 
-Du skal svare Ja og registrere de dagene du skulle ha vært på tiltak, men ikke kunne delta grunnet smitte eller smittevern.
+Du skal svare Ja og registrere de dagene du skulle ha vært på tiltak, men ikke kunne delta på grunn av smitte eller smittevern.
 
 </b></p>
 <br>
