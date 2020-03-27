@@ -1,5 +1,10 @@
-Click <strong>Yes </strong>if other reasons than your own illness have made you unable to take on work or participate in agreed activities. 
-<br>
+Click <strong>Yes </strong>if other reasons than your own illness have made you unable to take on work or participate in agreed activities.
+<br><br>
+<b><p style="color:#ee5522;">
+
+Absence from work due to quarantine should be registered in the same way as absence due to illness. Working from home is not considered absence.
+
+<b></p>
 <br>
 This applies e.g. to Holidays. This also applies if you stay abroad without NAVs approval.
 If you are a national of an EU/EEA-country and you have a temporary residence in another EU/EEA- country, you will not need approval by NAV.
@@ -11,7 +16,7 @@ Click <strong>Yes</strong> if you wish to be unavailable for NAV or for taking o
 Absence will as a rule reduce benefits.
 <br>
 <br>
-NAV can consider whether you may still receive the benefit. Please contact NAV on the first day of absence. 
+NAV can consider whether you may still receive the benefit. Please contact NAV on the first day of absence.
 <br>
 <br>
 NAV can determine whether you may continue to receive benefits, if your absence is due to special personal reasons. Contact NAV the first day of absence.

@@ -1,1 +1,8 @@
-Du skal svare <strong>Ja</strong> hvis du har vært i arbeid. Det gjelder både lønnet og ulønnet arbeid.<br><br>Det gjelder arbeid som <ul><li> arbeidstaker </li><li> oppdragstaker </li> <li> mottaker av omsorgslønn </li> <li> arbeid i egen næringsvirksomhet  </li> </ul> <br> Dette gjelder alle dager i uken, også lørdag og søndag, uansett når på døgnet du jobber. <br><br>Hvis du jobber turnus eller skift, skal du registrere et gjennomsnitt for turnusperioden. Ta kontakt med NAV.<br><br>Til deg som får dagpenger:  Det gjelder egne regler for ulønnet arbeid av hobbypreget eller sosial karakter. Kontakt NAV om dette.<br><br>I noen tiltak får du lønn. Avtal med  NAV om du skal krysse av for arbeid og hvilke timer du skal føre opp.<br><br>Du skal svare <strong>Nei</strong> hvis du ikke har vært i arbeid.
+Du skal svare <strong>Ja</strong> hvis du har vært i arbeid. Det gjelder både lønnet og ulønnet arbeid.
+<br><br>
+<b><p style="color:#ee5522;">
+
+Har du hjemmekontor og jobber, skal du føre opp arbeid på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du føre opp de timene du skulle ha jobbet.
+</b></p>
+<br>
+Det gjelder arbeid som <ul><li> arbeidstaker </li><li> oppdragstaker </li> <li> mottaker av omsorgslønn </li> <li> arbeid i egen næringsvirksomhet  </li> </ul> <br> Dette gjelder alle dager i uken, også lørdag og søndag, uansett når på døgnet du jobber. <br><br>Hvis du jobber turnus eller skift, skal du registrere et gjennomsnitt for turnusperioden. Ta kontakt med NAV.<br><br>Til deg som får dagpenger:  Det gjelder egne regler for ulønnet arbeid av hobbypreget eller sosial karakter. Kontakt NAV om dette.<br><br>I noen tiltak får du lønn. Avtal med  NAV om du skal krysse av for arbeid og hvilke timer du skal føre opp.<br><br>Du skal svare <strong>Nei</strong> hvis du ikke har vært i arbeid.

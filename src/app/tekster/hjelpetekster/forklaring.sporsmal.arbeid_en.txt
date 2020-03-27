@@ -1,12 +1,17 @@
 Click <strong>Yes</strong> if you have worked. Work includes both paid and unpaid labour.
-<br>
+<br><br>
+<b><p style="color:#ee5522;">
+
+If you work from home, register your hours like you normally would. If you are absent from work due to quarantine, but still receive payment, register the hours that you should have worked.
+
+<b></p>
 <br>
 This includes work as
 <ul>
-<li> employee </li> 
+<li> employee </li>
 <li> contactor </li>
 <li> Recipient of cash benefits for care </li>
-<li> self-employed </li> 
+<li> self-employed </li>
  </ul>
 This applies to all days of the week, including Saturday and Sunday, regardless if it is day, evening or night.
 <br>
@@ -17,7 +22,7 @@ If you work shifts, you register the average of hours per shift for the term.
 Do you receive unemployment benefits? Be aware that separate rules apply for unpaid labour of social or hobby-like nature.
 <br>
 <br>
-In some employment schemes you receive payment. You and NAV must then agree upon which hours you should register. 
+In some employment schemes you receive payment. You and NAV must then agree upon which hours you should register.
 <br>
 <br>
 Click <strong>No</strong> if you have not been working.
