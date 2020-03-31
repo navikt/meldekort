@@ -32,6 +32,7 @@ import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
+import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -196,6 +197,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     });
     return (
       <div className="sideinnhold innhold-detaljer">
+        <NAVChatBot
+          customerKey="41155"
+          queueKey="Q_CHAT_BOT"
+          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
+        />
         {this.innhold()}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className={knappeKlasser}>
