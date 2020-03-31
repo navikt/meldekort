@@ -1,5 +1,9 @@
 Click <strong>Yes</strong> if you have participated in activities you and NAV agreed on.
-<br>
+<br><br>
+<b><p style="color:#ee5522;">
+
+Tick Yes and register the days you should have participated in activities, but were unable to participate due to contagion or contagion-preventing measures.
+<b></p>
 <br>
 This includes
 <ul>

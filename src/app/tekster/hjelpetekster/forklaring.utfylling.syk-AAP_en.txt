@@ -1,5 +1,8 @@
 You need to register the days you have unable to take on work or perform an agreed activity due to illness.
 <br>
+<b><p style="color:#ee5522;">
+Absence from work due to quarantine should be registered in the same way as sick leave. This does not apply when working from home.
+</b></p>
 <br>
 This applies to days you have been too ill to participate in
 <ul>
