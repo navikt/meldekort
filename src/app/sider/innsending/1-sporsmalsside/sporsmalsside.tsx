@@ -375,7 +375,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             svg={<img alt="Veilder" src={veileder} />}
           >
             <div className="item">
-              <FormattedMessage id="sporsmal.lesVeiledning" />
+              <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
             </div>
             <div className="item">
               <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
