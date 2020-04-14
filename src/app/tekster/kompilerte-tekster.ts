@@ -277,7 +277,7 @@
     'sporsmal.ingenMeldekortASende':
       'Det er ingen tilgjengelige meldekort å sende inn ',
     'sporsmal.lesVeiledning':
-      'Du må lese veiledningstekstene før du fyller ut feltene i meldekortet. Du finner dem ved å klikke på "Les mer" under hvert spørsmål. ',
+      'Du må lese veiledningstekstene før du fyller ut feltene i meldekortet. Du finner dem ved å klikke på "Les mer" under hvert spørsmål. <br><br> Det er en del endringer for hvordan du skal føre arbeid, aktivitet og fravær på ifm. koronasituasjonen. Mer informasjon finner du <a target="_blank" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">her</a>. <br><br> Se også informasjon i veiledningstekstene markert med rød skrift. ',
     'sporsmal.registrertMerknad':
       'Merk: Hvis du svarer <strong>Nei</strong> vil du ikke lenger få bistand eller utbetalinger fra NAV ',
     'sporsmal.registrert':
@@ -651,7 +651,7 @@
     'sporsmal.ingenMeldekortASende':
       'There are no available employment status form to send. ',
     'sporsmal.lesVeiledning':
-      'You must read the guidance notes before filling out the fields in the employment status form. You will find these by clicking "Read more" under each question. ',
+      'You must read the guidance notes before filling out the fields in the employment status form. You will find these by clicking "Read more" under each question. <br><br> Due to the situation with corona, there have been some changes to how you should register work, activity and absence. More information is available <a target="_blank" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">here (norwegian only)</a>. <br><br> ',
     'sporsmal.registrertMerknad':
       'Note: If you click <strong>No</strong>, you will no longer receive assistance or benefits. ',
     'sporsmal.registrert':
