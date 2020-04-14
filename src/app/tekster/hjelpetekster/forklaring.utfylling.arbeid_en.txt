@@ -1,6 +1,8 @@
 <b><p style="color:#ee5522;">
 
 If you work from home, register your hours like you normally would. If you are absent from work due to quarantine, but still receive payment, register the hours that you should have worked.
+<br><br>
+If you receive unemployment benefits and work within agriculture, forestry or plant nursery, register only half the hours spent working on this. More information on what types of work are included is available <a target="_blank" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">here (norwegian only)</a>
 </p></b>
 You must register the hours you have been working, both paid und unpaid, even if you are self-employed. This applies to all days of the week, including Saturday and Sunday, regardless if it is day, evening or night.
 <br>
@@ -15,8 +17,9 @@ If you work exactly 50 percent, you register 18,5 hours one week, and 19 hours t
 <br>
 <br>
 If you work shifts, you register the average of hours per shift for the term.
-<br>
-<br>
+<br><br>
+If you receive payment in kind, such as free phone service, newspaper etc., do not calculate this into hours to be registered in the form. Payment in kind will not influence the amount of the unemployment benefit you receive.
+<br><br>
 Please contact NAV if you
 <ul>
 <li> are unsure how many hours to register </li>

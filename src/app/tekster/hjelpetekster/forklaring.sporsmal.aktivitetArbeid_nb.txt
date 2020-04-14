@@ -2,8 +2,7 @@ Du skal svare <strong>Ja</strong> hvis du har deltatt på tiltak, kurs eller utd
 <br><br>
 <b><p style="color:#ee5522;">
 
-Du skal registrere de dagene du skulle ha vært på tiltak eller kurs/utdanning, men ikke kunne delta på grunn av smitte eller av hensyn til smittevern
-
+Du skal registrere de dagene du skulle ha vært på tiltak eller kurs/utdanning, men ikke kunne delta på grunn av smitte eller av hensyn til smittevern.
 </b></p>
 <br>
 Du skal svare <strong>Ja</strong>, hvis NAV har godkjent at du får dagpenger mens du tar utdanning.<br><br> Du skal også svare <strong>Ja</strong> hvis du har tatt kurs/utdanning du ikke har avtalt med NAV. Dette gjelder også selvstudium.<br><br>  Du skal svare <strong>Nei</strong> hvis du ikke har deltatt på tiltak, kurs eller utdanning.

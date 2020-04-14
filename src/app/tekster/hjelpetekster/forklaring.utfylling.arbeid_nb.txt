@@ -1,6 +1,8 @@
 <b><p style="color:#ee5522;">
 
 Har du hjemmekontor og jobber, skal du registrere timer på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du registrere de timene du skulle ha jobbet.
+<br><br>
+Dersom du mottar dagpenger og tar jobb innenfor jordbruk, skogbruk og gartneri skal du kun føre halvparten av timene du har arbeidet med dette på meldekortet. Mer informasjon om hvilken type jobb innenfor landbruk, skogbruk og gartneri som omfattes finner du <a target="_blank" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">her</a>.
 </p></b>
 
 Du skal registrere alle timene du har jobbet, både lønnet og ulønnet, også i egen næringsvirksomhet. Dette gjelder alle dager i uken, også lørdag og søndag, uansett når på døgnet du jobber.
@@ -17,8 +19,9 @@ Jobber du akkurat 50 prosent, skal du registrere 18,5 timer den ene uken og 19 t
 <br>
 
 Hvis du jobber turnus eller skift, skal du registrere et gjennomsnitt for turnusperioden.
-<br>
-<br>
+<br><br>
+Dersom du mottar naturalytelser, som fri telefon, avis m.m., skal disse ikke omregnes til timer som skal føres på meldekortet. Det innebærer at naturalytelser du mottar ikke vil påvirke dagpengene dine.
+<br><br>
 Kontakt NAV hvis du
 <ul>
 <li> er i tvil om hvor mange timer du skal føre opp </li>
