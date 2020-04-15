@@ -372,13 +372,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         <section className="seksjon">
           <Veilederpanel
             kompakt={true}
-            svg={<img alt="Veilder" src={veileder} />}
+            svg={<img alt="Veileder" src={veileder} />}
           >
             <div className="item">
               <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
             </div>
             <div className="item">
-              <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
+              <FormattedHTMLMessage id="sporsmal.ansvarForRiktigUtfylling" />
             </div>
           </Veilederpanel>
         </section>

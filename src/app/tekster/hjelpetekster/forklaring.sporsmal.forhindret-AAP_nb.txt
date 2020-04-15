@@ -1,6 +1,9 @@
 Du skal svare <strong>Ja</strong> hvis du har vært forhindret fra å ta arbeid eller gjennomføre den aktiviteten du har avtalt med NAV fordi du har vært for syk.
-<br>
-<br>
+<br><br>
+<b><p style="color:#ee5522;">
+Fravær fra jobb på grunn av karantene føres på samme måte som sykdom (gjelder ikke ved hjemmekontor).
+</p></b>
+<br><br>
 Med aktivitet mener vi
 <ul>
 <li> arbeid </li>
