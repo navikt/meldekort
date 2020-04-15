@@ -3,7 +3,7 @@ Du skal svare <strong>Ja</strong> hvis du har vært forhindret fra å ta arbeid 
 <b><p style="color:#ee5522;">
 Fravær fra jobb på grunn av karantene føres på samme måte som sykdom (gjelder ikke ved hjemmekontor).
 </p></b>
-<br><br>
+<br>
 Med aktivitet mener vi
 <ul>
 <li> arbeid </li>
