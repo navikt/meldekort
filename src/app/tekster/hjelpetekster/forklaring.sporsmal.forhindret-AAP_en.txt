@@ -1,7 +1,10 @@
 Click <strong>Yes</strong> if you have been prevented from taking work or performing an agreed activity due to illness.
+<br><br>
+<b><p style="color:#ee5522;">
+Absence from work due to quarantine should be registered in the same way as sick leave. This does not apply when working from home.
+</p></b>
 <br>
-<br>
-This applies to 
+This applies to
 <ul>
 <li>employment schemes </li>
 <li>active medical treatment </li>

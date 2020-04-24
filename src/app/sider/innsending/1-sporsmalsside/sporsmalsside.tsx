@@ -34,7 +34,6 @@ import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
-import { counterPagereqSporsmal } from '../../../utils/promjs';
 import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
@@ -360,6 +359,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       innsending.innsendingstype
     ) ? (
       <main>
+        <NAVChatBot
+          customerKey="41155"
+          queueKey="Q_CHAT_BOT"
+          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
+        />
         <section className="seksjon">
           {brukermelding.length > 1 ? (
             <AlertStripe type={'info'}>{brukermelding}</AlertStripe>
@@ -374,13 +378,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         <section className="seksjon">
           <Veilederpanel
             kompakt={true}
-            svg={<img alt="Veilder" src={veileder} />}
+            svg={<img alt="Veileder" src={veileder} />}
           >
             <div className="item">
-              <FormattedMessage id="sporsmal.lesVeiledning" />
+              <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
             </div>
             <div className="item">
-              <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
+              <FormattedHTMLMessage id="sporsmal.ansvarForRiktigUtfylling" />
             </div>
           </Veilederpanel>
         </section>
