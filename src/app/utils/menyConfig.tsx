@@ -1,7 +1,6 @@
 import SendMeldekort from '../sider/sendMeldekort/sendMeldekort';
 import TidligereMeldekort from '../sider/tidligereMeldekort/tidligereMeldekort';
 import EtterregistrerMeldekort from '../sider/etterregistrerMeldekort/etterregistrerMeldekort';
-import EndreMeldeform from '../sider/endreMeldeform/endreMeldeform';
 import OmMeldekort from '../sider/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from '../sider/ofteStilteSporsmal/ofteStilteSporsmal';
 import { ComponentClass } from 'react';
@@ -36,13 +35,6 @@ const menyConfig: MenyPunkt[] = [
     tekstid: 'sekundarmeny.etterregistrer',
     tittel: 'etterregistrering',
     urlparam: '/etterregistrer-meldekort',
-    disabled: true,
-  },
-  {
-    component: EndreMeldeform,
-    tekstid: 'sekundarmeny.endreMeldeform',
-    tittel: 'endreMeldeform',
-    urlparam: '/endre-meldeform',
     disabled: true,
   },
   {

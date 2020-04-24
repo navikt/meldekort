@@ -47,8 +47,6 @@ import meldekortEpics from '../epics/meldekortEpics';
 import { Person } from '../types/person';
 import { MenyState } from '../types/meny';
 import menyReducer from '../reducers/menyReducer';
-import meldeformReducer, { MeldeformState } from '../reducers/meldeformReducer';
-import meldeformEpics from '../epics/meldeformEpics';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, MeldekortState } from '../types/meldekort';
@@ -85,7 +83,6 @@ export interface RootState {
   aktivtMeldekort: Meldekort;
   historiskeMeldekort: HistoriskeMeldekortState;
   innsending: InnsendingState;
-  meldeform: MeldeformState;
   meny: MenyState;
   ui: UIState;
   meldekort: MeldekortState;
@@ -106,7 +103,6 @@ const appReducer = combineReducers({
   historiskeMeldekort: historiskeMeldekortReducer,
   innsending: innsendingReducer,
   meny: menyReducer,
-  meldeform: meldeformReducer,
   ui: uiReducer,
   meldekort: meldekortReducer,
   weblogic: weblogicReducer,
@@ -175,7 +171,6 @@ epicMiddleware.run(
     innsendingEpics,
     meldekortdetaljerEpics,
     meldekortEpics,
-    meldeformEpics,
     weblogicEpics
   )
 );

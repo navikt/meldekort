@@ -10,7 +10,6 @@ import { HistoriskeMeldekortActions } from '../actions/historiskeMeldekort';
 import { InnsendingActions } from '../actions/innsending';
 import { isActionOf } from 'typesafe-actions';
 import { loggInnContent } from '../components/modal/loggInnContent';
-import { MeldeformActions } from '../actions/meldeform';
 import { MeldekortActions } from '../actions/meldekort';
 import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 import { obsFeilmeldingContent } from '../components/feil/obsFeilmeldingContent';
@@ -80,7 +79,6 @@ const fjernFeilmelding: AppEpic = action$ =>
         HistoriskeMeldekortActions.hentHistoriskeMeldekort.success,
         InnsendingActions.hentKorrigertId.success,
         InnsendingActions.kontrollerMeldekort.success,
-        MeldeformActions.endreMeldeform.success,
         MeldekortdetaljerActions.hentMeldekortdetaljer.success,
         PersonActions.hentPerson.success,
         PersonStatusActions.hentPersonStatus.success,

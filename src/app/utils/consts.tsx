@@ -6,7 +6,6 @@ export const Konstanter = () => {
     hentPersonInfoApiUri: 'person/info',
     hentMeldekortApiUri: 'person/meldekort',
     sendMeldekortApiUri: 'person/meldekort',
-    sendMeldeformApiUri: 'person/meldeform',
     hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
     hentInfomelding: 'meldekort/infomelding',
     pingWeblogic: 'weblogic/ping',

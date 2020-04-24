@@ -1,13 +1,7 @@
 import Environment from '../utils/env';
 import { Konstanter } from '../utils/consts';
 import { erMock } from '../mock/utils';
-import {
-  MeldeformDetaljerInn,
-  Meldeperiode,
-  Person,
-  PersonInfo,
-  PersonStatus,
-} from '../types/person';
+import { Person, PersonInfo, PersonStatus } from '../types/person';
 import { prefferedAxios } from '../types/fetch';
 import {
   Infomelding,
@@ -84,12 +78,6 @@ export function postMeldekort(
   meldekortdetaljer: MeldekortdetaljerInnsending
 ): Promise<ValideringsResultat> {
   return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
-}
-
-export function postEndreMeldeform(
-  meldeformdetaljer: MeldeformDetaljerInn
-): Promise<Meldeperiode> {
-  return fetchPost(Konstanter().sendMeldeformApiUri, meldeformdetaljer);
 }
 
 function addIdToUrlIfNotMock(url: string, id: number): string {
