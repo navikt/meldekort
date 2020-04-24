@@ -3,7 +3,7 @@ import HovedMeny from '../meny/desktop/hovedmeny';
 import MobilMeny from '../meny/mobil/mobilMeny';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { MeldeForm, Person } from '../../types/person';
+import { Person } from '../../types/person';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyState } from '../../types/meny';
@@ -47,9 +47,8 @@ class Header extends React.Component<HeaderProps> {
   ): void {
     const { person } = this.props;
     if (
-      person.meldeform !== prevProps.person.meldeform ||
       person.etterregistrerteMeldekort !==
-        prevProps.person.etterregistrerteMeldekort
+      prevProps.person.etterregistrerteMeldekort
     ) {
       this.oppdatertMeny();
     }
@@ -58,9 +57,7 @@ class Header extends React.Component<HeaderProps> {
   oppdatertMeny = () => {
     const { meny, person } = this.props;
     const oppdatertMeny = meny.alleMenyPunkter.map(menypunkt => {
-      if (menypunkt.tittel === 'endreMeldeform') {
-        return { ...menypunkt, disabled: person.meldeform !== MeldeForm.PAPIR };
-      } else if (menypunkt.tittel === 'etterregistrering') {
+      if (menypunkt.tittel === 'etterregistrering') {
         return {
           ...menypunkt,
           disabled: isEmpty(person.etterregistrerteMeldekort),

@@ -6,7 +6,6 @@ import meldekortdetaljer from './responses/meldekortdetaljer.json';
 import personstatus from './responses/personstatus.json';
 import korrigertid from './responses/korrigertid.json';
 import valideringsresultat from './responses/valideringsresultat.json';
-import meldeperiode from './responses/meldeperiode.json';
 import personinfo from './responses/personinfo.json';
 import infomelding from './responses/infomelding.json';
 import pingWeblogicJson from './responses/pingWeblogic.json';
@@ -54,9 +53,5 @@ export default () => {
 
   mock.onPost(apiUrl + Konstanter().sendMeldekortApiUri).reply(200, {
     ...valideringsresultat,
-  });
-
-  mock.onPost(apiUrl + Konstanter().sendMeldeformApiUri).reply(200, {
-    ...meldeperiode,
   });
 };

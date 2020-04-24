@@ -25,10 +25,6 @@ export interface PersonStatus {
   statusYtelse: string;
 }
 
-export interface MeldeformDetaljerInn {
-  meldeformNavn: string;
-}
-
 export interface Meldeperiode {
   id: string;
   meldeperiodeNavn: string;

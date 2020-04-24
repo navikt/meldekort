@@ -74,9 +74,6 @@ class OmMeldekort extends React.Component<
               <li>
                 <FormattedMessage id="genereltOmMeldekort.valg.tidligere" />
               </li>
-              <li>
-                <FormattedMessage id="genereltOmMeldekort.valg.endre" />
-              </li>
             </ul>
             <Normaltekst>
               <FormattedHTMLMessage
