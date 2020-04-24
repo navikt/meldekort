@@ -34,7 +34,7 @@ import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
-import { counterPagereqSporsmal } from '../../../utils/promjs';
+import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -344,9 +344,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   }
 
   render() {
-    counterPagereqSporsmal.inc();
-    console.log(counterPagereqSporsmal.get());
-
     const {
       innsending,
       aktivtMeldekort,
