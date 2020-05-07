@@ -246,7 +246,7 @@ class Utfyllingsside extends React.Component<
     let resultat =
       arbeidet && kurs && syk && ferie && feilITimer && feilIVertikal;
     if (!resultat) {
-      scrollTilElement('feilmelding');
+      scrollTilElement('periodebanner');
     }
     return resultat;
   };
