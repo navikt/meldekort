@@ -1,6 +1,7 @@
 export function scrollTilElement(
   elementid?: string,
-  oppforsel: ScrollBehavior = 'smooth'
+  oppforsel: ScrollBehavior = 'smooth',
+  deltaY: number = 0
 ) {
   let elementPos = 0;
 
@@ -8,6 +9,10 @@ export function scrollTilElement(
     elementPos =
       document.getElementById(elementid)!.getBoundingClientRect().top +
       window.scrollY;
+  }
+
+  if (typeof deltaY !== 'undefined') {
+    elementPos += deltaY;
   }
 
   try {
