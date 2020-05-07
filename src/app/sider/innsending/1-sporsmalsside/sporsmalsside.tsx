@@ -136,7 +136,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const resultat =
       arbeidet && kurs && syk && ferie && registrert && !begrunnelseValgt;
     if (!resultat) {
-      scrollTilElement('periodebanner');
+      scrollTilElement('feilmelding');
       return resultat;
     }
 
