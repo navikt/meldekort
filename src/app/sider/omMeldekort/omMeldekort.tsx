@@ -15,6 +15,7 @@ import { Router } from '../../types/router';
 import { RootState } from '../../store/configureStore';
 import { selectRouter } from '../../selectors/router';
 import NAVChatBot from '@navikt/nav-chatbot';
+import { scrollTilElement } from '../../utils/scroll';
 
 interface MapStateToProps {
   router: Router;
@@ -31,6 +32,7 @@ class OmMeldekort extends React.Component<
   any
 > {
   componentDidMount() {
+    scrollTilElement(undefined, 'auto');
     const { resetInnsending, meny, settValgtMenyPunkt } = this.props;
     resetInnsending();
     const valgtMenyPunkt = meny.alleMenyPunkter.find(

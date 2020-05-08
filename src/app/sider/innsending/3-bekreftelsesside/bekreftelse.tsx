@@ -229,7 +229,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       this.setState({
         feilmelding: hentIntl().formatMessage({ id: 'utfylling.bekreft.feil' }),
       });
-      scrollTilElement('feilmelding');
+      scrollTilElement('periodebanner');
     } else {
       this.setState({ senderMeldekort: true });
       let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
