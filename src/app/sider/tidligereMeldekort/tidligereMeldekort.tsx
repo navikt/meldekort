@@ -39,6 +39,7 @@ import { WeblogicActions } from '../../actions/weblogic';
 import { WeblogicPing } from '../../types/weblogic';
 import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 import NAVChatBot from '@navikt/nav-chatbot';
+import { scrollTilElement } from '../../utils/scroll';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -180,6 +181,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     });
 
   componentDidMount() {
+    scrollTilElement(undefined, 'auto');
     this.props.resetInnsending();
     this.props.pingWeblogic();
     if (this.props.weblogic.erWeblogicOppe) {
