@@ -1,0 +1,36 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: meldekort-frontend
+  namespace: ##NAMESPACE##
+  labels:
+    team: meldekort
+spec:
+  image: repo.adeo.no:5443/meldeplikt/meldekort:##RELEASE_VERSION##
+  port: 8080
+  ingresses:
+    - https://meldekort##URL_NAMESPACE##.nais.##DOMAIN_NAME##
+    - https://www##URL_NAMESPACE##.nav.no/meldekort
+    - https://meldekort##URL_NAMESPACE##.##CLUSTER##.nais.io
+  liveness:
+    path: /meldekort/internal/isAlive
+    initialDelay: 10
+  readiness:
+    path: /meldekort/internal/isReady
+    initialDelay: 10
+  prometheus:
+    enabled: true
+    path: meldekort/internal/metrics
+  vault:
+    enabled: true
+  replicas:
+    min: 2
+    max: 4
+  webproxy: true
+  resources:
+    limits:
+      cpu: '3'
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 768Mi
