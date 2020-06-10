@@ -456,7 +456,7 @@
       'For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Velg Registrer deg som arbeidssøker fra Ditt NAV hvis du vil registrere deg. ',
     'innlogget.tekst': 'Logged in: ',
     'korriger.begrunnelse.valg':
-      'Wrong amount of work hours,Forgotten to register activity,Illness,Staying abroad,Wrong other absence,Compensation,Other ',
+      'Wrong amount of work hours,Forgotten to register activity,Illness,Staying abroad,Wrong other absence,Wage compensation,Other ',
     'korriger.meldekort': 'Correct the form ',
     'korrigering.registrert.merknad': 'You cannot change this answer. ',
     'korrigering.sporsmal.begrunnelse':

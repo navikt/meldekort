@@ -1,1 +1,1 @@
-Wrong amount of work hours,Forgotten to register activity,Illness,Staying abroad,Wrong other absence,Compensation,Other
+Wrong amount of work hours,Forgotten to register activity,Illness,Staying abroad,Wrong other absence,Wage compensation,Other
