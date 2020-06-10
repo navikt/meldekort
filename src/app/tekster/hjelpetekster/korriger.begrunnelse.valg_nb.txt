@@ -1,1 +1,1 @@
-Feil i antall arbeidstimer,Glemt å registrere aktivitet,Sykdom,Utenlandsopphold,Feil annet fravær,Annet
+Feil i antall arbeidstimer,Glemt å registrere aktivitet,Sykdom,Utenlandsopphold,Feil annet fravær,Lønnskompensasjon,Annet
