@@ -102,7 +102,7 @@
       'For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Velg Registrer deg som arbeidssøker fra Ditt NAV hvis du vil registrere deg. ',
     'innlogget.tekst': 'Innlogget: ',
     'korriger.begrunnelse.valg':
-      'Feil i antall arbeidstimer,Glemt å registrere aktivitet,Sykdom,Utenlandsopphold,Feil annet fravær,Annet ',
+      'Feil i antall arbeidstimer,Glemt å registrere aktivitet,Sykdom,Utenlandsopphold,Feil annet fravær,Lønnskompensasjon,Annet ',
     'korriger.meldekort': 'Korriger meldekortet ',
     'korrigering.registrert.merknad': 'Du kan ikke endre dette svaret. ',
     'korrigering.sporsmal.begrunnelse':
@@ -456,7 +456,7 @@
       'For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Velg Registrer deg som arbeidssøker fra Ditt NAV hvis du vil registrere deg. ',
     'innlogget.tekst': 'Logged in: ',
     'korriger.begrunnelse.valg':
-      'Wrong amount of work hours,Forgotten to register activity,Illness,Staying abroad,Wrong other absence,Other ',
+      'Wrong amount of work hours,Forgotten to register activity,Illness,Staying abroad,Wrong other absence,Salary loss compensation,Other ',
     'korriger.meldekort': 'Correct the form ',
     'korrigering.registrert.merknad': 'You cannot change this answer. ',
     'korrigering.sporsmal.begrunnelse':
