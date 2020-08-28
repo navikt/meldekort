@@ -37,7 +37,6 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   router: Router;
@@ -318,11 +317,6 @@ class Kvittering extends React.Component<KvitteringsProps> {
 
     return this.props.personInfo.personId !== 0 ? (
       <main>
-        <NAVChatBot
-          customerKey="41155"
-          queueKey="Q_CHAT_BOT"
-          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
-        />
         {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
