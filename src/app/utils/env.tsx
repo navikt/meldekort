@@ -6,7 +6,9 @@ const Environment = () => {
     return {
       dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
       apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
+      loginUrl:
+        'https://loginservice-b2clogin-sbs.dev.nav.no/login?level=Level3',
+      // loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
     };
   } else if (window.location.hostname.indexOf('www-q1.nav.no') > -1) {
