@@ -8,7 +8,6 @@ CMD ["npm", "run", "server"]
 
 EXPOSE 8080
 
-#FROM navikt/pus-decorator
 FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator
 ENV APPLICATION_NAME=meldekort
 # ENV NAV_DEKORATOREN_URL=https://www-q1.nav.no
