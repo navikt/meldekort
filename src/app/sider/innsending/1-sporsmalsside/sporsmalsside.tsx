@@ -34,7 +34,6 @@ import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
-import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -359,11 +358,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       innsending.innsendingstype
     ) ? (
       <main>
-        <NAVChatBot
-          customerKey="41155"
-          queueKey="Q_CHAT_BOT"
-          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
-        />
         <section className="seksjon">
           {brukermelding.length > 1 ? (
             <AlertStripe type={'info'}>{brukermelding}</AlertStripe>

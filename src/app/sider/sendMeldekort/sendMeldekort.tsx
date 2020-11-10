@@ -26,7 +26,6 @@ import {
 import { useEffect } from 'react';
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
-import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   person: Person;
@@ -114,12 +113,6 @@ function SendMeldekort({
 
   return !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <main className="sideinnhold">
-      <NAVChatBot
-        customerKey="41155"
-        queueKey="Q_CHAT_BOT"
-        configId="599f9e7c-7f6b-4569-81a1-27202c419953"
-      />
-
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
           {' '}

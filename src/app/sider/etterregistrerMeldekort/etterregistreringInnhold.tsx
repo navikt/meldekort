@@ -8,7 +8,6 @@ import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortRad } from '../../types/meldekort';
 import { Router } from '../../types/router';
-import NAVChatBot from '@navikt/nav-chatbot';
 
 interface Props {
   router: Router;
@@ -25,11 +24,6 @@ function EtterregistreringInnhold({
 }: Props) {
   return (
     <main className="sideinnhold">
-      <NAVChatBot
-        customerKey="41155"
-        queueKey="Q_CHAT_BOT"
-        configId="599f9e7c-7f6b-4569-81a1-27202c419953"
-      />
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel className="seksjon">
           {hentIntl().formatMessage({

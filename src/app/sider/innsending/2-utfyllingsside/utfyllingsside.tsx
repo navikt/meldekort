@@ -32,7 +32,6 @@ import { InnsendingActions } from '../../../actions/innsending';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
 import { FravaerTypeEnum } from '../../../types/meldekort';
-import NAVChatBot from '@navikt/nav-chatbot';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -352,11 +351,6 @@ class Utfyllingsside extends React.Component<
       this.props.innsending.innsendingstype
     ) ? (
       <main>
-        <NAVChatBot
-          customerKey="41155"
-          queueKey="Q_CHAT_BOT"
-          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
-        />
         <section
           id="tittel"
           className="seksjon flex-innhold tittel-sprakvelger"

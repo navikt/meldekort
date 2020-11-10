@@ -9,7 +9,6 @@ import sporrende from '../../ikoner/sporrende.svg';
 import { InnsendingActions } from '../../actions/innsending';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import NAVChatBot from '@navikt/nav-chatbot';
 
 interface SporsmalProps {
   overskriftId: string;
@@ -83,11 +82,6 @@ class OfteStilteSporsmal extends React.Component<
   render() {
     return (
       <main className="sideinnhold">
-        <NAVChatBot
-          customerKey="41155"
-          queueKey="Q_CHAT_BOT"
-          configId="599f9e7c-7f6b-4569-81a1-27202c419953"
-        />
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
             <FormattedMessage id="overskrift.ofteStilteSporsmal" />
