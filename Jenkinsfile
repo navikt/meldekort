@@ -41,6 +41,7 @@ node {
     def slackAlertChannel = '#team-meldeplikt-alerts-dev'
     def vaultKvEnv = "preprod"
     def vaultServiceuserEnv = "dev"
+    def applicationAlias = "meldekort-frontend"
 
     def buildTimestamp = new Date().format("YYYYMMddHHmmss")
 
@@ -112,19 +113,18 @@ node {
             sh "${KUBECTL} config --kubeconfig=${KUBECONFIG_FILE} use-context ${cluster}"
 
             sh "${KUBECTL} apply --kubeconfig=${KUBECONFIG_FILE} -f ${NAISERATOR_YAML_FILE}"
-/*
+
             // Oppdater Vera
             try {
                 // Brukeren som skal registreres som deployer i Vera.
                 def deployer = getBuildUser(DEFAULT_BUILD_USER)
 
-                println("[INFO] Oppdaterer Vera => application=${application}, environment=${namespace}, version=${releaseVersion}, deployedBy=${deployer}")
+                println("[INFO] Oppdaterer Vera => application=${applicationAlias}, environment=${namespace}, version=${releaseVersion}, deployedBy=${deployer}")
 
-                sh "curl -i -s --header \"Content-Type: application/json\" --request POST --data \'{\"environment\": \"${namespace}\",\"application\": \"${application}\",\"version\": \"${releaseVersion}\",\"deployedBy\": \"${deployer}\"}\' ${VERA_UPDATE_URL}"
+                sh "curl -i -s --header \"Content-Type: application/json\" --request POST --data \'{\"environment\": \"${namespace}\",\"application\": \"${applicationAlias}\",\"version\": \"${releaseVersion}\",\"deployedBy\": \"${deployer}\"}\' ${VERA_UPDATE_URL}"
             } catch (e) {
                 println("[ERROR] Feil ved oppdatering av Vera. Exception: " + e)
             }
-*/
         }
 
         stage("Perform release") {
