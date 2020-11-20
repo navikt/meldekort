@@ -112,7 +112,7 @@ node {
             sh "${KUBECTL} config --kubeconfig=${KUBECONFIG_FILE} use-context ${cluster}"
 
             sh "${KUBECTL} apply --kubeconfig=${KUBECONFIG_FILE} -f ${NAISERATOR_YAML_FILE}"
-
+/*
             // Oppdater Vera
             try {
                 // Brukeren som skal registreres som deployer i Vera.
@@ -124,6 +124,7 @@ node {
             } catch (e) {
                 println("[ERROR] Feil ved oppdatering av Vera. Exception: " + e)
             }
+*/
         }
 
         stage("Perform release") {
