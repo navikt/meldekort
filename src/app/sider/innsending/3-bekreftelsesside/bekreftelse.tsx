@@ -34,6 +34,7 @@ import { selectFeilmelding } from '../../../selectors/ui';
 import { BaksystemFeilmelding } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
 import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
+import { PersonInfo } from '../../../types/person';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -41,6 +42,7 @@ interface MapStateToProps {
   person: Person;
   baksystemFeilmelding: BaksystemFeilmelding;
   sendteMeldekort: SendtMeldekort[];
+  personInfo: PersonInfo;
 }
 
 interface MapDispatchToProps {
@@ -77,6 +79,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
+    const { personInfo } = this.props;
     let { aktivtMeldekort, innsending } = this.props;
     let mDet = {
       meldekortdetaljer: {
@@ -84,6 +87,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         meldekortId: this.erInnsendingKorrigering()
           ? innsending.korrigertMeldekortId
           : aktivtMeldekort.meldekortId,
+        fnr: personInfo.fodselsnr,
         meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
         arkivnokkel: '1-ELEKTRONISK',
         kortType: this.erInnsendingKorrigering()
@@ -132,9 +136,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
     let { meldekortdetaljer } = this.state.meldekortdetaljer;
-    let { aktivtMeldekort } = this.props;
+    let { aktivtMeldekort, personInfo } = this.props;
     return {
       meldekortId: meldekortdetaljer.meldekortId,
+      fnr: personInfo.fodselsnr,
       kortType: meldekortdetaljer.kortType,
       kortStatus: aktivtMeldekort.kortStatus,
       meldegruppe: aktivtMeldekort.meldegruppe,
@@ -377,6 +382,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     aktivtMeldekort: state.aktivtMeldekort,
     person: state.person,
+    personInfo: state.personInfo.personInfo,
     baksystemFeilmelding: selectFeilmelding(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
   };
