@@ -143,6 +143,7 @@ export const innsendingTEST: InnsendingState = {
   meldekortdetaljer: {
     id: '',
     meldekortId: 0,
+    fnr: 'xxxxxxxxxxx',
     meldeperiode: '',
     arkivnokkel: '',
     kortType: KortType.KORRIGERT_ELEKTRONISK,

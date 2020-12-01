@@ -24,6 +24,7 @@ export interface SendtMeldekort {
 // hentMeldekortDetaljer
 export interface Meldekortdetaljer {
   id: string;
+  fnr: string;
   meldekortId: number;
   meldeperiode: string;
   arkivnokkel: string;

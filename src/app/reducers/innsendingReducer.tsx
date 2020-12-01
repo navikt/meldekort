@@ -21,6 +21,7 @@ const initialState: InnsendingState = {
   meldekortdetaljer: {
     id: '',
     meldekortId: 0,
+    fnr: '',
     meldeperiode: '',
     arkivnokkel: '',
     kortType: KortType.KORRIGERT_ELEKTRONISK,

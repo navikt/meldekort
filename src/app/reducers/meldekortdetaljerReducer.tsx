@@ -12,6 +12,7 @@ export interface MeldekortdetaljerState {
 const initialState: MeldekortdetaljerState = {
   meldekortdetaljer: {
     id: '',
+    fnr: '',
     meldekortId: 0,
     meldeperiode: '',
     arkivnokkel: '',
