@@ -44,6 +44,7 @@ export interface Meldeperiode {
 
 export interface MeldekortdetaljerInnsending {
   meldekortId: number;
+  fnr: string;
   kortType: KortType;
   kortStatus: KortStatus;
   meldegruppe: Meldegruppe;
