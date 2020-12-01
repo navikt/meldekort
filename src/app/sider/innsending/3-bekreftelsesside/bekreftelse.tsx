@@ -79,8 +79,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
-    const { personInfo } = this.props;
-    let { aktivtMeldekort, innsending } = this.props;
+    let { aktivtMeldekort, innsending, personInfo } = this.props;
     let mDet = {
       meldekortdetaljer: {
         id: '',
