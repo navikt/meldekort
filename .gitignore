@@ -27,3 +27,5 @@ yarn-error.log*
 .idea
 .idea/workspace.xml
 meldekort.iml
+.eslintcache
+.vscode/settings.json
