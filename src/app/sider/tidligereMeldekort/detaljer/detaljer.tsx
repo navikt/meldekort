@@ -26,7 +26,7 @@ import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
 import MobilTabell from '../../../components/tabell/mobil/mobilTabell';
 import { PersonInfoActions } from '../../../actions/personInfo';
-import { PersonInfo } from '../../../types/person';
+import { Person, PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
@@ -38,6 +38,7 @@ interface MapStateToProps {
   meldekortdetaljer: MeldekortdetaljerState;
   aktivtMeldekort: Meldekort;
   router: Router;
+  person: Person;
   personInfo: PersonInfo;
   weblogic: WeblogicPing;
 }
@@ -176,6 +177,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         <section className="seksjon">
           {meldekortdetaljer.meldekortdetaljer.id !== '' ? (
             <Meldekortdetaljer
+              aktivtMeldekort={aktivtMeldekort}
               meldekortdetaljer={meldekortdetaljer.meldekortdetaljer}
               erAap={meldegruppe === Meldegruppe.ATTF}
             />
@@ -190,7 +192,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   render() {
-    const { aktivtMeldekort, router } = this.props;
+    const { aktivtMeldekort, router, person, personInfo } = this.props;
     const knappeKlasser = classNames('knapper-container', {
       'lang-knapper': aktivtMeldekort.korrigerbart,
     });
@@ -219,6 +221,8 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
             <PrintKnapp
               innholdRenderer={this.innhold}
               prerenderInnhold={true}
+              person={person}
+              personInfo={personInfo}
             />
           </div>
         </section>
@@ -233,6 +237,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     meldekortdetaljer: state.meldekortdetaljer,
     aktivtMeldekort: state.aktivtMeldekort,
     router: selectRouter(state),
+    person: state.person,
     personInfo: state.personInfo.personInfo,
     weblogic: state.weblogic,
   };
@@ -251,7 +256,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Detaljer);
+export default connect(mapStateToProps, mapDispatchToProps)(Detaljer);
