@@ -364,6 +364,7 @@ class Utfyllingsside extends React.Component<
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
           <div className={'utfylling-container'}>
             <UkePanel
+              innsending={this.props.innsending}
               ukenummer={Konstanter().forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
               datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
@@ -373,6 +374,7 @@ class Utfyllingsside extends React.Component<
               }
             />
             <UkePanel
+              innsending={this.props.innsending}
               ukenummer={Konstanter().andreUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
               datoTittel={hentDatoForAndreUke(meldeperiode.til)}
@@ -427,7 +429,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.resetValideringsresultat()),
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Utfyllingsside);
+export default connect(mapStateToProps, mapDispatchToProps)(Utfyllingsside);
