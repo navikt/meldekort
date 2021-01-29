@@ -8,21 +8,29 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
   const browser = browserName + ' v. ' + browserVersion;
   const chrome = () => {
     return (
-      <a href={Nettlesere().chrome} target={'_blank'}>
+      <a
+        href={Nettlesere().chrome}
+        target={'_blank'}
+        rel={'noopener noreferrer'}
+      >
         Chrome
       </a>
     );
   };
   const firefox = () => {
     return (
-      <a href={Nettlesere().firefox} target={'_blank'}>
+      <a
+        href={Nettlesere().firefox}
+        target={'_blank'}
+        rel={'noopener noreferrer'}
+      >
         Firefox
       </a>
     );
   };
   const edge = () => {
     return (
-      <a href={Nettlesere().edge} target={'_blank'}>
+      <a href={Nettlesere().edge} target={'_blank'} rel={'noopener noreferrer'}>
         Microsoft Edge
       </a>
     );
