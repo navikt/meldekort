@@ -19,7 +19,7 @@ exports[`InfoToggler 1`] = `
     <span
       className="infoToggler__chevron"
     >
-      <i
+      <span
         className="nav-frontend-chevron chevronboks chevron--ned"
       />
     </span>

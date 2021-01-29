@@ -227,7 +227,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
         {this.props.weblogic.erWeblogicOppe ? (
           this.tekstOgContent()
         ) : (
-          <WeblogicErNedeInfomelding />
+          <WeblogicErNedeInfomelding weblogic={this.props.weblogic} />
         )}
       </main>
     );
@@ -257,7 +257,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TidligereMeldekort);
+export default connect(mapStateToProps, mapDispatchToProps)(TidligereMeldekort);

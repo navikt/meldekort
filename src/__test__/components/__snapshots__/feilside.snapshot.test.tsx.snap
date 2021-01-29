@@ -22,13 +22,19 @@ exports[`Feilside 1`] = `
       className="alertstripe alertstripe--feil"
     >
       <span
-        aria-label="feil"
         className="alertstripe__ikon"
       >
+        <span
+          className="sr-only"
+        >
+          feil
+        </span>
         <svg
+          aria-label="feil-ikon"
           focusable="false"
           height="1.5em"
           kind="feil-sirkel-fyll"
+          role="img"
           viewBox="0 0 24 24"
           width="1.5em"
         >

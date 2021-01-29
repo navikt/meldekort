@@ -60,7 +60,7 @@ exports[`Sprakvelger 1`] = `
         Norsk
       </div>
       <div>
-        <i
+        <span
           className="nav-frontend-chevron chevronboks chevron--ned"
         />
       </div>

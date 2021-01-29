@@ -4,15 +4,20 @@ import { Flatknapp } from 'nav-frontend-knapper';
 import printLogo from '../../ikoner/print.svg';
 import DOMPortal from './DOMPortal';
 import Utskrift from './utskrift';
+import { Person, PersonInfo } from '../../types/person';
 
 export interface PrintKnappProps {
   innholdRenderer: () => React.ReactNode;
   prerenderInnhold?: boolean;
   erKvittering?: boolean;
+  person: Person;
+  personInfo: PersonInfo;
 }
 
 export interface State {
   active: boolean;
+  person: Person;
+  personInfo: PersonInfo;
 }
 
 function updateDocumentClass(active: boolean) {
@@ -31,6 +36,8 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
     super(props);
     this.state = {
       active: false,
+      person: this.props.person,
+      personInfo: this.props.personInfo,
     };
   }
 
@@ -68,7 +75,13 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
   }
 
   render() {
-    const { prerenderInnhold, innholdRenderer, erKvittering } = this.props;
+    const {
+      prerenderInnhold,
+      innholdRenderer,
+      erKvittering,
+      personInfo,
+      person,
+    } = this.props;
 
     return (
       <div className={'navigasjonsknapp'}>
@@ -89,7 +102,12 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
         </Flatknapp>
         {prerenderInnhold || this.state.active ? (
           <DOMPortal>
-            <Utskrift active={true} erKvittering={erKvittering}>
+            <Utskrift
+              active={true}
+              erKvittering={erKvittering}
+              person={person}
+              personInfo={personInfo}
+            >
               {innholdRenderer()}
             </Utskrift>
           </DOMPortal>

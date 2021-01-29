@@ -293,6 +293,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         </section>
         <section className="seksjon">
           <Meldekortdetaljer
+            aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={innsending.meldekortdetaljer}
             erAap={aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
           />
@@ -344,6 +345,8 @@ class Kvittering extends React.Component<KvitteringsProps> {
               className={'navigasjonsknapp'}
             />
             <PrintKnapp
+              person={this.props.person}
+              personInfo={this.props.personInfo}
               erKvittering={true}
               innholdRenderer={this.innhold}
               prerenderInnhold={true}
@@ -383,7 +386,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(Kvittering);
+export default connect(mapStateToProps, mapDispatcherToProps)(Kvittering);

@@ -319,6 +319,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             <Sprakvelger />
           </section>
           <Meldekortdetaljer
+            aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={meldekortdetaljer}
             erAap={aap}
           />
@@ -407,7 +408,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(Bekreftelse);
+export default connect(mapStateToProps, mapDispatcherToProps)(Bekreftelse);
