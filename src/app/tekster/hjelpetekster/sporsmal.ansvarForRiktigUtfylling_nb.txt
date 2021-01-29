@@ -1,7 +1,7 @@
 Du må oppgi riktige og fullstendige opplysninger. Gjør du ikke det kan det føre til at du må betale tilbake det du feilaktig har fått utbetalt. Du kan også bli anmeldt til politiet.
 <br><br>
 <b><p style="color:#ee5522;">
-Det er en del endringer for hvordan du skal føre arbeid, aktivitet og fravær på ifm. koronasituasjonen. Mer informasjon finner du <a target="_blank" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">her</a>.
+Det er en del endringer for hvordan du skal føre arbeid, aktivitet og fravær på ifm. koronasituasjonen. Mer informasjon finner du <a target="_blank" rel="noopener noreferrer" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">her</a>.
 <br><br>
 Se også informasjon i veiledningstekstene markert med rød skrift.
 </p></b>

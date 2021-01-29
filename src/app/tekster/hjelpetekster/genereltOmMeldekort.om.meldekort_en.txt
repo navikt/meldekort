@@ -1,1 +1,1 @@
-Read more about the service at <a href="{0}{1}" target="_blank">Information about employment status form</a>.
+Read more about the service at <a href="{0}{1}" target="_blank" rel="noopener noreferrer">Information about employment status form</a>.

@@ -4,7 +4,7 @@ Du skal svare <strong>Ja</strong> hvis du har vært i arbeid. Det gjelder både 
 
 Har du hjemmekontor og jobber, skal du føre opp arbeid på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du føre opp de timene du skulle ha jobbet.
 <br><br>
-I perioden 13.04-31.10.2020 var det spesielle regler for føring av meldekort dersom du tok arbeid innenfor jordbruk, skogbruk og gartneri. <a target="_blank" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">Les mer her</a>.
+I perioden 13.04-31.10.2020 var det spesielle regler for føring av meldekort dersom du tok arbeid innenfor jordbruk, skogbruk og gartneri. <a target="_blank" rel="noopener noreferrer" href="https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/koronavirus--informasjon-fra-nav/hva-skal-jeg-fore-pa-meldekortet">Les mer her</a>.
 </b></p>
 <br>
 Det gjelder arbeid som <ul><li> arbeidstaker </li><li> oppdragstaker </li> <li> mottaker av omsorgslønn </li> <li> arbeid i egen næringsvirksomhet  </li> </ul> <br> Dette gjelder alle dager i uken, også lørdag og søndag, uansett når på døgnet du jobber.
