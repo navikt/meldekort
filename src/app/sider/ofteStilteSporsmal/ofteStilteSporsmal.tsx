@@ -9,6 +9,7 @@ import sporrende from '../../ikoner/sporrende.svg';
 import { InnsendingActions } from '../../actions/innsending';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { loggAktivitet } from '../../utils/amplitudeUtils';
 
 interface SporsmalProps {
   overskriftId: string;
@@ -77,6 +78,7 @@ class OfteStilteSporsmal extends React.Component<
 
   componentDidMount() {
     this.props.resetInnsending();
+    loggAktivitet('Viser ofte stilte spørsmål');
   }
 
   render() {
@@ -116,7 +118,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(OfteStilteSporsmal);
+export default connect(null, mapDispatchToProps)(OfteStilteSporsmal);

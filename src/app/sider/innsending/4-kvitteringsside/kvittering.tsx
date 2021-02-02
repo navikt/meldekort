@@ -37,6 +37,7 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { loggAktivitet } from '../../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   router: Router;
@@ -76,6 +77,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
     this.props.leggTilInnsendtMeldekort(
       oppdatertSendteMeldekort.sendteMeldekort
     );
+    loggAktivitet('Viser kvittering');
   }
 
   returnerMeldekortListaMedFlereMeldekortIgjen = (

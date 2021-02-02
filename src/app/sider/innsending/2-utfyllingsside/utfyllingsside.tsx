@@ -32,6 +32,7 @@ import { InnsendingActions } from '../../../actions/innsending';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
 import { FravaerTypeEnum } from '../../../types/meldekort';
+import { loggAktivitet } from '../../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -68,6 +69,7 @@ class Utfyllingsside extends React.Component<
 
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
+    loggAktivitet('Viser utfylling');
   }
 
   hentSporsmal = (): SpmSvar[] => {

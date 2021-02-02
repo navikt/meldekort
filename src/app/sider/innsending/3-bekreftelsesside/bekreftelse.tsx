@@ -34,6 +34,7 @@ import { selectFeilmelding } from '../../../selectors/ui';
 import { BaksystemFeilmelding } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
 import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
+import { loggAktivitet } from '../../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -74,6 +75,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
+    loggAktivitet('Viser bekreftelse');
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {

@@ -15,6 +15,7 @@ import { Router } from '../../types/router';
 import { RootState } from '../../store/configureStore';
 import { selectRouter } from '../../selectors/router';
 import { scrollTilElement } from '../../utils/scroll';
+import { loggAktivitet } from '../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   router: Router;
@@ -40,6 +41,7 @@ class OmMeldekort extends React.Component<
     if (typeof valgtMenyPunkt !== 'undefined') {
       settValgtMenyPunkt(valgtMenyPunkt);
     }
+    loggAktivitet('Viser om meldekort');
   }
 
   render() {
@@ -109,7 +111,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OmMeldekort);
+export default connect(mapStateToProps, mapDispatchToProps)(OmMeldekort);
