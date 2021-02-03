@@ -34,6 +34,7 @@ import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
+import { loggAktivitet } from '../../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -340,6 +341,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       );
       this.props.oppdaterSvar(nySporsmalsobjektState);
     }
+    loggAktivitet('Viser spørsmål');
   }
 
   render() {
@@ -477,7 +479,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(Sporsmalsside);
+export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);

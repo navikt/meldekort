@@ -10,6 +10,8 @@ const Environment = () => {
         'https://loginservice-b2clogin-sbs.dev.nav.no/login?level=Level3',
       // loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
+      amplitudeUrl: 'amplitude.nav.no/collect',
+      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
   } else if (window.location.hostname.indexOf('www-q1.nav.no') > -1) {
     return {
@@ -19,6 +21,8 @@ const Environment = () => {
         'https://loginservice-b2clogin-sbs.dev.nav.no/login?level=Level3',
       // loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
+      amplitudeUrl: 'amplitude.nav.no/collect',
+      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
   } else if (erMock()) {
     return {
@@ -40,6 +44,8 @@ const Environment = () => {
     apiUrl: 'https://www.nav.no/meldekort/meldekort-api/api/',
     loginUrl: 'https://loginservice.nav.no/login?level=Level3',
     logoutUrl: 'https://loginservice.nav.no/slo',
+    amplitudeUrl: 'amplitude.nav.no/collect',
+    amplitudeKey: 'b0bccdd4dd75081606ef7bcab668a7ed',
   };
 };
 

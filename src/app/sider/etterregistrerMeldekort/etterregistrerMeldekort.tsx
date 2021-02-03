@@ -19,6 +19,7 @@ import {
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { useEffect } from 'react';
 import EtterregistreringInnhold from './etterregistreringInnhold';
+import { loggAktivitet } from '../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   person: Person;
@@ -65,6 +66,7 @@ function EtterregistrerMeldekort({
       resetInnsending();
     }
     hentPerson();
+    loggAktivitet('Viser etterregistrere meldekort');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

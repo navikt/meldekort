@@ -39,6 +39,7 @@ import { WeblogicActions } from '../../actions/weblogic';
 import { WeblogicPing } from '../../types/weblogic';
 import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
+import { loggAktivitet } from '../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -193,6 +194,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
       this.props.settValgtMenyPunkt(valgtMenyPunkt);
     }
     window.addEventListener('resize', this.handleWindowSize);
+    loggAktivitet('Viser tidligere meldekort');
   }
 
   tekstOgContent = () => {

@@ -26,6 +26,7 @@ import {
 import { useEffect } from 'react';
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
+import { loggAktivitet } from '../../utils/amplitudeUtils';
 
 interface MapStateToProps {
   person: Person;
@@ -108,6 +109,8 @@ function SendMeldekort({
       resetInnsending();
     }
     hentPerson();
+
+    loggAktivitet('Viser send');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -162,7 +165,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SendMeldekort);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMeldekort);
