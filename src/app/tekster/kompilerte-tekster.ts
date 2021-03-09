@@ -306,11 +306,11 @@
       'Spørsmålet om du har vært forhindret fra å ta arbeid, delta på tiltak eller være arbeidssøker fordi du har vært for syk må besvares ',
     syk: ' ',
     'tidligereMeldekort.forklaring.korrigering':
-      'Du kan korrigere de fem siste meldekortene du har sendt. Da må du klikke på meldekortet du ønsker korrigere i listen under. Har du korrigert et meldekort vi allerede har beregnet vil vi vurdere om du har rett til mer penger eller om du har fått for mye utbetalt. Dette vil ta noe tid. Vi vil kontakte deg dersom vi trenger mer informasjon eller dokumentasjon. ',
+      'Du kan korrigere de ti siste meldekortene du har sendt. Da må du klikke på meldekortet du ønsker korrigere i listen under. Har du korrigert et meldekort vi allerede har beregnet vil vi vurdere om du har rett til mer penger eller om du har fått for mye utbetalt. Dette vil ta noe tid. Vi vil kontakte deg dersom vi trenger mer informasjon eller dokumentasjon. ',
     'tidligereMeldekort.forklaring':
-      'Denne siden viser en oversikt over meldekort som er sendt inn for de siste ti ukene. Har du nettopp sendt et meldekort der du har svart at du ikke ønsker å være arbeidssøker, kan det ta litt tid før kortet vises i oversikten. ',
+      'Denne siden viser en oversikt over meldekort som er sendt inn for de siste ti ukene. Har du nettopp sendt et meldekort der du har svart at du ikke ønsker å være arbeidssøker, kan det ta litt tid før kortet vises i oversikten. Det samme gjelder dersom du har sendt meldekort på natten. ',
     'tidligereMeldekort.harIngen':
-      'Det finnes ingen innsendte meldekort for de siste ti ukene. Har du nettopp sendt et meldekort, kan det ta litt tid før kortet vises i oversikten. ',
+      'Det finnes ingen innsendte meldekort for de siste tjue ukene. Har du nettopp sendt et meldekort, kan det ta litt tid før kortet vises i oversikten. ',
     'tidligereMeldekort.overskrift.brutto': 'Brutto beløp ',
     'tidligereMeldekort.overskrift.mottatt': 'Mottatt ',
     'tidligereMeldekort.overskrift.status': 'Status ',
@@ -663,11 +663,11 @@
       'The question of whether you been unable to work, participate in an employment scheme or apply for jobs due to illness must be answered ',
     syk: ' ',
     'tidligereMeldekort.forklaring.korrigering':
-      'You may correct the last five employment status forms you have previously sent us. In order to do this, you choose the form that you wish to correct in the list below. If you correct an employment status form that has already been calculated, we will recalculate to see if the sum is still correct. The process of recalculating may take some time. We will get in contact with you if we need further information or documentation. ',
+      'You may correct the last ten employment status forms you have previously sent us. In order to do this, you choose the form that you wish to correct in the list below. If you correct an employment status form that has already been calculated, we will recalculate to see if the sum is still correct. The process of recalculating may take some time. We will get in contact with you if we need further information or documentation. ',
     'tidligereMeldekort.forklaring':
-      'This page shows a list of the employment status forms that we have received from you covering the last ten weeks. If you only just registered an employment status form where you stated that you no longer wish to be an employment seeker, it may take some time for the form to appear. ',
+      'This page shows a list of the employment status forms that we have received from you covering the last ten weeks. If you only just registered an employment status form where you stated that you no longer wish to be an employment seeker, it may take some time for the form to appear. The same applies if you have sent the employment status form during the night. ',
     'tidligereMeldekort.harIngen':
-      'You have no previously registered employment status forms for the past ten weeks. If you recently sent an employment status form, it may take some time for it to appear. ',
+      'You have no previously registered employment status forms for the past twenty weeks. If you recently sent an employment status form, it may take some time for it to appear. ',
     'tidligereMeldekort.overskrift.brutto': 'Gross amount ',
     'tidligereMeldekort.overskrift.mottatt': 'Received ',
     'tidligereMeldekort.overskrift.status': 'Status ',
