@@ -107,7 +107,7 @@ node {
 
             // Deploy til NAIS
             withCredentials([string(credentialsId: 'deploy-api-key', variable: 'NAIS_DEPLOY_APIKEY')]) {
-                sh "${NAIS_CLI} --apikey=${NAIS_DEPLOY_APIKEY} --cluster=${cluster} --repository=${application} --resource=${NAISERATOR_YAML_FILE} --wait=true"
+                sh "${NAIS_CLI} --apikey=${NAIS_DEPLOY_APIKEY} --cluster=${cluster} --repository=${application} --ref=${branchName} --resource=${NAISERATOR_YAML_FILE} --wait=true"
              }
         }
 
