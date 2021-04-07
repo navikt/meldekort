@@ -77,7 +77,14 @@ class Kvittering extends React.Component<KvitteringsProps> {
     this.props.leggTilInnsendtMeldekort(
       oppdatertSendteMeldekort.sendteMeldekort
     );
-    loggAktivitet('Viser kvittering');
+
+    const arbeidsssokerSvar = this.props.innsending?.meldekortdetaljer?.sporsmal
+      ?.arbeidssoker;
+    loggAktivitet('Viser kvittering', {
+      arbeidssoker: arbeidsssokerSvar ? 'ja' : 'nei',
+      meldegruppe: this.props.aktivtMeldekort?.meldegruppe || 'UKJENT',
+      innsendingstype: this.props.innsendingstype || 'UKJENT',
+    });
   }
 
   returnerMeldekortListaMedFlereMeldekortIgjen = (
