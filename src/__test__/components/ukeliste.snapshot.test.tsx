@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import ProviderWrapper from '../testSetup/providerWrapper';
 import Ukeliste from '../../app/components/meldekortdetaljer/ukevisning/ukeliste';
 import { mkDagerTEST, mkTEST } from '../testSetup/testData';
+import { TypeYtelse } from '../../app/utils/teksterUtil';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -12,7 +13,7 @@ it('Ukeliste', () => {
     <ProviderWrapper>
       <Ukeliste
         aktivtMeldekort={mkTEST}
-        erAap={true}
+        typeYtelse={TypeYtelse.AAP}
         meldekortDager={mkDagerTEST}
         ukeNr={1}
       />

@@ -7,10 +7,10 @@ import BegrunnelseVisning from './begrunnelsevisning/begrunnelse';
 import SporsmalOgSvarVisning from './sporsmalvisning/sporsmalOgSvar';
 import Ukeliste from './ukevisning/ukeliste';
 import { hentSporsmalConfig } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { finnesIntlId, hentAapStreng } from '../../utils/teksterUtil';
+import { finnesIntlId } from '../../utils/teksterUtil';
 
-interface ErAap {
-  erAap: boolean;
+interface localProps {
+  typeYtelse: string;
 }
 
 const mapStateToProps = (state: RootState) => {
@@ -20,12 +20,12 @@ const mapStateToProps = (state: RootState) => {
 };
 
 type Props = MeldekortdetaljerState &
-  ErAap &
+  localProps &
   ReturnType<typeof mapStateToProps>;
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   aktivtMeldekort,
-  erAap,
+  typeYtelse,
   meldekortdetaljer,
 }) => {
   const config = hentSporsmalConfig();
@@ -39,23 +39,17 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
     }
   };
 
-  const hentSporsmalOgSvar = (
-    formatertDato: string,
-    erMeldekortAap: boolean
-  ) => {
-    const aap = hentAapStreng(erMeldekortAap);
-
-    const sporsmalOgSvarConfig = config.map(sporsmalsObj => {
+  const hentSporsmalOgSvar = (formatertDato: string, typeYtelse: string) => {
+    return config.map(sporsmalsObj => {
       return {
         kategori: sporsmalsObj.kategori,
-        sporsmal: finnesIntlId(sporsmalsObj.sporsmal + aap),
-        forklaring: finnesIntlId(sporsmalsObj.forklaring + aap),
+        sporsmal: finnesIntlId(sporsmalsObj.sporsmal + typeYtelse),
+        forklaring: finnesIntlId(sporsmalsObj.forklaring + typeYtelse),
         svar: hentSvar(sporsmalsObj.id),
         formatertDato:
           sporsmalsObj.kategori === 'registrert' ? formatertDato : undefined,
       };
     });
-    return sporsmalOgSvarConfig;
   };
 
   const sporsmalOgSvar = hentSporsmalOgSvar(
@@ -63,7 +57,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
       aktivtMeldekort.meldeperiode.fra,
       aktivtMeldekort.meldeperiode.til
     ),
-    erAap
+    typeYtelse
   );
 
   return (
@@ -74,13 +68,13 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
       </div>
       <div className="ukevisning">
         <Ukeliste
-          erAap={erAap}
+          typeYtelse={typeYtelse}
           aktivtMeldekort={aktivtMeldekort}
           meldekortDager={meldekortdager.slice(0, 7)}
           ukeNr={1}
         />
         <Ukeliste
-          erAap={erAap}
+          typeYtelse={typeYtelse}
           aktivtMeldekort={aktivtMeldekort}
           meldekortDager={meldekortdager.slice(7, 14)}
           ukeNr={2}
@@ -90,7 +84,4 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(Meldekortdetaljer);
+export default connect(mapStateToProps, null)(Meldekortdetaljer);

@@ -20,7 +20,7 @@ import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { DetaljRad, Meldegruppe, Meldekort } from '../../../types/meldekort';
+import { DetaljRad, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
@@ -32,6 +32,7 @@ import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
+import { finnTypeYtelse } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -179,7 +180,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
             <Meldekortdetaljer
               aktivtMeldekort={aktivtMeldekort}
               meldekortdetaljer={meldekortdetaljer.meldekortdetaljer}
-              erAap={meldegruppe === Meldegruppe.ATTF}
+              typeYtelse={finnTypeYtelse(meldegruppe)}
             />
           ) : (
             <div className="meldekort-spinner">

@@ -19,8 +19,207 @@ exports[`UkePanel 1`] = `
   >
     <Connect(UkePanel)
       datoTittel="naviger.neste"
-      erAap={false}
       faktiskUkeNummer="1"
+      innsending={
+        Object {
+          "begrunnelse": Object {
+            "erFeil": false,
+            "valgtArsak": "",
+          },
+          "innsendingstype": null,
+          "korrigertMeldekortId": 0,
+          "meldekortId": 0,
+          "meldekortdetaljer": Object {
+            "arkivnokkel": "",
+            "begrunnelse": "",
+            "id": "",
+            "kortType": "KORRIGERT_ELEKTRONISK",
+            "lestDato": 2019-01-01T10:00:00.000Z,
+            "meldeDato": 2019-01-01T10:00:00.000Z,
+            "meldekortId": 0,
+            "meldeperiode": "",
+            "sporsmal": Object {
+              "annetFravaer": false,
+              "arbeidet": false,
+              "arbeidssoker": false,
+              "kurs": false,
+              "meldekortDager": Array [],
+              "signatur": false,
+              "syk": false,
+            },
+          },
+          "meldekortdetaljerInnsending": undefined,
+          "sporsmalsobjekter": Array [
+            Object {
+              "checked": undefined,
+              "feil": Object {
+                "erFeil": false,
+                "feilmeldingId": "arbeidet.required",
+              },
+              "forklaring": "forklaring.sporsmal.arbeid",
+              "id": "arbeidet",
+              "ja": "svar.arbeid.ja",
+              "kategori": "arbeid",
+              "nei": "svar.arbeid.nei",
+              "sporsmal": "sporsmal.arbeid",
+            },
+            Object {
+              "checked": undefined,
+              "feil": Object {
+                "erFeil": false,
+                "feilmeldingId": "kurs.required",
+              },
+              "forklaring": "forklaring.sporsmal.aktivitetArbeid",
+              "id": "kurs",
+              "ja": "svar.aktivitetArbeid.ja",
+              "kategori": "aktivitetArbeid",
+              "nei": "svar.aktivitetArbeid.nei",
+              "sporsmal": "sporsmal.aktivitetArbeid",
+            },
+            Object {
+              "checked": undefined,
+              "feil": Object {
+                "erFeil": false,
+                "feilmeldingId": "syk.required",
+              },
+              "forklaring": "forklaring.sporsmal.forhindret",
+              "id": "syk",
+              "ja": "svar.forhindret.ja",
+              "kategori": "forhindret",
+              "nei": "svar.forhindret.nei",
+              "sporsmal": "sporsmal.forhindret",
+            },
+            Object {
+              "checked": undefined,
+              "feil": Object {
+                "erFeil": false,
+                "feilmeldingId": "annetFravar.required",
+              },
+              "forklaring": "forklaring.sporsmal.ferieFravar",
+              "id": "annetFravaer",
+              "ja": "svar.ferieFravar.ja",
+              "kategori": "ferieFravar",
+              "nei": "svar.ferieFravar.nei",
+              "sporsmal": "sporsmal.ferieFravar",
+            },
+            Object {
+              "checked": undefined,
+              "feil": Object {
+                "erFeil": false,
+                "feilmeldingId": "fortsetteRegistrert.required",
+              },
+              "forklaring": "forklaring.sporsmal.registrert",
+              "id": "arbeidssoker",
+              "ja": "svar.registrert.ja",
+              "kategori": "registrert",
+              "nei": "svar.registrert.nei",
+              "sporsmal": "sporsmal.registrert",
+            },
+          ],
+          "utfylteDager": Array [
+            Object {
+              "annetFravaer": false,
+              "dag": "Mandag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Tirsdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Onsdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Torsdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Fredag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Lørdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Søndag",
+              "kurs": false,
+              "syk": false,
+              "uke": 1,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Mandag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Tirsdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Onsdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Torsdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Fredag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Lørdag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+            Object {
+              "annetFravaer": false,
+              "dag": "Søndag",
+              "kurs": false,
+              "syk": false,
+              "uke": 2,
+            },
+          ],
+          "valideringsResultat": undefined,
+        }
+      }
+      typeYtelse=""
       ukenummer={1}
       utfyllingFeil={
         Object {

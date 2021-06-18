@@ -35,7 +35,6 @@ exports[`Ukeliste 1`] = `
           "mottattDato": 2019-01-01T10:00:00.000Z,
         }
       }
-      erAap={true}
       meldekortDager={
         Array [
           Object {
@@ -47,6 +46,7 @@ exports[`Ukeliste 1`] = `
           },
         ]
       }
+      typeYtelse="-AAP"
       ukeNr={1}
     />
   </Connect(IntlProvider)>

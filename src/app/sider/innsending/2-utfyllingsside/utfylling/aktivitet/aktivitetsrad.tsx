@@ -28,7 +28,7 @@ interface MapDispatchToProps {
 interface RadProps {
   tekstId: string;
   ukeNummer: number;
-  aap: boolean;
+  typeYtelse: string;
   forklaringId: string;
 }
 
@@ -156,16 +156,14 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
   };
 
   innhold = () => {
-    let { tekstId, aap, forklaringId } = this.props;
+    let { tekstId, typeYtelse, forklaringId } = this.props;
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
         <Undertittel className={'aktivitetsrad__tittel'}>
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage
-            id={aap ? forklaringId + '-AAP' : forklaringId}
-          />
+          <FormattedHTMLMessage id={forklaringId + typeYtelse} />
         </UtvidetInformasjon>
         <div className="ukedager--mobil">{hentUkedager()}</div>
         <div className="aktivitetsrad__inputfelter">{this.settFelter()}</div>
@@ -191,7 +189,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(Aktivitetsrad);
+export default connect(mapStateToProps, mapDispatcherToProps)(Aktivitetsrad);

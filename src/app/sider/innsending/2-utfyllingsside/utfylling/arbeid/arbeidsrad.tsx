@@ -27,7 +27,7 @@ interface MapDispatchToProps {
 
 interface UkeProps {
   ukeNummer: number;
-  aap: boolean;
+  typeYtelse: string;
   tekstId: string;
   forklaringId: string;
   bareArbeid: boolean;
@@ -127,7 +127,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
   };
 
   innhold = () => {
-    let { tekstId, aap, forklaringId, feil, bareArbeid } = this.props;
+    let { tekstId, typeYtelse, forklaringId, feil, bareArbeid } = this.props;
     return (
       <div
         className="arbeidsrad"
@@ -140,9 +140,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage
-            id={aap ? forklaringId + '-AAP' : forklaringId}
-          />
+          <FormattedHTMLMessage id={forklaringId + typeYtelse} />
         </UtvidetInformasjon>
         <div className="ukedager--mobil">{hentUkedager()}</div>
         <div className="arbeidsrad__inputfelter">{this.settFelter()}</div>
@@ -168,7 +166,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(Arbeidsrad);
+export default connect(mapStateToProps, mapDispatcherToProps)(Arbeidsrad);

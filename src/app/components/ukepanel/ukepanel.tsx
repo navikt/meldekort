@@ -19,7 +19,7 @@ interface Props {
   faktiskUkeNummer: string;
   datoTittel: string;
   utfyllingFeil: UtfyllingFeil;
-  erAap: boolean;
+  typeYtelse: string;
 }
 
 interface MapStateToProps {
@@ -30,18 +30,15 @@ type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   const hentSporsmal = (): SpmSvar[] => {
-    const sporsmalListe: SpmSvar[] = props.innsending.sporsmalsobjekter.map(
-      sporsmalobj => {
-        return {
-          kategori: sporsmalobj.kategori,
-          svar:
-            sporsmalobj.checked === undefined
-              ? false
-              : sporsmalobj.checked.endsWith('ja'),
-        };
-      }
-    );
-    return sporsmalListe;
+    return props.innsending.sporsmalsobjekter.map(sporsmalobj => {
+      return {
+        kategori: sporsmalobj.kategori,
+        svar:
+          sporsmalobj.checked === undefined
+            ? false
+            : sporsmalobj.checked.endsWith('ja'),
+      };
+    });
   };
 
   const sjekkSporsmal = (kategori: string): boolean => {
@@ -76,7 +73,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
               .filter(r => r.rad.includes(FravaerTypeEnum.ARBEIDS_FRAVAER))}
-            aap={props.erAap}
+            typeYtelse={props.typeYtelse}
             tekstId={'utfylling.arbeid'}
             forklaringId={'forklaring.utfylling.arbeid'}
             bareArbeid={
@@ -91,7 +88,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ukeNummer={props.ukenummer}
             tekstId="utfylling.tiltak"
             forklaringId={'forklaring.utfylling.tiltak'}
-            aap={props.erAap}
+            typeYtelse={props.typeYtelse}
             feil={props.utfyllingFeil.feilIKurs.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
@@ -103,7 +100,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ukeNummer={props.ukenummer}
             tekstId="utfylling.syk"
             forklaringId={'forklaring.utfylling.syk'}
-            aap={props.erAap}
+            typeYtelse={props.typeYtelse}
             feil={props.utfyllingFeil.feilISyk.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
@@ -115,7 +112,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ukeNummer={props.ukenummer}
             tekstId="utfylling.ferieFravar"
             forklaringId={'forklaring.utfylling.ferieFravar'}
-            aap={props.erAap}
+            typeYtelse={props.typeYtelse}
             feil={props.utfyllingFeil.feilIFerie.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
@@ -133,7 +130,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(UkePanel);
+export default connect(mapStateToProps, null)(UkePanel);

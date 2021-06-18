@@ -24,7 +24,6 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
 import {
   Infomelding,
-  Meldegruppe,
   Meldekort,
   SendtMeldekort,
 } from '../../../types/meldekort';
@@ -35,6 +34,7 @@ import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
+import { finnTypeYtelse } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -240,7 +240,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     return false;
   };
 
-  hentFeilmeldinger = (aap: boolean) => {
+  hentFeilmeldinger = (typeYtelse: string) => {
     const {
       sporsmalsobjekter,
       begrunnelse,
@@ -277,17 +277,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             ) : null}
             {feillIKurs ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'kurs.required' + (aap ? '-AAP' : ''),
+                id: 'kurs.required' + typeYtelse,
               })}`}</li>
             ) : null}
             {feilISyk ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'syk.required' + (aap ? '-AAP' : ''),
+                id: 'syk.required' + typeYtelse,
               })}`}</li>
             ) : null}
             {feilIFerie ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'annetFravar.required' + (aap ? '-AAP' : ''),
+                id: 'annetFravar.required' + typeYtelse,
               })}`}</li>
             ) : null}
             {feilIRegistrert ? (
@@ -351,9 +351,11 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       sendteMeldekort,
       infomelding,
     } = this.props;
-    const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
+
+    const typeYtelse = finnTypeYtelse(aktivtMeldekort.meldegruppe);
     const brukermelding =
       hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
+
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
       sendteMeldekort,
@@ -385,18 +387,18 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
           </Veilederpanel>
         </section>
         <section id="feilmelding" className="seksjon">
-          {this.hentFeilmeldinger(meldegruppeErAAP)}
+          {this.hentFeilmeldinger(typeYtelse)}
         </section>
         {innsending.innsendingstype === Innsendingstyper.korrigering && (
           <section className="seksjon">
             <BegrunnelseVelger
-              AAP={meldegruppeErAAP}
+              typeYtelse={typeYtelse}
               erFeil={innsending.begrunnelse.erFeil}
             />
           </section>
         )}
         <section className="seksjon">
-          <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending} />
+          <SporsmalsGruppe typeYtelse={typeYtelse} innsending={innsending} />
           {innsending.innsendingstype === Innsendingstyper.innsending ? (
             <div className="alertstripe_registrert">
               <AlertStripe type="advarsel">

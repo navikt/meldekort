@@ -9,18 +9,18 @@ import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 
 interface Props {
   aktivtMeldekort: Meldekort;
-  erAap: boolean;
+  typeYtelse: string;
   meldekortDager: MeldekortDag[];
   ukeNr: number;
 }
 
 const Ukeliste: React.FunctionComponent<Props> = ({
   ukeNr,
-  erAap,
+  typeYtelse,
   meldekortDager,
   aktivtMeldekort,
 }) => {
-  const dagListe = hentDagliste(meldekortDager, erAap);
+  const dagListe = hentDagliste(meldekortDager, typeYtelse);
 
   if (dagListe.length > 0) {
     return (

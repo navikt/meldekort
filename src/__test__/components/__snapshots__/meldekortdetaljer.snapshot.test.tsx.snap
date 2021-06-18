@@ -18,7 +18,24 @@ exports[`Meldekortdetaljer 1`] = `
     locale="nb"
   >
     <Connect(Meldekortdetaljer)
-      erAap={true}
+      aktivtMeldekort={
+        Object {
+          "bruttoBelop": 0,
+          "korrigerbart": true,
+          "kortStatus": "OPPRE",
+          "kortType": "ELEKTRONISK",
+          "meldegruppe": "DAGP",
+          "meldekortId": 1,
+          "meldeperiode": Object {
+            "fra": 2019-01-01T10:00:00.000Z,
+            "kanKortSendes": true,
+            "kortKanSendesFra": 2019-01-01T10:00:00.000Z,
+            "periodeKode": "201901",
+            "til": 2019-01-01T10:00:00.000Z,
+          },
+          "mottattDato": 2019-01-01T10:00:00.000Z,
+        }
+      }
       meldekortdetaljer={
         Object {
           "arkivnokkel": "",
@@ -40,6 +57,7 @@ exports[`Meldekortdetaljer 1`] = `
           },
         }
       }
+      typeYtelse="-AAP"
     />
   </Connect(IntlProvider)>
 </Provider>
