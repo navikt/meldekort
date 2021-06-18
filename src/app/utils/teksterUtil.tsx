@@ -17,6 +17,8 @@ export const finnesIntlId = (tekstid: string): string => {
   if (hentIntl().formatMessage({ id: tekstid }) !== tekstid) {
     return tekstid;
   } else {
-    return tekstid.slice(0, -4);
+    // Returnerer tekstid uten postfix
+    // For å gjøre dette finne vi siste bindestrek og kaster den og alt etter den
+    return tekstid.slice(0, tekstid.lastIndexOf('-'));
   }
 };
