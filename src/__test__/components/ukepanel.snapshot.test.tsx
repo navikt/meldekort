@@ -16,7 +16,7 @@ it('UkePanel', () => {
     >
       <UkePanel
         ukenummer={1}
-        typeYtelse={TypeYtelse.DAGPENGER}
+        typeYtelsePostfix={TypeYtelse.DAGPENGER}
         datoTittel={'naviger.neste'}
         faktiskUkeNummer={'1'}
         utfyllingFeil={utfyllingFeilTEST}

@@ -32,7 +32,7 @@ import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
-import { finnTypeYtelse } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -180,7 +180,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
             <Meldekortdetaljer
               aktivtMeldekort={aktivtMeldekort}
               meldekortdetaljer={meldekortdetaljer.meldekortdetaljer}
-              typeYtelse={finnTypeYtelse(meldegruppe)}
+              typeYtelsePostfix={finnTypeYtelsePostfix(meldegruppe)}
             />
           ) : (
             <div className="meldekort-spinner">

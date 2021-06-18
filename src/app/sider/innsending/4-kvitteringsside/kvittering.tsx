@@ -37,7 +37,7 @@ import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelse } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -304,7 +304,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={innsending.meldekortdetaljer}
-            typeYtelse={finnTypeYtelse(aktivtMeldekort.meldegruppe)}
+            typeYtelsePostfix={finnTypeYtelsePostfix(
+              aktivtMeldekort.meldegruppe
+            )}
           />
         </section>
         {innsendingstype === Innsendingstyper.innsending &&

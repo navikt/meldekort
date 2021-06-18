@@ -13,7 +13,7 @@ it('Ukeliste', () => {
     <ProviderWrapper>
       <Ukeliste
         aktivtMeldekort={mkTEST}
-        typeYtelse={TypeYtelse.AAP}
+        typeYtelsePostfix={TypeYtelse.AAP}
         meldekortDager={mkDagerTEST}
         ukeNr={1}
       />

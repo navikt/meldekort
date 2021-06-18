@@ -10,7 +10,7 @@ import { hentSporsmalConfig } from '../../sider/innsending/1-sporsmalsside/spors
 import { finnesIntlId } from '../../utils/teksterUtil';
 
 interface localProps {
-  typeYtelse: string;
+  typeYtelsePostfix: string;
 }
 
 const mapStateToProps = (state: RootState) => {
@@ -25,7 +25,7 @@ type Props = MeldekortdetaljerState &
 
 const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   aktivtMeldekort,
-  typeYtelse,
+  typeYtelsePostfix,
   meldekortdetaljer,
 }) => {
   const config = hentSporsmalConfig();
@@ -39,12 +39,15 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
     }
   };
 
-  const hentSporsmalOgSvar = (formatertDato: string, typeYtelse: string) => {
+  const hentSporsmalOgSvar = (
+    formatertDato: string,
+    typeYtelsePostfix: string
+  ) => {
     return config.map(sporsmalsObj => {
       return {
         kategori: sporsmalsObj.kategori,
-        sporsmal: finnesIntlId(sporsmalsObj.sporsmal + typeYtelse),
-        forklaring: finnesIntlId(sporsmalsObj.forklaring + typeYtelse),
+        sporsmal: finnesIntlId(sporsmalsObj.sporsmal + typeYtelsePostfix),
+        forklaring: finnesIntlId(sporsmalsObj.forklaring + typeYtelsePostfix),
         svar: hentSvar(sporsmalsObj.id),
         formatertDato:
           sporsmalsObj.kategori === 'registrert' ? formatertDato : undefined,
@@ -57,7 +60,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
       aktivtMeldekort.meldeperiode.fra,
       aktivtMeldekort.meldeperiode.til
     ),
-    typeYtelse
+    typeYtelsePostfix
   );
 
   return (
@@ -68,13 +71,13 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
       </div>
       <div className="ukevisning">
         <Ukeliste
-          typeYtelse={typeYtelse}
+          typeYtelsePostfix={typeYtelsePostfix}
           aktivtMeldekort={aktivtMeldekort}
           meldekortDager={meldekortdager.slice(0, 7)}
           ukeNr={1}
         />
         <Ukeliste
-          typeYtelse={typeYtelse}
+          typeYtelsePostfix={typeYtelsePostfix}
           aktivtMeldekort={aktivtMeldekort}
           meldekortDager={meldekortdager.slice(7, 14)}
           ukeNr={2}

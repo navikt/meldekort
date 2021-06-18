@@ -34,7 +34,7 @@ import { BaksystemFeilmelding } from '../../../types/ui';
 import { UiActions } from '../../../actions/ui';
 import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelse } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -269,7 +269,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     let { valideringsResultat } = this.props.innsending;
     let { meldekortdetaljer } = this.state.meldekortdetaljer;
     let { feilmelding } = this.state;
-    let typeYtelse = finnTypeYtelse(meldegruppe);
+    let typeYtelsePostfix = finnTypeYtelsePostfix(meldegruppe);
 
     if (typeof valideringsResultat !== 'undefined') {
       return valideringsResultat.status === 'FEIL' ? (
@@ -324,7 +324,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={meldekortdetaljer}
-            typeYtelse={typeYtelse}
+            typeYtelsePostfix={typeYtelsePostfix}
           />
           <BekreftCheckboksPanel
             className={'bekreftInfo'}
@@ -334,7 +334,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             feil={feilmelding === '' ? undefined : { feilmelding: feilmelding }}
           >
             <Normaltekst>
-              <FormattedHTMLMessage id={'utfylling.bekreft' + typeYtelse} />
+              <FormattedHTMLMessage
+                id={'utfylling.bekreft' + typeYtelsePostfix}
+              />
             </Normaltekst>
           </BekreftCheckboksPanel>
           <section className="seksjon flex-innhold sentrert">

@@ -36,7 +36,7 @@ const returnerAktivitetTekst = (
 
 export const hentDagliste = (
   meldekortdager: MeldekortDag[],
-  typeYtelse: string
+  typeYtelsePostfix: string
 ): JSX.Element[] => {
   const dagListe = [];
   let ukedager = hentUkedagerSomStringListe();
@@ -89,7 +89,7 @@ export const hentDagliste = (
             <UtvidetInformasjon>
               <Hjelpetekst
                 meldekortDag={meldekortDag}
-                typeYtelse={typeYtelse}
+                typeYtelsePostfix={typeYtelsePostfix}
               />
             </UtvidetInformasjon>
           ) : null}

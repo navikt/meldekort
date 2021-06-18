@@ -23,7 +23,7 @@ interface MapDispatchToProps {
 }
 
 interface Props {
-  typeYtelse: string;
+  typeYtelsePostfix: string;
   innsending: InnsendingState;
 }
 
@@ -51,7 +51,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
   lagSporsmal = (
     sporsmalsobj: Spm,
-    typeYtelse: string,
+    typeYtelsePostfix: string,
     innsendingstype: Innsendingstyper | null
   ) => {
     let skalVareDisabled: boolean = false;
@@ -62,7 +62,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         sporsmalsobj[key] !== sporsmalsobj.checked &&
         sporsmalsobj[key] !== sporsmalsobj.id
       ) {
-        sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + typeYtelse);
+        sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + typeYtelsePostfix);
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
         sporsmalsobj.feil.feilmeldingId = finnesIntlId(
           sporsmalsobj.feil.feilmeldingId
@@ -92,9 +92,13 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
   };
 
   render() {
-    const { innsending, typeYtelse } = this.props;
+    const { innsending, typeYtelsePostfix } = this.props;
     const sporsmalsgruppe = innsending.sporsmalsobjekter.map(sporsmalobj =>
-      this.lagSporsmal(sporsmalobj, typeYtelse, innsending.innsendingstype)
+      this.lagSporsmal(
+        sporsmalobj,
+        typeYtelsePostfix,
+        innsending.innsendingstype
+      )
     );
 
     return <>{sporsmalsgruppe}</>;

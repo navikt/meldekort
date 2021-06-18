@@ -7,11 +7,10 @@ export enum TypeYtelse {
   'TILTAKSPENGER' = '-TP',
 }
 
-export const finnTypeYtelse = (meldegruppe: Meldegruppe): string => {
-  // Da er det mulig å sjekke alt her og returnere TypeYtelse, eller bedre å si tilsvarende postfix
-  return meldegruppe === Meldegruppe.ATTF
-    ? TypeYtelse.AAP
-    : TypeYtelse.DAGPENGER;
+export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {
+  if (meldegruppe === Meldegruppe.ATTF) return TypeYtelse.AAP;
+  if (meldegruppe === Meldegruppe.INDIV) return TypeYtelse.TILTAKSPENGER;
+  return TypeYtelse.DAGPENGER;
 };
 
 export const finnesIntlId = (tekstid: string): string => {

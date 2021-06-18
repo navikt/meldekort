@@ -13,7 +13,7 @@ it('Meldekortdetaljer', () => {
     <ProviderWrapper initialStateName={'aktivtMeldekort'} initialState={mkTEST}>
       <Meldekortdetaljer
         aktivtMeldekort={mkTEST}
-        typeYtelse={TypeYtelse.AAP}
+        typeYtelsePostfix={TypeYtelse.AAP}
         meldekortdetaljer={mkDetaljerTEST}
       />
     </ProviderWrapper>

@@ -34,7 +34,7 @@ import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelse } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -240,7 +240,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     return false;
   };
 
-  hentFeilmeldinger = (typeYtelse: string) => {
+  hentFeilmeldinger = (typeYtelsePostfix: string) => {
     const {
       sporsmalsobjekter,
       begrunnelse,
@@ -277,17 +277,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             ) : null}
             {feillIKurs ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'kurs.required' + typeYtelse,
+                id: 'kurs.required' + typeYtelsePostfix,
               })}`}</li>
             ) : null}
             {feilISyk ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'syk.required' + typeYtelse,
+                id: 'syk.required' + typeYtelsePostfix,
               })}`}</li>
             ) : null}
             {feilIFerie ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'annetFravar.required' + typeYtelse,
+                id: 'annetFravar.required' + typeYtelsePostfix,
               })}`}</li>
             ) : null}
             {feilIRegistrert ? (
@@ -352,7 +352,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       infomelding,
     } = this.props;
 
-    const typeYtelse = finnTypeYtelse(aktivtMeldekort.meldegruppe);
+    const typeYtelsePostfix = finnTypeYtelsePostfix(
+      aktivtMeldekort.meldegruppe
+    );
     const brukermelding =
       hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
 
@@ -387,18 +389,21 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
           </Veilederpanel>
         </section>
         <section id="feilmelding" className="seksjon">
-          {this.hentFeilmeldinger(typeYtelse)}
+          {this.hentFeilmeldinger(typeYtelsePostfix)}
         </section>
         {innsending.innsendingstype === Innsendingstyper.korrigering && (
           <section className="seksjon">
             <BegrunnelseVelger
-              typeYtelse={typeYtelse}
+              typeYtelsePostfix={typeYtelsePostfix}
               erFeil={innsending.begrunnelse.erFeil}
             />
           </section>
         )}
         <section className="seksjon">
-          <SporsmalsGruppe typeYtelse={typeYtelse} innsending={innsending} />
+          <SporsmalsGruppe
+            typeYtelsePostfix={typeYtelsePostfix}
+            innsending={innsending}
+          />
           {innsending.innsendingstype === Innsendingstyper.innsending ? (
             <div className="alertstripe_registrert">
               <AlertStripe type="advarsel">

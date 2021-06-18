@@ -19,7 +19,7 @@ interface Props {
   faktiskUkeNummer: string;
   datoTittel: string;
   utfyllingFeil: UtfyllingFeil;
-  typeYtelse: string;
+  typeYtelsePostfix: string;
 }
 
 interface MapStateToProps {
@@ -73,7 +73,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
               .filter(r => r.rad.includes(FravaerTypeEnum.ARBEIDS_FRAVAER))}
-            typeYtelse={props.typeYtelse}
+            typeYtelsePostfix={props.typeYtelsePostfix}
             tekstId={'utfylling.arbeid'}
             forklaringId={'forklaring.utfylling.arbeid'}
             bareArbeid={
@@ -88,7 +88,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ukeNummer={props.ukenummer}
             tekstId="utfylling.tiltak"
             forklaringId={'forklaring.utfylling.tiltak'}
-            typeYtelse={props.typeYtelse}
+            typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilIKurs.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
@@ -100,7 +100,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ukeNummer={props.ukenummer}
             tekstId="utfylling.syk"
             forklaringId={'forklaring.utfylling.syk'}
-            typeYtelse={props.typeYtelse}
+            typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilISyk.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)
@@ -112,7 +112,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
             ukeNummer={props.ukenummer}
             tekstId="utfylling.ferieFravar"
             forklaringId={'forklaring.utfylling.ferieFravar'}
-            typeYtelse={props.typeYtelse}
+            typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilIFerie.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
               .concat(props.utfyllingFeil.feilIDagerVertikal)

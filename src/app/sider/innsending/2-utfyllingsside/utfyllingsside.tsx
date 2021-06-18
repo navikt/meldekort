@@ -33,7 +33,7 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
 import { FravaerTypeEnum } from '../../../types/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelse } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -347,7 +347,9 @@ class Utfyllingsside extends React.Component<
   render() {
     let { aktivtMeldekort, sendteMeldekort, innsending } = this.props;
     let { meldeperiode } = aktivtMeldekort;
-    const typeYtelse = finnTypeYtelse(aktivtMeldekort.meldegruppe);
+    const typeYtelsePostfix = finnTypeYtelsePostfix(
+      aktivtMeldekort.meldegruppe
+    );
 
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
@@ -373,7 +375,7 @@ class Utfyllingsside extends React.Component<
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
               datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
               utfyllingFeil={this.state}
-              typeYtelse={typeYtelse}
+              typeYtelsePostfix={typeYtelsePostfix}
             />
             <UkePanel
               innsending={innsending}
@@ -381,7 +383,7 @@ class Utfyllingsside extends React.Component<
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
               datoTittel={hentDatoForAndreUke(meldeperiode.til)}
               utfyllingFeil={this.state}
-              typeYtelse={typeYtelse}
+              typeYtelsePostfix={typeYtelsePostfix}
             />
           </div>
         </section>

@@ -57,7 +57,7 @@ exports[`Meldekortdetaljer 1`] = `
           },
         }
       }
-      typeYtelse="-AAP"
+      typeYtelsePostfix="-AAP"
     />
   </Connect(IntlProvider)>
 </Provider>

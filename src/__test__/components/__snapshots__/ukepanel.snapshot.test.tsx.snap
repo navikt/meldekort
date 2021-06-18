@@ -219,7 +219,7 @@ exports[`UkePanel 1`] = `
           "valideringsResultat": undefined,
         }
       }
-      typeYtelse=""
+      typeYtelsePostfix=""
       ukenummer={1}
       utfyllingFeil={
         Object {

@@ -11,7 +11,7 @@ import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvide
 
 interface MapStateToProps {
   begrunnelse: Begrunnelse;
-  typeYtelse: string;
+  typeYtelsePostfix: string;
 }
 
 interface MapDispatchToProps {
@@ -52,7 +52,7 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
             </Undertittel>
             <UtvidetInformasjon>
               {hentIntl().formatHTMLMessage({
-                id: 'forklaring.sporsmal.begrunnelse' + props.typeYtelse,
+                id: 'forklaring.sporsmal.begrunnelse' + props.typeYtelsePostfix,
               })}
             </UtvidetInformasjon>
           </>

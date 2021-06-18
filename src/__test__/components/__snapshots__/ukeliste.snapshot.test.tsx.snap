@@ -46,7 +46,7 @@ exports[`Ukeliste 1`] = `
           },
         ]
       }
-      typeYtelse="-AAP"
+      typeYtelsePostfix="-AAP"
       ukeNr={1}
     />
   </Connect(IntlProvider)>

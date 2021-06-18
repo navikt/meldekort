@@ -5,12 +5,12 @@ import { MeldekortDag } from '../../../types/meldekort';
 
 interface Props {
   meldekortDag: MeldekortDag;
-  typeYtelse: string;
+  typeYtelsePostfix: string;
 }
 
 const Hjelpetekst: React.FunctionComponent<Props> = ({
   meldekortDag,
-  typeYtelse,
+  typeYtelsePostfix,
 }) => {
   const hentTekst = (utfyllingTekstid: string, forklaringTekstid: string) => {
     return (
@@ -22,7 +22,7 @@ const Hjelpetekst: React.FunctionComponent<Props> = ({
               .toUpperCase()}
           </strong>
         </span>
-        <FormattedHTMLMessage id={forklaringTekstid + typeYtelse} />
+        <FormattedHTMLMessage id={forklaringTekstid + typeYtelsePostfix} />
       </span>
     );
   };

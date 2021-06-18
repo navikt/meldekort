@@ -8,7 +8,10 @@ import { TypeYtelse } from '../../app/utils/teksterUtil';
 it('Hjelpetekst', () => {
   const tree = renderer.create(
     <ProviderWrapper>
-      <Hjelpetekst meldekortDag={mkDagTEST} typeYtelse={TypeYtelse.AAP} />
+      <Hjelpetekst
+        meldekortDag={mkDagTEST}
+        typeYtelsePostfix={TypeYtelse.AAP}
+      />
     </ProviderWrapper>
   );
   expect(tree).toMatchSnapshot();
