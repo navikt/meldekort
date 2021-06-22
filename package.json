@@ -92,7 +92,7 @@
     "redux-devtools-extension": "^2.13.7",
     "redux-logger": "^3.0.6",
     "redux-observable": "^1.0.0",
-    "redux-persist": "^5.10.0",
+    "redux-persist": "^6.0.0",
     "redux-persist-transform-encrypt": "^3.0.0",
     "snyk": "^1.465.0",
     "stylelint": "^13.8.0",
