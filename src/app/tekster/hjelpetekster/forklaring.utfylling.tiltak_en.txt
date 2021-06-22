@@ -1,8 +1,8 @@
-<b><p style="color:#ee5522;">
-
-Register the days you should have participated in courses, but were unable to participate due to contagion or contagion-preventing measures.
-
-</p></b>
+<p style="color:#ee5522;">
+    <b>
+        Register the days you should have participated in courses, but were unable to participate due to contagion or contagion-preventing measures.
+    </b>
+</p>
 
 You need to register the days you have participated in employment schemes, courses or training/education that you and NAV have agreed on.
 <br>

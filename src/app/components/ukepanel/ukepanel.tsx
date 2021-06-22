@@ -111,7 +111,9 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
           <Aktivitetsrad
             ukeNummer={props.ukenummer}
             tekstId="utfylling.ferieFravar"
-            forklaringId={'forklaring.utfylling.ferieFravar'}
+            forklaringId={
+              'forklaring.utfylling.ferieFravar' + props.typeYtelsePostfix
+            }
             typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilIFerie.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal

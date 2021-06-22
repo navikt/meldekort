@@ -33,7 +33,7 @@ const aktivtMeldekortReducer = (
 ): Meldekort => {
   switch (action.type) {
     case getType(AktivtMeldekortActions.oppdaterAktivtMeldekort):
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, meldegruppe: Meldegruppe.INDIV };
 
     case getType(AktivtMeldekortActions.resettAktivtMeldekort):
       return { ...initialState };

@@ -1,0 +1,4 @@
+Du skal svare <strong>Ja</strong> hvis du har vært for syk til å delta på tiltak, kurs eller utdanning som du har avtalt med NAV.
+<br>
+<br>
+Du skal svare <strong>Nei</strong> hvis du ikke har vært syk.

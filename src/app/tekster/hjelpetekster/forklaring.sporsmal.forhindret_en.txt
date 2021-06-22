@@ -1,12 +1,11 @@
 Click <strong>Yes</strong> if you have been prevented from taking work.
-<br><br>
-<b><p style="color:#ee5522;">
-
-Do not register illness unless you have sick leave and receive illness benefits.
-
-<b></p>
 <br>
-Click <strong>Yes</strong> if you have been too ill to participate in employment schemes, courses or training/education that you and NAV have agreed on.
+<br>
+<p style="color:#ee5522;">
+    <b>
+        Do not register illness unless you have sick leave and receive illness benefits.
+    <b>
+</p>
 <br>
 <br>
 Click <strong>No</strong> if you have not been too ill.

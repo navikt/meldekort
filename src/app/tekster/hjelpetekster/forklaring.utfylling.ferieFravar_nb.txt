@@ -1,14 +1,11 @@
 <b><p style="color:#ee5522;">
-Om du ikke kan jobbe eller delta på aktiviteter på grunn av smitte eller av hensyn til smittevern, skal det ikke føre til trekk i dagpenger eller tiltakspenger. På meldekortet skal du derfor ikke registrere slikt fravær.
+Om du ikke kan jobbe på grunn av smitte eller av hensyn til smittevern, skal det ikke føre til trekk i dagpenger. På meldekortet skal du derfor ikke registrere slikt fravær.
 </p></b>
 
 Du skal registrere de dagene du har vært forhindret fra å ta arbeid av andre grunner enn egen sykdom.
 <br>
 <br>
-Du skal registrere dager du ikke har kunnet delta på tiltak, kurs eller utdanning.
-<br>
-<br>
-Det gjelder også dersom du ikke ønsker å være tilgjengelig for arbeidsmarkedet eller NAV på dager uten planlagt aktivitet.
+Det gjelder også dersom du ikke ønsker å være tilgjengelig for arbeidsmarkedet på dager uten planlagt aktivitet.
 <br>
 <br>
 Fravær vil normalt føre til trekk i utbetalingen.

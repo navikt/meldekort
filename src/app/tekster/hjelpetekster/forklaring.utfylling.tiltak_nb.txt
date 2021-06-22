@@ -1,7 +1,8 @@
-<b><p style="color:#ee5522;">
-
-Registrer de dagene du skulle ha vært på tiltak eller kurs/utdanning, men ikke kunne delta på grunn av smitte eller av hensyn til smittevern
-</p></b>
+<p style="color:#ee5522;">
+    <b>
+        Registrer de dagene du skulle ha vært på tiltak eller kurs/utdanning, men ikke kunne delta på grunn av smitte eller av hensyn til smittevern
+    </b>
+</p>
 
 Du skal føre opp dager du har deltatt på tiltak, kurs eller utdanning som du har avtalt med NAV.
 <br>
