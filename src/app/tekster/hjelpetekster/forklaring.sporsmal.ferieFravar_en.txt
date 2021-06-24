@@ -4,7 +4,7 @@ Click  <strong>Yes</strong> if other reasons than your own illness have made you
 <p style="color:#ee5522;">
     <b>
         Tick No if you are unable to work or participate in activities due to contagion or as a result of contagion-preventing measures.
-    <b>
+    </b>
 </p>
 <br>
 Click <strong>Yes</strong> if you wish to be unavailable for taking on work during days without any agreed activities.

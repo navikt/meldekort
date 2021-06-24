@@ -10,4 +10,4 @@ You need to be registered as a job seeker in order to receive job offers or assi
 Click <strong>No</strong> if you no longer want to receive unemployment benefits or any other service or benefits from NAV.
 <br>
 <br>
-If you click No, we will stop your benefits. We will then remove you from our register of job seekers, and you will not be assisted with job offers or labour market measures. 
+If you click <strong>No</strong>, we will stop your benefits. We will then remove you from our register of job seekers, and you will not be assisted with job offers or labour market measures.
