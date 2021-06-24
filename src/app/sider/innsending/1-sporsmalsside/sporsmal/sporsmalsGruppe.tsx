@@ -69,7 +69,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         );
       } else if (
         sporsmalsobj[key] === 'registrert' &&
-        innsendingstype !== Innsendingstyper.innsending
+        innsendingstype !== Innsendingstyper.INNSENDING
       ) {
         skalVareDisabled = true;
       }

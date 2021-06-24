@@ -35,9 +35,9 @@ export interface Begrunnelse {
 }
 
 export enum Innsendingstyper {
-  innsending = 'innsending',
-  etterregistrering = 'etterregistrering',
-  korrigering = 'korriger',
+  INNSENDING = 'innsending',
+  ETTERREGISTRERING = 'etterregistrering',
+  KORRIGERING = 'korriger',
 }
 
 export enum InnsendingTypeKeys {

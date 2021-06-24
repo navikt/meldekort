@@ -4,7 +4,7 @@ import { hentIntl } from '../../utils/intlUtil';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedHTMLMessage } from 'react-intl';
 import Tabell from '../../components/tabell/desktop/tabell';
-import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortRad } from '../../types/meldekort';
 import { Router } from '../../types/router';
@@ -43,11 +43,11 @@ function EtterregistreringInnhold({
 
       <section className="seksjon flex-innhold sentrert">
         <NavKnapp
-          type={knappTyper.hoved}
+          type={KnappTyper.HOVED}
           nestePath={router.location.pathname + '/innsending'}
           tekstid={'naviger.neste'}
           nesteAktivtMeldekort={nesteAktivtMeldekort}
-          nesteInnsendingstype={Innsendingstyper.etterregistrering}
+          nesteInnsendingstype={Innsendingstyper.ETTERREGISTRERING}
         />
       </section>
     </main>

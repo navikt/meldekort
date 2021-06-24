@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
@@ -128,7 +128,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   erInnsendingKorrigering = (): boolean => {
     return (
-      this.props.innsending.innsendingstype === Innsendingstyper.korrigering
+      this.props.innsending.innsendingstype === Innsendingstyper.KORRIGERING
     );
   };
 
@@ -144,7 +144,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       meldeperiode: aktivtMeldekort.meldeperiode,
       erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
       korrigerbart:
-        this.props.innsending.innsendingstype !== Innsendingstyper.korrigering,
+        this.props.innsending.innsendingstype !== Innsendingstyper.KORRIGERING,
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
       sesjonsId: 'IKKE I BRUK',
@@ -342,7 +342,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           <section className="seksjon flex-innhold sentrert">
             <div className={'knapper-container'}>
               <NavKnapp
-                type={knappTyper.hoved}
+                type={KnappTyper.HOVED}
                 nestePath={'/innsending/kvittering'}
                 tekstid={'naviger.send'}
                 className={'navigasjonsknapp'}
@@ -351,7 +351,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 disabled={this.state.senderMeldekort}
               />
               <NavKnapp
-                type={knappTyper.standard}
+                type={KnappTyper.STANDARD}
                 nestePath={
                   this.hoppOverUtfylling()
                     ? '/innsending/sporsmal'
@@ -361,7 +361,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 className={'navigasjonsknapp'}
               />
               <NavKnapp
-                type={knappTyper.flat}
+                type={KnappTyper.FLAT}
                 nestePath={'/om-meldekort'}
                 tekstid={'naviger.avbryt'}
                 className={'navigasjonsknapp'}

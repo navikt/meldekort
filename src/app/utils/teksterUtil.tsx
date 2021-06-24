@@ -2,9 +2,9 @@ import { hentIntl } from './intlUtil';
 import { Meldegruppe } from '../types/meldekort';
 
 export enum TypeYtelse {
-  'AAP' = '-AAP',
-  'DAGPENGER' = '',
-  'TILTAKSPENGER' = '-TP',
+  AAP = '-AAP',
+  DAGPENGER = '',
+  TILTAKSPENGER = '-TP',
 }
 
 export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {

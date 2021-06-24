@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import {
   hentDatoForAndreUke,
   hentDatoForForsteUke,
@@ -390,20 +390,20 @@ class Utfyllingsside extends React.Component<
         <section className="seksjon flex-innhold sentrert">
           <div className={'knapper-container'}>
             <NavKnapp
-              type={knappTyper.hoved}
+              type={KnappTyper.HOVED}
               nestePath={'/bekreftelse'}
               tekstid={'naviger.neste'}
               className={'navigasjonsknapp'}
               validering={this.valider}
             />
             <NavKnapp
-              type={knappTyper.standard}
+              type={KnappTyper.STANDARD}
               nestePath={'/sporsmal'}
               tekstid={'naviger.forrige'}
               className={'navigasjonsknapp'}
             />
             <NavKnapp
-              type={knappTyper.flat}
+              type={KnappTyper.FLAT}
               nestePath={'/om-meldekort'}
               tekstid={'naviger.avbryt'}
               className={'navigasjonsknapp'}

@@ -1,4 +1,6 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "react-hooks"],
   "rules": {
     "no-useless-computed-key": "off",
     "array-callback-return": "off",
