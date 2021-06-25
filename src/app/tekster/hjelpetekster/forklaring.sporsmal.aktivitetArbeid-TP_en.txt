@@ -1,4 +1,4 @@
-Click <strong>Yes</strong> if you have participated in employment schemes, courses or training/education. With employment schemes we mean labour market schemes such as an AMO course or a Job Club. Do not record other activities from your activity plan, such as information meetings with NAV or jobs you have applied for.
+*TILTAK* Click <strong>Yes</strong> if you have participated in employment schemes, courses or training/education. With employment schemes we mean labour market schemes such as an AMO course or a Job Club. Do not record other activities from your activity plan, such as information meetings with NAV or jobs you have applied for.
 <br>
 <br>
 <p style="color:#ee5522;">
@@ -6,6 +6,8 @@ Click <strong>Yes</strong> if you have participated in employment schemes, cours
         Register the days you should have participated in activities, courses or education, but were unable to participate due to contagion or contagion-preventing measures.
     </b>
 </p>
+<br>
+Click <strong>Yes</strong> if NAV has approved you receiving unemployment benefits while attending education.
 <br>
 <br>
 Click <strong>Yes</strong> if you have attended courses or education that you have not agreed upon with NAV. This also applies to self-study.

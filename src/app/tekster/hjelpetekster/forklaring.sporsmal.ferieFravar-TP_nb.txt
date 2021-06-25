@@ -1,22 +1,19 @@
-Du skal svare <strong>Ja</strong> hvis det er andre grunner enn egen sykdom til at du ikke har kunnet delta på tiltak. Med tiltak mener vi arbeidsmarkedstiltak som for eksempel AMO-kurs eller Jobbklubb.
+*TILTAK* Du skal svare <strong>Ja</strong> hvis det er andre grunner enn egen sykdom til at du ikke har kunnet ta arbeid eller være arbeidssøker.
 <br>
 <br>
 <p style="color:#ee5522;">
     <b>
-        Du skal svare Nei om du ikke kan delta på aktiviteter på grunn av smitte eller av hensyn til smittevern.
+        Du skal svare Nei om du ikke kan jobbe eller delta på aktiviteter på grunn av smitte eller av hensyn til smittevern.
     </b>
 </p>
 <br>
-Du skal også svare <strong>Ja</strong> hvis du ikke ønsker å være tilgjengelig for NAV på dager uten planlagt aktivitet.
+Du skal også svare <strong>Ja</strong> hvis du ikke ønsker å være tilgjengelig for arbeidsmarkedet eller NAV på dager uten planlagt aktivitet.
 <br>
 <br>
-Du skal svare <strong>Ja</strong> hvis du oppholder deg i utlandet. Du har ikke rett til tiltakspenger mens du oppholder deg i utlandet, med mindre NAV på forhånd har godkjent at du er dekket av en av unntaksreglene.
+Du skal svare <strong>Ja</strong> hvis du oppholder deg i utlandet. Du har ikke rett til dagpenger mens du oppholder deg i utlandet, med mindre NAV på forhånd har godkjent at du er dekket av en av unntaksreglene.
 <br>
 <br>
 Fravær vil normalt føre til trekk i utbetalingen.
-<br>
-<br>
-Er årsaken til fraværet jobbintervju, timeavtale i det offentlige hjelpeapparatet eller sterke velferdsgrunner, kan du likevel ha rett til tiltakspenger. Kontakt NAV første fraværsdag.
 <br>
 <br>
 Hvis du ikke har hatt fravær, svarer du <strong>Nei</strong>.

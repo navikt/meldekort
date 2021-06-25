@@ -1,7 +1,13 @@
-Click <strong>Yes</strong> if you want to receive work-oriented measures from NAV.
+*TILTAK* Click <strong>Yes</strong> if you want to be registered as a job seeker.
 <br>
 <br>
-Click <strong>No</strong> if you no longer want to receive benefits while participating in employment schemes or any other service or benefits from NAV.
+This also applies if you only wish to be registered part of the time period.
 <br>
 <br>
-If you click <strong>No</strong>, we will stop your benefits. We will then remove you from our register of job seekers, and you will not be assisted with labour market measures.
+You need to be registered as a job seeker in order to receive job offers or assistance from NAV in getting work.
+<br>
+<br>
+Click <strong>No</strong> if you no longer want to receive unemployment benefits or any other service or benefits from NAV.
+<br>
+<br>
+If you click <strong>No</strong>, we will stop your benefits. We will then remove you from our register of job seekers, and you will not be assisted with job offers or labour market measures.

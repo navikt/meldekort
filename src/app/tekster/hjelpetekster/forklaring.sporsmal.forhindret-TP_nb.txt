@@ -1,4 +1,14 @@
-Du skal svare <strong>Ja</strong> hvis du har vært for syk til å delta på tiltak, kurs eller utdanning som du har avtalt med NAV.
+*TILTAK* Du skal svare <strong>Ja</strong> hvis du har vært syk og derfor har vært forhindret fra å ta arbeid.
+<br>
+<br>
+<p style="color:#ee5522;">
+    <b>
+        Du skal ikke svare ja med mindre du er sykmeldt og skal ha sykepenger.
+    </b>
+</p>
 <br>
 <br>
 Du skal svare <strong>Nei</strong> hvis du ikke har vært syk.
+<br>
+<br>
+Til deg som får dagpenger: Blir du syk, kan du få sykepenger hvis du blir sykmeldt av lege. Får du gradert sykmelding på 50 prosent eller mindre, skal du svare <strong>Nei</strong> på dette spørsmålet. Sykepengene og dagpengene vil bli samordnet.

@@ -1,7 +1,13 @@
-Du skal svare <strong>Ja</strong> hvis du ønsker å få tilbud om arbeidsrettede tiltak fra NAV.
+*TILTAK* Du skal svare <strong>Ja</strong> dersom du ønsker å være registrert som arbeidssøker.
 <br>
 <br>
-Du skal svare <strong>Nei</strong> dersom du ikke lenger skal ha tiltakspenger eller noen annen form for bistand eller utbetalinger fra NAV.
+Dette gjelder også dersom du bare ønsker å være registrert i deler av perioden.
 <br>
 <br>
-Svarer du <strong>Nei</strong>, vil utbetalingene dine stanse. Da vil vi fjerne deg fra NAVs register over arbeidssøkere, og du vil ikke få tilbud om tiltak.
+Du må være registrert som arbeidssøker for få tilbud om arbeid eller bistand fra NAV for å komme i arbeid.
+<br>
+<br>
+Du skal svare <strong>Nei</strong> dersom du ikke lenger skal ha dagpenger eller noen annen form for bistand eller utbetalinger fra NAV.
+<br>
+<br>
+Svarer du <strong>Nei</strong>, vil utbetalingene dine stanse. Da vil vi fjerne deg fra NAVs register over arbeidssøkere, og du vil ikke få tilbud om arbeid eller tiltak.

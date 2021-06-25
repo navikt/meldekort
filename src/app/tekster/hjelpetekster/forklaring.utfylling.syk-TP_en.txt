@@ -1,6 +1,6 @@
-<b><p style="color:#ee5522;">
+*TILTAK* <b><p style="color:#ee5522;">
 
 Do not register illness unless you have sick leave and receive illness benefits.
 </p></b>
 
-You need to register the days you have been unable to participate in labour measures, courses or training/education that you and NAV have agreed on.
+You need to register the days you have been unable to take on work due to illness.
