@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import {
   hentDatoForAndreUke,
   hentDatoForForsteUke,
@@ -33,6 +33,7 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
 import { FravaerTypeEnum } from '../../../types/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -344,13 +345,16 @@ class Utfyllingsside extends React.Component<
   };
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort } = this.props;
+    let { aktivtMeldekort, sendteMeldekort, innsending } = this.props;
     let { meldeperiode } = aktivtMeldekort;
+    const typeYtelsePostfix = finnTypeYtelsePostfix(
+      aktivtMeldekort.meldegruppe
+    );
 
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
       sendteMeldekort,
-      this.props.innsending.innsendingstype
+      innsending.innsendingstype
     ) ? (
       <main>
         <section
@@ -366,44 +370,40 @@ class Utfyllingsside extends React.Component<
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
           <div className={'utfylling-container'}>
             <UkePanel
-              innsending={this.props.innsending}
+              innsending={innsending}
               ukenummer={Konstanter().forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
               datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
               utfyllingFeil={this.state}
-              erAap={
-                this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF
-              }
+              typeYtelsePostfix={typeYtelsePostfix}
             />
             <UkePanel
-              innsending={this.props.innsending}
+              innsending={innsending}
               ukenummer={Konstanter().andreUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
               datoTittel={hentDatoForAndreUke(meldeperiode.til)}
               utfyllingFeil={this.state}
-              erAap={
-                this.props.aktivtMeldekort.meldegruppe === Meldegruppe.ATTF
-              }
+              typeYtelsePostfix={typeYtelsePostfix}
             />
           </div>
         </section>
         <section className="seksjon flex-innhold sentrert">
           <div className={'knapper-container'}>
             <NavKnapp
-              type={knappTyper.hoved}
+              type={KnappTyper.HOVED}
               nestePath={'/bekreftelse'}
               tekstid={'naviger.neste'}
               className={'navigasjonsknapp'}
               validering={this.valider}
             />
             <NavKnapp
-              type={knappTyper.standard}
+              type={KnappTyper.STANDARD}
               nestePath={'/sporsmal'}
               tekstid={'naviger.forrige'}
               className={'navigasjonsknapp'}
             />
             <NavKnapp
-              type={knappTyper.flat}
+              type={KnappTyper.FLAT}
               nestePath={'/om-meldekort'}
               tekstid={'naviger.avbryt'}
               className={'navigasjonsknapp'}

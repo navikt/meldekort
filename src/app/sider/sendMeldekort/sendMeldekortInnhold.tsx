@@ -3,7 +3,7 @@ import { Meldekort, MeldekortRad } from '../../types/meldekort';
 import { FormattedHTMLMessage } from 'react-intl';
 import Tabell from '../../components/tabell/desktop/tabell';
 import { Normaltekst } from 'nav-frontend-typografi';
-import NavKnapp, { knappTyper } from '../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
 import { Router } from '../../types/router';
 import { BaksystemFeilmelding } from '../../types/ui';
@@ -49,11 +49,11 @@ function InnsendingsTabell({
       </section>
       <section className="seksjon flex-innhold sentrert">
         <NavKnapp
-          type={knappTyper.hoved}
+          type={KnappTyper.HOVED}
           nestePath={router.location.pathname + '/innsending'}
           tekstid={'naviger.neste'}
           nesteAktivtMeldekort={innsendingsklareMeldekort[0]}
-          nesteInnsendingstype={Innsendingstyper.innsending}
+          nesteInnsendingstype={Innsendingstyper.INNSENDING}
         />
       </section>
     </>

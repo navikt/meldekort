@@ -91,7 +91,7 @@ function SendMeldekort({
   const harKunEttMeldekort = (meldekortListe: Meldekort[]) => {
     if (meldekortListe.length === 1) {
       leggTilAktivtMeldekort(meldekortListe[0]);
-      settInnsendingstype(Innsendingstyper.innsending);
+      settInnsendingstype(Innsendingstyper.INNSENDING);
       return true;
     }
     return false;

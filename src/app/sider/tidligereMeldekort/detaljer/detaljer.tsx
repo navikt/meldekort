@@ -19,8 +19,8 @@ import { Router } from '../../../types/router';
 import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
-import { DetaljRad, Meldegruppe, Meldekort } from '../../../types/meldekort';
+import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
+import { DetaljRad, Meldekort } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
@@ -32,6 +32,7 @@ import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -179,7 +180,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
             <Meldekortdetaljer
               aktivtMeldekort={aktivtMeldekort}
               meldekortdetaljer={meldekortdetaljer.meldekortdetaljer}
-              erAap={meldegruppe === Meldegruppe.ATTF}
+              typeYtelsePostfix={finnTypeYtelsePostfix(meldegruppe)}
             />
           ) : (
             <div className="meldekort-spinner">
@@ -202,19 +203,19 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className={knappeKlasser}>
             <NavKnapp
-              type={knappTyper.hoved}
+              type={KnappTyper.HOVED}
               nestePath={'/tidligere-meldekort'}
               tekstid={'naviger.forrige'}
               className={'navigasjonsknapp'}
             />
             {aktivtMeldekort.korrigerbart ? (
               <NavKnapp
-                type={knappTyper.standard}
+                type={KnappTyper.STANDARD}
                 nestePath={router.location.pathname + '/korriger'}
                 tekstid={'korriger.meldekort'}
                 className={'navigasjonsknapp'}
                 nesteAktivtMeldekort={aktivtMeldekort}
-                nesteInnsendingstype={Innsendingstyper.korrigering}
+                nesteInnsendingstype={Innsendingstyper.KORRIGERING}
                 validering={this.sjekkAtWeblogicErOppe}
               />
             ) : null}

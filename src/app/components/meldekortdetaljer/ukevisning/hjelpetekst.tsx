@@ -2,19 +2,16 @@ import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import { hentIntl } from '../../../utils/intlUtil';
 import { MeldekortDag } from '../../../types/meldekort';
-import { hentAapStreng } from '../../../utils/teksterUtil';
 
 interface Props {
   meldekortDag: MeldekortDag;
-  erAap: boolean;
+  typeYtelsePostfix: string;
 }
 
 const Hjelpetekst: React.FunctionComponent<Props> = ({
   meldekortDag,
-  erAap,
+  typeYtelsePostfix,
 }) => {
-  const aap = hentAapStreng(erAap);
-
   const hentTekst = (utfyllingTekstid: string, forklaringTekstid: string) => {
     return (
       <span>
@@ -25,7 +22,7 @@ const Hjelpetekst: React.FunctionComponent<Props> = ({
               .toUpperCase()}
           </strong>
         </span>
-        <FormattedHTMLMessage id={forklaringTekstid + aap} />
+        <FormattedHTMLMessage id={forklaringTekstid + typeYtelsePostfix} />
       </span>
     );
   };

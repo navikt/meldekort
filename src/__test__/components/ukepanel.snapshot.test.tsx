@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import ProviderWrapper from '../testSetup/providerWrapper';
 import UkePanel from '../../app/components/ukepanel/ukepanel';
 import { innsendingTEST, utfyllingFeilTEST } from '../testSetup/testData';
+import { TypeYtelse } from '../../app/utils/teksterUtil';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -15,10 +16,11 @@ it('UkePanel', () => {
     >
       <UkePanel
         ukenummer={1}
-        erAap={false}
+        typeYtelsePostfix={TypeYtelse.DAGPENGER}
         datoTittel={'naviger.neste'}
         faktiskUkeNummer={'1'}
         utfyllingFeil={utfyllingFeilTEST}
+        innsending={innsendingTEST}
       />
     </ProviderWrapper>
   );

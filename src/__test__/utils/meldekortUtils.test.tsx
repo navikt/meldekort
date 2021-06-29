@@ -35,21 +35,21 @@ it('erAktivtMeldekortGyldig', () => {
     erAktivtMeldekortGyldig(
       mkTEST,
       [{ meldekortId: 0, kortType: KortType.ELEKTRONISK }],
-      Innsendingstyper.innsending
+      Innsendingstyper.INNSENDING
     )
   ).toBe(true);
   expect(
     erAktivtMeldekortGyldig(
       mkTEST,
       [{ meldekortId: 1, kortType: KortType.ELEKTRONISK }],
-      Innsendingstyper.innsending
+      Innsendingstyper.INNSENDING
     )
   ).toBe(false);
   expect(
     erAktivtMeldekortGyldig(
       mkTEST,
       [{ meldekortId: 1, kortType: KortType.ELEKTRONISK }],
-      Innsendingstyper.korrigering
+      Innsendingstyper.KORRIGERING
     )
   ).toBe(true);
   expect(

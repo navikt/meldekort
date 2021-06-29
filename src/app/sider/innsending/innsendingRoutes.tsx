@@ -44,7 +44,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
       settMeldekortId,
       aktivtMeldekort,
     } = this.props;
-    if (innsending.innsendingstype === Innsendingstyper.korrigering) {
+    if (innsending.innsendingstype === Innsendingstyper.KORRIGERING) {
       hentKorrigertId();
       settMeldekortId(aktivtMeldekort.meldekortId);
     } else {
@@ -132,7 +132,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InnsendingRoutes);
+export default connect(mapStateToProps, mapDispatchToProps)(InnsendingRoutes);

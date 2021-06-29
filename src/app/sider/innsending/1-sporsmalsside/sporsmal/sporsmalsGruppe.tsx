@@ -12,7 +12,7 @@ import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
 import { Meldekort } from '../../../../types/meldekort';
-import { finnesIntlId, hentAapStreng } from '../../../../utils/teksterUtil';
+import { finnesIntlId } from '../../../../utils/teksterUtil';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -23,7 +23,7 @@ interface MapDispatchToProps {
 }
 
 interface Props {
-  AAP: boolean;
+  typeYtelsePostfix: string;
   innsending: InnsendingState;
 }
 
@@ -51,10 +51,9 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
 
   lagSporsmal = (
     sporsmalsobj: Spm,
-    erAAP: boolean,
+    typeYtelsePostfix: string,
     innsendingstype: Innsendingstyper | null
   ) => {
-    const tekstendelse = hentAapStreng(erAAP);
     let skalVareDisabled: boolean = false;
     for (let key in sporsmalsobj) {
       if (
@@ -63,14 +62,14 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         sporsmalsobj[key] !== sporsmalsobj.checked &&
         sporsmalsobj[key] !== sporsmalsobj.id
       ) {
-        sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + tekstendelse);
+        sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + typeYtelsePostfix);
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
         sporsmalsobj.feil.feilmeldingId = finnesIntlId(
           sporsmalsobj.feil.feilmeldingId
         );
       } else if (
         sporsmalsobj[key] === 'registrert' &&
-        innsendingstype !== Innsendingstyper.innsending
+        innsendingstype !== Innsendingstyper.INNSENDING
       ) {
         skalVareDisabled = true;
       }
@@ -93,9 +92,13 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
   };
 
   render() {
-    const { innsending, AAP } = this.props;
+    const { innsending, typeYtelsePostfix } = this.props;
     const sporsmalsgruppe = innsending.sporsmalsobjekter.map(sporsmalobj =>
-      this.lagSporsmal(sporsmalobj, AAP, innsending.innsendingstype)
+      this.lagSporsmal(
+        sporsmalobj,
+        typeYtelsePostfix,
+        innsending.innsendingstype
+      )
     );
 
     return <>{sporsmalsgruppe}</>;
@@ -115,7 +118,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(SporsmalsGruppe);
+export default connect(mapStateToProps, mapDispatcherToProps)(SporsmalsGruppe);

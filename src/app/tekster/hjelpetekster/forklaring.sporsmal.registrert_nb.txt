@@ -7,7 +7,7 @@ Dette gjelder også dersom du bare ønsker å være registrert i deler av period
 Du må være registrert som arbeidssøker for få tilbud om arbeid eller bistand fra NAV for å komme i arbeid.
 <br>
 <br>
-Du skal svare <strong>Nei</strong> dersom du ikke lenger skal ha dagpenger, tiltakspenger eller noen annen form for bistand eller utbetalinger fra NAV. 
+Du skal svare <strong>Nei</strong> dersom du ikke lenger skal ha dagpenger eller noen annen form for bistand eller utbetalinger fra NAV.
 <br>
 <br>
 Svarer du <strong>Nei</strong>, vil utbetalingene dine stanse. Da vil vi fjerne deg fra NAVs register over arbeidssøkere, og du vil ikke få tilbud om arbeid eller tiltak.

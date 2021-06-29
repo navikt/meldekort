@@ -33,7 +33,7 @@ interface MapDispatchToProps {
 }
 
 interface NavKnappProps {
-  type: knappTyper;
+  type: KnappTyper;
   nestePath: string;
   tekstid: string;
   className?: string;
@@ -44,10 +44,10 @@ interface NavKnappProps {
   spinner?: boolean;
 }
 
-export enum knappTyper {
-  hoved = 'hoved',
-  standard = 'standard',
-  flat = 'flat',
+export enum KnappTyper {
+  HOVED = 'hoved',
+  STANDARD = 'standard',
+  FLAT = 'flat',
 }
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
@@ -56,9 +56,9 @@ class NavKnapp extends React.Component<Props> {
   harNestePathInnsending = (nestePathParams: string[]) => {
     return (
       nestePathParams[nestePathParams.length - 1] ===
-        Innsendingstyper.innsending ||
+        Innsendingstyper.INNSENDING ||
       nestePathParams[nestePathParams.length - 1] ===
-        Innsendingstyper.korrigering
+        Innsendingstyper.KORRIGERING
     );
   };
 
@@ -125,7 +125,7 @@ class NavKnapp extends React.Component<Props> {
           this.harNestePathInnsending(nestePathParams) &&
           nesteInnsendingstype !== undefined
         ) {
-          if (nesteInnsendingstype === Innsendingstyper.korrigering) {
+          if (nesteInnsendingstype === Innsendingstyper.KORRIGERING) {
             const konverterteSporsmalOgDager = settSporsmalOgUtfyllingHvisKorrigering(
               this.props.meldekortdetaljer,
               this.props.innsending
@@ -196,7 +196,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NavKnapp);
+export default connect(mapStateToProps, mapDispatchToProps)(NavKnapp);

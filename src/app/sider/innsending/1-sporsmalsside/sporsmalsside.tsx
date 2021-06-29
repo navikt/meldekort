@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import BegrunnelseVelger from './begrunnelse/begrunnelseVelger';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import veileder from '../../../ikoner/veileder.svg';
@@ -24,7 +24,6 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
 import {
   Infomelding,
-  Meldegruppe,
   Meldekort,
   SendtMeldekort,
 } from '../../../types/meldekort';
@@ -35,6 +34,7 @@ import { UiActions } from '../../../actions/ui';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -80,7 +80,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const registrert = this.sjekkOmSporsmalErUtfylt(kategorier[4]);
     const begrunnelseValgt =
       begrunnelse.valgtArsak === '' &&
-      innsendingstype === Innsendingstyper.korrigering;
+      innsendingstype === Innsendingstyper.KORRIGERING;
     const nySporsmalsobjekterState = sporsmalsobjekter.map(sporsmalsobj => {
       switch (sporsmalsobj.kategori) {
         case kategorier[0]:
@@ -141,7 +141,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     }
 
     if (
-      innsendingstype === Innsendingstyper.innsending &&
+      innsendingstype === Innsendingstyper.INNSENDING &&
       !this.fortsetteRegistrert()
     ) {
       this.props.visModal({
@@ -240,7 +240,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     return false;
   };
 
-  hentFeilmeldinger = (aap: boolean) => {
+  hentFeilmeldinger = (typeYtelsePostfix: string) => {
     const {
       sporsmalsobjekter,
       begrunnelse,
@@ -252,7 +252,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const feilIFerie = sporsmalsobjekter[3].feil.erFeil;
     const feilIRegistrert = sporsmalsobjekter[4].feil.erFeil;
     const feilIBegrunnelse =
-      begrunnelse.erFeil && innsendingstype === Innsendingstyper.korrigering;
+      begrunnelse.erFeil && innsendingstype === Innsendingstyper.KORRIGERING;
 
     if (
       feilIArbeid ||
@@ -277,17 +277,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
             ) : null}
             {feillIKurs ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'kurs.required' + (aap ? '-AAP' : ''),
+                id: 'kurs.required' + typeYtelsePostfix,
               })}`}</li>
             ) : null}
             {feilISyk ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'syk.required' + (aap ? '-AAP' : ''),
+                id: 'syk.required' + typeYtelsePostfix,
               })}`}</li>
             ) : null}
             {feilIFerie ? (
               <li>{`${hentIntl().formatMessage({
-                id: 'annetFravar.required' + (aap ? '-AAP' : ''),
+                id: 'annetFravar.required' + typeYtelsePostfix,
               })}`}</li>
             ) : null}
             {feilIRegistrert ? (
@@ -328,7 +328,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
     if (
       this.props.innsending.innsendingstype ===
-      Innsendingstyper.etterregistrering
+      Innsendingstyper.ETTERREGISTRERING
     ) {
       const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter.map(
         spmObj => {
@@ -351,9 +351,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       sendteMeldekort,
       infomelding,
     } = this.props;
-    const meldegruppeErAAP = aktivtMeldekort.meldegruppe === Meldegruppe.ATTF;
+
+    const typeYtelsePostfix = finnTypeYtelsePostfix(
+      aktivtMeldekort.meldegruppe
+    );
     const brukermelding =
       hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
+
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
       sendteMeldekort,
@@ -385,19 +389,22 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
           </Veilederpanel>
         </section>
         <section id="feilmelding" className="seksjon">
-          {this.hentFeilmeldinger(meldegruppeErAAP)}
+          {this.hentFeilmeldinger(typeYtelsePostfix)}
         </section>
-        {innsending.innsendingstype === Innsendingstyper.korrigering && (
+        {innsending.innsendingstype === Innsendingstyper.KORRIGERING && (
           <section className="seksjon">
             <BegrunnelseVelger
-              AAP={meldegruppeErAAP}
+              typeYtelsePostfix={typeYtelsePostfix}
               erFeil={innsending.begrunnelse.erFeil}
             />
           </section>
         )}
         <section className="seksjon">
-          <SporsmalsGruppe AAP={meldegruppeErAAP} innsending={innsending} />
-          {innsending.innsendingstype === Innsendingstyper.innsending ? (
+          <SporsmalsGruppe
+            typeYtelsePostfix={typeYtelsePostfix}
+            innsending={innsending}
+          />
+          {innsending.innsendingstype === Innsendingstyper.INNSENDING ? (
             <div className="alertstripe_registrert">
               <AlertStripe type="advarsel">
                 <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
@@ -408,7 +415,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
         <section className="seksjon flex-innhold sentrert">
           <div className={'knapper-container'}>
             <NavKnapp
-              type={knappTyper.hoved}
+              type={KnappTyper.HOVED}
               nestePath={
                 this.hoppeOverUtfylling() ? '/bekreftelse' : '/utfylling'
               }
@@ -417,7 +424,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
               validering={this.valider}
             />
             <NavKnapp
-              type={knappTyper.flat}
+              type={KnappTyper.FLAT}
               nestePath={'/om-meldekort'}
               tekstid={'naviger.avbryt'}
               className={'navigasjonsknapp'}

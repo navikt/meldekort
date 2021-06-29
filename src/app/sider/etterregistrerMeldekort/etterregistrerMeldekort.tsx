@@ -47,7 +47,7 @@ function EtterregistrerMeldekort({
   const harKunEttMeldekort = (meldekort: Meldekort[]) => {
     if (meldekort.length === 1) {
       leggTilAktivtMeldekort(meldekort[0]);
-      settInnsendingstype(Innsendingstyper.etterregistrering);
+      settInnsendingstype(Innsendingstyper.ETTERREGISTRERING);
       return true;
     } else {
       return false;

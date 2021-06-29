@@ -31,7 +31,7 @@ export const erAktivtMeldekortGyldig = (
 ): boolean => {
   if (innsendingsType === null) {
     return false;
-  } else if (innsendingsType === Innsendingstyper.korrigering) {
+  } else if (innsendingsType === Innsendingstyper.KORRIGERING) {
     return true;
   } else if (meldekort.meldekortId !== 0) {
     return !erMeldekortSendtInnTidligere(meldekort, sendteMeldekort);

@@ -11,7 +11,7 @@ import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvide
 
 interface MapStateToProps {
   begrunnelse: Begrunnelse;
-  AAP: boolean;
+  typeYtelsePostfix: string;
 }
 
 interface MapDispatchToProps {
@@ -52,8 +52,7 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
             </Undertittel>
             <UtvidetInformasjon>
               {hentIntl().formatHTMLMessage({
-                id:
-                  'forklaring.sporsmal.begrunnelse' + (props.AAP ? '-AAP' : ''),
+                id: 'forklaring.sporsmal.begrunnelse' + props.typeYtelsePostfix,
               })}
             </UtvidetInformasjon>
           </>
@@ -94,7 +93,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BegrunnelseVelger);
+export default connect(mapStateToProps, mapDispatchToProps)(BegrunnelseVelger);

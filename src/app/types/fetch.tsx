@@ -7,10 +7,10 @@ export const prefferedAxios = axios;
 export const backendApi: string = Environment().apiUrl;
 
 export enum FetchStatus {
-  'UNFETCHED',
-  'IN_PROGRESS',
-  'SUCCESS',
-  'FAILURE',
+  UNFETCHED,
+  IN_PROGRESS,
+  SUCCESS,
+  FAILURE,
 }
 
 export function hentDataFraKilde<T>(

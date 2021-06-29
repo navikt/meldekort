@@ -3,19 +3,22 @@ Meldekort er et webgrensesnitt for brukere å sende inn utfylte meldekort-skjema
 Meldekort tilbyr påloggende arbeidssøkere å se sin meldekorthistorikk samt å fylle ut og sende inn meldekort.
 
 ## Dokumentasjon
-Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/display/TA/Meldekort). Dokumentasjonen gjelder for den 
+Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/display/TA/Meldekort). Dokumentasjonen gjelder for den
 gamle JBoss/Wicket-applikasjonen, men vil bli oppdatert forløpende under utviklingen av denne nye versjonen.
 
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjekt rettes mot:
 
 * Geir Skjeret, geir.skjeret@nav.no
+* Igor Shuliakov, igor.shuliakov@nav.no
 
 ## For NAV-ansatte
 
 Interne henvendelser kan sendes via Slack i kanalen #team-arbeid / #meldekort
 
 ## For utviklere
+
+OBS! Man bør ha minst npm versjon 7 siden package-lock.json er på lockfileVersion 2 nå.
 
 ### Start applikasjonen lokalt
 
@@ -27,7 +30,7 @@ Interne henvendelser kan sendes via Slack i kanalen #team-arbeid / #meldekort
 
 
 For de som utvikler på tynnklienten, må disse to linjer med kode settes øverst i .npmrc-filen før npm install fungerer.
-* `proxy=http://155.55.60.117:8088/` 
+* `proxy=http://155.55.60.117:8088/`
 * `https-proxy=http://155.55.60.117:8088/`
 
 ## Endre tekster

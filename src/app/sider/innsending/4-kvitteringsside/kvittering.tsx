@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { FormattedMessage } from 'react-intl';
-import NavKnapp, { knappTyper } from '../../../components/knapp/navKnapp';
+import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
 import {
   KortStatus,
-  Meldegruppe,
   Meldekort,
   MeldekortState,
   SendtMeldekort,
@@ -38,6 +37,7 @@ import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -122,18 +122,18 @@ class Kvittering extends React.Component<KvitteringsProps> {
       etterregistrerteMeldekort.length > 0;
     const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(
       meldekort,
-      Innsendingstyper.innsending,
+      Innsendingstyper.INNSENDING,
       etterregistrerteMeldekort,
-      Innsendingstyper.etterregistrering
+      Innsendingstyper.ETTERREGISTRERING
     );
     const paramsForEtterregistrerte = this.returnerMeldekortListaMedFlereMeldekortIgjen(
       etterregistrerteMeldekort,
-      Innsendingstyper.etterregistrering,
+      Innsendingstyper.ETTERREGISTRERING,
       meldekort,
-      Innsendingstyper.innsending
+      Innsendingstyper.INNSENDING
     );
 
-    if (innsendingstype === Innsendingstyper.innsending) {
+    if (innsendingstype === Innsendingstyper.INNSENDING) {
       if (harBrukerFlereMeldekort) {
         return {
           knappTekstid: 'overskrift.nesteMeldekort',
@@ -149,7 +149,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
           nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype,
         };
       }
-    } else if (innsendingstype === Innsendingstyper.etterregistrering) {
+    } else if (innsendingstype === Innsendingstyper.ETTERREGISTRERING) {
       if (harBrukerFlereEtterregistrerteMeldekort) {
         return {
           knappTekstid: 'overskrift.etterregistrertMeldekort',
@@ -196,7 +196,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         }
       );
     } else if (
-      this.props.innsendingstype === Innsendingstyper.innsending &&
+      this.props.innsendingstype === Innsendingstyper.INNSENDING &&
       this.props.person.meldekort.length > 0
     ) {
       let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(
@@ -209,7 +209,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         );
       }
     } else if (
-      this.props.innsendingstype === Innsendingstyper.etterregistrering &&
+      this.props.innsendingstype === Innsendingstyper.ETTERREGISTRERING &&
       this.props.person.etterregistrerteMeldekort.length > 0
     ) {
       let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(
@@ -304,11 +304,13 @@ class Kvittering extends React.Component<KvitteringsProps> {
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={innsending.meldekortdetaljer}
-            erAap={aktivtMeldekort.meldegruppe === Meldegruppe.ATTF}
+            typeYtelsePostfix={finnTypeYtelsePostfix(
+              aktivtMeldekort.meldegruppe
+            )}
           />
         </section>
-        {innsendingstype === Innsendingstyper.innsending &&
-          nesteInnsendingstype === Innsendingstyper.etterregistrering && (
+        {innsendingstype === Innsendingstyper.INNSENDING &&
+          nesteInnsendingstype === Innsendingstyper.ETTERREGISTRERING && (
             <section className="seksjon etterregistrering_info">
               <FormattedMessage id={'sendt.etterregistrering.info'} />
             </section>
@@ -339,7 +341,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
               </a>
             ) : (
               <NavKnapp
-                type={knappTyper.hoved}
+                type={KnappTyper.HOVED}
                 className={'navigasjonsknapp'}
                 tekstid={knappTekstid}
                 nestePath={nestePath}
@@ -348,7 +350,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
               />
             )}
             <NavKnapp
-              type={knappTyper.standard}
+              type={KnappTyper.STANDARD}
               nestePath={'/tidligere-meldekort'}
               tekstid={'sendt.linkTilTidligereMeldekort'}
               className={'navigasjonsknapp'}
