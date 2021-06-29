@@ -1,4 +1,4 @@
-*TILTAK* <p style="color:#ee5522;">
+<p style="color:#ee5522;">
     <b>
         If you work from home, register your hours like you normally would. If you are absent from work due to quarantine, but still receive payment, register the hours that you should have worked.
         <br>

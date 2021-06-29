@@ -1,4 +1,4 @@
-*TILTAK* <p style="color:#ee5522;">
+<p style="color:#ee5522;">
     <b>
         Har du hjemmekontor og jobber, skal du registrere timer på vanlig måte. Har du fravær fra jobb på grunn av karantene, men får betalt lønn, skal du registrere de timene du skulle ha jobbet.
         <br>

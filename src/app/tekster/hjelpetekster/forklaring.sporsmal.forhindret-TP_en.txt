@@ -1,4 +1,4 @@
-*TILTAK* Click <strong>Yes</strong> if you have been prevented from taking work.
+Click <strong>Yes</strong> if you have been prevented from taking work.
 <br>
 <br>
 <p style="color:#ee5522;">

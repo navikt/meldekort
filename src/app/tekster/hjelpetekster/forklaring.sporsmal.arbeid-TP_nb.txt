@@ -1,4 +1,4 @@
-*TILTAK* Du skal svare <strong>Ja</strong> hvis du har vært i arbeid. Det gjelder både lønnet og ulønnet arbeid.
+Du skal svare <strong>Ja</strong> hvis du har vært i arbeid. Det gjelder både lønnet og ulønnet arbeid.
 <br>
 <br>
 <p style="color:#ee5522;">

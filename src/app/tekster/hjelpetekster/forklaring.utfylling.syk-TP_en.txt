@@ -1,4 +1,4 @@
-*TILTAK* <b><p style="color:#ee5522;">
+<b><p style="color:#ee5522;">
 
 Do not register illness unless you have sick leave and receive illness benefits.
 </p></b>
