@@ -68,7 +68,7 @@
     "nav-frontend-veileder": "^2.0.8",
     "nav-frontend-veileder-style": "^2.0.6",
     "nav-frontend-veilederpanel": "^0.1.10",
-    "nav-frontend-veilederpanel-style": "0.0.14",
+    "nav-frontend-veilederpanel-style": "0.0.45",
     "node-notifier": "^8.0.2",
     "promjs": "^0.4.0",
     "prop-types": "^15.7.2",
