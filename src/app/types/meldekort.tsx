@@ -57,12 +57,20 @@ export interface MeldekortdetaljerInnsending {
   signatur: boolean;
 
   sesjonsId: string;
+
+  sporsmalsobjekter?: Sporsmalsobjekt[];
 }
 
 export interface Fravaer {
   dag: Date;
   type: FravaerType;
   arbeidTimer?: number;
+}
+
+export interface Sporsmalsobjekt {
+  sporsmal: string;
+  forklaring?: string;
+  svar?: string;
 }
 
 export interface ValideringsResultat {

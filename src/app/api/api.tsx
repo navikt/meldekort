@@ -7,10 +7,21 @@ import {
   Infomelding,
   Meldekort,
   Meldekortdetaljer,
-  MeldekortdetaljerInnsending,
+  Sporsmalsobjekt,
   ValideringsResultat,
 } from '../types/meldekort';
 import { WeblogicPing } from '../types/weblogic';
+import { RootState } from '../store/configureStore';
+import { finnTypeYtelsePostfix } from '../utils/teksterUtil';
+import * as React from 'react';
+import { hentIntl } from '../utils/intlUtil';
+import {
+  hentDatoForAndreUke,
+  hentDatoForForsteUke,
+  hentNestePeriodeMedUkerOgDato,
+  hentUkenummerForDato,
+  ukeTekst,
+} from '../utils/dates';
 
 const fetchGet = async (url: string) => {
   return prefferedAxios
@@ -74,9 +85,12 @@ export function pingWeblogic(): Promise<WeblogicPing> {
   return fetchGet(Konstanter().pingWeblogic);
 }
 
-export function postMeldekort(
-  meldekortdetaljer: MeldekortdetaljerInnsending
-): Promise<ValideringsResultat> {
+export function postMeldekort(state: RootState): Promise<ValideringsResultat> {
+  let meldekortdetaljer = {
+    ...state.innsending.meldekortdetaljerInnsending!,
+    sporsmalsobjekter: opprettSporsmalsobjekter(state),
+  };
+
   return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
 }
 
@@ -85,4 +99,188 @@ function addIdToUrlIfNotMock(url: string, id: number): string {
     return url.replace('{id}', id.toString());
   }
   return url;
+}
+
+function opprettSporsmalsobjekter(state: RootState) {
+  const typeYtelsePostfix = finnTypeYtelsePostfix(
+    state.aktivtMeldekort.meldegruppe
+  );
+
+  let { til, fra } = state.aktivtMeldekort.meldeperiode;
+
+  // Side 1
+  let sporsmalsobjekter: Sporsmalsobjekt[] = state.innsending.sporsmalsobjekter.map(
+    spm => {
+      let formatertDato =
+        spm.kategori === 'registrert'
+          ? hentNestePeriodeMedUkerOgDato(fra, til)
+          : '';
+
+      return {
+        sporsmal:
+          hentIntl().formatMessage({ id: spm.sporsmal + typeYtelsePostfix }) +
+          formatertDato,
+        forklaring: hentIntl().formatMessage({
+          id: spm.forklaring + typeYtelsePostfix,
+        }),
+        svar:
+          (spm.checked?.endsWith('ja') ? 'X ' : '_ ') +
+          hentIntl().formatMessage({ id: spm.ja + typeYtelsePostfix }) +
+          '<br>' +
+          (spm.checked?.endsWith('nei') ? 'X ' : '_ ') +
+          hentIntl().formatMessage({ id: spm.nei + typeYtelsePostfix }),
+      };
+    }
+  );
+
+  // Side 2
+  let uke1 = {
+    sporsmal: ukeTekst() + hentUkenummerForDato(fra),
+    forklaring: hentDatoForForsteUke(fra),
+    svar: ukedager(),
+  };
+
+  let uke2 = {
+    sporsmal: ukeTekst() + hentUkenummerForDato(til),
+    forklaring: hentDatoForAndreUke(til),
+    svar: ukedager(),
+  };
+
+  sporsmalsobjekter.push(uke1);
+  sporsmalsobjekter.push(arbeidsdager(state, typeYtelsePostfix, 1));
+  sporsmalsobjekter.push(tiltaksdager(state, typeYtelsePostfix, 1));
+  sporsmalsobjekter.push(sykedager(state, typeYtelsePostfix, 1));
+  sporsmalsobjekter.push(feriedager(state, typeYtelsePostfix, 1));
+
+  sporsmalsobjekter.push(uke2);
+  sporsmalsobjekter.push(arbeidsdager(state, typeYtelsePostfix, 2));
+  sporsmalsobjekter.push(tiltaksdager(state, typeYtelsePostfix, 2));
+  sporsmalsobjekter.push(sykedager(state, typeYtelsePostfix, 2));
+  sporsmalsobjekter.push(feriedager(state, typeYtelsePostfix, 2));
+
+  return sporsmalsobjekter;
+}
+
+function ukedager() {
+  return (
+    hentIntl()
+      .formatMessage({ id: 'ukedag.mandag' })
+      .toUpperCase()[0] +
+    ' ' +
+    hentIntl()
+      .formatMessage({ id: 'ukedag.tirsdag' })
+      .toUpperCase()[0] +
+    ' ' +
+    hentIntl()
+      .formatMessage({ id: 'ukedag.onsdag' })
+      .toUpperCase()[0] +
+    ' ' +
+    hentIntl()
+      .formatMessage({ id: 'ukedag.torsdag' })
+      .toUpperCase()[0] +
+    ' ' +
+    hentIntl()
+      .formatMessage({ id: 'ukedag.fredag' })
+      .toUpperCase()[0] +
+    ' ' +
+    hentIntl()
+      .formatMessage({ id: 'ukedag.lordag' })
+      .toUpperCase()[0] +
+    ' ' +
+    hentIntl()
+      .formatMessage({ id: 'ukedag.sondag' })
+      .toUpperCase()[0]
+  );
+}
+
+function arbeidsdager(
+  state: RootState,
+  typeYtelsePostfix: String,
+  uke: number
+) {
+  return {
+    sporsmal: hentIntl().formatMessage({
+      id: 'utfylling.arbeid' + typeYtelsePostfix,
+    }),
+    forklaring: hentIntl().formatMessage({
+      id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
+    }),
+    svar: state.innsending.utfylteDager
+      .filter(dag => dag.uke == uke)
+      .map(dag => {
+        if (dag.arbeidetTimer) {
+          return dag.arbeidetTimer;
+        } else {
+          return 0;
+        }
+      })
+      .join(','),
+  };
+}
+
+function tiltaksdager(
+  state: RootState,
+  typeYtelsePostfix: String,
+  uke: number
+) {
+  return {
+    sporsmal: hentIntl().formatMessage({
+      id: 'utfylling.tiltak' + typeYtelsePostfix,
+    }),
+    forklaring: hentIntl().formatMessage({
+      id: 'forklaring.utfylling.tiltak' + typeYtelsePostfix,
+    }),
+    svar: state.innsending.utfylteDager
+      .filter(dag => dag.uke == uke)
+      .map(dag => {
+        if (dag.kurs) {
+          return 'X';
+        } else {
+          return '_';
+        }
+      })
+      .join(', '),
+  };
+}
+
+function sykedager(state: RootState, typeYtelsePostfix: String, uke: number) {
+  return {
+    sporsmal: hentIntl().formatMessage({
+      id: 'utfylling.syk' + typeYtelsePostfix,
+    }),
+    forklaring: hentIntl().formatMessage({
+      id: 'forklaring.utfylling.syk' + typeYtelsePostfix,
+    }),
+    svar: state.innsending.utfylteDager
+      .filter(dag => dag.uke == uke)
+      .map(dag => {
+        if (dag.syk) {
+          return 'X';
+        } else {
+          return ' ';
+        }
+      })
+      .join(', '),
+  };
+}
+
+function feriedager(state: RootState, typeYtelsePostfix: String, uke: number) {
+  return {
+    sporsmal: hentIntl().formatMessage({
+      id: 'utfylling.ferieFravar' + typeYtelsePostfix,
+    }),
+    forklaring: hentIntl().formatMessage({
+      id: 'forklaring.utfylling.ferieFravar' + typeYtelsePostfix,
+    }),
+    svar: state.innsending.utfylteDager
+      .filter(dag => dag.uke == uke)
+      .map(dag => {
+        if (dag.annetFravaer) {
+          return 'X';
+        } else {
+          return ' ';
+        }
+      })
+      .join(', '),
+  };
 }
