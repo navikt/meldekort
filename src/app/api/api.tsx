@@ -137,13 +137,11 @@ function opprettSporsmalsobjekter(state: RootState) {
   let uke1 = {
     sporsmal: ukeTekst() + hentUkenummerForDato(fra),
     forklaring: hentDatoForForsteUke(fra),
-    svar: ukedager(),
   };
 
   let uke2 = {
     sporsmal: ukeTekst() + hentUkenummerForDato(til),
     forklaring: hentDatoForAndreUke(til),
-    svar: ukedager(),
   };
 
   sporsmalsobjekter.push(uke1);
@@ -205,16 +203,19 @@ function arbeidsdager(
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
     }),
-    svar: state.innsending.utfylteDager
-      .filter(dag => dag.uke == uke)
-      .map(dag => {
-        if (dag.arbeidetTimer) {
-          return dag.arbeidetTimer;
-        } else {
-          return 0;
-        }
-      })
-      .join(','),
+    svar:
+      ukedager() +
+      '<br>' +
+      state.innsending.utfylteDager
+        .filter(dag => dag.uke == uke)
+        .map(dag => {
+          if (dag.arbeidetTimer) {
+            return dag.arbeidetTimer;
+          } else {
+            return 0;
+          }
+        })
+        .join(','),
   };
 }
 
@@ -230,16 +231,19 @@ function tiltaksdager(
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.tiltak' + typeYtelsePostfix,
     }),
-    svar: state.innsending.utfylteDager
-      .filter(dag => dag.uke == uke)
-      .map(dag => {
-        if (dag.kurs) {
-          return 'X';
-        } else {
-          return '_';
-        }
-      })
-      .join(', '),
+    svar:
+      ukedager() +
+      '<br>' +
+      state.innsending.utfylteDager
+        .filter(dag => dag.uke == uke)
+        .map(dag => {
+          if (dag.kurs) {
+            return 'X';
+          } else {
+            return '_';
+          }
+        })
+        .join(', '),
   };
 }
 
@@ -251,16 +255,19 @@ function sykedager(state: RootState, typeYtelsePostfix: String, uke: number) {
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.syk' + typeYtelsePostfix,
     }),
-    svar: state.innsending.utfylteDager
-      .filter(dag => dag.uke == uke)
-      .map(dag => {
-        if (dag.syk) {
-          return 'X';
-        } else {
-          return ' ';
-        }
-      })
-      .join(', '),
+    svar:
+      ukedager() +
+      '<br>' +
+      state.innsending.utfylteDager
+        .filter(dag => dag.uke == uke)
+        .map(dag => {
+          if (dag.syk) {
+            return 'X';
+          } else {
+            return '_';
+          }
+        })
+        .join(', '),
   };
 }
 
@@ -272,15 +279,18 @@ function feriedager(state: RootState, typeYtelsePostfix: String, uke: number) {
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.ferieFravar' + typeYtelsePostfix,
     }),
-    svar: state.innsending.utfylteDager
-      .filter(dag => dag.uke == uke)
-      .map(dag => {
-        if (dag.annetFravaer) {
-          return 'X';
-        } else {
-          return ' ';
-        }
-      })
-      .join(', '),
+    svar:
+      ukedager() +
+      '<br>' +
+      state.innsending.utfylteDager
+        .filter(dag => dag.uke == uke)
+        .map(dag => {
+          if (dag.annetFravaer) {
+            return 'X';
+          } else {
+            return '_';
+          }
+        })
+        .join(', '),
   };
 }
