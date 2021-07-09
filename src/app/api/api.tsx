@@ -135,13 +135,21 @@ function opprettSporsmalsobjekter(state: RootState) {
 
   // Side 2
   let uke1 = {
-    sporsmal: ukeTekst() + hentUkenummerForDato(fra),
-    forklaring: hentDatoForForsteUke(fra),
+    sporsmal:
+      ukeTekst() +
+      hentUkenummerForDato(fra) +
+      ' (' +
+      hentDatoForForsteUke(fra) +
+      ')',
   };
 
   let uke2 = {
-    sporsmal: ukeTekst() + hentUkenummerForDato(til),
-    forklaring: hentDatoForAndreUke(til),
+    sporsmal:
+      ukeTekst() +
+      hentUkenummerForDato(til) +
+      ' (' +
+      hentDatoForAndreUke(til) +
+      ')',
   };
 
   sporsmalsobjekter.push(uke1);
