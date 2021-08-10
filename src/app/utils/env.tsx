@@ -6,9 +6,7 @@ const Environment = () => {
     return {
       dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
       apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
-      loginUrl:
-        'https://loginservice-b2clogin-sbs.dev.nav.no/login?level=Level3',
-      // loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
+      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
@@ -17,9 +15,7 @@ const Environment = () => {
     return {
       dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
       apiUrl: 'https://www-q1.nav.no/meldekort/meldekort-api/api/',
-      loginUrl:
-        'https://loginservice-b2clogin-sbs.dev.nav.no/login?level=Level3',
-      // loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
+      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
