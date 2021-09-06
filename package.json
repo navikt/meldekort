@@ -5,7 +5,7 @@
   "homepage": "/meldekort",
   "dependencies": {
     "@craco/craco": "^5.9.0",
-    "@navikt/nav-chatbot": "^1.2.2",
+    "@navikt/nav-chatbot": "^2.1.1",
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/node": "^10.12.18",
@@ -22,7 +22,7 @@
     "@types/redux-logger": "^3.0.7",
     "@types/redux-persist-transform-encrypt": "^2.0.1",
     "amplitude-js": "7.4.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "be-pretty": "^0.9.3",
