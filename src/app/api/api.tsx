@@ -101,7 +101,7 @@ function addIdToUrlIfNotMock(url: string, id: number): string {
   return url;
 }
 
-function opprettSporsmalsobjekter(state: RootState) {
+function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   const typeYtelsePostfix = finnTypeYtelsePostfix(
     state.aktivtMeldekort.meldegruppe
   );
@@ -134,7 +134,7 @@ function opprettSporsmalsobjekter(state: RootState) {
   );
 
   // Side 2
-  let uke1 = {
+  let uke1: Sporsmalsobjekt = {
     sporsmal:
       ukeTekst() +
       hentUkenummerForDato(fra) +
@@ -143,7 +143,7 @@ function opprettSporsmalsobjekter(state: RootState) {
       ')',
   };
 
-  let uke2 = {
+  let uke2: Sporsmalsobjekt = {
     sporsmal:
       ukeTekst() +
       hentUkenummerForDato(til) +
@@ -203,8 +203,10 @@ function arbeidsdager(
   state: RootState,
   typeYtelsePostfix: String,
   uke: number
-) {
+): Sporsmalsobjekt {
   return {
+    advarsel:
+      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
       id: 'utfylling.arbeid' + typeYtelsePostfix,
     }),
@@ -231,8 +233,10 @@ function tiltaksdager(
   state: RootState,
   typeYtelsePostfix: String,
   uke: number
-) {
+): Sporsmalsobjekt {
   return {
+    advarsel:
+      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
       id: 'utfylling.tiltak' + typeYtelsePostfix,
     }),
@@ -255,8 +259,14 @@ function tiltaksdager(
   };
 }
 
-function sykedager(state: RootState, typeYtelsePostfix: String, uke: number) {
+function sykedager(
+  state: RootState,
+  typeYtelsePostfix: String,
+  uke: number
+): Sporsmalsobjekt {
   return {
+    advarsel:
+      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
       id: 'utfylling.syk' + typeYtelsePostfix,
     }),
@@ -279,8 +289,14 @@ function sykedager(state: RootState, typeYtelsePostfix: String, uke: number) {
   };
 }
 
-function feriedager(state: RootState, typeYtelsePostfix: String, uke: number) {
+function feriedager(
+  state: RootState,
+  typeYtelsePostfix: String,
+  uke: number
+): Sporsmalsobjekt {
   return {
+    advarsel:
+      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
       id: 'utfylling.ferieFravar' + typeYtelsePostfix,
     }),

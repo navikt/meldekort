@@ -68,6 +68,7 @@ export interface Fravaer {
 }
 
 export interface Sporsmalsobjekt {
+  advarsel?: string;
   sporsmal: string;
   forklaring?: string;
   svar?: string;
