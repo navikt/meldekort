@@ -9,7 +9,7 @@
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/node": "^10.12.18",
-    "@types/ramda": "^0.26.1",
+    "@types/ramda": "^0.27.44",
     "@types/react": "^16.14.8",
     "@types/react-aria-menubutton": "^6.2.2",
     "@types/react-collapse": "^4.0.2",
