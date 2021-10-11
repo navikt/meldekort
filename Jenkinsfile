@@ -28,7 +28,7 @@ node {
     validateJobParameters(environ)
 
     def varsFile = ".nais/vars-" + environ + ".yaml"
-    def cluster = "dev-fss"
+    def cluster = "dev-sbs"
 
     def buildTimestamp = new Date().format("YYYYMMddHHmmss")
 
