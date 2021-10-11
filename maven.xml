@@ -22,7 +22,7 @@
                 </executions>
                 <configuration>
                     <descriptors>
-                        <descriptor>nais.xml</descriptor>
+                        <descriptor>zip.xml</descriptor>
                     </descriptors>
                     <finalName>${project.artifactId}</finalName>
                 </configuration>
