@@ -1,9 +1,10 @@
-import NorskFlaggSVG from '../components/sprakvelger/NorskFlaggSVG';
 import * as React from 'react';
+import NorskFlaggSVG from '../components/sprakvelger/NorskFlaggSVG';
 import EngelskFlaggSVG from '../components/sprakvelger/EngelskFlaggSVG';
 import localeDataNB from 'react-intl/locale-data/nb';
 import localeDataNN from 'react-intl/locale-data/nn';
 import localeDataEN from 'react-intl/locale-data/en';
+import * as http from 'http';
 
 export interface SprakObj {
   label: string;
@@ -47,41 +48,46 @@ const localesReducer = (
 };
 
 export const messagesLoader = {
-  nb: () => import('../tekster/nb.json'),
-  nn: () => import('../tekster/nn.json'),
-  en: () => import('../tekster/en.json'),
+  nb: () => downloadMessages('nb'),
+  nn: () => downloadMessages('nn'),
+  en: () => downloadMessages('en'),
 };
 
-/*
-const currentDate = new Date();
-const time = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate().toString().padStart(2, '0') +
-  ' ' + currentDate.getHours().toString().padStart(2, '0') +
-  ':' + currentDate.getMinutes().toString().padStart(2, '0') +
-  ':' + currentDate.getSeconds().toString().padStart(2, '0');
+const downloadMessages = async (language: string) => {
+  const options = {
+    hostname: 'localhost',
+    port: 3001,
+    path: '/getall?language=' + language,
+    method: 'GET',
+  };
 
-const db = new Database('texts.sqlite');
+  return new Promise((resolve, reject) => {
+    const req = http.request(options, res => {
+      // on bad status, reject
+      if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+        return reject(new Error('statusCode=' + res.statusCode));
+      }
 
-const result = db.prepare("SELECT value " +
-  "FROM texts " +
-  "WHERE key = ? " +
-  "AND language = ? " +
-  "AND fromDateTime <= ? " +
-  "ORDER BY datetime(fromDateTime) DESC"
-).get(
-  tekstid,
-  hentLocale(),
-  time
-);
+      let data = '';
 
-// result is undefined if nothing has been found
-let value = tekstid.split('-')[0]
-if (result) {
-  value = tekstid;
-}
+      // on response data, cumulate it
+      res.on('data', chunk => {
+        data += chunk;
+      });
 
-db.close();
+      // on end, parse and resolve
+      res.on('end', () => {
+        resolve(JSON.parse(data));
+      });
+    });
 
-return value;
-*/
+    // on request error, reject
+    req.on('error', err => {
+      reject(err);
+    });
+
+    req.end();
+  });
+};
 
 export default localesReducer;

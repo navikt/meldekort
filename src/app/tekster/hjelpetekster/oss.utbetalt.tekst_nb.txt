@@ -1,9 +1,0 @@
-<p>
-Når meldekortet er beregnet, ser du brutto beregnet ytelse på «Ditt NAV».
-</p>
-<p>
-Brutto beløp er ytelsen før skattetrekk og eventuelle andre trekk. Beløpet er beregnet ut i fra hvilken dagsats du har, samt eventuelle tilleggsopplysninger du har oppgitt på meldekortet.
-</p>
-<p>
-Vil du ha flere detaljer om de ytelsene som er beregnet og mer om hva som er trukket i skatt eller av andre grunner, ser du det i «Dine utbetalinger».
-</p>

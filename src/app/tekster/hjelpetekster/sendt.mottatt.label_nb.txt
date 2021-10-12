@@ -1,1 +1,0 @@
-Meldekortet er mottatt av NAV {0} (klokken {1})

@@ -1,1 +1,0 @@
-Du kan også finne mer informasjon om tjenesten på siden <a href="{0}{1}" target="_blank" rel="noopener noreferrer">Informasjon om meldekort</a>.

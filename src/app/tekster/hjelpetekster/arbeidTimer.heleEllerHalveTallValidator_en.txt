@@ -1,1 +1,0 @@
-Invalid number of hours. Whole and half hours are valid values
