@@ -15,6 +15,7 @@ export const Konstanter = () => {
     andreUke: 2,
     pas: 'PASSWORD',
     use: 'USERNAME',
+    defaultLocale: 'nb',
   };
 };
 

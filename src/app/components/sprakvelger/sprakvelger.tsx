@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { RootState } from '../../store/configureStore';
-import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
+import { Button, Menu, MenuItem, Wrapper } from 'react-aria-menubutton';
 
 import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
-import EngelskFlaggSVG from './EngelskFlaggSVG';
-import NorskFlaggSVG from './NorskFlaggSVG';
 import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
-import { SprakObj } from '../../reducers/localesReducer';
+import { messagesLoader, SprakObj } from '../../reducers/localesReducer';
+import { Konstanter } from '../../utils/consts';
 
 const mapStateToProps = ({ intl, locales }: RootState) => {
   return {
@@ -32,13 +31,12 @@ const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
   const erSprakObjValgtSprakObj = sprakobj.label === valgtSprak;
   return (
     !erSprakObjValgtSprakObj && (
-      <li key={sprakobj.label} value={sprakobj.label}>
+      <li key={`language_list_item_${sprakobj.label}`} value={sprakobj.label}>
         <MenuItem className="languageToggle__menu__item">
-          <div className="languageToggle__button__flag">
-            {sprakobj.label === 'nb' ? <NorskFlaggSVG /> : <EngelskFlaggSVG />}
-          </div>
+          <div className="languageToggle__button__flag">{sprakobj.ikon}</div>
           <div
-            id={`languagesprakobj_${sprakobj}`}
+            key={sprakobj.label}
+            id={`languagesprakobj_${sprakobj.label}`}
             className="languageToggle__button__language"
           >
             {sprakobj.tittel}
@@ -51,13 +49,14 @@ const renderMenuItem = (sprakobj: SprakObj, valgtSprak: string) => {
 
 const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
   const { locale, locs } = props;
-  const sprakArray = [locs.nb, locs.en];
 
   const handleSelection = (value: JSX.Element[]) => {
-    const erNorskValgtSprak = value[1].props.children === 'Norsk';
-    const sprak: string = erNorskValgtSprak ? locs.nb.label : locs.en.label;
-    const tekster: {} = erNorskValgtSprak ? locs.nb.tekster : locs.en.tekster;
-    props.updateIntl(sprak, tekster);
+    const newLocale: string = value[1].key
+      ? value[1].key.toString()
+      : Konstanter().defaultLocale;
+    messagesLoader[newLocale]().then((messages: object) => {
+      props.updateIntl(newLocale, messages);
+    });
   };
 
   return (
@@ -68,10 +67,10 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
       >
         <Button className="languageToggle__button">
           <div className="languageToggle__button__flag">
-            {locale === 'nb' ? <NorskFlaggSVG /> : <EngelskFlaggSVG />}
+            {locs[locale].ikon}
           </div>
           <div className="languageToggle__button__language">
-            {locale === 'nb' ? locs.nb.tittel : locs.en.tittel}
+            {locs[locale].tittel}
           </div>
           <div>
             <NedChevron />
@@ -79,7 +78,9 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
         </Button>
         <Menu className="languageToggle__menu">
           <ul>
-            {sprakArray.map(sprakObj => renderMenuItem(sprakObj, locale))}
+            {Object.keys(locs).map(sprakObj =>
+              renderMenuItem(locs[sprakObj], locale)
+            )}
           </ul>
         </Menu>
       </Wrapper>
@@ -87,7 +88,4 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sprakvelger);
+export default connect(mapStateToProps, mapDispatchToProps)(Sprakvelger);

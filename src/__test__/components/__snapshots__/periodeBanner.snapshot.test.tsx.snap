@@ -9,7 +9,7 @@ exports[`PeriodeBanner 1`] = `
     className="typo-ingress flex-innhold sentrert"
   >
     <span>
-      Meldekort for perioden 
+      Meldekort for perioden
     </span>
   </p>
   <h1

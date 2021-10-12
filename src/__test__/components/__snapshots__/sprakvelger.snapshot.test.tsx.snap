@@ -57,7 +57,7 @@ exports[`Sprakvelger 1`] = `
       <div
         className="languageToggle__button__language"
       >
-        Norsk
+        Bokmål
       </div>
       <div>
         <span

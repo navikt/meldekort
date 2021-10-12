@@ -4,6 +4,9 @@ import {
   konverterUkedag,
   matchUkedager,
 } from '../../app/utils/ukedager';
+import { setLocalesBeforeAll } from '../testSetup/providerWrapper';
+
+setLocalesBeforeAll();
 
 it('hentUkedagerSomStringListe', () => {
   expect(hentUkedagerSomStringListe()).toStrictEqual([

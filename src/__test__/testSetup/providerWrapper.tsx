@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { store } from '../../app/store/configureStore';
-import { IntlProvider } from 'react-intl-redux';
+import { IntlProvider, IntlState, updateIntl } from 'react-intl-redux';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import tekster from '../../app/tekster/kompilerte-tekster';
+import { messagesLoader } from '../../app/reducers/localesReducer';
+import { Konstanter } from '../../app/utils/consts';
 
 interface Props {
   children: React.ReactNode;
@@ -11,16 +12,15 @@ interface Props {
   initialStateName?: string;
 }
 
+let intl: IntlState;
+
 const ProviderWrapper: React.FunctionComponent<Props> = props => {
   let testStore;
   if (props.initialState !== undefined) {
     let { initialState, initialStateName } = props;
     const mockState = {
       [initialStateName!]: initialState,
-      intl: {
-        locale: 'nb',
-        messages: tekster.nb,
-      },
+      intl: intl,
     };
     const mockStore = configureStore();
     testStore = mockStore(mockState);
@@ -30,11 +30,27 @@ const ProviderWrapper: React.FunctionComponent<Props> = props => {
 
   return (
     <Provider store={testStore}>
-      <IntlProvider locale="nb" defaultLocale="nb">
+      <IntlProvider
+        locale={Konstanter().defaultLocale}
+        defaultLocale={Konstanter().defaultLocale}
+      >
         {props.children}
       </IntlProvider>
     </Provider>
   );
+};
+
+export const setLocalesBeforeAll = () => {
+  beforeAll(async () => {
+    return await messagesLoader[Konstanter().defaultLocale]().then(
+      (messages: object) => {
+        store.dispatch(
+          updateIntl({ locale: Konstanter().defaultLocale, messages: messages })
+        );
+        intl = { locale: Konstanter().defaultLocale, messages: messages };
+      }
+    );
+  });
 };
 
 export default ProviderWrapper;

@@ -13,7 +13,7 @@ import {
   RouterState,
 } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
 
 import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
@@ -27,7 +27,6 @@ import personReducer from '../reducers/personReducer';
 import personStatusReducer, {
   PersonStatusState,
 } from '../reducers/personStatusReducer';
-import tekster from '../tekster/kompilerte-tekster';
 import {
   default as localesReducer,
   LocalesState,
@@ -65,12 +64,7 @@ export const history = createBrowserHistory({
 
 const packageConfig = require('../../../package.json');
 
-const initialState = {
-  intl: {
-    locale: 'nb',
-    messages: tekster.nb,
-  },
-};
+const initialState = {};
 
 export interface RootState {
   locales: LocalesState;

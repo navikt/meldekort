@@ -1,5 +1,4 @@
 import Environment from '../utils/env';
-import tekster from '../tekster/kompilerte-tekster';
 import { AppEpic } from '../store/configureStore';
 import { AxiosResponse } from 'axios';
 import { baksystemFeilmeldingContent } from '../components/feil/baksystemFeilmeldingContent';
@@ -18,6 +17,8 @@ import { PersonStatusActions } from '../actions/personStatus';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
+import { messagesLoader } from '../reducers/localesReducer';
+import { Konstanter } from '../utils/consts';
 
 const handterFeiletApiKall: AppEpic = action$ =>
   action$.pipe(
@@ -29,7 +30,14 @@ const handterFeiletApiKall: AppEpic = action$ =>
         axiosResponse.status !== undefined &&
         axiosResponse.status === 401
       ) {
-        updateIntl({ locale: 'nb', messages: tekster.nb });
+        messagesLoader[Konstanter().defaultLocale]().then(
+          (messages: object) => {
+            updateIntl({
+              locale: Konstanter().defaultLocale,
+              messages: messages,
+            });
+          }
+        );
 
         return [
           UiActions.visModal({

@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const betterSqlite3 = require('better-sqlite3');
+let db;
 
 function readFile(dir, file) {
   try {
@@ -8,56 +10,73 @@ function readFile(dir, file) {
     console.log('Error:', e.stack);
   }
 }
-function createJson(katalog) {
-  const tekster = getNbAndEnTexts(katalog);
-  return (
-    "/*tslint:disable*/export default {'nb':{" +
-    tekster[0] +
-    "},'en':{" +
-    tekster[1] +
-    '}};'
-  );
+
+function createJson(katalog, language) {
+  const tekster = getNbAndEnTexts(katalog, language);
+  return '{' + tekster + '}';
 }
 
-function getNbAndEnTexts(dir) {
-  return read(dir, '', '');
+function getNbAndEnTexts(dir, language) {
+  return read(dir, language);
 }
 
-function read(dir, nb, en) {
+function read(dir, language) {
+  let result = [];
+
   fs.readdirSync(dir).forEach(file => {
     if (fs.statSync(path.join(dir, file)).isDirectory()) {
-      [nb, en] = read(path.join(dir, file), nb, en);
+      read(path.join(dir, file), language);
     } else {
-      file.split('_')[1] === 'nb.txt'
-        ? (nb = nb + skrivFilTilSprak(file, dir, '_nb.txt'))
-        : (en = en + skrivFilTilSprak(file, dir, '_en.txt'));
+      if (file.split('_')[1] === language + '.txt') {
+        result.push(
+          '"' +
+            file.split('_')[0] +
+            '":"' +
+            readFile(dir, file)
+              .trim()
+              .replaceAll(/(\r\n|\n|\r)/gm, ' ')
+              .replaceAll('"', '\\"') +
+            '"'
+        );
+
+        db.prepare(
+          'INSERT INTO texts (key, value, language, fromDateTime) VALUES (?, ?, ?, ?)'
+        ).run(
+          file.split('_')[0],
+          readFile(dir, file)
+            .trim()
+            .replaceAll(/(\r\n|\n|\r)/gm, ' '),
+          file.substr(-6, 2),
+          '0000-00-00-00 00:00:00'
+        );
+      }
     }
   });
 
-  return [nb, en];
-}
-
-function skrivFilTilSprak(fil, dir, splitStr) {
-  return (
-    "'" +
-    fil.split(splitStr)[0] +
-    "'" +
-    ':' +
-    "'" +
-    readFile(dir, fil)
-      .trim()
-      .replace(/(\r\n|\n|\r)/gm, ' ') +
-    " ',"
-  );
+  return result.join(',');
 }
 
 try {
-  fs.writeFileSync(
-    './src/app/tekster/kompilerte-tekster.ts',
-    createJson('./src/app/tekster/hjelpetekster')
+  db = betterSqlite3('texts.sqlite');
+  db.exec('DROP TABLE IF EXISTS texts');
+  db.exec(
+    'CREATE TABLE texts (key TEXT, value TEXT, language TEXT, fromDateTime TEXT)'
   );
+
+  fs.writeFileSync(
+    './src/app/tekster/nb.json',
+    createJson('./src/app/tekster/hjelpetekster', 'nb')
+  );
+  fs.writeFileSync(
+    './src/app/tekster/nn.json',
+    createJson('./src/app/tekster/hjelpetekster', 'nn')
+  );
+  fs.writeFileSync(
+    './src/app/tekster/en.json',
+    createJson('./src/app/tekster/hjelpetekster', 'en')
+  );
+
+  db.close();
 } catch (e) {
   console.log('Kunne ikke skrive fil ', e);
 }
-
-console.log(getNbAndEnTexts('./src/app/tekster/hjelpetekster'));
