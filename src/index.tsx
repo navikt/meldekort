@@ -8,14 +8,12 @@ import { IntlProvider, updateIntl } from 'react-intl-redux';
 import { Provider } from 'react-redux';
 import { persistor, store } from './app/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
-import { messagesLoader } from './app/reducers/localesReducer';
+import { Locales, messagesLoader } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
 
-let locales = store.getState().locales;
-Object.keys(store.getState().locales).forEach(sprakObj =>
-  addLocaleData(locales[sprakObj].localeData)
-);
+let locales: Locales = store.getState().locales;
+locales.forEach(locale => addLocaleData(locale.localeData));
 
 const rootElement = document.getElementById('meldekort__root');
 

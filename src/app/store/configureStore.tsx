@@ -27,10 +27,7 @@ import personReducer from '../reducers/personReducer';
 import personStatusReducer, {
   PersonStatusState,
 } from '../reducers/personStatusReducer';
-import {
-  default as localesReducer,
-  LocalesState,
-} from '../reducers/localesReducer';
+import { default as localesReducer, Locales } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
 
 import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
@@ -67,7 +64,7 @@ const packageConfig = require('../../../package.json');
 const initialState = {};
 
 export interface RootState {
-  locales: LocalesState;
+  locales: Locales;
   intl: IntlState;
   router: RouterState;
   person: Person;

@@ -6,44 +6,40 @@ import localeDataNN from 'react-intl/locale-data/nn';
 import localeDataEN from 'react-intl/locale-data/en';
 import * as http from 'http';
 
-export interface SprakObj {
+export interface Locale {
   label: string;
   tittel: string;
   ikon: JSX.Element;
   localeData: ReactIntl.LocaleData;
 }
 
-export interface LocalesState {
-  nb: SprakObj;
-  nn: SprakObj;
-  en: SprakObj;
-}
+export interface Locales extends Array<Locale> {}
 
-const initialState: LocalesState = {
-  nb: {
+const initialState: Locales = [
+  {
     label: 'nb',
     tittel: 'Bokmål',
     ikon: <NorskFlaggSVG />,
     localeData: localeDataNB,
   },
-  nn: {
+  {
     label: 'nn',
     tittel: 'Nynorsk',
     ikon: <NorskFlaggSVG />,
     localeData: localeDataNN,
   },
-  en: {
+  {
     label: 'en',
     tittel: 'English',
     ikon: <EngelskFlaggSVG />,
     localeData: localeDataEN,
   },
-};
+];
 
 const localesReducer = (
-  state: LocalesState = initialState,
+  state: Locales = initialState,
   action: any
-): LocalesState => {
+): Locales => {
   return state;
 };
 
