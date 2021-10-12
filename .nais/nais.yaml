@@ -1,0 +1,68 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: meldekort-frontend{{ dashEnv }}
+  namespace: meldekort
+  labels:
+    team: meldekort
+spec:
+  image: repo.adeo.no:5443/meldeplikt/meldekort:{{ releaseVersion }}
+  port: 8080
+  ingresses:
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
+  liveness:
+    path: /meldekort/internal/isAlive
+    initialDelay: 10
+  readiness:
+    path: /meldekort/internal/isReady
+    initialDelay: 10
+  prometheus:
+    enabled: true
+    path: meldekort/internal/metrics
+  vault:
+    enabled: true
+  replicas:
+    min: 2
+    max: 4
+  webproxy: true
+  resources:
+    limits:
+      cpu: '3'
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 768Mi
+---
+apiVersion: nais.io/v1
+kind: Alert
+metadata:
+  name: meldekort-frontend
+  namespace: meldekort
+  labels:
+    team: meldekort
+spec:
+  receivers:
+    slack:
+      channel: '#{{ slackAlertChannel }}'
+  alerts:
+    - alert: meldekort-frontend_applikasjonsinstanser nede
+      expr: kube_deployment_status_replicas_unavailable{deployment=~"meldekort-frontend.*"} > 0
+      for: 2m
+      description: >
+            *\{{ $labels.deployment }}* har utilgjengelige applikasjonsinstanser (podder)
+      action: |
+            Kjør `kubectl describe pod -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for å se events,
+            evt. kjør først `kubectl get pods -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for en oversikt over poddene.
+            Sjekk også Kibana for eventuelle feil som er logget; query `application:\{{ $labels.deployment }} AND (level:Error OR level:Warning)`.
+      severity: danger
+    - alert: meldekort-frontend_feil er logget
+      expr: sum(increase(logd_messages_total{log_app=~"meldekort-frontend.*",log_level="Error"}[10m])) by (log_app, log_namespace) > 0
+      for: 3m
+      description: >
+            *\{{ $labels.log_app }}* har logget feil med loggnivå Error
+      action: |
+            Antall feil målt over siste 10 minutter er *\{{ $value }}*.
+            Sjekk Kibana for detaljer om feil som er logget: query `application:\{{ $labels.log_app }} AND (level:Error OR level:Warning)`.
+      severity: danger
