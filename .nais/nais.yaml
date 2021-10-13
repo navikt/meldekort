@@ -8,6 +8,8 @@ metadata:
 spec:
   image: repo.adeo.no:5443/meldeplikt/meldekort:{{ releaseVersion }}
   port: 8080
+  secureLogs:
+    enabled: true
   ingresses:
   {{#each ingresses as |url|}}
      - {{url}}
