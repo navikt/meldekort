@@ -2,7 +2,6 @@ import * as React from 'react';
 import NorskFlaggSVG from '../components/sprakvelger/NorskFlaggSVG';
 import EngelskFlaggSVG from '../components/sprakvelger/EngelskFlaggSVG';
 import localeDataNB from 'react-intl/locale-data/nb';
-import localeDataNN from 'react-intl/locale-data/nn';
 import localeDataEN from 'react-intl/locale-data/en';
 import * as http from 'http';
 
@@ -18,16 +17,18 @@ export interface Locales extends Array<Locale> {}
 const initialState: Locales = [
   {
     label: 'nb',
-    tittel: 'Bokmål',
+    tittel: 'Norsk',
     ikon: <NorskFlaggSVG />,
     localeData: localeDataNB,
   },
+  /*
   {
     label: 'nn',
     tittel: 'Nynorsk',
     ikon: <NorskFlaggSVG />,
     localeData: localeDataNN,
   },
+  */
   {
     label: 'en',
     tittel: 'English',

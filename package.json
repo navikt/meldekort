@@ -109,7 +109,7 @@
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
     "start:frontend": "cross-env REACT_APP_MOCK=true craco start",
-    "start:backend": "node src/server.js",
+    "start:backend": "node server.js",
     "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
     "test": "concurrently --kill-others \"npm run start:backend\" \"npm run test:run\"",
     "test:run": "react-scripts test --env=jsdom --coverage --watchAll=false --w=1",
