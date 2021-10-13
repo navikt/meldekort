@@ -130,7 +130,7 @@ node {
 
                 def nextVersion = getNextSnapshotVersion(releaseVersion)
 
-                sh "mvn -f version.xml versions:set -DnewVersion=${nextVersion} -DgenerateBackupPoms=false -B"
+                sh "mvn -f maven.xml versions:set -DnewVersion=${nextVersion} -DgenerateBackupPoms=false -B"
 
                 sh "git commit -am \"Oppdatert til neste SNAPSHOT-versjon ${nextVersion} (fra Jenkins pipeline)\""
                 sh "git push origin ${branchName}"
