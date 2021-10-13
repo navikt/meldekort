@@ -17,7 +17,7 @@ import { PersonStatusActions } from '../actions/personStatus';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
-import { messagesLoader } from '../reducers/localesReducer';
+import { downloadMessages } from '../reducers/localesReducer';
 import { Konstanter } from '../utils/consts';
 
 const handterFeiletApiKall: AppEpic = action$ =>
@@ -30,14 +30,15 @@ const handterFeiletApiKall: AppEpic = action$ =>
         axiosResponse.status !== undefined &&
         axiosResponse.status === 401
       ) {
-        messagesLoader[Konstanter().defaultLocale]().then(
-          (messages: object) => {
-            updateIntl({
-              locale: Konstanter().defaultLocale,
-              messages: messages,
-            });
-          }
-        );
+        downloadMessages(
+          Konstanter().defaultLocale,
+          Konstanter().defaultFromTime
+        ).then((messages: object) => {
+          updateIntl({
+            locale: Konstanter().defaultLocale,
+            messages: messages,
+          });
+        });
 
         return [
           UiActions.visModal({

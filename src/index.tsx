@@ -8,7 +8,7 @@ import { IntlProvider, updateIntl } from 'react-intl-redux';
 import { Provider } from 'react-redux';
 import { persistor, store } from './app/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Locales, messagesLoader } from './app/reducers/localesReducer';
+import { downloadMessages, Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
 
@@ -32,12 +32,14 @@ const render = (Component: React.ComponentType, locale: string) => {
 
 // TODO: render a loader before getting messages
 // Or maybe it's ok because messages will be downloaded from localhost?
-messagesLoader[Konstanter().defaultLocale]().then((messages: object) => {
-  store.dispatch(
-    updateIntl({ locale: Konstanter().defaultLocale, messages: messages })
-  );
+downloadMessages(Konstanter().defaultLocale, Konstanter().defaultFromTime).then(
+  (messages: object) => {
+    store.dispatch(
+      updateIntl({ locale: Konstanter().defaultLocale, messages: messages })
+    );
 
-  return render(App, Konstanter().defaultLocale);
-});
+    return render(App, Konstanter().defaultLocale);
+  }
+);
 
 serviceWorker.unregister();

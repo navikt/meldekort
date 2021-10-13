@@ -6,7 +6,7 @@ import { Button, Menu, MenuItem, Wrapper } from 'react-aria-menubutton';
 import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
-import { messagesLoader, Locale } from '../../reducers/localesReducer';
+import { Locale, downloadMessages } from '../../reducers/localesReducer';
 import { Konstanter } from '../../utils/consts';
 
 const mapStateToProps = ({ intl, locales }: RootState) => {
@@ -55,9 +55,11 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
     const newLocale: string = value[1].key
       ? value[1].key.toString()
       : Konstanter().defaultLocale;
-    messagesLoader[newLocale]().then((messages: object) => {
-      props.updateIntl(newLocale, messages);
-    });
+    downloadMessages(newLocale, Konstanter().defaultFromTime).then(
+      (messages: object) => {
+        props.updateIntl(newLocale, messages);
+      }
+    );
   };
 
   return (

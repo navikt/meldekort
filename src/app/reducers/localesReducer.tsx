@@ -43,17 +43,11 @@ const localesReducer = (
   return state;
 };
 
-export const messagesLoader = {
-  nb: () => downloadMessages('nb'),
-  nn: () => downloadMessages('nn'),
-  en: () => downloadMessages('en'),
-};
-
-const downloadMessages = async (language: string) => {
+export const downloadMessages = async (language: string, from: string) => {
   const options = {
     hostname: 'localhost',
     port: 3001,
-    path: '/getall?language=' + language,
+    path: '/getall?language=' + language + '&from=' + from,
     method: 'GET',
   };
 

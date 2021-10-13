@@ -7,6 +7,13 @@ const port = 3001;
 http
   .createServer(function(req, res) {
     try {
+      // CORS policy
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+      );
+
       const parsedUrl = url.parse(req.url, true);
       const queryObject = parsedUrl.query;
 
@@ -54,11 +61,6 @@ http
           value = id;
         }
 
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader(
-          'Access-Control-Allow-Methods',
-          'GET, POST, PUT, DELETE, OPTIONS'
-        );
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end(value);
       } else if (parsedUrl.pathname === '/get') {
@@ -70,21 +72,11 @@ http
           value = result.value;
         }
 
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader(
-          'Access-Control-Allow-Methods',
-          'GET, POST, PUT, DELETE, OPTIONS'
-        );
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end(value);
       } else if (parsedUrl.pathname === '/getall') {
         const result = getAll(db, language, time);
 
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader(
-          'Access-Control-Allow-Methods',
-          'GET, POST, PUT, DELETE, OPTIONS'
-        );
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.end(JSON.stringify(result));
       } else {
