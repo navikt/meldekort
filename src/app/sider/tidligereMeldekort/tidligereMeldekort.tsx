@@ -40,6 +40,8 @@ import { WeblogicPing } from '../../types/weblogic';
 import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
+import { downloadMessages } from '../../reducers/localesReducer';
+import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -52,7 +54,7 @@ interface MapStateToProps {
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
-  leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+  leggTilAktivtMeldekort: (locale: string, meldekort: Meldekort) => void;
   pingWeblogic: () => void;
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
@@ -251,8 +253,15 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    leggTilAktivtMeldekort: (meldekort: Meldekort) =>
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),
+    leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => {
+      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort));
+      downloadMessages(
+        locale,
+        aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
+      ).then((messages: object) => {
+        dispatch(updateIntl({ locale: locale, messages: messages }));
+      });
+    },
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),

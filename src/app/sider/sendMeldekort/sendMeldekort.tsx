@@ -27,16 +27,19 @@ import { useEffect } from 'react';
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
+import { downloadMessages } from '../../reducers/localesReducer';
+import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   person: Person;
   baksystemFeilmelding: BaksystemFeilmelding;
   router: Router;
   sendteMeldekort: SendtMeldekort[];
+  locale: string;
 }
 interface MapDispatchToProps {
   hentPerson: () => void;
-  leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
+  leggTilAktivtMeldekort: (locale: string, meldekort: Meldekort) => void;
   resetInnsending: () => void;
   settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
@@ -52,6 +55,7 @@ function SendMeldekort({
   leggTilAktivtMeldekort,
   resetInnsending,
   settInnsendingstype,
+  locale,
 }: Props) {
   const hentFeilmeldingEllerData = (rader: MeldekortRad[], kolonner: any) => {
     if (rader.length > 0) {
@@ -88,9 +92,9 @@ function SendMeldekort({
     }
   };
 
-  const harKunEttMeldekort = (meldekortListe: Meldekort[]) => {
+  const harKunEttMeldekort = (locale: string, meldekortListe: Meldekort[]) => {
     if (meldekortListe.length === 1) {
-      leggTilAktivtMeldekort(meldekortListe[0]);
+      leggTilAktivtMeldekort(locale, meldekortListe[0]);
       settInnsendingstype(Innsendingstyper.INNSENDING);
       return true;
     }
@@ -114,7 +118,7 @@ function SendMeldekort({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return !harKunEttMeldekort(innsendingsklareMeldekort) ? (
+  return !harKunEttMeldekort(locale, innsendingsklareMeldekort) ? (
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
@@ -150,6 +154,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     router: selectRouter(state),
     baksystemFeilmelding: selectFeilmelding(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    locale: state.intl.locale,
   };
 };
 
@@ -157,8 +162,15 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     hentPerson: () => dispatch(PersonActions.hentPerson.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
+    leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => {
+      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort));
+      downloadMessages(
+        locale,
+        aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
+      ).then((messages: object) => {
+        dispatch(updateIntl({ locale: locale, messages: messages }));
+      });
+    },
     settInnsendingstype: (innsendingstype: Innsendingstyper) => {
       dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype));
     },
