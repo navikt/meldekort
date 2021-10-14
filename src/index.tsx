@@ -30,8 +30,6 @@ const render = (Component: React.ComponentType, locale: string) => {
   );
 };
 
-// TODO: render a loader before getting messages
-// Or maybe it's ok because messages will be downloaded from localhost?
 downloadMessages(Konstanter().defaultLocale, Konstanter().defaultFromTime).then(
   (messages: object) => {
     store.dispatch(
