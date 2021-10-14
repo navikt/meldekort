@@ -27,7 +27,6 @@ import {
   formaterUkeOgDatoPeriode,
   hentTid,
 } from '../../../utils/dates';
-import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import Environment from '../../../utils/env';
 import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -38,8 +37,6 @@ import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { downloadMessages } from '../../../reducers/localesReducer';
-import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   router: Router;
@@ -59,7 +56,6 @@ interface PropsVerdier {
 }
 
 interface MapDispatchToProps {
-  leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => void;
   settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
   leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) => void;
   hentPersonInfo: () => void;
@@ -389,15 +385,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => {
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort));
-      downloadMessages(
-        locale,
-        aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
-      ).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-      });
-    },
     settInnsendingstype: (innsendingstype: Innsendingstyper | null) =>
       dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>

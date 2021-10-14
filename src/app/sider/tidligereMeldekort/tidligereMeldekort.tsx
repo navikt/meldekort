@@ -7,7 +7,6 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Tabell from '../../components/tabell/desktop/tabell';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
-import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { BaksystemFeilmelding, IngenTidligereMeldekort } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -29,7 +28,7 @@ import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortRedu
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
-import { HistoriskeMeldekortRad, Meldekort } from '../../types/meldekort';
+import { HistoriskeMeldekortRad } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import {
   selectFeilmelding,
@@ -40,8 +39,6 @@ import { WeblogicPing } from '../../types/weblogic';
 import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
-import { downloadMessages } from '../../reducers/localesReducer';
-import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -54,7 +51,6 @@ interface MapStateToProps {
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
-  leggTilAktivtMeldekort: (locale: string, meldekort: Meldekort) => void;
   pingWeblogic: () => void;
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
@@ -253,15 +249,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => {
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort));
-      downloadMessages(
-        locale,
-        aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
-      ).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-      });
-    },
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
