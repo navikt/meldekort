@@ -80,7 +80,7 @@
     "react-burger-menu": "^2.6.8",
     "react-collapse": "^4.0.3",
     "react-dom": "^16.7.0",
-    "react-intl": "^3.12.1",
+    "react-intl": "^2.8.0",
     "react-intl-redux": "^2.2.0",
     "react-modal": "^3.8.0",
     "react-motion": "^0.4.8",
