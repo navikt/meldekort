@@ -13,8 +13,6 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { Sporsmal as Spm } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { UtfyltDag } from '../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { settSporsmalOgUtfyllingHvisKorrigering } from '../../utils/korrigeringUtils';
-import { downloadMessages } from '../../reducers/localesReducer';
-import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   router: Router;
@@ -22,11 +20,10 @@ interface MapStateToProps {
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
   meldekortdetaljer: Meldekortdetaljer;
-  locale: string;
 }
 
 interface MapDispatchToProps {
-  leggTilAktivtMeldekort: (locale: string, meldekort: Meldekort) => void;
+  leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
   leggTilMeldekortId: (meldekortId: number) => void;
   oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
   oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => void;
@@ -83,7 +80,6 @@ class NavKnapp extends React.Component<Props> {
       nestePath,
       router,
       tekstid,
-      locale,
     } = this.props;
 
     if (tekstid === 'naviger.avbryt') {
@@ -93,7 +89,7 @@ class NavKnapp extends React.Component<Props> {
       nesteAktivtMeldekort !== undefined &&
         nesteInnsendingstype !== undefined &&
         this.props.resettAktivtMeldekort() &&
-        this.props.leggTilAktivtMeldekort(locale, nesteAktivtMeldekort);
+        this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
 
       let validert: boolean = true;
       if (typeof this.props.validering !== 'undefined') {
@@ -179,21 +175,13 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     aktivtMeldekort: state.aktivtMeldekort,
     innsending: state.innsending,
     meldekortdetaljer: state.meldekortdetaljer.meldekortdetaljer,
-    locale: state.intl.locale,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => {
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort));
-      downloadMessages(
-        locale,
-        aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
-      ).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-      });
-    },
+    leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
+      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     settInnsendingstype: (innsendingstype: Innsendingstyper) =>

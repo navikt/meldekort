@@ -16,12 +16,15 @@ import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
+import { downloadMessages } from '../../reducers/localesReducer';
+import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   innsending: InnsendingState;
   aktivtMeldekort: Meldekort;
   meldekortdetaljer: Meldekortdetaljer;
   router: RouterState;
+  locale: string;
 }
 
 interface MapDispatchToProps {
@@ -30,6 +33,7 @@ interface MapDispatchToProps {
   oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
   oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => void;
   settMeldekortId: (meldekortId: number) => void;
+  settLocale: (locale: string, from: string) => void;
 }
 
 type InnsendingRoutesProps = RouteComponentProps &
@@ -53,7 +57,12 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
   };
 
   componentDidMount() {
+    const { settLocale, aktivtMeldekort, locale } = this.props;
     this.settMeldekortIdBasertPaInnsendingstype();
+    settLocale(
+      locale,
+      aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
+    );
   }
 
   render() {
@@ -114,6 +123,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     aktivtMeldekort: state.aktivtMeldekort,
     meldekortdetaljer: state.meldekortdetaljer.meldekortdetaljer,
     router: state.router,
+    locale: state.intl.locale,
   };
 };
 
@@ -121,6 +131,11 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
+    settLocale: (locale: string, from: string) => {
+      downloadMessages(locale, from).then((messages: object) => {
+        dispatch(updateIntl({ locale: locale, messages: messages }));
+      });
+    },
     hentKorrigertId: () =>
       dispatch(InnsendingActions.hentKorrigertId.request()),
     oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>

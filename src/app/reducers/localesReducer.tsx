@@ -44,6 +44,14 @@ const localesReducer = (
   return state;
 };
 
+interface LocaleCache {
+  label: string;
+  fromTime: string;
+  messages: object;
+  validUntil: number;
+}
+const localeCache = new Array<LocaleCache>();
+
 export const downloadMessages = async (language: string, from: string) => {
   const options = {
     hostname: 'localhost',
@@ -52,11 +60,23 @@ export const downloadMessages = async (language: string, from: string) => {
     method: 'GET',
   };
 
+  const cachedLocale = localeCache.find(
+    cachedLocale =>
+      cachedLocale.label === language && cachedLocale.fromTime === from
+  );
+  const now = new Date().getTime();
+  const validUntil = now + 1800000; // Milliseconds
+  if (cachedLocale && cachedLocale.validUntil >= now) {
+    return new Promise(resolve => {
+      resolve(cachedLocale.messages);
+    });
+  }
+
   return new Promise((resolve, reject) => {
     const req = http.request(options, res => {
       // on bad status, reject
       if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
-        return reject(new Error('statusCode=' + res.statusCode));
+        reject(new Error('statusCode=' + res.statusCode));
       }
 
       let data = '';
@@ -68,7 +88,20 @@ export const downloadMessages = async (language: string, from: string) => {
 
       // on end, parse and resolve
       res.on('end', () => {
-        resolve(JSON.parse(data));
+        const messages = JSON.parse(data);
+
+        if (cachedLocale) {
+          cachedLocale.messages = messages;
+          cachedLocale.validUntil = validUntil;
+        } else {
+          localeCache.push({
+            label: language,
+            fromTime: from,
+            messages: messages,
+            validUntil: validUntil,
+          });
+        }
+        resolve(messages);
       });
     });
 

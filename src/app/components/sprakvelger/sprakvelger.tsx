@@ -9,11 +9,12 @@ import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
 import { Locale, downloadMessages } from '../../reducers/localesReducer';
 import { Konstanter } from '../../utils/consts';
 
-const mapStateToProps = ({ intl, locales }: RootState) => {
+const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
   return {
     currentLocale: intl.locale,
     messages: intl.messages,
     locales: locales,
+    aktivtMeldekort: aktivtMeldekort,
   };
 };
 
@@ -49,17 +50,20 @@ const renderMenuItem = (locale: Locale, valgtSprak: string) => {
 };
 
 const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
-  const { currentLocale, locales } = props;
+  const { currentLocale, locales, aktivtMeldekort } = props;
 
   const handleSelection = (value: JSX.Element[]) => {
     const newLocale: string = value[1].key
       ? value[1].key.toString()
       : Konstanter().defaultLocale;
-    downloadMessages(newLocale, Konstanter().defaultFromTime).then(
-      (messages: object) => {
-        props.updateIntl(newLocale, messages);
-      }
-    );
+    downloadMessages(
+      newLocale,
+      aktivtMeldekort
+        ? aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
+        : Konstanter().defaultFromTime
+    ).then((messages: object) => {
+      props.updateIntl(newLocale, messages);
+    });
   };
 
   return (

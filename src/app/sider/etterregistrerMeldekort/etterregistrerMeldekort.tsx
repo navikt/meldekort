@@ -20,19 +20,16 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { useEffect } from 'react';
 import EtterregistreringInnhold from './etterregistreringInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
-import { downloadMessages } from '../../reducers/localesReducer';
-import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   person: Person;
   router: Router;
   sendteMeldekort: SendtMeldekort[];
-  locale: string;
 }
 interface MapDispatchToProps {
   hentPerson: () => void;
   resetInnsending: () => void;
-  leggTilAktivtMeldekort: (locale: string, meldekort: Meldekort) => void;
+  leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
   settInnsendingstype: (innsendingstype: Innsendingstyper) => void;
 }
 
@@ -46,11 +43,10 @@ function EtterregistrerMeldekort({
   resetInnsending,
   settInnsendingstype,
   leggTilAktivtMeldekort,
-  locale,
 }: Props) {
   const harKunEttMeldekort = (meldekort: Meldekort[]) => {
     if (meldekort.length === 1) {
-      leggTilAktivtMeldekort(locale, meldekort[0]);
+      leggTilAktivtMeldekort(meldekort[0]);
       settInnsendingstype(Innsendingstyper.ETTERREGISTRERING);
       return true;
     } else {
@@ -99,7 +95,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     router: selectRouter(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
-    locale: state.intl.locale,
   };
 };
 
@@ -107,15 +102,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     hentPerson: () => dispatch(PersonActions.hentPerson.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    leggTilAktivtMeldekort: (locale: string, aktivtMeldekort: Meldekort) => {
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort));
-      downloadMessages(
-        locale,
-        aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
-      ).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-      });
-    },
+    leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
+      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
     settInnsendingstype: (innsendingstype: Innsendingstyper) =>
       dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
   };
