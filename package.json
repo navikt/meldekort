@@ -111,7 +111,7 @@
     "start:frontend": "cross-env REACT_APP_MOCK=true craco start",
     "start:backend": "node server.js",
     "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
-    "test": "concurrently --kill-others \"npm run start:backend\" \"npm run test:run\"",
+    "test": "concurrently --kill-others --success first \"npm run start:backend\" \"npm run test:run\"",
     "test:run": "react-scripts test --env=jsdom --coverage --watchAll=false --w=1",
     "test:watch": "react-scripts test --env=jsdom",
     "test:reload": "react-scripts test -u",
