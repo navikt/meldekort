@@ -1,0 +1,6 @@
+dashEnv: ""
+releaseVersion: ##RELEASE_VERSION##
+slackAlertChannel: team-meldeplikt-alerts
+ingresses:
+  - "https://meldekort.nais.oera.no"
+  - "https://www.nav.no/meldekort"
