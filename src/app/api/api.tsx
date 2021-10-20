@@ -195,7 +195,6 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
       }),
   });
 
-  console.log(sporsmalsobjekter);
   return sporsmalsobjekter;
 }
 
@@ -248,9 +247,9 @@ function arbeidsdager(
       id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
     }),
     svar:
-      '<table border="1" style="border-collapse:collapse"><tr><td>' +
+      '<table border="1" style="border-collapse:collapse"><tr>' +
       ukedager() +
-      '</tr><tr>' +
+      '</tr><tr><td>' +
       state.innsending.utfylteDager
         .filter(dag => dag.uke == uke)
         .map(dag => {
@@ -261,7 +260,7 @@ function arbeidsdager(
           }
         })
         .join('</td><td>') +
-      '</tr></table>',
+      '</td></tr></table>',
   };
 }
 
@@ -280,8 +279,9 @@ function tiltaksdager(
       id: 'forklaring.utfylling.tiltak' + typeYtelsePostfix,
     }),
     svar:
+      '<table border="1" style="border-collapse:collapse"><tr>' +
       ukedager() +
-      '<br>' +
+      '</tr><tr><td>' +
       state.innsending.utfylteDager
         .filter(dag => dag.uke == uke)
         .map(dag => {
@@ -291,7 +291,8 @@ function tiltaksdager(
             return '_';
           }
         })
-        .join(', '),
+        .join('</td><td>') +
+      '</td></tr></table>',
   };
 }
 
@@ -310,8 +311,9 @@ function sykedager(
       id: 'forklaring.utfylling.syk' + typeYtelsePostfix,
     }),
     svar:
+      '<table border="1" style="border-collapse:collapse"><tr>' +
       ukedager() +
-      '<br>' +
+      '</tr><tr><td>' +
       state.innsending.utfylteDager
         .filter(dag => dag.uke == uke)
         .map(dag => {
@@ -321,7 +323,8 @@ function sykedager(
             return '_';
           }
         })
-        .join(', '),
+        .join('</td><td>') +
+      '</td></tr></table>',
   };
 }
 
@@ -340,8 +343,9 @@ function feriedager(
       id: 'forklaring.utfylling.ferieFravar' + typeYtelsePostfix,
     }),
     svar:
+      '<table border="1" style="border-collapse:collapse"><tr>' +
       ukedager() +
-      '<br>' +
+      '</tr><tr><td>' +
       state.innsending.utfylteDager
         .filter(dag => dag.uke == uke)
         .map(dag => {
@@ -351,6 +355,7 @@ function feriedager(
             return '_';
           }
         })
-        .join(', '),
+        .join('</td><td>') +
+      '</td></tr></table>',
   };
 }
