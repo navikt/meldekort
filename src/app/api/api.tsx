@@ -22,6 +22,7 @@ import {
   hentUkenummerForDato,
   ukeTekst,
 } from '../utils/dates';
+import { Innsendingstyper } from '../types/innsending';
 
 const fetchGet = async (url: string) => {
   return prefferedAxios
@@ -108,29 +109,48 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
 
   let { til, fra } = state.aktivtMeldekort.meldeperiode;
 
-  // Side 1
-  let sporsmalsobjekter: Sporsmalsobjekt[] = state.innsending.sporsmalsobjekter.map(
-    spm => {
-      let formatertDato =
-        spm.kategori === 'registrert'
-          ? hentNestePeriodeMedUkerOgDato(fra, til)
-          : '';
+  let sporsmalsobjekter: Sporsmalsobjekt[] = new Array<Sporsmalsobjekt>();
 
-      return {
-        sporsmal:
-          hentIntl().formatMessage({ id: spm.sporsmal }) + formatertDato,
-        forklaring: hentIntl().formatMessage({
-          id: spm.forklaring,
-        }),
-        svar:
-          (spm.checked?.endsWith('ja') ? 'X ' : '_ ') +
-          hentIntl().formatMessage({ id: spm.ja }) +
-          '<br>' +
-          (spm.checked?.endsWith('nei') ? 'X ' : '_ ') +
-          hentIntl().formatMessage({ id: spm.nei }),
-      };
-    }
-  );
+  if (state.innsending.innsendingstype === Innsendingstyper.KORRIGERING) {
+    sporsmalsobjekter.push({
+      sporsmal: hentIntl().formatMessage({
+        id: 'sporsmal.lesVeiledning' + typeYtelsePostfix,
+      }),
+    });
+  }
+
+  if (state.innsending.innsendingstype === Innsendingstyper.KORRIGERING) {
+    sporsmalsobjekter.push({
+      sporsmal: hentIntl().formatMessage({
+        id: 'korrigering.sporsmal.begrunnelse' + typeYtelsePostfix,
+      }),
+      forklaring: hentIntl().formatMessage({
+        id: 'forklaring.sporsmal.begrunnelse' + typeYtelsePostfix,
+      }),
+      svar: state.innsending.begrunnelse.valgtArsak,
+    });
+  }
+
+  // Side 1
+  state.innsending.sporsmalsobjekter.forEach(spm => {
+    let formatertDato =
+      spm.kategori === 'registrert'
+        ? hentNestePeriodeMedUkerOgDato(fra, til)
+        : '';
+
+    sporsmalsobjekter.push({
+      sporsmal: hentIntl().formatMessage({ id: spm.sporsmal }) + formatertDato,
+      forklaring: hentIntl().formatMessage({
+        id: spm.forklaring,
+      }),
+      svar:
+        (spm.checked?.endsWith('ja') ? 'X ' : '_ ') +
+        hentIntl().formatMessage({ id: spm.ja }) +
+        '<br>' +
+        (spm.checked?.endsWith('nei') ? 'X ' : '_ ') +
+        hentIntl().formatMessage({ id: spm.nei }),
+    });
+  });
 
   // Side 2
   let uke1: Sporsmalsobjekt = {
@@ -163,38 +183,53 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   sporsmalsobjekter.push(sykedager(state, typeYtelsePostfix, 2));
   sporsmalsobjekter.push(feriedager(state, typeYtelsePostfix, 2));
 
+  sporsmalsobjekter.push({
+    sporsmal: '',
+    forklaring:
+      hentIntl().formatMessage({
+        id: 'utfylling.bekreft' + typeYtelsePostfix,
+      }) +
+      '<br>X ' +
+      hentIntl().formatMessage({
+        id: 'utfylling.bekreftAnsvar' + typeYtelsePostfix,
+      }),
+  });
+
+  console.log(sporsmalsobjekter);
   return sporsmalsobjekter;
 }
 
 function ukedager() {
   return (
+    '<td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.mandag' })
       .toUpperCase()[0] +
-    ' ' +
+    '</td><td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.tirsdag' })
       .toUpperCase()[0] +
-    ' ' +
+    '</td><td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.onsdag' })
       .toUpperCase()[0] +
-    ' ' +
+    '</td><td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.torsdag' })
       .toUpperCase()[0] +
-    ' ' +
+    '</td><td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.fredag' })
       .toUpperCase()[0] +
-    ' ' +
+    '</td><td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.lordag' })
       .toUpperCase()[0] +
-    ' ' +
+    '</td><td>' +
     hentIntl()
       .formatMessage({ id: 'ukedag.sondag' })
-      .toUpperCase()[0]
+      .toUpperCase()[0] +
+    '</td>'
   );
 }
 
@@ -213,8 +248,9 @@ function arbeidsdager(
       id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
     }),
     svar:
+      '<table border="1" style="border-collapse:collapse"><tr><td>' +
       ukedager() +
-      '<br>' +
+      '</tr><tr>' +
       state.innsending.utfylteDager
         .filter(dag => dag.uke == uke)
         .map(dag => {
@@ -224,7 +260,8 @@ function arbeidsdager(
             return 0;
           }
         })
-        .join(','),
+        .join('</td><td>') +
+      '</tr></table>',
   };
 }
 
