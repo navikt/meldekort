@@ -1,6 +1,6 @@
-{0}{1} for perioden Uke {2} - {3} ({4} - {5}}) elektronisk mottatt av NAV<br>
-Meldekortet ble mottatt %MOTTAT% og fikk ID %MELDEKORT_ID%<br>
-Tema: %TEMA%<br>
-Bruker: %NAVN% (%FNR%)<br>
-Tilgangsnivå: %TILGANGSNIVAA%<br>
-Neste meldekort kan sendes inn fra {6}<br><br>
+{type}Meldekort for perioden {period} elektronisk mottatt av NAV<br/>
+Meldekortet ble mottatt %MOTTAT% og fikk ID %MELDEKORT_ID%<br/>
+Tema: %TEMA%<br/>
+Bruker: %NAVN% (%FNR%)<br/>
+Tilgangsnivå: %TILGANGSNIVAA%<br/>
+Neste meldekort kan sendes inn fra {kortKanSendesFra}<br/><br/>

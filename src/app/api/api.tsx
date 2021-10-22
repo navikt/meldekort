@@ -17,6 +17,7 @@ import * as React from 'react';
 import { hentIntl } from '../utils/intlUtil';
 import {
   formaterDato,
+  formaterUkeOgDatoPeriode,
   hentDatoForAndreUke,
   hentDatoForForsteUke,
   hentNestePeriodeMedUkerOgDato,
@@ -104,13 +105,12 @@ function addIdToUrlIfNotMock(url: string, id: number): string {
 }
 
 function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
-  const typeYtelsePostfix = finnTypeYtelsePostfix(
-    state.aktivtMeldekort.meldegruppe
-  );
+  const { aktivtMeldekort, innsending } = state;
 
-  let { til, fra, kortKanSendesFra } = state.aktivtMeldekort.meldeperiode;
-  let korrigering =
-    state.innsending.innsendingstype === Innsendingstyper.KORRIGERING;
+  const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+
+  let { til, fra, kortKanSendesFra } = aktivtMeldekort.meldeperiode;
+  let korrigering = innsending.innsendingstype === Innsendingstyper.KORRIGERING;
 
   let sporsmalsobjekter: Sporsmalsobjekt[] = new Array<Sporsmalsobjekt>();
 
@@ -123,15 +123,16 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
     svar: hentIntl().formatMessage(
       { id: 'sendt.mottatt.pdfheader' },
       {
-        0: korrigering
-          ? hentIntl().formatMessage({ id: 'meldekort.type.korrigert' }) + ' '
+        type: korrigering
+          ? hentIntl()
+              .formatMessage({ id: 'meldekort.type.korrigert' })
+              .trim() + ' '
           : '',
-        1: hentIntl().formatMessage({ id: 'overskrift.meldekort' }),
-        2: hentUkenummerForDato(fra),
-        3: hentUkenummerForDato(til),
-        4: hentDatoForForsteUke(fra),
-        5: hentDatoForAndreUke(til),
-        6: formaterDato(kortKanSendesFra),
+        period: formaterUkeOgDatoPeriode(
+          innsending.meldekortdetaljerInnsending!.meldeperiode.fra,
+          innsending.meldekortdetaljerInnsending!.meldeperiode.til
+        ),
+        kortKanSendesFra: formaterDato(kortKanSendesFra),
       }
     ),
   });
@@ -150,12 +151,12 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
       forklaring: hentIntl().formatMessage({
         id: 'forklaring.sporsmal.begrunnelse' + typeYtelsePostfix,
       }),
-      svar: state.innsending.begrunnelse.valgtArsak,
+      svar: innsending.begrunnelse.valgtArsak,
     });
   }
 
   // Side 1
-  state.innsending.sporsmalsobjekter.forEach(spm => {
+  innsending.sporsmalsobjekter.forEach(spm => {
     let formatertDato =
       spm.kategori === 'registrert'
         ? hentNestePeriodeMedUkerOgDato(fra, til)
@@ -217,6 +218,7 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
       }),
   });
 
+  console.log(sporsmalsobjekter);
   return sporsmalsobjekter;
 }
 
@@ -263,7 +265,7 @@ function arbeidsdager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.arbeid',
+      id: 'utfylling.arbeid' + typeYtelsePostfix,
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
@@ -295,7 +297,7 @@ function tiltaksdager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.tiltak',
+      id: 'utfylling.tiltak' + typeYtelsePostfix,
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.tiltak' + typeYtelsePostfix,
@@ -327,7 +329,7 @@ function sykedager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.syk',
+      id: 'utfylling.syk' + typeYtelsePostfix,
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.syk' + typeYtelsePostfix,
@@ -359,7 +361,7 @@ function feriedager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.ferieFravar',
+      id: 'utfylling.ferieFravar' + typeYtelsePostfix,
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.ferieFravar' + typeYtelsePostfix,

@@ -157,6 +157,7 @@
     'meldekort.type.elektronisk': 'Elektronisk kort ',
     'meldekort.type.erstatning': 'Erstatningskort ',
     'meldekort.type.korrigertElektronisk': 'Elektronisk korrigert ',
+    'meldekort.type.korrigert': 'Korrigert ',
     'meldekort.type.manuellArena': 'Manuelt opprettet kort ',
     'meldekort.type.maskineltOppdatert': 'Maskinelt oppdatert ',
     'meldekort.type.ordinarManuell': 'Manuelt utfylt kort ',
@@ -263,6 +264,8 @@
     'sendt.linkTilTidligereMeldekort': 'Til meldekortoversikten ',
     'sendt.meldekortKanSendes': 'Neste meldekort kan sendes inn fra {0} ',
     'sendt.mottatt.label': 'Meldekortet er mottatt av NAV {0} (klokken {1}) ',
+    'sendt.mottatt.pdfheader':
+      '{type}Meldekort for perioden {period} elektronisk mottatt av NAV<br/> Meldekortet ble mottatt %MOTTAT% og fikk ID %MELDEKORT_ID%<br/> Tema: %TEMA%<br/> Bruker: %NAVN% (%FNR%)<br/> Tilgangsnivå: %TILGANGSNIVAA%<br/> Neste meldekort kan sendes inn fra {kortKanSendesFra}<br/><br/> ',
     'skrivUt.lukkVindu': 'Lukk vindu ',
     'sporsmal.aktivitetArbeid-AAP':
       'Har du gjennomført avtalt aktivitet eller deltatt på kurs/utdanning? ',
@@ -557,6 +560,7 @@
     'meldekort.type.elektronisk': 'Electronic card ',
     'meldekort.type.erstatning': 'Erstatningskort ',
     'meldekort.type.korrigertElektronisk': 'Elektronisk korrigert ',
+    'meldekort.type.korrigert': 'Corrected ',
     'meldekort.type.manuellArena': 'Manuelt opprettet kort ',
     'meldekort.type.maskineltOppdatert': 'Maskinelt oppdatert ',
     'meldekort.type.ordinarManuell': 'Manuelt utfylt kort ',
@@ -666,6 +670,8 @@
       'The next employment status form can be submitted on {0} ',
     'sendt.mottatt.label':
       'The Employment status form was received by NAV on {0} (at {1}) ',
+    'sendt.mottatt.pdfheader':
+      '{type}Employment status for the period {period} electronically received by NAV<br/> The Employment status form was received %MOTTAT% and got ID %MELDEKORT_ID%<br/> Subject: %TEMA%<br/> User: %NAVN% (%FNR%)<br/> Access level: %TILGANGSNIVAA%<br/> The next Employment status form can be submitted from {kortKanSendesFra}<br/><br/> ',
     'skrivUt.lukkVindu': 'Close ',
     'sporsmal.aktivitetArbeid-AAP':
       'Have you completed an agreed activity or taken part in a course and/or training? ',
