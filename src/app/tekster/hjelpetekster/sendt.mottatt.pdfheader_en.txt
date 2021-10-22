@@ -1,0 +1,6 @@
+{0}{1} for the period Week {2} - {3} ({4} - {5}}) electronically received by NAV<br>
+The Employment status form was received %MOTTAT% and got ID %MELDEKORT_ID%<br>
+Subject: %TEMA%<br>
+User: %NAVN% (%FNR%)<br>
+Access level: %TILGANGSNIVAA%<br>
+The next Employment status form can be submitted from {6}<br><br>

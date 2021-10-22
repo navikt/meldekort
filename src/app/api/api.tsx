@@ -16,6 +16,7 @@ import { finnTypeYtelsePostfix } from '../utils/teksterUtil';
 import * as React from 'react';
 import { hentIntl } from '../utils/intlUtil';
 import {
+  formaterDato,
   hentDatoForAndreUke,
   hentDatoForForsteUke,
   hentNestePeriodeMedUkerOgDato,
@@ -107,19 +108,41 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
     state.aktivtMeldekort.meldegruppe
   );
 
-  let { til, fra } = state.aktivtMeldekort.meldeperiode;
+  let { til, fra, kortKanSendesFra } = state.aktivtMeldekort.meldeperiode;
+  let korrigering =
+    state.innsending.innsendingstype === Innsendingstyper.KORRIGERING;
 
   let sporsmalsobjekter: Sporsmalsobjekt[] = new Array<Sporsmalsobjekt>();
 
-  if (state.innsending.innsendingstype === Innsendingstyper.KORRIGERING) {
-    sporsmalsobjekter.push({
-      sporsmal: hentIntl().formatMessage({
-        id: 'sporsmal.lesVeiledning' + typeYtelsePostfix,
-      }),
-    });
-  }
+  // Vi vet ikke meldekort ID før vi sender det, vi kan ikke stole på klokkeslett fra JS, vi må mappe tema
+  // Men vi må ha denne teksten på riktig språk
+  // Derfor setter vi nn alt vi kan og sender teksten videre med placeholders (f.eks %TEMA%)
+  // Disse senere erstattes i meldekort-api
+  sporsmalsobjekter.push({
+    sporsmal: '',
+    svar: hentIntl().formatMessage(
+      { id: 'sendt.mottatt.pdfheader' },
+      {
+        0: korrigering
+          ? hentIntl().formatMessage({ id: 'meldekort.type.korrigert' }) + ' '
+          : '',
+        1: hentIntl().formatMessage({ id: 'overskrift.meldekort' }),
+        2: hentUkenummerForDato(fra),
+        3: hentUkenummerForDato(til),
+        4: hentDatoForForsteUke(fra),
+        5: hentDatoForAndreUke(til),
+        6: formaterDato(kortKanSendesFra),
+      }
+    ),
+  });
 
-  if (state.innsending.innsendingstype === Innsendingstyper.KORRIGERING) {
+  sporsmalsobjekter.push({
+    sporsmal: hentIntl().formatMessage({
+      id: 'sporsmal.lesVeiledning' + typeYtelsePostfix,
+    }),
+  });
+
+  if (korrigering) {
     sporsmalsobjekter.push({
       sporsmal: hentIntl().formatMessage({
         id: 'korrigering.sporsmal.begrunnelse' + typeYtelsePostfix,
@@ -184,12 +207,11 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   sporsmalsobjekter.push(feriedager(state, typeYtelsePostfix, 2));
 
   sporsmalsobjekter.push({
-    sporsmal: '',
-    forklaring:
+    sporsmal:
       hentIntl().formatMessage({
         id: 'utfylling.bekreft' + typeYtelsePostfix,
       }) +
-      '<br>X ' +
+      '<br><br>X ' +
       hentIntl().formatMessage({
         id: 'utfylling.bekreftAnsvar' + typeYtelsePostfix,
       }),
