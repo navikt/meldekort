@@ -55,7 +55,7 @@ const localeCache = new Array<LocaleCache>();
 export const downloadMessages = async (language: string, from: string) => {
   const options = {
     hostname: 'localhost',
-    port: 3001,
+    port: 8081,
     path: '/getall?language=' + language + '&from=' + from,
     method: 'GET',
   };

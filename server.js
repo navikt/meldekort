@@ -2,7 +2,7 @@ const betterSqlite3 = require('better-sqlite3');
 const url = require('url');
 const http = require('http');
 
-const port = 3001;
+const port = 8081;
 
 http
   .createServer(function(req, res) {
