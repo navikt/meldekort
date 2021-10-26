@@ -78,8 +78,7 @@ node {
         }
 
         stage("Install npm packages") {
-            sh "source /opt/rh/devtoolset-7/enable"
-            sh "npm ci"
+            sh "source /opt/rh/devtoolset-7/enable && npm ci"
         }
 
         stage("Build application") {
