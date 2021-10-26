@@ -94,7 +94,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         meldeDato: new Date(),
         lestDato: new Date(),
         begrunnelse: this.erInnsendingKorrigering()
-          ? innsending.begrunnelse.valgtArsak
+          ? innsending.begrunnelse.valgtArsakTekst
           : '',
         sporsmal: {
           arbeidet:

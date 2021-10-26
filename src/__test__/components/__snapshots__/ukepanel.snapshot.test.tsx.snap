@@ -25,6 +25,7 @@ exports[`UkePanel 1`] = `
           "begrunnelse": Object {
             "erFeil": false,
             "valgtArsak": "",
+            "valgtArsakTekst": "",
           },
           "innsendingstype": null,
           "korrigertMeldekortId": 0,

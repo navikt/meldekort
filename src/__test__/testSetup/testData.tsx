@@ -136,6 +136,7 @@ export const innsendingTEST: InnsendingState = {
   innsendingstype: null,
   begrunnelse: {
     valgtArsak: '',
+    valgtArsakTekst: '',
     erFeil: false,
   },
   sporsmalsobjekter: hentSporsmalConfig(),

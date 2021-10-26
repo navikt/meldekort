@@ -78,7 +78,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const syk = this.sjekkOmSporsmalErUtfylt(kategorier[2]);
     const ferie = this.sjekkOmSporsmalErUtfylt(kategorier[3]);
     const registrert = this.sjekkOmSporsmalErUtfylt(kategorier[4]);
-    const begrunnelseValgt =
+    const begrunnelseIkkeValgt =
       begrunnelse.valgtArsak === '' &&
       innsendingstype === Innsendingstyper.KORRIGERING;
     const nySporsmalsobjekterState = sporsmalsobjekter.map(sporsmalsobj => {
@@ -130,11 +130,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     this.props.oppdaterSvar(nySporsmalsobjekterState);
     this.props.settBegrunnelse({
       valgtArsak: begrunnelse.valgtArsak,
-      erFeil: begrunnelseValgt,
+      valgtArsakTekst: begrunnelse.valgtArsakTekst,
+      erFeil: begrunnelseIkkeValgt,
     });
 
     const resultat =
-      arbeidet && kurs && syk && ferie && registrert && !begrunnelseValgt;
+      arbeidet && kurs && syk && ferie && registrert && !begrunnelseIkkeValgt;
     if (!resultat) {
       scrollTilElement('feilmelding', 'auto', -120);
       return resultat;

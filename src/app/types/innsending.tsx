@@ -31,6 +31,7 @@ export interface SpmSvar {
 
 export interface Begrunnelse {
   valgtArsak: string;
+  valgtArsakTekst: string;
   erFeil: boolean;
 }
 
