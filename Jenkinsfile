@@ -78,11 +78,11 @@ node {
         }
 
         stage("Install npm packages") {
+            sh "scl enable devtoolset-7 bash"
             sh "npm ci"
         }
 
         stage("Build application") {
-            sh "scl enable devtoolset-7 bash"
             sh "mvn -f version.xml versions:set -DnewVersion=${releaseVersion} -DgenerateBackupPoms=false -B"
             sh "npm run build"
         }
