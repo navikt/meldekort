@@ -79,6 +79,7 @@ node {
 
         stage("Install npm packages") {
             sh "scl enable devtoolset-7 bash"
+            sh "source scl_source enable devtoolset-7"
             sh "npm ci"
         }
 
