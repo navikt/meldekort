@@ -8,7 +8,9 @@ metadata:
 spec:
   image: repo.adeo.no:5443/meldeplikt/meldekort:{{ releaseVersion }}
   port: 8080
-  additionalPorts: 8081
+  service:
+    port: 8081
+    protocol: https
   secureLogs:
     enabled: true
   ingresses:
