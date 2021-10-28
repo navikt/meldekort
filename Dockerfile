@@ -4,8 +4,7 @@ ENV NODE_ENV production
 
 WORKDIR /source
 
-CMD ["npm", "run", "server"]
-CMD ["npm", "run", "start:backend"]
+CMD ./start_backend_frontend.sh
 
 EXPOSE 8080
 EXPOSE 8081
