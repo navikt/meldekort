@@ -1,5 +1,6 @@
 export const Konstanter = () => {
   return {
+    basePath: '/meldekort',
     hentHistoriskeMeldekortApiUri: 'person/historiskemeldekort',
     hentMeldekortdetaljerApiUri: 'meldekort/{id}',
     hentPersonStatusApiUri: 'person/status',

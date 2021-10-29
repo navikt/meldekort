@@ -54,9 +54,10 @@ import { hentEnvSetting } from '../utils/env';
 import { WeblogicPing } from '../types/weblogic';
 import weblogicReducer from '../reducers/weblogicReducer';
 import weblogicEpics from '../epics/weblogicEpics';
+import { Konstanter } from '../utils/consts';
 
 export const history = createBrowserHistory({
-  basename: '/meldekort',
+  basename: Konstanter().basePath,
 });
 
 const packageConfig = require('../../../package.json');

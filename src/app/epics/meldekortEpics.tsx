@@ -45,9 +45,8 @@ const handterFeiletApiKall: AppEpic = action$ =>
             content: () => loggInnContent(),
             onRequestClose: () => {
               window.location.assign(
-                `${Environment().loginUrl}&redirect=${
-                  window.location.origin
-                }/meldekort`
+                `${Environment().loginUrl}&redirect=${window.location.origin}` +
+                  Konstanter().basePath
               );
             },
             visModal: true,

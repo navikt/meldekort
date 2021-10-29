@@ -4,6 +4,8 @@ import EngelskFlaggSVG from '../components/sprakvelger/EngelskFlaggSVG';
 import localeDataNB from 'react-intl/locale-data/nb';
 import localeDataEN from 'react-intl/locale-data/en';
 import * as http from 'http';
+import { Konstanter } from '../utils/consts';
+import { erLocalhost } from '../mock/utils';
 
 export interface Locale {
   label: string;
@@ -54,9 +56,14 @@ const localeCache = new Array<LocaleCache>();
 
 export const downloadMessages = async (language: string, from: string) => {
   const options = {
-    hostname: 'localhost',
+    hostname: window.location.hostname,
     port: 8081,
-    path: '/getall?language=' + language + '&from=' + from,
+    path:
+      (erLocalhost() ? '' : Konstanter().basePath) +
+      '/getall?language=' +
+      language +
+      '&from=' +
+      from,
     method: 'GET',
   };
 
