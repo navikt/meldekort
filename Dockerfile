@@ -4,10 +4,9 @@ ENV NODE_ENV production
 
 WORKDIR /source
 
-CMD ./start_backend_frontend.sh
+CMD ["node", "server.js"]
 
 EXPOSE 8080
-EXPOSE 8081
 
 FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator
 ENV APPLICATION_NAME=meldekort

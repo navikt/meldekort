@@ -57,10 +57,10 @@ const localeCache = new Array<LocaleCache>();
 export const downloadMessages = async (language: string, from: string) => {
   const options = {
     hostname: window.location.hostname,
-    port: 8081,
+    port: window.location.port || 8080,
     path:
       (erLocalhost() ? '' : Konstanter().basePath) +
-      '/getall?language=' +
+      '/texts/getall?language=' +
       language +
       '&from=' +
       from,

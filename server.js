@@ -1,98 +1,101 @@
+const express = require('express');
 const betterSqlite3 = require('better-sqlite3');
 const url = require('url');
-const http = require('http');
 
-const port = 8081;
+const db = new betterSqlite3('texts.sqlite');
+const app = express();
 
-http
-  .createServer(function(req, res) {
-    try {
-      // CORS policy
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PUT, DELETE, OPTIONS'
-      );
+const basePath = '/texts';
 
-      const parsedUrl = url.parse(req.url, true);
-      const queryObject = parsedUrl.query;
+app.get(basePath + '/exists', function(req, res) {
+  const { id, language, time } = parseUrl(req);
 
-      const id = queryObject.id;
-      const language = queryObject.language;
+  // result is undefined if nothing has been found
+  const result = getOne(db, id, language, time);
 
-      // YYYY-MM-DD HH:MI:SS
-      let time = queryObject.from;
-      if (!time) {
-        const currentDate = new Date();
-        time =
-          currentDate.getFullYear() +
-          '-' +
-          (currentDate.getMonth() + 1) +
-          '-' +
-          currentDate
-            .getDate()
-            .toString()
-            .padStart(2, '0') +
-          ' ' +
-          currentDate
-            .getHours()
-            .toString()
-            .padStart(2, '0') +
-          ':' +
-          currentDate
-            .getMinutes()
-            .toString()
-            .padStart(2, '0') +
-          ':' +
-          currentDate
-            .getSeconds()
-            .toString()
-            .padStart(2, '0');
-      }
+  let value = id.split('-')[0];
+  if (result) {
+    value = id;
+  }
 
-      const db = new betterSqlite3('texts.sqlite');
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.end(value);
+});
 
-      if (parsedUrl.pathname === '/exists') {
-        const result = getOne(db, id, language, time);
+app.get(basePath + '/getall', function(req, res) {
+  const { language, time } = parseUrl(req);
+  const result = getAll(db, language, time);
 
-        // result is undefined if nothing has been found
-        let value = id.split('-')[0];
-        if (result) {
-          value = id;
-        }
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.end(JSON.stringify(result));
+});
 
-        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-        res.end(value);
-      } else if (parsedUrl.pathname === '/get') {
-        // result is undefined if nothing has been found
-        const result = getOne(db, id, language, time);
+app.get(basePath + '/get', function(req, res) {
+  const { id, language, time } = parseUrl(req);
 
-        let value = queryObject.id;
-        if (result) {
-          value = result.value;
-        }
+  // result is undefined if nothing has been found
+  const result = getOne(db, id, language, time);
 
-        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-        res.end(value);
-      } else if (parsedUrl.pathname === '/getall') {
-        const result = getAll(db, language, time);
+  let value = queryObject.id;
+  if (result) {
+    value = result.value;
+  }
 
-        res.setHeader('Content-Type', 'application/json; charset=utf-8');
-        res.end(JSON.stringify(result));
-      } else {
-        res.statusCode = 404;
-        res.end();
-      }
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.end(value);
+});
 
-      db.close();
-    } catch (e) {
-      console.log(e);
-    }
-  })
-  .listen(port, function(err) {
-    if (err) throw err;
-    console.log('Listening on ' + port);
-  });
+app.use('/meldekort', express.static(__dirname));
+app.use('/', express.static(__dirname));
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
+
+function parseUrl(req) {
+  const parsedUrl = url.parse(req.url, true);
+  const queryObject = parsedUrl.query;
+
+  const id = queryObject.id;
+  const language = queryObject.language;
+
+  // YYYY-MM-DD HH:MI:SS
+  let time = queryObject.from;
+  if (!time) {
+    const currentDate = new Date();
+    time =
+      currentDate.getFullYear() +
+      '-' +
+      (currentDate.getMonth() + 1) +
+      '-' +
+      currentDate
+        .getDate()
+        .toString()
+        .padStart(2, '0') +
+      ' ' +
+      currentDate
+        .getHours()
+        .toString()
+        .padStart(2, '0') +
+      ':' +
+      currentDate
+        .getMinutes()
+        .toString()
+        .padStart(2, '0') +
+      ':' +
+      currentDate
+        .getSeconds()
+        .toString()
+        .padStart(2, '0');
+  }
+
+  return {
+    id,
+    language,
+    time,
+  };
+}
 
 function getOne(db, id, language, time) {
   return db
