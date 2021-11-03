@@ -4,7 +4,7 @@ ENV NODE_ENV production
 
 WORKDIR /source
 
-CMD ["node", "server.js"]
+CMD ["npm", "run", "server"]
 
 EXPOSE 8080
 
@@ -17,3 +17,5 @@ ENV DISABLE_FRONTEND_LOGGER=true
 ENV DISABLE_UNLEASH=true
 ENV EXTRA_DECORATOR_PARAMS=&chatbot=true&feedback=false
 COPY --from=builder /source/build /app
+
+RUN apt-get -y install nodejs
