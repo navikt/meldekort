@@ -1,4 +1,4 @@
-FROM node:11-alpine as builder
+FROM node:12-alpine as builder
 COPY . /source
 ENV NODE_ENV production
 
@@ -20,5 +20,6 @@ ENV EXTRA_DECORATOR_PARAMS=&chatbot=true&feedback=false
 # trenger vi hele builder? kan vi copiere kun nodejs?
 COPY --from=builder / /
 COPY --from=builder /source/build /app
+COPY --from=builder /source/node_modules /app/node_modules
 
 CMD ["node", "app/server.js"]
