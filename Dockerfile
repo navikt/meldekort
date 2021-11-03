@@ -18,4 +18,9 @@ ENV DISABLE_UNLEASH=true
 ENV EXTRA_DECORATOR_PARAMS=&chatbot=true&feedback=false
 COPY --from=builder /source/build /app
 
-RUN apt-get -y install nodejs
+RUN apt-get install -y \
+    software-properties-common \
+    npm
+RUN npm install npm@latest -g && \
+    npm install n -g && \
+    n latest
