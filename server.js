@@ -5,7 +5,7 @@ const url = require('url');
 const db = new betterSqlite3('texts.sqlite');
 const app = express();
 
-const basePath = '/texts';
+const basePath = '*/texts';
 
 app.get(basePath + '/exists', function(req, res) {
   const { id, language, time } = parseUrl(req);
