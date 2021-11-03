@@ -20,3 +20,5 @@ ENV EXTRA_DECORATOR_PARAMS=&chatbot=true&feedback=false
 # trenger vi hele builder? kan vi copiere kun nodejs?
 COPY --from=builder / /
 COPY --from=builder /source/build /app
+
+CMD ["node", "app/server.js"]
