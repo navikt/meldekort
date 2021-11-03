@@ -17,11 +17,6 @@ ENV DISABLE_FRONTEND_LOGGER=true
 ENV DISABLE_UNLEASH=true
 ENV EXTRA_DECORATOR_PARAMS=&chatbot=true&feedback=false
 
+# trenger vi hele builder? kan vi copiere kun nodejs?
+COPY --from=builder / /
 COPY --from=builder /source/build /app
-
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    npm
-RUN npm install npm@latest -g && \
-    npm install n -g && \
-    n latest
