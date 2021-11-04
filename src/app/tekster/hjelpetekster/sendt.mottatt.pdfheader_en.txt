@@ -3,5 +3,4 @@ The Employment status form was received {mottatt} and got ID %MELDEKORT_ID%<br/>
 Subject: %TEMA%<br/>
 User: %NAVN% (%FNR%)<br/>
 Access level: %TILGANGSNIVAA%<br/>
-{kortKanSendesFra}
-<br/>
+{kortKanSendesFra}<br/>

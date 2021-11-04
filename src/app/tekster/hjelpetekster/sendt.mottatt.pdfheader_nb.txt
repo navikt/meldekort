@@ -3,5 +3,4 @@ Meldekortet ble mottatt {mottatt} og fikk ID %MELDEKORT_ID%<br/>
 Tema: %TEMA%<br/>
 Bruker: %NAVN% (%FNR%)<br/>
 Tilgangsnivå: %TILGANGSNIVAA%<br/>
-{kortKanSendesFra}
-<br/>
+{kortKanSendesFra}<br/>

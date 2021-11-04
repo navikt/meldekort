@@ -206,14 +206,20 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
 
   sporsmalsobjekter.push({
     sporsmal: hentIntl().formatMessage({
-      id: 'sporsmal.lesVeiledning' + typeYtelsePostfix,
+      id: 'sporsmal.lesVeiledning',
+    }),
+  });
+
+  sporsmalsobjekter.push({
+    sporsmal: hentIntl().formatMessage({
+      id: 'sporsmal.ansvarForRiktigUtfylling',
     }),
   });
 
   if (korrigering) {
     sporsmalsobjekter.push({
       sporsmal: hentIntl().formatMessage({
-        id: 'korrigering.sporsmal.begrunnelse' + typeYtelsePostfix,
+        id: 'korrigering.sporsmal.begrunnelse',
       }),
       forklaring: hentIntl().formatMessage({
         id: 'forklaring.sporsmal.begrunnelse' + typeYtelsePostfix,
@@ -281,7 +287,7 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
       }) +
       '<br><br>X ' +
       hentIntl().formatMessage({
-        id: 'utfylling.bekreftAnsvar' + typeYtelsePostfix,
+        id: 'utfylling.bekreftAnsvar',
       }),
   });
 
@@ -332,7 +338,7 @@ function arbeidsdager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.arbeid' + typeYtelsePostfix,
+      id: 'utfylling.arbeid',
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
@@ -364,7 +370,7 @@ function tiltaksdager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.tiltak' + typeYtelsePostfix,
+      id: 'utfylling.tiltak',
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.tiltak' + typeYtelsePostfix,
@@ -396,7 +402,7 @@ function sykedager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.syk' + typeYtelsePostfix,
+      id: 'utfylling.syk',
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.syk' + typeYtelsePostfix,
@@ -428,7 +434,7 @@ function feriedager(
     advarsel:
       'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.ferieFravar' + typeYtelsePostfix,
+      id: 'utfylling.ferieFravar',
     }),
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.utfylling.ferieFravar' + typeYtelsePostfix,
