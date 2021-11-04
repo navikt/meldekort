@@ -7,7 +7,6 @@ import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
 import {
-  KortStatus,
   Meldekort,
   MeldekortState,
   SendtMeldekort,
@@ -18,7 +17,6 @@ import { selectRouter } from '../../../selectors/router';
 import { connect } from 'react-redux';
 import { Router } from '../../../types/router';
 import { Person, PersonInfo } from '../../../types/person';
-import { isEmpty } from 'ramda';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
 import { hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
@@ -33,7 +31,11 @@ import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { scrollTilElement } from '../../../utils/scroll';
 import { MeldekortActions } from '../../../actions/meldekort';
-import { erMeldekortSendtInnTidligere } from '../../../utils/meldekortUtils';
+import {
+  meldekortSomKanSendes,
+  nesteMeldekortKanSendes,
+  returnerMeldekortListaMedFlereMeldekortIgjen,
+} from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
@@ -87,46 +89,29 @@ class Kvittering extends React.Component<KvitteringsProps> {
     });
   }
 
-  returnerMeldekortListaMedFlereMeldekortIgjen = (
-    meldekort1: Meldekort[],
-    innsendingstype1: Innsendingstyper,
-    meldekort2: Meldekort[],
-    innsendingstype2: Innsendingstyper
-  ) => {
-    let nesteAktivtMeldekort, nesteInnsendingstype;
-
-    if (!isEmpty(meldekort1)) {
-      nesteAktivtMeldekort = meldekort1[0];
-      nesteInnsendingstype = innsendingstype1;
-    } else {
-      nesteAktivtMeldekort = meldekort2[0];
-      nesteInnsendingstype = innsendingstype2;
-    }
-    return {
-      nesteAktivtMeldekort: nesteAktivtMeldekort,
-      nesteInnsendingstype: nesteInnsendingstype,
-    };
-  };
-
   returnerPropsVerdier = (): PropsVerdier => {
-    const { innsendingstype, person, router } = this.props;
+    const { innsendingstype, person, router, sendteMeldekort } = this.props;
     const urlParams = router.location.pathname.split('/');
     urlParams.pop();
     const nestePath = urlParams.join('/');
-    const meldekort = this.meldekortSomKanSendes(person.meldekort);
-    const etterregistrerteMeldekort = this.meldekortSomKanSendes(
-      person.etterregistrerteMeldekort
+    const meldekort = meldekortSomKanSendes(
+      person.meldekort,
+      sendteMeldekort.sendteMeldekort
+    );
+    const etterregistrerteMeldekort = meldekortSomKanSendes(
+      person.etterregistrerteMeldekort,
+      sendteMeldekort.sendteMeldekort
     );
     const harBrukerFlereMeldekort = meldekort.length > 0;
     const harBrukerFlereEtterregistrerteMeldekort =
       etterregistrerteMeldekort.length > 0;
-    const paramsForMeldekort = this.returnerMeldekortListaMedFlereMeldekortIgjen(
+    const paramsForMeldekort = returnerMeldekortListaMedFlereMeldekortIgjen(
       meldekort,
       Innsendingstyper.INNSENDING,
       etterregistrerteMeldekort,
       Innsendingstyper.ETTERREGISTRERING
     );
-    const paramsForEtterregistrerte = this.returnerMeldekortListaMedFlereMeldekortIgjen(
+    const paramsForEtterregistrerte = returnerMeldekortListaMedFlereMeldekortIgjen(
       etterregistrerteMeldekort,
       Innsendingstyper.ETTERREGISTRERING,
       meldekort,
@@ -174,70 +159,9 @@ class Kvittering extends React.Component<KvitteringsProps> {
     };
   };
 
-  meldekortSomKanSendes = (meldekortListe: Meldekort[]): Meldekort[] => {
-    return meldekortListe.filter(meldekort => {
-      let kanSendes = meldekort.meldeperiode.kanKortSendes;
-      if (kanSendes) {
-        kanSendes = !erMeldekortSendtInnTidligere(
-          meldekort,
-          this.props.sendteMeldekort.sendteMeldekort
-        );
-      }
-      return kanSendes;
-    });
-  };
-
-  nesteMeldekortKanSendes = (nesteAktivtMeldekort: Meldekort) => {
-    if (nesteAktivtMeldekort !== undefined) {
-      return hentIntl().formatMessage(
-        { id: 'sendt.meldekortKanSendes' },
-        {
-          0: formaterDato(nesteAktivtMeldekort.meldeperiode.kortKanSendesFra),
-        }
-      );
-    } else if (
-      this.props.innsendingstype === Innsendingstyper.INNSENDING &&
-      this.props.person.meldekort.length > 0
-    ) {
-      let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(
-        this.props.person.meldekort
-      );
-      if (mkListe.length > 0) {
-        return hentIntl().formatMessage(
-          { id: 'sendt.meldekortKanSendes' },
-          { 0: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
-        );
-      }
-    } else if (
-      this.props.innsendingstype === Innsendingstyper.ETTERREGISTRERING &&
-      this.props.person.etterregistrerteMeldekort.length > 0
-    ) {
-      let mkListe = this.hentMeldekortSomIkkeKanSendesEnda(
-        this.props.person.etterregistrerteMeldekort
-      );
-      if (mkListe.length > 0) {
-        return hentIntl().formatMessage(
-          { id: 'sendt.meldekortKanSendes' },
-          { 0: formaterDato(mkListe[0].meldeperiode.kortKanSendesFra) }
-        );
-      }
-    }
-  };
-
-  hentMeldekortSomIkkeKanSendesEnda = (
-    meldekortListe: Meldekort[]
-  ): Meldekort[] => {
-    return meldekortListe.filter(
-      meldekort =>
-        (meldekort.kortStatus === KortStatus.SENDT ||
-          meldekort.kortStatus === KortStatus.OPPRE) &&
-        !meldekort.meldeperiode.kanKortSendes
-    );
-  };
-
-  visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort) => {
-    const { personInfo } = this.props;
-    const { meldekortdetaljerInnsending } = this.props.innsending;
+  visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort | undefined) => {
+    const { personInfo, innsending, person } = this.props;
+    const { meldekortdetaljerInnsending, innsendingstype } = innsending;
     const ukeOgPeriode = formaterUkeOgDatoPeriode(
       meldekortdetaljerInnsending!.meldeperiode.fra,
       meldekortdetaljerInnsending!.meldeperiode.til
@@ -272,11 +196,22 @@ class Kvittering extends React.Component<KvitteringsProps> {
         <Ingress>
           <span>{meldekortErMottatt}</span>
         </Ingress>
-        {typeof nesteAktivtMeldekort !== undefined && (
-          <Ingress className="noPrint">
-            <span>{this.nesteMeldekortKanSendes(nesteAktivtMeldekort)}</span>
-          </Ingress>
-        )}
+        <Ingress className="noPrint">
+          <span>
+            {hentIntl().formatMessage(
+              { id: 'sendt.meldekortKanSendes' },
+              {
+                0: formaterDato(
+                  nesteMeldekortKanSendes(
+                    nesteAktivtMeldekort,
+                    innsendingstype,
+                    person
+                  )
+                ),
+              }
+            )}
+          </span>
+        </Ingress>
       </div>
     );
   };
@@ -298,7 +233,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
           <Sprakvelger />
         </section>
         <section className="seksjon">
-          {this.visOppsummeringsTekster(nesteAktivtMeldekort!)}
+          {this.visOppsummeringsTekster(nesteAktivtMeldekort)}
         </section>
         <section className="seksjon">
           <Meldekortdetaljer

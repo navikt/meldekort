@@ -6,6 +6,8 @@ import {
 } from '../types/meldekort';
 import { Innsendingstyper } from '../types/innsending';
 import { hentDatoPeriode, hentUkePeriode } from './dates';
+import { isEmpty } from 'ramda';
+import { Person } from '../types/person';
 
 export const erMeldekortSendtInnTidligere = (
   meldekort: Meldekort,
@@ -91,6 +93,81 @@ export const hentMeldekortRaderFraPerson = (
     }
   }
   return radliste;
+};
+
+export const meldekortSomKanSendes = (
+  meldekortListe: Meldekort[],
+  sendteMeldekort: SendtMeldekort[]
+): Meldekort[] => {
+  return meldekortListe.filter(meldekort => {
+    let kanSendes = meldekort.meldeperiode.kanKortSendes;
+    if (kanSendes) {
+      kanSendes = !erMeldekortSendtInnTidligere(meldekort, sendteMeldekort);
+    }
+    return kanSendes;
+  });
+};
+
+const hentMeldekortSomIkkeKanSendesEnda = (
+  meldekortListe: Meldekort[]
+): Meldekort[] => {
+  return meldekortListe.filter(
+    meldekort =>
+      (meldekort.kortStatus === KortStatus.SENDT ||
+        meldekort.kortStatus === KortStatus.OPPRE) &&
+      !meldekort.meldeperiode.kanKortSendes
+  );
+};
+
+export const nesteMeldekortKanSendes = (
+  nesteAktivtMeldekort: Meldekort | undefined,
+  innsendingstype: Innsendingstyper | null,
+  person: Person
+): Date => {
+  if (nesteAktivtMeldekort !== undefined) {
+    return nesteAktivtMeldekort.meldeperiode.kortKanSendesFra;
+  } else if (
+    innsendingstype === Innsendingstyper.INNSENDING &&
+    person.meldekort.length > 0
+  ) {
+    let mkListe = hentMeldekortSomIkkeKanSendesEnda(person.meldekort);
+    if (mkListe.length > 0) {
+      return mkListe[0].meldeperiode.kortKanSendesFra;
+    }
+  } else if (
+    innsendingstype === Innsendingstyper.ETTERREGISTRERING &&
+    person.etterregistrerteMeldekort.length > 0
+  ) {
+    let mkListe = hentMeldekortSomIkkeKanSendesEnda(
+      person.etterregistrerteMeldekort
+    );
+    if (mkListe.length > 0) {
+      return mkListe[0].meldeperiode.kortKanSendesFra;
+    }
+  }
+
+  return new Date();
+};
+
+export const returnerMeldekortListaMedFlereMeldekortIgjen = (
+  meldekort1: Meldekort[],
+  innsendingstype1: Innsendingstyper,
+  meldekort2: Meldekort[],
+  innsendingstype2: Innsendingstyper
+) => {
+  let nesteAktivtMeldekort, nesteInnsendingstype;
+
+  if (!isEmpty(meldekort1)) {
+    nesteAktivtMeldekort = meldekort1[0];
+    nesteInnsendingstype = innsendingstype1;
+  } else {
+    nesteAktivtMeldekort = meldekort2[0];
+    nesteInnsendingstype = innsendingstype2;
+  }
+  return {
+    nesteAktivtMeldekort: nesteAktivtMeldekort,
+    nesteInnsendingstype: nesteInnsendingstype,
+  };
 };
 
 export const hentPeriodeDatoKolonner = [

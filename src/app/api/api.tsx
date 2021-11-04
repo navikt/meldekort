@@ -25,6 +25,11 @@ import {
   ukeTekst,
 } from '../utils/dates';
 import { Innsendingstyper } from '../types/innsending';
+import {
+  meldekortSomKanSendes,
+  nesteMeldekortKanSendes,
+  returnerMeldekortListaMedFlereMeldekortIgjen,
+} from '../utils/meldekortUtils';
 
 const fetchGet = async (url: string) => {
   return prefferedAxios
@@ -105,12 +110,51 @@ function addIdToUrlIfNotMock(url: string, id: number): string {
 }
 
 function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
-  const { aktivtMeldekort, innsending } = state;
-
+  const { aktivtMeldekort, innsending, person } = state;
   const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
-  let { til, fra, kortKanSendesFra } = aktivtMeldekort.meldeperiode;
+  let { til, fra } = aktivtMeldekort.meldeperiode;
   let korrigering = innsending.innsendingstype === Innsendingstyper.KORRIGERING;
+
+  let nesteAktivtMeldekort;
+  const sendteMeldekort = state.meldekort.sendteMeldekort;
+  sendteMeldekort.push(aktivtMeldekort);
+  const meldekort = meldekortSomKanSendes(person.meldekort, sendteMeldekort);
+  const etterregistrerteMeldekort = meldekortSomKanSendes(
+    person.etterregistrerteMeldekort,
+    sendteMeldekort
+  );
+  const harBrukerFlereMeldekort = meldekort.length > 0;
+  const harBrukerFlereEtterregistrerteMeldekort =
+    etterregistrerteMeldekort.length > 0;
+  const paramsForMeldekort = returnerMeldekortListaMedFlereMeldekortIgjen(
+    meldekort,
+    Innsendingstyper.INNSENDING,
+    etterregistrerteMeldekort,
+    Innsendingstyper.ETTERREGISTRERING
+  );
+  const paramsForEtterregistrerte = returnerMeldekortListaMedFlereMeldekortIgjen(
+    etterregistrerteMeldekort,
+    Innsendingstyper.ETTERREGISTRERING,
+    meldekort,
+    Innsendingstyper.INNSENDING
+  );
+
+  if (innsending.innsendingstype === Innsendingstyper.INNSENDING) {
+    if (harBrukerFlereMeldekort) {
+      nesteAktivtMeldekort = paramsForMeldekort.nesteAktivtMeldekort;
+    } else if (harBrukerFlereEtterregistrerteMeldekort) {
+      nesteAktivtMeldekort = paramsForEtterregistrerte.nesteAktivtMeldekort;
+    }
+  } else if (
+    innsending.innsendingstype === Innsendingstyper.ETTERREGISTRERING
+  ) {
+    if (harBrukerFlereEtterregistrerteMeldekort) {
+      nesteAktivtMeldekort = paramsForEtterregistrerte.nesteAktivtMeldekort;
+    } else if (harBrukerFlereMeldekort) {
+      nesteAktivtMeldekort = paramsForMeldekort.nesteAktivtMeldekort;
+    }
+  }
 
   let sporsmalsobjekter: Sporsmalsobjekt[] = new Array<Sporsmalsobjekt>();
 
@@ -132,7 +176,13 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
           innsending.meldekortdetaljerInnsending!.meldeperiode.fra,
           innsending.meldekortdetaljerInnsending!.meldeperiode.til
         ),
-        kortKanSendesFra: formaterDato(kortKanSendesFra),
+        kortKanSendesFra: formaterDato(
+          nesteMeldekortKanSendes(
+            nesteAktivtMeldekort,
+            innsending.innsendingstype,
+            person
+          )
+        ),
       }
     ),
   });
