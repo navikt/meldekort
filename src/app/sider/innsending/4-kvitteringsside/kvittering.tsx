@@ -174,6 +174,12 @@ class Kvittering extends React.Component<KvitteringsProps> {
       }
     );
 
+    const nesteDato = nesteMeldekortKanSendes(
+      nesteAktivtMeldekort,
+      innsendingstype,
+      person
+    );
+
     return (
       <div className="oppsummeringsTekster">
         <Ingress>
@@ -196,22 +202,18 @@ class Kvittering extends React.Component<KvitteringsProps> {
         <Ingress>
           <span>{meldekortErMottatt}</span>
         </Ingress>
-        <Ingress className="noPrint">
-          <span>
-            {hentIntl().formatMessage(
-              { id: 'sendt.meldekortKanSendes' },
-              {
-                0: formaterDato(
-                  nesteMeldekortKanSendes(
-                    nesteAktivtMeldekort,
-                    innsendingstype,
-                    person
-                  )
-                ),
-              }
-            )}
-          </span>
-        </Ingress>
+        {nesteDato && (
+          <Ingress className="noPrint">
+            <span>
+              {hentIntl().formatMessage(
+                { id: 'sendt.meldekortKanSendes' },
+                {
+                  0: formaterDato(nesteDato),
+                }
+              )}
+            </span>
+          </Ingress>
+        )}
       </div>
     );
   };

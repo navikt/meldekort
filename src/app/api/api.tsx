@@ -21,6 +21,7 @@ import {
   hentDatoForAndreUke,
   hentDatoForForsteUke,
   hentNestePeriodeMedUkerOgDato,
+  hentTid,
   hentUkenummerForDato,
   ukeTekst,
 } from '../utils/dates';
@@ -111,10 +112,15 @@ function addIdToUrlIfNotMock(url: string, id: number): string {
 
 function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   const { aktivtMeldekort, innsending, person } = state;
+  const {
+    innsendingstype,
+    meldekortdetaljerInnsending,
+    begrunnelse,
+  } = innsending;
   const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
   let { til, fra } = aktivtMeldekort.meldeperiode;
-  let korrigering = innsending.innsendingstype === Innsendingstyper.KORRIGERING;
+  let korrigering = innsendingstype === Innsendingstyper.KORRIGERING;
 
   let nesteAktivtMeldekort;
   const sendteMeldekort = state.meldekort.sendteMeldekort;
@@ -140,15 +146,13 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
     Innsendingstyper.INNSENDING
   );
 
-  if (innsending.innsendingstype === Innsendingstyper.INNSENDING) {
+  if (innsendingstype === Innsendingstyper.INNSENDING) {
     if (harBrukerFlereMeldekort) {
       nesteAktivtMeldekort = paramsForMeldekort.nesteAktivtMeldekort;
     } else if (harBrukerFlereEtterregistrerteMeldekort) {
       nesteAktivtMeldekort = paramsForEtterregistrerte.nesteAktivtMeldekort;
     }
-  } else if (
-    innsending.innsendingstype === Innsendingstyper.ETTERREGISTRERING
-  ) {
+  } else if (innsendingstype === Innsendingstyper.ETTERREGISTRERING) {
     if (harBrukerFlereEtterregistrerteMeldekort) {
       nesteAktivtMeldekort = paramsForEtterregistrerte.nesteAktivtMeldekort;
     } else if (harBrukerFlereMeldekort) {
@@ -162,6 +166,17 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   // Men vi må ha denne teksten på riktig språk
   // Derfor setter vi nn alt vi kan og sender teksten videre med placeholders (f.eks %TEMA%)
   // Disse senere erstattes i meldekort-api
+
+  const meldekortErMottatt =
+    formaterDato(meldekortdetaljerInnsending!.mottattDato) +
+    ' ' +
+    hentTid(meldekortdetaljerInnsending!.mottattDato);
+  const nesteDato = nesteMeldekortKanSendes(
+    nesteAktivtMeldekort,
+    innsendingstype,
+    person
+  );
+
   sporsmalsobjekter.push({
     sporsmal: '',
     svar: hentIntl().formatMessage(
@@ -173,16 +188,18 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
               .trim() + ' '
           : '',
         period: formaterUkeOgDatoPeriode(
-          innsending.meldekortdetaljerInnsending!.meldeperiode.fra,
-          innsending.meldekortdetaljerInnsending!.meldeperiode.til
+          meldekortdetaljerInnsending!.meldeperiode.fra,
+          meldekortdetaljerInnsending!.meldeperiode.til
         ),
-        kortKanSendesFra: formaterDato(
-          nesteMeldekortKanSendes(
-            nesteAktivtMeldekort,
-            innsending.innsendingstype,
-            person
-          )
-        ),
+        mottatt: meldekortErMottatt,
+        kortKanSendesFra: nesteDato
+          ? hentIntl().formatMessage(
+              { id: 'sendt.meldekortKanSendes' },
+              {
+                0: formaterDato(nesteDato),
+              }
+            ) + '<br/>'
+          : '',
       }
     ),
   });
@@ -201,7 +218,7 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
       forklaring: hentIntl().formatMessage({
         id: 'forklaring.sporsmal.begrunnelse' + typeYtelsePostfix,
       }),
-      svar: innsending.begrunnelse.valgtArsak,
+      svar: begrunnelse.valgtArsak,
     });
   }
 

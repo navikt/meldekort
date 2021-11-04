@@ -123,7 +123,7 @@ export const nesteMeldekortKanSendes = (
   nesteAktivtMeldekort: Meldekort | undefined,
   innsendingstype: Innsendingstyper | null,
   person: Person
-): Date => {
+): Date | null => {
   if (nesteAktivtMeldekort !== undefined) {
     return nesteAktivtMeldekort.meldeperiode.kortKanSendesFra;
   } else if (
@@ -146,7 +146,7 @@ export const nesteMeldekortKanSendes = (
     }
   }
 
-  return new Date();
+  return null;
 };
 
 export const returnerMeldekortListaMedFlereMeldekortIgjen = (
