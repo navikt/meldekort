@@ -99,3 +99,54 @@ export const hentDagliste = (
   }
   return dagListe;
 };
+
+export const hentDaglisteUtenLesMer = (
+  meldekortdager: MeldekortDag[]
+): JSX.Element[] => {
+  const dagListe = [];
+  let ukedager = hentUkedagerSomStringListe();
+
+  for (let i = 0; i < meldekortdager.length; i++) {
+    let meldekortDag = meldekortdager[i];
+    const harAktivitet =
+      meldekortDag.arbeidetTimerSum > 0 ||
+      meldekortDag.kurs ||
+      meldekortDag.annetFravaer ||
+      meldekortDag.syk;
+    if (harAktivitet) {
+      let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
+      dagListe.push(
+        <div>
+          <strong className={'ukedag'}>{ukedag}:&nbsp;</strong>
+          <span className={'aktiviteter'}>
+            {meldekortDag.arbeidetTimerSum > 0
+              ? `${hentIntl().formatMessage({ id: 'utfylling.arbeid' })}
+                              ${meldekortDag.arbeidetTimerSum}
+                              ${hentIntl()
+                                .formatMessage({ id: 'overskrift.timer' })
+                                .trim()}${
+                  sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag)
+                    ? ', '
+                    : ''
+                }`
+              : null}
+            {meldekortDag.kurs
+              ? returnerAktivitetTekst(meldekortDag, 'kurs', 'utfylling.tiltak')
+              : null}
+            {meldekortDag.syk
+              ? returnerAktivitetTekst(meldekortDag, 'syk', 'utfylling.syk')
+              : null}
+            {meldekortDag.annetFravaer
+              ? returnerAktivitetTekst(
+                  meldekortDag,
+                  '',
+                  'utfylling.ferieFravar'
+                )
+              : null}
+          </span>
+        </div>
+      );
+    }
+  }
+  return dagListe;
+};
