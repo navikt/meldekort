@@ -37,7 +37,7 @@ import {
   nesteMeldekortKanSendes,
   returnerMeldekortListaMedFlereMeldekortIgjen,
 } from '../utils/meldekortUtils';
-import { hentDaglisteUtenLesMer } from '../components/meldekortdetaljer/ukevisning/dagliste';
+import { hentDagliste } from '../components/meldekortdetaljer/ukevisning/dagliste';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const fetchGet = async (url: string) => {
@@ -320,7 +320,7 @@ function uke1(
       ' (' +
       hentDatoForForsteUke(fra) +
       ')',
-    svar: hentDaglisteUtenLesMer(meldekortdager.slice(0, 7))
+    svar: hentDagliste(meldekortdager.slice(0, 7), typeYtelsePostfix, false)
       .map(element => renderToStaticMarkup(element))
       .join(''),
   };
@@ -338,7 +338,7 @@ function uke2(
       ' (' +
       hentDatoForAndreUke(til) +
       ')',
-    svar: hentDaglisteUtenLesMer(meldekortdager.slice(7, 14))
+    svar: hentDagliste(meldekortdager.slice(7, 14), typeYtelsePostfix, false)
       .map(element => renderToStaticMarkup(element))
       .join(''),
   };

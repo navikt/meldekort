@@ -265,7 +265,7 @@
     'sendt.meldekortKanSendes': 'Neste meldekort kan sendes inn fra {0} ',
     'sendt.mottatt.label': 'Meldekortet er mottatt av NAV {0} (klokken {1}) ',
     'sendt.mottatt.pdfheader':
-      '{type}Meldekort for perioden {period} elektronisk mottatt av NAV<br/> Meldekortet ble mottatt {mottatt} og fikk ID %MELDEKORT_ID%<br/> Tema: %TEMA%<br/> Bruker: %NAVN% (%FNR%)<br/> Tilgangsnivå: %TILGANGSNIVAA%<br/> {kortKanSendesFra} <br/> ',
+      '{type}Meldekort for perioden {period} elektronisk mottatt av NAV<br/> Meldekortet ble mottatt {mottatt} og fikk ID %MELDEKORT_ID%<br/> Bruker: %NAVN% (%FNR%)<br/> Tema: %TEMA%<br/> Tilgangsnivå: %TILGANGSNIVAA%<br/> {kortKanSendesFra}<br/> ',
     'skrivUt.lukkVindu': 'Lukk vindu ',
     'sporsmal.aktivitetArbeid-AAP':
       'Har du gjennomført avtalt aktivitet eller deltatt på kurs/utdanning? ',
@@ -671,7 +671,7 @@
     'sendt.mottatt.label':
       'The Employment status form was received by NAV on {0} (at {1}) ',
     'sendt.mottatt.pdfheader':
-      '{type}Employment status for the period {period} electronically received by NAV<br/> The Employment status form was received {mottatt} and got ID %MELDEKORT_ID%<br/> Subject: %TEMA%<br/> User: %NAVN% (%FNR%)<br/> Access level: %TILGANGSNIVAA%<br/> {kortKanSendesFra} <br/> ',
+      '{type}Employment status for the period {period} electronically received by NAV<br/> The Employment status form was received {mottatt} and got ID %MELDEKORT_ID%<br/> User: %NAVN% (%FNR%)<br/> Subject: %TEMA%<br/> Access level: %TILGANGSNIVAA%<br/> {kortKanSendesFra}<br/> ',
     'skrivUt.lukkVindu': 'Close ',
     'sporsmal.aktivitetArbeid-AAP':
       'Have you completed an agreed activity or taken part in a course and/or training? ',
