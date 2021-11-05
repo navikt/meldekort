@@ -132,7 +132,7 @@ function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
 
   // Vi må finne neste meldekort først
   let nesteAktivtMeldekort;
-  const sendteMeldekort = state.meldekort.sendteMeldekort;
+  const sendteMeldekort = Array.of(...state.meldekort.sendteMeldekort);
   sendteMeldekort.push(aktivtMeldekort);
   const meldekort = meldekortSomKanSendes(person.meldekort, sendteMeldekort);
   const etterregistrerteMeldekort = meldekortSomKanSendes(
