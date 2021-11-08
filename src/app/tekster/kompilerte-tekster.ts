@@ -259,6 +259,8 @@
       'Du kan sende inn meldekort for følgende perioder: ',
     'sendMeldekort.info.neste': 'Klikk på Neste for å sende meldekort. ',
     'sendMeldekort.knapp.startUtfylling': 'Start Utfylling ',
+    'sendt.advarsel':
+      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet ',
     'sendt.etterregistrering.info':
       'Det finnes meldekort for tidligere periode som er klare for innsending. Klikk på knappen for å sende inn. ',
     'sendt.linkTilTidligereMeldekort': 'Til meldekortoversikten ',
@@ -663,6 +665,8 @@
       'You may send employment status forms concerning the period: ',
     'sendMeldekort.info.neste': 'Click next to send employment status form. ',
     'sendMeldekort.knapp.startUtfylling': 'Begin filling out forms ',
+    'sendt.advarsel':
+      'You probably did not see the information below if you answered NO to the related question ',
     'sendt.etterregistrering.info':
       'Your employment status forms for one or more previous periods are ready to be sent. Click the button to send. ',
     'sendt.linkTilTidligereMeldekort': 'Employment form homescreen ',

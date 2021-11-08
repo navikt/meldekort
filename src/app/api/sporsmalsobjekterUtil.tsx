@@ -109,14 +109,13 @@ export function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   sporsmalsobjekter.push(uke1(fra, meldekortdager, typeYtelsePostfix));
   sporsmalsobjekter.push(uke2(til, meldekortdager, typeYtelsePostfix));
 
-  sporsmalsobjekter.push(utfyllingArbeid(typeYtelsePostfix));
-  sporsmalsobjekter.push(utfyllingTiltak(typeYtelsePostfix));
-  sporsmalsobjekter.push(utfyllingSyk(typeYtelsePostfix));
-  sporsmalsobjekter.push(utfyllingFerieFravar(typeYtelsePostfix));
+  sporsmalsobjekter.push(utfylling('utfylling.arbeid', typeYtelsePostfix));
+  sporsmalsobjekter.push(utfylling('utfylling.tiltak', typeYtelsePostfix));
+  sporsmalsobjekter.push(utfylling('utfylling.syk', typeYtelsePostfix));
+  sporsmalsobjekter.push(utfylling('utfylling.ferieFravar', typeYtelsePostfix));
 
   sporsmalsobjekter.push(bekreftelse(typeYtelsePostfix));
 
-  console.log(sporsmalsobjekter);
   return sporsmalsobjekter;
 }
 
@@ -132,7 +131,7 @@ function header(
 
   // Vi vet ikke meldekort ID før vi sender det, vi kan ikke stole på klokkeslett fra JS, vi må mappe tema
   // Men vi må ha denne teksten på riktig språk
-  // Derfor setter vi nn alt vi kan og sender teksten videre med placeholders (f.eks %TEMA%)
+  // Derfor setter vi alt vi kan og sender teksten videre med placeholders (f.eks %TEMA%)
   // Disse senere erstattes i meldekort-api
   return {
     sporsmal: '',
@@ -255,54 +254,16 @@ function uke2(
   };
 }
 
-function utfyllingArbeid(typeYtelsePostfix: String): Sporsmalsobjekt {
+function utfylling(id: string, typeYtelsePostfix: string): Sporsmalsobjekt {
   return {
-    advarsel:
-      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
+    advarsel: hentIntl().formatMessage({
+      id: 'sendt.advarsel',
+    }),
     sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.arbeid',
+      id: id,
     }),
     forklaring: hentIntl().formatMessage({
-      id: 'forklaring.utfylling.arbeid' + typeYtelsePostfix,
-    }),
-  };
-}
-
-function utfyllingTiltak(typeYtelsePostfix: String): Sporsmalsobjekt {
-  return {
-    advarsel:
-      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
-    sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.tiltak',
-    }),
-    forklaring: hentIntl().formatMessage({
-      id: 'forklaring.utfylling.tiltak' + typeYtelsePostfix,
-    }),
-  };
-}
-
-function utfyllingSyk(typeYtelsePostfix: String): Sporsmalsobjekt {
-  return {
-    advarsel:
-      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
-    sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.syk',
-    }),
-    forklaring: hentIntl().formatMessage({
-      id: 'forklaring.utfylling.syk' + typeYtelsePostfix,
-    }),
-  };
-}
-
-function utfyllingFerieFravar(typeYtelsePostfix: String): Sporsmalsobjekt {
-  return {
-    advarsel:
-      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet',
-    sporsmal: hentIntl().formatMessage({
-      id: 'utfylling.ferieFravar',
-    }),
-    forklaring: hentIntl().formatMessage({
-      id: 'forklaring.utfylling.ferieFravar' + typeYtelsePostfix,
+      id: 'forklaring.' + id + typeYtelsePostfix,
     }),
   };
 }
