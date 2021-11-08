@@ -3,8 +3,9 @@ Meldekort er et webgrensesnitt for brukere å sende inn utfylte meldekort-skjema
 Meldekort tilbyr påloggende arbeidssøkere å se sin meldekorthistorikk samt å fylle ut og sende inn meldekort.
 
 ## Dokumentasjon
-Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/pages/viewpage.action?pageId=431009242). Dokumentasjonen gjelder for den
+Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/display/TMP/Meldekort-api). Dokumentasjonen gjelder for den
 gamle JBoss/Wicket-applikasjonen, men vil bli oppdatert forløpende under utviklingen av denne nye versjonen.
+Om Meldekort journalføring: https://confluence.adeo.no/pages/viewpage.action?pageId=431009242
 
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjekt rettes mot:
