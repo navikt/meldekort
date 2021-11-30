@@ -5,7 +5,7 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 //
 // Forventer følgende build-parametere:
 // - Miljo: Hvilket miljø på NAIS som applikasjonen skal deployes til.
-// - ReleaseBygg (true/false): Bygg en release av applikasjonen med versjon x.y.z som satt i pom. 
+// - ReleaseBygg (true/false): Bygg en release av applikasjonen med versjon x.y.z som satt i pom.
 //
 // NB! Denne pipelinen støtter ikke prod.
 //
@@ -28,7 +28,7 @@ node {
     validateJobParameters(environ)
 
     def varsFile = ".nais/vars-" + environ + ".yaml"
-    def cluster = "dev-sbs"
+    def cluster = "dev-gcp"
 
     def buildTimestamp = new Date().format("YYYYMMddHHmmss")
 
