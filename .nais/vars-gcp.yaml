@@ -1,0 +1,5 @@
+dashEnv: -gcp
+releaseVersion: ##RELEASE_VERSION##
+slackAlertChannel: team-meldeplikt-alerts-dev
+ingresses:
+  - "https://meldekort-gcp.dev.nav.no"
