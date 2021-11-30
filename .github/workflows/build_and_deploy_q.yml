@@ -92,11 +92,11 @@ jobs:
       - name: Set release version in version file
         run: mvn versions:set -DnewVersion=${{ steps.calcReleaseVersion.outputs.version }} -f ${{ env.VERSION_FILENAME }}
       - name: Test and build (Maven)
-        if: ${{ env.BUILD_USE_MAVEN }}
+        if: ${{ env.BUILD_USE_MAVEN }} == 'true'
         run: mvn clean package -B -e -U
         continue-on-error: false
       - name: Test and build (npm)
-        if: ${{ env.BUILD_USE_NPM }}
+        if: ${{ env.BUILD_USE_NPM }} == 'true'
         run: |
           npm ci
           npm test
@@ -122,6 +122,7 @@ jobs:
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: ${{ env.NAIS_FILE }}
           VAR: IMAGE=${{ steps.setVars.outputs.IMAGE }},appName=${{ env.APPNAME }},dashEnv=-${{ env.ENVIRONMENT }},slackAlertChannel=${{ env.SLACK_ALERT_CHANNEL }},ingress=https://${{ env.APPNAME  }}-${{ env.ENVIRONMENT }}.${{ env.INGRESS_POSTFIX }}
+          VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
       # Hvis det er ny versjon, oppdater pom.xml og utfør git commit/push
       - name: Set next version in version file
         if: github.event.inputs.bump_patch == 'bump' && github.ref == ${{ env.MAIN_BRANCH }}
