@@ -157,7 +157,7 @@
     'meldekort.type.elektronisk': 'Elektronisk kort ',
     'meldekort.type.erstatning': 'Erstatningskort ',
     'meldekort.type.korrigertElektronisk': 'Elektronisk korrigert ',
-    'meldekort.type.korrigert': 'Korrigert ',
+    'meldekort.type.korrigert': 'Korrigert meldekort ',
     'meldekort.type.manuellArena': 'Manuelt opprettet kort ',
     'meldekort.type.maskineltOppdatert': 'Maskinelt oppdatert ',
     'meldekort.type.ordinarManuell': 'Manuelt utfylt kort ',
@@ -260,14 +260,15 @@
     'sendMeldekort.info.neste': 'Klikk på Neste for å sende meldekort. ',
     'sendMeldekort.knapp.startUtfylling': 'Start Utfylling ',
     'sendt.advarsel':
-      'Du har sannsynligvis ikke sett informasjonen nedenfor dersom du har svart NEI på det relaterte spørsmålet ',
+      '<i>Du har sannsynligvis ikke sett informasjonen i de grå boksene nedenfor dersom du har svart NEI på de relaterte spørsmålene</i> ',
     'sendt.etterregistrering.info':
       'Det finnes meldekort for tidligere periode som er klare for innsending. Klikk på knappen for å sende inn. ',
     'sendt.linkTilTidligereMeldekort': 'Til meldekortoversikten ',
-    'sendt.meldekortKanSendes': 'Neste meldekort kan sendes inn fra {0} ',
+    'sendt.meldekortKanSendes':
+      '<b>Neste meldekort kan sendes inn fra:</b> {0} ',
     'sendt.mottatt.label': 'Meldekortet er mottatt av NAV {0} (klokken {1}) ',
     'sendt.mottatt.pdfheader':
-      '{type}Meldekort for perioden {period} elektronisk mottatt av NAV<br/> Meldekortet ble mottatt {mottatt} og fikk ID %MELDEKORT_ID%<br/> Bruker: %NAVN% (%FNR%)<br/> Tema: %TEMA%<br/> Tilgangsnivå: %TILGANGSNIVAA%<br/> {kortKanSendesFra}<br/> ',
+      '<b>{type} for perioden:</b> {period} elektronisk mottatt av NAV<br/> <b>Meldekortet ble mottatt:</b> {mottatt}<br/> <b>Bruker:</b> %NAVN% (%FNR%)<br/> {kortKanSendesFra}<br/> ',
     'skrivUt.lukkVindu': 'Lukk vindu ',
     'sporsmal.aktivitetArbeid-AAP':
       'Har du gjennomført avtalt aktivitet eller deltatt på kurs/utdanning? ',
@@ -562,7 +563,7 @@
     'meldekort.type.elektronisk': 'Electronic card ',
     'meldekort.type.erstatning': 'Erstatningskort ',
     'meldekort.type.korrigertElektronisk': 'Elektronisk korrigert ',
-    'meldekort.type.korrigert': 'Corrected ',
+    'meldekort.type.korrigert': 'Corrected employment status form ',
     'meldekort.type.manuellArena': 'Manuelt opprettet kort ',
     'meldekort.type.maskineltOppdatert': 'Maskinelt oppdatert ',
     'meldekort.type.ordinarManuell': 'Manuelt utfylt kort ',
@@ -666,16 +667,16 @@
     'sendMeldekort.info.neste': 'Click next to send employment status form. ',
     'sendMeldekort.knapp.startUtfylling': 'Begin filling out forms ',
     'sendt.advarsel':
-      'You probably did not see the information below if you answered NO to the related question ',
+      '<i>You probably did not see the information in the grey boxes below if you answered NO to the related questions</i> ',
     'sendt.etterregistrering.info':
       'Your employment status forms for one or more previous periods are ready to be sent. Click the button to send. ',
     'sendt.linkTilTidligereMeldekort': 'Employment form homescreen ',
     'sendt.meldekortKanSendes':
-      'The next employment status form can be submitted on {0} ',
+      '<b>The next employment status form can be submitted on:</b> {0} ',
     'sendt.mottatt.label':
       'The Employment status form was received by NAV on {0} (at {1}) ',
     'sendt.mottatt.pdfheader':
-      '{type}Employment status for the period {period} electronically received by NAV<br/> The Employment status form was received {mottatt} and got ID %MELDEKORT_ID%<br/> User: %NAVN% (%FNR%)<br/> Subject: %TEMA%<br/> Access level: %TILGANGSNIVAA%<br/> {kortKanSendesFra}<br/> ',
+      '<b>{type} for the period:</b> {period} electronically received by NAV<br/> <b>The Employment status form was received:</b> {mottatt}<br/> <b>User:</b> %NAVN% (%FNR%)<br/> {kortKanSendesFra}<br/> ',
     'skrivUt.lukkVindu': 'Close ',
     'sporsmal.aktivitetArbeid-AAP':
       'Have you completed an agreed activity or taken part in a course and/or training? ',

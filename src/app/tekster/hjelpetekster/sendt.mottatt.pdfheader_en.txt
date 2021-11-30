@@ -1,6 +1,4 @@
-{type}Employment status for the period {period} electronically received by NAV<br/>
-The Employment status form was received {mottatt} and got ID %MELDEKORT_ID%<br/>
-User: %NAVN% (%FNR%)<br/>
-Subject: %TEMA%<br/>
-Access level: %TILGANGSNIVAA%<br/>
+<b>{type} for the period:</b> {period} electronically received by NAV<br/>
+<b>The Employment status form was received:</b> {mottatt}<br/>
+<b>User:</b> %NAVN% (%FNR%)<br/>
 {kortKanSendesFra}<br/>

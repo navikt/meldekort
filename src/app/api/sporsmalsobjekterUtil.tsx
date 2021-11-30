@@ -109,7 +109,9 @@ export function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   sporsmalsobjekter.push(uke1(fra, meldekortdager, typeYtelsePostfix));
   sporsmalsobjekter.push(uke2(til, meldekortdager, typeYtelsePostfix));
 
-  sporsmalsobjekter.push(utfylling('utfylling.arbeid', typeYtelsePostfix));
+  sporsmalsobjekter.push(
+    utfylling('utfylling.arbeid', typeYtelsePostfix, true)
+  );
   sporsmalsobjekter.push(utfylling('utfylling.tiltak', typeYtelsePostfix));
   sporsmalsobjekter.push(utfylling('utfylling.syk', typeYtelsePostfix));
   sporsmalsobjekter.push(utfylling('utfylling.ferieFravar', typeYtelsePostfix));
@@ -141,8 +143,10 @@ function header(
         type: korrigering
           ? hentIntl()
               .formatMessage({ id: 'meldekort.type.korrigert' })
-              .trim() + ' '
-          : '',
+              .trim()
+          : hentIntl()
+              .formatMessage({ id: 'overskrift.meldekort' })
+              .trim(),
         period: formaterUkeOgDatoPeriode(
           meldekortdetaljerInnsending!.meldeperiode.fra,
           meldekortdetaljerInnsending!.meldeperiode.til
@@ -254,11 +258,15 @@ function uke2(
   };
 }
 
-function utfylling(id: string, typeYtelsePostfix: string): Sporsmalsobjekt {
+function utfylling(
+  id: string,
+  typeYtelsePostfix: string,
+  medAdvarsel: boolean = false
+): Sporsmalsobjekt {
   return {
-    advarsel: hentIntl().formatMessage({
-      id: 'sendt.advarsel',
-    }),
+    advarsel: medAdvarsel
+      ? hentIntl().formatMessage({ id: 'sendt.advarsel' })
+      : '',
     sporsmal: hentIntl().formatMessage({
       id: id,
     }),

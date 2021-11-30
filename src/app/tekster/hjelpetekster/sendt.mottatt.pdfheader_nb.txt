@@ -1,6 +1,4 @@
-{type}Meldekort for perioden {period} elektronisk mottatt av NAV<br/>
-Meldekortet ble mottatt {mottatt} og fikk ID %MELDEKORT_ID%<br/>
-Bruker: %NAVN% (%FNR%)<br/>
-Tema: %TEMA%<br/>
-Tilgangsnivå: %TILGANGSNIVAA%<br/>
+<b>{type} for perioden:</b> {period} elektronisk mottatt av NAV<br/>
+<b>Meldekortet ble mottatt:</b> {mottatt}<br/>
+<b>Bruker:</b> %NAVN% (%FNR%)<br/>
 {kortKanSendesFra}<br/>
