@@ -267,12 +267,16 @@ function utfylling(
     advarsel: medAdvarsel
       ? hentIntl().formatMessage({ id: 'sendt.advarsel' })
       : '',
-    sporsmal: hentIntl().formatMessage({
-      id: id,
-    }),
-    forklaring: hentIntl().formatMessage({
-      id: 'forklaring.' + id + typeYtelsePostfix,
-    }),
+    sporsmal: '',
+    forklaring:
+      '<b>' +
+      hentIntl().formatMessage({
+        id: id,
+      }) +
+      '</b><br/>' +
+      hentIntl().formatMessage({
+        id: 'forklaring.' + id + typeYtelsePostfix,
+      }),
   };
 }
 

@@ -419,54 +419,58 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
     hentIntl().formatMessage({ id: 'sendt.advarsel' })
   );
   expect(result[10 + add].forklaring).toBe(
-    hentIntl().formatMessage({
-      id: 'forklaring.utfylling.arbeid',
-    })
+    '<b>' +
+      hentIntl().formatMessage({
+        id: 'utfylling.arbeid',
+      }) +
+      '</b><br/>' +
+      hentIntl().formatMessage({
+        id: 'forklaring.utfylling.arbeid',
+      })
   );
-  expect(result[10 + add].sporsmal).toBe(
-    hentIntl().formatMessage({
-      id: 'utfylling.arbeid',
-    })
-  );
+  expect(result[10 + add].sporsmal).toBe('');
   expect(result[10 + add].svar).toBe(undefined);
 
   expect(result[11 + add].advarsel).toBe('');
   expect(result[11 + add].forklaring).toBe(
-    hentIntl().formatMessage({
-      id: 'forklaring.utfylling.tiltak',
-    })
+    '<b>' +
+      hentIntl().formatMessage({
+        id: 'utfylling.tiltak',
+      }) +
+      '</b><br/>' +
+      hentIntl().formatMessage({
+        id: 'forklaring.utfylling.tiltak',
+      })
   );
-  expect(result[11 + add].sporsmal).toBe(
-    hentIntl().formatMessage({
-      id: 'utfylling.tiltak',
-    })
-  );
+  expect(result[11 + add].sporsmal).toBe('');
   expect(result[11 + add].svar).toBe(undefined);
 
   expect(result[12 + add].advarsel).toBe('');
   expect(result[12 + add].forklaring).toBe(
-    hentIntl().formatMessage({
-      id: 'forklaring.utfylling.syk',
-    })
+    '<b>' +
+      hentIntl().formatMessage({
+        id: 'utfylling.syk',
+      }) +
+      '</b><br/>' +
+      hentIntl().formatMessage({
+        id: 'forklaring.utfylling.syk',
+      })
   );
-  expect(result[12 + add].sporsmal).toBe(
-    hentIntl().formatMessage({
-      id: 'utfylling.syk',
-    })
-  );
+  expect(result[12 + add].sporsmal).toBe('');
   expect(result[12 + add].svar).toBe(undefined);
 
   expect(result[13 + add].advarsel).toBe('');
   expect(result[13 + add].forklaring).toBe(
-    hentIntl().formatMessage({
-      id: 'forklaring.utfylling.ferieFravar',
-    })
+    '<b>' +
+      hentIntl().formatMessage({
+        id: 'utfylling.ferieFravar',
+      }) +
+      '</b><br/>' +
+      hentIntl().formatMessage({
+        id: 'forklaring.utfylling.ferieFravar',
+      })
   );
-  expect(result[13 + add].sporsmal).toBe(
-    hentIntl().formatMessage({
-      id: 'utfylling.ferieFravar',
-    })
-  );
+  expect(result[13 + add].sporsmal).toBe('');
   expect(result[13 + add].svar).toBe(undefined);
 
   expect(result[14 + add].advarsel).toBe(undefined);
@@ -481,4 +485,6 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
       })
   );
   expect(result[14 + add].svar).toBe(undefined);
+
+  console.log(result);
 };
