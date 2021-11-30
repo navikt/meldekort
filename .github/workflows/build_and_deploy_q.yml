@@ -24,9 +24,9 @@ env:
   INGRESS_POSTFIX: dev.nav.no
   CLUSTER: dev-gcp
   NAIS_FILE: .nais/nais.yaml
-  BUILD_USE_MAVEN: false
-  BUILD_USE_GRADLE: false
-  BUILD_USE_NPM: true
+  BUILD_USE_MAVEN: 'false'
+  BUILD_USE_GRADLE: 'false'
+  BUILD_USE_NPM: 'true'
   MAIN_BRANCH: 'refs/heads/master' # Heter branchen main eller master?
   VERSION_FILENAME: 'pom.xml' # Vanligvis pom.xml, evt maven.xml
 
@@ -102,14 +102,14 @@ jobs:
           npm test
           npm run build
         continue-on-error: false
-      - name: Build docker image
-        run: |
-          docker build --build-arg JAR_FILE=${{ steps.setVars.outputs.JARFILE }} --build-arg SPRING_PROFILES=${{ env.SPRINGPROFILES }} -t ${{ steps.setVars.outputs.IMAGE }} .
       - name: Login to Github Package Registry
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+      - name: Build docker image
+        run: |
+          docker build --build-arg JAR_FILE=${{ steps.setVars.outputs.JARFILE }} --build-arg SPRING_PROFILES=${{ env.SPRINGPROFILES }} -t ${{ steps.setVars.outputs.IMAGE }} .
       - name: Push Docker image
         run: |
           docker push ${{ steps.setVars.outputs.IMAGE }}
