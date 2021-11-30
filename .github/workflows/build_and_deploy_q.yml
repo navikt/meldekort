@@ -90,7 +90,7 @@ jobs:
           echo "::set-output name=jarfile::${{ env.APPNAME }}-${{ steps.calcReleaseVersion.outputs.version }}.jar"
           echo "::set-output name=image::docker.pkg.github.com/${{ github.repository }}/${{ env.APPNAME }}:${{ steps.calcReleaseVersion.outputs.version }}"
       - name: Set release version in version file
-        run: mvn versions:set -DnewVersion=${{ steps.calcReleaseVersion.outputs.version }} -f {{ env.VERSION_FILENAME }}
+        run: mvn versions:set -DnewVersion=${{ steps.calcReleaseVersion.outputs.version }} -f ${{ env.VERSION_FILENAME }}
       - name: Test and build (Maven)
         if: ${{ env.BUILD_USE_MAVEN }}
         run: mvn clean package -B -e -U
@@ -125,7 +125,7 @@ jobs:
       # Hvis det er ny versjon, oppdater pom.xml og utfør git commit/push
       - name: Set next version in version file
         if: github.event.inputs.bump_patch == 'bump' && github.ref == ${{ env.MAIN_BRANCH }}
-        run: mvn versions:set -DnewVersion=${{ steps.calcNextVersion.outputs.version }} -f {{ env.VERSION_FILENAME }}
+        run: mvn versions:set -DnewVersion=${{ steps.calcNextVersion.outputs.version }} -f ${{ env.VERSION_FILENAME }}
       - name: Commit og push bumped version
         if: github.event.inputs.bump_patch == 'bump' && github.ref == ${{ env.MAIN_BRANCH }}
         run: |
