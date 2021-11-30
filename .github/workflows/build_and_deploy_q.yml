@@ -16,7 +16,7 @@ on:
         default: ''
 
 env:
-  APPNAME: meldeplikt-kafka-producer
+  APPNAME: meldekort-frontend
   SPRINGPROFILES: nais
   SLACK_ALERT_CHANNEL: '#team-meldeplikt-alerts-dev'
   ENVIRONMENT: ${{ github.event.inputs.environment }}
@@ -27,7 +27,7 @@ env:
   BUILD_USE_MAVEN: 'false'
   BUILD_USE_GRADLE: 'false'
   BUILD_USE_NPM: 'true'
-  MAIN_BRANCH: 'refs/heads/master' # Heter branchen main eller master?
+  MAIN_BRANCH: 'refs/heads/main' # Heter branchen main eller master?
   VERSION_FILENAME: 'pom.xml' # Vanligvis pom.xml, evt maven.xml
 
 jobs:
@@ -114,14 +114,14 @@ jobs:
         run: |
           docker push ${{ steps.setVars.outputs.IMAGE }}
       - name: Deploy til q-miljø
-        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
+        if: always() && (env.ENVIRONMENT == 'gcp' || env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           PRINT_PAYLOAD: true
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: ${{ env.NAIS_FILE }}
-          VAR: IMAGE=${{ steps.setVars.outputs.IMAGE }},appName=${{ env.APPNAME }},dashEnv=-${{ env.ENVIRONMENT }},vaultKvEnv=${{ env.VAULT_KV_ENV }},slackAlertChannel=${{ env.SLACK_ALERT_CHANNEL }},ingress=https://${{ env.APPNAME  }}-${{ env.ENVIRONMENT }}.${{ env.INGRESS_POSTFIX }},kafkaPool=${{ env.KAFKA_POOL }}
+          VAR: IMAGE=${{ steps.setVars.outputs.IMAGE }},appName=${{ env.APPNAME }},dashEnv=-${{ env.ENVIRONMENT }},slackAlertChannel=${{ env.SLACK_ALERT_CHANNEL }},ingress=https://${{ env.APPNAME  }}-${{ env.ENVIRONMENT }}.${{ env.INGRESS_POSTFIX }}
       # Hvis det er ny versjon, oppdater pom.xml og utfør git commit/push
       - name: Set next version in version file
         if: github.event.inputs.bump_patch == 'bump' && github.ref == ${{ env.MAIN_BRANCH }}
