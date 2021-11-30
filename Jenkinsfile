@@ -12,7 +12,7 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 node {
     def NAIS_YAML_FILE = ".nais/nais.yaml"
-    def DOCKER_REPO = "repo.adeo.no:5443"
+    def DOCKER_REPO = "docker.pkg.github.com/navikt"
 
     // For opplasting av Nais-artifakt (nais.yaml + vars-filer)
     def NEXUS_REPO_URL = "http://maven.adeo.no/nexus/service/local/artifact/maven/content"
