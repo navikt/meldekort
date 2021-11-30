@@ -28,7 +28,7 @@ env:
   BUILD_USE_GRADLE: false
   BUILD_USE_NPM: true
   MAIN_BRANCH: 'refs/heads/master' # Heter branchen main eller master?
-  VERSION_FILENAME: 'maven.xml' # Vanligvis pom.xml, evt maven.xml
+  VERSION_FILENAME: 'pom.xml' # Vanligvis pom.xml, evt maven.xml
 
 jobs:
   build:
