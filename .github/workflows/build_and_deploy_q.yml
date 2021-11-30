@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set default environment for push
-        if: github.event_name == 'push' && github.ref == ${{ env.MAIN_BRANCH }}
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: echo "ENVIRONMENT=q0" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt-openj9'
       - name: Setup Node
-        if: ${{ env.BUILD_USE_MAVEN }}
+        if: ${{ env.BUILD_USE_MAVEN }} == 'true'
         uses: actions/setup-node@v2
         with:
           node-version: '14'
