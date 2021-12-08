@@ -5,7 +5,7 @@
 
     <groupId>no.nav.meldeplikt</groupId>
     <artifactId>meldekort</artifactId>
-    <version>1.4.4-SNAPSHOT</version>
+    <version>1.4.4</version>
 
     <build>
         <plugins>
