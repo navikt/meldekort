@@ -218,7 +218,7 @@ it('opprettSporsmalsobjekter for meldekort med neste meldekort', () => {
         period: 'Uke 1 - 2 (30.12.2019 - 12.01.2020)',
         mottatt: formaterDato(MOTTATT_DATO) + ' ' + hentTid(MOTTATT_DATO),
         kortKanSendesFra:
-          hentIntl().formatMessage(
+          hentIntl().formatHTMLMessage(
             { id: 'sendt.meldekortKanSendes' },
             {
               0: formaterDato(KAN_SENDES_FRA),
