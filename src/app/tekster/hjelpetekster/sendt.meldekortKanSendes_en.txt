@@ -1,1 +1,1 @@
-<b>The next employment status form can be submitted on:</b> {0}
+The next employment status form can be submitted on {0}

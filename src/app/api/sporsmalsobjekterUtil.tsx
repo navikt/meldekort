@@ -154,7 +154,7 @@ function header(
         mottatt: meldekortMottatt,
         kortKanSendesFra: nesteDato
           ? hentIntl().formatMessage(
-              { id: 'sendt.meldekortKanSendes' },
+              { id: 'sendt.mottatt.meldekortKanSendes' },
               {
                 0: formaterDato(nesteDato),
               }
