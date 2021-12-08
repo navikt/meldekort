@@ -7,10 +7,12 @@ import {
   Infomelding,
   Meldekort,
   Meldekortdetaljer,
-  MeldekortdetaljerInnsending,
   ValideringsResultat,
 } from '../types/meldekort';
 import { WeblogicPing } from '../types/weblogic';
+import { RootState } from '../store/configureStore';
+import * as React from 'react';
+import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
 
 const fetchGet = async (url: string) => {
   return prefferedAxios
@@ -74,9 +76,12 @@ export function pingWeblogic(): Promise<WeblogicPing> {
   return fetchGet(Konstanter().pingWeblogic);
 }
 
-export function postMeldekort(
-  meldekortdetaljer: MeldekortdetaljerInnsending
-): Promise<ValideringsResultat> {
+export function postMeldekort(state: RootState): Promise<ValideringsResultat> {
+  let meldekortdetaljer = {
+    ...state.innsending.meldekortdetaljerInnsending!,
+    sporsmalsobjekter: opprettSporsmalsobjekter(state),
+  };
+
   return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
 }
 

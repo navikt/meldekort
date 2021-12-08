@@ -36,7 +36,7 @@ const kontrollerMeldekort: AppEpic = (action$, state$) =>
     filter(isActionOf([InnsendingActions.kontrollerMeldekort.request])),
     withLatestFrom(state$),
     switchMap(([action, state]) =>
-      from(postMeldekort(state.innsending.meldekortdetaljerInnsending!)).pipe(
+      from(postMeldekort(state)).pipe(
         map(InnsendingActions.kontrollerMeldekort.success),
         catchError(error =>
           of(
