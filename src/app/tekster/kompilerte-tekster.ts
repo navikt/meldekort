@@ -264,9 +264,10 @@
     'sendt.etterregistrering.info':
       'Det finnes meldekort for tidligere periode som er klare for innsending. Klikk på knappen for å sende inn. ',
     'sendt.linkTilTidligereMeldekort': 'Til meldekortoversikten ',
-    'sendt.meldekortKanSendes':
-      '<b>Neste meldekort kan sendes inn fra:</b> {0} ',
+    'sendt.meldekortKanSendes': 'Neste meldekort kan sendes inn fra {0} ',
     'sendt.mottatt.label': 'Meldekortet er mottatt av NAV {0} (klokken {1}) ',
+    'sendt.mottatt.meldekortKanSendes':
+      '<b>Neste meldekort kan sendes inn fra:</b> {0} ',
     'sendt.mottatt.pdfheader':
       '<b>{type} for perioden:</b> {period} elektronisk mottatt av NAV<br/> <b>Meldekortet ble mottatt:</b> {mottatt}<br/> <b>Bruker:</b> %NAVN% (%FNR%)<br/> {kortKanSendesFra}<br/> ',
     'skrivUt.lukkVindu': 'Lukk vindu ',
@@ -672,9 +673,11 @@
       'Your employment status forms for one or more previous periods are ready to be sent. Click the button to send. ',
     'sendt.linkTilTidligereMeldekort': 'Employment form homescreen ',
     'sendt.meldekortKanSendes':
-      '<b>The next employment status form can be submitted on:</b> {0} ',
+      'The next employment status form can be submitted on {0} ',
     'sendt.mottatt.label':
       'The Employment status form was received by NAV on {0} (at {1}) ',
+    'sendt.mottatt.meldekortKanSendes':
+      '<b>The next employment status form can be submitted on:</b> {0} ',
     'sendt.mottatt.pdfheader':
       '<b>{type} for the period:</b> {period} electronically received by NAV<br/> <b>The Employment status form was received:</b> {mottatt}<br/> <b>User:</b> %NAVN% (%FNR%)<br/> {kortKanSendesFra}<br/> ',
     'skrivUt.lukkVindu': 'Close ',

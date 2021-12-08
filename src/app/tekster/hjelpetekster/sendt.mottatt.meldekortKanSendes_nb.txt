@@ -1,0 +1,1 @@
+<b>Neste meldekort kan sendes inn fra:</b> {0}

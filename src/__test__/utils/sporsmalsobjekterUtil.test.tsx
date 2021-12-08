@@ -219,7 +219,7 @@ it('opprettSporsmalsobjekter for meldekort med neste meldekort', () => {
         mottatt: formaterDato(MOTTATT_DATO) + ' ' + hentTid(MOTTATT_DATO),
         kortKanSendesFra:
           hentIntl().formatMessage(
-            { id: 'sendt.meldekortKanSendes' },
+            { id: 'sendt.mottatt.meldekortKanSendes' },
             {
               0: formaterDato(KAN_SENDES_FRA),
             }
