@@ -4,7 +4,7 @@ ENV NODE_ENV production
 
 WORKDIR /source
 
-CMD ["npm", "run", "server"]
+# CMD ["npm", "run", "server"]
 
 EXPOSE 8080
 

@@ -33,9 +33,6 @@ For de som utvikler på tynnklienten, må disse to linjer med kode settes øvers
 * `proxy=http://155.55.60.117:8088/`
 * `https-proxy=http://155.55.60.117:8088/`
 
-## Endre tekster
-Ved endring av tekster, husk å bygge/kompilere tekstene ved å kjøre kommandoen `npm run build:tekster`
-
 ### Andre tilgjengelige kommandoer
 
 * `npm test` kjører testene.

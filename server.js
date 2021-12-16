@@ -1,5 +1,7 @@
-const express = require('express');
 const betterSqlite3 = require('better-sqlite3');
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
 const url = require('url');
 
 const db = new betterSqlite3('texts.sqlite');
@@ -45,8 +47,17 @@ app.get(basePath + '/get', function(req, res) {
   res.end(value);
 });
 
-app.use('/meldekort', express.static(__dirname));
-app.use('/', express.static(__dirname));
+app.use('/meldekort', (req, res, next) => {
+  console.log(req.baseUrl);
+  console.log(req.path);
+
+  const file = path.join(__dirname, 'build', req.path);
+  if (req.path === '/' || !fs.existsSync(file)) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  } else {
+    res.sendFile(file);
+  }
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
