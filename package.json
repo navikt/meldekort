@@ -105,7 +105,7 @@
     "typesafe-actions": "^3.0.0"
   },
   "scripts": {
-    "build": "set CI=false&&craco build && cp './server.js' './build/' && cp './texts.sqlite' './build/'",
+    "build": "CI=false craco build && cp './server.js' './build/' && cp './texts.sqlite' './build/'",
     "eject": "craco eject",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
