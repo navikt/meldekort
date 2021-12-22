@@ -1,1 +1,1 @@
-<i>Du har sannsynligvis ikke sett informasjonen i de grå boksene nedenfor dersom du har svart NEI på de relaterte spørsmålene</i>
+<i>De grå boksene under viser veiledningstekster fra utfyllingssiden på meldekortet. Vi viste kun veiledningsteksten til deg hvis du svarte JA på spørsmålet.</i>

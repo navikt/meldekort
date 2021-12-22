@@ -260,7 +260,7 @@
     'sendMeldekort.info.neste': 'Klikk på Neste for å sende meldekort. ',
     'sendMeldekort.knapp.startUtfylling': 'Start Utfylling ',
     'sendt.advarsel':
-      '<i>Du har sannsynligvis ikke sett informasjonen i de grå boksene nedenfor dersom du har svart NEI på de relaterte spørsmålene</i> ',
+      '<i>De grå boksene under viser veiledningstekster fra utfyllingssiden på meldekortet. Vi viste kun veiledningsteksten til deg hvis du svarte JA på spørsmålet.</i> ',
     'sendt.etterregistrering.info':
       'Det finnes meldekort for tidligere periode som er klare for innsending. Klikk på knappen for å sende inn. ',
     'sendt.linkTilTidligereMeldekort': 'Til meldekortoversikten ',
@@ -668,7 +668,7 @@
     'sendMeldekort.info.neste': 'Click next to send employment status form. ',
     'sendMeldekort.knapp.startUtfylling': 'Begin filling out forms ',
     'sendt.advarsel':
-      '<i>You probably did not see the information in the grey boxes below if you answered NO to the related questions</i> ',
+      '<i>The grey boxes below contain the guidance notes from the webpage where you completed the employment status form. We only showed you the guidance notes for questions where you answered YES.</i> ',
     'sendt.etterregistrering.info':
       'Your employment status forms for one or more previous periods are ready to be sent. Click the button to send. ',
     'sendt.linkTilTidligereMeldekort': 'Employment form homescreen ',
