@@ -1,68 +1,62 @@
 const betterSqlite3 = require('better-sqlite3');
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const url = require('url');
+const http = require('http');
 
-const db = new betterSqlite3('texts.sqlite');
-const app = express();
+const port = process.env.PORT || 8080;
+const basePath = '/texts';
 
-const basePath = '*/texts';
+http
+  .createServer(function(req, res) {
+    try {
+      // CORS policy
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+      );
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
 
-app.get(basePath + '/exists', function(req, res) {
-  const { id, language, time } = parseUrl(req);
+      const { path, id, language, time } = parseUrl(req);
+      const db = new betterSqlite3('texts.sqlite');
 
-  // result is undefined if nothing has been found
-  const result = getOne(db, id, language, time);
+      if (path === basePath + '/exists') {
+        const result = getOne(db, id, language, time);
 
-  let value = id.split('-')[0];
-  if (result) {
-    value = id;
-  }
+        // result is undefined if nothing has been found
+        let value = id.split('-')[0];
+        if (result) {
+          value = id;
+        }
 
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.end(value);
-});
+        res.end(value);
+      } else if (path === basePath + '/get') {
+        // result is undefined if nothing has been found
+        const result = getOne(db, id, language, time);
 
-app.get(basePath + '/getall', function(req, res) {
-  const { language, time } = parseUrl(req);
-  const result = getAll(db, language, time);
+        let value = id;
+        if (result) {
+          value = result.value;
+        }
 
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.end(JSON.stringify(result));
-});
+        res.end(value);
+      } else if (path === basePath + '/getall') {
+        const result = getAll(db, language, time);
 
-app.get(basePath + '/get', function(req, res) {
-  const { id, language, time } = parseUrl(req);
+        res.end(JSON.stringify(result));
+      } else {
+        res.statusCode = 404;
+        res.end();
+      }
 
-  // result is undefined if nothing has been found
-  const result = getOne(db, id, language, time);
-
-  let value = queryObject.id;
-  if (result) {
-    value = result.value;
-  }
-
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.end(value);
-});
-
-app.use('/meldekort', (req, res, next) => {
-  console.log(req.baseUrl);
-  console.log(req.path);
-
-  const file = path.join(__dirname, 'build', req.path);
-  if (req.path === '/' || !fs.existsSync(file)) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  } else {
-    res.sendFile(file);
-  }
-});
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+      db.close();
+    } catch (e) {
+      console.log(e);
+    }
+  })
+  .listen(port, function(err) {
+    if (err) throw err;
+    console.log('Listening on ' + port);
+  });
 
 function parseUrl(req) {
   const parsedUrl = url.parse(req.url, true);
@@ -102,6 +96,7 @@ function parseUrl(req) {
   }
 
   return {
+    path: parsedUrl.pathname,
     id,
     language,
     time,

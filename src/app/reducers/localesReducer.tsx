@@ -57,7 +57,7 @@ const localeCache = new Array<LocaleCache>();
 export const downloadMessages = async (language: string, from: string) => {
   const options = {
     hostname: window.location.hostname,
-    port: process.env.PORT || window.location.port || 8080,
+    port: process.env.PORT || 8080,
     path:
       (erLocalhost() ? '' : Konstanter().basePath) +
       '/texts/getall?language=' +

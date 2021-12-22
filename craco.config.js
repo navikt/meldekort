@@ -48,9 +48,4 @@ module.exports = {
       },
     },
   },
-  devServer: {
-    proxy: {
-      '/texts': 'http://localhost:8080',
-    },
-  },
 };
