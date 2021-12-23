@@ -4,7 +4,7 @@ Click <strong>Yes</strong> if you have been prevented from taking work.
 <p style="color:#ee5522;">
     <b>
         Do not register illness unless you have sick leave and receive illness benefits.
-    <b>
+    </b>
 </p>
 <br>
 <br>
