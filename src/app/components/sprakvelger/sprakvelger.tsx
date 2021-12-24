@@ -74,10 +74,16 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
       >
         <Button className="languageToggle__button">
           <div className="languageToggle__button__flag">
-            {locales.find(locale => locale.label === currentLocale)?.ikon}
+            {
+              locales.find((locale: Locale) => locale.label === currentLocale)
+                ?.ikon
+            }
           </div>
           <div className="languageToggle__button__language">
-            {locales.find(locale => locale.label === currentLocale)?.tittel}
+            {
+              locales.find((locale: Locale) => locale.label === currentLocale)
+                ?.tittel
+            }
           </div>
           <div>
             <NedChevron />
@@ -85,7 +91,9 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
         </Button>
         <Menu className="languageToggle__menu">
           <ul>
-            {locales.map(locale => renderMenuItem(locale, currentLocale))}
+            {locales.map((locale: Locale) =>
+              renderMenuItem(locale, currentLocale)
+            )}
           </ul>
         </Menu>
       </Wrapper>

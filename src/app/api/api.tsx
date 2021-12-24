@@ -12,7 +12,7 @@ import {
 } from '../types/meldekort';
 import { WeblogicPing } from '../types/weblogic';
 
-const fetchGet = async (url: string) => {
+export const fetchGet = async (url: string) => {
   return prefferedAxios
     .get(Environment().apiUrl + url, {
       headers: {

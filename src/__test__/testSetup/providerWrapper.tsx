@@ -3,7 +3,7 @@ import { store } from '../../app/store/configureStore';
 import { IntlProvider, IntlState, updateIntl } from 'react-intl-redux';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { downloadMessages } from '../../app/reducers/localesReducer';
+import teksterJsonNb from '../../app/mock/responses/tekster_nb.json';
 import { Konstanter } from '../../app/utils/consts';
 
 interface Props {
@@ -42,15 +42,13 @@ const ProviderWrapper: React.FunctionComponent<Props> = props => {
 
 export const setLocalesBeforeAll = () => {
   beforeAll(async () => {
-    return await downloadMessages(
-      Konstanter().defaultLocale,
-      Konstanter().defaultFromTime
-    ).then((messages: object) => {
-      store.dispatch(
-        updateIntl({ locale: Konstanter().defaultLocale, messages: messages })
-      );
-      intl = { locale: Konstanter().defaultLocale, messages: messages };
-    });
+    store.dispatch(
+      updateIntl({
+        locale: Konstanter().defaultLocale,
+        messages: teksterJsonNb,
+      })
+    );
+    intl = { locale: Konstanter().defaultLocale, messages: teksterJsonNb };
   });
 };
 

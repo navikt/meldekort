@@ -3,9 +3,8 @@ import NorskFlaggSVG from '../components/sprakvelger/NorskFlaggSVG';
 import EngelskFlaggSVG from '../components/sprakvelger/EngelskFlaggSVG';
 import localeDataNB from 'react-intl/locale-data/nb';
 import localeDataEN from 'react-intl/locale-data/en';
-import * as http from 'http';
 import { Konstanter } from '../utils/consts';
-import { erLocalhost } from '../mock/utils';
+import { fetchGet } from '../api/api';
 
 export interface Locale {
   label: string;
@@ -52,21 +51,10 @@ interface LocaleCache {
   messages: object;
   validUntil: number;
 }
+
 const localeCache = new Array<LocaleCache>();
 
 export const downloadMessages = async (language: string, from: string) => {
-  const options = {
-    hostname: window.location.hostname,
-    port: process.env.PORT || 8080,
-    path:
-      (erLocalhost() ? '' : Konstanter().basePath) +
-      '/texts/getall?language=' +
-      language +
-      '&from=' +
-      from,
-    method: 'GET',
-  };
-
   const cachedLocale = localeCache.find(
     cachedLocale =>
       cachedLocale.label === language && cachedLocale.fromTime === from
@@ -80,44 +68,24 @@ export const downloadMessages = async (language: string, from: string) => {
   }
 
   return new Promise((resolve, reject) => {
-    const req = http.request(options, res => {
-      // on bad status, reject
-      if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
-        reject(new Error('statusCode=' + res.statusCode));
-      }
-
-      let data = '';
-
-      // on response data, cumulate it
-      res.on('data', chunk => {
-        data += chunk;
-      });
-
-      // on end, parse and resolve
-      res.on('end', () => {
-        const messages = JSON.parse(data);
-
+    fetchGet(
+      Konstanter().hentAlleTekster + '?language=' + language + '&from=' + from
+    )
+      .then(data => {
         if (cachedLocale) {
-          cachedLocale.messages = messages;
+          cachedLocale.messages = data;
           cachedLocale.validUntil = validUntil;
         } else {
           localeCache.push({
             label: language,
             fromTime: from,
-            messages: messages,
+            messages: data,
             validUntil: validUntil,
           });
         }
-        resolve(messages);
-      });
-    });
-
-    // on request error, reject
-    req.on('error', err => {
-      reject(err);
-    });
-
-    req.end();
+        resolve(data);
+      })
+      .catch(() => console.log('Kunne ikke hente tekster'));
   });
 };
 
