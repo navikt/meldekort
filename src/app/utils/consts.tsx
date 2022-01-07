@@ -10,7 +10,7 @@ export const Konstanter = () => {
     hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
     hentInfomelding: 'meldekort/infomelding',
     pingWeblogic: 'weblogic/ping',
-    hentAlleTekster: 'texts/getall',
+    hentAlleTekster: 'tekster/hentAlle',
     metodeGet: 'GET',
     metodePost: 'POST',
     forsteUke: 1,
