@@ -54,10 +54,10 @@ interface LocaleCache {
 
 const localeCache = new Array<LocaleCache>();
 
-export const downloadMessages = async (language: string, from: string) => {
+export const downloadMessages = async (sprak: string, fraTidspunkt: string) => {
   const cachedLocale = localeCache.find(
     cachedLocale =>
-      cachedLocale.label === language && cachedLocale.fromTime === from
+      cachedLocale.label === sprak && cachedLocale.fromTime === fraTidspunkt
   );
   const now = new Date().getTime();
   const validUntil = now + 1800000; // Milliseconds
@@ -69,7 +69,11 @@ export const downloadMessages = async (language: string, from: string) => {
 
   return new Promise((resolve, reject) => {
     fetchGet(
-      Konstanter().hentAlleTekster + '?language=' + language + '&from=' + from
+      Konstanter().hentAlleTekster +
+        '?sprak=' +
+        sprak +
+        '&fraTidspunkt=' +
+        fraTidspunkt
     )
       .then(data => {
         if (cachedLocale) {
@@ -77,8 +81,8 @@ export const downloadMessages = async (language: string, from: string) => {
           cachedLocale.validUntil = validUntil;
         } else {
           localeCache.push({
-            label: language,
-            fromTime: from,
+            label: sprak,
+            fromTime: fraTidspunkt,
             messages: data,
             validUntil: validUntil,
           });

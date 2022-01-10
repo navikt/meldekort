@@ -58,14 +58,14 @@ export default () => {
   });
 
   const urlNb = new RegExp(
-    `${apiUrl + Konstanter().hentAlleTekster}\\?language=nb.*`
+    `${apiUrl + Konstanter().hentAlleTekster}\\?sprak=nb.*`
   );
   mock.onGet(urlNb).reply(200, {
     ...teksterJsonNb,
   });
 
   const urlEn = new RegExp(
-    `${apiUrl + Konstanter().hentAlleTekster}\\?language=en.*`
+    `${apiUrl + Konstanter().hentAlleTekster}\\?sprak=en.*`
   );
   mock.onGet(urlEn).reply(200, {
     ...teksterJsonEn,
