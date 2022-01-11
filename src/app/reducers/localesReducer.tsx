@@ -55,6 +55,8 @@ interface LocaleCache {
 const localeCache = new Array<LocaleCache>();
 
 export const downloadMessages = async (sprak: string, fraDato: string) => {
+  fraDato = fraDato.substring(0, 10); // meldeperiod har tid, men vi trenger ikke den
+
   const cachedLocale = localeCache.find(
     cachedLocale =>
       cachedLocale.label === sprak && cachedLocale.fromDate === fraDato
