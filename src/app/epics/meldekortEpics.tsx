@@ -32,7 +32,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
       ) {
         downloadMessages(
           Konstanter().defaultLocale,
-          Konstanter().defaultFromTime
+          Konstanter().defaultFromDate
         ).then((messages: object) => {
           updateIntl({
             locale: Konstanter().defaultLocale,

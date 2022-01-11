@@ -60,7 +60,7 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
       newLocale,
       aktivtMeldekort
         ? aktivtMeldekort.meldeperiode.fra.toString().substring(0, 19)
-        : Konstanter().defaultFromTime
+        : Konstanter().defaultFromDate
     ).then((messages: object) => {
       props.updateIntl(newLocale, messages);
     });

@@ -30,7 +30,7 @@ const render = (Component: React.ComponentType, locale: string) => {
   );
 };
 
-downloadMessages(Konstanter().defaultLocale, Konstanter().defaultFromTime).then(
+downloadMessages(Konstanter().defaultLocale, Konstanter().defaultFromDate).then(
   (messages: object) => {
     store.dispatch(
       updateIntl({ locale: Konstanter().defaultLocale, messages: messages })
