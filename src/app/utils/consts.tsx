@@ -18,7 +18,7 @@ export const Konstanter = () => {
     pas: 'PASSWORD',
     use: 'USERNAME',
     defaultLocale: 'nb',
-    defaultFromDate: '0000-00-00',
+    defaultFromDate: '1000-01-01',
   };
 };
 
