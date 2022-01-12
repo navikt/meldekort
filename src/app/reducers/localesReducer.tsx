@@ -5,6 +5,7 @@ import localeDataNB from 'react-intl/locale-data/nb';
 import localeDataEN from 'react-intl/locale-data/en';
 import { Konstanter } from '../utils/consts';
 import { fetchGet } from '../api/api';
+import Environment from '../utils/env';
 
 export interface Locale {
   label: string;
@@ -87,7 +88,14 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
         }
         resolve(data);
       })
-      .catch(() => console.log('Kunne ikke hente tekster'));
+      .catch(error => {
+        console.log('Kunne ikke hente tekster');
+        console.log(error);
+        window.location.assign(
+          `${Environment().loginUrl}&redirect=${window.location.origin}` +
+            Konstanter().basePath
+        );
+      });
   });
 };
 
