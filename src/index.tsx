@@ -11,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { downloadMessages, Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
+import Environment from './app/utils/env';
 
 let locales: Locales = store.getState().locales;
 locales.forEach(locale => addLocaleData(locale.localeData));
@@ -30,14 +31,19 @@ const render = (Component: React.ComponentType, locale: string) => {
   );
 };
 
-downloadMessages(Konstanter().defaultLocale, Konstanter().defaultFromDate).then(
-  (messages: object) => {
+downloadMessages(Konstanter().defaultLocale, Konstanter().defaultFromDate)
+  .then((messages: object) => {
     store.dispatch(
       updateIntl({ locale: Konstanter().defaultLocale, messages: messages })
     );
 
     return render(App, Konstanter().defaultLocale);
-  }
-);
+  })
+  .catch(() =>
+    window.location.assign(
+      `${Environment().loginUrl}&redirect=${window.location.origin}` +
+        Konstanter().basePath
+    )
+  );
 
 serviceWorker.unregister();
