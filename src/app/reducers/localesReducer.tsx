@@ -88,9 +88,9 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
         }
         resolve(data);
       })
-      .catch(error => {
+      .catch(() => {
         console.log('Kunne ikke hente tekster');
-        console.log(error);
+        // Det er mest sannsynlig at brukeren ikke er innlogget, sender ham til innloggingssiden
         window.location.assign(
           `${Environment().loginUrl}&redirect=${window.location.origin}` +
             Konstanter().basePath
