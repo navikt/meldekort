@@ -11,11 +11,19 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { downloadMessages, Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 let locales: Locales = store.getState().locales;
 locales.forEach(locale => addLocaleData(locale.localeData));
 
 const rootElement = document.getElementById('meldekort__root');
+
+ReactDOM.render(
+  <div className="loader">
+    <NavFrontendSpinner type="XL" />
+  </div>,
+  rootElement
+);
 
 const render = (Component: React.ComponentType, locale: string) => {
   ReactDOM.render(
