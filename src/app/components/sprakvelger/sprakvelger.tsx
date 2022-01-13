@@ -55,12 +55,12 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
   const handleSelection = (value: JSX.Element[]) => {
     const newLocale: string = value[1].key
       ? value[1].key.toString()
-      : Konstanter().defaultLocale;
+      : Konstanter.defaultLocale;
     downloadMessages(
       newLocale,
       aktivtMeldekort
         ? aktivtMeldekort.meldeperiode.fra.toString()
-        : Konstanter().defaultFromDate
+        : Konstanter.defaultFromDate
     ).then((messages: object) => {
       props.updateIntl(newLocale, messages);
     });

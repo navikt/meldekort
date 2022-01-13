@@ -63,7 +63,7 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
       cachedLocale.label === sprak && cachedLocale.fromDate === fraDato
   );
   const now = new Date().getTime();
-  const validUntil = now + 1800000; // Milliseconds
+  const validUntil = now + Konstanter.cachedLocaleValidity;
   if (cachedLocale && cachedLocale.validUntil >= now) {
     return new Promise(resolve => {
       resolve(cachedLocale.messages);
@@ -72,7 +72,7 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
 
   return new Promise((resolve, reject) => {
     fetchGet(
-      Konstanter().hentAlleTekster + '?sprak=' + sprak + '&fraDato=' + fraDato
+      Konstanter.hentAlleTekster + '?sprak=' + sprak + '&fraDato=' + fraDato
     )
       .then(data => {
         if (cachedLocale) {
@@ -93,7 +93,7 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
         // Det er mest sannsynlig at brukeren ikke er innlogget, sender ham til innloggingssiden
         window.location.assign(
           `${Environment().loginUrl}&redirect=${window.location.origin}` +
-            Konstanter().basePath
+            Konstanter.basePath
         );
       });
   });

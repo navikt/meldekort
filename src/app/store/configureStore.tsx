@@ -57,7 +57,7 @@ import weblogicEpics from '../epics/weblogicEpics';
 import { Konstanter } from '../utils/consts';
 
 export const history = createBrowserHistory({
-  basename: Konstanter().basePath,
+  basename: Konstanter.basePath,
 });
 
 const packageConfig = require('../../../package.json');

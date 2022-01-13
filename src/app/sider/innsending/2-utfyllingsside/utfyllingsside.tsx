@@ -371,7 +371,7 @@ class Utfyllingsside extends React.Component<
           <div className={'utfylling-container'}>
             <UkePanel
               innsending={innsending}
-              ukenummer={Konstanter().forsteUke}
+              ukenummer={Konstanter.forsteUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
               datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
               utfyllingFeil={this.state}
@@ -379,7 +379,7 @@ class Utfyllingsside extends React.Component<
             />
             <UkePanel
               innsending={innsending}
-              ukenummer={Konstanter().andreUke}
+              ukenummer={Konstanter.andreUke}
               faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
               datoTittel={hentDatoForAndreUke(meldeperiode.til)}
               utfyllingFeil={this.state}

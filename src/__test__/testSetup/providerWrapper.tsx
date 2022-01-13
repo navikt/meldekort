@@ -31,8 +31,8 @@ const ProviderWrapper: React.FunctionComponent<Props> = props => {
   return (
     <Provider store={testStore}>
       <IntlProvider
-        locale={Konstanter().defaultLocale}
-        defaultLocale={Konstanter().defaultLocale}
+        locale={Konstanter.defaultLocale}
+        defaultLocale={Konstanter.defaultLocale}
       >
         {props.children}
       </IntlProvider>
@@ -44,11 +44,11 @@ export const setLocalesBeforeAll = () => {
   beforeAll(async () => {
     store.dispatch(
       updateIntl({
-        locale: Konstanter().defaultLocale,
+        locale: Konstanter.defaultLocale,
         messages: teksterJsonNb,
       })
     );
-    intl = { locale: Konstanter().defaultLocale, messages: teksterJsonNb };
+    intl = { locale: Konstanter.defaultLocale, messages: teksterJsonNb };
   });
 };
 

@@ -21,51 +21,51 @@ export default () => {
 
   console.log('### MOCK AKTIVERT ###');
 
-  mock.onGet(apiUrl + Konstanter().hentMeldekortApiUri).reply(200, {
+  mock.onGet(apiUrl + Konstanter.hentMeldekortApiUri).reply(200, {
     ...person,
   });
 
   mock
-    .onGet(apiUrl + Konstanter().hentHistoriskeMeldekortApiUri)
+    .onGet(apiUrl + Konstanter.hentHistoriskeMeldekortApiUri)
     .reply(200, historiskeMeldekort);
 
-  mock.onGet(apiUrl + Konstanter().hentMeldekortdetaljerApiUri).reply(200, {
+  mock.onGet(apiUrl + Konstanter.hentMeldekortdetaljerApiUri).reply(200, {
     ...meldekortdetaljer,
   });
 
-  mock.onGet(apiUrl + Konstanter().hentPersonStatusApiUri).reply(200, {
+  mock.onGet(apiUrl + Konstanter.hentPersonStatusApiUri).reply(200, {
     ...personstatus,
   });
 
-  mock.onGet(apiUrl + Konstanter().hentPersonInfoApiUri).reply(200, {
+  mock.onGet(apiUrl + Konstanter.hentPersonInfoApiUri).reply(200, {
     ...personinfo,
   });
 
   mock
-    .onGet(apiUrl + Konstanter().hentKorrigertMeldekortIdApiUri)
+    .onGet(apiUrl + Konstanter.hentKorrigertMeldekortIdApiUri)
     .reply(200, korrigertid);
 
-  mock.onGet(apiUrl + Konstanter().hentInfomelding).reply(200, {
+  mock.onGet(apiUrl + Konstanter.hentInfomelding).reply(200, {
     ...infomelding,
   });
 
-  mock.onGet(apiUrl + Konstanter().pingWeblogic).reply(200, {
+  mock.onGet(apiUrl + Konstanter.pingWeblogic).reply(200, {
     ...pingWeblogicJson,
   });
 
-  mock.onPost(apiUrl + Konstanter().sendMeldekortApiUri).reply(200, {
+  mock.onPost(apiUrl + Konstanter.sendMeldekortApiUri).reply(200, {
     ...valideringsresultat,
   });
 
   const urlNb = new RegExp(
-    `${apiUrl + Konstanter().hentAlleTekster}\\?sprak=nb.*`
+    `${apiUrl + Konstanter.hentAlleTekster}\\?sprak=nb.*`
   );
   mock.onGet(urlNb).reply(200, {
     ...teksterJsonNb,
   });
 
   const urlEn = new RegExp(
-    `${apiUrl + Konstanter().hentAlleTekster}\\?sprak=en.*`
+    `${apiUrl + Konstanter.hentAlleTekster}\\?sprak=en.*`
   );
   mock.onGet(urlEn).reply(200, {
     ...teksterJsonEn,

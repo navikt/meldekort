@@ -31,11 +31,11 @@ const handterFeiletApiKall: AppEpic = action$ =>
         axiosResponse.status === 401
       ) {
         downloadMessages(
-          Konstanter().defaultLocale,
-          Konstanter().defaultFromDate
+          Konstanter.defaultLocale,
+          Konstanter.defaultFromDate
         ).then((messages: object) => {
           updateIntl({
-            locale: Konstanter().defaultLocale,
+            locale: Konstanter.defaultLocale,
             messages: messages,
           });
         });
@@ -46,7 +46,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
             onRequestClose: () => {
               window.location.assign(
                 `${Environment().loginUrl}&redirect=${window.location.origin}` +
-                  Konstanter().basePath
+                  Konstanter.basePath
               );
             },
             visModal: true,
