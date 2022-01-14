@@ -88,13 +88,16 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
         }
         resolve(data);
       })
-      .catch(() => {
-        console.log('Kunne ikke hente tekster');
-        // Det er mest sannsynlig at brukeren ikke er innlogget, sender ham til innloggingssiden
-        window.location.assign(
-          `${Environment().loginUrl}&redirect=${window.location.origin}` +
-            Konstanter.basePath
-        );
+      .catch(error => {
+        if (error.message === 'Request failed with status code 401') {
+          // Bruker er ikke innlogget, sender ham til innogging
+          window.location.assign(
+            `${Environment().loginUrl}&redirect=${window.location.origin}` +
+              Konstanter.basePath
+          );
+        } else {
+          reject('Kunne ikke hente tekster. Prøv igjen senere');
+        }
       });
   });
 };

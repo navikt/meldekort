@@ -12,40 +12,50 @@ import { downloadMessages, Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { FunctionComponentElement } from 'react';
 
 let locales: Locales = store.getState().locales;
 locales.forEach(locale => addLocaleData(locale.localeData));
 
 const rootElement = document.getElementById('meldekort__root');
 
-ReactDOM.render(
-  <div className="loader">
-    <NavFrontendSpinner type="XL" />
-  </div>,
-  rootElement
-);
+const render = (element: FunctionComponentElement<any>) => {
+  ReactDOM.render(element, rootElement);
+};
 
-const render = (Component: React.ComponentType, locale: string) => {
-  ReactDOM.render(
+const renderApp = (Component: React.ComponentType, locale: string) => {
+  render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>
         <IntlProvider locale={locale} defaultLocale={locale}>
           <Component />
         </IntlProvider>
       </PersistGate>
-    </Provider>,
-    rootElement
+    </Provider>
   );
 };
 
-downloadMessages(Konstanter.defaultLocale, Konstanter.defaultFromDate).then(
-  (messages: object) => {
+const renderLoader = (element: any) => {
+  render(<div className="loader">{element}</div>);
+};
+
+// Først viser vi loader
+renderLoader(<NavFrontendSpinner type="XL" />);
+
+// Nå kan vi prøve å hente tekster
+// Det er ikke noe vits i å vise appen uten tekstene
+// Hvis vi kan hente tekstene, viser vi appen
+// Hvis vi ikke kan hente tekstene, viser vi feilmelding
+downloadMessages(Konstanter.defaultLocale, Konstanter.defaultFromDate)
+  .then((messages: object) => {
     store.dispatch(
       updateIntl({ locale: Konstanter.defaultLocale, messages: messages })
     );
 
-    return render(App, Konstanter.defaultLocale);
-  }
-);
+    return renderApp(App, Konstanter.defaultLocale);
+  })
+  .catch(reason => {
+    return renderLoader(<div>{reason}</div>);
+  });
 
 serviceWorker.unregister();
