@@ -253,6 +253,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         <Ingress>
           <span>
             {hentIntl().formatMessage({ id: 'meldekort.for' }) +
+              ' ' +
               personInfo.fornavn +
               ' ' +
               personInfo.etternavn +
@@ -264,6 +265,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         <Ingress>
           <span>
             {hentIntl().formatMessage({ id: 'meldekort.for.perioden' }) +
+              ' ' +
               ukeOgPeriode}
           </span>
         </Ingress>
