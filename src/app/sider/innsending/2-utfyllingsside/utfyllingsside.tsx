@@ -372,7 +372,9 @@ class Utfyllingsside extends React.Component<
             <UkePanel
               innsending={innsending}
               ukenummer={Konstanter.forsteUke}
-              faktiskUkeNummer={hentUkenummerForDato(meldeperiode.fra)}
+              faktiskUkeNummer={hentUkenummerForDato(
+                meldeperiode.fra
+              ).toString()}
               datoTittel={hentDatoForForsteUke(meldeperiode.fra)}
               utfyllingFeil={this.state}
               typeYtelsePostfix={typeYtelsePostfix}
@@ -380,7 +382,9 @@ class Utfyllingsside extends React.Component<
             <UkePanel
               innsending={innsending}
               ukenummer={Konstanter.andreUke}
-              faktiskUkeNummer={hentUkenummerForDato(meldeperiode.til)}
+              faktiskUkeNummer={hentUkenummerForDato(
+                meldeperiode.til
+              ).toString()}
               datoTittel={hentDatoForAndreUke(meldeperiode.til)}
               utfyllingFeil={this.state}
               typeYtelsePostfix={typeYtelsePostfix}

@@ -4,6 +4,7 @@ import ProviderWrapper, {
   setLocalesBeforeAll,
 } from '../testSetup/providerWrapper';
 import PrintKnapp from '../../app/components/print/printKnapp';
+import { testPerson, testPersoninfo } from '../testSetup/testData';
 
 setLocalesBeforeAll();
 
@@ -14,6 +15,8 @@ it('PrintKnapp', () => {
         innholdRenderer={() => {
           return <span>Test</span>;
         }}
+        person={testPerson}
+        personInfo={testPersoninfo}
       />
     </ProviderWrapper>
   );

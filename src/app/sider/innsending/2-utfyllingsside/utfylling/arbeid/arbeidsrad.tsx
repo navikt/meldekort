@@ -4,7 +4,6 @@ import {
   hentUkedager,
   hentUkedagerSomStringListe,
   konverterUkedag,
-  matchUkedager,
 } from '../../../../../utils/ukedager';
 import { FormattedHTMLMessage } from 'react-intl';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
@@ -39,7 +38,7 @@ type ArbeidsradProps = UkeProps &
   MapDispatchToProps;
 
 class Arbeidsrad extends React.Component<ArbeidsradProps> {
-  setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: string) => {
+  setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: number) => {
     const match = event.target.value.match(/^[0-9]?\d{0,2}?([,.]?[0-9]?)?$/);
     if (match !== null) {
       let nyVerdi = event.target.value;
@@ -49,10 +48,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
         nyVerdi = nyVerdi.replace(',', '.');
       }
       const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
-        if (
-          dag.uke === this.props.ukeNummer &&
-          matchUkedager(dag.dag, ukedag.trim())
-        ) {
+        if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {
           return {
             ...dag,
             arbeidetTimer: event.target.value === '' ? undefined : nyVerdi,
@@ -64,13 +60,10 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
     }
   };
 
-  finnIndex = (ukedag: string): number => {
+  finnIndex = (ukedag: number): number => {
     let dagObj = null;
     this.props.innsending.utfylteDager.forEach(dag => {
-      if (
-        matchUkedager(dag.dag, ukedag.trim()) &&
-        dag.uke === this.props.ukeNummer
-      ) {
+      if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {
         dagObj = dag;
       }
     });
@@ -82,18 +75,20 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
   };
 
   settFelter = () => {
-    return hentUkedagerSomStringListe().map(dag => {
+    return hentUkedagerSomStringListe().map((dag, index) => {
       let feilLokal: boolean = false;
-      let ukedag = konverterUkedag(dag);
+      let ukedag = konverterUkedag(index);
       let { utfylteDager } = this.props.innsending;
       let utfyltDagIndex = this.finnIndex(ukedag);
+
       if (typeof this.props.feilIDager !== 'undefined') {
         this.props.feilIDager.forEach(e =>
-          e.dag === ukedag.trim() && e.uke === this.props.ukeNummer.toString()
+          e.uke === this.props.ukeNummer && e.dag === ukedag
             ? (feilLokal = true)
             : null
         );
       }
+
       return (
         <Input
           className="arbeid__inputfelt"

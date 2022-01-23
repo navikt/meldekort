@@ -42,6 +42,8 @@ export const hentDagliste = (
   const dagListe = [];
   let ukedager = hentUkedagerSomStringListe();
 
+  console.log(meldekortdager);
+
   for (let i = 0; i < meldekortdager.length; i++) {
     let meldekortDag = meldekortdager[i];
     const harAktivitet =

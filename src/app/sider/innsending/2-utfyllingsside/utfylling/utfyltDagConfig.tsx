@@ -1,6 +1,6 @@
 export interface UtfyltDag {
   uke: number;
-  dag: string;
+  dag: number;
   arbeidetTimer?: string;
   syk: boolean;
   annetFravaer: boolean;
@@ -11,98 +11,98 @@ export const hentUtfyltDagConfig = (): UtfyltDag[] => {
   return [
     {
       uke: 1,
-      dag: 'Mandag',
+      dag: 1,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 1,
-      dag: 'Tirsdag',
+      dag: 2,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 1,
-      dag: 'Onsdag',
+      dag: 3,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 1,
-      dag: 'Torsdag',
+      dag: 4,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 1,
-      dag: 'Fredag',
+      dag: 5,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 1,
-      dag: 'Lørdag',
+      dag: 6,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 1,
-      dag: 'Søndag',
+      dag: 0,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Mandag',
+      dag: 1,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Tirsdag',
+      dag: 2,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Onsdag',
+      dag: 3,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Torsdag',
+      dag: 4,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Fredag',
+      dag: 5,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Lørdag',
+      dag: 6,
       syk: false,
       annetFravaer: false,
       kurs: false,
     },
     {
       uke: 2,
-      dag: 'Søndag',
+      dag: 0,
       syk: false,
       annetFravaer: false,
       kurs: false,

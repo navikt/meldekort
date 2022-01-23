@@ -72,8 +72,8 @@ export interface Feilmelding {
 }
 
 export interface FeilKolonne {
-  uke: string;
-  dag: string;
+  uke: number;
+  dag: number;
   rad: string;
 }
 
