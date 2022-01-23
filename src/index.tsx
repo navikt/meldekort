@@ -8,11 +8,12 @@ import { IntlProvider, updateIntl } from 'react-intl-redux';
 import { Provider } from 'react-redux';
 import { persistor, store } from './app/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
-import { downloadMessages, Locales } from './app/reducers/localesReducer';
+import { Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { FunctionComponentElement } from 'react';
+import { downloadMessages } from './app/utils/intlUtil';
 
 let locales: Locales = store.getState().locales;
 locales.forEach(locale => addLocaleData(locale.localeData));

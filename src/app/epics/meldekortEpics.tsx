@@ -17,8 +17,8 @@ import { PersonStatusActions } from '../actions/personStatus';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
-import { downloadMessages } from '../reducers/localesReducer';
 import { Konstanter } from '../utils/consts';
+import { downloadMessages } from '../utils/intlUtil';
 
 const handterFeiletApiKall: AppEpic = action$ =>
   action$.pipe(

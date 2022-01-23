@@ -16,8 +16,8 @@ import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
-import { downloadMessages } from '../../reducers/localesReducer';
 import { updateIntl } from 'react-intl-redux';
+import { downloadMessages } from '../../utils/intlUtil';
 
 interface MapStateToProps {
   innsending: InnsendingState;

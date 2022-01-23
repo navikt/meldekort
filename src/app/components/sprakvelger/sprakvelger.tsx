@@ -6,8 +6,9 @@ import { Button, Menu, MenuItem, Wrapper } from 'react-aria-menubutton';
 import { IntlAction, updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
-import { Locale, downloadMessages } from '../../reducers/localesReducer';
+import { Locale } from '../../reducers/localesReducer';
 import { Konstanter } from '../../utils/consts';
+import { downloadMessages } from '../../utils/intlUtil';
 
 const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
   return {
