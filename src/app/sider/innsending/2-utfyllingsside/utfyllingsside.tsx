@@ -9,10 +9,10 @@ import {
   hentUkenummerForDato,
 } from '../../../utils/dates';
 import {
+  FeilKolonne,
   InnsendingState,
   SpmSvar,
   UtfyllingFeil,
-  FeilKolonne,
 } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
@@ -21,6 +21,7 @@ import { UtfyltDag } from './utfylling/utfyltDagConfig';
 import { hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
+  FravaerTypeEnum,
   Meldegruppe,
   Meldekort,
   SendtMeldekort,
@@ -31,7 +32,6 @@ import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
-import { FravaerTypeEnum } from '../../../types/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 

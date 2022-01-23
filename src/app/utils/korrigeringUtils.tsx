@@ -1,6 +1,5 @@
 import { MeldekortDag, Meldekortdetaljer, Sporsmal } from '../types/meldekort';
 import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
-import { hentUkedagerSomStringListe } from './ukedager';
 import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { InnsendingState } from '../types/innsending';
 
@@ -15,12 +14,9 @@ const konverterMeldekortdetaljerMeldekortDagerTilInnsendingUtfylteDager = (
   meldekortDager: MeldekortDag[],
   utfylteDager: UtfyltDag[]
 ) => {
-  const ukedagerSomListe = hentUkedagerSomStringListe();
   return utfylteDager.map((utfyltDag, index) => {
     return {
       ...utfyltDag,
-      uke: index < 7 ? 1 : 2,
-      dag: ukedagerSomListe[index].trim(),
       syk: meldekortDager[index].syk,
       arbeidetTimer: meldekortDager[index].arbeidetTimerSum.toString(),
       annetFravaer: meldekortDager[index].annetFravaer,

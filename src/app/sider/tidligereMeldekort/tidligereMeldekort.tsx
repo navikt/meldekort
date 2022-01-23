@@ -21,7 +21,7 @@ import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyActions } from '../../actions/meny';
 import { MenyState } from '../../types/meny';
 
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { hentIntl } from '../../utils/intlUtil';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';

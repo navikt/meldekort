@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
@@ -23,7 +24,6 @@ import {
   hentMeldekortRaderFraPerson,
   hentPeriodeDatoKolonner,
 } from '../../utils/meldekortUtils';
-import { useEffect } from 'react';
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { RootState } from '../../store/configureStore';
 import { PersonActions } from '../../actions/person';
 import { InnsendingActions } from '../../actions/innsending';
@@ -17,7 +18,6 @@ import {
   hentPeriodeDatoKolonner,
 } from '../../utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { useEffect } from 'react';
 import EtterregistreringInnhold from './etterregistreringInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
 

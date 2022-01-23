@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import * as React from 'react';
+import { FunctionComponentElement } from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.less';
 import App from './app/app';
@@ -12,7 +13,6 @@ import { Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
 import { addLocaleData } from 'react-intl';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { FunctionComponentElement } from 'react';
 import { downloadMessages } from './app/utils/intlUtil';
 
 let locales: Locales = store.getState().locales;

@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { hentIntl } from '../../../utils/intlUtil';
 import { MenyActions } from '../../../actions/meny';
 import { MenyPunkt } from '../../../utils/menyConfig';
-import { RootState, history } from '../../../store/configureStore';
+import { history, RootState } from '../../../store/configureStore';
 import Lenke from 'nav-frontend-lenker';
 
 interface MapStateToProps {
@@ -67,7 +67,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HovedMeny);
+export default connect(mapStateToProps, mapDispatchToProps)(HovedMeny);
