@@ -33,6 +33,8 @@ import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortR
 import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import { downloadMessages } from '../../../utils/intlUtil';
+import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -42,6 +44,7 @@ interface MapStateToProps {
   person: Person;
   personInfo: PersonInfo;
   weblogic: WeblogicPing;
+  locale: string;
 }
 
 interface MapDispatchToProps {
@@ -50,6 +53,7 @@ interface MapDispatchToProps {
   hentPersonInfo: () => void;
   resettAktivtMeldekort: () => void;
   pingWeblogic: () => void;
+  settLocale: (locale: string, from: string) => void;
 }
 
 type Props = MapDispatchToProps & MapStateToProps;
@@ -97,12 +101,21 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   componentDidMount() {
-    this.props.resettMeldekortdetaljer();
+    const {
+      resettMeldekortdetaljer,
+      personInfo,
+      hentPersonInfo,
+      settLocale,
+      aktivtMeldekort,
+      locale,
+    } = this.props;
+    resettMeldekortdetaljer();
     this.sjekkAktivtMeldekortOgRedirect();
     window.addEventListener('resize', this.handleWindowSize);
-    if (this.props.personInfo.personId === 0) {
-      this.props.hentPersonInfo();
+    if (personInfo.personId === 0) {
+      hentPersonInfo();
     }
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra.toString());
   }
 
   handleWindowSize = () =>
@@ -241,6 +254,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     personInfo: state.personInfo.personInfo,
     weblogic: state.weblogic,
+    locale: state.intl.locale,
   };
 };
 
@@ -254,6 +268,11 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    settLocale: (locale: string, from: string) => {
+      downloadMessages(locale, from).then((messages: object) => {
+        dispatch(updateIntl({ locale: locale, messages: messages }));
+      });
+    },
   };
 };
 
