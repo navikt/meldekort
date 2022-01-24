@@ -140,7 +140,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       kortType: meldekortdetaljer.kortType,
       kortStatus: aktivtMeldekort.kortStatus,
       meldegruppe: aktivtMeldekort.meldegruppe,
-      mottattDato: meldekortdetaljer.meldeDato,
+      mottattDato: new Date(),
       meldeperiode: aktivtMeldekort.meldeperiode,
       erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
       korrigerbart:
