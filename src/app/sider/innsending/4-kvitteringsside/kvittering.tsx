@@ -203,7 +203,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         {nesteDato && (
           <Ingress className="noPrint">
             <span>
-              {hentIntl().formatMessage(
+              {hentIntl().formatHTMLMessage(
                 { id: 'sendt.meldekortKanSendes' },
                 {
                   0: formaterDato(nesteDato),

@@ -29,13 +29,17 @@ type ReduxType = KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
 class Komponentlenke extends React.Component<ReduxType> {
   clickHandler = () => {
+    console.log('1');
     this.props.resettAktivtMeldekort();
+    console.log('2');
     if (this.props.meldekort) {
+      console.log('3');
       this.props.leggTilAktivtMeldekort(this.props.meldekort);
+      console.log('4');
     }
 
-    const pathname = this.props.router.location.pathname;
-    pathname !== this.props.rute && history.push(this.props.rute);
+    console.log('5');
+    history.push(this.props.rute);
   };
 
   render() {
