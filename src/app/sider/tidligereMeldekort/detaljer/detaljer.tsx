@@ -8,7 +8,7 @@ import { Dispatch } from 'redux';
 import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { FormattedMessage } from 'react-intl';
-import { history, RootState } from '../../../store/configureStore';
+import { RootState } from '../../../store/configureStore';
 import {
   mapKortStatusTilTekst,
   mapKortTypeTilTekst,
@@ -88,9 +88,6 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     ) {
       this.props.hentMeldekortdetaljer();
     }
-    /*else {
-      history.push('/tidligere-meldekort');
-    }*/
   };
 
   sjekkAtWeblogicErOppe = (): boolean => {
@@ -124,21 +121,8 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       windowSize: window.innerWidth,
     });
 
-  samstemmMeldekortId = () => {
-    const { meldekortdetaljer, aktivtMeldekort } = this.props;
-    if (meldekortdetaljer.meldekortdetaljer.id !== '') {
-      if (
-        aktivtMeldekort.meldekortId !==
-        meldekortdetaljer.meldekortdetaljer.meldekortId
-      ) {
-        history.push('/tidligere-meldekort');
-      }
-    }
-  };
-
   innhold = () => {
     const { meldekortdetaljer, aktivtMeldekort } = this.props;
-    // this.samstemmMeldekortId();
     const rows = this.settTabellrader(aktivtMeldekort);
     const columns = [
       {
