@@ -138,7 +138,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
   innhold = () => {
     const { meldekortdetaljer, aktivtMeldekort } = this.props;
-    this.samstemmMeldekortId();
+    // this.samstemmMeldekortId();
     const rows = this.settTabellrader(aktivtMeldekort);
     const columns = [
       {
