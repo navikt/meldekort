@@ -87,9 +87,10 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       ).length > 0
     ) {
       this.props.hentMeldekortdetaljer();
-    } else {
-      history.push('/tidligere-meldekort');
     }
+    /*else {
+      history.push('/tidligere-meldekort');
+    }*/
   };
 
   sjekkAtWeblogicErOppe = (): boolean => {
