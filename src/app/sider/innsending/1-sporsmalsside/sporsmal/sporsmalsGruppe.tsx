@@ -55,6 +55,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     innsendingstype: Innsendingstyper | null
   ) => {
     let skalVareDisabled: boolean = false;
+    console.log(typeYtelsePostfix);
     for (let key in sporsmalsobj) {
       if (
         sporsmalsobj[key] !== sporsmalsobj.kategori &&

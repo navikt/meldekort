@@ -8,6 +8,7 @@ export enum TypeYtelse {
 }
 
 export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {
+  console.log(meldegruppe);
   if (meldegruppe === Meldegruppe.ATTF) return TypeYtelse.AAP;
   if (meldegruppe === Meldegruppe.INDIV) return TypeYtelse.TILTAKSPENGER;
   return TypeYtelse.DAGPENGER;
