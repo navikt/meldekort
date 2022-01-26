@@ -100,11 +100,19 @@ jobs:
       - name: Set vars
         id: setVars
         run: |
-          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.APPNAME }}:${{ steps.releaseVersion.outputs.version }}"
+          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.REPO_NAME }}:${{ steps.releaseVersion.outputs.version }}"
 
+      #      - name: Set release version in pom.xml
+      #        run: mvn versions:set -DnewVersion=${{ steps.releaseVersion.outputs.version }}
+      #
+      - name: Set version
+        id: package_version
+        uses: KageKirin/set-node-package-version@v0
+        with:
+          version: ${{ steps.releaseVersion.outputs.version }}
 #      - name: Set release version in pom.xml
 #        run: mvn versions:set -DnewVersion=${{ steps.releaseVersion.outputs.version }}
-#
+
 #      - name: Build application
 #        run: |
 #          mvn dependency:go-offline
