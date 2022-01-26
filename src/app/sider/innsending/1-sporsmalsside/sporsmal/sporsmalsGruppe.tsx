@@ -55,7 +55,6 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
     innsendingstype: Innsendingstyper | null
   ) => {
     let skalVareDisabled: boolean = false;
-    console.log(typeYtelsePostfix);
     for (let key in sporsmalsobj) {
       if (
         sporsmalsobj[key] !== sporsmalsobj.kategori &&
@@ -63,7 +62,9 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
         sporsmalsobj[key] !== sporsmalsobj.checked &&
         sporsmalsobj[key] !== sporsmalsobj.id
       ) {
-        sporsmalsobj[key] = finnesIntlId(sporsmalsobj[key] + typeYtelsePostfix);
+        sporsmalsobj[key] = finnesIntlId(
+          sporsmalsobj[key].split('-')[0] + typeYtelsePostfix
+        );
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
         sporsmalsobj.feil.feilmeldingId = finnesIntlId(
           sporsmalsobj.feil.feilmeldingId
