@@ -15,8 +15,8 @@ on:
         default: ''
 
 env:
-  REPONAME: meldekort
-  APPNAME: meldekort-frontend
+  REPO_NAME: ${{ github.event.repository.name }}
+  APPNAME: ${{ env.REPO_NAME }}-frontend
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   CLUSTER: dev-sbs
   NAIS_FILE: .nais/nais.yaml
