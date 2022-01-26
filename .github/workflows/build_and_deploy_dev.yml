@@ -1,5 +1,5 @@
 name: Build and deploy to dev
-
+# TODO: fjern print
 on:
   push:
     branches:
@@ -15,8 +15,8 @@ on:
         default: ''
 
 env:
+  REPONAME: meldekort
   APPNAME: meldekort-frontend
-  SPRINGPROFILES: nais
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   CLUSTER: dev-sbs
   NAIS_FILE: .nais/nais.yaml
@@ -40,6 +40,13 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+          cache: 'npm'
+
       #
       #      - name: Set up JDK 11
       #        uses: actions/setup-java@v2
@@ -86,13 +93,15 @@ jobs:
           prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
 
       - name: Print releaseVersion
-        run: echo ${{ steps.releaseVersion.outputs.version }}
-#      - name: Set vars
-#        id: setVars
-#        run: |
-#          echo "::set-output name=jarfile::${{ env.APPNAME }}-${{ steps.releaseVersion.outputs.version }}.jar"
-#          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.APPNAME }}:${{ steps.releaseVersion.outputs.version }}"
-#
+        run: |
+          echo ${{ steps.releaseVersion.outputs.version }}
+          echo ${{ github.event.repository.name }}
+
+      - name: Set vars
+        id: setVars
+        run: |
+          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.APPNAME }}:${{ steps.releaseVersion.outputs.version }}"
+
 #      - name: Set release version in pom.xml
 #        run: mvn versions:set -DnewVersion=${{ steps.releaseVersion.outputs.version }}
 #
