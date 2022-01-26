@@ -56,42 +56,37 @@ jobs:
       #            ${{ runner.os }}-maven-
       #
 
-      #      - name: Extract version
-      #        id: extract_version
-      #        uses: Saionaro/extract-package-version@v1.0.6
-      #      # From now you can access the version
-      #      - name: Print version
-      #        run: echo ${{ steps.extract_version.outputs.version }}
-
-      - name: get-npm-version
-        id: package-version
+      - name: Read version from package.json
+        id: packageVersion
         uses: martinbeentjes/npm-get-version-action@master
 
       - name: Print version
-        run: echo ${{ steps.package-version.outputs.current-version }}
-#      - name: Read version from POM
-#        uses: entimaniac/read-pom-version-action@1.0.0
-#        id: pomVersion
-#
-#      - name: Set snapshot timestamp
-#        id: snapshotTimestamp
-#        if: github.event.inputs.bump_patch != 'bump'
-#        run: |
-#          echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
-#
-#      # Version blir eksisterende versjon fra POM uten -SNAPSHOT
-#      # For release:  eks 1.0.1
-#      # For snapshot: eks 1.0.1-20220104111118
-#      - name: Calculate release version
-#        uses: slime-hatena/semantic-versioning-calculator-action@main
-#        id: releaseVersion
-#        with:
-#          version: ${{ steps.pomVersion.outputs.version }}
-#          increment_major: 'false'
-#          increment_minor: 'false'
-#          increment_patch: 'false'
-#          prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
-#
+        run: echo ${{ steps.packageVersion.outputs.current-version }}
+      #      - name: Read version from POM
+      #        uses: entimaniac/read-pom-version-action@1.0.0
+      #        id: pomVersion
+      #
+      - name: Set snapshot timestamp
+        id: snapshotTimestamp
+        if: github.event.inputs.bump_patch != 'bump'
+        run: |
+          echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
+
+      # Version blir eksisterende versjon fra package.json uten -SNAPSHOT
+      # For release:  eks 1.0.1
+      # For snapshot: eks 1.0.1-20220104111118
+      - name: Calculate release version
+        uses: slime-hatena/semantic-versioning-calculator-action@main
+        id: releaseVersion
+        with:
+          version: ${{ steps.packageVersion.outputs.current-version }}
+          increment_major: 'false'
+          increment_minor: 'false'
+          increment_patch: 'false'
+          prerelease: ${{ steps.packageVersion.outputs.current-version }}
+
+      - name: Print releaseVersion
+        run: echo ${{ steps.releaseVersion.outputs.version }}
 #      - name: Set vars
 #        id: setVars
 #        run: |
