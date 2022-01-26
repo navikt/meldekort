@@ -56,12 +56,19 @@ jobs:
       #            ${{ runner.os }}-maven-
       #
 
-      - name: Extract version
-        id: extract_version
-        uses: Saionaro/extract-package-version@v1.0.6
-      # From now you can access the version
+      #      - name: Extract version
+      #        id: extract_version
+      #        uses: Saionaro/extract-package-version@v1.0.6
+      #      # From now you can access the version
+      #      - name: Print version
+      #        run: echo ${{ steps.extract_version.outputs.version }}
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+
       - name: Print version
-        run: echo ${{ steps.extract_version.outputs.version }}
+        run: echo ${{ steps.package-version.outputs.current-version }}
 #      - name: Read version from POM
 #        uses: entimaniac/read-pom-version-action@1.0.0
 #        id: pomVersion
