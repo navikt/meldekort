@@ -83,7 +83,7 @@ jobs:
           increment_major: 'false'
           increment_minor: 'false'
           increment_patch: 'false'
-          prerelease: ${{ steps.packageVersion.outputs.current-version }}
+          prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
 
       - name: Print releaseVersion
         run: echo ${{ steps.releaseVersion.outputs.version }}
