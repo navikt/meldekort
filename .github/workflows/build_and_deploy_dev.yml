@@ -1,0 +1,172 @@
+name: Build and deploy to dev
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Miljø (støtter q0 og q1)'
+        required: true
+        default: 'q1'
+      bump_patch:
+        description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
+        default: ''
+
+env:
+  APPNAME: meldekort-frontend
+  SPRINGPROFILES: nais
+  ENVIRONMENT: ${{ github.event.inputs.environment }}
+  CLUSTER: dev-sbs
+  NAIS_FILE: .nais/nais.yaml
+  MAIN_BRANCH: refs/heads/master
+
+jobs:
+  build:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if correct branch
+        if: github.event.inputs.bump_patch == 'bump' && github.ref != env.MAIN_BRANCH
+        run: |
+          echo "Release skal kun bygges fra ${{ env.MAIN_BRANCH }} branch!"
+          exit 1
+        continue-on-error: false
+
+      - name: Set default environment for push
+        if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
+        run: echo "ENVIRONMENT=q1" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v2
+#
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '11'
+#          distribution: 'adopt-openj9'
+#
+#      - name: Cache Maven packages
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-maven-
+#
+#      - name: Read version from POM
+#        uses: entimaniac/read-pom-version-action@1.0.0
+#        id: pomVersion
+#
+#      - name: Set snapshot timestamp
+#        id: snapshotTimestamp
+#        if: github.event.inputs.bump_patch != 'bump'
+#        run: |
+#          echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
+#
+#      # Version blir eksisterende versjon fra POM uten -SNAPSHOT
+#      # For release:  eks 1.0.1
+#      # For snapshot: eks 1.0.1-20220104111118
+#      - name: Calculate release version
+#        uses: slime-hatena/semantic-versioning-calculator-action@main
+#        id: releaseVersion
+#        with:
+#          version: ${{ steps.pomVersion.outputs.version }}
+#          increment_major: 'false'
+#          increment_minor: 'false'
+#          increment_patch: 'false'
+#          prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
+#
+#      - name: Set vars
+#        id: setVars
+#        run: |
+#          echo "::set-output name=jarfile::${{ env.APPNAME }}-${{ steps.releaseVersion.outputs.version }}.jar"
+#          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.APPNAME }}:${{ steps.releaseVersion.outputs.version }}"
+#
+#      - name: Set release version in pom.xml
+#        run: mvn versions:set -DnewVersion=${{ steps.releaseVersion.outputs.version }}
+#
+#      - name: Build application
+#        run: |
+#          mvn dependency:go-offline
+#          mvn clean verify -B -e -U
+#
+#      - name: Build Docker image
+#        run: |
+#          mvn clean package -DskipTests -B
+#          ls -l ./target
+#          echo ${{ steps.setVars.outputs.jarfile }}
+#          echo ${{ env.SPRINGPROFILES }}
+#          echo ${{ steps.setVars.outputs.image }}
+#          docker build --build-arg JAR_FILE=${{ steps.setVars.outputs.jarfile }} --build-arg SPRING_PROFILES=${{ env.SPRINGPROFILES }} -t ${{ steps.setVars.outputs.image }} .
+#
+#      - name: Log in to the Container registry
+#        uses: docker/login-action@v1
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Push Docker image
+#        run: |
+#          docker push ${{ steps.setVars.outputs.image }}
+#
+#      - name: Deploy to dev
+#        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1'  || env.ENVIRONMENT == 'q2'  || env.ENVIRONMENT == 'q4'  || env.ENVIRONMENT == 't0' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
+#        uses: nais/deploy/actions/deploy@v1
+#        env:
+#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+#          PRINT_PAYLOAD: true
+#          CLUSTER: ${{ env.CLUSTER }}
+#          RESOURCE: ${{ env.NAIS_FILE }}
+#          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
+#          VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
+#          WAIT: false
+#
+#      - name: Archive files in .nais
+#        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+#        uses: thedoctor0/zip-release@master
+#        with:
+#          path: .nais
+#          filename: '${{ env.APPNAME }}-${{ steps.releaseVersion.outputs.version }}.zip'
+#
+#      - name: Create release
+#        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+#        uses: ncipollo/release-action@v1
+#        with:
+#          tag: 'v${{ steps.releaseVersion.outputs.version }}'
+#          artifacts: '${{ env.APPNAME }}-${{ steps.releaseVersion.outputs.version }}.zip'
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      # Next version blir eksisterende versjon + 0.0.1, med postfix -SNAPSHOT
+#      - name: Calculate next version
+#        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+#        uses: slime-hatena/semantic-versioning-calculator-action@main
+#        id: nextReleaseVersion
+#        with:
+#          version: ${{ steps.pomVersion.outputs.version }}
+#          increment_major: 'false'
+#          increment_minor: 'false'
+#          increment_patch: 'true'
+#          prerelease: 'SNAPSHOT'
+#
+#      # Hvis det er ny versjon, oppdater pom.xml og utfør git commit/push
+#      - name: Set next version in pom.xml
+#        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+#        run: mvn versions:set -DnewVersion=${{ steps.nextReleaseVersion.outputs.version }}
+#
+#      - name: Commit bumped version
+#        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+#        run: |
+#          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#          git config --local user.name "github-actions[bot]"
+#          git commit -m "Bump version fra Github Actions" -a
+#          git tag -a ${{ env.APPNAME }}-${{ steps.nextReleaseVersion.outputs.version }} -m ${{ env.APPNAME }}-${{ steps.nextReleaseVersion.outputs.version }}
+#
+#      - name: Push changes
+#        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          branch: ${{ github.ref }}
