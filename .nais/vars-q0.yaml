@@ -1,5 +1,4 @@
 dashEnv: -q0
-releaseVersion: ##RELEASE_VERSION##
 slackAlertChannel: team-meldeplikt-alerts-dev
 ingresses:
   - "https://meldekort-q0.dev.nav.no"
