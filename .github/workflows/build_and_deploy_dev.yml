@@ -141,7 +141,6 @@ jobs:
       - name: Build Docker image
         run: |
           npm run build
-          ls -l ./target
           docker build -t ${{ steps.setVars.outputs.image }} .
 
       - name: Log in to the Container registry
