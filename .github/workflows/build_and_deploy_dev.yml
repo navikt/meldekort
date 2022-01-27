@@ -20,7 +20,8 @@ env:
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   CLUSTER: dev-sbs
   NAIS_FILE: .nais/nais.yaml
-  MAIN_BRANCH: refs/heads/master
+  #  MAIN_BRANCH: refs/heads/master
+  MAIN_BRANCH: refs/heads/mp-342-github-actions-init
 
 jobs:
   build:
