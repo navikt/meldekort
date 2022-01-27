@@ -121,13 +121,22 @@ jobs:
 
       - name: Print version
         run: echo ${{ steps.packageVersion2.outputs.current-version }}
-#      - name: Set release version in pom.xml
-#        run: mvn versions:set -DnewVersion=${{ steps.releaseVersion.outputs.version }}
+      #      - name: Set release version in pom.xml
+      #        run: mvn versions:set -DnewVersion=${{ steps.releaseVersion.outputs.version }}
 
-#      - name: Build application
-#        run: |
-#          mvn dependency:go-offline
-#          mvn clean verify -B -e -U
+      #      - name: Build application
+      #        run: |
+      #          mvn dependency:go-offline
+      #          mvn clean verify -B -e -U
+
+      - name: Install npm packages
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Test application
+        run: npm test
 #
 #      - name: Build Docker image
 #        run: |
