@@ -137,27 +137,24 @@ jobs:
 
       - name: Test application
         run: npm test
-#
-#      - name: Build Docker image
-#        run: |
-#          mvn clean package -DskipTests -B
-#          ls -l ./target
-#          echo ${{ steps.setVars.outputs.jarfile }}
-#          echo ${{ env.SPRINGPROFILES }}
-#          echo ${{ steps.setVars.outputs.image }}
-#          docker build --build-arg JAR_FILE=${{ steps.setVars.outputs.jarfile }} --build-arg SPRING_PROFILES=${{ env.SPRINGPROFILES }} -t ${{ steps.setVars.outputs.image }} .
-#
-#      - name: Log in to the Container registry
-#        uses: docker/login-action@v1
-#        with:
-#          registry: ghcr.io
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Push Docker image
-#        run: |
-#          docker push ${{ steps.setVars.outputs.image }}
-#
+
+      - name: Build Docker image
+        run: |
+          npm run build
+          ls -l ./target
+          docker build -t ${{ steps.setVars.outputs.image }} .
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ steps.setVars.outputs.image }}
+
 #      - name: Deploy to dev
 #        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1'  || env.ENVIRONMENT == 'q2'  || env.ENVIRONMENT == 'q4'  || env.ENVIRONMENT == 't0' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
 #        uses: nais/deploy/actions/deploy@v1
