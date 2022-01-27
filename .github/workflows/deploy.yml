@@ -13,7 +13,8 @@ on:
         default: ''
 
 env:
-  APPNAME: meldekort-frontend
+  REPONAME: ${{ github.event.repository.name }}
+  APPNAME: ${{ github.event.repository.name }}-frontend
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   NAIS_FILE: .nais/nais.yaml
   MAIN_BRANCH: refs/heads/master
@@ -29,40 +30,41 @@ jobs:
           echo "Jobben skal kun kjøres fra master branch!"
           exit 1
         continue-on-error: false
-#      - name: Set vars
-#        id: setVars
-#        run: |
-#          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.APPNAME }}:${{ github.event.inputs.deploy_version }}"
-#
-#      - name: Set cluster
-#        uses: haya14busa/action-cond@v1
-#        id: cluster
-#        with:
-#          cond: ${{ github.event.inputs.environment == 'p' }}
-#          if_true: "prod-sbs"
-#          if_false: "dev-sbs"
-#
-#      - name: Download artifact
-#        uses: dsaltares/fetch-gh-release-asset@master
-#        with:
-#          version: 'tags/v${{ github.event.inputs.deploy_version }}'
-#          file: '${{ env.APPNAME }}-${{ github.event.inputs.deploy_version }}.zip'
-#          target: '${{ env.APPNAME }}-${{ github.event.inputs.deploy_version }}.zip'
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Unzip artifact (vars-files)
-#        uses: montudor/action-zip@v1
-#        with:
-#          args: unzip ${{ env.APPNAME }}-${{ github.event.inputs.deploy_version }}.zip -d .
-#
-#      - name: Deploy release to dev or prod
-#        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'p')
-#        uses: nais/deploy/actions/deploy@v1
-#        env:
-#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-#          PRINT_PAYLOAD: true
-#          CLUSTER: ${{ steps.cluster.outputs.value }}
-#          RESOURCE: ${{ env.NAIS_FILE }}
-#          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
-#          VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
-#          WAIT: false
+
+      - name: Set vars
+        id: setVars
+        run: |
+          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ github.event.inputs.deploy_version }}"
+
+      - name: Set cluster
+        uses: haya14busa/action-cond@v1
+        id: cluster
+        with:
+          cond: ${{ github.event.inputs.environment == 'p' }}
+          if_true: 'prod-sbs'
+          if_false: 'dev-sbs'
+
+      - name: Download artifact
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          version: 'tags/v${{ github.event.inputs.deploy_version }}'
+          file: '${{ env.REPONAME }}-${{ github.event.inputs.deploy_version }}.zip'
+          target: '${{ env.REPONAME }}-${{ github.event.inputs.deploy_version }}.zip'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Unzip artifact (vars-files)
+        uses: montudor/action-zip@v1
+        with:
+          args: unzip ${{ env.REPONAME }}-${{ github.event.inputs.deploy_version }}.zip -d .
+
+      - name: Deploy release to dev or prod
+        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'p')
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          PRINT_PAYLOAD: true
+          CLUSTER: ${{ steps.cluster.outputs.value }}
+          RESOURCE: ${{ env.NAIS_FILE }}
+          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
+          VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
+          WAIT: false
