@@ -1,0 +1,167 @@
+name: Build and deploy to dev
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Miljø (støtter q0 og q1)'
+        required: true
+        default: 'q1'
+      bump_patch:
+        description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
+        default: ''
+
+env:
+  REPONAME: ${{ github.event.repository.name }}
+  APPNAME: ${{ github.event.repository.name }}-frontend
+  ENVIRONMENT: ${{ github.event.inputs.environment }}
+  CLUSTER: dev-sbs
+  NAIS_FILE: .nais/nais.yaml
+  MAIN_BRANCH: refs/heads/master
+
+jobs:
+  build:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if correct branch
+        if: github.event.inputs.bump_patch == 'bump' && github.ref != env.MAIN_BRANCH
+        run: |
+          echo "Release skal kun bygges fra ${{ env.MAIN_BRANCH }} branch!"
+          exit 1
+        continue-on-error: false
+
+      - name: Set default environment for push
+        if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
+        run: echo "ENVIRONMENT=q1" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+          cache: 'npm'
+
+      - name: Read version from package.json
+        id: packageVersion
+        uses: martinbeentjes/npm-get-version-action@master
+
+      - name: Set snapshot timestamp
+        id: snapshotTimestamp
+        if: github.event.inputs.bump_patch != 'bump'
+        run: |
+          echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
+
+      # Version blir eksisterende versjon fra package.json uten -SNAPSHOT
+      # For release:  eks 1.0.1
+      # For snapshot: eks 1.0.1-20220104111118
+      - name: Calculate release version
+        uses: slime-hatena/semantic-versioning-calculator-action@main
+        id: releaseVersion
+        with:
+          version: ${{ steps.packageVersion.outputs.current-version }}
+          increment_major: 'false'
+          increment_minor: 'false'
+          increment_patch: 'false'
+          prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
+
+      - name: Set vars
+        id: setVars
+        run: |
+          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ steps.releaseVersion.outputs.version }}"
+
+      - name: Set release version in package.json
+        run: |
+          jq '.version="${{ steps.releaseVersion.outputs.version }}"' package.json > package.json.new
+          mv package.json.new package.json
+
+      - name: Install npm packages
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Test application
+        run: npm test
+
+      - name: Build Docker image
+        run: |
+          npm run build
+          docker build -t ${{ steps.setVars.outputs.image }} .
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ steps.setVars.outputs.image }}
+
+      - name: Deploy to dev
+        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          PRINT_PAYLOAD: true
+          CLUSTER: ${{ env.CLUSTER }}
+          RESOURCE: ${{ env.NAIS_FILE }}
+          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
+          VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
+          WAIT: false
+
+      - name: Archive files in .nais
+        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+        uses: thedoctor0/zip-release@master
+        with:
+          path: .nais
+          filename: '${{ env.REPONAME }}-${{ steps.releaseVersion.outputs.version }}.zip'
+
+      - name: Create release
+        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+        uses: ncipollo/release-action@v1
+        with:
+          tag: 'v${{ steps.releaseVersion.outputs.version }}'
+          artifacts: '${{ env.REPONAME }}-${{ steps.releaseVersion.outputs.version }}.zip'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Next version blir eksisterende versjon + 0.0.1, med postfix -SNAPSHOT
+      - name: Calculate next version
+        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+        uses: slime-hatena/semantic-versioning-calculator-action@main
+        id: nextReleaseVersion
+        with:
+          version: ${{ steps.packageVersion.outputs.current-version }}
+          increment_major: 'false'
+          increment_minor: 'false'
+          increment_patch: 'true'
+          prerelease: 'SNAPSHOT'
+
+      # Hvis det er ny versjon, oppdater package.json og utfør git commit/push
+      - name: Set next version in package.json
+        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+        run: |
+          jq '.version="${{ steps.nextReleaseVersion.outputs.version }}"' package.json > package.json.new
+          mv package.json.new package.json
+
+      - name: Commit bumped version
+        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Bump version fra Github Actions" -a
+          git tag -a ${{ env.REPONAME }}-${{ steps.nextReleaseVersion.outputs.version }} -m ${{ env.REPONAME }}-${{ steps.nextReleaseVersion.outputs.version }}
+
+      - name: Push changes
+        if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

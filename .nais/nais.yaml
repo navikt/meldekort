@@ -1,12 +1,12 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: meldekort-frontend{{ dashEnv }}
+  name: {{ appName }}{{ dashEnv }}
   namespace: meldekort
   labels:
     team: meldekort
 spec:
-  image: repo.adeo.no:5443/meldeplikt/meldekort:{{ releaseVersion }}
+  image: {{image}}
   port: 8080
   secureLogs:
     enabled: true
