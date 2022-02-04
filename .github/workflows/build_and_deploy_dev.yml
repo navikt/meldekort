@@ -9,7 +9,7 @@ on:
       environment:
         description: 'Miljø (støtter q0 og q1)'
         required: true
-        default: 'q1'
+        default: 'q0'
       bump_patch:
         description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
         default: ''
