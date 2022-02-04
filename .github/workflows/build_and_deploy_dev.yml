@@ -36,7 +36,7 @@ jobs:
 
       - name: Set default environment for push
         if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
-        run: echo "ENVIRONMENT=q1" >> $GITHUB_ENV
+        run: echo "ENVIRONMENT=q0" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v2
