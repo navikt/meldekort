@@ -263,7 +263,7 @@ it('opprettSporsmalsobjekter for korrigert meldekort med neste meldekort', () =>
       id: 'korrigering.sporsmal.begrunnelse',
     })
   );
-  expect(result[3].svar).toBe(arsak);
+  expect(result[3].svar).toBe(arsakTekst);
 });
 
 const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
