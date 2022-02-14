@@ -6,7 +6,7 @@ on:
       environment:
         description: 'Miljø (støtter q0, q1 og p)'
         required: true
-        default: 'q1'
+        default: 'q0'
       deploy_version:
         description: 'Hvilken versjon skal deployes? (kun for master-branchen)'
         required: true
