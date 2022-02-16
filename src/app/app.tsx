@@ -28,11 +28,11 @@ import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import {
   isIE,
-  isOldSafari,
-  isOldEdge,
   isOldChrome,
-  isOldIE,
+  isOldEdge,
   isOldFirefox,
+  isOldIE,
+  isOldSafari,
 } from './utils/browsers';
 
 if (erMock()) {
@@ -179,7 +179,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

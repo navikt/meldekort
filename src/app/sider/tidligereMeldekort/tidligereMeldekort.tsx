@@ -7,7 +7,6 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Tabell from '../../components/tabell/desktop/tabell';
 import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
-import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { BaksystemFeilmelding, IngenTidligereMeldekort } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -22,14 +21,14 @@ import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyActions } from '../../actions/meny';
 import { MenyState } from '../../types/meny';
 
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { hentIntl } from '../../utils/intlUtil';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
-import { HistoriskeMeldekortRad, Meldekort } from '../../types/meldekort';
+import { HistoriskeMeldekortRad } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import {
   selectFeilmelding,
@@ -52,7 +51,6 @@ interface MapStateToProps {
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
-  leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
   pingWeblogic: () => void;
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
@@ -251,8 +249,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    leggTilAktivtMeldekort: (meldekort: Meldekort) =>
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(meldekort)),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),

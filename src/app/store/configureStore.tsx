@@ -13,7 +13,7 @@ import {
   RouterState,
 } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
 
 import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
@@ -27,11 +27,7 @@ import personReducer from '../reducers/personReducer';
 import personStatusReducer, {
   PersonStatusState,
 } from '../reducers/personStatusReducer';
-import tekster from '../tekster/kompilerte-tekster';
-import {
-  default as localesReducer,
-  LocalesState,
-} from '../reducers/localesReducer';
+import { default as localesReducer, Locales } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
 
 import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
@@ -58,22 +54,18 @@ import { hentEnvSetting } from '../utils/env';
 import { WeblogicPing } from '../types/weblogic';
 import weblogicReducer from '../reducers/weblogicReducer';
 import weblogicEpics from '../epics/weblogicEpics';
+import { Konstanter } from '../utils/consts';
 
 export const history = createBrowserHistory({
-  basename: '/meldekort',
+  basename: Konstanter.basePath,
 });
 
 const packageConfig = require('../../../package.json');
 
-const initialState = {
-  intl: {
-    locale: 'nb',
-    messages: tekster.nb,
-  },
-};
+const initialState = {};
 
 export interface RootState {
-  locales: LocalesState;
+  locales: Locales;
   intl: IntlState;
   router: RouterState;
   person: Person;

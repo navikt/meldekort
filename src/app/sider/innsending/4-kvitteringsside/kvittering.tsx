@@ -25,7 +25,6 @@ import {
   formaterUkeOgDatoPeriode,
   hentTid,
 } from '../../../utils/dates';
-import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import Environment from '../../../utils/env';
 import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -59,7 +58,6 @@ interface PropsVerdier {
 }
 
 interface MapDispatchToProps {
-  leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) => void;
   settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
   leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) => void;
   hentPersonInfo: () => void;
@@ -205,7 +203,7 @@ class Kvittering extends React.Component<KvitteringsProps> {
         {nesteDato && (
           <Ingress className="noPrint">
             <span>
-              {hentIntl().formatMessage(
+              {hentIntl().formatHTMLMessage(
                 { id: 'sendt.meldekortKanSendes' },
                 {
                   0: formaterDato(nesteDato),
@@ -324,8 +322,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    leggTilAktivtMeldekort: (aktivtMeldekort: Meldekort) =>
-      dispatch(AktivtMeldekortActions.oppdaterAktivtMeldekort(aktivtMeldekort)),
     settInnsendingstype: (innsendingstype: Innsendingstyper | null) =>
       dispatch(InnsendingActions.leggTilInnsendingstype(innsendingstype)),
     leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>

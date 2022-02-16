@@ -14,6 +14,7 @@ const initialState: InnsendingState = {
   innsendingstype: null,
   begrunnelse: {
     valgtArsak: '',
+    valgtArsakTekst: '',
     erFeil: false,
   },
   sporsmalsobjekter: hentSporsmalConfig(),

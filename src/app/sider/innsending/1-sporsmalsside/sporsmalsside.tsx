@@ -16,7 +16,11 @@ import {
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { hentIntl, hentLocale } from '../../../utils/intlUtil';
+import {
+  downloadMessages,
+  hentIntl,
+  hentLocale,
+} from '../../../utils/intlUtil';
 import { history, RootState } from '../../../store/configureStore';
 import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
 import { IModal, ModalKnapp } from '../../../types/ui';
@@ -35,12 +39,14 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
   sendteMeldekort: SendtMeldekort[];
   infomelding: Infomelding;
+  locale: string;
 }
 
 interface MapDispatchToProps {
@@ -51,6 +57,7 @@ interface MapDispatchToProps {
   settBegrunnelse: (begrunnelse: Begrunnelse) => void;
   oppdaterDager: (utfylteDager: UtfyltDag[]) => void;
   hentInfomelding: () => void;
+  settLocale: (locale: string, from: string) => void;
 }
 
 type SporsmalssideProps = MapStateToProps &
@@ -78,7 +85,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const syk = this.sjekkOmSporsmalErUtfylt(kategorier[2]);
     const ferie = this.sjekkOmSporsmalErUtfylt(kategorier[3]);
     const registrert = this.sjekkOmSporsmalErUtfylt(kategorier[4]);
-    const begrunnelseValgt =
+    const begrunnelseIkkeValgt =
       begrunnelse.valgtArsak === '' &&
       innsendingstype === Innsendingstyper.KORRIGERING;
     const nySporsmalsobjekterState = sporsmalsobjekter.map(sporsmalsobj => {
@@ -130,11 +137,12 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     this.props.oppdaterSvar(nySporsmalsobjekterState);
     this.props.settBegrunnelse({
       valgtArsak: begrunnelse.valgtArsak,
-      erFeil: begrunnelseValgt,
+      valgtArsakTekst: begrunnelse.valgtArsakTekst,
+      erFeil: begrunnelseIkkeValgt,
     });
 
     const resultat =
-      arbeidet && kurs && syk && ferie && registrert && !begrunnelseValgt;
+      arbeidet && kurs && syk && ferie && registrert && !begrunnelseIkkeValgt;
     if (!resultat) {
       scrollTilElement('feilmelding', 'auto', -120);
       return resultat;
@@ -323,14 +331,21 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
   };
 
   componentDidMount() {
+    const {
+      aktivtMeldekort,
+      hentInfomelding,
+      settLocale,
+      locale,
+      innsending,
+      oppdaterSvar,
+    } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra.toString());
+
     scrollTilElement(undefined, 'auto');
-    this.props.hentInfomelding();
+    hentInfomelding();
     this.resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
-    if (
-      this.props.innsending.innsendingstype ===
-      Innsendingstyper.ETTERREGISTRERING
-    ) {
-      const nySporsmalsobjektState = this.props.innsending.sporsmalsobjekter.map(
+    if (innsending.innsendingstype === Innsendingstyper.ETTERREGISTRERING) {
+      const nySporsmalsobjektState = innsending.sporsmalsobjekter.map(
         spmObj => {
           if (spmObj.kategori === kategorier[4]) {
             return { ...spmObj, checked: kategorier[4] + '.ja' };
@@ -339,7 +354,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
           }
         }
       );
-      this.props.oppdaterSvar(nySporsmalsobjektState);
+      oppdaterSvar(nySporsmalsobjektState);
     }
     loggAktivitet('Viser spørsmål');
   }
@@ -467,6 +482,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     sendteMeldekort: state.meldekort.sendteMeldekort,
     infomelding: state.meldekort.infomelding,
+    locale: state.intl.locale,
   };
 };
 
@@ -483,6 +499,11 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     oppdaterDager: (utfylteDager: UtfyltDag[]) =>
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
+    settLocale: (locale: string, from: string) => {
+      downloadMessages(locale, from).then((messages: object) => {
+        dispatch(updateIntl({ locale: locale, messages: messages }));
+      });
+    },
   };
 };
 

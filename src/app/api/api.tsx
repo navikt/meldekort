@@ -14,7 +14,7 @@ import { RootState } from '../store/configureStore';
 import * as React from 'react';
 import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
 
-const fetchGet = async (url: string) => {
+export const fetchGet = async (url: string) => {
   return prefferedAxios
     .get(Environment().apiUrl + url, {
       headers: {
@@ -41,39 +41,39 @@ const fetchPost = async (url: string, data: any) => {
 };
 
 export const fetchMeldekort = (): Promise<Person> => {
-  return fetchGet(Konstanter().hentMeldekortApiUri);
+  return fetchGet(Konstanter.hentMeldekortApiUri);
 };
 
 export function fetchHistoriskeMeldekort(): Promise<Meldekort[]> {
-  return fetchGet(Konstanter().hentHistoriskeMeldekortApiUri);
+  return fetchGet(Konstanter.hentHistoriskeMeldekortApiUri);
 }
 
 export function fetchMeldekortdetaljer(id: number): Promise<Meldekortdetaljer> {
   return fetchGet(
-    addIdToUrlIfNotMock(Konstanter().hentMeldekortdetaljerApiUri, id)
+    addIdToUrlIfNotMock(Konstanter.hentMeldekortdetaljerApiUri, id)
   );
 }
 
 export function fetchPersonstatus(): Promise<PersonStatus> {
-  return fetchGet(Konstanter().hentPersonStatusApiUri);
+  return fetchGet(Konstanter.hentPersonStatusApiUri);
 }
 
 export function fetchPersoninfo(): Promise<PersonInfo> {
-  return fetchGet(Konstanter().hentPersonInfoApiUri);
+  return fetchGet(Konstanter.hentPersonInfoApiUri);
 }
 
 export function fetchKorrigertId(id: number): Promise<number> {
   return fetchGet(
-    addIdToUrlIfNotMock(Konstanter().hentKorrigertMeldekortIdApiUri, id)
+    addIdToUrlIfNotMock(Konstanter.hentKorrigertMeldekortIdApiUri, id)
   );
 }
 
 export function fetchInfomelding(): Promise<Infomelding> {
-  return fetchGet(Konstanter().hentInfomelding);
+  return fetchGet(Konstanter.hentInfomelding);
 }
 
 export function pingWeblogic(): Promise<WeblogicPing> {
-  return fetchGet(Konstanter().pingWeblogic);
+  return fetchGet(Konstanter.pingWeblogic);
 }
 
 export function postMeldekort(state: RootState): Promise<ValideringsResultat> {
@@ -82,7 +82,7 @@ export function postMeldekort(state: RootState): Promise<ValideringsResultat> {
     sporsmalsobjekter: opprettSporsmalsobjekter(state),
   };
 
-  return fetchPost(Konstanter().sendMeldekortApiUri, meldekortdetaljer);
+  return fetchPost(Konstanter.sendMeldekortApiUri, meldekortdetaljer);
 }
 
 function addIdToUrlIfNotMock(url: string, id: number): string {

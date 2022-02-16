@@ -31,6 +31,7 @@ export interface SpmSvar {
 
 export interface Begrunnelse {
   valgtArsak: string;
+  valgtArsakTekst: string;
   erFeil: boolean;
 }
 
@@ -71,8 +72,8 @@ export interface Feilmelding {
 }
 
 export interface FeilKolonne {
-  uke: string;
-  dag: string;
+  uke: number;
+  dag: number;
   rad: string;
 }
 

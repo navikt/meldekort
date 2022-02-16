@@ -1,7 +1,0 @@
-Du skal svare <strong>Ja</strong> hvis du ønsker å få tilbud om arbeid eller bistand fra NAV for å komme i arbeid eller få avklart arbeidsevnen din.
-<br>
-<br>
-Du skal svare <strong>Nei </strong>hvis du ikke lenger skal ha arbeidsavklaringspenger eller noen annen form for bistand eller utbetaling fra NAV. 
-<br>
-<br>
-Hvis du har gjennomført aktivitetsplan og får arbeidsavklaringspenger mens du søker arbeid, vil utbetalingene stanse automatisk hvis du svarer <strong>Nei </strong>. Da vil vi fjerne deg fra NAVs register over arbeidssøkere, og du vil ikke få tilbud om arbeid eller tiltak. 

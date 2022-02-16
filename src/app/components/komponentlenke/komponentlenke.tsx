@@ -66,7 +66,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatcherToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(Komponentlenke);
+export default connect(mapStateToProps, mapDispatcherToProps)(Komponentlenke);

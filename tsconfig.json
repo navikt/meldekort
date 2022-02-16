@@ -29,8 +29,7 @@
     "build",
     "scripts",
     "jest",
-    "src/app/mocks",
-    "src/app/utils/build-tekster.js"
+    "src/app/mocks"
   ],
   "include": [
     "src"

@@ -1,4 +1,0 @@
-<b>{type} for perioden:</b> {period} elektronisk mottatt av NAV<br/>
-<b>Meldekortet ble mottatt:</b> {mottatt}<br/>
-<b>Bruker:</b> %NAVN% (%FNR%)<br/>
-{kortKanSendesFra}<br/>

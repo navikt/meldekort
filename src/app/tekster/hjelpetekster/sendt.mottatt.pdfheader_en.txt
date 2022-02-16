@@ -1,4 +1,0 @@
-<b>{type} for the period:</b> {period} electronically received by NAV<br/>
-<b>The Employment status form was received:</b> {mottatt}<br/>
-<b>User:</b> %NAVN% (%FNR%)<br/>
-{kortKanSendesFra}<br/>

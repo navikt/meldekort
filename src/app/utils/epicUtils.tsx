@@ -1,5 +1,4 @@
 import { from } from 'rxjs';
-import { FetchState, FetchStatus } from '../types/fetch';
 
 /**
  * Use async functions with rxjs, with less parenthesis soup.

@@ -10,18 +10,20 @@ import {
   hentNestePeriodeMedUkerOgDato,
   hentNummerOgDatoForAndreUke,
   hentNummerOgDatoForForsteUke,
-  hentTid,
   hentUkenummerForDato,
   hentUkePeriode,
   kalkulerDato,
   ukeTekst,
 } from '../../app/utils/dates';
+import { setLocalesBeforeAll } from '../testSetup/providerWrapper';
 
 const fraDatoString = '2019-01-01T10:10:00Z';
 const tilDatoString = '2019-01-13T10:10:00Z';
 
 const fraDato = new Date(fraDatoString);
 const tilDato = new Date(tilDatoString);
+
+setLocalesBeforeAll();
 
 it('hentUkenummerForDato', () => {
   expect(hentUkenummerForDato(fraDato)).toBe(1);
@@ -80,7 +82,7 @@ it('hentNestePeriodeMedUkerOgDato', () => {
 });
 
 it('ukeTekst', () => {
-  expect(ukeTekst()).toBe('Uke ');
+  expect(ukeTekst()).toBe('Uke');
 });
 
 it('kalkulerDato', () => {

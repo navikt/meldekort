@@ -16,7 +16,7 @@ exports[`HovedMeny 1`] = `
         href="#"
         onClick={[Function]}
       >
-        Send 
+        Send
       </a>
     </li>
     <li
@@ -28,7 +28,7 @@ exports[`HovedMeny 1`] = `
         href="#"
         onClick={[Function]}
       >
-        Tidligere meldekort 
+        Tidligere meldekort
       </a>
     </li>
   </ul>

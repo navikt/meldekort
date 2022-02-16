@@ -16,6 +16,7 @@ import {
 } from '../../app/types/innsending';
 import { hentSporsmalConfig } from '../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
+import { MeldeForm, Person, PersonInfo } from '../../app/types/person';
 
 export const menyPunkterTEST: MenyPunkt[] = [
   {
@@ -126,8 +127,8 @@ export const utfyllingFeilTEST: UtfyllingFeil = {
   feilKombinasjonFravaerSyk: false,
   feilIArbeidetTimerHeleHalve: true,
   feilIArbeidetTimer: true,
-  feilIDagerHorisontal: [{ uke: '1', dag: 'mandag', rad: 'A' }],
-  feilIDagerVertikal: [{ uke: '1', dag: 'tirsdag', rad: 'S' }],
+  feilIDagerHorisontal: [{ uke: 1, dag: 1, rad: 'A' }],
+  feilIDagerVertikal: [{ uke: 1, dag: 2, rad: 'S' }],
 };
 
 export const innsendingTEST: InnsendingState = {
@@ -136,6 +137,7 @@ export const innsendingTEST: InnsendingState = {
   innsendingstype: null,
   begrunnelse: {
     valgtArsak: '',
+    valgtArsakTekst: '',
     erFeil: false,
   },
   sporsmalsobjekter: hentSporsmalConfig(),
@@ -161,4 +163,21 @@ export const innsendingTEST: InnsendingState = {
   },
   meldekortdetaljerInnsending: undefined,
   valideringsResultat: undefined,
+};
+
+export const testPerson: Person = {
+  maalformkode: '',
+  meldeform: MeldeForm.IKKE_SATT,
+  meldekort: [mkTEST],
+  etterregistrerteMeldekort: [],
+  fravaer: [],
+  id: '',
+  antallGjenstaaendeFeriedager: 0,
+};
+
+export const testPersoninfo: PersonInfo = {
+  personId: 123456,
+  fodselsnr: '01020312345',
+  etternavn: 'Test',
+  fornavn: 'Testesen',
 };

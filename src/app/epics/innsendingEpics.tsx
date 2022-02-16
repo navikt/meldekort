@@ -7,12 +7,11 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { combineEpics } from 'redux-observable';
-import { fetchKorrigertId } from '../api/api';
+import { fetchKorrigertId, postMeldekort } from '../api/api';
 import { from, of } from 'rxjs';
 import { InnsendingActions } from '../actions/innsending';
 import { isActionOf } from 'typesafe-actions';
 import { MeldekortActions } from '../actions/meldekort';
-import { postMeldekort } from '../api/api';
 
 const hentKorrigertId: AppEpic = (action$, state$) =>
   action$.pipe(

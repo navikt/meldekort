@@ -192,7 +192,7 @@ function korrigeringsBegrunnelse(
     forklaring: hentIntl().formatMessage({
       id: 'forklaring.sporsmal.begrunnelse' + typeYtelsePostfix,
     }),
-    svar: begrunnelse.valgtArsak,
+    svar: begrunnelse.valgtArsakTekst,
   };
 }
 

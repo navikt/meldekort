@@ -25,16 +25,16 @@ interface BegrunnselseProps {
 type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
 const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
+  const optionsString = hentIntl().messages['korriger.begrunnelse.valg'];
+  const options = JSON.parse(optionsString ? optionsString : '{}');
+
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     props.settBegrunnelse({
       valgtArsak: event.target.value,
+      valgtArsakTekst: options[event.target.value],
       erFeil: event.target.value === '',
     });
   };
-
-  const options: string[] = hentIntl()
-    .formatMessage({ id: 'korriger.begrunnelse.valg' })
-    .split(',');
 
   const begrunnelseClass = props.erFeil ? 'feilmelding' : '';
 
@@ -64,10 +64,10 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
           {' '}
           {hentIntl().formatMessage({ id: 'begrunnelse.velgArsak' })}
         </option>
-        {options.map(opt => (
-          <option value={opt.trim()} key={opt}>
+        {Object.keys(options).map(key => (
+          <option value={key} key={options[key]}>
             {' '}
-            {opt}{' '}
+            {options[key]}{' '}
           </option>
         ))}
       </Select>

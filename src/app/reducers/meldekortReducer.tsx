@@ -1,5 +1,5 @@
 import { MeldekortState } from '../types/meldekort';
-import { MeldekortActionTypes, MeldekortActions } from '../actions/meldekort';
+import { MeldekortActions, MeldekortActionTypes } from '../actions/meldekort';
 import { getType } from 'typesafe-actions';
 
 const initialState: MeldekortState = {

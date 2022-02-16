@@ -8,7 +8,7 @@ exports[`NavKnapp 1`] = `
   type="submit"
 >
   <span>
-    Neste 
+    Neste
   </span>
 </button>
 `;

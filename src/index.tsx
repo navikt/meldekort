@@ -1,34 +1,62 @@
 import 'babel-polyfill';
 import * as React from 'react';
+import { FunctionComponentElement } from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.less';
-import nbLocaleData from 'react-intl/locale-data/nb';
-import enLocaleData from 'react-intl/locale-data/en';
-import { addLocaleData } from 'react-intl';
 import App from './app/app';
 import * as serviceWorker from './registerServiceWorker';
-import { IntlProvider } from 'react-intl-redux';
+import { IntlProvider, updateIntl } from 'react-intl-redux';
 import { Provider } from 'react-redux';
 import { persistor, store } from './app/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Locales } from './app/reducers/localesReducer';
+import { Konstanter } from './app/utils/consts';
+import { addLocaleData } from 'react-intl';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import { downloadMessages } from './app/utils/intlUtil';
 
-addLocaleData([...nbLocaleData, ...enLocaleData]);
+let locales: Locales = store.getState().locales;
+locales.forEach(locale => addLocaleData(locale.localeData));
 
 const rootElement = document.getElementById('meldekort__root');
 
-const render = (Component: React.ComponentType<{}>) => {
-  ReactDOM.render(
+const render = (element: FunctionComponentElement<any>) => {
+  ReactDOM.render(element, rootElement);
+};
+
+const renderApp = (Component: React.ComponentType, locale: string) => {
+  render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>
-        <IntlProvider locale="nb" defaultLocale="nb">
+        <IntlProvider locale={locale} defaultLocale={locale}>
           <Component />
         </IntlProvider>
       </PersistGate>
-    </Provider>,
-    rootElement
+    </Provider>
   );
 };
 
-render(App);
+const renderLoader = (element: any) => {
+  render(<div className="loader">{element}</div>);
+};
+
+// Først viser vi loader
+renderLoader(<NavFrontendSpinner type="XL" />);
+
+// Nå kan vi prøve å hente tekster
+// Det er ikke noe vits i å vise appen uten tekstene
+// Hvis vi kan hente tekstene, viser vi appen
+// Hvis vi ikke kan hente tekstene, viser vi feilmelding
+downloadMessages(Konstanter.defaultLocale, Konstanter.defaultFromDate)
+  .then((messages: object) => {
+    store.dispatch(
+      updateIntl({ locale: Konstanter.defaultLocale, messages: messages })
+    );
+
+    return renderApp(App, Konstanter.defaultLocale);
+  })
+  .catch(reason => {
+    return renderLoader(<div>{reason}</div>);
+  });
 
 serviceWorker.unregister();

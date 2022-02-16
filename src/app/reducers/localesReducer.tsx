@@ -1,34 +1,42 @@
-import { LocalesActions } from '../types/locales';
-import tekster from '../tekster/kompilerte-tekster';
+import * as React from 'react';
+import NorskFlaggSVG from '../components/sprakvelger/NorskFlaggSVG';
+import EngelskFlaggSVG from '../components/sprakvelger/EngelskFlaggSVG';
+import localeDataNB from 'react-intl/locale-data/nb';
+import localeDataEN from 'react-intl/locale-data/en';
 
-export interface SprakObj {
+export interface Locale {
   label: string;
   tittel: string;
-  tekster: {};
+  ikon: JSX.Element;
+  localeData: ReactIntl.LocaleData;
 }
 
-export interface LocalesState {
-  nb: SprakObj;
-  en: SprakObj;
-}
+export interface Locales extends Array<Locale> {}
 
-const initialState: LocalesState = {
-  nb: {
+const locales: Locales = [
+  {
     label: 'nb',
     tittel: 'Norsk',
-    tekster: tekster.nb,
+    ikon: <NorskFlaggSVG />,
+    localeData: localeDataNB,
   },
-  en: {
+  /*
+  {
+    label: 'nn',
+    tittel: 'Nynorsk',
+    ikon: <NorskFlaggSVG />,
+    localeData: localeDataNN,
+  },
+  */
+  {
     label: 'en',
     tittel: 'English',
-    tekster: tekster.en,
+    ikon: <EngelskFlaggSVG />,
+    localeData: localeDataEN,
   },
-};
+];
 
-const localesReducer = (
-  state: LocalesState = initialState,
-  action: LocalesActions
-): LocalesState => {
+const localesReducer = (state: Locales = locales, action: any): Locales => {
   return state;
 };
 

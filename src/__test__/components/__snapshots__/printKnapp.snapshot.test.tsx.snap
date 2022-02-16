@@ -11,11 +11,11 @@ exports[`PrintKnapp 1`] = `
     type="button"
   >
     <img
-      alt="Skriv ut  logo"
+      alt="Skriv ut logo"
       className="printLogo"
       src="print.svg"
     />
-    Skriv ut 
+    Skriv ut
   </button>
 </div>
 `;

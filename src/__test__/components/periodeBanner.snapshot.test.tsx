@@ -1,8 +1,12 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import PeriodeBanner from '../../app/components/periodeBanner/periodeBanner';
-import ProviderWrapper from '../testSetup/providerWrapper';
+import ProviderWrapper, {
+  setLocalesBeforeAll,
+} from '../testSetup/providerWrapper';
 import { mkTEST } from '../testSetup/testData';
+
+setLocalesBeforeAll();
 
 it('PeriodeBanner', () => {
   const tree = renderer.create(

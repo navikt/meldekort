@@ -4,7 +4,6 @@ import {
   hentUkedager,
   hentUkedagerSomStringListe,
   konverterUkedag,
-  matchUkedager,
 } from '../../../../../utils/ukedager';
 import { Checkbox } from 'nav-frontend-skjema';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
@@ -38,12 +37,9 @@ type AktivitetsradProps = RadProps &
   MapDispatchToProps;
 
 class Aktivitetsrad extends React.Component<AktivitetsradProps> {
-  setVerdi = (ukedag: string) => {
+  setVerdi = (ukedag: number) => {
     const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
-      if (
-        dag.uke === this.props.ukeNummer &&
-        matchUkedager(dag.dag, ukedag.trim())
-      ) {
+      if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {
         switch (this.props.tekstId) {
           case 'utfylling.tiltak':
             return {
@@ -71,11 +67,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
     this.props.oppdaterDager(oppdaterteDager);
   };
 
-  isChecked = (ukedag: string): boolean => {
+  isChecked = (ukedag: number): boolean => {
     let valgtDag = this.props.innsending.utfylteDager.filter(
-      dag =>
-        dag.uke === this.props.ukeNummer &&
-        matchUkedager(dag.dag, ukedag.trim())
+      dag => dag.uke === this.props.ukeNummer && dag.dag === ukedag
     );
     let checked: boolean = false;
     switch (this.props.tekstId) {
@@ -95,17 +89,18 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
   };
 
   settFelter = () => {
-    return hentUkedagerSomStringListe().map(dag => {
+    return hentUkedagerSomStringListe().map((dag, index) => {
       let erFeil: boolean = false;
+      let ukedag = konverterUkedag(index);
 
-      let ukedag = konverterUkedag(dag);
       if (typeof this.props.feilIDager !== 'undefined') {
         this.props.feilIDager.forEach(e =>
-          e.dag === ukedag.trim() && e.uke === this.props.ukeNummer.toString()
+          e.uke === this.props.ukeNummer && e.dag === ukedag
             ? (erFeil = true)
             : null
         );
       }
+
       return (
         <Checkbox
           className={

@@ -19,7 +19,7 @@ export const formaterDato = (dato: Date): string => {
 };
 // Format: Uke 1-2
 export const hentUkePeriode = (fraDato: Date, tilDato: Date): string => {
-  return `${ukeTekst()}${hentUkenummerForDato(
+  return `${ukeTekst()} ${hentUkenummerForDato(
     fraDato
   )} - ${hentUkenummerForDato(tilDato)}`;
 };
@@ -67,7 +67,7 @@ export const hentNummerOgDatoForForsteUke = (fraDato: Date): string => {
   let periode = `${formaterDato(fraDato)} - ${hentDatoForUkesluttIForsteUke(
     fraDato
   )}`;
-  return `${ukeTekst()}${ukenr} (${periode})`;
+  return `${ukeTekst()} ${ukenr} (${periode})`;
 };
 
 export const hentNummerOgDatoForAndreUke = (tilDato: Date): string => {
@@ -76,7 +76,7 @@ export const hentNummerOgDatoForAndreUke = (tilDato: Date): string => {
     tilDato
   )}`;
 
-  return `${ukeTekst()}${ukenr} (${periode})`;
+  return `${ukeTekst()} ${ukenr} (${periode})`;
 };
 
 export const hentNestePeriodeMedUkerOgDato = (

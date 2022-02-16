@@ -9,7 +9,6 @@ import {
   MeldekortState,
   Sporsmalsobjekt,
 } from '../../app/types/meldekort';
-import { MeldeForm, Person } from '../../app/types/person';
 import { InnsendingState, Innsendingstyper } from '../../app/types/innsending';
 import { hentSporsmalConfig } from '../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
@@ -25,6 +24,7 @@ import {
 import { hentIntl } from '../../app/utils/intlUtil';
 import { hentDagliste } from '../../app/components/meldekortdetaljer/ukevisning/dagliste';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { testPerson } from '../testSetup/testData';
 
 const MELDEKORT_ID = 1234567;
 const FRA = new Date('2019-12-30T10:00:00Z');
@@ -66,16 +66,6 @@ const nesteMeldekort: Meldekort = {
   korrigerbart: true,
 };
 
-const person: Person = {
-  maalformkode: '',
-  meldeform: MeldeForm.IKKE_SATT,
-  meldekort: [aktivtMeldekort],
-  etterregistrerteMeldekort: [],
-  fravaer: [],
-  id: '',
-  antallGjenstaaendeFeriedager: 0,
-};
-
 const meldekortDager: MeldekortDag[] = [
   {
     dag: 1,
@@ -92,6 +82,7 @@ const innsending: InnsendingState = {
   innsendingstype: Innsendingstyper.INNSENDING,
   begrunnelse: {
     valgtArsak: '',
+    valgtArsakTekst: '',
     erFeil: false,
   },
   sporsmalsobjekter: hentSporsmalConfig(),
@@ -154,7 +145,7 @@ const state: RootState = {
   intl: null,
   // @ts-ignore
   router: null,
-  person: person,
+  person: testPerson,
   // @ts-ignore
   personStatus: null,
   // @ts-ignore
@@ -230,12 +221,14 @@ it('opprettSporsmalsobjekter for meldekort med neste meldekort', () => {
 });
 
 it('opprettSporsmalsobjekter for korrigert meldekort med neste meldekort', () => {
-  const arsak = 'Bla bla bla';
+  const arsak = '1';
+  const arsakTekst = 'Bla bla bla';
 
   const newState = { ...state };
   newState.innsending.innsendingstype = Innsendingstyper.KORRIGERING;
   newState.innsending.begrunnelse = {
     valgtArsak: arsak,
+    valgtArsakTekst: arsakTekst,
     erFeil: false,
   };
 
@@ -270,7 +263,7 @@ it('opprettSporsmalsobjekter for korrigert meldekort med neste meldekort', () =>
       id: 'korrigering.sporsmal.begrunnelse',
     })
   );
-  expect(result[3].svar).toBe(arsak);
+  expect(result[3].svar).toBe(arsakTekst);
 });
 
 const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {

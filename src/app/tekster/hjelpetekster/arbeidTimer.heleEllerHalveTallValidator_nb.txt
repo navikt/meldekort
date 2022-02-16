@@ -1,1 +1,0 @@
-Antall timer er ugyldig. Gyldige verdier er hele og halve timer

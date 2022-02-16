@@ -1,1 +1,0 @@
-<i>De grå boksene under viser veiledningstekster fra utfyllingssiden på meldekortet. Vi viste kun veiledningsteksten til deg hvis du svarte JA på spørsmålet.</i>
