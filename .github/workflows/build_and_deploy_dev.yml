@@ -107,7 +107,7 @@ jobs:
           docker push ${{ steps.setVars.outputs.image }}
 
       - name: Deploy to dev
-        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
+        if: always() && (env.ENVIRONMENT == 'gcp' || env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)) # always()?
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
