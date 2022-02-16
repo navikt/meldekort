@@ -25,7 +25,8 @@ const Environment = () => {
   ) {
     return {
       dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
-      apiUrl: 'https://meldekort-api-gcp.dev.nav.no/meldekort/meldekort-api/',
+      apiUrl:
+        'https://meldekort-api-gcp.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice-q.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
