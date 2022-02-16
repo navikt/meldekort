@@ -36,6 +36,10 @@ spec:
     requests:
       cpu: 500m
       memory: 768Mi
+  accessPolicy:
+    outbound:
+      rules:
+        - application: meldekort-api-gcp
 ---
 apiVersion: nais.io/v1
 kind: Alert

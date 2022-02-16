@@ -12,6 +12,7 @@ on:
         default: 'q0'
       bump_patch:
         description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
+        required: false
         default: ''
 
 env:

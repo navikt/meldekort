@@ -20,6 +20,17 @@ const Environment = () => {
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
+  } else if (
+    window.location.hostname.indexOf('meldekort-frontend-gcp.dev.nav.no') > -1
+  ) {
+    return {
+      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
+      apiUrl: 'https://meldekort-api-gcp.dev.nav.no/meldekort/meldekort-api/',
+      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      amplitudeUrl: 'amplitude.nav.no/collect',
+      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
+    };
   } else if (erMock()) {
     return {
       dittNavUrl: 'https://www.nav.no/person/dittnav',

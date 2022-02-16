@@ -1,0 +1,4 @@
+dashEnv: -gcp
+slackAlertChannel: team-meldeplikt-alerts-dev
+ingresses:
+  - "https://meldekort-frontend-gcp.dev.nav.no"
