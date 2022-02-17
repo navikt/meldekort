@@ -3,6 +3,7 @@ import { store } from '../store/configureStore';
 import { Konstanter } from './consts';
 import { fetchGet } from '../api/api';
 import Environment from './env';
+import { formaterDatoIso } from './dates';
 
 interface LocaleCache {
   label: string;
@@ -13,12 +14,12 @@ interface LocaleCache {
 
 const localeCache = new Array<LocaleCache>();
 
-export const downloadMessages = async (sprak: string, fraDato: string) => {
-  fraDato = fraDato.substring(0, 10); // meldeperiod har tid, men vi trenger ikke den
+export const downloadMessages = async (sprak: string, fraDato: Date) => {
+  const fraDatoFormatert = formaterDatoIso(fraDato);
 
   const cachedLocale = localeCache.find(
     cachedLocale =>
-      cachedLocale.label === sprak && cachedLocale.fromDate === fraDato
+      cachedLocale.label === sprak && cachedLocale.fromDate === fraDatoFormatert
   );
   const now = new Date().getTime();
   const validUntil = now + Konstanter.cachedLocaleValidity;
@@ -30,7 +31,11 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
 
   return new Promise((resolve, reject) => {
     fetchGet(
-      Konstanter.hentAlleTekster + '?sprak=' + sprak + '&fraDato=' + fraDato
+      Konstanter.hentAlleTekster +
+        '?sprak=' +
+        sprak +
+        '&fraDato=' +
+        fraDatoFormatert
     )
       .then(data => {
         if (cachedLocale) {
@@ -39,7 +44,7 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
         } else {
           localeCache.push({
             label: sprak,
-            fromDate: fraDato,
+            fromDate: fraDatoFormatert,
             messages: data,
             validUntil: validUntil,
           });

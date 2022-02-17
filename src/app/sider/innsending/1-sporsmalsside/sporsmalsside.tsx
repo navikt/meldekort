@@ -57,7 +57,7 @@ interface MapDispatchToProps {
   settBegrunnelse: (begrunnelse: Begrunnelse) => void;
   oppdaterDager: (utfylteDager: UtfyltDag[]) => void;
   hentInfomelding: () => void;
-  settLocale: (locale: string, from: string) => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type SporsmalssideProps = MapStateToProps &
@@ -339,7 +339,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       innsending,
       oppdaterSvar,
     } = this.props;
-    settLocale(locale, aktivtMeldekort.meldeperiode.fra.toString());
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
     scrollTilElement(undefined, 'auto');
     hentInfomelding();
@@ -499,7 +499,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     oppdaterDager: (utfylteDager: UtfyltDag[]) =>
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
-    settLocale: (locale: string, from: string) => {
+    settLocale: (locale: string, from: Date) => {
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
       });

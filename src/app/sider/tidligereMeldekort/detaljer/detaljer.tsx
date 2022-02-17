@@ -53,7 +53,7 @@ interface MapDispatchToProps {
   hentPersonInfo: () => void;
   resettAktivtMeldekort: () => void;
   pingWeblogic: () => void;
-  settLocale: (locale: string, from: string) => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type Props = MapDispatchToProps & MapStateToProps;
@@ -113,7 +113,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     if (personInfo.personId === 0) {
       hentPersonInfo();
     }
-    settLocale(locale, aktivtMeldekort.meldeperiode.fra.toString());
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
   }
 
   handleWindowSize = () =>
@@ -253,7 +253,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
-    settLocale: (locale: string, from: string) => {
+    settLocale: (locale: string, from: Date) => {
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
       });

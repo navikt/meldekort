@@ -9,6 +9,7 @@ import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
 import { Locale } from '../../reducers/localesReducer';
 import { Konstanter } from '../../utils/consts';
 import { downloadMessages } from '../../utils/intlUtil';
+import { formaterDatoIso } from '../../utils/dates';
 
 const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
   return {
@@ -60,7 +61,7 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
     downloadMessages(
       newLocale,
       aktivtMeldekort
-        ? aktivtMeldekort.meldeperiode.fra.toString()
+        ? aktivtMeldekort.meldeperiode.fra
         : Konstanter.defaultFromDate
     ).then((messages: object) => {
       props.updateIntl(newLocale, messages);
