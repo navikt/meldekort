@@ -17,7 +17,7 @@ export const Konstanter = {
   pas: 'PASSWORD',
   use: 'USERNAME',
   defaultLocale: 'nb',
-  defaultFromDate: '1000-01-01',
+  defaultFromDate: new Date('1000-01-01'),
   cachedLocaleValidity: 1800000, // Milliseconds
 };
 

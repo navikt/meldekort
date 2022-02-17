@@ -33,7 +33,7 @@ interface MapDispatchToProps {
   oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) => void;
   oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) => void;
   settMeldekortId: (meldekortId: number) => void;
-  settLocale: (locale: string, from: string) => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type InnsendingRoutesProps = RouteComponentProps &
@@ -59,7 +59,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
   componentDidMount() {
     const { settLocale, aktivtMeldekort, locale } = this.props;
     this.settMeldekortIdBasertPaInnsendingstype();
-    settLocale(locale, aktivtMeldekort.meldeperiode.fra.toString());
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
   }
 
   render() {
@@ -128,7 +128,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
-    settLocale: (locale: string, from: string) => {
+    settLocale: (locale: string, from: Date) => {
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
       });

@@ -17,6 +17,12 @@ export const hentUkenummerForDato = (dato: Date): number => {
 export const formaterDato = (dato: Date): string => {
   return moment(dato).format(datoFormat);
 };
+
+// Formaterer dato til YYYY-MM-DD
+export const formaterDatoIso = (dato: Date): string => {
+  return moment(dato).format('YYYY-MM-DD');
+};
+
 // Format: Uke 1-2
 export const hentUkePeriode = (fraDato: Date, tilDato: Date): string => {
   return `${ukeTekst()} ${hentUkenummerForDato(
