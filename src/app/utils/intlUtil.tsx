@@ -31,7 +31,11 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
 
   return new Promise((resolve, reject) => {
     fetchGet(
-      Konstanter.hentAlleTekster + '?sprak=' + sprak + '&fraDato=' + fraDato
+      Konstanter.hentAlleTekster +
+        '?sprak=' +
+        sprak +
+        '&fraDato=' +
+        fraDatoFormatert
     )
       .then(data => {
         if (cachedLocale) {
