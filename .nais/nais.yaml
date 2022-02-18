@@ -36,7 +36,7 @@ spec:
       memory: 768Mi
   env:
     - name: NAV_DEKORATOREN_URL
-      value: 'https://dekoratoren.dev.nav.no'
+      value: 'https://www-q1.nav.no/' # 'https://dekoratoren.dev.nav.no'
   idporten:
     enabled: true
     sidecar:
@@ -51,6 +51,7 @@ spec:
         - application: meldekort-api-gcp
       external:
         - host: dekoratoren.dev.nav.no
+        - host: www-q1.nav.no
 ---
 apiVersion: nais.io/v1
 kind: Alert
