@@ -48,6 +48,8 @@ spec:
     outbound:
       rules:
         - application: meldekort-api-gcp
+      external:
+        - host: dekoratoren.dev.nav.no
 ---
 apiVersion: nais.io/v1
 kind: Alert
