@@ -23,8 +23,6 @@ spec:
   prometheus:
     enabled: true
     path: meldekort/internal/metrics
-  vault:
-    enabled: true
   replicas:
     min: 2
     max: 4
@@ -36,13 +34,16 @@ spec:
     requests:
       cpu: 500m
       memory: 768Mi
+  env:
+    - name: NAV_DEKORATOREN_URL
+      value: 'https://dekoratoren.dev.nav.no/'
   idporten:
     enabled: true
     sidecar:
       enabled: true
       level: Level4
       locale: nb
-      autoLogin: true
+      autoLogin: false
       errorPath: ""
   accessPolicy:
     outbound:
