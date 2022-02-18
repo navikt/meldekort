@@ -36,7 +36,7 @@ spec:
       memory: 768Mi
   env:
     - name: NAV_DEKORATOREN_URL
-      value: 'https://www-q1.nav.no/' # 'https://dekoratoren.dev.nav.no'
+      value: 'https://www-q1.nav.no' # 'https://dekoratoren.dev.nav.no'
   idporten:
     enabled: true
     sidecar:
