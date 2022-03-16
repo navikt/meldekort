@@ -27,8 +27,8 @@ const Environment = () => {
       dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
       apiUrl:
         'https://meldekort-api-gcp.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: '/oauth2/login',
-      logoutUrl: '/oauth2/logout',
+      loginUrl: 'https://meldekort-api-gcp.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-gcp.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
@@ -50,8 +50,8 @@ const Environment = () => {
   return {
     dittNavUrl: 'https://www.nav.no/person/dittnav',
     apiUrl: 'https://www.nav.no/meldekort/meldekort-api/api/',
-    loginUrl: 'https://loginservice.nav.no/login?level=Level3',
-    logoutUrl: 'https://loginservice.nav.no/slo',
+    loginUrl: 'https://meldekort-api-gcp.nav.no/oauth2/login', // TODO: Check this
+    logoutUrl: 'https://meldekort-api-gcp.nav.no/oauth2/logout', // TODO: Check this
     amplitudeUrl: 'amplitude.nav.no/collect',
     amplitudeKey: 'b0bccdd4dd75081606ef7bcab668a7ed',
   };

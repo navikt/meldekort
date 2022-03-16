@@ -38,7 +38,7 @@ spec:
     - secret: meldekort-frontend{{ dashEnv }}
   env:
     - name: NAV_DEKORATOREN_URL
-      value: 'https://dekoratoren.dev.nav.no' # 'https://www-q1.nav.no'
+      value: 'https://dekoratoren.dev.nav.no'
     - name: DISABLE_SENSU_METRICS
       value: 'true'
   idporten:
