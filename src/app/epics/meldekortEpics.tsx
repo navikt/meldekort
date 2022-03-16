@@ -44,10 +44,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
           UiActions.visModal({
             content: () => loggInnContent(),
             onRequestClose: () => {
-              window.location.assign(
-                `${Environment().loginUrl}&redirect=${window.location.origin}` +
-                  Konstanter.basePath
-              );
+              window.location.assign(`${Environment().loginUrl}`);
             },
             visModal: true,
           }),

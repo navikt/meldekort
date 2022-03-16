@@ -49,10 +49,7 @@ export const downloadMessages = async (sprak: string, fraDato: string) => {
       .catch(error => {
         if (error.message === 'Request failed with status code 401') {
           // Bruker er ikke innlogget, sender ham til innogging
-          window.location.assign(
-            `${Environment().loginUrl}&redirect=${window.location.origin}` +
-              Konstanter.basePath
-          );
+          window.location.assign(`${Environment().loginUrl}`);
         } else {
           reject('Kunne ikke hente tekster. Prøv igjen senere');
         }
