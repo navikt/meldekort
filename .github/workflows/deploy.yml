@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter q0, q1 og p)'
+        description: 'Miljø (støtter gcp og p)'
         required: true
-        default: 'q0'
+        default: 'gcp'
       deploy_version:
         description: 'Hvilken versjon skal deployes? (kun for master-branchen)'
         required: true
@@ -58,7 +58,7 @@ jobs:
           args: unzip ${{ env.REPONAME }}-${{ github.event.inputs.deploy_version }}.zip -d .
 
       - name: Deploy release to dev or prod
-        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'p')
+        if: always() && (env.ENVIRONMENT == 'gcp' || env.ENVIRONMENT == 'p')
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}

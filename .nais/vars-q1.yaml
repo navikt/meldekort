@@ -1,6 +1,0 @@
-dashEnv: -q1
-slackAlertChannel: team-meldeplikt-alerts-dev
-ingresses:
-  - "https://meldekort-q1.dev.nav.no"
-  - "https://meldekort-q1.nais.oera-q.local"
-  - "https://www-q1.nav.no/meldekort"

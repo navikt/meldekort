@@ -2,29 +2,11 @@ import { erLocalhost, erMock } from '../mock/utils';
 import { Konstanter } from './consts';
 
 const Environment = () => {
-  if (window.location.hostname.indexOf('www-q0.nav.no') > -1) {
-    return {
-      dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
-      apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
-      amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
-    };
-  } else if (window.location.hostname.indexOf('www-q1.nav.no') > -1) {
-    return {
-      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
-      apiUrl: 'https://www-q1.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
-      amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
-    };
-  } else if (
+  if (
     window.location.hostname.indexOf('meldekort-frontend-gcp.dev.nav.no') > -1
   ) {
     return {
-      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl:
         'https://meldekort-api-gcp.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://meldekort-api-gcp.dev.nav.no/oauth2/login',

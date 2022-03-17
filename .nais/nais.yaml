@@ -55,7 +55,6 @@ spec:
         - application: meldekort-api-gcp
       external:
         - host: dekoratoren.dev.nav.no
-        - host: www-q1.nav.no
 ---
 apiVersion: nais.io/v1
 kind: Alert

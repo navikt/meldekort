@@ -10,7 +10,6 @@ EXPOSE 8080
 
 FROM ghcr.io/navikt/pus-decorator/pus-decorator
 ENV APPLICATION_NAME=meldekort
-# ENV NAV_DEKORATOREN_URL=https://www-q1.nav.no
 ENV APPRES_CMS_URL=https://appres.nav.no/
 ENV FOOTER_TYPE=WITH_ALPHABET
 ENV DISABLE_FRONTEND_LOGGER=true
