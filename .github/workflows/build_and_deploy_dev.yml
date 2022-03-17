@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter gcp)' # Vi trenger ikke deene nå siden vi skal ha kun 1 dev-gcp miljø
+        description: 'Miljø (støtter gcp)' # Vi trenger ikke å velge miljø her siden vi skal ha kun 1 dev-gcp miljø
         required: true
         default: 'gcp'
       bump_patch:
@@ -107,7 +107,7 @@ jobs:
           docker push ${{ steps.setVars.outputs.image }}
 
       - name: Deploy to dev
-        if: always() && (env.ENVIRONMENT == 'gcp' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)) # always()?
+        if: always() && (env.ENVIRONMENT == 'gcp' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
