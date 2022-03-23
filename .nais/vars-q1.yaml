@@ -1,0 +1,6 @@
+dashEnv: -q1
+slackAlertChannel: team-meldeplikt-alerts-dev
+ingresses:
+  - "https://meldekort-frontend-q1.dev.nav.no"
+navDekoratorenUrl: "https://dekoratoren.dev.nav.no"
+externalUrl: "dekoratoren.dev.nav.no"

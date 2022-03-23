@@ -3,14 +3,26 @@ import { Konstanter } from './consts';
 
 const Environment = () => {
   if (
-    window.location.hostname.indexOf('meldekort-frontend-gcp.dev.nav.no') > -1
+    window.location.hostname.indexOf('meldekort-frontend-q0.dev.nav.no') > -1
   ) {
     return {
       dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl:
-        'https://meldekort-api-gcp.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-gcp.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-gcp.dev.nav.no/oauth2/logout',
+        'https://meldekort-api-q0.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/logout',
+      amplitudeUrl: 'amplitude.nav.no/collect',
+      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
+    };
+  } else if (
+    window.location.hostname.indexOf('meldekort-frontend-q1.dev.nav.no') > -1
+  ) {
+    return {
+      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
+      apiUrl:
+        'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };

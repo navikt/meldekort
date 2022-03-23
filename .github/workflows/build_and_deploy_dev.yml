@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter gcp)' # Vi trenger ikke å velge miljø her siden vi skal ha kun 1 dev-gcp miljø
+        description: 'Miljø (støtter q0 og q1)'
         required: true
-        default: 'gcp'
+        default: 'q0'
       bump_patch:
         description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
         required: false
@@ -37,7 +37,7 @@ jobs:
 
       - name: Set default environment for push
         if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
-        run: echo "ENVIRONMENT=gcp" >> $GITHUB_ENV
+        run: echo "ENVIRONMENT=q0" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -107,7 +107,7 @@ jobs:
           docker push ${{ steps.setVars.outputs.image }}
 
       - name: Deploy to dev
-        if: always() && (env.ENVIRONMENT == 'gcp' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
+        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
