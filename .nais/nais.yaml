@@ -41,14 +41,6 @@ spec:
       value: '{{ navDekoratorenUrl }}'
     - name: DISABLE_SENSU_METRICS
       value: 'true'
-  idporten:
-    enabled: true
-    sidecar:
-      enabled: true
-      level: Level4
-      locale: nb
-      autoLogin: false
-      errorPath: ""
   accessPolicy:
     outbound:
       rules:
