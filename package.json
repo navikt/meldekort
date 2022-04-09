@@ -34,7 +34,7 @@
     "location-origin": "^1.1.4",
     "lodash.throttle": "^4.1.1",
     "minimist": "^1.2.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nav-frontend-alertstriper": "^3.0.3",
     "nav-frontend-alertstriper-style": "^2.0.2",
     "nav-frontend-chevron": "^1.0.9",
