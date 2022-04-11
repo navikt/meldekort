@@ -6,8 +6,8 @@ const Environment = () => {
     return {
       dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
       apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice.dev.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
@@ -15,8 +15,8 @@ const Environment = () => {
     return {
       dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
       apiUrl: 'https://www-q1.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice.dev.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
@@ -24,15 +24,15 @@ const Environment = () => {
     return {
       dittNavUrl: 'https://www.nav.no/person/dittnav',
       apiUrl: '',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice.dev.nav.no/slo',
     };
   } else if (erLocalhost()) {
     return {
       dittNavUrl: 'https://www.nav.no/person/dittnav',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice.dev.nav.no/slo',
     };
   }
   return {
