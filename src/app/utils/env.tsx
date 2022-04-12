@@ -2,7 +2,7 @@ import { erLocalhost, erMock } from '../mock/utils';
 import { Konstanter } from './consts';
 
 const Environment = () => {
-  if (window.location.hostname.indexOf('www-q0.nav.no') > -1) {
+  if (window.location.hostname.indexOf('www-q0.dev.nav.no') > -1) {
     return {
       dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
       apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
@@ -11,7 +11,7 @@ const Environment = () => {
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
     };
-  } else if (window.location.hostname.indexOf('www-q1.nav.no') > -1) {
+  } else if (window.location.hostname.indexOf('www-q1.dev.nav.no') > -1) {
     return {
       dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
       apiUrl: 'https://www-q1.nav.no/meldekort/meldekort-api/api/',
