@@ -4,3 +4,4 @@ ingresses:
   - "https://meldekort-q0.dev.nav.no"
   - "https://meldekort-q0.nais.oera-q.local"
   - "https://www-q0.nav.no/meldekort"
+  - "https://www-q0.dev.nav.no/meldekort"
