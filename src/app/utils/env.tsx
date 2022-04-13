@@ -4,7 +4,7 @@ import { Konstanter } from './consts';
 const Environment = () => {
   if (window.location.hostname.indexOf('www-q0.dev.nav.no') > -1) {
     return {
-      dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl: 'https://www-q0.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
@@ -13,7 +13,7 @@ const Environment = () => {
     };
   } else if (window.location.hostname.indexOf('www-q1.dev.nav.no') > -1) {
     return {
-      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl: 'https://www-q1.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
@@ -22,14 +22,14 @@ const Environment = () => {
     };
   } else if (erMock()) {
     return {
-      dittNavUrl: 'https://www.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl: '',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
     };
   } else if (erLocalhost()) {
     return {
-      dittNavUrl: 'https://www.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
