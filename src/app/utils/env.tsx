@@ -5,7 +5,7 @@ const Environment = () => {
   if (window.location.hostname.indexOf('www-q0.dev.nav.no') > -1) {
     return {
       dittNavUrl: 'https://www-q0.nav.no/person/dittnav',
-      apiUrl: 'https://www-q0.nav.no/meldekort/meldekort-api/api/',
+      apiUrl: 'https://www-q0.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
@@ -14,7 +14,7 @@ const Environment = () => {
   } else if (window.location.hostname.indexOf('www-q1.dev.nav.no') > -1) {
     return {
       dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
-      apiUrl: 'https://www-q1.nav.no/meldekort/meldekort-api/api/',
+      apiUrl: 'https://www-q1.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
