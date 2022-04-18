@@ -13,6 +13,7 @@ import Arbeidsrad from '../../sider/innsending/2-utfyllingsside/utfylling/arbeid
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { FravaerTypeEnum } from '../../types/meldekort';
+import { useState } from 'react';
 
 interface Props {
   ukenummer: number;
@@ -29,6 +30,9 @@ interface MapStateToProps {
 type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
+  const [apen, setApen] = useState(true);
+  const toggle = (previous: boolean) => !previous;
+
   const hentSporsmal = (): SpmSvar[] => {
     return props.innsending.sporsmalsobjekter.map(sporsmalobj => {
       return {
@@ -52,7 +56,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
 
   return (
     <EkspanderbartpanelBase
-      heading={
+      tittel={
         <div className="uke__tittel">
           <Innholdstittel>{`${ukeTekst()} ${
             props.faktiskUkeNummer
@@ -61,8 +65,8 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
         </div>
       }
       border={true}
-      apen={true}
-      ariaTittel={`${ukeTekst()} ${props.faktiskUkeNummer} ${props.datoTittel}`}
+      apen={apen}
+      onClick={() => setApen(toggle)}
     >
       <div className="uke__panel">
         <div className="ukedager--desktop">{hentUkedager()}</div>

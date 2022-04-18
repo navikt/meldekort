@@ -52,15 +52,7 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
         ]}
         checked={props.checked}
         onChange={props.sporsmalOnChange}
-        feil={
-          props.sporsmalsobjekt.feil.erFeil
-            ? {
-                feilmelding: hentIntl().formatMessage({
-                  id: props.sporsmalsobjekt.feil.feilmeldingId,
-                }),
-              }
-            : undefined
-        }
+        feil={props.sporsmalsobjekt.feil.erFeil}
       />
     </section>
   );

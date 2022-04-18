@@ -5,7 +5,7 @@ exports[`EkspanderbartInnhold 1`] = `
   className="ekspanderbartInnhold"
   style={
     Object {
-      "height": 0,
+      "height": "0px",
       "overflow": "hidden",
     }
   }
