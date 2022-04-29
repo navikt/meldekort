@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { EkspanderbartpanelPure } from 'nav-frontend-ekspanderbartpanel';
+import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { hentIntl } from '../../utils/intlUtil';
 
 import sporrende from '../../ikoner/sporrende.svg';
@@ -95,7 +95,7 @@ class OfteStilteSporsmal extends React.Component<
         <section className="oss-seksjon seksjon">
           {this.sporsmal().map(sporsmal => {
             return (
-              <EkspanderbartpanelPure
+              <EkspanderbartpanelBase
                 key={sporsmal.id}
                 onClick={() => this.handleClick(sporsmal.id)}
                 border={true}
@@ -103,7 +103,7 @@ class OfteStilteSporsmal extends React.Component<
                 apen={this.state.valgtSporsmalId === sporsmal.id}
               >
                 <FormattedHTMLMessage id={sporsmal.tekstId} />
-              </EkspanderbartpanelPure>
+              </EkspanderbartpanelBase>
             );
           })}
         </section>

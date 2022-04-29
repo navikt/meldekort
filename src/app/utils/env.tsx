@@ -28,17 +28,17 @@ const Environment = () => {
     };
   } else if (erMock()) {
     return {
-      dittNavUrl: 'https://www.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl: '',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice.dev.nav.no/slo',
     };
   } else if (erLocalhost()) {
     return {
-      dittNavUrl: 'https://www.nav.no/person/dittnav',
+      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice-q.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice-q.nav.no/slo',
+      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+      logoutUrl: 'https://loginservice.dev.nav.no/slo',
     };
   }
   return {

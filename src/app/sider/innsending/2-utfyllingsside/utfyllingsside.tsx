@@ -108,7 +108,7 @@ class Utfyllingsside extends React.Component<
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.syk) {
             feil.push({
-              uke: dag.uke.toString(),
+              uke: dag.uke,
               dag: dag.dag,
               rad: FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.SYKDOM,
             });
@@ -116,7 +116,7 @@ class Utfyllingsside extends React.Component<
           }
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
             feil.push({
-              uke: dag.uke.toString(),
+              uke: dag.uke,
               dag: dag.dag,
               rad:
                 FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.ANNET_FRAVAER,
@@ -131,7 +131,7 @@ class Utfyllingsside extends React.Component<
         if (typeof dag.arbeidetTimer !== 'undefined') {
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
             feil.push({
-              uke: dag.uke.toString(),
+              uke: dag.uke,
               dag: dag.dag,
               rad:
                 FravaerTypeEnum.ARBEIDS_FRAVAER + FravaerTypeEnum.ANNET_FRAVAER,
@@ -141,7 +141,7 @@ class Utfyllingsside extends React.Component<
         }
         if (dag.syk && dag.annetFravaer) {
           feil.push({
-            uke: dag.uke.toString(),
+            uke: dag.uke,
             dag: dag.dag,
             rad: FravaerTypeEnum.SYKDOM + FravaerTypeEnum.ANNET_FRAVAER,
           });
@@ -153,7 +153,7 @@ class Utfyllingsside extends React.Component<
       dager.forEach(dag => {
         if (dag.syk && dag.annetFravaer) {
           feil.push({
-            uke: dag.uke.toString(),
+            uke: dag.uke,
             dag: dag.dag,
             rad: FravaerTypeEnum.SYKDOM + FravaerTypeEnum.ANNET_FRAVAER,
           });
@@ -180,7 +180,7 @@ class Utfyllingsside extends React.Component<
       if (typeof dag.arbeidetTimer !== 'undefined') {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
           feil.push({
-            uke: dag.uke.toString(),
+            uke: dag.uke,
             dag: dag.dag,
             rad: FravaerTypeEnum.ARBEIDS_FRAVAER,
           });
@@ -190,7 +190,7 @@ class Utfyllingsside extends React.Component<
           Number(dag.arbeidetTimer) < 0
         ) {
           feil.push({
-            uke: dag.uke.toString(),
+            uke: dag.uke,
             dag: dag.dag,
             rad: FravaerTypeEnum.ARBEIDS_FRAVAER,
           });

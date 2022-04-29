@@ -11,14 +11,11 @@ export interface OwnProps {
   ariaLive?: 'assertive' | 'polite' | 'off';
   /** Om skjul/vis skal animeres. Default true */
   animert?: boolean;
-  /** Om noe av innholdet er ekspandertbart */
-  harEkspanderbartInnhold?: boolean;
 }
 
 const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
   children,
   animert = true,
-  harEkspanderbartInnhold = false,
   erApen = false,
   ariaLive = 'off',
 }) => {
@@ -38,11 +35,9 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
   return (
     <Collapse
       isOpened={erApen}
-      springConfig={{ stiffness: 250, damping: 30 }}
       className={classNames('ekspanderbartInnhold', {
         'ekspanderbartInnhold--apen': erApen,
       })}
-      hasNestedCollapse={harEkspanderbartInnhold}
     >
       {content}
     </Collapse>

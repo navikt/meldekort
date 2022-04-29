@@ -1,4 +1,4 @@
-FROM node:12-alpine as builder
+FROM node:17-alpine as builder
 COPY . /source
 ENV NODE_ENV production
 
