@@ -102,7 +102,7 @@
     "webpack": "4.44.2"
   },
   "scripts": {
-    "build": "set CI=false&&craco build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && set CI=false && craco build",
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
