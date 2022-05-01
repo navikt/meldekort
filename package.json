@@ -86,7 +86,7 @@
     "react-redux": "^7.2.8",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-observable": "^1.0.0",
@@ -102,7 +102,7 @@
     "webpack": "4.44.2"
   },
   "scripts": {
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && set CI=false && craco build",
+    "build": "set CI=false && craco build",
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
@@ -126,8 +126,8 @@
     "@types/redux-mock-store": "^1.0.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "axios-mock-adapter": "^1.17.0",
-    "craco": "0.0.3",
-    "craco-less": "^1.20.0",
+    "craco": "^0.0.3",
+    "craco-less": "^2.0.0",
     "cross-env": "^5.2.1",
     "enzyme": "^3.10.0",
     "enzyme-to-json": "^3.3.5",
