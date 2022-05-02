@@ -110,11 +110,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
             this.setTimer(event, ukedag);
           }}
           feil={
-            typeof this.props.feilIDager !== 'undefined'
-              ? feilLokal
-                ? { feilmelding: '' }
-                : undefined
-              : undefined
+            typeof this.props.feilIDager !== 'undefined' ? feilLokal : false
           }
         />
       );

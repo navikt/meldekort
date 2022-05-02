@@ -116,13 +116,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps> {
           onChange={() => {
             this.setVerdi(ukedag);
           }}
-          feil={
-            typeof this.props.feilIDager !== 'undefined'
-              ? erFeil
-                ? { feilmelding: '' }
-                : undefined
-              : undefined
-          }
+          feil={typeof this.props.feilIDager !== 'undefined' ? erFeil : false}
         />
       );
     });
