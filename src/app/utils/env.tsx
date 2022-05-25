@@ -9,7 +9,7 @@ const Environment = () => {
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
+      amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
     };
   } else if (window.location.hostname.indexOf('www-q1.dev.nav.no') > -1) {
     return {
@@ -18,7 +18,7 @@ const Environment = () => {
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
       amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
+      amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
     };
   } else if (erMock()) {
     return {
@@ -41,7 +41,7 @@ const Environment = () => {
     loginUrl: 'https://loginservice.nav.no/login?level=Level3',
     logoutUrl: 'https://loginservice.nav.no/slo',
     amplitudeUrl: 'amplitude.nav.no/collect',
-    amplitudeKey: 'b0bccdd4dd75081606ef7bcab668a7ed',
+    amplitudeKey: '913768927b84cde5eac0d0d18c737561',
   };
 };
 
