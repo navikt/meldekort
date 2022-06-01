@@ -59,7 +59,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
               Konstanter.basePath
           );
         } else {
-          reject('Kunne ikke hente tekster. Prøv igjen senere');
+          reject('Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.');
         }
       });
   });
