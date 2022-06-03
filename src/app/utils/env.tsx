@@ -12,7 +12,7 @@ const Environment = () => {
       loginUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/login',
       logoutUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
+      amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
     };
   } else if (
     window.location.hostname.indexOf('meldekort-frontend-q1.dev.nav.no') > -1
@@ -24,7 +24,7 @@ const Environment = () => {
       loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
       logoutUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '2f190e67f31d7e4719c5ff048ad3d3e6',
+      amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
     };
   } else if (erMock()) {
     return {
@@ -47,7 +47,7 @@ const Environment = () => {
     loginUrl: 'https://meldekort-api.nav.no/oauth2/login',
     logoutUrl: 'https://meldekort-api.nav.no/oauth2/logout',
     amplitudeUrl: 'amplitude.nav.no/collect',
-    amplitudeKey: 'b0bccdd4dd75081606ef7bcab668a7ed',
+    amplitudeKey: '913768927b84cde5eac0d0d18c737561',
   };
 };
 

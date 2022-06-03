@@ -56,7 +56,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
           // Bruker er ikke innlogget, sender ham til innogging
           window.location.assign(`${Environment().loginUrl}`);
         } else {
-          reject('Kunne ikke hente tekster. Prøv igjen senere');
+          reject('Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.');
         }
       });
   });
