@@ -2,21 +2,27 @@ import { erLocalhost, erMock } from '../mock/utils';
 import { Konstanter } from './consts';
 
 const Environment = () => {
-  if (window.location.hostname.indexOf('www-q0.dev.nav.no') > -1) {
+  if (
+    window.location.hostname.indexOf('meldekort-frontend-q0.dev.nav.no') > -1
+  ) {
     return {
       dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
-      apiUrl: 'https://www-q0.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice.dev.nav.no/slo',
+      apiUrl:
+        'https://meldekort-api-q0.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
     };
-  } else if (window.location.hostname.indexOf('www-q1.dev.nav.no') > -1) {
+  } else if (
+    window.location.hostname.indexOf('meldekort-frontend-q1.dev.nav.no') > -1
+  ) {
     return {
-      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
-      apiUrl: 'https://www-q1.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice.dev.nav.no/slo',
+      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
+      apiUrl:
+        'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
     };
@@ -38,8 +44,8 @@ const Environment = () => {
   return {
     dittNavUrl: 'https://www.nav.no/person/dittnav',
     apiUrl: 'https://www.nav.no/meldekort/meldekort-api/api/',
-    loginUrl: 'https://loginservice.nav.no/login?level=Level3',
-    logoutUrl: 'https://loginservice.nav.no/slo',
+    loginUrl: 'https://meldekort-api.nav.no/oauth2/login',
+    logoutUrl: 'https://meldekort-api.nav.no/oauth2/logout',
     amplitudeUrl: 'amplitude.nav.no/collect',
     amplitudeKey: '913768927b84cde5eac0d0d18c737561',
   };

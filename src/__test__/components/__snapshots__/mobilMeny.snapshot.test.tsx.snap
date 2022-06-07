@@ -4,11 +4,11 @@ exports[`MobilMeny 1`] = `
 <Provider
   store={
     Object {
+      "@@observable": [Function],
       "dispatch": [Function],
       "getState": [Function],
       "replaceReducer": [Function],
       "subscribe": [Function],
-      Symbol(observable): [Function],
     }
   }
 >
@@ -20,7 +20,12 @@ exports[`MobilMeny 1`] = `
       menypunkter={
         Array [
           Object {
-            "component": [Function],
+            "component": Object {
+              "$$typeof": Symbol(react.memo),
+              "WrappedComponent": [Function],
+              "compare": null,
+              "type": [Function],
+            },
             "disabled": false,
             "exact": true,
             "tekstid": "naviger.send",
@@ -28,7 +33,12 @@ exports[`MobilMeny 1`] = `
             "urlparam": "/send-meldekort",
           },
           Object {
-            "component": [Function],
+            "component": Object {
+              "$$typeof": Symbol(react.memo),
+              "WrappedComponent": [Function],
+              "compare": null,
+              "type": [Function],
+            },
             "disabled": false,
             "tekstid": "sekundarmeny.tidligere",
             "tittel": "tidligereMeldekort",

@@ -86,10 +86,13 @@ class NavKnapp extends React.Component<Props> {
       this.props.resetInnsending();
       history.push(nestePath);
     } else {
-      nesteAktivtMeldekort !== undefined &&
-        nesteInnsendingstype !== undefined &&
-        this.props.resettAktivtMeldekort() &&
+      if (
+        nesteAktivtMeldekort !== undefined &&
+        nesteInnsendingstype !== undefined
+      ) {
+        this.props.resettAktivtMeldekort();
         this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
+      }
 
       let validert: boolean = true;
       if (typeof this.props.validering !== 'undefined') {

@@ -23,8 +23,6 @@ spec:
   prometheus:
     enabled: true
     path: meldekort/internal/metrics
-  vault:
-    enabled: true
   replicas:
     min: 2
     max: 4
@@ -36,11 +34,24 @@ spec:
     requests:
       cpu: 500m
       memory: 768Mi
+  envFrom:
+    - secret: {{ appName }}{{ dashEnv }}
+  env:
+    - name: NAV_DEKORATOREN_URL
+      value: '{{ navDekoratorenUrl }}'
+    - name: DISABLE_SENSU_METRICS
+      value: 'true'
+  accessPolicy:
+    outbound:
+      rules:
+        - application: meldekort-api{{ dashEnv }}
+      external:
+        - host: '{{ externalUrl }}'
 ---
 apiVersion: nais.io/v1
 kind: Alert
 metadata:
-  name: meldekort-frontend
+  name: {{ appName }}
   namespace: meldekort
   labels:
     team: meldekort
@@ -49,7 +60,7 @@ spec:
     slack:
       channel: '#{{ slackAlertChannel }}'
   alerts:
-    - alert: meldekort-frontend_applikasjonsinstanser nede
+    - alert: {{ appName }}_applikasjonsinstanser nede
       expr: kube_deployment_status_replicas_unavailable{deployment=~"meldekort-frontend.*"} > 0
       for: 2m
       description: >
@@ -59,7 +70,7 @@ spec:
             evt. kjør først `kubectl get pods -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for en oversikt over poddene.
             Sjekk også Kibana for eventuelle feil som er logget; query `application:\{{ $labels.deployment }} AND (level:Error OR level:Warning)`.
       severity: danger
-    - alert: meldekort-frontend_feil er logget
+    - alert: {{ appName }}_feil er logget
       expr: sum(increase(logd_messages_total{log_app=~"meldekort-frontend.*",log_level="Error"}[10m])) by (log_app, log_namespace) > 0
       for: 3m
       description: >

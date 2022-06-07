@@ -331,7 +331,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             onChange={() => this.settChecked()}
             checked={meldekortdetaljer.sporsmal.signatur}
             label={hentIntl().formatMessage({ id: 'utfylling.bekreftAnsvar' })}
-            feil={feilmelding === '' ? undefined : { feilmelding: feilmelding }}
+            feil={feilmelding !== ''}
           >
             <Normaltekst>
               <FormattedHTMLMessage

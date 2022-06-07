@@ -12,13 +12,14 @@ on:
         default: 'q0'
       bump_patch:
         description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
+        required: false
         default: ''
 
 env:
   REPONAME: ${{ github.event.repository.name }}
   APPNAME: ${{ github.event.repository.name }}-frontend
   ENVIRONMENT: ${{ github.event.inputs.environment }}
-  CLUSTER: dev-sbs
+  CLUSTER: dev-gcp
   NAIS_FILE: .nais/nais.yaml
   MAIN_BRANCH: refs/heads/master
 
@@ -32,7 +33,6 @@ jobs:
         run: |
           echo "Release skal kun bygges fra ${{ env.MAIN_BRANCH }} branch!"
           exit 1
-        continue-on-error: false
 
       - name: Set default environment for push
         if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
@@ -42,9 +42,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: '16'
           cache: 'npm'
 
       - name: Read version from package.json
@@ -106,7 +106,7 @@ jobs:
           docker push ${{ steps.setVars.outputs.image }}
 
       - name: Deploy to dev
-        if: always() && (env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH))
+        if: env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
