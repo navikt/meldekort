@@ -43,7 +43,7 @@ const Environment = () => {
   }
   return {
     dittNavUrl: 'https://www.nav.no/person/dittnav',
-    apiUrl: 'https://www.nav.no/meldekort/meldekort-api/api/',
+    apiUrl: 'https://meldekort-api.nav.no/meldekort/meldekort-api/api/',
     loginUrl: 'https://meldekort-api.nav.no/oauth2/login',
     logoutUrl: 'https://meldekort-api.nav.no/oauth2/logout',
     amplitudeUrl: 'amplitude.nav.no/collect',
