@@ -1,7 +1,6 @@
 dashEnv: ""
 slackAlertChannel: team-meldeplikt-alerts
 ingresses:
-  - "https://meldekort.nais.oera.no"
-  - "https://www.nav.no/meldekort"
+  - "https://meldekort-frontend.nav.no"
 navDekoratorenUrl: "https://www.nav.no/dekoratoren"
 externalUrl: "www.nav.no"
