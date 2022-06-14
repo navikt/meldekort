@@ -80,7 +80,7 @@ jobs:
           mv package.json.new package.json
 
       - name: Install npm packages
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build application
         run: npm run build
