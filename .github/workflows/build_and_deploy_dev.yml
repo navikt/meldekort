@@ -45,7 +45,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '17'
-          cache: 'npm'
 
       - name: Read version from package.json
         id: packageVersion
