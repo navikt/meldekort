@@ -27,7 +27,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
       const axiosResponse: AxiosResponse | undefined = action.payload.response;
       if (
         axiosResponse &&
-        axiosResponse.status !== undefined &&
+        axiosResponse.status != undefined &&
         axiosResponse.status === 401
       ) {
         downloadMessages(
@@ -51,7 +51,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
         ];
       } else if (
         axiosResponse &&
-        axiosResponse.status !== undefined &&
+        axiosResponse.status != undefined &&
         axiosResponse.status === 500
       ) {
         return [
@@ -62,7 +62,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
         ];
       } else if (
         axiosResponse &&
-        axiosResponse.status !== undefined &&
+        axiosResponse.status != undefined &&
         axiosResponse.status >= 400
       ) {
         return [

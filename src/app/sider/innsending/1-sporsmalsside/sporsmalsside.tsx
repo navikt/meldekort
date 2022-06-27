@@ -40,6 +40,7 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { updateIntl } from 'react-intl-redux';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -47,6 +48,7 @@ interface MapStateToProps {
   sendteMeldekort: SendtMeldekort[];
   infomelding: Infomelding;
   locale: string;
+  loading: boolean;
 }
 
 interface MapDispatchToProps {
@@ -365,7 +367,16 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       aktivtMeldekort,
       sendteMeldekort,
       infomelding,
+      loading,
     } = this.props;
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     const typeYtelsePostfix = finnTypeYtelsePostfix(
       aktivtMeldekort.meldegruppe
@@ -483,6 +494,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     sendteMeldekort: state.meldekort.sendteMeldekort,
     infomelding: state.meldekort.infomelding,
     locale: state.intl.locale,
+    loading: state.ui.loading,
   };
 };
 
@@ -502,6 +514,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settLocale: (locale: string, from: Date) => {
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
+        dispatch(UiActions.stopLoading());
       });
     },
   };

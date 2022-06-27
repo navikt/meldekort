@@ -35,6 +35,7 @@ import { WeblogicActions } from '../../../actions/weblogic';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { downloadMessages } from '../../../utils/intlUtil';
 import { updateIntl } from 'react-intl-redux';
+import { UiActions } from '../../../actions/ui';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -45,6 +46,7 @@ interface MapStateToProps {
   personInfo: PersonInfo;
   weblogic: WeblogicPing;
   locale: string;
+  loading: boolean;
 }
 
 interface MapDispatchToProps {
@@ -174,7 +176,8 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
           </div>
         </section>
         <section className="seksjon">
-          {meldekortdetaljer.meldekortdetaljer.id !== '' ? (
+          {meldekortdetaljer.meldekortdetaljer.id !== '' &&
+          !this.props.loading ? (
             <Meldekortdetaljer
               aktivtMeldekort={aktivtMeldekort}
               meldekortdetaljer={meldekortdetaljer.meldekortdetaljer}
@@ -240,13 +243,16 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     personInfo: state.personInfo.personInfo,
     weblogic: state.weblogic,
     locale: state.intl.locale,
+    loading: state.ui.loading,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    hentMeldekortdetaljer: () =>
-      dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request()),
+    hentMeldekortdetaljer: () => {
+      dispatch(UiActions.startLoading());
+      dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request());
+    },
     resettMeldekortdetaljer: () =>
       dispatch(MeldekortdetaljerActions.resettMeldekortdetaljer()),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
@@ -256,6 +262,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settLocale: (locale: string, from: Date) => {
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
+        dispatch(UiActions.stopLoading());
       });
     },
   };

@@ -9,7 +9,7 @@ import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
 import { Locale } from '../../reducers/localesReducer';
 import { Konstanter } from '../../utils/consts';
 import { downloadMessages } from '../../utils/intlUtil';
-import { formaterDatoIso } from '../../utils/dates';
+import { UiActions } from '../../actions/ui';
 
 const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
   return {
@@ -22,6 +22,8 @@ const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
   return {
+    startLoading: () => dispatch(UiActions.startLoading()),
+    stopLoading: () => dispatch(UiActions.stopLoading()),
     updateIntl: (locale: any, messages: any) =>
       dispatch(updateIntl({ locale, messages })),
   };
@@ -55,6 +57,8 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
   const { currentLocale, locales, aktivtMeldekort } = props;
 
   const handleSelection = (value: JSX.Element[]) => {
+    props.startLoading();
+
     const newLocale: string = value[1].key
       ? value[1].key.toString()
       : Konstanter.defaultLocale;
@@ -65,6 +69,7 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
         : Konstanter.defaultFromDate
     ).then((messages: object) => {
       props.updateIntl(newLocale, messages);
+      props.stopLoading();
     });
   };
 

@@ -10,6 +10,7 @@ export interface UIState {
   modal: IModal;
   baksystemFeilmelding: BaksystemFeilmelding;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
+  loading: boolean;
 }
 
 const initialState: UIState = {
@@ -24,6 +25,7 @@ const initialState: UIState = {
   ingenTidligereMeldekort: {
     harTidligereMeldekort: true,
   },
+  loading: false,
 };
 
 const uiReducer = (
@@ -55,6 +57,16 @@ const uiReducer = (
       return {
         ...state,
         ingenTidligereMeldekort: action.payload,
+      };
+    case getType(UiActions.startLoading):
+      return {
+        ...state,
+        loading: true,
+      };
+    case getType(UiActions.stopLoading):
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;
