@@ -3,7 +3,7 @@
 exports[`EkspanderbartInnhold 1`] = `
 <div
   aria-hidden={true}
-  className="ReactCollapse--collapse"
+  className="ekspanderbartInnhold"
   style={
     Object {
       "height": "0px",
@@ -11,9 +11,7 @@ exports[`EkspanderbartInnhold 1`] = `
     }
   }
 >
-  <div
-    className="ReactCollapse--content"
-  >
+  <div>
     <div
       aria-live="off"
     >
