@@ -24,7 +24,7 @@
     "@types/redux-logger": "^3.0.7",
     "@types/redux-persist-transform-encrypt": "^2.0.1",
     "amplitude-js": "7.4.1",
-    "axios": "^0.21.3",
+    "axios": "^0.27.2",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "be-pretty": "^0.9.3",
