@@ -30,6 +30,8 @@ const handterFeiletApiKall: AppEpic = action$ =>
         axiosResponse.status != undefined &&
         axiosResponse.status === 401
       ) {
+        UiActions.startLoading();
+
         downloadMessages(
           Konstanter.defaultLocale,
           Konstanter.defaultFromDate
@@ -38,6 +40,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
             locale: Konstanter.defaultLocale,
             messages: messages,
           });
+          UiActions.stopLoading();
         });
 
         return [

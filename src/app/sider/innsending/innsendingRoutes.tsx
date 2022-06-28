@@ -127,11 +127,11 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
-    settMeldekortId: (meldekortId: number) => {
-      dispatch(UiActions.startLoading());
-      dispatch(InnsendingActions.leggTilMeldekortId(meldekortId));
-    },
+    settMeldekortId: (meldekortId: number) =>
+      dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
     settLocale: (locale: string, from: Date) => {
+      dispatch(UiActions.startLoading());
+
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
         dispatch(UiActions.stopLoading());

@@ -512,6 +512,8 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
     settLocale: (locale: string, from: Date) => {
+      dispatch(UiActions.startLoading());
+
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
         dispatch(UiActions.stopLoading());

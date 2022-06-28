@@ -250,7 +250,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     hentMeldekortdetaljer: () => {
-      dispatch(UiActions.startLoading());
       dispatch(MeldekortdetaljerActions.hentMeldekortdetaljer.request());
     },
     resettMeldekortdetaljer: () =>
@@ -260,6 +259,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settLocale: (locale: string, from: Date) => {
+      dispatch(UiActions.startLoading());
+
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
         dispatch(UiActions.stopLoading());
