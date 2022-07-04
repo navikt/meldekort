@@ -18,6 +18,7 @@ import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
 import { updateIntl } from 'react-intl-redux';
 import { downloadMessages } from '../../utils/intlUtil';
+import { UiActions } from '../../actions/ui';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -40,7 +41,7 @@ type InnsendingRoutesProps = RouteComponentProps &
   MapStateToProps &
   MapDispatchToProps;
 
-class InnsendingRoutes extends React.Component<InnsendingRoutesProps> {
+class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
   settMeldekortIdBasertPaInnsendingstype = () => {
     const {
       hentKorrigertId,
@@ -129,8 +130,11 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
     settLocale: (locale: string, from: Date) => {
+      dispatch(UiActions.startLoading());
+
       downloadMessages(locale, from).then((messages: object) => {
         dispatch(updateIntl({ locale: locale, messages: messages }));
+        dispatch(UiActions.stopLoading());
       });
     },
     hentKorrigertId: () =>

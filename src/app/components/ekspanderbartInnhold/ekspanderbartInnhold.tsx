@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import { Collapse } from 'react-collapse';
 
 export interface OwnProps {
@@ -35,9 +34,11 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
   return (
     <Collapse
       isOpened={erApen}
-      className={classNames('ekspanderbartInnhold', {
-        'ekspanderbartInnhold--apen': erApen,
-      })}
+      theme={{
+        collapse: erApen
+          ? 'ekspanderbartInnhold ekspanderbartInnhold--apen'
+          : 'ekspanderbartInnhold',
+      }}
     >
       {content}
     </Collapse>
