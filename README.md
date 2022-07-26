@@ -33,7 +33,7 @@ Interne henvendelser kan sendes via Slack i kanalen #team-arbeid / #meldekort
 OBS! Man bør ha minst npm versjon 7 siden package-lock.json er på lockfileVersion 2 nå.
 
 ### Start applikasjonen lokalt
-1. Last ned npm-pakker med `npm install`.
+1. Last ned npm-pakker med `npm install --legacy-peer-deps`.
 2. Kjør `npm start`. Appen starter da på [http://localhost:3000](http://localhost:3000).
 3. Hvis man vil kjøre appen i mock-modus (uten meldekort-api kjørende lokalt) starter man appen med `npm run start:mock`
 

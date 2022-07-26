@@ -38,7 +38,7 @@ import {
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -67,7 +67,7 @@ type KvitteringsProps = RouteComponentProps &
   MapDispatchToProps &
   MapStateToProps;
 
-class Kvittering extends React.Component<KvitteringsProps> {
+class Kvittering extends React.Component<KvitteringsProps, {}> {
   componentDidMount() {
     this.props.hentPersonInfo();
     scrollTilElement(undefined, 'auto');
@@ -85,6 +85,11 @@ class Kvittering extends React.Component<KvitteringsProps> {
       meldegruppe: this.props.aktivtMeldekort?.meldegruppe || 'UKJENT',
       innsendingstype: this.props.innsendingstype || 'UKJENT',
     });
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js';
+    document.body.appendChild(script);
   }
 
   returnerPropsVerdier = (): PropsVerdier => {
@@ -262,7 +267,11 @@ class Kvittering extends React.Component<KvitteringsProps> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    return this.props.personInfo.personId !== 0 ? (
+    const { aktivtMeldekort, personInfo, person } = this.props;
+    let isAAP =
+      finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe) === TypeYtelse.AAP;
+
+    return personInfo.personId !== 0 ? (
       <main>
         {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
@@ -291,14 +300,23 @@ class Kvittering extends React.Component<KvitteringsProps> {
               className={'navigasjonsknapp'}
             />
             <PrintKnapp
-              person={this.props.person}
-              personInfo={this.props.personInfo}
+              person={person}
+              personInfo={personInfo}
               erKvittering={true}
               innholdRenderer={this.innhold}
               prerenderInnhold={true}
             />
           </div>
         </section>
+        {isAAP ? (
+          <div
+            data-uxsignals-embed="study-v8t9k2rf87"
+            style={{ width: '100%' }}
+            data-uxsignals-mode={Environment().testEnv ? 'demo' : ''}
+          ></div>
+        ) : (
+          ''
+        )}
       </main>
     ) : (
       <div className="meldekort-spinner">
