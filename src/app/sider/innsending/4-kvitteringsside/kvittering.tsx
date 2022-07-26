@@ -226,11 +226,23 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     nesteInnsendingstype?: Innsendingstyper
   ) => {
     const { innsendingstype, innsending, aktivtMeldekort } = this.props;
+    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+    const isAAP = typeYtelse === TypeYtelse.AAP;
+
     return (
       <>
         <AlertStripe type={'suksess'} className="alertSendt noPrint">
           <FormattedMessage id={'overskrift.meldekort.sendt'} />
         </AlertStripe>
+        {isAAP ? (
+          <div
+            data-uxsignals-embed="study-v8t9k2rf87"
+            style={{ width: '100%' }}
+            data-uxsignals-mode={Environment().testEnv ? 'demo' : ''}
+          ></div>
+        ) : (
+          ''
+        )}
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel>
             <FormattedMessage id="overskrift.steg4" />
@@ -244,9 +256,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={innsending.meldekortdetaljer}
-            typeYtelsePostfix={finnTypeYtelsePostfix(
-              aktivtMeldekort.meldegruppe
-            )}
+            typeYtelsePostfix={typeYtelse}
           />
         </section>
         {innsendingstype === Innsendingstyper.INNSENDING &&
@@ -267,9 +277,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    const { aktivtMeldekort, personInfo, person } = this.props;
-    let isAAP =
-      finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe) === TypeYtelse.AAP;
+    const { personInfo, person } = this.props;
 
     return personInfo.personId !== 0 ? (
       <main>
@@ -308,15 +316,6 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
             />
           </div>
         </section>
-        {isAAP ? (
-          <div
-            data-uxsignals-embed="study-v8t9k2rf87"
-            style={{ width: '100%' }}
-            data-uxsignals-mode={Environment().testEnv ? 'demo' : ''}
-          ></div>
-        ) : (
-          ''
-        )}
       </main>
     ) : (
       <div className="meldekort-spinner">
