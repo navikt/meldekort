@@ -52,7 +52,7 @@ export enum KnappTyper {
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 
-class NavKnapp extends React.Component<Props> {
+class NavKnapp extends React.Component<Props, {}> {
   harNestePathInnsending = (nestePathParams: string[]) => {
     return (
       nestePathParams[nestePathParams.length - 1] ===

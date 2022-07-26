@@ -83,10 +83,8 @@ const innsendingReducer = (
       return { ...state, valideringsResultat: undefined };
 
     case getType(InnsendingActions.hentKorrigertId.success):
-      return {
-        ...state,
-        korrigertMeldekortId: action.payload,
-      };
+      return { ...state, korrigertMeldekortId: action.payload };
+
     case getType(InnsendingActions.oppdaterMeldekortdetaljer):
       return { ...state, meldekortdetaljer: action.payload };
 
@@ -97,11 +95,7 @@ const innsendingReducer = (
       return { ...state, begrunnelse: action.payload };
 
     case getType(InnsendingActions.settValideringsresultat):
-      return {
-        ...state,
-        ...action.payload,
-        valideringsResultat: action.payload,
-      };
+      return { ...state, valideringsResultat: action.payload };
 
     case getType(InnsendingActions.kontrollerMeldekort.success):
       return { ...state, valideringsResultat: action.payload };

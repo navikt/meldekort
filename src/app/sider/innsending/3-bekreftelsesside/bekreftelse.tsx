@@ -217,9 +217,16 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer
       .sporsmal.signatur;
     if (detaljer.meldekortdetaljer.sporsmal.signatur) {
-      this.setState({ feilmelding: '' });
+      this.setState(prevState => ({
+        ...prevState,
+        feilmelding: '',
+      }));
     }
-    this.setState({ meldekortdetaljer: detaljer });
+
+    this.setState(prevState => ({
+      ...prevState,
+      meldekortdetaljer: detaljer,
+    }));
   };
 
   valider = (): boolean => {
@@ -227,12 +234,16 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     let sign = this.state.meldekortdetaljer.meldekortdetaljer.sporsmal.signatur;
 
     if (!sign) {
-      this.setState({
+      this.setState(prevState => ({
+        ...prevState,
         feilmelding: hentIntl().formatMessage({ id: 'utfylling.bekreft.feil' }),
-      });
+      }));
       scrollTilElement('periodebanner');
     } else {
-      this.setState({ senderMeldekort: true });
+      this.setState(prevState => ({
+        ...prevState,
+        senderMeldekort: true,
+      }));
       let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
       this.props.oppdaterMeldekortdetaljer(
         this.state.meldekortdetaljer.meldekortdetaljer
@@ -259,7 +270,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       this.state.senderMeldekort
     ) {
       scrollTilElement(undefined, 'auto');
-      this.setState({ senderMeldekort: false });
+      this.setState(prevState => ({
+        ...prevState,
+        senderMeldekort: false,
+      }));
     }
   }
 

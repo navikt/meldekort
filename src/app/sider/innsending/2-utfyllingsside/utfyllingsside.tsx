@@ -162,12 +162,14 @@ class Utfyllingsside extends React.Component<
       });
     }
 
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       feilIDagerVertikal: feil,
       feilKombinasjonSykArbeid: feilKombinasjonSykArbeid,
       feilKombinasjonFravaerArbeid: feilKombinasjonFravaerArbeid,
       feilKombinasjonFravaerSyk: feilKombinasjonFravaerSyk,
-    });
+    }));
+
     return feil.length === 0;
   };
 
@@ -198,11 +200,14 @@ class Utfyllingsside extends React.Component<
         }
       }
     });
-    this.setState({
+
+    this.setState(prevState => ({
+      ...prevState,
       feilIDagerHorisontal: feil,
       feilIArbeidetTimerHeleHalve: feilIArbeidetTimerHeleHalve,
       feilIArbeidetTimer: feilIArbeidetTimer,
-    });
+    }));
+
     return feil.length === 0;
   };
 
@@ -238,12 +243,13 @@ class Utfyllingsside extends React.Component<
       }
     });
 
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       feilIArbeid: { feil: !arbeidet },
       feilIKurs: { feil: !kurs },
       feilISyk: { feil: !syk },
       feilIFerie: { feil: !ferie },
-    });
+    }));
 
     let resultat =
       arbeidet && kurs && syk && ferie && feilITimer && feilIVertikal;
