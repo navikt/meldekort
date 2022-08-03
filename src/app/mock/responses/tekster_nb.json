@@ -97,6 +97,7 @@
   "meldekort.status.sendt": "Kortet er sendt ut",
   "meldekort.status.slett": "Vises ikke",
   "meldekort.status.vente": "Venter på annet kort",
+  "meldekort.status.ubeha": "Til behandling",
   "meldekort.type-AAP": "Automatisk utfylt kort",
   "meldekort.type.elektronisk": "Elektronisk kort",
   "meldekort.type.erstatning": "Erstatningskort",

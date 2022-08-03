@@ -27,6 +27,7 @@ it('mapKortStatusTilTekst', () => {
   expect(mapKortStatusTilTekst(KortStatus.FEIL)).toBe(manuell);
   expect(mapKortStatusTilTekst(KortStatus.OPPF)).toBe('Ikke i bruk');
   expect(mapKortStatusTilTekst(KortStatus.VENTE)).toBe('Venter på annet kort');
+  expect(mapKortStatusTilTekst(KortStatus.UBEHA)).toBe(behandling);
 });
 
 it('mapKortTypeTilTekst', () => {

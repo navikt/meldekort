@@ -1,33 +1,32 @@
 # Meldekort
-Meldekort er et webgrensesnitt for brukere å sende inn utfylte meldekort-skjema til NAV.
-Meldekort tilbyr påloggende arbeidssøkere å se sin meldekorthistorikk samt å fylle ut og sende inn meldekort.
+Meldekort er et webgrensesnitt for brukere til å fylle ut og sende inn meldekort til NAV.
+Meldekort tilbyr påloggende arbeidssøkere å se sin meldekorthistorikk, samt å fylle ut og sende inn meldekort.
 
 ## Dokumentasjon
 Dokumentasjon finnes i [Confluence](https://confluence.adeo.no/display/TA/Meldekort).
 Om Meldekort journalføring: https://confluence.adeo.no/pages/viewpage.action?pageId=431009242
 
 ## Tekster
-Denne appen har en mekanisme for tekstversjonering. Dvs. appen viser de versjonenne av tekstene som var gyldige i
-begynnelsen av meldeperioden til aktivt meldekort. Hvis meldekort ikke er valgt, viser appen de nyeste versjonene av
-tekstene.
+Denne appen har en mekanisme for tekstversjonering. Dvs. appen viser gjeldende versjon av tekstene som var gyldige i
+begynnelsen av meldeperioden til aktivt meldekort. Hvis meldekort ikke er valgt, viser appen den nyeste versjonen av
+tekstene. Tekstene er lagret i en DB og derfor må vi gå gjennom meldekort-api og meldekortservice for å nå dem.
 
-Tekstene er lagret i en DB og derfor må vi gå gjennom meldekort-api og meldekortservice for å nå dem.
-
-For å endre tekstene (eller opprette nye versjoner) må man endre fil R__recreate_texts.sql i meldekortservice og deploye
-meldekortservice på nytt.
-Dette gir mulighet å teste endringer i DEV/QA først og hindrer direkte endringer i prod DB.
+For å endre tekstene (eller opprette nye versjoner), må man endre fil R__recreate_texts.sql i meldekortservice og deploye
+meldekortservice på nytt. Dette gir mulighet for å teste endringer i DEV/QA først og hindrer direkte endringer i prod DB.
 
 OBS! Meldekort-frontend har også cache for tekstene (30 minutter), dvs. appen skal ikke prøve å hente tekstene med samme
 språk og gyldighetstid på nytt i løpet av 30 minutter.
 
 ## Henvendelser
-Spørsmål knyttet til koden eller prosjekt rettes mot:
+Spørsmål knyttet til koden eller prosjekt rettes til:
 
-* Geir Skjeret, geir.skjeret@nav.no
 * Igor Shuliakov, igor.shuliakov@nav.no
+* Audun Persson, audun.persson@nav.no
+* Petter Hannevold, petter.hannevold@nav.no
+* Mona Kjeldsrud, mona.kjeldsrud@nav.no
 
 ## For NAV-ansatte
-Interne henvendelser kan sendes via Slack i kanalen #team-arbeid / #meldekort
+Interne henvendelser kan sendes via Slack i kanalen #team-meldeplikt / #meldekort
 
 ## For utviklere
 OBS! Man bør ha minst npm versjon 7 siden package-lock.json er på lockfileVersion 2 nå.
