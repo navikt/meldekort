@@ -18,7 +18,7 @@ import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
 import { Konstanter } from '../utils/consts';
-import { downloadMessages } from '../utils/intlUtil';
+import { downloadMessagesAndCall } from '../utils/intlUtil';
 
 const handterFeiletApiKall: AppEpic = action$ =>
   action$.pipe(
@@ -30,18 +30,13 @@ const handterFeiletApiKall: AppEpic = action$ =>
         axiosResponse.status != undefined &&
         axiosResponse.status === 401
       ) {
-        UiActions.startLoading();
-
-        downloadMessages(
+        downloadMessagesAndCall(
           Konstanter.defaultLocale,
-          Konstanter.defaultFromDate
-        ).then((messages: object) => {
-          updateIntl({
-            locale: Konstanter.defaultLocale,
-            messages: messages,
-          });
-          UiActions.stopLoading();
-        });
+          Konstanter.defaultFromDate,
+          UiActions.startLoading,
+          UiActions.stopLoading,
+          updateIntl
+        );
 
         return [
           UiActions.visModal({

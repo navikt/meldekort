@@ -4,6 +4,8 @@ import { Konstanter } from './consts';
 import { fetchGet } from '../api/api';
 import Environment from './env';
 import { formaterDatoIso } from './dates';
+import { UiActions } from '../actions/ui';
+import { Dispatch } from 'redux';
 
 interface LocaleCache {
   label: string;
@@ -13,6 +15,51 @@ interface LocaleCache {
 }
 
 const localeCache = new Array<LocaleCache>();
+
+export const downloadMessagesAndDispatch = (
+  locale: string,
+  from: Date,
+  dispatch: Dispatch,
+  updateIntl: Function
+) => {
+  dispatch(UiActions.startLoading());
+
+  downloadMessages(locale, from)
+    .then((messages: object) => {
+      dispatch(updateIntl({ locale: locale, messages: messages }));
+      dispatch(UiActions.stopLoading());
+    })
+    .catch(error => {
+      console.log(error);
+      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+    });
+};
+
+export const downloadMessagesAndCall = (
+  locale: string,
+  from: Date,
+  startLoading: Function,
+  stopLoading: Function,
+  updateIntl: Function
+) => {
+  startLoading();
+
+  downloadMessages(locale, from)
+    .then((messages: object) => {
+      updateIntl({ locale: locale, messages: messages });
+      stopLoading();
+    })
+    .catch(error => {
+      console.log(error);
+      downloadMessagesAndCall(
+        locale,
+        from,
+        startLoading,
+        stopLoading,
+        updateIntl
+      );
+    });
+};
 
 export const downloadMessages = async (sprak: string, fraDato: Date) => {
   const fraDatoFormatert = formaterDatoIso(fraDato);
@@ -56,7 +103,9 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
           // Bruker er ikke innlogget, sender ham til innogging
           window.location.assign(`${Environment().loginUrl}`);
         } else {
-          reject('Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.');
+          reject(
+            'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.'
+          );
         }
       });
   });

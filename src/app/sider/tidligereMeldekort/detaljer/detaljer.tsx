@@ -33,9 +33,8 @@ import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortR
 import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { downloadMessages } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
 import { updateIntl } from 'react-intl-redux';
-import { UiActions } from '../../../actions/ui';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -259,12 +258,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settLocale: (locale: string, from: Date) => {
-      dispatch(UiActions.startLoading());
-
-      downloadMessages(locale, from).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-        dispatch(UiActions.stopLoading());
-      });
+      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
     },
   };
 };

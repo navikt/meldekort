@@ -17,8 +17,7 @@ import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
 import { updateIntl } from 'react-intl-redux';
-import { downloadMessages } from '../../utils/intlUtil';
-import { UiActions } from '../../actions/ui';
+import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -71,8 +70,8 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
     let noPrint =
       pathname === `/send-meldekort/innsending/kvittering` ||
       pathname === `/tidligere-meldekort/detaljer/korriger/kvittering`
-        ? `noPrint`
-        : undefined;
+        ? 'noPrint'
+        : '';
 
     return this.props.innsending.innsendingstype === null ? (
       <Redirect to={'/om-meldekort'} />
@@ -130,12 +129,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
     settLocale: (locale: string, from: Date) => {
-      dispatch(UiActions.startLoading());
-
-      downloadMessages(locale, from).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-        dispatch(UiActions.stopLoading());
-      });
+      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
     },
     hentKorrigertId: () =>
       dispatch(InnsendingActions.hentKorrigertId.request()),
