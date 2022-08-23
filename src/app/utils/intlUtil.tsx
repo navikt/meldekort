@@ -23,6 +23,7 @@ export const downloadMessagesAndDispatch = (
   updateIntl: Function
 ) => {
   dispatch(UiActions.startLoading());
+  updateIntl({ locale: locale, messages: {} });
 
   downloadMessages(locale, from)
     .then((messages: object) => {
@@ -43,6 +44,7 @@ export const downloadMessagesAndCall = (
   updateIntl: Function
 ) => {
   startLoading();
+  updateIntl({ locale: locale, messages: {} });
 
   downloadMessages(locale, from)
     .then((messages: object) => {
