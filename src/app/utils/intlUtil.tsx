@@ -62,7 +62,7 @@ export const downloadMessagesAndCall = (
     });
 };
 
-export const downloadMessages = async (sprak: string, fraDato: Date) => {
+export const downloadMessages = (sprak: string, fraDato: Date) => {
   const fraDatoFormatert = formaterDatoIso(fraDato);
 
   const cachedLocale = localeCache.find(
@@ -77,8 +77,8 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
     });
   }
 
-  return await new Promise((resolve, reject) => {
-    fetchGet(
+  return new Promise(async (resolve, reject) => {
+    await fetchGet(
       Konstanter.hentAlleTekster +
         '?sprak=' +
         sprak +
