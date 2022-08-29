@@ -44,7 +44,6 @@ export const downloadMessagesAndCall = (
   updateIntl: Function
 ) => {
   startLoading();
-  updateIntl({ locale: locale, messages: {} });
 
   downloadMessages(locale, from)
     .then((messages: object) => {
@@ -78,7 +77,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
     });
   }
 
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     fetchGet(
       Konstanter.hentAlleTekster +
         '?sprak=' +
