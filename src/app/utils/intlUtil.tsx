@@ -68,6 +68,8 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
+  processing = true;
+
   const fraDatoFormatert = formaterDatoIso(fraDato);
 
   const cachedLocale = localeCache.find(
