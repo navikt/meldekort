@@ -29,11 +29,13 @@ export const downloadMessagesAndDispatch = (
   downloadMessages(locale, from)
     .then((messages: object) => {
       dispatch(updateIntl({ locale: locale, messages: messages }));
-      dispatch(UiActions.stopLoading());
     })
     .catch(error => {
       console.log(error);
       downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+    })
+    .finally(() => {
+      dispatch(UiActions.stopLoading());
     });
 };
 
@@ -49,7 +51,6 @@ export const downloadMessagesAndCall = (
   downloadMessages(locale, from)
     .then((messages: object) => {
       updateIntl({ locale: locale, messages: messages });
-      stopLoading();
     })
     .catch(error => {
       console.log(error);
@@ -60,6 +61,9 @@ export const downloadMessagesAndCall = (
         stopLoading,
         updateIntl
       );
+    })
+    .finally(() => {
+      stopLoading();
     });
 };
 
@@ -79,12 +83,13 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   );
   const now = new Date().getTime();
   const validUntil = now + Konstanter.cachedLocaleValidity;
+
   if (cachedLocale && cachedLocale.validUntil >= now) {
+    processing = false;
     return cachedLocale.messages;
   }
 
   try {
-    console.log('START');
     let data = await fetchGet(
       Konstanter.hentAlleTekster +
         '?sprak=' +
@@ -92,7 +97,6 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
         '&fraDato=' +
         fraDatoFormatert
     );
-    console.log('FINISH');
 
     if (cachedLocale) {
       cachedLocale.messages = data;
@@ -106,11 +110,9 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
       });
     }
 
-    processing = false;
     return data;
   } catch (error) {
     console.log(error);
-    processing = false;
 
     if (
       error instanceof Error &&
@@ -121,6 +123,8 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
     } else {
       throw 'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.';
     }
+  } finally {
+    processing = false;
   }
 };
 

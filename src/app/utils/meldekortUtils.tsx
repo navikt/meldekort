@@ -44,7 +44,7 @@ export const erAktivtMeldekortGyldig = (
 export const erBrukerRegistrertIArena = (
   arbeidssokerStatus: string
 ): boolean => {
-  return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
+  return !(arbeidssokerStatus == null || arbeidssokerStatus === '');
 };
 
 export const harKortStatusOPPRellerSENDT = (meldekort: Meldekort) =>
@@ -73,25 +73,24 @@ export const hentMeldekortRaderFraPerson = (
 ): MeldekortRad[] => {
   let radliste: MeldekortRad[] = [];
 
-  if (innsendingsklareMeldekort !== null) {
-    for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
-      if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
-        if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
-          let rad: MeldekortRad = {
-            periode: hentUkePeriode(
-              innsendingsklareMeldekort[i].meldeperiode.fra,
-              innsendingsklareMeldekort[i].meldeperiode.til
-            ),
-            dato: hentDatoPeriode(
-              innsendingsklareMeldekort[i].meldeperiode.fra,
-              innsendingsklareMeldekort[i].meldeperiode.til
-            ),
-          };
-          radliste.push(rad);
-        }
+  for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
+    if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
+      if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
+        let rad: MeldekortRad = {
+          periode: hentUkePeriode(
+            innsendingsklareMeldekort[i].meldeperiode.fra,
+            innsendingsklareMeldekort[i].meldeperiode.til
+          ),
+          dato: hentDatoPeriode(
+            innsendingsklareMeldekort[i].meldeperiode.fra,
+            innsendingsklareMeldekort[i].meldeperiode.til
+          ),
+        };
+        radliste.push(rad);
       }
     }
   }
+
   return radliste;
 };
 
