@@ -16,6 +16,8 @@ interface LocaleCache {
 
 const localeCache = new Array<LocaleCache>();
 
+let processing = false;
+
 export const downloadMessagesAndDispatch = (
   locale: string,
   from: Date,
@@ -24,9 +26,7 @@ export const downloadMessagesAndDispatch = (
 ) => {
   dispatch(UiActions.startLoading());
 
-  new Promise(async () => {
-    return await downloadMessages(locale, from);
-  })
+  downloadMessages(locale, from)
     .then((messages: object) => {
       dispatch(updateIntl({ locale: locale, messages: messages }));
       dispatch(UiActions.stopLoading());
@@ -46,9 +46,7 @@ export const downloadMessagesAndCall = (
 ) => {
   startLoading();
 
-  new Promise(async () => {
-    return await downloadMessages(locale, from);
-  })
+  downloadMessages(locale, from)
     .then((messages: object) => {
       updateIntl({ locale: locale, messages: messages });
       stopLoading();
@@ -66,6 +64,10 @@ export const downloadMessagesAndCall = (
 };
 
 export const downloadMessages = async (sprak: string, fraDato: Date) => {
+  while (processing) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
   const fraDatoFormatert = formaterDatoIso(fraDato);
 
   const cachedLocale = localeCache.find(
@@ -101,9 +103,12 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
       });
     }
 
+    processing = false;
     return data;
   } catch (error) {
     console.log(error);
+    processing = false;
+
     if (
       error instanceof Error &&
       error.message === 'Request failed with status code 401'
