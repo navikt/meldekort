@@ -24,7 +24,9 @@ export const downloadMessagesAndDispatch = (
 ) => {
   dispatch(UiActions.startLoading());
 
-  downloadMessages(locale, from)
+  new Promise(async () => {
+    return await downloadMessages(locale, from);
+  })
     .then((messages: object) => {
       dispatch(updateIntl({ locale: locale, messages: messages }));
       dispatch(UiActions.stopLoading());
@@ -44,7 +46,9 @@ export const downloadMessagesAndCall = (
 ) => {
   startLoading();
 
-  downloadMessages(locale, from)
+  new Promise(async () => {
+    return await downloadMessages(locale, from);
+  })
     .then((messages: object) => {
       updateIntl({ locale: locale, messages: messages });
       stopLoading();
