@@ -23,7 +23,6 @@ export const downloadMessagesAndDispatch = (
   updateIntl: Function
 ) => {
   dispatch(UiActions.startLoading());
-  updateIntl({ locale: locale, messages: {} });
 
   downloadMessages(locale, from)
     .then((messages: object) => {
@@ -62,7 +61,7 @@ export const downloadMessagesAndCall = (
     });
 };
 
-export const downloadMessages = (sprak: string, fraDato: Date) => {
+export const downloadMessages = async (sprak: string, fraDato: Date) => {
   const fraDatoFormatert = formaterDatoIso(fraDato);
 
   const cachedLocale = localeCache.find(
@@ -72,44 +71,45 @@ export const downloadMessages = (sprak: string, fraDato: Date) => {
   const now = new Date().getTime();
   const validUntil = now + Konstanter.cachedLocaleValidity;
   if (cachedLocale && cachedLocale.validUntil >= now) {
-    return new Promise(resolve => {
-      resolve(cachedLocale.messages);
-    });
+    return cachedLocale.messages;
   }
 
-  return new Promise(async (resolve, reject) => {
-    await fetchGet(
+  try {
+    console.log('START');
+    let data = await fetchGet(
       Konstanter.hentAlleTekster +
         '?sprak=' +
         sprak +
         '&fraDato=' +
         fraDatoFormatert
-    )
-      .then(data => {
-        if (cachedLocale) {
-          cachedLocale.messages = data;
-          cachedLocale.validUntil = validUntil;
-        } else {
-          localeCache.push({
-            label: sprak,
-            fromDate: fraDatoFormatert,
-            messages: data,
-            validUntil: validUntil,
-          });
-        }
-        resolve(data);
-      })
-      .catch(error => {
-        if (error.message === 'Request failed with status code 401') {
-          // Bruker er ikke innlogget, sender ham til innogging
-          window.location.assign(`${Environment().loginUrl}`);
-        } else {
-          reject(
-            'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.'
-          );
-        }
+    );
+    console.log('FINISH');
+
+    if (cachedLocale) {
+      cachedLocale.messages = data;
+      cachedLocale.validUntil = validUntil;
+    } else {
+      localeCache.push({
+        label: sprak,
+        fromDate: fraDatoFormatert,
+        messages: data,
+        validUntil: validUntil,
       });
-  });
+    }
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    if (
+      error instanceof Error &&
+      error.message === 'Request failed with status code 401'
+    ) {
+      // Bruker er ikke innlogget, sender ham til innogging
+      window.location.assign(`${Environment().loginUrl}`);
+    } else {
+      throw 'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.';
+    }
+  }
 };
 
 export const hentIntl = () => {
