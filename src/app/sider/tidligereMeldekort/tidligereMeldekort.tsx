@@ -106,6 +106,9 @@ class TidligereMeldekort extends React.Component<Props, State> {
         key: 'periode',
         label: <FormattedMessage id="overskrift.periode" />,
         cell: function(row: any, column: any) {
+          if (row.meldekort.kortStatus === 'UBEHA') {
+            return (row.periode)
+          }
           return (
             <Komponentlenke
               lenketekst={row.periode}
