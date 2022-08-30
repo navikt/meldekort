@@ -28,7 +28,7 @@ import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortRedu
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
-import { HistoriskeMeldekortRad } from '../../types/meldekort';
+import {HistoriskeMeldekortRad, KortStatus} from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import {
   selectFeilmelding,
@@ -106,7 +106,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
         key: 'periode',
         label: <FormattedMessage id="overskrift.periode" />,
         cell: function(row: any, column: any) {
-          if (row.meldekort.kortStatus === 'UBEHA') {
+          if (row.meldekort.kortStatus === KortStatus.UBEHA) {
             return (row.periode)
           }
           return (
