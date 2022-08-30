@@ -64,6 +64,7 @@ export const downloadMessagesAndCall = (
 };
 
 export const downloadMessages = async (sprak: string, fraDato: Date) => {
+  // Make texts sync again!
   while (processing) {
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
