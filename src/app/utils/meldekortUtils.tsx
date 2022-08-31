@@ -124,7 +124,6 @@ export const nesteMeldekortKanSendes = (
   person: Person
 ): Date | null => {
   if (nesteAktivtMeldekort !== undefined) {
-    console.log('1');
     return nesteAktivtMeldekort.meldeperiode.kortKanSendesFra;
   } else if (
     innsendingstype === Innsendingstyper.INNSENDING &&
@@ -132,18 +131,6 @@ export const nesteMeldekortKanSendes = (
   ) {
     let mkListe = hentMeldekortSomIkkeKanSendesEnda(person.meldekort);
     if (mkListe.length > 0) {
-      console.log('2');
-      return mkListe[0].meldeperiode.kortKanSendesFra;
-    }
-  } else if (
-    innsendingstype === Innsendingstyper.ETTERREGISTRERING &&
-    person.etterregistrerteMeldekort.length > 0
-  ) {
-    let mkListe = hentMeldekortSomIkkeKanSendesEnda(
-      person.etterregistrerteMeldekort
-    );
-    if (mkListe.length > 0) {
-      console.log('3');
       return mkListe[0].meldeperiode.kortKanSendesFra;
     }
   }
