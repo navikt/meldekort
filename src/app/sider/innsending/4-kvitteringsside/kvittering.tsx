@@ -155,8 +155,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       }
     }
     return {
-      knappTekstid: 'tilbake.dittNav',
-      nestePath: Environment().dittNavUrl,
+      knappTekstid: 'tilbake.minSide',
+      nestePath: Environment().minSideUrl,
       nesteAktivtMeldekort: undefined,
       nesteInnsendingstype: undefined,
     };
@@ -284,7 +284,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
         {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
-            {nestePath === Environment().dittNavUrl ? (
+            {nestePath === Environment().minSideUrl ? (
               <a
                 className={'knapp navigasjonsknapp knapp--hoved'}
                 href={nestePath}

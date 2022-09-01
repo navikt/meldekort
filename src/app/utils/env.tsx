@@ -6,7 +6,7 @@ const Environment = () => {
     window.location.hostname.indexOf('meldekort-frontend-q0.dev.nav.no') > -1
   ) {
     return {
-      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
+      minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl:
         'https://meldekort-api-q0.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/login',
@@ -19,7 +19,7 @@ const Environment = () => {
     window.location.hostname.indexOf('meldekort-frontend-q1.dev.nav.no') > -1
   ) {
     return {
-      dittNavUrl: 'https://www-q1.nav.no/person/dittnav',
+      minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl:
         'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/',
       loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
@@ -30,7 +30,7 @@ const Environment = () => {
     };
   } else if (erMock()) {
     return {
-      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
+      minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl: '',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
@@ -38,7 +38,7 @@ const Environment = () => {
     };
   } else if (erLocalhost()) {
     return {
-      dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
+      minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
@@ -46,7 +46,7 @@ const Environment = () => {
     };
   }
   return {
-    dittNavUrl: 'https://www.nav.no/person/dittnav',
+    minSideUrl: 'https://www.nav.no/minside/',
     apiUrl: 'https://meldekort-api.nav.no/meldekort/meldekort-api/api/',
     loginUrl: 'https://meldekort-api.nav.no/oauth2/login',
     logoutUrl: 'https://meldekort-api.nav.no/oauth2/logout',
