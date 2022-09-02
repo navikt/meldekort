@@ -10,11 +10,7 @@ import {
   InnsendingState,
   Innsendingstyper,
 } from '../types/innsending';
-import {
-  meldekortSomKanSendes,
-  nesteMeldekortKanSendes,
-  returnerMeldekortListaMedFlereMeldekortIgjen,
-} from '../utils/meldekortUtils';
+import { nesteMeldekortKanSendes } from '../utils/meldekortUtils';
 import {
   formaterDato,
   formaterUkeOgDatoPeriode,
@@ -41,50 +37,13 @@ export function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   let { til, fra } = aktivtMeldekort.meldeperiode;
   let korrigering = innsendingstype === Innsendingstyper.KORRIGERING;
 
-  // Vi må finne neste meldekort først
-  let nesteAktivtMeldekort;
   const sendteMeldekort = Array.of(...state.meldekort.sendteMeldekort);
   sendteMeldekort.push(aktivtMeldekort);
-  const meldekort = meldekortSomKanSendes(person.meldekort, sendteMeldekort);
-  const etterregistrerteMeldekort = meldekortSomKanSendes(
-    person.etterregistrerteMeldekort,
-    sendteMeldekort
-  );
-  const harBrukerFlereMeldekort = meldekort.length > 0;
-  const harBrukerFlereEtterregistrerteMeldekort =
-    etterregistrerteMeldekort.length > 0;
-  const paramsForMeldekort = returnerMeldekortListaMedFlereMeldekortIgjen(
-    meldekort,
-    Innsendingstyper.INNSENDING,
-    etterregistrerteMeldekort,
-    Innsendingstyper.ETTERREGISTRERING
-  );
-  const paramsForEtterregistrerte = returnerMeldekortListaMedFlereMeldekortIgjen(
-    etterregistrerteMeldekort,
-    Innsendingstyper.ETTERREGISTRERING,
-    meldekort,
-    Innsendingstyper.INNSENDING
-  );
 
-  if (innsendingstype === Innsendingstyper.INNSENDING) {
-    if (harBrukerFlereMeldekort) {
-      nesteAktivtMeldekort = paramsForMeldekort.nesteAktivtMeldekort;
-    } else if (harBrukerFlereEtterregistrerteMeldekort) {
-      nesteAktivtMeldekort = paramsForEtterregistrerte.nesteAktivtMeldekort;
-    }
-  } else if (innsendingstype === Innsendingstyper.ETTERREGISTRERING) {
-    if (harBrukerFlereEtterregistrerteMeldekort) {
-      nesteAktivtMeldekort = paramsForEtterregistrerte.nesteAktivtMeldekort;
-    } else if (harBrukerFlereMeldekort) {
-      nesteAktivtMeldekort = paramsForMeldekort.nesteAktivtMeldekort;
-    }
-  }
-
-  // Nå kan vi finne ut når neste meldekort kan sendes inn
   const nesteDato = nesteMeldekortKanSendes(
-    nesteAktivtMeldekort,
-    innsendingstype,
-    person
+    person,
+    sendteMeldekort,
+    innsendingstype
   );
 
   const meldekortdager = innsending.meldekortdetaljer.sporsmal.meldekortDager;

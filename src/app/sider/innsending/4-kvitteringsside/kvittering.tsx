@@ -162,8 +162,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     };
   };
 
-  visOppsummeringsTekster = (nesteAktivtMeldekort: Meldekort | undefined) => {
-    const { personInfo, innsending, person } = this.props;
+  visOppsummeringsTekster = () => {
+    const { personInfo, innsending, person, sendteMeldekort } = this.props;
     const { meldekortdetaljerInnsending, innsendingstype } = innsending;
     const ukeOgPeriode = formaterUkeOgDatoPeriode(
       meldekortdetaljerInnsending!.meldeperiode.fra,
@@ -178,9 +178,9 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     );
 
     const nesteDato = nesteMeldekortKanSendes(
-      nesteAktivtMeldekort,
-      innsendingstype,
-      person
+      person,
+      sendteMeldekort.sendteMeldekort,
+      innsendingstype
     );
 
     return (
@@ -221,10 +221,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     );
   };
 
-  innhold = (
-    nesteAktivtMeldekort?: Meldekort,
-    nesteInnsendingstype?: Innsendingstyper
-  ) => {
+  innhold = (nesteInnsendingstype?: Innsendingstyper) => {
     const { innsendingstype, innsending, aktivtMeldekort } = this.props;
     const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
     const isAAP = typeYtelse === TypeYtelse.AAP;
@@ -249,9 +246,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        <section className="seksjon">
-          {this.visOppsummeringsTekster(nesteAktivtMeldekort)}
-        </section>
+        <section className="seksjon">{this.visOppsummeringsTekster()}</section>
         <section className="seksjon">
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
@@ -281,7 +276,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
 
     return personInfo.personId !== 0 ? (
       <main>
-        {this.innhold(nesteAktivtMeldekort, nesteInnsendingstype)}
+        {this.innhold(nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
             {nestePath === Environment().dittNavUrl ? (

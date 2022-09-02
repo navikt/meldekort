@@ -107,35 +107,48 @@ export const meldekortSomKanSendes = (
   });
 };
 
-const hentMeldekortSomIkkeKanSendesEnda = (
+export const meldekortSomIkkeKanSendesEnda = (
   meldekortListe: Meldekort[]
 ): Meldekort[] => {
   return meldekortListe.filter(
     meldekort =>
-      (meldekort.kortStatus === KortStatus.SENDT ||
-        meldekort.kortStatus === KortStatus.OPPRE) &&
+      meldekort.kortStatus === KortStatus.OPPRE &&
       !meldekort.meldeperiode.kanKortSendes
   );
 };
 
 export const nesteMeldekortKanSendes = (
-  nesteAktivtMeldekort: Meldekort | undefined,
-  innsendingstype: Innsendingstyper | null,
-  person: Person
+  person: Person,
+  sendteMeldekort: SendtMeldekort[],
+  innsendingstype: Innsendingstyper | null
 ): Date | null => {
-  if (nesteAktivtMeldekort !== undefined) {
-    return nesteAktivtMeldekort.meldeperiode.kortKanSendesFra;
-  } else if (
-    innsendingstype === Innsendingstyper.INNSENDING &&
-    person.meldekort.length > 0
+  if (
+    innsendingstype !== Innsendingstyper.ETTERREGISTRERING &&
+    innsendingstype !== Innsendingstyper.KORRIGERING
   ) {
-    let mkListe = hentMeldekortSomIkkeKanSendesEnda(person.meldekort);
+    let mkListe = meldekortSomKanSendes(person.meldekort, sendteMeldekort);
     if (mkListe.length > 0) {
+      // For å være helt sikker på at vi har det tidligste meldekortet først
+      mkListe.sort(compareFn);
+      return mkListe[0].meldeperiode.kortKanSendesFra;
+    }
+
+    mkListe = meldekortSomIkkeKanSendesEnda(person.meldekort);
+    if (mkListe.length > 0) {
+      // For å være helt sikker på at vi har det tidligste meldekortet først
+      mkListe.sort(compareFn);
       return mkListe[0].meldeperiode.kortKanSendesFra;
     }
   }
 
   return null;
+};
+
+const compareFn = (a: Meldekort, b: Meldekort): number => {
+  return (
+    b.meldeperiode.kortKanSendesFra.valueOf() -
+    a.meldeperiode.kortKanSendesFra.valueOf()
+  );
 };
 
 export const returnerMeldekortListaMedFlereMeldekortIgjen = (
