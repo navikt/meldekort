@@ -28,6 +28,7 @@ export const downloadMessagesAndDispatch = (
 
   downloadMessages(locale, from)
     .then((messages: object) => {
+      console.log(messages);
       dispatch(updateIntl({ locale: locale, messages: messages }));
     })
     .catch(error => {
@@ -50,6 +51,7 @@ export const downloadMessagesAndCall = (
 
   downloadMessages(locale, from)
     .then((messages: object) => {
+      console.log(messages);
       updateIntl({ locale: locale, messages: messages });
     })
     .catch(error => {
