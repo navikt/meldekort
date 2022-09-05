@@ -22,7 +22,8 @@ export const downloadMessagesAndDispatch = (
   locale: string,
   from: Date,
   dispatch: Dispatch,
-  updateIntl: Function
+  updateIntl: Function,
+  forceUpdate: Function | null
 ) => {
   dispatch(UiActions.startLoading());
 
@@ -30,10 +31,17 @@ export const downloadMessagesAndDispatch = (
     .then((messages: object) => {
       console.log(messages);
       dispatch(updateIntl({ locale: locale, messages: messages }));
+      if (forceUpdate) forceUpdate();
     })
     .catch(error => {
       console.log(error);
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+      downloadMessagesAndDispatch(
+        locale,
+        from,
+        dispatch,
+        updateIntl,
+        forceUpdate
+      );
     })
     .finally(() => {
       dispatch(UiActions.stopLoading());
