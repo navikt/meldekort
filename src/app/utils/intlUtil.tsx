@@ -6,6 +6,7 @@ import Environment from './env';
 import { formaterDatoIso } from './dates';
 import { UiActions } from '../actions/ui';
 import { Dispatch } from 'redux';
+import { updateIntl } from 'react-intl-redux';
 
 interface LocaleCache {
   label: string;
@@ -21,24 +22,22 @@ let processing = false;
 export const downloadMessagesAndDispatch = (
   locale: string,
   from: Date,
-  dispatch: Dispatch,
-  updateIntl: Function
+  dispatch1: Dispatch,
+  updateIntl1: Function
 ) => {
-  dispatch(UiActions.startLoading());
+  store.dispatch(UiActions.startLoading());
 
   downloadMessages(locale, from)
     .then((messages: object) => {
       console.log(messages);
-      dispatch(
-        updateIntl({ locale: locale, messages: messages, key: Date.now() })
-      );
+      store.dispatch(updateIntl({ locale: locale, messages: messages }));
     })
     .catch(error => {
       console.log(error);
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+      downloadMessagesAndDispatch(locale, from, dispatch1, updateIntl1);
     })
     .finally(() => {
-      dispatch(UiActions.stopLoading());
+      store.dispatch(UiActions.stopLoading());
     });
 };
 
