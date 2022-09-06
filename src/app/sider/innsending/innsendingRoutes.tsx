@@ -58,7 +58,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
   componentDidMount() {
     const { settLocale, aktivtMeldekort, locale } = this.props;
     this.settMeldekortIdBasertPaInnsendingstype();
-    // settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
   }
 
   render() {
