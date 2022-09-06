@@ -15,7 +15,6 @@ import { obsFeilmeldingContent } from '../components/feil/obsFeilmeldingContent'
 import { PersonActions } from '../actions/person';
 import { PersonStatusActions } from '../actions/personStatus';
 import { UiActions } from '../actions/ui';
-import { updateIntl } from 'react-intl-redux';
 import { fetchInfomelding } from '../api/api';
 import { Konstanter } from '../utils/consts';
 import { downloadMessagesAndCall } from '../utils/intlUtil';
@@ -32,10 +31,7 @@ const handterFeiletApiKall: AppEpic = action$ =>
       ) {
         downloadMessagesAndCall(
           Konstanter.defaultLocale,
-          Konstanter.defaultFromDate,
-          UiActions.startLoading,
-          UiActions.stopLoading,
-          updateIntl
+          Konstanter.defaultFromDate
         );
 
         return [

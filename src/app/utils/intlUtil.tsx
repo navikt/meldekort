@@ -5,7 +5,6 @@ import { fetchGet } from '../api/api';
 import Environment from './env';
 import { formaterDatoIso } from './dates';
 import { UiActions } from '../actions/ui';
-import { Dispatch } from 'redux';
 import { updateIntl } from 'react-intl-redux';
 
 interface LocaleCache {
@@ -19,36 +18,26 @@ const localeCache = new Array<LocaleCache>();
 
 let processing = false;
 
-export const downloadMessagesAndDispatch = (
-  locale: string,
-  from: Date,
-  dispatch1: Dispatch,
-  updateIntl1: Function
-) => {
+export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
   store.dispatch(UiActions.startLoading());
 
   downloadMessages(locale, from)
     .then((messages: object) => {
       console.log(messages);
+      store.dispatch(updateIntl({ locale: 'nn', messages: {} }));
       store.dispatch(updateIntl({ locale: locale, messages: messages }));
     })
     .catch(error => {
       console.log(error);
-      downloadMessagesAndDispatch(locale, from, dispatch1, updateIntl1);
+      downloadMessagesAndDispatch(locale, from);
     })
     .finally(() => {
       store.dispatch(UiActions.stopLoading());
     });
 };
 
-export const downloadMessagesAndCall = (
-  locale: string,
-  from: Date,
-  startLoading: Function,
-  stopLoading: Function,
-  updateIntl: Function
-) => {
-  startLoading();
+export const downloadMessagesAndCall = (locale: string, from: Date) => {
+  UiActions.startLoading();
 
   downloadMessages(locale, from)
     .then((messages: object) => {
@@ -57,16 +46,10 @@ export const downloadMessagesAndCall = (
     })
     .catch(error => {
       console.log(error);
-      downloadMessagesAndCall(
-        locale,
-        from,
-        startLoading,
-        stopLoading,
-        updateIntl
-      );
+      downloadMessagesAndCall(locale, from);
     })
     .finally(() => {
-      stopLoading();
+      UiActions.stopLoading();
     });
 };
 

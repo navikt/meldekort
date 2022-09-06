@@ -34,7 +34,6 @@ import { WeblogicPing } from '../../../types/weblogic';
 import { WeblogicActions } from '../../../actions/weblogic';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
-import { updateIntl } from 'react-intl-redux';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -258,7 +257,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settLocale: (locale: string, from: Date) => {
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+      downloadMessagesAndDispatch(locale, from);
     },
   };
 };

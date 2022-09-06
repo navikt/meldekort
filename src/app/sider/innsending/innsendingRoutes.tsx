@@ -16,7 +16,6 @@ import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
-import { updateIntl } from 'react-intl-redux';
 import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
 
 interface MapStateToProps {
@@ -129,7 +128,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
     settLocale: (locale: string, from: Date) => {
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+      downloadMessagesAndDispatch(locale, from);
     },
     hentKorrigertId: () =>
       dispatch(InnsendingActions.hentKorrigertId.request()),

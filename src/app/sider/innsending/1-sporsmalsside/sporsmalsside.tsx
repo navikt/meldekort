@@ -39,7 +39,6 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { updateIntl } from 'react-intl-redux';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
@@ -512,7 +511,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
     settLocale: (locale: string, from: Date) => {
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
+      downloadMessagesAndDispatch(locale, from);
     },
   };
 };
