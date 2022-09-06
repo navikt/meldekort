@@ -40,7 +40,6 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { IntlState } from 'react-intl-redux';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -48,7 +47,8 @@ interface MapStateToProps {
   sendteMeldekort: SendtMeldekort[];
   infomelding: Infomelding;
   loading: boolean;
-  intlState: IntlState;
+  locale: string;
+  messages: any;
 }
 
 interface MapDispatchToProps {
@@ -337,13 +337,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       aktivtMeldekort,
       hentInfomelding,
       settLocale,
-      intlState,
+      locale,
       innsending,
       oppdaterSvar,
     } = this.props;
-    console.log(intlState.locale);
+    console.log(locale);
     console.log(aktivtMeldekort.meldeperiode.fra);
-    // settLocale(intlState.locale, aktivtMeldekort.meldeperiode.fra);
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
     scrollTilElement(undefined, 'auto');
     hentInfomelding();
@@ -496,7 +496,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     sendteMeldekort: state.meldekort.sendteMeldekort,
     infomelding: state.meldekort.infomelding,
     loading: state.ui.loading,
-    intlState: state.intl,
+    locale: state.intl.locale,
+    messages: state.intl.messages,
   };
 };
 
