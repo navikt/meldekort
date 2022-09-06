@@ -6,7 +6,6 @@ import Environment from './env';
 import { formaterDatoIso } from './dates';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
-import { Dispatch } from 'redux';
 
 interface LocaleCache {
   label: string;
