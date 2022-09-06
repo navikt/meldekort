@@ -341,6 +341,8 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       innsending,
       oppdaterSvar,
     } = this.props;
+    console.log(intlState.locale);
+    console.log(aktivtMeldekort.meldeperiode.fra);
     settLocale(intlState.locale, aktivtMeldekort.meldeperiode.fra);
 
     scrollTilElement(undefined, 'auto');
