@@ -24,7 +24,6 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
 
   downloadMessages(locale, from)
     .then((messages: object) => {
-      console.log(messages);
       store.dispatch(updateIntl({ locale: locale, messages: messages }));
       console.log(store.getState());
     })

@@ -40,14 +40,15 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { IntlState } from 'react-intl-redux';
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
   sendteMeldekort: SendtMeldekort[];
   infomelding: Infomelding;
-  locale: string;
   loading: boolean;
+  intlState: IntlState;
 }
 
 interface MapDispatchToProps {
@@ -492,8 +493,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     sendteMeldekort: state.meldekort.sendteMeldekort,
     infomelding: state.meldekort.infomelding,
-    locale: state.intl.locale,
     loading: state.ui.loading,
+    intlState: state.intl,
   };
 };
 
