@@ -128,6 +128,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settMeldekortId: (meldekortId: number) =>
       dispatch(InnsendingActions.leggTilMeldekortId(meldekortId)),
     settLocale: (locale: string, from: Date) => {
+      console.log('2');
       downloadMessagesAndDispatch(locale, from);
     },
     hentKorrigertId: () =>
