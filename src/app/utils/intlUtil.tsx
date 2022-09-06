@@ -24,10 +24,10 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
   downloadMessages(locale, from)
     .then((messages: object) => {
       console.log(messages);
-      store.dispatch({
-        ...updateIntl({ locale: locale, messages: messages }),
-        key: Date.now(),
-      });
+      store.dispatch(
+        updateIntl({ locale: locale, messages: messages }),
+        'key' + Date.now()
+      );
     })
     .catch(error => {
       console.log(error);
