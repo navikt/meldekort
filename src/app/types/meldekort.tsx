@@ -171,6 +171,7 @@ export enum KortStatus {
   FEIL = 'FEIL',
   VENTE = 'VENTE',
   OPPF = 'OPPF',
+  UBEHA = 'UBEHA',
 }
 
 export enum FravaerTypeEnum {
