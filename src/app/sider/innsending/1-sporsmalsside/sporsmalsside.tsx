@@ -512,7 +512,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
     settLocale: (locale: string, from: Date) => {
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl, null);
+      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
     },
   };
 };

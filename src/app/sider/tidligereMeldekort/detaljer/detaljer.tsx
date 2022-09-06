@@ -258,7 +258,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settLocale: (locale: string, from: Date) => {
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl, null);
+      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
     },
   };
 };

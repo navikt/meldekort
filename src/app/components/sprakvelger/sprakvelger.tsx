@@ -22,7 +22,7 @@ const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
   return {
     settLocale: (locale: string, from: Date) => {
-      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl, null);
+      downloadMessagesAndDispatch(locale, from, dispatch, updateIntl);
     },
   };
 };
