@@ -24,18 +24,14 @@ const render = (element: FunctionComponentElement<any>) => {
   ReactDOM.render(element, rootElement);
 };
 
-const renderApp = (
-  Component: React.ComponentType,
-  locale: string,
-  messages: object
-) => {
+const renderApp = (Component: React.ComponentType, locale: string) => {
   render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>
         <IntlProvider
           locale={locale}
           defaultLocale={locale}
-          key={JSON.stringify(messages)}
+          messages={store.getState().intl.messages}
         >
           <Component />
         </IntlProvider>
@@ -61,7 +57,7 @@ downloadMessages(Konstanter.defaultLocale, Konstanter.defaultFromDate)
       updateIntl({ locale: Konstanter.defaultLocale, messages: messages })
     );
 
-    return renderApp(App, Konstanter.defaultLocale, messages);
+    return renderApp(App, Konstanter.defaultLocale);
   })
   .catch(reason => {
     return renderLoader(<div>{reason}</div>);

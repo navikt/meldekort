@@ -528,6 +528,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps, null, {
-  pure: false,
-})(Sporsmalsside);
+export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);
