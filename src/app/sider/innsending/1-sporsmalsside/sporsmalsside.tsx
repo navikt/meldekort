@@ -391,6 +391,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     const brukermelding =
       hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
 
+    console.log('RENDER');
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
       sendteMeldekort,
