@@ -419,6 +419,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
               <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
             </div>
             <div className="item">
+              <FormattedMessage id="sporsmal.ansvarForRiktigUtfylling" />
               <FormattedHTMLMessage id="sporsmal.ansvarForRiktigUtfylling" />
             </div>
           </Veilederpanel>
