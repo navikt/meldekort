@@ -32,7 +32,11 @@ const renderApp = (
   render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>
-        <IntlProvider locale={locale} defaultLocale={locale} key={messages}>
+        <IntlProvider
+          locale={locale}
+          defaultLocale={locale}
+          key={JSON.stringify(messages)}
+        >
           <Component />
         </IntlProvider>
       </PersistGate>
