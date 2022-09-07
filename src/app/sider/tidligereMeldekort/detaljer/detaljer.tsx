@@ -258,7 +258,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settLocale: (locale: string, from: Date) => {
       console.log('4');
-      downloadMessagesAndDispatch(locale, from, null);
+      downloadMessagesAndDispatch(locale, from);
     },
   };
 };

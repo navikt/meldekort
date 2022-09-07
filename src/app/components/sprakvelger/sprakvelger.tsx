@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
   return {
     settLocale: (locale: string, from: Date) => {
       console.log('1');
-      downloadMessagesAndDispatch(locale, from, null);
+      downloadMessagesAndDispatch(locale, from);
     },
   };
 };
