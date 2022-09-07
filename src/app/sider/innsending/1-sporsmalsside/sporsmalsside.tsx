@@ -15,7 +15,7 @@ import {
 } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, injectIntl } from 'react-intl';
 import {
   downloadMessagesAndDispatch,
   hentIntl,
@@ -528,4 +528,6 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside)
+);
