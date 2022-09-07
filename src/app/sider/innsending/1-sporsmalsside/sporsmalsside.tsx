@@ -75,6 +75,10 @@ const kategorier = [
 ];
 
 class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
+  state = {
+    key: Math.random(),
+  };
+
   valider = (): boolean => {
     const {
       sporsmalsobjekter,
@@ -391,7 +395,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       sendteMeldekort,
       innsending.innsendingstype
     ) ? (
-      <main>
+      <main key={this.state.key}>
         <section className="seksjon">
           {brukermelding.length > 1 ? (
             <AlertStripe type={'info'}>{brukermelding}</AlertStripe>
@@ -517,6 +521,7 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settLocale: (locale: string, from: Date) => {
       console.log('3');
       downloadMessagesAndDispatch(locale, from);
+      this.setState({ key: Math.random() });
     },
   };
 };
