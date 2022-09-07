@@ -15,7 +15,12 @@ import {
 } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { FormattedHTMLMessage, FormattedMessage, injectIntl } from 'react-intl';
+import {
+  FormattedHTMLMessage,
+  FormattedMessage,
+  InjectedIntlProps,
+  injectIntl,
+} from 'react-intl';
 import {
   downloadMessagesAndDispatch,
   hentIntl,
@@ -64,7 +69,8 @@ interface MapDispatchToProps {
 
 type SporsmalssideProps = MapStateToProps &
   MapDispatchToProps &
-  RouteComponentProps;
+  RouteComponentProps &
+  InjectedIntlProps;
 
 const kategorier = [
   'arbeid',
@@ -74,11 +80,7 @@ const kategorier = [
   'registrert',
 ];
 
-class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
-  state = {
-    key: Math.random(),
-  };
-
+class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
   valider = (): boolean => {
     const {
       sporsmalsobjekter,
@@ -398,7 +400,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       sendteMeldekort,
       innsending.innsendingstype
     ) ? (
-      <main key={this.state.key}>
+      <main>
         <section className="seksjon">
           {brukermelding.length > 1 ? (
             <AlertStripe type={'info'}>{brukermelding}</AlertStripe>
