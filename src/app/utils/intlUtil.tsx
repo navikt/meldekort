@@ -23,6 +23,7 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
 
   downloadMessages(locale, from)
     .then((messages: object) => {
+      console.log(store.getState());
       store.dispatch(updateIntl({ locale: locale, messages: messages }));
       console.log(store.getState());
     })

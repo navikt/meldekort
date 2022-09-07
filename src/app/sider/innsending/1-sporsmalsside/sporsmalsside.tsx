@@ -21,7 +21,7 @@ import {
   hentIntl,
   hentLocale,
 } from '../../../utils/intlUtil';
-import { history, RootState } from '../../../store/configureStore';
+import { history, RootState, store } from '../../../store/configureStore';
 import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
 import { IModal, ModalKnapp } from '../../../types/ui';
 import { Innholdstittel } from 'nav-frontend-typografi';
@@ -392,6 +392,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
 
     console.log('RENDER');
+    console.log(store.getState());
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
       sendteMeldekort,
