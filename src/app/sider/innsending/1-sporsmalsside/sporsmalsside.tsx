@@ -348,6 +348,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
     console.log(locale);
     console.log(aktivtMeldekort.meldeperiode.fra);
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+    this.setState({ key: Math.random() });
 
     scrollTilElement(undefined, 'auto');
     hentInfomelding();
@@ -521,7 +522,6 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settLocale: (locale: string, from: Date) => {
       console.log('3');
       downloadMessagesAndDispatch(locale, from);
-      this.setState({ key: Math.random() });
     },
   };
 };
