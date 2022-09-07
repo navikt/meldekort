@@ -1,4 +1,4 @@
-import { IntlProvider } from 'react-intl';
+import { injectIntl, IntlProvider } from 'react-intl';
 import { store } from '../store/configureStore';
 import { Konstanter } from './consts';
 import { fetchGet } from '../api/api';
