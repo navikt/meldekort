@@ -18,17 +18,22 @@ const localeCache = new Array<LocaleCache>();
 
 let processing = false;
 
-export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
+export const downloadMessagesAndDispatch = (
+  locale: string,
+  from: Date,
+  setState: Function | null
+) => {
   store.dispatch(UiActions.startLoading());
 
   downloadMessages(locale, from)
     .then((messages: object) => {
       store.dispatch(updateIntl({ locale: locale, messages: messages }));
       console.log(store.getState());
+      if (setState) setState({ key: Math.random() });
     })
     .catch(error => {
       console.log(error);
-      downloadMessagesAndDispatch(locale, from);
+      downloadMessagesAndDispatch(locale, from, setState);
     })
     .finally(() => {
       store.dispatch(UiActions.stopLoading());
