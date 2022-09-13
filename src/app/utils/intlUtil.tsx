@@ -94,7 +94,10 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   } catch (error) {
     console.log(error);
 
-    if (error.message === 'Request failed with status code 401') {
+    if (
+      error instanceof Error &&
+      error.message === 'Request failed with status code 401'
+    ) {
       // Bruker er ikke innlogget, sender ham til innogging
       window.location.assign(`${Environment().loginUrl}`);
       return {};
