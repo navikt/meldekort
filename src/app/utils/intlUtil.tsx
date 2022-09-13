@@ -95,7 +95,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   } catch (error) {
     console.log(error);
 
-    if (error instanceof AxiosError && error.status === 401) {
+    if (error instanceof AxiosError && error.status === '401') {
       // Bruker er ikke innlogget, sender ham til innogging
       window.location.assign(`${Environment().loginUrl}`);
       return {};
