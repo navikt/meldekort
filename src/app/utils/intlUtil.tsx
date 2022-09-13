@@ -1,4 +1,4 @@
-import { injectIntl, IntlProvider } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { store } from '../store/configureStore';
 import { Konstanter } from './consts';
 import { fetchGet } from '../api/api';
@@ -6,6 +6,8 @@ import Environment from './env';
 import { formaterDatoIso } from './dates';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
+import { InnsendingActions } from '../actions/innsending';
+import { Begrunnelse, InnsendingState } from '../types/innsending';
 
 interface LocaleCache {
   label: string;
@@ -23,9 +25,18 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
 
   downloadMessages(locale, from)
     .then((messages: object) => {
-      console.log(store.getState());
+      // Vi må oppdatere teksten til den valgte begrunnelsen
+      let innsending = store.getState().innsending;
+      const optionsString = messages['korriger.begrunnelse.valg'];
+      const options = JSON.parse(optionsString ? optionsString : '{}');
+      const begrunnelse: Begrunnelse = {
+        valgtArsak: innsending.begrunnelse.valgtArsak,
+        valgtArsakTekst: options[innsending.begrunnelse.valgtArsak],
+        erFeil: innsending.begrunnelse.valgtArsak === '',
+      };
+      store.dispatch(InnsendingActions.settBegrunnelse(begrunnelse));
+
       store.dispatch(updateIntl({ locale: locale, messages: messages }));
-      console.log(store.getState());
     })
     .catch(error => {
       console.log(error);
@@ -41,7 +52,6 @@ export const downloadMessagesAndCall = (locale: string, from: Date) => {
 
   downloadMessages(locale, from)
     .then((messages: object) => {
-      console.log(messages);
       updateIntl({ locale: locale, messages: messages });
     })
     .catch(error => {
