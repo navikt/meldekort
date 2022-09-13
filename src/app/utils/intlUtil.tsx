@@ -7,7 +7,8 @@ import { formaterDatoIso } from './dates';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { InnsendingActions } from '../actions/innsending';
-import { Begrunnelse, InnsendingState } from '../types/innsending';
+import { Begrunnelse } from '../types/innsending';
+import { AxiosError } from 'axios';
 
 interface LocaleCache {
   label: string;
@@ -44,22 +45,6 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
     })
     .finally(() => {
       store.dispatch(UiActions.stopLoading());
-    });
-};
-
-export const downloadMessagesAndCall = (locale: string, from: Date) => {
-  UiActions.startLoading();
-
-  downloadMessages(locale, from)
-    .then((messages: object) => {
-      updateIntl({ locale: locale, messages: messages });
-    })
-    .catch(error => {
-      console.log(error);
-      downloadMessagesAndCall(locale, from);
-    })
-    .finally(() => {
-      UiActions.stopLoading();
     });
 };
 
@@ -110,12 +95,10 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   } catch (error) {
     console.log(error);
 
-    if (
-      error instanceof Error &&
-      error.message === 'Request failed with status code 401'
-    ) {
+    if (error instanceof AxiosError && error.status === 401) {
       // Bruker er ikke innlogget, sender ham til innogging
       window.location.assign(`${Environment().loginUrl}`);
+      return {};
     } else {
       throw 'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.';
     }
