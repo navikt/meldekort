@@ -8,7 +8,6 @@ import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
 import { InnsendingActions } from '../actions/innsending';
 import { Begrunnelse } from '../types/innsending';
-import { AxiosError } from 'axios';
 
 interface LocaleCache {
   label: string;
@@ -95,7 +94,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   } catch (error) {
     console.log(error);
 
-    if (error instanceof AxiosError && error.response.status === 401) {
+    if (error.message === 'Request failed with status code 401') {
       // Bruker er ikke innlogget, sender ham til innogging
       window.location.assign(`${Environment().loginUrl}`);
       return {};
