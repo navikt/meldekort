@@ -38,7 +38,7 @@ import {
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -85,11 +85,6 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       meldegruppe: this.props.aktivtMeldekort?.meldegruppe || 'UKJENT',
       innsendingstype: this.props.innsendingstype || 'UKJENT',
     });
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js';
-    document.body.appendChild(script);
   }
 
   returnerPropsVerdier = (): PropsVerdier => {
@@ -224,22 +219,13 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
   innhold = (nesteInnsendingstype?: Innsendingstyper) => {
     const { innsendingstype, innsending, aktivtMeldekort } = this.props;
     const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
-    const isAAP = typeYtelse === TypeYtelse.AAP;
 
     return (
       <>
         <AlertStripe type={'suksess'} className="alertSendt noPrint">
           <FormattedMessage id={'overskrift.meldekort.sendt'} />
         </AlertStripe>
-        {isAAP ? (
-          <div
-            data-uxsignals-embed="study-v8t9k2rf87"
-            style={{ width: '100%' }}
-            data-uxsignals-mode={Environment().testEnv ? 'demo' : ''}
-          ></div>
-        ) : (
-          ''
-        )}
+
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel>
             <FormattedMessage id="overskrift.steg4" />
