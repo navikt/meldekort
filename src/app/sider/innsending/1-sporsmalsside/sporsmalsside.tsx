@@ -53,7 +53,6 @@ interface MapStateToProps {
   infomelding: Infomelding;
   loading: boolean;
   locale: string;
-  messages: any;
 }
 
 interface MapDispatchToProps {
@@ -502,7 +501,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     infomelding: state.meldekort.infomelding,
     loading: state.ui.loading,
     locale: state.intl.locale,
-    messages: state.intl.messages,
   };
 };
 
