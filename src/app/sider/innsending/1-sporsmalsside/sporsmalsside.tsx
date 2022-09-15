@@ -15,9 +15,14 @@ import {
 } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import {
-  downloadMessages,
+  FormattedHTMLMessage,
+  FormattedMessage,
+  InjectedIntlProps,
+  injectIntl,
+} from 'react-intl';
+import {
+  downloadMessagesAndDispatch,
   hentIntl,
   hentLocale,
 } from '../../../utils/intlUtil';
@@ -39,7 +44,6 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { MeldekortActions } from '../../../actions/meldekort';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { updateIntl } from 'react-intl-redux';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
@@ -47,8 +51,8 @@ interface MapStateToProps {
   innsending: InnsendingState;
   sendteMeldekort: SendtMeldekort[];
   infomelding: Infomelding;
-  locale: string;
   loading: boolean;
+  locale: string;
 }
 
 interface MapDispatchToProps {
@@ -64,7 +68,8 @@ interface MapDispatchToProps {
 
 type SporsmalssideProps = MapStateToProps &
   MapDispatchToProps &
-  RouteComponentProps;
+  RouteComponentProps &
+  InjectedIntlProps;
 
 const kategorier = [
   'arbeid',
@@ -74,7 +79,7 @@ const kategorier = [
   'registrert',
 ];
 
-class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
+class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
   valider = (): boolean => {
     const {
       sporsmalsobjekter,
@@ -342,6 +347,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, any> {
       oppdaterSvar,
     } = this.props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+    this.forceUpdate();
 
     scrollTilElement(undefined, 'auto');
     hentInfomelding();
@@ -493,8 +499,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     sendteMeldekort: state.meldekort.sendteMeldekort,
     infomelding: state.meldekort.infomelding,
-    locale: state.intl.locale,
     loading: state.ui.loading,
+    locale: state.intl.locale,
   };
 };
 
@@ -512,14 +518,11 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       dispatch(InnsendingActions.oppdaterUtfylteDager(utfylteDager)),
     hentInfomelding: () => dispatch(MeldekortActions.hentInfomelding.request()),
     settLocale: (locale: string, from: Date) => {
-      dispatch(UiActions.startLoading());
-
-      downloadMessages(locale, from).then((messages: object) => {
-        dispatch(updateIntl({ locale: locale, messages: messages }));
-        dispatch(UiActions.stopLoading());
-      });
+      downloadMessagesAndDispatch(locale, from);
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside)
+);
