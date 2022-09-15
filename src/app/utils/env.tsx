@@ -3,14 +3,14 @@ import { Konstanter } from './consts';
 
 const Environment = () => {
   if (
-    window.location.hostname.indexOf('meldekort-frontend-q0.dev.nav.no') > -1
+    window.location.hostname.indexOf('meldekort-frontend-q2.dev.nav.no') > -1
   ) {
     return {
       dittNavUrl: 'https://www.dev.nav.no/person/dittnav',
       apiUrl:
-        'https://meldekort-api-q0.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q0.dev.nav.no/oauth2/logout',
+        'https://meldekort-api-q2.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,

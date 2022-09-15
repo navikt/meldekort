@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter q0 og q1)'
+        description: 'Miljø (støtter q1 og q2)'
         required: true
-        default: 'q0'
+        default: 'q2'
       bump_patch:
         description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
         required: false
@@ -36,7 +36,7 @@ jobs:
 
       - name: Set default environment for push
         if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
-        run: echo "ENVIRONMENT=q0" >> $GITHUB_ENV
+        run: echo "ENVIRONMENT=q2" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -105,7 +105,7 @@ jobs:
           docker push ${{ steps.setVars.outputs.image }}
 
       - name: Deploy to dev
-        if: env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)
+        if: env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'q2' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
