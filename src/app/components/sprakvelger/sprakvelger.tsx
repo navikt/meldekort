@@ -3,13 +3,12 @@ import { Dispatch } from 'redux';
 import { RootState } from '../../store/configureStore';
 import { Button, Menu, MenuItem, Wrapper } from 'react-aria-menubutton';
 
-import { IntlAction, updateIntl } from 'react-intl-redux';
+import { IntlAction } from 'react-intl-redux';
 import { connect } from 'react-redux';
 import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
 import { Locale } from '../../reducers/localesReducer';
 import { Konstanter } from '../../utils/consts';
-import { downloadMessages } from '../../utils/intlUtil';
-import { UiActions } from '../../actions/ui';
+import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
 
 const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
   return {
@@ -22,10 +21,9 @@ const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IntlAction>) => {
   return {
-    startLoading: () => dispatch(UiActions.startLoading()),
-    stopLoading: () => dispatch(UiActions.stopLoading()),
-    updateIntl: (locale: any, messages: any) =>
-      dispatch(updateIntl({ locale, messages })),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 
@@ -54,23 +52,18 @@ const renderMenuItem = (locale: Locale, valgtSprak: string) => {
 };
 
 const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
-  const { currentLocale, locales, aktivtMeldekort } = props;
+  const { currentLocale, locales, aktivtMeldekort, settLocale } = props;
 
   const handleSelection = (value: JSX.Element[]) => {
-    props.startLoading();
-
     const newLocale: string = value[1].key
       ? value[1].key.toString()
       : Konstanter.defaultLocale;
-    downloadMessages(
+    settLocale(
       newLocale,
       aktivtMeldekort
         ? aktivtMeldekort.meldeperiode.fra
         : Konstanter.defaultFromDate
-    ).then((messages: object) => {
-      props.updateIntl(newLocale, messages);
-      props.stopLoading();
-    });
+    );
   };
 
   return (

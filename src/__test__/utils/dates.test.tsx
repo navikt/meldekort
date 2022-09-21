@@ -17,7 +17,7 @@ import {
 } from '../../app/utils/dates';
 import { setLocalesBeforeAll } from '../testSetup/providerWrapper';
 
-const fraDatoString = '2019-01-01T10:10:00Z';
+const fraDatoString = '2019-01-01T00:00:00Z';
 const tilDatoString = '2019-01-13T10:10:00Z';
 
 const fraDato = new Date(fraDatoString);
@@ -87,6 +87,6 @@ it('ukeTekst', () => {
 
 it('kalkulerDato', () => {
   expect(kalkulerDato(fraDato, 6)).toStrictEqual(
-    new Date('2019-01-07T10:10:00.000Z')
+    new Date('2019-01-07T00:00:00.000Z')
   );
 });

@@ -28,7 +28,11 @@ const renderApp = (Component: React.ComponentType, locale: string) => {
   render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>
-        <IntlProvider locale={locale} defaultLocale={locale}>
+        <IntlProvider
+          locale={locale}
+          defaultLocale={locale}
+          messages={store.getState().intl.messages}
+        >
           <Component />
         </IntlProvider>
       </PersistGate>
