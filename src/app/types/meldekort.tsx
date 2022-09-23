@@ -122,7 +122,7 @@ export interface HistoriskeMeldekortRad {
 export interface DetaljRad {
   meldekortid: number;
   kortType: string;
-  kortStatus: string;
+  kortStatus: KortStatus;
   bruttoBelop: string;
   mottattDato: any;
 }

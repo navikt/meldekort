@@ -71,7 +71,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     return {
       meldekortid: meldekort.meldekortId,
       mottattDato: formaterDato(meldekort.mottattDato),
-      kortStatus: mapKortStatusTilTekst(meldekort.kortStatus),
+      kortStatus: meldekort.kortStatus,
       bruttoBelop: formaterBelop(meldekort.bruttoBelop),
       kortType: mapKortTypeTilTekst(meldekort.kortType),
     };
@@ -138,7 +138,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
               type={'info'}
               className={finnRiktigEtikettKlasse(row.kortStatus)}
             >
-              {row.kortStatus}
+              {mapKortStatusTilTekst(row.kortStatus)}
             </EtikettBase>
           );
         },
