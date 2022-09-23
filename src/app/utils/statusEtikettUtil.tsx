@@ -1,16 +1,25 @@
-export const finnRiktigEtikettKlasse = (statustekst: string): string => {
-  let status = statustekst.trim();
-  if (statustekst == null) {
-    status = 'info';
+import { KortStatus } from '../types/meldekort';
+
+export const finnRiktigEtikettKlasse = (status: KortStatus): string => {
+  let className: string;
+
+  switch (status) {
+    case KortStatus.KLAR:
+      className = '__fokusert';
+      break;
+    case KortStatus.REGIS:
+    case KortStatus.NYKTR:
+    case KortStatus.UBEHA:
+      className = '__informativ';
+      break;
+    case KortStatus.FERDI:
+    case KortStatus.IKKE:
+    case KortStatus.OVERM:
+      className = '__positiv';
+      break;
+    default:
+      className = '__fremhevet';
   }
-  if (status === 'Klar til beregning' || status === 'Til behandling') {
-    status = '__informativ';
-  } else if (status === 'Kortet er beregnet') {
-    status = '__positiv';
-  } else if (status === 'Ingen beregning') {
-    status = '__fremhevet';
-  } else {
-    status = '__fokusert';
-  }
-  return 'etikettbase' + status;
+
+  return 'etikettbase' + className;
 };

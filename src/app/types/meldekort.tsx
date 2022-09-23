@@ -114,7 +114,7 @@ export interface HistoriskeMeldekortRad {
   periode?: string;
   dato: string;
   mottatt: string;
-  status: string;
+  status: KortStatus;
   bruttobelop: string;
   detaljer?: string;
 }
