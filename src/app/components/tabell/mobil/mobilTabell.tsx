@@ -3,6 +3,7 @@ import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import EtikettBase from 'nav-frontend-etiketter';
 import Komponentlenke from '../../komponentlenke/komponentlenke';
 import { DetaljRad, HistoriskeMeldekortRad } from '../../../types/meldekort';
+import { mapKortStatusTilTekst } from '../../../utils/kortMapper';
 
 interface MobilTabellProps {
   rows?: HistoriskeMeldekortRad[];
@@ -28,7 +29,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
             type={'info'}
             className={finnRiktigEtikettKlasse(rowData[i])}
           >
-            {rowData[i]}
+            {mapKortStatusTilTekst(rowData[i])}
           </EtikettBase>
         );
       } else if (
@@ -68,7 +69,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
             type={'info'}
             className={finnRiktigEtikettKlasse(rowData[i])}
           >
-            {rowData[i]}
+            {mapKortStatusTilTekst(rowData[i])}
           </EtikettBase>
         );
       } else if (i === header.key) {
