@@ -102,7 +102,9 @@ export const ukeTekst = (): string => {
 };
 
 export const kalkulerDato = (startDato: Date, plussDager: number): Date => {
-  return moment(startDato)
-    .add(plussDager, 'days')
-    .toDate();
+  const result = new Date(startDato);
+
+  result.setDate(result.getDate() + plussDager);
+
+  return result;
 };

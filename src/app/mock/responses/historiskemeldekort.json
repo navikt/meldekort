@@ -61,5 +61,20 @@
     "erForskuddsPeriode": false,
     "mottattDato": "2019-01-12T12:00:00+01:00",
     "korrigerbart": false
+  },
+  {
+    "meldekortId": 1111112222,
+    "kortType": "ELEKTRONISK",
+    "meldeperiode": {
+      "fra": "2019-01-14T12:00:00+01:00",
+      "til": "2019-01-27T12:00:00+01:00",
+      "kortKanSendesFra": "2019-01-26T12:00:00+01:00",
+      "periodeKode": "201902"
+    },
+    "meldegruppe": "DAGP",
+    "kortStatus": "UBEHA",
+    "erForskuddsPeriode": false,
+    "mottattDato": "2019-01-26T12:07:33+01:00",
+    "korrigerbart": false
   }
 ]

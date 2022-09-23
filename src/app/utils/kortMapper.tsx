@@ -35,6 +35,8 @@ export const mapKortStatusTilTekst = (status: KortStatus) => {
       return intl.formatMessage({ id: 'meldekort.status.oppf' });
     case KortStatus.VENTE:
       return intl.formatMessage({ id: 'meldekort.status.vente' });
+    case KortStatus.UBEHA:
+      return intl.formatMessage({ id: 'meldekort.status.ubeha' });
 
     default:
       return 'Feil i status';

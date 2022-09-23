@@ -44,7 +44,7 @@ export const erAktivtMeldekortGyldig = (
 export const erBrukerRegistrertIArena = (
   arbeidssokerStatus: string
 ): boolean => {
-  return !(arbeidssokerStatus === null || arbeidssokerStatus === '');
+  return !(arbeidssokerStatus == null || arbeidssokerStatus === '');
 };
 
 export const harKortStatusOPPRellerSENDT = (meldekort: Meldekort) =>
@@ -73,25 +73,24 @@ export const hentMeldekortRaderFraPerson = (
 ): MeldekortRad[] => {
   let radliste: MeldekortRad[] = [];
 
-  if (innsendingsklareMeldekort !== null) {
-    for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
-      if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
-        if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
-          let rad: MeldekortRad = {
-            periode: hentUkePeriode(
-              innsendingsklareMeldekort[i].meldeperiode.fra,
-              innsendingsklareMeldekort[i].meldeperiode.til
-            ),
-            dato: hentDatoPeriode(
-              innsendingsklareMeldekort[i].meldeperiode.fra,
-              innsendingsklareMeldekort[i].meldeperiode.til
-            ),
-          };
-          radliste.push(rad);
-        }
+  for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
+    if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
+      if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
+        let rad: MeldekortRad = {
+          periode: hentUkePeriode(
+            innsendingsklareMeldekort[i].meldeperiode.fra,
+            innsendingsklareMeldekort[i].meldeperiode.til
+          ),
+          dato: hentDatoPeriode(
+            innsendingsklareMeldekort[i].meldeperiode.fra,
+            innsendingsklareMeldekort[i].meldeperiode.til
+          ),
+        };
+        radliste.push(rad);
       }
     }
   }
+
   return radliste;
 };
 
@@ -108,45 +107,48 @@ export const meldekortSomKanSendes = (
   });
 };
 
-const hentMeldekortSomIkkeKanSendesEnda = (
+export const meldekortSomIkkeKanSendesEnda = (
   meldekortListe: Meldekort[]
 ): Meldekort[] => {
   return meldekortListe.filter(
     meldekort =>
-      (meldekort.kortStatus === KortStatus.SENDT ||
-        meldekort.kortStatus === KortStatus.OPPRE) &&
+      meldekort.kortStatus === KortStatus.OPPRE &&
       !meldekort.meldeperiode.kanKortSendes
   );
 };
 
 export const nesteMeldekortKanSendes = (
-  nesteAktivtMeldekort: Meldekort | undefined,
-  innsendingstype: Innsendingstyper | null,
-  person: Person
+  person: Person,
+  sendteMeldekort: SendtMeldekort[],
+  innsendingstype: Innsendingstyper | null
 ): Date | null => {
-  if (nesteAktivtMeldekort !== undefined) {
-    return nesteAktivtMeldekort.meldeperiode.kortKanSendesFra;
-  } else if (
-    innsendingstype === Innsendingstyper.INNSENDING &&
-    person.meldekort.length > 0
+  if (
+    innsendingstype !== Innsendingstyper.ETTERREGISTRERING &&
+    innsendingstype !== Innsendingstyper.KORRIGERING
   ) {
-    let mkListe = hentMeldekortSomIkkeKanSendesEnda(person.meldekort);
+    let mkListe = meldekortSomKanSendes(person.meldekort, sendteMeldekort);
     if (mkListe.length > 0) {
+      // For å være helt sikker på at vi har det tidligste meldekortet først
+      mkListe.sort(compareFn);
       return mkListe[0].meldeperiode.kortKanSendesFra;
     }
-  } else if (
-    innsendingstype === Innsendingstyper.ETTERREGISTRERING &&
-    person.etterregistrerteMeldekort.length > 0
-  ) {
-    let mkListe = hentMeldekortSomIkkeKanSendesEnda(
-      person.etterregistrerteMeldekort
-    );
+
+    mkListe = meldekortSomIkkeKanSendesEnda(person.meldekort);
     if (mkListe.length > 0) {
+      // For å være helt sikker på at vi har det tidligste meldekortet først
+      mkListe.sort(compareFn);
       return mkListe[0].meldeperiode.kortKanSendesFra;
     }
   }
 
   return null;
+};
+
+const compareFn = (a: Meldekort, b: Meldekort): number => {
+  return (
+    b.meldeperiode.kortKanSendesFra.valueOf() -
+    a.meldeperiode.kortKanSendesFra.valueOf()
+  );
 };
 
 export const returnerMeldekortListaMedFlereMeldekortIgjen = (
