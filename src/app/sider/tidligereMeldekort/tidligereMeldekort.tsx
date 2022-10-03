@@ -28,7 +28,7 @@ import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortRedu
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
-import {HistoriskeMeldekortRad, KortStatus} from '../../types/meldekort';
+import { HistoriskeMeldekortRad, KortStatus } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import {
   selectFeilmelding,
@@ -86,11 +86,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
           meldekort.meldeperiode.til
         ),
         mottatt:
-          typeof meldekort.mottattDato === 'undefined' ||
-          meldekort.mottattDato === null
+          typeof meldekort.mottattDato === 'undefined'
             ? ''
             : formaterDato(meldekort.mottattDato),
-        status: mapKortStatusTilTekst(meldekort.kortStatus),
+        status: meldekort.kortStatus,
         bruttobelop: formaterBelop(meldekort.bruttoBelop),
         detaljer: hentIntl().formatMessage({ id: 'overskrift.detaljer' }),
       });
@@ -107,7 +106,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
         label: <FormattedMessage id="overskrift.periode" />,
         cell: function(row: any, column: any) {
           if (row.meldekort.kortStatus === KortStatus.UBEHA) {
-            return (row.periode)
+            return row.periode;
           }
           return (
             <Komponentlenke
@@ -137,7 +136,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
               className={finnRiktigEtikettKlasse(row.status)}
               type={'info'}
             >
-              {row.status}
+              {mapKortStatusTilTekst(row.status)}
             </EtikettBase>
           );
         },

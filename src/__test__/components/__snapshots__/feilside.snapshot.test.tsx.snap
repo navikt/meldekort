@@ -61,7 +61,7 @@ exports[`Feilside 1`] = `
         <span
           dangerouslySetInnerHTML={
             Object {
-              "__html": "For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Velg \\"Registrer deg som arbeidssøker\\" fra Ditt NAV hvis du vil registrere deg.",
+              "__html": "For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Velg \\"Registrer deg som arbeidssøker\\" fra Min side hvis du vil registrere deg.",
             }
           }
         />
