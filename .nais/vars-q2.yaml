@@ -1,5 +1,4 @@
 dashEnv: -q2
-slackAlertChannel: team-meldeplikt-alerts-dev
 ingresses:
   - "https://meldekort-frontend-q2.dev.nav.no"
 navDekoratorenUrl: "https://dekoratoren.dev.nav.no"
