@@ -94,7 +94,7 @@
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
     "snyk": "^1.997.0",
-    "stylelint": "^14.11.0",
+    "stylelint": "^14.13.0",
     "stylelint-no-unsupported-browser-features": "^4.1.1",
     "ts-react-json-table": "^0.1.1",
     "tslint-config-prettier": "^1.15.0",
