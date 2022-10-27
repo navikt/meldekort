@@ -15,12 +15,7 @@ import {
 } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  FormattedHTMLMessage,
-  FormattedMessage,
-  InjectedIntlProps,
-  injectIntl,
-} from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import {
   downloadMessagesAndDispatch,
   hentIntl,
@@ -36,7 +31,7 @@ import {
   Meldekort,
   SendtMeldekort,
 } from '../../../types/meldekort';
-import { Redirect, RouteComponentProps } from 'react-router';
+import { Redirect } from 'react-router';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
@@ -66,10 +61,7 @@ interface MapDispatchToProps {
   settLocale: (locale: string, from: Date) => void;
 }
 
-type SporsmalssideProps = MapStateToProps &
-  MapDispatchToProps &
-  RouteComponentProps &
-  InjectedIntlProps;
+type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 
 const kategorier = [
   'arbeid',
@@ -522,6 +514,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default injectIntl(
-  connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside)
-);
+export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);

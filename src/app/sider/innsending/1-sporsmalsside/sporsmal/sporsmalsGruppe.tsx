@@ -29,7 +29,7 @@ interface Props {
 
 type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
 
-class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps> {
+class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, {}> {
   sporsmalOnChange = (
     event: React.SyntheticEvent<EventTarget>,
     value?: string
