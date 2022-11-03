@@ -48,6 +48,7 @@ interface MapStateToProps {
   innsendingstype: Innsendingstyper | null;
   sendteMeldekort: MeldekortState;
   personInfo: PersonInfo;
+  loading: boolean;
   locale: string;
 }
 
@@ -81,6 +82,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       settLocale,
       locale,
     } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
     hentPersonInfo();
     scrollTilElement(undefined, 'auto');
@@ -96,8 +98,6 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
       innsendingstype: innsendingstype || 'UKJENT',
     });
-
-    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
   }
 
   returnerPropsVerdier = (): PropsVerdier => {
@@ -271,7 +271,15 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    const { personInfo, person } = this.props;
+    const { personInfo, person, loading } = this.props;
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     return personInfo.personId !== 0 ? (
       <main>
@@ -328,6 +336,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     sendteMeldekort: state.meldekort,
     personInfo: state.personInfo.personInfo,
+    loading: state.ui.loading,
     locale: state.intl.locale,
   };
 };

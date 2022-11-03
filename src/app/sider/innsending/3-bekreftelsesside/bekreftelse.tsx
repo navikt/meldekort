@@ -35,6 +35,7 @@ import { UiActions } from '../../../actions/ui';
 import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -42,6 +43,7 @@ interface MapStateToProps {
   person: Person;
   baksystemFeilmelding: BaksystemFeilmelding;
   sendteMeldekort: SendtMeldekort[];
+  loading: boolean;
   locale: string;
 }
 
@@ -76,11 +78,11 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   componentDidMount() {
-    scrollTilElement(undefined, 'auto');
-    loggAktivitet('Viser bekreftelse');
-
     const { settLocale, locale, aktivtMeldekort } = this.props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+
+    scrollTilElement(undefined, 'auto');
+    loggAktivitet('Viser bekreftelse');
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
@@ -283,12 +285,20 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort } = this.props;
+    let { aktivtMeldekort, sendteMeldekort, loading } = this.props;
     let { meldegruppe } = this.props.aktivtMeldekort;
     let { valideringsResultat } = this.props.innsending;
     let { meldekortdetaljer } = this.state.meldekortdetaljer;
     let { feilmelding } = this.state;
     let typeYtelsePostfix = finnTypeYtelsePostfix(meldegruppe);
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     if (typeof valideringsResultat !== 'undefined') {
       return valideringsResultat.status === 'FEIL' ? (
@@ -402,6 +412,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     baksystemFeilmelding: selectFeilmelding(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    loading: state.ui.loading,
     locale: state.intl.locale,
   };
 };

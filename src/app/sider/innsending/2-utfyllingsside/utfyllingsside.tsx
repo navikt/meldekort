@@ -34,11 +34,13 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   innsending: InnsendingState;
   aktivtMeldekort: Meldekort;
   sendteMeldekort: SendtMeldekort[];
+  loading: boolean;
   locale: string;
 }
 
@@ -71,11 +73,11 @@ class Utfyllingsside extends React.Component<
   }
 
   componentDidMount() {
-    scrollTilElement(undefined, 'auto');
-    loggAktivitet('Viser utfylling');
-
     const { settLocale, locale, aktivtMeldekort } = this.props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+
+    scrollTilElement(undefined, 'auto');
+    loggAktivitet('Viser utfylling');
   }
 
   hentSporsmal = (): SpmSvar[] => {
@@ -356,11 +358,19 @@ class Utfyllingsside extends React.Component<
   };
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort, innsending } = this.props;
+    let { aktivtMeldekort, sendteMeldekort, innsending, loading } = this.props;
     let { meldeperiode } = aktivtMeldekort;
     const typeYtelsePostfix = finnTypeYtelsePostfix(
       aktivtMeldekort.meldegruppe
     );
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
@@ -437,6 +447,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     aktivtMeldekort: state.aktivtMeldekort,
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    loading: state.ui.loading,
     locale: state.intl.locale,
   };
 };
