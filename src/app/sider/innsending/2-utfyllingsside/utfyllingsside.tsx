@@ -18,7 +18,7 @@ import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { Konstanter } from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
-import { hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
   FravaerTypeEnum,
@@ -39,10 +39,12 @@ interface MapStateToProps {
   innsending: InnsendingState;
   aktivtMeldekort: Meldekort;
   sendteMeldekort: SendtMeldekort[];
+  locale: string;
 }
 
 interface MapDispatchToProps {
   resetValideringsresultat: () => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type UtfyllingssideProps = MapStateToProps & MapDispatchToProps;
@@ -71,6 +73,9 @@ class Utfyllingsside extends React.Component<
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
     loggAktivitet('Viser utfylling');
+
+    const { settLocale, locale, aktivtMeldekort } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
   }
 
   hentSporsmal = (): SpmSvar[] => {
@@ -432,6 +437,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     aktivtMeldekort: state.aktivtMeldekort,
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    locale: state.intl.locale,
   };
 };
 
@@ -439,6 +445,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     resetValideringsresultat: () =>
       dispatch(InnsendingActions.resetValideringsresultat()),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Utfyllingsside);

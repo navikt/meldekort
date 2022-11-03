@@ -21,7 +21,7 @@ import {
   MeldekortdetaljerInnsending,
   SendtMeldekort,
 } from '../../../types/meldekort';
-import { hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
@@ -42,6 +42,7 @@ interface MapStateToProps {
   person: Person;
   baksystemFeilmelding: BaksystemFeilmelding;
   sendteMeldekort: SendtMeldekort[];
+  locale: string;
 }
 
 interface MapDispatchToProps {
@@ -53,6 +54,7 @@ interface MapDispatchToProps {
     meldekortdetaljerInnsending: MeldekortdetaljerInnsending
   ) => void;
   skjulBaksystemFeilmelding: () => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type BekreftelseProps = MapStateToProps & MapDispatchToProps;
@@ -76,6 +78,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
     loggAktivitet('Viser bekreftelse');
+
+    const { settLocale, locale, aktivtMeldekort } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
@@ -397,6 +402,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     baksystemFeilmelding: selectFeilmelding(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    locale: state.intl.locale,
   };
 };
 
@@ -422,6 +428,9 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       ),
     skjulBaksystemFeilmelding: () =>
       dispatch(UiActions.skjulBaksystemFeilmelding()),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 
