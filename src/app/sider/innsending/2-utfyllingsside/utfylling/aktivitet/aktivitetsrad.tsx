@@ -36,7 +36,7 @@ type AktivitetsradProps = RadProps &
   MapStateToProps &
   MapDispatchToProps;
 
-class Aktivitetsrad extends React.Component<AktivitetsradProps> {
+class Aktivitetsrad extends React.Component<AktivitetsradProps, {}> {
   setVerdi = (ukedag: number) => {
     const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
       if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {

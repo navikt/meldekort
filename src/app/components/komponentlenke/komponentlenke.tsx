@@ -27,7 +27,7 @@ interface MapDispatcherToProps {
 
 type ReduxType = KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
-class Komponentlenke extends React.Component<ReduxType> {
+class Komponentlenke extends React.Component<ReduxType, {}> {
   clickHandler = () => {
     this.props.resettAktivtMeldekort();
     if (this.props.meldekort) {

@@ -29,7 +29,7 @@ interface MapDispatchToProps {
 
 class OmMeldekort extends React.Component<
   MapDispatchToProps & MapStateToProps,
-  any
+  {}
 > {
   componentDidMount() {
     scrollTilElement(undefined, 'auto');

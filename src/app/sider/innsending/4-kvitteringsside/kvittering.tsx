@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import { Router } from '../../../types/router';
 import { Person, PersonInfo } from '../../../types/person';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import {
   formaterDato,
@@ -48,6 +48,8 @@ interface MapStateToProps {
   innsendingstype: Innsendingstyper | null;
   sendteMeldekort: MeldekortState;
   personInfo: PersonInfo;
+  loading: boolean;
+  locale: string;
 }
 
 interface PropsVerdier {
@@ -61,6 +63,7 @@ interface MapDispatchToProps {
   settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
   leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) => void;
   hentPersonInfo: () => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type KvitteringsProps = RouteComponentProps &
@@ -69,21 +72,31 @@ type KvitteringsProps = RouteComponentProps &
 
 class Kvittering extends React.Component<KvitteringsProps, {}> {
   componentDidMount() {
-    this.props.hentPersonInfo();
-    scrollTilElement(undefined, 'auto');
-    let oppdatertSendteMeldekort = this.props.sendteMeldekort;
-    let { meldekortId, kortType } = this.props.aktivtMeldekort;
-    oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
-    this.props.leggTilInnsendtMeldekort(
-      oppdatertSendteMeldekort.sendteMeldekort
-    );
+    const {
+      hentPersonInfo,
+      sendteMeldekort,
+      aktivtMeldekort,
+      leggTilInnsendtMeldekort,
+      innsending,
+      innsendingstype,
+      settLocale,
+      locale,
+    } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
-    const arbeidsssokerSvar = this.props.innsending?.meldekortdetaljer?.sporsmal
-      ?.arbeidssoker;
+    hentPersonInfo();
+    scrollTilElement(undefined, 'auto');
+    let oppdatertSendteMeldekort = sendteMeldekort;
+    let { meldekortId, kortType } = aktivtMeldekort;
+    oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
+    leggTilInnsendtMeldekort(oppdatertSendteMeldekort.sendteMeldekort);
+
+    const arbeidsssokerSvar =
+      innsending?.meldekortdetaljer?.sporsmal?.arbeidssoker;
     loggAktivitet('Viser kvittering', {
       arbeidssoker: arbeidsssokerSvar ? 'ja' : 'nei',
-      meldegruppe: this.props.aktivtMeldekort?.meldegruppe || 'UKJENT',
-      innsendingstype: this.props.innsendingstype || 'UKJENT',
+      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
+      innsendingstype: innsendingstype || 'UKJENT',
     });
   }
 
@@ -258,7 +271,15 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    const { personInfo, person } = this.props;
+    const { personInfo, person, loading } = this.props;
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     return personInfo.personId !== 0 ? (
       <main>
@@ -315,6 +336,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     sendteMeldekort: state.meldekort,
     personInfo: state.personInfo.personInfo,
+    loading: state.ui.loading,
+    locale: state.intl.locale,
   };
 };
 
@@ -325,6 +348,9 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>
       dispatch(MeldekortActions.leggTilInnsendtMeldekort(sendteMeldekort)),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 
