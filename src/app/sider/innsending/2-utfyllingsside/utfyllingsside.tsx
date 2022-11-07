@@ -18,7 +18,7 @@ import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { Konstanter } from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
-import { hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
   FravaerTypeEnum,
@@ -34,15 +34,19 @@ import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import { Redirect } from 'react-router';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   innsending: InnsendingState;
   aktivtMeldekort: Meldekort;
   sendteMeldekort: SendtMeldekort[];
+  loading: boolean;
+  locale: string;
 }
 
 interface MapDispatchToProps {
   resetValideringsresultat: () => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type UtfyllingssideProps = MapStateToProps & MapDispatchToProps;
@@ -69,6 +73,9 @@ class Utfyllingsside extends React.Component<
   }
 
   componentDidMount() {
+    const { settLocale, locale, aktivtMeldekort } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+
     scrollTilElement(undefined, 'auto');
     loggAktivitet('Viser utfylling');
   }
@@ -359,11 +366,19 @@ class Utfyllingsside extends React.Component<
   };
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort, innsending } = this.props;
+    let { aktivtMeldekort, sendteMeldekort, innsending, loading } = this.props;
     let { meldeperiode } = aktivtMeldekort;
     const typeYtelsePostfix = finnTypeYtelsePostfix(
       aktivtMeldekort.meldegruppe
     );
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
@@ -440,6 +455,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     aktivtMeldekort: state.aktivtMeldekort,
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    loading: state.ui.loading,
+    locale: state.intl.locale,
   };
 };
 
@@ -447,6 +464,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   return {
     resetValideringsresultat: () =>
       dispatch(InnsendingActions.resetValideringsresultat()),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Utfyllingsside);

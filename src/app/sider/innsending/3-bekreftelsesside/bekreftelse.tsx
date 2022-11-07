@@ -21,7 +21,7 @@ import {
   MeldekortdetaljerInnsending,
   SendtMeldekort,
 } from '../../../types/meldekort';
-import { hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
@@ -35,6 +35,7 @@ import { UiActions } from '../../../actions/ui';
 import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -42,6 +43,8 @@ interface MapStateToProps {
   person: Person;
   baksystemFeilmelding: BaksystemFeilmelding;
   sendteMeldekort: SendtMeldekort[];
+  loading: boolean;
+  locale: string;
 }
 
 interface MapDispatchToProps {
@@ -53,6 +56,7 @@ interface MapDispatchToProps {
     meldekortdetaljerInnsending: MeldekortdetaljerInnsending
   ) => void;
   skjulBaksystemFeilmelding: () => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type BekreftelseProps = MapStateToProps & MapDispatchToProps;
@@ -74,6 +78,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   componentDidMount() {
+    const { settLocale, locale, aktivtMeldekort } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
+
     scrollTilElement(undefined, 'auto');
     loggAktivitet('Viser bekreftelse');
   }
@@ -278,12 +285,20 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort } = this.props;
+    let { aktivtMeldekort, sendteMeldekort, loading } = this.props;
     let { meldegruppe } = this.props.aktivtMeldekort;
     let { valideringsResultat } = this.props.innsending;
     let { meldekortdetaljer } = this.state.meldekortdetaljer;
     let { feilmelding } = this.state;
     let typeYtelsePostfix = finnTypeYtelsePostfix(meldegruppe);
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
 
     if (typeof valideringsResultat !== 'undefined') {
       return valideringsResultat.status === 'FEIL' ? (
@@ -397,6 +412,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     baksystemFeilmelding: selectFeilmelding(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
+    loading: state.ui.loading,
+    locale: state.intl.locale,
   };
 };
 
@@ -422,6 +439,9 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
       ),
     skjulBaksystemFeilmelding: () =>
       dispatch(UiActions.skjulBaksystemFeilmelding()),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 
