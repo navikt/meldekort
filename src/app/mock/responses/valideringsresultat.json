@@ -1,6 +1,6 @@
 {
   "meldekortId": 1331533859,
-  "status": "OK",
+  "status": "FEIL",
   "arsakskoder": [
     {
       "kode": "H01",
@@ -12,7 +12,8 @@
     },
     {
       "kode": "K16",
-      "tekst": "Ditt meldekort er allerede levert."
+      "tekst": "Ditt meldekort er allerede levert.",
+      "params": [ "02.11.2022 17:53:43" ]
     }
   ],
   "meldekortdager": [

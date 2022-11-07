@@ -121,7 +121,7 @@
   "meldekortkontroll.feilkode.k11": "A technical error has occurred when submitting the employment status form. Close your browser and try again. ",
   "meldekortkontroll.feilkode.k12": "Employment status form days are doubled, missing or outside the registration period. ",
   "meldekortkontroll.feilkode.k15": "The employment status form has been submitted before the earliest permitted date. ",
-  "meldekortkontroll.feilkode.k16": "Your employment status form has already been delivered. ",
+  "meldekortkontroll.feilkode.k16": "Your employment status form has already been delivered. Date and time of delivery was {0}. You may have experienced slowness in the system which has caused that you did not receive this confirmation the first time. ",
   "meldekortkontroll.feilkode.tk01": "Has stated not to be participating in employment schemes, but the system has registered employment schemes. ",
   "melding.loggInn": "You are not logged inn. We will redirect you to the log in page when you close this box. ",
   "melding.loggInn.overskrift": "You have to log in ",

@@ -121,7 +121,7 @@
   "meldekortkontroll.feilkode.k11": "Det har oppstått en teknisk feil ved innsending av meldekortet. Lukk nettleseren din og forsøk på nytt. ",
   "meldekortkontroll.feilkode.k12": "Meldekortdager er dobbelt opp, mangler eller er utenfor meldeperioden. ",
   "meldekortkontroll.feilkode.k15": "Meldekortet er forsøkt innsendt før tidligst tillatte dato. ",
-  "meldekortkontroll.feilkode.k16": "Ditt meldekort er allerede levert. ",
+  "meldekortkontroll.feilkode.k16": "Ditt meldekort er allerede levert. Dato og tidspunkt for levering var {0}. Du kan ha opplevd treghet i systemet som har medført at du ikke fikk denne bekreftelsen første gangen. ",
   "meldekortkontroll.feilkode.tk01": "Har oppgitt å ikke være på tiltak, men fagsystemet har registrert tiltak. ",
   "melding.loggInn": "Du er ikke logget inn. Vi viderefører deg til innloggingsiden når du lukker denne boksen. ",
   "melding.loggInn.overskrift": "Du må logge inn ",

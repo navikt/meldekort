@@ -349,11 +349,19 @@ class Utfyllingsside extends React.Component<
               {valideringsResultat.arsakskoder.map(arsakskode => {
                 return (
                   <li key={arsakskode.kode}>
-                    {hentIntl().formatMessage({
-                      id:
-                        'meldekortkontroll.feilkode.' +
-                        arsakskode.kode.toLowerCase(),
-                    })}
+                    {hentIntl().formatMessage(
+                      {
+                        id:
+                          'meldekortkontroll.feilkode.' +
+                          arsakskode.kode.toLowerCase(),
+                      },
+                      {
+                        0:
+                          arsakskode.params && arsakskode.params.length > 0
+                            ? arsakskode.params[0]
+                            : '',
+                      }
+                    )}
                   </li>
                 );
               })}
