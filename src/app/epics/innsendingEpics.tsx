@@ -7,28 +7,11 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { combineEpics } from 'redux-observable';
-import { fetchKorrigertId, postMeldekort } from '../api/api';
+import { postMeldekort } from '../api/api';
 import { from, of } from 'rxjs';
 import { InnsendingActions } from '../actions/innsending';
 import { isActionOf } from 'typesafe-actions';
 import { MeldekortActions } from '../actions/meldekort';
-
-const hentKorrigertId: AppEpic = (action$, state$) =>
-  action$.pipe(
-    filter(isActionOf([InnsendingActions.hentKorrigertId.request])),
-    withLatestFrom(state$),
-    switchMap(([action, state]) =>
-      from(fetchKorrigertId(state.aktivtMeldekort.meldekortId)).pipe(
-        map(InnsendingActions.hentKorrigertId.success),
-        catchError(error =>
-          of(
-            InnsendingActions.hentKorrigertId.failure(error),
-            MeldekortActions.apiKallFeilet(error)
-          )
-        )
-      )
-    )
-  );
 
 const kontrollerMeldekort: AppEpic = (action$, state$) =>
   action$.pipe(
@@ -47,4 +30,4 @@ const kontrollerMeldekort: AppEpic = (action$, state$) =>
     )
   );
 
-export default combineEpics(hentKorrigertId, kontrollerMeldekort);
+export default combineEpics(kontrollerMeldekort);
