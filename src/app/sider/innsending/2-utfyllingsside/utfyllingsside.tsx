@@ -347,7 +347,23 @@ class Utfyllingsside extends React.Component<
           <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
             <ul>
               {valideringsResultat.arsakskoder.map(arsakskode => {
-                return <li key={arsakskode.kode}>{arsakskode.tekst}</li>;
+                return (
+                  <li key={arsakskode.kode}>
+                    {hentIntl().formatMessage(
+                      {
+                        id:
+                          'meldekortkontroll.feilkode.' +
+                          arsakskode.kode.toLowerCase(),
+                      },
+                      {
+                        0:
+                          arsakskode.params && arsakskode.params.length > 0
+                            ? arsakskode.params[0]
+                            : '',
+                      }
+                    )}
+                  </li>
+                );
               })}
             </ul>
           </AlertStripe>
