@@ -84,6 +84,7 @@ export interface ValideringsResultat {
 export interface Arsakskode {
   kode: string;
   tekst: string;
+  params: string[];
 }
 
 export interface Sporsmal {

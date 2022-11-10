@@ -17,6 +17,7 @@ import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
 import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
+import { hentKorrigertIdAndDispatch } from '../../utils/korrigeringUtils';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -130,8 +131,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     settLocale: (locale: string, from: Date) => {
       downloadMessagesAndDispatch(locale, from);
     },
-    hentKorrigertId: () =>
-      dispatch(InnsendingActions.hentKorrigertId.request()),
+    hentKorrigertId: () => hentKorrigertIdAndDispatch(),
     oppdaterSporsmalsobjekter: (sporsmalsobjekter: Spm[]) =>
       dispatch(InnsendingActions.oppdaterSpm(sporsmalsobjekter)),
     oppdaterUtfylteDager: (utfylteDager: UtfyltDag[]) =>

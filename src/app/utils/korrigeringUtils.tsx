@@ -2,6 +2,10 @@ import { MeldekortDag, Meldekortdetaljer, Sporsmal } from '../types/meldekort';
 import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { InnsendingState } from '../types/innsending';
+import { store } from '../store/configureStore';
+import { UiActions } from '../actions/ui';
+import { InnsendingActions } from '../actions/innsending';
+import { fetchKorrigertId } from '../api/api';
 
 const settCheckedBasertPaBoolean = (
   kategoritekst: string,
@@ -77,3 +81,19 @@ export function settSporsmalOgUtfyllingHvisKorrigering(
     utfylteDager: konverterteUtfylteDager,
   };
 }
+
+export const hentKorrigertIdAndDispatch = () => {
+  store.dispatch(UiActions.startLoading());
+
+  fetchKorrigertId(store.getState().aktivtMeldekort.meldekortId)
+    .then((payload: number) => {
+      store.dispatch(InnsendingActions.hentKorrigertId.success(payload));
+    })
+    .catch(error => {
+      console.log(error);
+      store.dispatch(InnsendingActions.hentKorrigertId.failure(error));
+    })
+    .finally(() => {
+      store.dispatch(UiActions.stopLoading());
+    });
+};
