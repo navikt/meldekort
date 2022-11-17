@@ -1,27 +1,25 @@
 import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
-import { WeblogicPing } from '../../types/weblogic';
+import { Lesemodus } from '../../types/lesemodus';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { hentLocale } from '../../utils/intlUtil';
 
 interface MapStateToProps {
-  weblogic: WeblogicPing;
+  lesemodus: Lesemodus;
 }
 
-const WeblogicErNedeInfomelding: React.FunctionComponent<
-  MapStateToProps
-> = props => {
-  let weblogic = props.weblogic;
+const NedeInfomelding: React.FunctionComponent<MapStateToProps> = props => {
+  let lesemodus = props.lesemodus;
 
   const hentNedetidsmelding = () => {
-    if (weblogic.melding === null) {
-      return <FormattedMessage id={'weblogicNedeInfomelding'} />;
+    if (lesemodus.melding === null) {
+      return <FormattedMessage id={'nedeInfomelding'} />;
     } else {
       return hentLocale() === 'nb'
-        ? weblogic.melding.norsk
-        : weblogic.melding.engelsk;
+        ? lesemodus.melding.norsk
+        : lesemodus.melding.engelsk;
     }
   };
 
@@ -30,11 +28,8 @@ const WeblogicErNedeInfomelding: React.FunctionComponent<
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    weblogic: state.weblogic,
+    lesemodus: state.lesemodus,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(WeblogicErNedeInfomelding);
+export default connect(mapStateToProps, null)(NedeInfomelding);

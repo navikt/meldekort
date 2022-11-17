@@ -34,9 +34,9 @@ import {
   selectFeilmelding,
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
-import { WeblogicActions } from '../../actions/weblogic';
-import { WeblogicPing } from '../../types/weblogic';
-import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
+import { LesemodusActions } from '../../actions/lesemodus';
+import { Lesemodus } from '../../types/lesemodus';
+import NedeInfomelding from '../../components/feil/nedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
 
@@ -44,14 +44,14 @@ interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   baksystemFeilmelding: BaksystemFeilmelding;
-  weblogic: WeblogicPing;
+  lesemodus: Lesemodus;
   meny: MenyState;
 }
 
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
-  pingWeblogic: () => void;
+  lesemodus: () => void;
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
@@ -65,7 +65,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.props.hentHistoriskeMeldekort();
-    this.props.pingWeblogic();
+    this.props.lesemodus();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -183,8 +183,8 @@ class TidligereMeldekort extends React.Component<Props, State> {
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
     this.props.resetInnsending();
-    this.props.pingWeblogic();
-    if (this.props.weblogic.erWeblogicOppe) {
+    this.props.lesemodus();
+    if (this.props.lesemodus.lesemodus) {
       this.props.hentHistoriskeMeldekort();
     }
     const valgtMenyPunkt = this.props.meny.alleMenyPunkter.find(
@@ -226,10 +226,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        {this.props.weblogic.erWeblogicOppe ? (
+        {this.props.lesemodus.lesemodus ? (
           this.tekstOgContent()
         ) : (
-          <WeblogicErNedeInfomelding weblogic={this.props.weblogic} />
+          <NedeInfomelding lesemodus={this.props.lesemodus} />
         )}
       </main>
     );
@@ -241,7 +241,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     historiskeMeldekort: state.historiskeMeldekort,
     ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
     baksystemFeilmelding: selectFeilmelding(state),
-    weblogic: state.weblogic,
+    lesemodus: state.lesemodus,
     meny: state.meny,
   };
 };
@@ -251,7 +251,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    lesemodus: () => dispatch(LesemodusActions.lesemodus.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
   };

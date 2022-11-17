@@ -30,8 +30,8 @@ import { Person, PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
-import { WeblogicPing } from '../../../types/weblogic';
-import { WeblogicActions } from '../../../actions/weblogic';
+import { Lesemodus } from '../../../types/lesemodus';
+import { LesemodusActions } from '../../../actions/lesemodus';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
 
@@ -42,7 +42,7 @@ interface MapStateToProps {
   router: Router;
   person: Person;
   personInfo: PersonInfo;
-  weblogic: WeblogicPing;
+  lesemodus: Lesemodus;
   locale: string;
   loading: boolean;
 }
@@ -52,7 +52,7 @@ interface MapDispatchToProps {
   resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
   resettAktivtMeldekort: () => void;
-  pingWeblogic: () => void;
+  lesemodus: () => void;
   settLocale: (locale: string, from: Date) => void;
 }
 
@@ -61,7 +61,7 @@ type Props = MapDispatchToProps & MapStateToProps;
 class Detaljer extends React.Component<Props, { windowSize: number }> {
   constructor(props: any) {
     super(props);
-    this.props.pingWeblogic();
+    this.props.lesemodus();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -78,9 +78,9 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAktivtMeldekortOgRedirect = () => {
-    const { historiskeMeldekort, aktivtMeldekort, weblogic } = this.props;
+    const { historiskeMeldekort, aktivtMeldekort, lesemodus } = this.props;
     if (
-      weblogic.erWeblogicOppe &&
+      !lesemodus.lesemodus &&
       aktivtMeldekort.meldekortId !== 0 &&
       historiskeMeldekort.historiskeMeldekort.filter(
         mk => mk.meldekortId === aktivtMeldekort.meldekortId
@@ -90,12 +90,12 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     }
   };
 
-  sjekkAtWeblogicErOppe = (): boolean => {
-    let erOppe = this.props.weblogic.erWeblogicOppe.valueOf();
-    if (!erOppe) {
+  sjekkOmSkrivemodus = (): boolean => {
+    let skrivemodus = !this.props.lesemodus.lesemodus.valueOf();
+    if (!skrivemodus) {
       this.sjekkAktivtMeldekortOgRedirect();
     }
-    return erOppe;
+    return skrivemodus;
   };
 
   componentDidMount() {
@@ -215,7 +215,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
                 className={'navigasjonsknapp'}
                 nesteAktivtMeldekort={aktivtMeldekort}
                 nesteInnsendingstype={Innsendingstyper.KORRIGERING}
-                validering={this.sjekkAtWeblogicErOppe}
+                validering={this.sjekkOmSkrivemodus}
               />
             ) : null}
             <PrintKnapp
@@ -239,7 +239,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     router: selectRouter(state),
     person: state.person,
     personInfo: state.personInfo.personInfo,
-    weblogic: state.weblogic,
+    lesemodus: state.lesemodus,
     locale: state.intl.locale,
     loading: state.ui.loading,
   };
@@ -255,7 +255,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
-    pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    lesemodus: () => dispatch(LesemodusActions.lesemodus.request()),
     settLocale: (locale: string, from: Date) => {
       downloadMessagesAndDispatch(locale, from);
     },

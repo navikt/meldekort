@@ -1,6 +1,6 @@
 import { Infomelding } from './meldekort';
 
-export interface WeblogicPing {
-  erWeblogicOppe: boolean;
+export interface Lesemodus {
+  lesemodus: boolean;
   melding: Infomelding | null;
 }
