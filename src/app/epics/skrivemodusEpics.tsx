@@ -2,20 +2,20 @@ import { AppEpic } from '../store/configureStore';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { isActionOf } from 'typesafe-actions';
 import { from, of } from 'rxjs';
-import { LesemodusActions } from '../actions/lesemodus';
-import { lesemodus } from '../api/api';
+import { SkrivemodusActions } from '../actions/skrivemodus';
+import { skrivemodus } from '../api/api';
 import { MeldekortActions } from '../actions/meldekort';
 import { combineEpics } from 'redux-observable';
 
-const lesemodusEpic: AppEpic = action$ =>
+const skrivemodusEpic: AppEpic = action$ =>
   action$.pipe(
-    filter(isActionOf(LesemodusActions.lesemodus.request)),
+    filter(isActionOf(SkrivemodusActions.skrivemodus.request)),
     switchMap(() =>
-      from(lesemodus()).pipe(
-        map(LesemodusActions.lesemodus.success),
+      from(skrivemodus()).pipe(
+        map(SkrivemodusActions.skrivemodus.success),
         catchError(error =>
           of(
-            LesemodusActions.lesemodus.failure(error),
+            SkrivemodusActions.skrivemodus.failure(error),
             MeldekortActions.apiKallFeilet(error)
           )
         )
@@ -23,4 +23,4 @@ const lesemodusEpic: AppEpic = action$ =>
     )
   );
 
-export default combineEpics(lesemodusEpic);
+export default combineEpics(skrivemodusEpic);

@@ -1,6 +1,6 @@
 import { Infomelding } from './meldekort';
 
-export interface Lesemodus {
-  lesemodus: boolean;
+export interface Skrivemodus {
+  skrivemodus: boolean;
   melding: Infomelding | null;
 }

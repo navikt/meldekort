@@ -34,8 +34,8 @@ import {
   selectFeilmelding,
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
-import { LesemodusActions } from '../../actions/lesemodus';
-import { Lesemodus } from '../../types/lesemodus';
+import { SkrivemodusActions } from '../../actions/skrivemodus';
+import { Skrivemodus } from '../../types/skrivemodus';
 import NedeInfomelding from '../../components/feil/nedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
@@ -44,14 +44,14 @@ interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   baksystemFeilmelding: BaksystemFeilmelding;
-  lesemodus: Lesemodus;
+  skrivemodus: Skrivemodus;
   meny: MenyState;
 }
 
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
-  lesemodus: () => void;
+  skrivemodus: () => void;
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
@@ -65,7 +65,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.props.hentHistoriskeMeldekort();
-    this.props.lesemodus();
+    this.props.skrivemodus();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -183,8 +183,8 @@ class TidligereMeldekort extends React.Component<Props, State> {
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
     this.props.resetInnsending();
-    this.props.lesemodus();
-    if (this.props.lesemodus.lesemodus) {
+    this.props.skrivemodus();
+    if (this.props.skrivemodus.skrivemodus) {
       this.props.hentHistoriskeMeldekort();
     }
     const valgtMenyPunkt = this.props.meny.alleMenyPunkter.find(
@@ -226,10 +226,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        {this.props.lesemodus.lesemodus ? (
+        {this.props.skrivemodus.skrivemodus ? (
           this.tekstOgContent()
         ) : (
-          <NedeInfomelding lesemodus={this.props.lesemodus} />
+          <NedeInfomelding skrivemodus={this.props.skrivemodus} />
         )}
       </main>
     );
@@ -241,7 +241,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     historiskeMeldekort: state.historiskeMeldekort,
     ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
     baksystemFeilmelding: selectFeilmelding(state),
-    lesemodus: state.lesemodus,
+    skrivemodus: state.skrivemodus,
     meny: state.meny,
   };
 };
@@ -251,7 +251,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    lesemodus: () => dispatch(LesemodusActions.lesemodus.request()),
+    skrivemodus: () => dispatch(SkrivemodusActions.skrivemodus.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
   };

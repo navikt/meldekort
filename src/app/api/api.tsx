@@ -9,7 +9,7 @@ import {
   Meldekortdetaljer,
   ValideringsResultat,
 } from '../types/meldekort';
-import { Lesemodus } from '../types/lesemodus';
+import { Skrivemodus } from '../types/skrivemodus';
 import { RootState } from '../store/configureStore';
 import * as React from 'react';
 import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
@@ -72,8 +72,8 @@ export function fetchInfomelding(): Promise<Infomelding> {
   return fetchGet(Konstanter.hentInfomelding);
 }
 
-export function lesemodus(): Promise<Lesemodus> {
-  return fetchGet(Konstanter.lesemodus);
+export function skrivemodus(): Promise<Skrivemodus> {
+  return fetchGet(Konstanter.skrivemodus);
 }
 
 export function postMeldekort(state: RootState): Promise<ValideringsResultat> {

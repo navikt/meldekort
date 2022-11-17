@@ -8,7 +8,7 @@ export const Konstanter = {
   sendMeldekortApiUri: 'person/meldekort',
   hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
   hentInfomelding: 'meldekort/infomelding',
-  lesemodus: 'lesemodus',
+  skrivemodus: 'skrivemodus',
   hentAlleTekster: 'tekst/hentAlle',
   metodeGet: 'GET',
   metodePost: 'POST',

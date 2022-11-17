@@ -30,8 +30,8 @@ import { Person, PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
-import { Lesemodus } from '../../../types/lesemodus';
-import { LesemodusActions } from '../../../actions/lesemodus';
+import { Skrivemodus } from '../../../types/skrivemodus';
+import { SkrivemodusActions } from '../../../actions/skrivemodus';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
 
@@ -42,7 +42,7 @@ interface MapStateToProps {
   router: Router;
   person: Person;
   personInfo: PersonInfo;
-  lesemodus: Lesemodus;
+  skrivemodus: Skrivemodus;
   locale: string;
   loading: boolean;
 }
@@ -52,7 +52,7 @@ interface MapDispatchToProps {
   resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
   resettAktivtMeldekort: () => void;
-  lesemodus: () => void;
+  skrivemodus: () => void;
   settLocale: (locale: string, from: Date) => void;
 }
 
@@ -61,7 +61,7 @@ type Props = MapDispatchToProps & MapStateToProps;
 class Detaljer extends React.Component<Props, { windowSize: number }> {
   constructor(props: any) {
     super(props);
-    this.props.lesemodus();
+    this.props.skrivemodus();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -78,9 +78,9 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAktivtMeldekortOgRedirect = () => {
-    const { historiskeMeldekort, aktivtMeldekort, lesemodus } = this.props;
+    const { historiskeMeldekort, aktivtMeldekort, skrivemodus } = this.props;
     if (
-      !lesemodus.lesemodus &&
+      skrivemodus.skrivemodus &&
       aktivtMeldekort.meldekortId !== 0 &&
       historiskeMeldekort.historiskeMeldekort.filter(
         mk => mk.meldekortId === aktivtMeldekort.meldekortId
@@ -91,7 +91,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkOmSkrivemodus = (): boolean => {
-    let skrivemodus = !this.props.lesemodus.lesemodus.valueOf();
+    let skrivemodus = !this.props.skrivemodus.skrivemodus.valueOf();
     if (!skrivemodus) {
       this.sjekkAktivtMeldekortOgRedirect();
     }
@@ -239,7 +239,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     router: selectRouter(state),
     person: state.person,
     personInfo: state.personInfo.personInfo,
-    lesemodus: state.lesemodus,
+    skrivemodus: state.skrivemodus,
     locale: state.intl.locale,
     loading: state.ui.loading,
   };
@@ -255,7 +255,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
-    lesemodus: () => dispatch(LesemodusActions.lesemodus.request()),
+    skrivemodus: () => dispatch(SkrivemodusActions.skrivemodus.request()),
     settLocale: (locale: string, from: Date) => {
       downloadMessagesAndDispatch(locale, from);
     },
