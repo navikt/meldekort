@@ -53,8 +53,8 @@ import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
 import { Skrivemodus } from '../types/skrivemodus';
 import skrivemodusReducer from '../reducers/skrivemodusReducer';
-import { Konstanter } from '../utils/consts';
 import skrivemodusEpics from '../epics/skrivemodusEpics';
+import { Konstanter } from '../utils/consts';
 
 export const history = createBrowserHistory({
   basename: Konstanter.basePath,

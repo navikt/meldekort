@@ -91,7 +91,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkOmSkrivemodus = (): boolean => {
-    let skrivemodus = !this.props.skrivemodus.skrivemodus.valueOf();
+    let skrivemodus = this.props.skrivemodus.skrivemodus.valueOf();
     if (!skrivemodus) {
       this.sjekkAktivtMeldekortOgRedirect();
     }

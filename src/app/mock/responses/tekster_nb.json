@@ -133,6 +133,7 @@
   "naviger.neste": "Neste",
   "naviger.send": "Send",
   "naviger.tilbake": "Tilbake ",
+  "nedetidInfomelding": "Du kan for tiden ikke se meldekort du tidligere har sendt eller korrigere dem, på grunn av oppdateringer vi gjør i våre systemer. Du kan fortsatt sende meldekort som vanlig. ",
   "obs.feilmelding": "Noe gikk galt. Vennligst prøv igjen senere. ",
   "obs.feilmelding.overskrift": "Obs! ",
   "oss.frist.overskrift": "Når er siste frist for å sende meldekort uten trekk? ",
@@ -286,6 +287,5 @@
   "utfylling.tiltak": "Tiltak/kurs/utdanning ",
   "utfylling.ugyldigKombinasjon": "Ulovlig kombinasjon av dager: ",
   "veiledning.les": "Les mer ",
-  "veiledning.lukk": "Skjul tekst ",
-  "skrivemodusInfomelding": "Du kan for tiden ikke se meldekort du tidligere har sendt eller korrigere dem, på grunn av oppdateringer vi gjør i våre systemer. Du kan fortsatt sende meldekort som vanlig. "
+  "veiledning.lukk": "Skjul tekst "
 }

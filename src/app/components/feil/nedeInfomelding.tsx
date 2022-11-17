@@ -15,7 +15,7 @@ const NedeInfomelding: React.FunctionComponent<MapStateToProps> = props => {
 
   const hentNedetidsmelding = () => {
     if (skrivemodus.melding === null) {
-      return <FormattedMessage id={'nedeInfomelding'} />;
+      return <FormattedMessage id={'nedetidInfomelding'} />;
     } else {
       return hentLocale() === 'nb'
         ? skrivemodus.melding.norsk
