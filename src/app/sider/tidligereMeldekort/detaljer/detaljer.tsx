@@ -80,7 +80,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   sjekkAktivtMeldekortOgRedirect = () => {
     const { historiskeMeldekort, aktivtMeldekort, weblogic } = this.props;
     if (
-      weblogic.erWeblogicOppe &&
+      weblogic.skrivemodus &&
       aktivtMeldekort.meldekortId !== 0 &&
       historiskeMeldekort.historiskeMeldekort.filter(
         mk => mk.meldekortId === aktivtMeldekort.meldekortId
@@ -91,7 +91,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAtWeblogicErOppe = (): boolean => {
-    let erOppe = this.props.weblogic.erWeblogicOppe.valueOf();
+    let erOppe = this.props.weblogic.skrivemodus.valueOf();
     if (!erOppe) {
       this.sjekkAktivtMeldekortOgRedirect();
     }

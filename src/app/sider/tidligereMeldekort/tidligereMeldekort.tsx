@@ -184,7 +184,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     scrollTilElement(undefined, 'auto');
     this.props.resetInnsending();
     this.props.pingWeblogic();
-    if (this.props.weblogic.erWeblogicOppe) {
+    if (this.props.weblogic.skrivemodus) {
       this.props.hentHistoriskeMeldekort();
     }
     const valgtMenyPunkt = this.props.meny.alleMenyPunkter.find(
@@ -226,7 +226,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        {this.props.weblogic.erWeblogicOppe ? (
+        {this.props.weblogic.skrivemodus ? (
           this.tekstOgContent()
         ) : (
           <WeblogicErNedeInfomelding weblogic={this.props.weblogic} />

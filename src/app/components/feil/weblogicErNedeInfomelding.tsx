@@ -10,14 +10,12 @@ interface MapStateToProps {
   weblogic: WeblogicPing;
 }
 
-const WeblogicErNedeInfomelding: React.FunctionComponent<
-  MapStateToProps
-> = props => {
+const WeblogicErNedeInfomelding: React.FunctionComponent<MapStateToProps> = props => {
   let weblogic = props.weblogic;
 
   const hentNedetidsmelding = () => {
     if (weblogic.melding === null) {
-      return <FormattedMessage id={'weblogicNedeInfomelding'} />;
+      return <FormattedMessage id={'skrivemodusInfomelding'} />;
     } else {
       return hentLocale() === 'nb'
         ? weblogic.melding.norsk
@@ -34,7 +32,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(WeblogicErNedeInfomelding);
+export default connect(mapStateToProps, null)(WeblogicErNedeInfomelding);

@@ -3,7 +3,7 @@ import { WeblogicActions, WeblogicActionTypes } from '../actions/weblogic';
 import { getType } from 'typesafe-actions';
 
 const initialState: WeblogicPing = {
-  erWeblogicOppe: true,
+  skrivemodus: true,
   melding: null,
 };
 
@@ -13,7 +13,7 @@ const weblogicReducer = (
 ): WeblogicPing => {
   if (action.type === getType(WeblogicActions.pingWeblogic.success)) {
     return {
-      erWeblogicOppe: action.payload.erWeblogicOppe,
+      skrivemodus: action.payload.skrivemodus,
       melding:
         action.payload.melding === undefined ? null : action.payload.melding,
     };
