@@ -90,12 +90,12 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     }
   };
 
-  sjekkAtWeblogicErOppe = (): boolean => {
-    let erOppe = this.props.skrivemodus.skrivemodus.valueOf();
-    if (!erOppe) {
+  sjekkAtSkrivemodus = (): boolean => {
+    let skrivemodus = this.props.skrivemodus.skrivemodus.valueOf();
+    if (!skrivemodus) {
       this.sjekkAktivtMeldekortOgRedirect();
     }
-    return erOppe;
+    return skrivemodus;
   };
 
   componentDidMount() {
@@ -215,7 +215,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
                 className={'navigasjonsknapp'}
                 nesteAktivtMeldekort={aktivtMeldekort}
                 nesteInnsendingstype={Innsendingstyper.KORRIGERING}
-                validering={this.sjekkAtWeblogicErOppe}
+                validering={this.sjekkAtSkrivemodus}
               />
             ) : null}
             <PrintKnapp

@@ -10,20 +10,22 @@ interface MapStateToProps {
   weblogic: Skrivemodus;
 }
 
-const WeblogicErNedeInfomelding: React.FunctionComponent<MapStateToProps> = props => {
-  let weblogic = props.weblogic;
+const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props => {
+  let skrivemodus = props.weblogic;
 
-  const hentNedetidsmelding = () => {
-    if (weblogic.melding === null) {
+  const hentSkrivemodusInfomelding = () => {
+    if (skrivemodus.melding === null) {
       return <FormattedMessage id={'skrivemodusInfomelding'} />;
     } else {
       return hentLocale() === 'nb'
-        ? weblogic.melding.norsk
-        : weblogic.melding.engelsk;
+        ? skrivemodus.melding.norsk
+        : skrivemodus.melding.engelsk;
     }
   };
 
-  return <AlertStripe type={'info'}>{hentNedetidsmelding()}</AlertStripe>;
+  return (
+    <AlertStripe type={'info'}>{hentSkrivemodusInfomelding()}</AlertStripe>
+  );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
@@ -32,4 +34,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect(mapStateToProps, null)(WeblogicErNedeInfomelding);
+export default connect(mapStateToProps, null)(SkrivemodusInfomelding);
