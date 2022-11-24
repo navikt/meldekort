@@ -34,7 +34,7 @@ import {
   selectFeilmelding,
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
-import { WeblogicActions } from '../../actions/weblogic';
+import { WeblogicActions } from '../../actions/skrivemodus';
 import { WeblogicPing } from '../../types/weblogic';
 import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';

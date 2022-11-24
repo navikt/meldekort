@@ -52,8 +52,8 @@ import personInfoReducer, {
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
 import { WeblogicPing } from '../types/weblogic';
-import weblogicReducer from '../reducers/weblogicReducer';
-import weblogicEpics from '../epics/weblogicEpics';
+import skrivemodusReducer from '../reducers/skrivemodusReducer';
+import weblogicEpics from '../epics/skrivemodusEpics';
 import { Konstanter } from '../utils/consts';
 
 export const history = createBrowserHistory({
@@ -97,7 +97,7 @@ const appReducer = combineReducers({
   meny: menyReducer,
   ui: uiReducer,
   meldekort: meldekortReducer,
-  weblogic: weblogicReducer,
+  weblogic: skrivemodusReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

@@ -1,5 +1,5 @@
 import { WeblogicPing } from '../types/weblogic';
-import { WeblogicActions, WeblogicActionTypes } from '../actions/weblogic';
+import { WeblogicActions, WeblogicActionTypes } from '../actions/skrivemodus';
 import { getType } from 'typesafe-actions';
 
 const initialState: WeblogicPing = {
@@ -7,7 +7,7 @@ const initialState: WeblogicPing = {
   melding: null,
 };
 
-const weblogicReducer = (
+const skrivemodusReducer = (
   state: WeblogicPing = initialState,
   action: WeblogicActionTypes
 ): WeblogicPing => {
@@ -22,4 +22,4 @@ const weblogicReducer = (
   }
 };
 
-export default weblogicReducer;
+export default skrivemodusReducer;

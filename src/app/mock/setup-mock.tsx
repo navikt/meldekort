@@ -8,7 +8,7 @@ import korrigertid from './responses/korrigertid.json';
 import valideringsresultat from './responses/valideringsresultat.json';
 import personinfo from './responses/personinfo.json';
 import infomelding from './responses/infomelding.json';
-import pingWeblogicJson from './responses/pingWeblogic.json';
+import pingWeblogicJson from './responses/skrivemodus.json';
 import teksterJsonNb from './responses/tekster_nb.json';
 import teksterJsonEn from './responses/tekster_en.json';
 import MockAdapter from 'axios-mock-adapter';
