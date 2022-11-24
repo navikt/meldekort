@@ -34,9 +34,9 @@ import {
   selectFeilmelding,
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
-import { WeblogicActions } from '../../actions/skrivemodus';
+import { SkrivemodusActions } from '../../actions/skrivemodus';
 import { Skrivemodus } from '../../types/skrivemodus';
-import WeblogicErNedeInfomelding from '../../components/feil/skrivemodusInfomelding';
+import SkrivemodusInfomelding from '../../components/feil/skrivemodusInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
 
@@ -229,7 +229,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
         {this.props.skrivemodus.skrivemodus ? (
           this.tekstOgContent()
         ) : (
-          <WeblogicErNedeInfomelding weblogic={this.props.skrivemodus} />
+          <SkrivemodusInfomelding skrivemodus={this.props.skrivemodus} />
         )}
       </main>
     );
@@ -251,7 +251,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    hentSkrivemodus: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    hentSkrivemodus: () =>
+      dispatch(SkrivemodusActions.hentSkrivemodus.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
   };

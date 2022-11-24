@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 import { hentLocale } from '../../utils/intlUtil';
 
 interface MapStateToProps {
-  weblogic: Skrivemodus;
+  skrivemodus: Skrivemodus;
 }
 
 const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props => {
-  let skrivemodus = props.weblogic;
+  let skrivemodus = props.skrivemodus;
 
   const hentSkrivemodusInfomelding = () => {
     if (skrivemodus.melding === null) {
@@ -30,7 +30,7 @@ const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props =
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    weblogic: state.weblogic,
+    skrivemodus: state.weblogic,
   };
 };
 

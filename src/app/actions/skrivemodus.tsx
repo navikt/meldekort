@@ -8,12 +8,12 @@ export enum SkrivemodusTypeKeys {
   SKRIVEMODUS_FEILET = 'SKRIVEMODUS_FEILET',
 }
 
-export const WeblogicActions = {
-  pingWeblogic: createAsyncAction(
+export const SkrivemodusActions = {
+  hentSkrivemodus: createAsyncAction(
     SkrivemodusTypeKeys.SKRIVEMODUS,
     SkrivemodusTypeKeys.SKRIVEMODUS_OK,
     SkrivemodusTypeKeys.SKRIVEMODUS_FEILET
   )<void, Skrivemodus, AxiosError>(),
 };
 
-export type WeblogicActionTypes = ActionType<typeof WeblogicActions>;
+export type WeblogicActionTypes = ActionType<typeof SkrivemodusActions>;

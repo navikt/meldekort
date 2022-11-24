@@ -31,7 +31,7 @@ import classNames from 'classnames';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
 import { Skrivemodus } from '../../../types/skrivemodus';
-import { WeblogicActions } from '../../../actions/skrivemodus';
+import { SkrivemodusActions } from '../../../actions/skrivemodus';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
 
@@ -255,7 +255,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
-    hentSkrivemodus: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    hentSkrivemodus: () =>
+      dispatch(SkrivemodusActions.hentSkrivemodus.request()),
     settLocale: (locale: string, from: Date) => {
       downloadMessagesAndDispatch(locale, from);
     },
