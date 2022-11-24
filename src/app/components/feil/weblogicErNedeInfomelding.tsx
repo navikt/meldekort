@@ -1,13 +1,13 @@
 import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedMessage } from 'react-intl';
-import { WeblogicPing } from '../../types/weblogic';
+import { Skrivemodus } from '../../types/skrivemodus';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { hentLocale } from '../../utils/intlUtil';
 
 interface MapStateToProps {
-  weblogic: WeblogicPing;
+  weblogic: Skrivemodus;
 }
 
 const WeblogicErNedeInfomelding: React.FunctionComponent<MapStateToProps> = props => {

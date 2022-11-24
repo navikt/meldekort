@@ -1,16 +1,16 @@
-import { WeblogicPing } from '../types/weblogic';
+import { Skrivemodus } from '../types/skrivemodus';
 import { WeblogicActions, WeblogicActionTypes } from '../actions/skrivemodus';
 import { getType } from 'typesafe-actions';
 
-const initialState: WeblogicPing = {
+const initialState: Skrivemodus = {
   skrivemodus: true,
   melding: null,
 };
 
 const skrivemodusReducer = (
-  state: WeblogicPing = initialState,
+  state: Skrivemodus = initialState,
   action: WeblogicActionTypes
-): WeblogicPing => {
+): Skrivemodus => {
   if (action.type === getType(WeblogicActions.pingWeblogic.success)) {
     return {
       skrivemodus: action.payload.skrivemodus,

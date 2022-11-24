@@ -35,7 +35,7 @@ import {
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
 import { WeblogicActions } from '../../actions/skrivemodus';
-import { WeblogicPing } from '../../types/weblogic';
+import { Skrivemodus } from '../../types/skrivemodus';
 import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
@@ -44,7 +44,7 @@ interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   baksystemFeilmelding: BaksystemFeilmelding;
-  weblogic: WeblogicPing;
+  weblogic: Skrivemodus;
   meny: MenyState;
 }
 

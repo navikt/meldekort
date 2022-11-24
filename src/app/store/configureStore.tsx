@@ -51,7 +51,7 @@ import personInfoReducer, {
 } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
-import { WeblogicPing } from '../types/weblogic';
+import { Skrivemodus } from '../types/skrivemodus';
 import skrivemodusReducer from '../reducers/skrivemodusReducer';
 import weblogicEpics from '../epics/skrivemodusEpics';
 import { Konstanter } from '../utils/consts';
@@ -78,7 +78,7 @@ export interface RootState {
   meny: MenyState;
   ui: UIState;
   meldekort: MeldekortState;
-  weblogic: WeblogicPing;
+  weblogic: Skrivemodus;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;

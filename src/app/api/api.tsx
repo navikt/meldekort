@@ -9,7 +9,7 @@ import {
   Meldekortdetaljer,
   ValideringsResultat,
 } from '../types/meldekort';
-import { WeblogicPing } from '../types/weblogic';
+import { Skrivemodus } from '../types/skrivemodus';
 import { RootState } from '../store/configureStore';
 import * as React from 'react';
 import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
@@ -72,7 +72,7 @@ export function fetchInfomelding(): Promise<Infomelding> {
   return fetchGet(Konstanter.hentInfomelding);
 }
 
-export function pingWeblogic(): Promise<WeblogicPing> {
+export function pingWeblogic(): Promise<Skrivemodus> {
   return fetchGet(Konstanter.pingWeblogic);
 }
 

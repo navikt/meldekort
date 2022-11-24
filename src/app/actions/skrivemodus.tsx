@@ -1,5 +1,5 @@
 import { ActionType, createAsyncAction } from 'typesafe-actions';
-import { WeblogicPing } from '../types/weblogic';
+import { Skrivemodus } from '../types/skrivemodus';
 import { AxiosError } from 'axios';
 
 export enum WeblogicTypeKeys {
@@ -13,7 +13,7 @@ export const WeblogicActions = {
     WeblogicTypeKeys.PING_WEBLOGIC,
     WeblogicTypeKeys.PING_WEBLOGIC_OK,
     WeblogicTypeKeys.PING_WEBLOGIC_FEILET
-  )<void, WeblogicPing, AxiosError>(),
+  )<void, Skrivemodus, AxiosError>(),
 };
 
 export type WeblogicActionTypes = ActionType<typeof WeblogicActions>;

@@ -30,7 +30,7 @@ import { Person, PersonInfo } from '../../../types/person';
 import classNames from 'classnames';
 import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
 import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
-import { WeblogicPing } from '../../../types/weblogic';
+import { Skrivemodus } from '../../../types/skrivemodus';
 import { WeblogicActions } from '../../../actions/skrivemodus';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
@@ -42,7 +42,7 @@ interface MapStateToProps {
   router: Router;
   person: Person;
   personInfo: PersonInfo;
-  weblogic: WeblogicPing;
+  weblogic: Skrivemodus;
   locale: string;
   loading: boolean;
 }
