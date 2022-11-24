@@ -42,7 +42,7 @@ interface MapStateToProps {
   router: Router;
   person: Person;
   personInfo: PersonInfo;
-  weblogic: Skrivemodus;
+  skrivemodus: Skrivemodus;
   locale: string;
   loading: boolean;
 }
@@ -52,7 +52,7 @@ interface MapDispatchToProps {
   resettMeldekortdetaljer: () => void;
   hentPersonInfo: () => void;
   resettAktivtMeldekort: () => void;
-  pingWeblogic: () => void;
+  hentSkrivemodus: () => void;
   settLocale: (locale: string, from: Date) => void;
 }
 
@@ -61,7 +61,7 @@ type Props = MapDispatchToProps & MapStateToProps;
 class Detaljer extends React.Component<Props, { windowSize: number }> {
   constructor(props: any) {
     super(props);
-    this.props.pingWeblogic();
+    this.props.hentSkrivemodus();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -78,9 +78,9 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAktivtMeldekortOgRedirect = () => {
-    const { historiskeMeldekort, aktivtMeldekort, weblogic } = this.props;
+    const { historiskeMeldekort, aktivtMeldekort, skrivemodus } = this.props;
     if (
-      weblogic.skrivemodus &&
+      skrivemodus.skrivemodus &&
       aktivtMeldekort.meldekortId !== 0 &&
       historiskeMeldekort.historiskeMeldekort.filter(
         mk => mk.meldekortId === aktivtMeldekort.meldekortId
@@ -91,7 +91,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   sjekkAtWeblogicErOppe = (): boolean => {
-    let erOppe = this.props.weblogic.skrivemodus.valueOf();
+    let erOppe = this.props.skrivemodus.skrivemodus.valueOf();
     if (!erOppe) {
       this.sjekkAktivtMeldekortOgRedirect();
     }
@@ -239,7 +239,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     router: selectRouter(state),
     person: state.person,
     personInfo: state.personInfo.personInfo,
-    weblogic: state.weblogic,
+    skrivemodus: state.weblogic,
     locale: state.intl.locale,
     loading: state.ui.loading,
   };
@@ -255,7 +255,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
     resettAktivtMeldekort: () =>
       dispatch(AktivtMeldekortActions.resettAktivtMeldekort()),
-    pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    hentSkrivemodus: () => dispatch(WeblogicActions.pingWeblogic.request()),
     settLocale: (locale: string, from: Date) => {
       downloadMessagesAndDispatch(locale, from);
     },
