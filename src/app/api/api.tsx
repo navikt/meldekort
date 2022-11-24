@@ -72,7 +72,7 @@ export function fetchInfomelding(): Promise<Infomelding> {
   return fetchGet(Konstanter.hentInfomelding);
 }
 
-export function pingWeblogic(): Promise<Skrivemodus> {
+export function fetchSkrivemodus(): Promise<Skrivemodus> {
   return fetchGet(Konstanter.pingWeblogic);
 }
 

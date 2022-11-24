@@ -3,7 +3,7 @@ import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { isActionOf } from 'typesafe-actions';
 import { from, of } from 'rxjs';
 import { WeblogicActions } from '../actions/skrivemodus';
-import { pingWeblogic } from '../api/api';
+import { fetchSkrivemodus } from '../api/api';
 import { MeldekortActions } from '../actions/meldekort';
 import { combineEpics } from 'redux-observable';
 
@@ -11,7 +11,7 @@ const pingWeblogicEpic: AppEpic = action$ =>
   action$.pipe(
     filter(isActionOf(WeblogicActions.pingWeblogic.request)),
     switchMap(() =>
-      from(pingWeblogic()).pipe(
+      from(fetchSkrivemodus()).pipe(
         map(WeblogicActions.pingWeblogic.success),
         catchError(error =>
           of(
