@@ -2,17 +2,17 @@ import { ActionType, createAsyncAction } from 'typesafe-actions';
 import { Skrivemodus } from '../types/skrivemodus';
 import { AxiosError } from 'axios';
 
-export enum WeblogicTypeKeys {
-  PING_WEBLOGIC = 'PING_WEBLOGIC',
-  PING_WEBLOGIC_OK = 'PING_WEBLOGIC_OK',
-  PING_WEBLOGIC_FEILET = 'PING_WEBLOGIC_FEILET',
+export enum SkrivemodusTypeKeys {
+  SKRIVEMODUS = 'SKRIVEMODUS',
+  SKRIVEMODUS_OK = 'SKRIVEMODUS_OK',
+  SKRIVEMODUS_FEILET = 'SKRIVEMODUS_FEILET',
 }
 
 export const WeblogicActions = {
   pingWeblogic: createAsyncAction(
-    WeblogicTypeKeys.PING_WEBLOGIC,
-    WeblogicTypeKeys.PING_WEBLOGIC_OK,
-    WeblogicTypeKeys.PING_WEBLOGIC_FEILET
+    SkrivemodusTypeKeys.SKRIVEMODUS,
+    SkrivemodusTypeKeys.SKRIVEMODUS_OK,
+    SkrivemodusTypeKeys.SKRIVEMODUS_FEILET
   )<void, Skrivemodus, AxiosError>(),
 };
 
