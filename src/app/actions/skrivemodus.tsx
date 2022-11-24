@@ -16,4 +16,4 @@ export const SkrivemodusActions = {
   )<void, Skrivemodus, AxiosError>(),
 };
 
-export type WeblogicActionTypes = ActionType<typeof SkrivemodusActions>;
+export type SkrivemodusActionTypes = ActionType<typeof SkrivemodusActions>;

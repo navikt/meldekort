@@ -241,7 +241,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     historiskeMeldekort: state.historiskeMeldekort,
     ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
     baksystemFeilmelding: selectFeilmelding(state),
-    skrivemodus: state.weblogic,
+    skrivemodus: state.skrivemodus,
     meny: state.meny,
   };
 };

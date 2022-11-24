@@ -239,7 +239,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     router: selectRouter(state),
     person: state.person,
     personInfo: state.personInfo.personInfo,
-    skrivemodus: state.weblogic,
+    skrivemodus: state.skrivemodus,
     locale: state.intl.locale,
     loading: state.ui.loading,
   };

@@ -7,7 +7,7 @@ import { fetchSkrivemodus } from '../api/api';
 import { MeldekortActions } from '../actions/meldekort';
 import { combineEpics } from 'redux-observable';
 
-const pingWeblogicEpic: AppEpic = action$ =>
+const hentSkrivemodusEpic: AppEpic = action$ =>
   action$.pipe(
     filter(isActionOf(SkrivemodusActions.hentSkrivemodus.request)),
     switchMap(() =>
@@ -23,4 +23,4 @@ const pingWeblogicEpic: AppEpic = action$ =>
     )
   );
 
-export default combineEpics(pingWeblogicEpic);
+export default combineEpics(hentSkrivemodusEpic);

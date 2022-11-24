@@ -1,7 +1,7 @@
 import { Skrivemodus } from '../types/skrivemodus';
 import {
   SkrivemodusActions,
-  WeblogicActionTypes,
+  SkrivemodusActionTypes,
 } from '../actions/skrivemodus';
 import { getType } from 'typesafe-actions';
 
@@ -12,7 +12,7 @@ const initialState: Skrivemodus = {
 
 const skrivemodusReducer = (
   state: Skrivemodus = initialState,
-  action: WeblogicActionTypes
+  action: SkrivemodusActionTypes
 ): Skrivemodus => {
   if (action.type === getType(SkrivemodusActions.hentSkrivemodus.success)) {
     return {

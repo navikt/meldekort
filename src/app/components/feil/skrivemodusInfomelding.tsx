@@ -30,7 +30,7 @@ const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props =
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    skrivemodus: state.weblogic,
+    skrivemodus: state.skrivemodus,
   };
 };
 

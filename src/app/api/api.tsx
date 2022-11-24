@@ -73,7 +73,7 @@ export function fetchInfomelding(): Promise<Infomelding> {
 }
 
 export function fetchSkrivemodus(): Promise<Skrivemodus> {
-  return fetchGet(Konstanter.pingWeblogic);
+  return fetchGet(Konstanter.hentSkrivemodus);
 }
 
 export function postMeldekort(state: RootState): Promise<ValideringsResultat> {

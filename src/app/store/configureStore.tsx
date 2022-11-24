@@ -53,7 +53,7 @@ import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
 import { Skrivemodus } from '../types/skrivemodus';
 import skrivemodusReducer from '../reducers/skrivemodusReducer';
-import weblogicEpics from '../epics/skrivemodusEpics';
+import skrivemodusEpics from '../epics/skrivemodusEpics';
 import { Konstanter } from '../utils/consts';
 
 export const history = createBrowserHistory({
@@ -78,7 +78,7 @@ export interface RootState {
   meny: MenyState;
   ui: UIState;
   meldekort: MeldekortState;
-  weblogic: Skrivemodus;
+  skrivemodus: Skrivemodus;
 }
 
 export type AppEpic = Epic<Action, Action, RootState>;
@@ -97,7 +97,7 @@ const appReducer = combineReducers({
   meny: menyReducer,
   ui: uiReducer,
   meldekort: meldekortReducer,
-  weblogic: skrivemodusReducer,
+  skrivemodus: skrivemodusReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -163,7 +163,7 @@ epicMiddleware.run(
     innsendingEpics,
     meldekortdetaljerEpics,
     meldekortEpics,
-    weblogicEpics
+    skrivemodusEpics
   )
 );
 
