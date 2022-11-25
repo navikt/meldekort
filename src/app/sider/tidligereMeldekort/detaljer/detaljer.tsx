@@ -90,7 +90,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     }
   };
 
-  sjekkAtSkrivemodus = (): boolean => {
+  erSkrivemodus = (): boolean => {
     let skrivemodus = this.props.skrivemodus.skrivemodus.valueOf();
     if (!skrivemodus) {
       this.sjekkAktivtMeldekortOgRedirect();
@@ -215,7 +215,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
                 className={'navigasjonsknapp'}
                 nesteAktivtMeldekort={aktivtMeldekort}
                 nesteInnsendingstype={Innsendingstyper.KORRIGERING}
-                validering={this.sjekkAtSkrivemodus}
+                validering={this.erSkrivemodus}
               />
             ) : null}
             <PrintKnapp
