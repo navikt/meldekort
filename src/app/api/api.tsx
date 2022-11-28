@@ -37,6 +37,21 @@ const fetchPost = async (url: string, data: any) => {
     })
     .then(response => {
       return response.data;
+    })
+    .catch(error => {
+      // Dette kan brukes kun når man sender inn et meldekort
+      // Men det er OK siden fetchPost brukes kun i postMeldekort
+      // Dette må endres til en feilhåndtering på en riktig måte,
+      // men dette kan vi ha nå siden vi tenkter å skrive om hele løsningen
+      return {
+        status: 'FEIL',
+        arsakskoder: [
+          {
+            kode: '00',
+            tekst: error,
+          },
+        ],
+      };
     });
 };
 
