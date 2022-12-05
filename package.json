@@ -11,7 +11,7 @@
     "@redux-devtools/extension": "^3.2.3",
     "@types/history": "^4.7.2",
     "@types/node": "^10.12.60",
-    "@types/ramda": "^0.28.19",
+    "@types/ramda": "^0.28.20",
     "@types/react": "^17.0.52",
     "@types/react-aria-menubutton": "^6.2.2",
     "@types/react-collapse": "^5.0.1",
@@ -93,7 +93,7 @@
     "redux-observable": "^1.0.0",
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
-    "snyk": "^1.1053.0",
+    "snyk": "^1.1064.0",
     "stylelint": "^14.14.1",
     "stylelint-no-unsupported-browser-features": "^4.1.1",
     "ts-react-json-table": "^0.1.1",
@@ -110,8 +110,7 @@
     "prettier": "`prettier '**/*.{js, tsx,less}'  --write`",
     "test": "react-scripts test --env=jsdom --coverage --watchAll=false --w=1",
     "test:watch": "react-scripts test --env=jsdom",
-    "test:reload": "react-scripts test -u",
-    "comb": "csscomb *.less"
+    "test:reload": "react-scripts test -u"
   },
   "browserslist": [
     ">0.2%",
@@ -132,7 +131,6 @@
     "enzyme": "^3.10.0",
     "enzyme-to-json": "^3.3.5",
     "husky": "^3.0.3",
-    "less": "^4.1.3",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "react-test-renderer": "^17.0.2",

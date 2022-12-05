@@ -5,10 +5,10 @@
   "tabWidth": 2,
   "overrides": [
     {
-      "files": "*.less",
+      "files": "*.css",
       "options": {
         "singleQuote": false,
-        "parser": "less"
+        "parser": "css"
       }
     }
   ]
