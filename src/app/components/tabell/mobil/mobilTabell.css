@@ -1,0 +1,21 @@
+.mobilTabell-container {
+  border-bottom: 1px solid #b7b1a9;
+}
+.mobilTabell-container table.mobilTabell {
+  border-spacing: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad {
+  height: 2.5rem;
+}
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad:first-child {
+  border-top: 1px solid #b7b1a9;
+}
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad:nth-child(odd) {
+  background: #f8f8f8;
+}
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad:nth-child(even) {
+  background: white;
+}

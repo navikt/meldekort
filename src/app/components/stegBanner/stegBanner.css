@@ -1,0 +1,8 @@
+.seksjon.stegbanner
+  .stegindikator.stegindikator--kompakt
+  .stegindikator__liste {
+  margin: 1rem;
+}
+.stegindikator__steg {
+  z-index: 0;
+}

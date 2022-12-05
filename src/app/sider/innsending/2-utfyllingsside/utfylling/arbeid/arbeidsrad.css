@@ -1,0 +1,71 @@
+.arbeidsrad {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  width: 100%;
+  border-left: solid 9px #99c2e8;
+  border-top: 1px solid #c6c2bf;
+  padding: 0 1rem 0 1rem;
+}
+.arbeidsrad__tittel {
+  align-self: end;
+  padding-bottom: 0.5rem;
+}
+.arbeidsrad__inputfelter {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  margin-top: 1.2rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.arbeidsrad .skjemaelement {
+  justify-self: center;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+}
+.arbeidsrad .skjemaelement .input--xs {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+}
+.arbeidsrad .utvidetInformasjon {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding-bottom: 0.5rem;
+}
+.arbeidsrad .utvidetInformasjon.utvidetInformasjon--apen {
+  margin-top: 0.5rem;
+}
+@media only screen and (max-width: 767px) {
+  .arbeidsrad {
+    display: flex;
+    flex-direction: column;
+  }
+  .arbeidsrad__tittel {
+    align-self: flex-start;
+    padding-top: 1rem;
+  }
+  .arbeidsrad__inputfelter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin: 0 0 1rem;
+  }
+  .arbeidsrad .skjemaelement {
+    margin: 0;
+  }
+  .arbeidsrad .skjemaelement .input--xs {
+    width: 2.25rem;
+    height: 2rem;
+  }
+  .arbeidsrad .utvidetInformasjon {
+    padding-bottom: 1rem;
+  }
+}

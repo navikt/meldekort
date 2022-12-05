@@ -1,0 +1,12 @@
+.seksjon.begrunnelse .utvidetInformasjon {
+  margin-bottom: 1rem;
+}
+.seksjon.begrunnelse .feilmelding {
+  padding: 0 0.5rem 0 0.5rem;
+  background-color: #f3e3e3;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.seksjon.begrunnelse .feilmelding .rodTekst {
+  color: #ba3a26;
+}

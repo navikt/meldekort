@@ -1,0 +1,21 @@
+.innhold-detaljer img {
+  height: 3rem;
+}
+.ingress-detaljer {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+.tabell-detaljer {
+  margin-top: 3rem;
+}
+.ikkeVis {
+  display: none;
+}
+.ikkeVisMenPrint {
+  display: none;
+}
+@media print {
+  .ikkeVisMenPrint {
+    display: block;
+  }
+}

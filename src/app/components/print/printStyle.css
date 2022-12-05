@@ -1,0 +1,175 @@
+.utskrift {
+  display: none;
+}
+@media print {
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  decorator-header,
+  decorator-footer,
+  header,
+  nav,
+  footer,
+  .decorator-wrapper,
+  .navno-dekorator,
+  .hodefot .siteheader,
+  .hodefot .sitefooter,
+  .banner-container,
+  .noPrint {
+    display: none;
+  }
+  .pagewrapper {
+    display: none;
+    min-height: 0;
+  }
+  .utskrift {
+    display: block;
+  }
+  .utskrift__hode {
+    text-align: center;
+    margin-bottom: 2vh;
+  }
+  .utskrift__hode img {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .utskrift .noPrint {
+    display: none;
+  }
+  .utskrift .tabell-detaljer {
+    margin: 0;
+  }
+  .utskrift .tabell .jsonTable td,
+  .utskrift .tabell .jsonTable th {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .utskrift .tabell .jsonTable td .etikett--suksess,
+  .utskrift .tabell .jsonTable th .etikett--suksess {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .utskrift span,
+  .utskrift h1,
+  .utskrift h2,
+  .utskrift hr,
+  .utskrift p,
+  .utskrift td,
+  .utskrift div,
+  .utskrift section {
+    font-size: 12px;
+    margin-top: 0;
+    line-height: 14px;
+  }
+  .utskrift span h1,
+  .utskrift h1 h1,
+  .utskrift h2 h1,
+  .utskrift hr h1,
+  .utskrift p h1,
+  .utskrift td h1,
+  .utskrift div h1,
+  .utskrift section h1,
+  .utskrift span h1 span,
+  .utskrift h1 h1 span,
+  .utskrift h2 h1 span,
+  .utskrift hr h1 span,
+  .utskrift p h1 span,
+  .utskrift td h1 span,
+  .utskrift div h1 span,
+  .utskrift section h1 span,
+  .utskrift span h2,
+  .utskrift h1 h2,
+  .utskrift h2 h2,
+  .utskrift hr h2,
+  .utskrift p h2,
+  .utskrift td h2,
+  .utskrift div h2,
+  .utskrift section h2,
+  .utskrift span h2 span,
+  .utskrift h1 h2 span,
+  .utskrift h2 h2 span,
+  .utskrift hr h2 span,
+  .utskrift p h2 span,
+  .utskrift td h2 span,
+  .utskrift div h2 span,
+  .utskrift section h2 span {
+    font-size: 16px;
+  }
+  .utskrift .periodeBanner {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .utskrift .periodeBanner h1,
+  .utskrift .periodeBanner p,
+  .utskrift .periodeBanner p span {
+    margin-bottom: 0.2rem;
+  }
+  .utskrift .oppsummeringsTekster {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .utskrift .meldekortdetaljer .sporsmalsvisning {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  .utskrift .meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe {
+    margin-bottom: 0.75rem;
+  }
+  .utskrift .meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe img {
+    height: 1.25rem;
+  }
+  .utskrift
+    .meldekortdetaljer
+    .sporsmalsvisning
+    .sporsmalsgruppe
+    .sporsmalstekst {
+    margin-bottom: 0.5rem;
+  }
+  .utskrift .meldekortdetaljer .ukevisning {
+    border-bottom: 1px solid #d1d1d1;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: minmax(auto, auto);
+  }
+  .utskrift .meldekortdetaljer .ukevisning .uke {
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  .utskrift .meldekortdetaljer .ukevisning .uke .uketittel {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .utskrift .meldekortdetaljer .ukevisning .uke .dagliste {
+    margin-bottom: 0.5rem;
+  }
+  .utskrift .meldekortdetaljer .ukevisning .uke .dagliste .dagliste__dager {
+    display: grid;
+    grid-template-columns: 4.25rem auto;
+    grid-template-rows: minmax(auto, auto);
+  }
+  .utskrift .meldekortdetaljer .ukevisning .uke:last-child {
+    padding-left: 1rem;
+  }
+}
+#meldekort__root .onlyPrint {
+  display: none;
+}
+#meldekort__root .printLogo {
+  height: 20px;
+  margin-right: 0.5rem;
+  padding-bottom: 0.2rem;
+}
+@media print {
+  #meldekort__root {
+    display: none;
+  }
+}
+.utskrift.browserSpecificStyling
+  .utskrift__innhold
+  .seksjon
+  .meldekortdetaljer
+  .ukevisning {
+  display: flex;
+}

@@ -1,0 +1,122 @@
+.partialGridSupportedStyling .banner__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media only screen and (max-width: 480px),
+  only screen and (max-width: 767px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling .banner__content {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.partialGridSupportedStyling .mobilmeny__navlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.partialGridSupportedStyling .mobilmenyToggle {
+  display: block;
+  height: 100%;
+  width: 60px;
+}
+@media only screen and (min-width: 992px) {
+  .partialGridSupportedStyling .mobilmenyToggle {
+    display: none;
+  }
+}
+.partialGridSupportedStyling .knapper-container {
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+}
+.partialGridSupportedStyling .knapper-container .navigasjonsknapp {
+  margin-bottom: 1.5rem;
+}
+@media only screen and (min-width: 992px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling .knapper-container .navigasjonsknapp {
+    margin-right: 2rem;
+  }
+}
+.partialGridSupportedStyling .utfylling-container .uke__panel {
+  display: flex;
+  flex-direction: column;
+}
+.partialGridSupportedStyling .utfylling-container .ukedager--desktop {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50%;
+}
+@media only screen and (max-width: 480px), only screen and (max-width: 767px) {
+  .partialGridSupportedStyling .utfylling-container .ukedager--desktop {
+    display: none;
+  }
+}
+.partialGridSupportedStyling .utfylling-container .ukedager--mobil {
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (min-width: 992px) {
+  .partialGridSupportedStyling .utfylling-container .ukedager--mobil {
+    display: none;
+  }
+}
+.partialGridSupportedStyling .utfylling-container .arbeidsrad {
+  padding-bottom: 1rem;
+}
+.partialGridSupportedStyling .utfylling-container .arbeidsrad__tittel {
+  padding-top: 1rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.partialGridSupportedStyling .utfylling-container .arbeidsrad__inputfelter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+}
+.partialGridSupportedStyling
+  .utfylling-container
+  .arbeidsrad
+  .utvidetInformasjon {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+@media only screen and (max-width: 767px),
+  only screen and (max-width: 480px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling .utfylling-container .arbeidsrad__inputfelter {
+    padding: 0;
+  }
+}
+.partialGridSupportedStyling .utfylling-container .aktivitetsrad {
+  padding-bottom: 1rem;
+}
+.partialGridSupportedStyling .utfylling-container .aktivitetsrad__tittel {
+  padding-top: 1rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.partialGridSupportedStyling .utfylling-container .aktivitetsrad__inputfelter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+}
+.partialGridSupportedStyling
+  .utfylling-container
+  .aktivitetsrad
+  .utvidetInformasjon {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+@media only screen and (max-width: 767px),
+  only screen and (max-width: 480px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling
+    .utfylling-container
+    .aktivitetsrad__inputfelter {
+    padding: 0;
+  }
+}

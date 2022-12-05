@@ -1,0 +1,57 @@
+.meldekortHeader .hovedmeny {
+  background: white;
+  display: flex;
+  justify-content: center;
+  border-bottom: 4px solid #e9e7e7;
+}
+.meldekortHeader .hovedmeny__wrapper {
+  display: flex;
+  justify-content: space-between;
+  min-height: 4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.meldekortHeader .hovedmeny__item {
+  display: flex;
+}
+.meldekortHeader .hovedmeny__menypunkt {
+  align-items: center;
+  border: 0;
+  border-bottom: 4px solid #e9e7e7;
+  color: #0067c5;
+  display: flex;
+  font-size: 1.1rem;
+  height: 100%;
+  padding: 0.25rem 0.4rem 0.25rem 0.4rem;
+  position: relative;
+  top: 4px;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  width: 100%;
+  font-weight: bold;
+}
+.meldekortHeader .hovedmeny__menypunkt:hover {
+  color: #262626;
+  border-bottom: 4px solid #66a5f4;
+}
+.meldekortHeader .hovedmeny__menypunkt:active {
+  color: #fff;
+  border-bottom: 4px solid white;
+}
+.meldekortHeader .hovedmeny .active {
+  border-bottom: 4px solid #0067c5;
+  z-index: 1;
+  color: #262626;
+}
+.meldekortHeader .hovedmeny .active:focus {
+  color: #fff;
+  border-bottom: 4px solid white;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (max-width: 767px),
+  only screen and (max-width: 480px) {
+  .meldekortHeader .hovedmeny {
+    display: none;
+  }
+}

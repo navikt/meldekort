@@ -1,0 +1,12 @@
+.bekreftCheckboksPanel {
+  padding: 2rem !important;
+}
+.bekreftInfo {
+  margin-bottom: 2rem;
+}
+.bekreftInfo .skjemaelement--horisontal {
+  margin-top: 1rem;
+}
+.bekreftInfo .skjemaelement--horisontal .skjemaelement__label {
+  font-weight: 600;
+}

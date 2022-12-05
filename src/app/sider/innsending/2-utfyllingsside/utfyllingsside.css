@@ -1,0 +1,94 @@
+.utfylling-container {
+  display: block;
+  width: 100%;
+}
+.utfylling-container .ekspanderbartPanel {
+  margin-bottom: 2rem;
+}
+.utfylling-container .uke__panel {
+  margin: 0 1rem 1rem 1rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: minmax(auto, 1fr);
+}
+.utfylling-container .uke__tittel {
+  padding-left: 1rem;
+}
+.utfylling-container .ukedager--desktop {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  border-left: solid 4px white;
+  padding: 0 1rem 0.5rem 0;
+}
+.utfylling-container .ukedager--desktop .typo-ingress {
+  justify-self: center;
+}
+.utfylling-container .ukedager--desktop .typo-ingress abbr {
+  font-weight: bold;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (min-width: 992px) {
+  .utfylling-container .ukedager--mobil {
+    display: none;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .utfylling-container .ekspanderbartPanel__innhold {
+    padding: 0 !important;
+  }
+  .utfylling-container .uke__panel {
+    margin: 0 0 0;
+  }
+}
+@media only screen and (max-width: 767px), only screen and (max-width: 480px) {
+  .utfylling-container .ekspanderbartPanel {
+    margin-bottom: 2rem;
+  }
+  .utfylling-container .ekspanderbartPanel__innhold {
+    padding: 0 !important;
+  }
+  .utfylling-container .uke__panel {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  .utfylling-container .ukedager--desktop {
+    display: none;
+  }
+  .utfylling-container .ukedager--mobil {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin-top: 1rem;
+  }
+  .utfylling-container .ukedager--mobil .typo-ingress {
+    justify-self: center;
+  }
+}
+.utfylling__feilmelding {
+  margin-bottom: 2rem;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+.vekk {
+  position: absolute;
+  left: -3000px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  z-index: -1000;
+}
