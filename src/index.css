@@ -1,0 +1,1999 @@
+/*
+-----------------------------
+   GENERELL STYLING
+-----------------------------
+*/
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: white;
+}
+
+body #meldekort__root .loader {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+body #meldekort__root .main-container,
+body #meldekort__root .overlay .main-container {
+  z-index: 100;
+  max-width: 992px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+body #meldekort__root .main-container .sideinnhold,
+body #meldekort__root .overlay .main-container .sideinnhold {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0 3rem 0;
+}
+
+body #meldekort__root .main-container .sideinnhold .flex-innhold,
+body #meldekort__root .overlay .main-container .sideinnhold .flex-innhold {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body
+  #meldekort__root
+  .main-container
+  .sideinnhold
+  .flex-innhold.tittel-sprakvelger,
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .flex-innhold.tittel-sprakvelger {
+  align-items: center;
+  justify-content: space-between;
+}
+
+body #meldekort__root .main-container .sideinnhold .flex-innhold.sentrert,
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .flex-innhold.sentrert {
+  justify-content: center;
+}
+
+body #meldekort__root .main-container .sideinnhold .seksjon,
+body #meldekort__root .overlay .main-container .sideinnhold .seksjon {
+  margin-bottom: 2rem;
+}
+
+body #meldekort__root .main-container .sideinnhold .seksjon:last-child,
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon:last-child {
+  margin-bottom: 0;
+}
+
+body #meldekort__root .main-container .sideinnhold .seksjon .item,
+body #meldekort__root .overlay .main-container .sideinnhold .seksjon .item {
+  margin-bottom: 1rem;
+}
+
+body #meldekort__root .main-container .sideinnhold .seksjon .item:last-child,
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon
+  .item:last-child {
+  margin-bottom: 0;
+}
+
+body #meldekort__root .main-container .sideinnhold .seksjon .knapper-container,
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 300px));
+  grid-template-rows: minmax(auto, auto);
+  grid-row-gap: 1rem;
+  grid-column-gap: 2rem;
+}
+
+body
+  #meldekort__root
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp,
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp {
+  min-width: 165px;
+}
+
+body
+  #meldekort__root
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp:nth-child(1),
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp:nth-child(1) {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: end;
+}
+
+body
+  #meldekort__root
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp:nth-child(2),
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp:nth-child(2) {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: start;
+}
+
+body
+  #meldekort__root
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp:nth-child(3),
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon
+  .knapper-container
+  .navigasjonsknapp:nth-child(3) {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  justify-self: center;
+}
+
+body .sentrert-tekst {
+  text-align: center;
+}
+
+@media only screen and (min-width: 992px) {
+  body #decorator-footer {
+    padding-top: 100px;
+  }
+
+  body #meldekort__root .main-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+
+  body #meldekort__root .main-container .sideinnhold {
+    width: 800px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  body #meldekort__root .main-container {
+    padding: 0 1rem 0 1rem;
+  }
+
+  body #meldekort__root .main-container .sideinnhold {
+    padding: 2rem 0 2rem 0;
+  }
+
+  body #meldekort__root .main-container .sideinnhold .seksjon {
+    margin-bottom: 1.5rem;
+  }
+
+  body #meldekort__root .main-container .sideinnhold .seksjon .item {
+    margin-bottom: 1rem;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container.lang-knapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(auto, auto);
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container.lang-knapper
+    .navigasjonsknapp {
+    min-width: 140px;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container.lang-knapper
+    .navigasjonsknapp:nth-child(1) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    justify-self: center;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container.lang-knapper
+    .navigasjonsknapp:nth-child(2) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    justify-self: center;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container.lang-knapper
+    .navigasjonsknapp:nth-child(3) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    justify-self: center;
+  }
+}
+
+@media only screen and (max-width: 480px), only screen and (max-width: 767px) {
+  body #meldekort__root .main-container {
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .flex-innhold.tittel-sprakvelger {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto auto;
+    grid-column-gap: 0.5rem;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .flex-innhold.tittel-sprakvelger
+    h1,
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .flex-innhold.tittel-sprakvelger
+    .languageToggle {
+    align-self: center;
+    margin: 0;
+  }
+
+  body #meldekort__root .main-container .sideinnhold .seksjon {
+    margin-bottom: 1.5rem;
+  }
+
+  body #meldekort__root .main-container .sideinnhold .seksjon .item {
+    margin-bottom: 1rem;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container.lang-knapper
+    .navigasjonsknapp {
+    min-width: 140px;
+  }
+
+  body
+    #meldekort__root
+    .main-container
+    .sideinnhold
+    .seksjon
+    .knapper-container
+    .navigasjonsknapp {
+    margin-bottom: 1rem;
+  }
+}
+
+.partialGridSupportedStyling .banner__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 480px),
+  only screen and (max-width: 767px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling .banner__content {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.partialGridSupportedStyling .mobilmeny__navlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.partialGridSupportedStyling .mobilmenyToggle {
+  display: block;
+  height: 100%;
+  width: 60px;
+}
+
+@media only screen and (min-width: 992px) {
+  .partialGridSupportedStyling .mobilmenyToggle {
+    display: none;
+  }
+}
+
+.partialGridSupportedStyling .knapper-container {
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+}
+
+.partialGridSupportedStyling .knapper-container .navigasjonsknapp {
+  margin-bottom: 1.5rem;
+}
+
+@media only screen and (min-width: 992px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling .knapper-container .navigasjonsknapp {
+    margin-right: 2rem;
+  }
+}
+
+.partialGridSupportedStyling .utfylling-container .uke__panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.partialGridSupportedStyling .utfylling-container .ukedager--desktop {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50%;
+}
+
+@media only screen and (max-width: 480px), only screen and (max-width: 767px) {
+  .partialGridSupportedStyling .utfylling-container .ukedager--desktop {
+    display: none;
+  }
+}
+
+.partialGridSupportedStyling .utfylling-container .ukedager--mobil {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (min-width: 992px) {
+  .partialGridSupportedStyling .utfylling-container .ukedager--mobil {
+    display: none;
+  }
+}
+
+.partialGridSupportedStyling .utfylling-container .arbeidsrad {
+  padding-bottom: 1rem;
+}
+
+.partialGridSupportedStyling .utfylling-container .arbeidsrad__tittel {
+  padding-top: 1rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.partialGridSupportedStyling .utfylling-container .arbeidsrad__inputfelter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+}
+
+.partialGridSupportedStyling
+  .utfylling-container
+  .arbeidsrad
+  .utvidetInformasjon {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+@media only screen and (max-width: 767px),
+  only screen and (max-width: 480px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling .utfylling-container .arbeidsrad__inputfelter {
+    padding: 0;
+  }
+}
+
+.partialGridSupportedStyling .utfylling-container .aktivitetsrad {
+  padding-bottom: 1rem;
+}
+
+.partialGridSupportedStyling .utfylling-container .aktivitetsrad__tittel {
+  padding-top: 1rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.partialGridSupportedStyling .utfylling-container .aktivitetsrad__inputfelter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+}
+
+.partialGridSupportedStyling
+  .utfylling-container
+  .aktivitetsrad
+  .utvidetInformasjon {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+@media only screen and (max-width: 767px),
+  only screen and (max-width: 480px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .partialGridSupportedStyling
+    .utfylling-container
+    .aktivitetsrad__inputfelter {
+    padding: 0;
+  }
+}
+
+.oldBrowserStyling .banner__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.oldBrowserStyling .banner__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.oldBrowserStyling .mobilmeny__navlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.oldBrowserStyling .mobilmenyToggle {
+  display: block;
+  height: 100%;
+  width: 60px;
+}
+
+@media only screen and (min-width: 992px) {
+  .oldBrowserStyling .mobilmenyToggle {
+    display: none;
+  }
+}
+
+.oldBrowserStyling .knapper-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.oldBrowserStyling .knapper-container .navigasjonsknapp {
+  margin-bottom: 1.5rem;
+}
+
+@media only screen and (min-width: 992px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .oldBrowserStyling .knapper-container .navigasjonsknapp {
+    margin-right: 2rem;
+  }
+}
+
+.oldBrowserStyling .utfylling-container .uke__panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.oldBrowserStyling .utfylling-container .ukedager--desktop {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50%;
+}
+
+@media only screen and (max-width: 480px),
+  only screen and (max-width: 767px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .oldBrowserStyling .utfylling-container .ukedager--desktop {
+    display: none;
+  }
+}
+
+.oldBrowserStyling .utfylling-container .ukedager--mobil {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 992px) {
+  .oldBrowserStyling .utfylling-container .ukedager--mobil {
+    display: none;
+  }
+}
+
+.oldBrowserStyling .utfylling-container .arbeidsrad {
+  padding-bottom: 1rem;
+}
+
+.oldBrowserStyling .utfylling-container .arbeidsrad__tittel {
+  padding-top: 1rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.oldBrowserStyling .utfylling-container .arbeidsrad__inputfelter {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 1rem 50%;
+  margin-top: 0;
+}
+
+.oldBrowserStyling .utfylling-container .arbeidsrad .utvidetInformasjon {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+@media only screen and (max-width: 767px),
+  only screen and (max-width: 480px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .oldBrowserStyling .utfylling-container .arbeidsrad__inputfelter {
+    padding: 0;
+  }
+}
+
+.oldBrowserStyling .utfylling-container .aktivitetsrad {
+  padding-bottom: 1rem;
+}
+
+.oldBrowserStyling .utfylling-container .aktivitetsrad__tittel {
+  padding-top: 1rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.oldBrowserStyling .utfylling-container .aktivitetsrad__inputfelter {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 1rem 50%;
+  margin-top: 0;
+}
+
+.oldBrowserStyling .utfylling-container .aktivitetsrad .utvidetInformasjon {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+@media only screen and (max-width: 767px),
+  only screen and (max-width: 480px),
+  only screen and (min-width: 768px) and (max-width: 991px) {
+  .oldBrowserStyling .utfylling-container .aktivitetsrad__inputfelter {
+    padding: 0;
+  }
+}
+
+/*
+-----------------------------
+   CSS GRID FUNKSJONER
+-----------------------------
+*/
+/*
+-----------------------------------------
+   CONTAINER, MARGIN, PADDING
+-----------------------------------------
+*/
+/*
+-----------------------------
+   BREKKPUNKTER & SETUP
+-----------------------------
+*/
+.spinforyourlife {
+  margin-top: 3rem;
+}
+
+.ekspanderbartInnhold {
+  transition: height 0.5s ease;
+}
+
+.ekspanderbartInnhold .ekspanderbart__tekst {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  color: #262626;
+}
+
+.ekspanderbartInnhold--apen {
+  margin-top: 1rem;
+  opacity: 1;
+  box-shadow: 0 0 0 3px #00347d;
+  border-radius: 4px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .ekspanderbartInnhold--apen {
+    margin-top: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ekspanderbartInnhold--apen {
+    margin-top: 0;
+  }
+}
+
+.alertstripe_wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.gammelNettleser {
+  display: block;
+  width: 80%;
+  margin: 1rem auto 0;
+}
+
+@media only screen and (min-width: 992px) {
+  .gammelNettleser {
+    width: 800px;
+  }
+}
+
+@supports ((display: -ms-grid) or (display: grid)) {
+  .gammelNettleser {
+    display: none;
+  }
+}
+
+.meldekortHeader__innsending {
+  display: none;
+}
+
+.banner__container {
+  background-color: #cce1ff;
+  border-bottom: 2px solid #99c3ff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr;
+}
+
+.banner__content {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  grid-template-rows: minmax(40px, auto);
+}
+
+.banner__title {
+  height: 100%;
+  justify-self: center;
+  padding: 0.5rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .meldekortHeader {
+    border-bottom: none;
+  }
+
+  .banner__content {
+    border-bottom: 2px solid #99c3ff;
+  }
+
+  .banner__title {
+    width: 100%;
+  }
+}
+
+.meldekortHeader .hovedmeny {
+  background: white;
+  display: flex;
+  justify-content: center;
+  border-bottom: 4px solid #e9e7e7;
+}
+
+.meldekortHeader .hovedmeny__wrapper {
+  display: flex;
+  justify-content: space-between;
+  min-height: 4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meldekortHeader .hovedmeny__item {
+  display: flex;
+}
+
+.meldekortHeader .hovedmeny__menypunkt {
+  align-items: center;
+  border: 0;
+  border-bottom: 4px solid #e9e7e7;
+  color: #0067c5;
+  display: flex;
+  font-size: 1.1rem;
+  height: 100%;
+  padding: 0.25rem 0.4rem 0.25rem 0.4rem;
+  position: relative;
+  top: 4px;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+  width: 100%;
+  font-weight: bold;
+}
+
+.meldekortHeader .hovedmeny__menypunkt:hover {
+  color: #262626;
+  border-bottom: 4px solid #66a5f4;
+}
+
+.meldekortHeader .hovedmeny__menypunkt:active {
+  color: #fff;
+  border-bottom: 4px solid white;
+}
+
+.meldekortHeader .hovedmeny .active {
+  border-bottom: 4px solid #0067c5;
+  z-index: 1;
+  color: #262626;
+}
+
+.meldekortHeader .hovedmeny .active:focus {
+  color: #fff;
+  border-bottom: 4px solid white;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (max-width: 767px),
+  only screen and (max-width: 480px) {
+  .meldekortHeader .hovedmeny {
+    display: none;
+  }
+}
+
+.meldekortdetaljer {
+  padding-top: 1rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning {
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.meldekortdetaljer .sporsmalsvisning .begrunnelse {
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .begrunnelse .sporsmalstekst {
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .begrunnelse .checkmark {
+  height: 24px;
+  margin-right: 0.5rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .begrunnelse .utvidetInformasjon {
+  margin-top: 0.15rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe {
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe .typo-element {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe:last-child {
+  margin-bottom: 0;
+}
+
+.meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe img {
+  height: 24px;
+  margin-right: 0.5rem;
+}
+
+.meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe .sporsmalstekst {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .ukevisning .detaljerborder {
+  width: 2rem;
+  border: 1px solid #000000;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .ukevisning .uke {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.meldekortdetaljer .ukevisning .uke .uketittel {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.meldekortdetaljer .ukevisning .uke .dagliste {
+  margin-bottom: 1rem;
+}
+
+.meldekortdetaljer .ukevisning .uke .utfylling {
+  margin-left: 0.2rem;
+}
+
+.mobilmeny {
+  background: white;
+}
+
+.mobilmeny__navlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(auto, auto);
+  padding: 0;
+}
+
+.mobilmeny__item {
+  justify-self: center;
+  font-weight: 500;
+  list-style: none;
+  padding: 5px 5px 3px 5px;
+  transition: all ease-in-out 0.75s;
+}
+
+.mobilmeny__lenke {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 5px 3px 0 3px;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.mobilmeny__lenke:after {
+  background: transparent;
+  content: "";
+  display: block;
+  height: 4px;
+  margin: 5px auto 0 auto;
+  transition: width 0.8s ease;
+  width: 0;
+}
+
+.mobilmeny__lenke:hover:after {
+  width: 100%;
+  font-weight: bold;
+  background: #99c3ff;
+}
+
+.mobilmeny__lenke.active {
+  color: black;
+  font-weight: bold;
+}
+
+.mobilmeny__lenke.active:after {
+  background: #0067c5;
+  height: 4px;
+  width: 100%;
+}
+
+.mobilmeny__lenke:focus {
+  color: white;
+}
+
+.mobilmeny__lenke:focus:after {
+  background: #fff;
+}
+
+@media only screen and (max-width: 480px) {
+  .mobilmeny__navlist {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(auto, auto);
+  }
+
+  .mobilmeny__item {
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .mobilmeny {
+    background-color: transparent;
+    display: none;
+  }
+}
+
+.overlay {
+  bottom: 0;
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  opacity: 1;
+  right: 0;
+  top: 0;
+  transition: opacity 0.3s ease 0s;
+  width: 100%;
+  z-index: 105;
+}
+
+.mobilmenyToggle {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.mobilmenyToggle__burgericon {
+  cursor: pointer;
+  position: relative;
+}
+
+.mobilmenyToggle__burgericon.open .line:nth-child(1) {
+  width: 0;
+}
+
+.mobilmenyToggle__burgericon.open .line:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.mobilmenyToggle__burgericon.open .line:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.mobilmenyToggle__burgericon.open .line:nth-child(4) {
+  width: 0;
+}
+
+.mobilmenyToggle .line {
+  background: black;
+  height: 5px;
+  left: 0;
+  position: absolute;
+  transition: 0.25s ease-in-out;
+  width: 100%;
+}
+
+.mobilmenyToggle .line:nth-child(1) {
+  top: 5px;
+}
+
+.mobilmenyToggle .line:nth-child(2),
+.mobilmenyToggle .line:nth-child(3) {
+  top: 15px;
+}
+
+.mobilmenyToggle .line:nth-child(4) {
+  top: 25px;
+}
+
+@media only screen and (max-width: 480px) {
+  .mobilmenyToggle {
+    margin-top: 0.75rem;
+    margin-left: 0.25rem;
+  }
+
+  .mobilmenyToggle__burgericon {
+    width: 85%;
+  }
+
+  .mobilmenyToggle .line {
+    height: 5px;
+  }
+
+  .mobilmenyToggle .line:nth-child(1) {
+    top: 0;
+  }
+
+  .mobilmenyToggle .line:nth-child(2),
+  .mobilmenyToggle .line:nth-child(3) {
+    top: 10px;
+  }
+
+  .mobilmenyToggle .line:nth-child(4) {
+    top: 20px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .mobilmenyToggle {
+    display: none;
+  }
+}
+
+.uimodal {
+  width: 40rem;
+  min-height: 15rem;
+  position: relative;
+}
+
+.uimodal__content {
+  margin-top: 1rem;
+}
+
+.uimodal__actions {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.uimodal__actions-knapp {
+  margin-left: 1rem;
+}
+
+.uimodal .uimodal__actions-knapp {
+  margin-top: 0.5rem;
+}
+
+.modal-overskrift h2 {
+  margin-bottom: 1rem;
+}
+
+.utskrift {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  decorator-header,
+  decorator-footer,
+  header,
+  nav,
+  footer,
+  .decorator-wrapper,
+  .navno-dekorator,
+  .hodefot .siteheader,
+  .hodefot .sitefooter,
+  .banner-container,
+  .noPrint {
+    display: none;
+  }
+
+  .pagewrapper {
+    display: none;
+    min-height: 0;
+  }
+
+  .utskrift {
+    display: block;
+  }
+
+  .utskrift__hode {
+    text-align: center;
+    margin-bottom: 2vh;
+  }
+
+  .utskrift__hode img {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .utskrift .noPrint {
+    display: none;
+  }
+
+  .utskrift .tabell-detaljer {
+    margin: 0;
+  }
+
+  .utskrift .tabell .jsonTable td,
+  .utskrift .tabell .jsonTable th {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .utskrift .tabell .jsonTable td .etikett--suksess,
+  .utskrift .tabell .jsonTable th .etikett--suksess {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .utskrift span,
+  .utskrift h1,
+  .utskrift h2,
+  .utskrift hr,
+  .utskrift p,
+  .utskrift td,
+  .utskrift div,
+  .utskrift section {
+    font-size: 12px;
+    margin-top: 0;
+    line-height: 14px;
+  }
+
+  .utskrift span h1,
+  .utskrift h1 h1,
+  .utskrift h2 h1,
+  .utskrift hr h1,
+  .utskrift p h1,
+  .utskrift td h1,
+  .utskrift div h1,
+  .utskrift section h1,
+  .utskrift span h1 span,
+  .utskrift h1 h1 span,
+  .utskrift h2 h1 span,
+  .utskrift hr h1 span,
+  .utskrift p h1 span,
+  .utskrift td h1 span,
+  .utskrift div h1 span,
+  .utskrift section h1 span,
+  .utskrift span h2,
+  .utskrift h1 h2,
+  .utskrift h2 h2,
+  .utskrift hr h2,
+  .utskrift p h2,
+  .utskrift td h2,
+  .utskrift div h2,
+  .utskrift section h2,
+  .utskrift span h2 span,
+  .utskrift h1 h2 span,
+  .utskrift h2 h2 span,
+  .utskrift hr h2 span,
+  .utskrift p h2 span,
+  .utskrift td h2 span,
+  .utskrift div h2 span,
+  .utskrift section h2 span {
+    font-size: 16px;
+  }
+
+  .utskrift .periodeBanner {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .utskrift .periodeBanner h1,
+  .utskrift .periodeBanner p,
+  .utskrift .periodeBanner p span {
+    margin-bottom: 0.2rem;
+  }
+
+  .utskrift .oppsummeringsTekster {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .utskrift .meldekortdetaljer .sporsmalsvisning {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .utskrift .meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe {
+    margin-bottom: 0.75rem;
+  }
+
+  .utskrift .meldekortdetaljer .sporsmalsvisning .sporsmalsgruppe img {
+    height: 1.25rem;
+  }
+
+  .utskrift
+    .meldekortdetaljer
+    .sporsmalsvisning
+    .sporsmalsgruppe
+    .sporsmalstekst {
+    margin-bottom: 0.5rem;
+  }
+
+  .utskrift .meldekortdetaljer .ukevisning {
+    border-bottom: 1px solid #d1d1d1;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: minmax(auto, auto);
+  }
+
+  .utskrift .meldekortdetaljer .ukevisning .uke {
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .utskrift .meldekortdetaljer .ukevisning .uke .uketittel {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .utskrift .meldekortdetaljer .ukevisning .uke .dagliste {
+    margin-bottom: 0.5rem;
+  }
+
+  .utskrift .meldekortdetaljer .ukevisning .uke .dagliste .dagliste__dager {
+    display: grid;
+    grid-template-columns: 4.25rem auto;
+    grid-template-rows: minmax(auto, auto);
+  }
+
+  .utskrift .meldekortdetaljer .ukevisning .uke:last-child {
+    padding-left: 1rem;
+  }
+}
+
+#meldekort__root .onlyPrint {
+  display: none;
+}
+
+#meldekort__root .printLogo {
+  height: 20px;
+  margin-right: 0.5rem;
+  padding-bottom: 0.2rem;
+}
+
+@media print {
+  #meldekort__root {
+    display: none;
+  }
+}
+
+.utskrift.browserSpecificStyling
+  .utskrift__innhold
+  .seksjon
+  .meldekortdetaljer
+  .ukevisning {
+  display: flex;
+}
+
+.languageToggle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.languageToggle__wrapper {
+  min-width: 165px;
+  position: relative;
+  outline: none;
+}
+
+.languageToggle__wrapper:hover {
+  background-color: #ffffff;
+}
+
+.languageToggle__button {
+  width: 100%;
+  display: flex;
+  border: 1px solid #a0a0a0;
+  border-radius: 0.25rem;
+  align-content: center;
+  flex-wrap: nowrap;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.languageToggle__button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbd66;
+  border-color: transparent;
+}
+
+.languageToggle__button__flag {
+  max-height: 18px;
+  padding-right: 0.5rem;
+}
+
+.languageToggle__button__language {
+  text-align: left;
+  width: 65%;
+}
+
+.languageToggle__menu {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.languageToggle__menu ul {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #a0a0a0;
+  border-left: 1px solid #a0a0a0;
+  border-right: 1px solid #a0a0a0;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  left: 0;
+  top: 100%;
+}
+
+.languageToggle__menu ul li {
+  width: 100%;
+  list-style: none;
+}
+
+.languageToggle__menu__item {
+  display: flex;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  width: 100%;
+  outline: none;
+}
+
+.languageToggle__menu__item:hover {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbd66;
+}
+
+.languageToggle__menu__item:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbd66;
+}
+
+@media only screen and (max-width: 480px) {
+  .languageToggle__wrapper {
+    min-width: 130px;
+  }
+
+  .languageToggle__button {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
+}
+
+.seksjon.stegbanner
+  .stegindikator.stegindikator--kompakt
+  .stegindikator__liste {
+  margin: 1rem;
+}
+
+.stegindikator__steg {
+  z-index: 0;
+}
+
+.tabell .jsonTable {
+  border-spacing: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tabell .jsonTable thead {
+  border-bottom: 1px solid #262626;
+}
+
+.tabell .jsonTable td,
+.tabell .jsonTable th {
+  padding: 1rem;
+  text-align: left;
+}
+
+.tabell .jsonTable .jsonRow {
+  background: #f8f8f8;
+}
+
+.tabell .jsonTable .jsonRow tr,
+.tabell .jsonTable .jsonRow td {
+  border-bottom: 1px solid #b7b1a9;
+}
+
+.tabell .jsonTable .jsonOdd {
+  background: white;
+}
+
+.etikett.etikettbase__positiv {
+  background-color: #99dead;
+}
+
+.etikett.etikettbase__fremhevet {
+  background-color: #efa89d;
+}
+
+.etikett.etikettbase__informativ {
+  background-color: #b5f1ff;
+}
+
+.etikett.etikettbase__fokusert {
+  background-color: #ffd799;
+}
+
+.mobilTabell-container {
+  border-bottom: 1px solid #b7b1a9;
+}
+
+.mobilTabell-container table.mobilTabell {
+  border-spacing: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad {
+  height: 2.5rem;
+}
+
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad:first-child {
+  border-top: 1px solid #b7b1a9;
+}
+
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad:nth-child(odd) {
+  background: #f8f8f8;
+}
+
+.mobilTabell-container table.mobilTabell tbody tr.tabellRad:nth-child(even) {
+  background: white;
+}
+
+.infoToggler {
+  position: relative;
+  border: none !important;
+  background: transparent;
+  padding: 0;
+  display: inline-block;
+}
+
+.infoToggler:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbd66;
+}
+
+.infoToggler__content {
+  color: #0067c5;
+  display: block;
+  text-align: left;
+  border-bottom: solid 1px #b7b1a9;
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.infoToggler:hover .infoToggler__content,
+.infoToggler:focus .infoToggler__content,
+.infoToggler:active .infoToggler__content {
+  border-bottom-color: #0067c5;
+}
+
+.infoToggler__label {
+  display: inline-block;
+}
+
+.infoToggler__chevron {
+  line-height: 1.3rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.utvidetInformasjon {
+  /* Justere på grunn av animasjon */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.utvidetInformasjon p {
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+.utvidetInformasjon__innhold,
+.utvidetInformasjon__toggler {
+  width: 100%;
+}
+
+.utvidetInformasjon__innhold {
+  order: 1;
+}
+
+.utvidetInformasjon__toggler {
+  order: 2;
+}
+
+.bekreftCheckboksPanel {
+  padding: 2rem !important;
+}
+
+.bekreftInfo {
+  margin-bottom: 2rem;
+}
+
+.bekreftInfo .skjemaelement--horisontal {
+  margin-top: 1rem;
+}
+
+.bekreftInfo .skjemaelement--horisontal .skjemaelement__label {
+  font-weight: 600;
+}
+
+.seksjon.sporsmal .flex-sporsmal-hjelpetekst-container {
+  display: block;
+}
+
+.seksjon.sporsmal .skjema__feilomrade--harFeil {
+  margin-top: 1rem;
+}
+
+.seksjon.sporsmal .inputPanelGruppe {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.seksjon.begrunnelse .utvidetInformasjon {
+  margin-bottom: 1rem;
+}
+
+.seksjon.begrunnelse .feilmelding {
+  background-color: #f3e3e3;
+  padding: 1rem 0.5rem;
+}
+
+.seksjon.begrunnelse .feilmelding .rodTekst {
+  color: #ba3a26;
+}
+
+.alertstripe_registrert {
+  margin-top: -1.25rem;
+}
+
+.aktivitetsrad {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border-top: 1px solid #c6c2bf;
+  border-left: solid 9px;
+  grid-template-rows: minmax(auto, auto);
+  width: 100%;
+  padding: 0 1rem 0 1rem;
+}
+
+.aktivitetsrad:last-child {
+  border-bottom: solid 1px #c6c2bf;
+}
+
+.aktivitetsrad__tittel {
+  align-self: end;
+}
+
+.aktivitetsrad .utvidetInformasjon {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding-bottom: 0.5rem;
+}
+
+.aktivitetsrad .utvidetInformasjon.utvidetInformasjon--apen {
+  margin-top: 1rem;
+}
+
+.aktivitetsrad__inputfelter {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.aktivitetsrad__inputfelter .aktivitet__checkbox_feil {
+  justify-self: center;
+}
+
+.aktivitetsrad__inputfelter
+  .aktivitet__checkbox_feil
+  label.skjemaelement__label::before {
+  margin: 0.25rem;
+  border-color: #ba3a26;
+  background-color: #d99999;
+}
+
+.aktivitetsrad__inputfelter .aktivitet__checkbox {
+  justify-self: center;
+}
+
+.aktivitetsrad__inputfelter
+  .aktivitet__checkbox
+  label.skjemaelement__label::before {
+  margin: 0.25rem;
+}
+
+.feilIRad {
+  background-color: #e79999;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (min-width: 992px) {
+  .aktivitetsrad .ukedager {
+    display: none;
+  }
+
+  .feilIRad {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .aktivitetsrad {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+  }
+
+  .aktivitetsrad__tittel {
+    padding-top: 1rem;
+    align-self: flex-start;
+  }
+
+  .aktivitetsrad__inputfelter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin: 0 0 2rem 0;
+  }
+
+  .aktivitetsrad__inputfelter .aktivitet__checkbox {
+    justify-self: center;
+  }
+
+  .aktivitetsrad__inputfelter
+    .aktivitet__checkbox
+    label.skjemaelement__label::before {
+    margin: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .aktivitetsrad {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 100%;
+  }
+
+  .aktivitetsrad__tittel {
+    padding-top: 1rem;
+  }
+
+  .aktivitetsrad .utvidetInformasjon {
+    padding-top: 0.5rem;
+  }
+
+  .aktivitetsrad__inputfelter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin: 0 0 2rem 0;
+  }
+
+  .aktivitetsrad__inputfelter .aktivitet__checkbox {
+    justify-self: center;
+  }
+}
+
+.arbeidsrad {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  width: 100%;
+  border-left: solid 9px #99c2e8;
+  border-top: 1px solid #c6c2bf;
+  padding: 0 1rem 0 1rem;
+}
+
+.arbeidsrad__tittel {
+  align-self: end;
+  padding-bottom: 0.5rem;
+}
+
+.arbeidsrad__inputfelter {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  margin-top: 1.2rem;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.arbeidsrad .skjemaelement {
+  justify-self: center;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.arbeidsrad .skjemaelement .input--xs {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+}
+
+.arbeidsrad .utvidetInformasjon {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding-bottom: 0.5rem;
+}
+
+.arbeidsrad .utvidetInformasjon.utvidetInformasjon--apen {
+  margin-top: 0.5rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .arbeidsrad {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .arbeidsrad__tittel {
+    align-self: flex-start;
+    padding-top: 1rem;
+  }
+
+  .arbeidsrad__inputfelter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin: 0 0 1rem;
+  }
+
+  .arbeidsrad .skjemaelement {
+    margin: 0;
+  }
+
+  .arbeidsrad .skjemaelement .input--xs {
+    width: 2.25rem;
+    height: 2rem;
+  }
+
+  .arbeidsrad .utvidetInformasjon {
+    padding-bottom: 1rem;
+  }
+}
+
+.utfylling-container {
+  display: block;
+  width: 100%;
+}
+
+.utfylling-container .ekspanderbartPanel {
+  margin-bottom: 2rem;
+}
+
+.utfylling-container .uke__panel {
+  margin: 0 1rem 1rem 1rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: minmax(auto, 1fr);
+}
+
+.utfylling-container .uke__tittel {
+  padding-left: 1rem;
+}
+
+.utfylling-container .ukedager--desktop {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: minmax(auto, auto);
+  border-left: solid 4px white;
+  padding: 0 1rem 0.5rem 0;
+}
+
+.utfylling-container .ukedager--desktop .typo-ingress {
+  justify-self: center;
+}
+
+.utfylling-container .ukedager--desktop .typo-ingress abbr {
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px),
+  only screen and (min-width: 992px) {
+  .utfylling-container .ukedager--mobil {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .utfylling-container .ekspanderbartPanel__innhold {
+    padding: 0 !important;
+  }
+
+  .utfylling-container .uke__panel {
+    margin: 0 0 0;
+  }
+}
+
+@media only screen and (max-width: 767px), only screen and (max-width: 480px) {
+  .utfylling-container .ekspanderbartPanel {
+    margin-bottom: 2rem;
+  }
+
+  .utfylling-container .ekspanderbartPanel__innhold {
+    padding: 0 !important;
+  }
+
+  .utfylling-container .uke__panel {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .utfylling-container .ukedager--desktop {
+    display: none;
+  }
+
+  .utfylling-container .ukedager--mobil {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: minmax(auto, auto);
+    margin-top: 1rem;
+  }
+
+  .utfylling-container .ukedager--mobil .typo-ingress {
+    justify-self: center;
+  }
+}
+
+.utfylling__feilmelding {
+  margin-bottom: 2rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.vekk {
+  position: absolute;
+  left: -3000px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  z-index: -1000;
+}
+
+.oss-ikon {
+  height: 15rem;
+}
+
+.oss-seksjon .ekspanderbartPanel {
+  margin-bottom: 2rem;
+}
+
+.meldekort-spinner {
+  text-align: center;
+}
+
+.send-meldekort-varsel {
+  text-align: center;
+}
+
+.box {
+  border-radius: 0.5rem;
+  border: 2px solid #c6c2bf;
+  padding: 1rem;
+  text-align: center;
+}
+
+.innhold-detaljer img {
+  height: 3rem;
+}
+
+.ingress-detaljer {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.tabell-detaljer {
+  margin-top: 3rem;
+}
+
+.ikkeVis {
+  display: none;
+}
+
+.ikkeVisMenPrint {
+  display: none;
+}
+
+@media print {
+  .ikkeVisMenPrint {
+    display: block;
+  }
+}
+
+.alertSendt {
+  margin-bottom: 2rem;
+}
+
+.etterregistrering_info {
+  text-align: center;
+}
+
+.kvitteringsKnapper button {
+  margin-top: 1rem;
+}
