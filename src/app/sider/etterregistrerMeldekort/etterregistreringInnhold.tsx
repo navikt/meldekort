@@ -25,7 +25,7 @@ function EtterregistreringInnhold({
   return (
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
-        <Innholdstittel className="seksjon">
+        <Innholdstittel>
           {hentIntl().formatMessage({
             id: 'overskrift.etterregistrering.innsending',
           })}

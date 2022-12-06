@@ -18,7 +18,7 @@ body #meldekort__root .loader {
 }
 
 body #meldekort__root .main-container,
-body #meldekort__root .main-container.overlay {
+body #meldekort__root .overlay .main-container {
   z-index: 100;
   max-width: 992px;
   margin-right: auto;
@@ -26,14 +26,14 @@ body #meldekort__root .main-container.overlay {
 }
 
 body #meldekort__root .main-container .sideinnhold,
-body #meldekort__root .main-container.overlay .sideinnhold {
+body #meldekort__root .overlay .main-container .sideinnhold {
   display: flex;
   flex-direction: column;
   padding: 2rem 0 3rem 0;
 }
 
 body #meldekort__root .main-container .sideinnhold .flex-innhold,
-body #meldekort__root .main-container.overlay .sideinnhold .flex-innhold {
+body #meldekort__root .overlay .main-container .sideinnhold .flex-innhold {
   display: flex;
   flex-wrap: wrap;
 }
@@ -42,11 +42,11 @@ body
   #meldekort__root
   .main-container
   .sideinnhold
-  .flex-innhold
-  .tittel-sprakvelger,
+  .flex-innhold.tittel-sprakvelger,
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .flex-innhold.tittel-sprakvelger {
   align-items: center;
@@ -56,31 +56,38 @@ body
 body #meldekort__root .main-container .sideinnhold .flex-innhold.sentrert,
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .flex-innhold.sentrert {
   justify-content: center;
 }
 
 body #meldekort__root .main-container .sideinnhold .seksjon,
-body #meldekort__root .main-container.overlay .sideinnhold .seksjon {
+body #meldekort__root .overlay .main-container .sideinnhold .seksjon {
   margin-bottom: 2rem;
 }
 
 body #meldekort__root .main-container .sideinnhold .seksjon:last-child,
-body #meldekort__root .main-container.overlay .sideinnhold .seksjon:last-child {
+body
+  #meldekort__root
+  .overlay
+  .main-container
+  .sideinnhold
+  .seksjon:last-child {
   margin-bottom: 0;
 }
 
 body #meldekort__root .main-container .sideinnhold .seksjon .item,
-body #meldekort__root .main-container.overlay .sideinnhold .seksjon .item {
+body #meldekort__root .overlay .main-container .sideinnhold .seksjon .item {
   margin-bottom: 1rem;
 }
 
 body #meldekort__root .main-container .sideinnhold .seksjon .item:last-child,
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .seksjon
   .item:last-child {
@@ -90,7 +97,8 @@ body
 body #meldekort__root .main-container .sideinnhold .seksjon .knapper-container,
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .seksjon
   .knapper-container {
@@ -110,7 +118,8 @@ body
   .navigasjonsknapp,
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .seksjon
   .knapper-container
@@ -127,7 +136,8 @@ body
   .navigasjonsknapp:nth-child(1),
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .seksjon
   .knapper-container
@@ -148,7 +158,8 @@ body
   .navigasjonsknapp:nth-child(2),
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .seksjon
   .knapper-container
@@ -169,7 +180,8 @@ body
   .navigasjonsknapp:nth-child(3),
 body
   #meldekort__root
-  .main-container.overlay
+  .overlay
+  .main-container
   .sideinnhold
   .seksjon
   .knapper-container
