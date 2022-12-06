@@ -100,7 +100,7 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-react-hooks": "^2.2.1",
     "typesafe-actions": "^3.0.0",
-    "webpack": "4.44.2"
+    "webpack": "5.75.0"
   },
   "scripts": {
     "build": "set CI=false && craco build",
