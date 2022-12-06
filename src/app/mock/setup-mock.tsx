@@ -8,7 +8,7 @@ import korrigertid from './responses/korrigertid.json';
 import valideringsresultat from './responses/valideringsresultat.json';
 import personinfo from './responses/personinfo.json';
 import infomelding from './responses/infomelding.json';
-import pingWeblogicJson from './responses/pingWeblogic.json';
+import skrivemodusJson from './responses/skrivemodus.json';
 import teksterJsonNb from './responses/tekster_nb.json';
 import teksterJsonEn from './responses/tekster_en.json';
 import MockAdapter from 'axios-mock-adapter';
@@ -49,8 +49,8 @@ export default () => {
     ...infomelding,
   });
 
-  mock.onGet(apiUrl + Konstanter.pingWeblogic).reply(200, {
-    ...pingWeblogicJson,
+  mock.onGet(apiUrl + Konstanter.hentSkrivemodus).reply(200, {
+    ...skrivemodusJson,
   });
 
   mock.onPost(apiUrl + Konstanter.sendMeldekortApiUri).reply(200, {
