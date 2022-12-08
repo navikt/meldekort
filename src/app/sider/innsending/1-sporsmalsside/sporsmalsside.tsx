@@ -356,9 +356,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
       oppdaterSvar(nySporsmalsobjektState);
     }
     loggAktivitet('Viser spørsmål');
-    loggAktivitet('skjema startet', {
-      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
-    });
   }
 
   render() {

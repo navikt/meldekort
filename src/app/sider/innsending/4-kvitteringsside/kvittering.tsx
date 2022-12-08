@@ -98,9 +98,6 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
       innsendingstype: innsendingstype || 'UKJENT',
     });
-    loggAktivitet('skjema fullført', {
-      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
-    });
   }
 
   returnerPropsVerdier = (): PropsVerdier => {

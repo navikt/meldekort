@@ -35,9 +35,9 @@ function amplitudeLogger(name: string, values?: object) {
 }
 
 type AmplitudeAktivitetsData = {
-  arbeidssoker?: string;
+  arbeidssoker: string;
   meldegruppe: string;
-  innsendingstype?: string;
+  innsendingstype: string;
 };
 
 export function loggAktivitet(
