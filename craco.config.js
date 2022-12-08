@@ -1,3 +1,14 @@
 module.exports = {
-  plugins: [],
+  webpack: {
+    configure: {
+      optimization: {
+        runtimeChunk: false,
+        splitChunks: {
+          chunks(chunk) {
+            return false;
+          },
+        },
+      },
+    },
+  },
 };
