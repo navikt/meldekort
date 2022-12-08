@@ -1,14 +1,7 @@
-module.exports = {
-  webpack: {
-    configure: {
-      optimization: {
-        runtimeChunk: false,
-        splitChunks: {
-          chunks(chunk) {
-            return false;
-          },
-        },
-      },
-    },
-  },
+module.exports = function override(config) {
+  config.optimization.splitChunks = {
+    chunks: 'all',
+  };
+
+  return config;
 };
