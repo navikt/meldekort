@@ -396,16 +396,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
           ) : null}
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel>
+          <Innholdstittel tag="h2">
             <FormattedMessage id="overskrift.steg1" />
           </Innholdstittel>
           <Sprakvelger />
         </section>
         <section className="seksjon">
-          <Veilederpanel
-            kompakt={true}
-            svg={<img alt="Veileder" src={veileder} />}
-          >
+          <Veilederpanel kompakt={true} svg={<img alt="" src={veileder} />}>
             <div className="item">
               <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
             </div>

@@ -22,7 +22,7 @@ const BegrunnelseVisning: React.FunctionComponent<Props> = props => {
               <FormattedHTMLMessage id={'forklaring.sporsmal.begrunnelse'} />
             </UtvidetInformasjon>
           </div>
-          <img className={'checkmark'} alt={'checkmark'} src={checkMark} />
+          <img className={'checkmark'} alt="" src={checkMark} />
           <span>{props.begrunnelse}</span>
         </section>
       );

@@ -798,7 +798,8 @@ body .sentrert-tekst {
   border-bottom: 4px solid #66a5f4;
 }
 
-.meldekortHeader .hovedmeny__menypunkt:active {
+.meldekortHeader .hovedmeny__menypunkt:active,
+.hovedmeny__menypunkt:focus {
   color: #fff;
   border-bottom: 4px solid white;
 }

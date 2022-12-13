@@ -15,29 +15,28 @@ interface SporsmalProps {
 }
 
 const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
+  const legend = (
+    <div className="typo-undertittel" style={{ marginBottom: '-2rem' }}>
+      <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
+      {props.formatertDato ? <span> {props.formatertDato} ? </span> : null}{' '}
+      {props.disabled ? (
+        <FormattedMessage id={'korrigering.registrert.merknad'} />
+      ) : null}
+    </div>
+  );
+
+  const description = (
+    <UtvidetInformasjon>
+      <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
+    </UtvidetInformasjon>
+  );
+
   return (
     <section className="seksjon sporsmal">
-      <div className="flex-sporsmal-hjelpetekst-container">
-        <Undertittel>
-          <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
-          {props.formatertDato ? (
-            <span> {props.formatertDato} ? </span>
-          ) : null}{' '}
-          {props.disabled ? (
-            <FormattedMessage id={'korrigering.registrert.merknad'} />
-          ) : null}
-        </Undertittel>
-
-        <>
-          <UtvidetInformasjon>
-            <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
-          </UtvidetInformasjon>
-        </>
-      </div>
-
       <RadioPanelGruppe
         name={props.sporsmalsobjekt.kategori}
-        legend=""
+        legend={legend}
+        description={description}
         radios={[
           {
             label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.ja }),
