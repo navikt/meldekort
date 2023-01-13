@@ -398,7 +398,7 @@ class Utfyllingsside extends React.Component<
           id="tittel"
           className="seksjon flex-innhold tittel-sprakvelger"
         >
-          <Innholdstittel>
+          <Innholdstittel tag="h2">
             <FormattedMessage id="overskrift.steg2" />
           </Innholdstittel>
           <Sprakvelger />

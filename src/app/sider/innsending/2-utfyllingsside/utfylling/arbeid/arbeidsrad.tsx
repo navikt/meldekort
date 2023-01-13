@@ -133,7 +133,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, {}> {
           borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none',
         }}
       >
-        <Undertittel className={'arbeidsrad__tittel'}>
+        <Undertittel tag="h4" className={'arbeidsrad__tittel'}>
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>

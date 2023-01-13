@@ -148,7 +148,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, {}> {
     let { tekstId, typeYtelsePostfix, forklaringId } = this.props;
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
-        <Undertittel className={'aktivitetsrad__tittel'}>
+        <Undertittel tag="h4" className={'aktivitetsrad__tittel'}>
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>

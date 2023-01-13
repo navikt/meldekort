@@ -345,7 +345,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             )}
           </div>
           <section className="seksjon flex-innhold tittel-sprakvelger">
-            <Innholdstittel>
+            <Innholdstittel tag="h2">
               <FormattedMessage id="overskrift.steg3" />
             </Innholdstittel>
             <Sprakvelger />

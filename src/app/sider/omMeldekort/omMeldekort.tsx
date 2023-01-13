@@ -56,7 +56,7 @@ class OmMeldekort extends React.Component<
         <Veilederpanel
           type={'plakat'}
           kompakt={true}
-          svg={<img alt={'Veileder'} src={veileder} />}
+          svg={<img alt="" src={veileder} />}
         >
           <section className="seksjon">
             <Normaltekst>

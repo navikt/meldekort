@@ -11,7 +11,7 @@ exports[`PrintKnapp 1`] = `
     type="button"
   >
     <img
-      alt="Skriv ut logo"
+      alt=""
       className="printLogo"
       src="print.svg"
     />

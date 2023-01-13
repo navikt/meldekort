@@ -30,7 +30,7 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
         return (
           <section key={spm.sporsmal} className="sporsmalsgruppe">
             <div className="sporsmalstekst">
-              <Undertittel>
+              <Undertittel tag="h3">
                 <FormattedMessage id={spm.sporsmal} />
                 {spm.formatertDato ? <span>{spm.formatertDato}?</span> : null}
               </Undertittel>
@@ -38,7 +38,7 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
                 <FormattedHTMLMessage id={spm.forklaring} />
               </UtvidetInformasjon>
             </div>
-            <img alt={'checkmark'} src={checkMark} />
+            <img alt="" src={checkMark} />
             <span> {hentTekstForSvar(spm.svar)} </span>
           </section>
         );

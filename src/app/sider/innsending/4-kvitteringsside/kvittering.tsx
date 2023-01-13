@@ -243,7 +243,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
         </AlertStripe>
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
-          <Innholdstittel>
+          <Innholdstittel tag="h2">
             <FormattedMessage id="overskrift.steg4" />
           </Innholdstittel>
           <Sprakvelger />
