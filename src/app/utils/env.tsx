@@ -22,7 +22,6 @@ const Environment = (): EnvironmentType => {
     };
   }
 
-  /*
   if (erLocalhost()) {
     return {
       minSideUrl: 'https://www.dev.nav.no/minside/',
@@ -33,7 +32,6 @@ const Environment = (): EnvironmentType => {
       amplitudeKey: '',
     };
   }
-  */
 
   return {
     minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'UNDEFINED_MIN_SIDE_URL',

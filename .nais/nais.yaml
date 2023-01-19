@@ -39,17 +39,17 @@ spec:
   env:
     - name: NAV_DEKORATOREN_URL
       value: '{{ navDekoratorenUrl }}'
-    - name: REACT_APP_MIN_SIDE_URL
+    - name: MIN_SIDE_URL
       value: '{{ minSideUrl }}'
-    - name: REACT_APP_API_URL
+    - name: API_URL
       value: '{{ apiUrl }}'
-    - name: REACT_APP_LOGIN_URL
+    - name: LOGIN_URL
       value: '{{ loginUrl }}'
-    - name: REACT_APP_LOGOUT_URL
+    - name: LOGOUT_URL
       value: '{{ logoutUrl }}'
-    - name: REACT_APP_AMPLITUDE_URL
+    - name: AMPLITUDE_URL
       value: '{{ amplitudeUrl }}'
-    - name: REACT_APP_AMPLITUDE_KEY
+    - name: AMPLITUDE_KEY
       value: '{{ amplitudeKey }}'
     - name: DISABLE_SENSU_METRICS
       value: 'true'
