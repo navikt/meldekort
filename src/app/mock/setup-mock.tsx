@@ -12,10 +12,10 @@ import skrivemodusJson from './responses/skrivemodus.json';
 import teksterJsonNb from './responses/tekster_nb.json';
 import teksterJsonEn from './responses/tekster_en.json';
 import MockAdapter from 'axios-mock-adapter';
-import Environment from '../utils/env';
+import ENVIRONMENT from '../utils/env';
 
 export default () => {
-  const apiUrl = Environment().apiUrl;
+  const apiUrl = ENVIRONMENT.apiUrl;
 
   let mock = new MockAdapter(prefferedAxios);
 

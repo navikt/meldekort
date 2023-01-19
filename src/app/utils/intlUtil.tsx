@@ -2,7 +2,7 @@ import { IntlProvider } from 'react-intl';
 import { store } from '../store/configureStore';
 import { Konstanter } from './consts';
 import { fetchGet } from '../api/api';
-import Environment from './env';
+import ENVIRONMENT from './env';
 import { formaterDatoIso } from './dates';
 import { UiActions } from '../actions/ui';
 import { updateIntl } from 'react-intl-redux';
@@ -99,7 +99,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
       error.message === 'Request failed with status code 401'
     ) {
       // Bruker er ikke innlogget, sender ham til innogging
-      window.location.assign(`${Environment().loginUrl}`);
+      window.location.assign(`${ENVIRONMENT.loginUrl}`);
       return {};
     } else {
       throw 'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.';

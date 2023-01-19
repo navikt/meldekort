@@ -10,42 +10,40 @@ type EnvironmentType = {
   amplitudeKey: string;
 };
 
-const Environment = (): EnvironmentType => {
-  if (erMock()) {
-    return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
-      apiUrl: '',
-      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice.dev.nav.no/slo',
-      amplitudeUrl: '',
-      amplitudeKey: '',
-    };
-  }
-
-  if (erLocalhost()) {
-    return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
-      apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice.dev.nav.no/slo',
-      amplitudeUrl: '',
-      amplitudeKey: '',
-    };
-  }
-
-  return {
-    minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'UNDEFINED_MIN_SIDE_URL',
-    apiUrl: process.env.REACT_APP_API_URL || 'UNDEFINED_API_URL',
-    loginUrl: process.env.REACT_APP_LOGIN_URL || 'UNDEFINED_LOGIN_URL',
-    logoutUrl: process.env.REACT_APP_LOGOUT_URL || 'UNDEFINED_LOGOUT_URL',
-    amplitudeUrl:
-      process.env.REACT_APP_AMPLITUDE_URL || 'UNDEFINED_AMPLITUDE_URL',
-    amplitudeKey:
-      process.env.REACT_APP_AMPLITUDE_KEY || 'UNDEFINED_AMPLITUDE_KEY',
-  };
+let ENVIRONMENT: EnvironmentType = {
+  minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'UNDEFINED_MIN_SIDE_URL',
+  apiUrl: process.env.REACT_APP_API_URL || 'UNDEFINED_API_URL',
+  loginUrl: process.env.REACT_APP_LOGIN_URL || 'UNDEFINED_LOGIN_URL',
+  logoutUrl: process.env.REACT_APP_LOGOUT_URL || 'UNDEFINED_LOGOUT_URL',
+  amplitudeUrl:
+    process.env.REACT_APP_AMPLITUDE_URL || 'UNDEFINED_AMPLITUDE_URL',
+  amplitudeKey:
+    process.env.REACT_APP_AMPLITUDE_KEY || 'UNDEFINED_AMPLITUDE_KEY',
 };
 
-export default Environment;
+if (erMock()) {
+  ENVIRONMENT = {
+    minSideUrl: 'https://www.dev.nav.no/minside/',
+    apiUrl: '',
+    loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+    logoutUrl: 'https://loginservice.dev.nav.no/slo',
+    amplitudeUrl: '',
+    amplitudeKey: '',
+  };
+}
+
+if (erLocalhost()) {
+  ENVIRONMENT = {
+    minSideUrl: 'https://www.dev.nav.no/minside/',
+    apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
+    loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
+    logoutUrl: 'https://loginservice.dev.nav.no/slo',
+    amplitudeUrl: '',
+    amplitudeKey: '',
+  };
+}
+
+export default ENVIRONMENT;
 
 export function hentEnvSetting(variableName: string) {
   const meldekort = 'meldekort';
