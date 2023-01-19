@@ -1,58 +1,47 @@
 import { erLocalhost, erMock } from '../mock/utils';
 import { Konstanter } from './consts';
 
-const Environment = () => {
-  if (
-    window.location.hostname.indexOf('meldekort-frontend-q2.dev.nav.no') > -1
-  ) {
-    return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
-      apiUrl:
-        'https://meldekort-api-q2.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/logout',
-      amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
-      testEnv: true,
-    };
-  } else if (
-    window.location.hostname.indexOf('meldekort-frontend-q1.dev.nav.no') > -1
-  ) {
-    return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
-      apiUrl:
-        'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout',
-      amplitudeUrl: 'amplitude.nav.no/collect',
-      amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
-      testEnv: true,
-    };
-  } else if (erMock()) {
+type EnvironmentType = {
+  minSideUrl: string;
+  apiUrl: string;
+  loginUrl: string;
+  logoutUrl: string;
+  amplitudeUrl: string;
+  amplitudeKey: string;
+};
+
+const Environment = (): EnvironmentType => {
+  if (erMock()) {
     return {
       minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl: '',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
-      testEnv: true,
+      amplitudeUrl: '',
+      amplitudeKey: '',
     };
-  } else if (erLocalhost()) {
+  }
+
+  if (erLocalhost()) {
     return {
       minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
-      testEnv: true,
+      amplitudeUrl: '',
+      amplitudeKey: '',
     };
   }
+
   return {
-    minSideUrl: 'https://www.nav.no/minside/',
-    apiUrl: 'https://meldekort-api.nav.no/meldekort/meldekort-api/api/',
-    loginUrl: 'https://meldekort-api.nav.no/oauth2/login',
-    logoutUrl: 'https://meldekort-api.nav.no/oauth2/logout',
-    amplitudeUrl: 'amplitude.nav.no/collect',
-    amplitudeKey: '913768927b84cde5eac0d0d18c737561',
-    testEnv: false,
+    minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'Undefined minSideUrl',
+    apiUrl: process.env.REACT_APP_API_URL || 'Undefined apiUrl',
+    loginUrl: process.env.REACT_APP_LOGIN_URL || 'Undefined loginUrl',
+    logoutUrl: process.env.REACT_APP_LOGOUT_URL || 'Undefined logoutUrl',
+    amplitudeUrl:
+      process.env.REACT_APP_AMPLITUDE_URL || 'Undefined amplitudeUrl',
+    amplitudeKey:
+      process.env.REACT_APP_AMPLITUDE_KEY || 'Undefined amplitudeKey',
   };
 };
 
