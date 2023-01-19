@@ -22,6 +22,7 @@ const Environment = (): EnvironmentType => {
     };
   }
 
+  /*
   if (erLocalhost()) {
     return {
       minSideUrl: 'https://www.dev.nav.no/minside/',
@@ -32,16 +33,17 @@ const Environment = (): EnvironmentType => {
       amplitudeKey: '',
     };
   }
+  */
 
   return {
-    minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'Undefined minSideUrl',
-    apiUrl: process.env.REACT_APP_API_URL || 'Undefined apiUrl',
-    loginUrl: process.env.REACT_APP_LOGIN_URL || 'Undefined loginUrl',
-    logoutUrl: process.env.REACT_APP_LOGOUT_URL || 'Undefined logoutUrl',
+    minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'UNDEFINED_MIN_SIDE_URL',
+    apiUrl: process.env.REACT_APP_API_URL || 'UNDEFINED_API_URL',
+    loginUrl: process.env.REACT_APP_LOGIN_URL || 'UNDEFINED_LOGIN_URL',
+    logoutUrl: process.env.REACT_APP_LOGOUT_URL || 'UNDEFINED_LOGOUT_URL',
     amplitudeUrl:
-      process.env.REACT_APP_AMPLITUDE_URL || 'Undefined amplitudeUrl',
+      process.env.REACT_APP_AMPLITUDE_URL || 'UNDEFINED_AMPLITUDE_URL',
     amplitudeKey:
-      process.env.REACT_APP_AMPLITUDE_KEY || 'Undefined amplitudeKey',
+      process.env.REACT_APP_AMPLITUDE_KEY || 'UNDEFINED_AMPLITUDE_KEY',
   };
 };
 
