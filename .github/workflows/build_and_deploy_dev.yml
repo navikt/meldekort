@@ -89,12 +89,12 @@ jobs:
         run: npm test
 
       - name: Build Docker image
+        # In order for React to have access to environment variables, they must be defined at build time
+        # More over, these variables must have names starting with REACT_APP_
+        # We read vars-file, take lines starting with REACT_APP_, replace ": " with "=" (using ${line/: /=})
+        # and put resulting string to the environment (using >> $GITHUB_ENV)
+        # Then we build the app and create a Docker image
         run: |
-          # In order for React to have access to environment variables, they must be defined at build time
-          # More over, these variables must have names starting with REACT_APP_
-          # We read vars-file, take lines starting with REACT_APP_, replace ": " with "=" (using ${line/: /=})
-          # and put resulting string to the environment (using >> $GITHUB_ENV)
-          # Then we build the app and create a Docker image
           input=".nais/vars-${{ env.ENVIRONMENT }}.yaml"
           while IFS= read -r line
           do
