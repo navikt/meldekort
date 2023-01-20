@@ -25,7 +25,7 @@ import {
   formaterUkeOgDatoPeriode,
   hentTid,
 } from '../../../utils/dates';
-import ENVIRONMENT from '../../../utils/env';
+import Environment from '../../../utils/env';
 import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { scrollTilElement } from '../../../utils/scroll';
@@ -167,7 +167,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     }
     return {
       knappTekstid: 'tilbake.minSide',
-      nestePath: ENVIRONMENT.minSideUrl,
+      nestePath: Environment.minSideUrl,
       nesteAktivtMeldekort: undefined,
       nesteInnsendingstype: undefined,
     };
@@ -289,7 +289,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
         {this.innhold(nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
-            {nestePath === ENVIRONMENT.minSideUrl ? (
+            {nestePath === Environment.minSideUrl ? (
               <a
                 className={'knapp navigasjonsknapp knapp--hoved'}
                 href={nestePath}

@@ -1,10 +1,10 @@
 import amplitude from 'amplitude-js';
-import ENVIRONMENT from './env';
+import Environment from './env';
 
 let initialized = false;
 
 function initAmplitude() {
-  const { amplitudeKey, amplitudeUrl } = ENVIRONMENT;
+  const { amplitudeKey, amplitudeUrl } = Environment;
 
   if (!amplitudeKey || !amplitudeUrl) {
     return;

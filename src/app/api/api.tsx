@@ -1,4 +1,4 @@
-import ENVIRONMENT from '../utils/env';
+import Environment from '../utils/env';
 import { Konstanter } from '../utils/consts';
 import { erMock } from '../mock/utils';
 import { Person, PersonInfo, PersonStatus } from '../types/person';
@@ -16,7 +16,7 @@ import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
 
 export const fetchGet = async (url: string) => {
   return prefferedAxios
-    .get(ENVIRONMENT.apiUrl + url, {
+    .get(Environment.apiUrl + url, {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
       },
@@ -29,7 +29,7 @@ export const fetchGet = async (url: string) => {
 
 const fetchPost = async (url: string, data: any) => {
   return prefferedAxios
-    .post(ENVIRONMENT.apiUrl + url, data, {
+    .post(Environment.apiUrl + url, data, {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
       },

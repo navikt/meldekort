@@ -10,7 +10,7 @@ type EnvironmentType = {
   amplitudeKey: string;
 };
 
-let ENVIRONMENT: EnvironmentType = {
+let Environment: EnvironmentType = {
   minSideUrl: process.env.REACT_APP_MIN_SIDE_URL || 'UNDEFINED_MIN_SIDE_URL',
   apiUrl: process.env.REACT_APP_API_URL || 'UNDEFINED_API_URL',
   loginUrl: process.env.REACT_APP_LOGIN_URL || 'UNDEFINED_LOGIN_URL',
@@ -22,7 +22,7 @@ let ENVIRONMENT: EnvironmentType = {
 };
 
 if (erMock()) {
-  ENVIRONMENT = {
+  Environment = {
     minSideUrl: 'https://www.dev.nav.no/minside/',
     apiUrl: '',
     loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
@@ -33,7 +33,7 @@ if (erMock()) {
 }
 
 if (erLocalhost()) {
-  ENVIRONMENT = {
+  Environment = {
     minSideUrl: 'https://www.dev.nav.no/minside/',
     apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
     loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
@@ -43,7 +43,7 @@ if (erLocalhost()) {
   };
 }
 
-export default ENVIRONMENT;
+export default Environment;
 
 export function hentEnvSetting(variableName: string) {
   const meldekort = 'meldekort';

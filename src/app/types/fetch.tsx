@@ -1,10 +1,10 @@
 import axios from 'axios';
-import ENVIRONMENT from '../utils/env';
+import Environment from '../utils/env';
 
 axios.defaults.baseURL = window.location.origin;
 export const prefferedAxios = axios;
 
-export const backendApi: string = ENVIRONMENT.apiUrl;
+export const backendApi: string = Environment.apiUrl;
 
 export enum FetchStatus {
   UNFETCHED,
