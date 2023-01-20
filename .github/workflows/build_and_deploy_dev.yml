@@ -90,15 +90,18 @@ jobs:
 
       - name: Build Docker image
         run: |
+          # In order for React to have access to environment variables, they must be defined at build time
+          # More over, these variables must have names starting with REACT_APP_
+          # We read vars-file, take lines starting with REACT_APP_, replace ": " with "=" (using ${line/: /=})
+          # and put resulting string to the environment (using >> $GITHUB_ENV)
+          # Then we build the app and create a Docker image
+          input=".nais/vars-${{ env.ENVIRONMENT }}.yaml"
+          while IFS= read -r line
+          do
+          [[ $line = REACT_APP_* ]] && echo "${line/: /=}" >> $GITHUB_ENV
+          done < "$input"
           npm run build
           docker build -t ${{ steps.setVars.outputs.image }} .
-        env:
-          REACT_APP_MIN_SIDE_URL: 'https://www.dev.nav.no/minside/'
-          REACT_APP_API_URL: 'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/'
-          REACT_APP_LOGIN_URL: 'https://meldekort-api-q1.dev.nav.no/oauth2/login'
-          REACT_APP_LOGOUT_URL: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout'
-          REACT_APP_AMPLITUDE_URL: 'amplitude.nav.no/collect'
-          REACT_APP_AMPLITUDE_KEY: '9845ded64c69cd068651cd0d968e0796'
 
       - name: Log in to the Container registry
         uses: docker/login-action@v1
