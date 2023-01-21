@@ -18,7 +18,7 @@
     "@types/react-dom": "^17.0.18",
     "@types/react-intl": "^2.3.18",
     "@types/react-intl-redux": "^0.1.16",
-    "@types/react-redux": "^6.0.20",
+    "@types/react-redux": "^6.0.21",
     "@types/react-router": "^4.4.0",
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-logger": "^3.0.7",
