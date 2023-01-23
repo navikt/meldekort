@@ -84,7 +84,7 @@ jobs:
           input=".nais/vars-${{ env.ENVIRONMENT }}.yaml"
           while IFS= read -r line
           do
-          [[ $line = REACT_APP_* ]] && echo "${line/: /=}" | tr -d "\"" >> $GITHUB_ENV
+          [[ $line = REACT_APP_* ]] && echo "${line/: /=}" | tr -d "\"" >> .env
           done < "$input"
 
       - name: Set release version in package.json
