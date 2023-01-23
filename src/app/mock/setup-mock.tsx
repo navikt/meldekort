@@ -15,7 +15,7 @@ import MockAdapter from 'axios-mock-adapter';
 import Environment from '../utils/env';
 
 export default () => {
-  const apiUrl = Environment().apiUrl;
+  const apiUrl = Environment.apiUrl;
 
   let mock = new MockAdapter(prefferedAxios);
 
