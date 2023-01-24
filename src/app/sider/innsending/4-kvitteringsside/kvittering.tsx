@@ -274,7 +274,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    const { personInfo, person, loading } = this.props;
+    const { personInfo, person, loading, aktivtMeldekort } = this.props;
+    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
     if (loading) {
       return (
@@ -282,6 +283,12 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <NavFrontendSpinner type={'XL'} />
         </div>
       );
+    }
+
+    // @ts-ignore
+    if (typeYtelse === 'AAP' && window.hj) {
+      // @ts-ignore
+      window.hj('trigger', 'meldekortAAP');
     }
 
     return personInfo.personId !== 0 ? (
