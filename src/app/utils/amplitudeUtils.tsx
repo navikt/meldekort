@@ -4,7 +4,7 @@ import Environment from './env';
 let initialized = false;
 
 function initAmplitude() {
-  const { amplitudeKey, amplitudeUrl } = Environment;
+  const { amplitudeKey, amplitudeUrl } = Environment();
 
   if (!amplitudeKey || !amplitudeUrl) {
     return;
