@@ -69,23 +69,10 @@ jobs:
           increment_patch: 'false'
           prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
 
-      # In order for React to have access to environment variables, they must be defined at build time
-      # More over, these variables must have names starting with REACT_APP_
-      # We read vars-file,
-      # take lines starting with REACT_APP_,
-      # replace ": " with "=" (using ${line/: /=}),
-      # delete all double quotes (using tr -d "\"")
-      # and put resulting string to the environment (using >> $GITHUB_ENV)
-      # Then we build the app and create a Docker image
       - name: Set vars
         id: setVars
         run: |
           echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ steps.releaseVersion.outputs.version }}"
-          input=".nais/vars-${{ env.ENVIRONMENT }}.yaml"
-          while IFS= read -r line
-          do
-          [[ $line = REACT_APP_* ]] && echo "${line/: /=}" | tr -d "\"" >> $GITHUB_ENV
-          done < "$input"
 
       - name: Set release version in package.json
         run: |

@@ -99,7 +99,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
       error.message === 'Request failed with status code 401'
     ) {
       // Bruker er ikke innlogget, sender ham til innogging
-      window.location.assign(`${Environment.loginUrl}`);
+      window.location.assign(`${Environment().loginUrl}`);
       return {};
     } else {
       throw 'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.';
