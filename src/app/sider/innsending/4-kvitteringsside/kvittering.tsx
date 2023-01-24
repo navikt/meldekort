@@ -285,11 +285,10 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       );
     }
 
-    // @ts-ignore
     if (
       typeYtelse === 'AAP' &&
       nesteAktivtMeldekort == undefined &&
-      window.hj
+      window['hj']
     ) {
       // @ts-ignore
       window.hj('trigger', 'meldekortAAP');
