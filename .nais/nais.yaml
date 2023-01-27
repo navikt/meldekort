@@ -32,8 +32,8 @@ spec:
       cpu: 50m
       memory: 512Mi
     requests:
-      cpu: 50m
-      memory: 512Mi
+      cpu: 25m
+      memory: 256Mi
   envFrom:
     - secret: {{ appName }}{{ dashEnv }}
   env:
