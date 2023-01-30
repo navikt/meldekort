@@ -16,10 +16,12 @@ spec:
   {{/each}}
   liveness:
     path: /meldekort/internal/isAlive
-    initialDelay: 20
+    initialDelay: 30
+    timeout: 5
   readiness:
     path: /meldekort/internal/isReady
-    initialDelay: 20
+    initialDelay: 30
+    timeout: 5
   prometheus:
     enabled: true
     path: meldekort/internal/metrics
