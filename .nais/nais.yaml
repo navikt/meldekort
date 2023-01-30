@@ -16,12 +16,10 @@ spec:
   {{/each}}
   liveness:
     path: /meldekort/internal/isAlive
-    initialDelay: 30
-    timeout: 5
+    initialDelay: 10
   readiness:
     path: /meldekort/internal/isReady
-    initialDelay: 30
-    timeout: 5
+    initialDelay: 10
   prometheus:
     enabled: true
     path: meldekort/internal/metrics
@@ -31,10 +29,10 @@ spec:
   webproxy: true
   resources:
     limits:
-      cpu: 500m
+      cpu: 500m # minimum
       memory: 512Mi
     requests:
-      cpu: 500m
+      cpu: 500m # minimum
       memory: 512Mi
   envFrom:
     - secret: {{ appName }}{{ dashEnv }}
