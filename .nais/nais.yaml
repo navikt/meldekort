@@ -29,10 +29,10 @@ spec:
   webproxy: true
   resources:
     limits:
-      cpu: 500m # minimum
+      cpu: 1000m
       memory: 512Mi
     requests:
-      cpu: 500m # minimum
+      cpu: 300m
       memory: 512Mi
   envFrom:
     - secret: {{ appName }}{{ dashEnv }}
