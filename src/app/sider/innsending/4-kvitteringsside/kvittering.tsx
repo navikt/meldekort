@@ -38,7 +38,7 @@ import {
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -286,7 +286,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     }
 
     if (
-      typeYtelse === 'AAP' &&
+      typeYtelse === TypeYtelse.AAP &&
       nesteAktivtMeldekort == undefined &&
       window['hj']
     ) {
