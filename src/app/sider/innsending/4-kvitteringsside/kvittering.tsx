@@ -38,7 +38,7 @@ import {
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -274,7 +274,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    const { personInfo, person, loading } = this.props;
+    const { personInfo, person, loading, aktivtMeldekort } = this.props;
+    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
     if (loading) {
       return (
@@ -282,6 +283,15 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <NavFrontendSpinner type={'XL'} />
         </div>
       );
+    }
+
+    if (
+      typeYtelse === TypeYtelse.AAP &&
+      nesteAktivtMeldekort == undefined &&
+      window['hj']
+    ) {
+      // @ts-ignore
+      window.hj('trigger', 'meldekortAAP');
     }
 
     return personInfo.personId !== 0 ? (
