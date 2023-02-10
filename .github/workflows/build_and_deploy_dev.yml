@@ -65,7 +65,7 @@ jobs:
           echo "RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.current-version }}${{ env.TIMESTAMP }}" | sed 's/-SNAPSHOT//g')" >> $GITHUB_ENV
 
       - name: Set vars
-          id: setVars
+        id: setVars
         run: |
           echo "IMAGE=ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ env.RELEASE_VERSION }}" >> $GITHUB_ENV
 
