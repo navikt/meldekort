@@ -33,7 +33,7 @@ jobs:
       - name: Set vars
         id: setVars
         run: |
-          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ github.event.inputs.deploy_version }}"
+          echo "IMAGE=ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ github.event.inputs.deploy_version }}" >> $GITHUB_ENV
 
       - name: Set cluster
         uses: haya14busa/action-cond@v1
@@ -64,6 +64,6 @@ jobs:
           PRINT_PAYLOAD: true
           CLUSTER: ${{ steps.cluster.outputs.value }}
           RESOURCE: ${{ env.NAIS_FILE }}
-          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
+          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}
           VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
           WAIT: false
