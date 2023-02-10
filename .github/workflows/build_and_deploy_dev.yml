@@ -52,7 +52,6 @@ jobs:
 
       # Setter timestamp, eks. -20220104111118
       - name: Set snapshot timestamp
-        id: snapshotTimestamp
         if: github.event.inputs.bump_patch != 'bump'
         run: |
           echo "TIMESTAMP=-$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
@@ -65,7 +64,6 @@ jobs:
           echo "RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.current-version }}${{ env.TIMESTAMP }}" | sed 's/-SNAPSHOT//g')" >> $GITHUB_ENV
 
       - name: Set vars
-        id: setVars
         run: |
           echo "IMAGE=ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ env.RELEASE_VERSION }}" >> $GITHUB_ENV
 
@@ -107,7 +105,7 @@ jobs:
           PRINT_PAYLOAD: true
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: ${{ env.NAIS_FILE }}
-          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
+          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}
           VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
           WAIT: false
 
