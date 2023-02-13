@@ -48,11 +48,7 @@ jobs:
 
       - name: Read version from package.json
         id: packageVersion
-        #uses: martinbeentjes/npm-get-version-action@master
-        uses: Bruce17/ghaction-package-latest-version@v1
-        with:
-          package: meldekort
-          language: node
+        uses: martinbeentjes/npm-get-version-action@main
 
       # Setter timestamp, eks. -20220104111118
       - name: Set snapshot timestamp
