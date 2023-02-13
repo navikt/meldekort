@@ -61,7 +61,7 @@ jobs:
       # For snapshot: eks 1.0.1-20220104111118
       - name: Calculate release version
         run: |
-          echo "RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.latestVersion }}${{ env.TIMESTAMP }}" | sed 's/-SNAPSHOT//g')" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.current-version }}${{ env.TIMESTAMP }}" | sed 's/-SNAPSHOT//g')" >> $GITHUB_ENV
 
       - name: Set vars
         run: |
@@ -128,7 +128,7 @@ jobs:
       - name: Calculate next version
         if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
         run: |
-          echo "NEXT_RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.latestVersion }}" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g' | sed 's/$/-SNAPSHOT/')" >> $GITHUB_ENV
+          echo "NEXT_RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.current-version }}" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g' | sed 's/$/-SNAPSHOT/')" >> $GITHUB_ENV
 
       # Hvis det er ny versjon, oppdater package.json og utfør git commit/push
       - name: Set next version in package.json
