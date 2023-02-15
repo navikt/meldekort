@@ -7,13 +7,20 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter q1 og q2)'
+        description: 'Miljø'
         required: true
         default: 'q2'
+        type: choice
+        options:
+          - q1
+          - q2
       bump_patch:
-        description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
-        required: false
+        description: 'Velg "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
         default: ''
+        type: choice
+        options:
+          - ''
+          - bump
 
 env:
   REPONAME: ${{ github.event.repository.name }}
