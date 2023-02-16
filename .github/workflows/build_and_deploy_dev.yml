@@ -7,13 +7,20 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter q1 og q2)'
+        description: 'Miljø'
         required: true
         default: 'q2'
+        type: choice
+        options:
+          - q1
+          - q2
       bump_patch:
-        description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
-        required: false
+        description: 'Velg "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
         default: ''
+        type: choice
+        options:
+          - ''
+          - bump
 
 env:
   REPONAME: ${{ github.event.repository.name }}
@@ -71,6 +78,11 @@ jobs:
         run: |
           jq '.version="${{ env.RELEASE_VERSION }}"' package.json > package.json.new
           mv package.json.new package.json
+
+      - name: Authenticate with registry
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "@navikt:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
       - name: Install npm packages
         run: npm ci --legacy-peer-deps
