@@ -29,6 +29,7 @@ env:
   CLUSTER: dev-gcp
   NAIS_FILE: .nais/nais.yaml
   MAIN_BRANCH: refs/heads/master
+  NPM_TOKEN: ${{ secrets.READER_TOKEN }}
 
 jobs:
   build:
@@ -78,6 +79,9 @@ jobs:
         run: |
           jq '.version="${{ env.RELEASE_VERSION }}"' package.json > package.json.new
           mv package.json.new package.json
+
+      - name: Authenticate with registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
       - name: Install npm packages
         run: npm ci --legacy-peer-deps
