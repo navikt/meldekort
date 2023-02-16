@@ -29,7 +29,6 @@ env:
   CLUSTER: dev-gcp
   NAIS_FILE: .nais/nais.yaml
   MAIN_BRANCH: refs/heads/master
-  NPM_TOKEN: ${{ secrets.READER_TOKEN }}
 
 jobs:
   build:
