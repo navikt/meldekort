@@ -81,7 +81,9 @@ jobs:
           mv package.json.new package.json
 
       - name: Authenticate with registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "@navikt:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
       - name: Install npm packages
         run: npm ci --legacy-peer-deps
