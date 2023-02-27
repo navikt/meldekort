@@ -306,11 +306,11 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <div
             data-uxsignals-embed="study-wkxm8qrazd"
             style="max-width: 620px"
-          ></div>
+          />
           <script
             type="module"
             src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
-          ></script>
+          />
         </div>
       );
     }
