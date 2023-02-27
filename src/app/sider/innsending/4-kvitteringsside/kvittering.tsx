@@ -305,7 +305,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
         <div>
           <div
             data-uxsignals-embed="study-wkxm8qrazd"
-            style="max-width: 620px"
+            style={{ maxWidth: '620px' }}
           />
           <script
             type="module"
