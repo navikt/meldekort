@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
 import {
+  Meldegruppe,
   Meldekort,
   MeldekortState,
   SendtMeldekort,
@@ -294,6 +295,26 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       window.hj('trigger', 'meldekortAAP');
     }
 
+    let uxSignals = <></>;
+    if (
+      (aktivtMeldekort.meldegruppe === Meldegruppe.ATTF ||
+        aktivtMeldekort.meldegruppe === Meldegruppe.DAGP) &&
+      nesteAktivtMeldekort == undefined
+    ) {
+      uxSignals = (
+        <div>
+          <div
+            data-uxsignals-embed="study-wkxm8qrazd"
+            style="max-width: 620px"
+          ></div>
+          <script
+            type="module"
+            src="https://uxsignals-frontend.uxsignals.app.iterate.no/embed.js"
+          ></script>
+        </div>
+      );
+    }
+
     return personInfo.personId !== 0 ? (
       <main>
         {this.innhold(nesteInnsendingstype)}
@@ -331,6 +352,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
             />
           </div>
         </section>
+        {uxSignals}
       </main>
     ) : (
       <div className="meldekort-spinner">
