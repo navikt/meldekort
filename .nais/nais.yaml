@@ -32,7 +32,7 @@ spec:
       memory: 768Mi
     requests:
       cpu: 500m
-      memory: 512Mi
+      memory: 768Mi
   envFrom:
     - secret: {{ appName }}{{ dashEnv }}
   env:
