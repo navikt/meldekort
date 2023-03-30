@@ -29,7 +29,6 @@ spec:
   webproxy: true
   resources:
     limits:
-      cpu: 1500m
       memory: 768Mi
     requests:
       cpu: 500m
