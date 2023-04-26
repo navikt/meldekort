@@ -73,7 +73,7 @@
     "node-notifier": "^10.0.0",
     "promjs": "^0.4.2",
     "prop-types": "^15.7.2",
-    "ramda": "^0.28.0",
+    "ramda": "^0.29.0",
     "react": "^17.0.2",
     "react-app-polyfill": "^1.0.1",
     "react-aria-menubutton": "^7.0.3",
