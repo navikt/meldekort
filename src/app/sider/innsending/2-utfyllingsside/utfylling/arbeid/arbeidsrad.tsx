@@ -37,9 +37,9 @@ type ArbeidsradProps = UkeProps &
   MapStateToProps &
   MapDispatchToProps;
 
-class Arbeidsrad extends React.Component<ArbeidsradProps> {
+class Arbeidsrad extends React.Component<ArbeidsradProps, {}> {
   setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: number) => {
-    const match = event.target.value.match(/^[0-9]?\d{0,2}?([,.]?[0-9]?)?$/);
+    const match = event.target.value.match(/^\d?\d{0,2}?([,.]?\d?)?$/);
     if (match !== null) {
       let nyVerdi = event.target.value;
       if (match[0] === ',' || match[0] === '.') {
@@ -133,7 +133,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps> {
           borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none',
         }}
       >
-        <Undertittel className={'arbeidsrad__tittel'}>
+        <Undertittel tag="h4" className={'arbeidsrad__tittel'}>
           <FormattedHTMLMessage id={tekstId} />
         </Undertittel>
         <UtvidetInformasjon>

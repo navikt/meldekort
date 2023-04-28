@@ -9,7 +9,7 @@ import {
   Meldekortdetaljer,
   ValideringsResultat,
 } from '../types/meldekort';
-import { WeblogicPing } from '../types/weblogic';
+import { Skrivemodus } from '../types/skrivemodus';
 import { RootState } from '../store/configureStore';
 import * as React from 'react';
 import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
@@ -37,6 +37,21 @@ const fetchPost = async (url: string, data: any) => {
     })
     .then(response => {
       return response.data;
+    })
+    .catch(error => {
+      // Dette kan brukes kun når man sender inn et meldekort
+      // Men det er OK siden fetchPost brukes kun i postMeldekort
+      // Dette må endres til en feilhåndtering på en riktig måte,
+      // men dette kan vi ha nå siden vi tenkter å skrive om hele løsningen
+      return {
+        status: 'FEIL',
+        arsakskoder: [
+          {
+            kode: '00',
+            tekst: error,
+          },
+        ],
+      };
     });
 };
 
@@ -72,8 +87,8 @@ export function fetchInfomelding(): Promise<Infomelding> {
   return fetchGet(Konstanter.hentInfomelding);
 }
 
-export function pingWeblogic(): Promise<WeblogicPing> {
-  return fetchGet(Konstanter.pingWeblogic);
+export function fetchSkrivemodus(): Promise<Skrivemodus> {
+  return fetchGet(Konstanter.hentSkrivemodus);
 }
 
 export function postMeldekort(state: RootState): Promise<ValideringsResultat> {

@@ -29,8 +29,7 @@ spec:
   webproxy: true
   resources:
     limits:
-      cpu: '3'
-      memory: 1024Mi
+      memory: 768Mi
     requests:
       cpu: 500m
       memory: 768Mi
@@ -47,35 +46,3 @@ spec:
         - application: meldekort-api{{ dashEnv }}
       external:
         - host: '{{ externalUrl }}'
----
-apiVersion: nais.io/v1
-kind: Alert
-metadata:
-  name: {{ appName }}
-  namespace: meldekort
-  labels:
-    team: meldekort
-spec:
-  receivers:
-    slack:
-      channel: '#{{ slackAlertChannel }}'
-  alerts:
-    - alert: {{ appName }}_applikasjonsinstanser nede
-      expr: kube_deployment_status_replicas_unavailable{deployment=~"meldekort-frontend.*"} > 0
-      for: 2m
-      description: >
-            *\{{ $labels.deployment }}* har utilgjengelige applikasjonsinstanser (podder)
-      action: |
-            Kjør `kubectl describe pod -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for å se events,
-            evt. kjør først `kubectl get pods -l app=\{{ $labels.deployment }} -n \{{ $labels.namespace }}` for en oversikt over poddene.
-            Sjekk også Kibana for eventuelle feil som er logget; query `application:\{{ $labels.deployment }} AND (level:Error OR level:Warning)`.
-      severity: danger
-    - alert: {{ appName }}_feil er logget
-      expr: sum(increase(logd_messages_total{log_app=~"meldekort-frontend.*",log_level="Error"}[10m])) by (log_app, log_namespace) > 0
-      for: 3m
-      description: >
-            *\{{ $labels.log_app }}* har logget feil med loggnivå Error
-      action: |
-            Antall feil målt over siste 10 minutter er *\{{ $value }}*.
-            Sjekk Kibana for detaljer om feil som er logget: query `application:\{{ $labels.log_app }} AND (level:Error OR level:Warning)`.
-      severity: danger

@@ -11,6 +11,7 @@ export interface UIState {
   baksystemFeilmelding: BaksystemFeilmelding;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   loading: boolean;
+  numberOfLoading: number;
 }
 
 const initialState: UIState = {
@@ -26,6 +27,7 @@ const initialState: UIState = {
     harTidligereMeldekort: true,
   },
   loading: false,
+  numberOfLoading: 0,
 };
 
 const uiReducer = (
@@ -62,11 +64,13 @@ const uiReducer = (
       return {
         ...state,
         loading: true,
+        numberOfLoading: state.numberOfLoading + 1,
       };
     case getType(UiActions.stopLoading):
       return {
         ...state,
-        loading: false,
+        loading: state.numberOfLoading - 1 != 0,
+        numberOfLoading: state.numberOfLoading - 1,
       };
     default:
       return state;

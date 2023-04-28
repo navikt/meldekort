@@ -84,6 +84,7 @@ export interface ValideringsResultat {
 export interface Arsakskode {
   kode: string;
   tekst: string;
+  params: string[];
 }
 
 export interface Sporsmal {
@@ -114,7 +115,7 @@ export interface HistoriskeMeldekortRad {
   periode?: string;
   dato: string;
   mottatt: string;
-  status: string;
+  status: KortStatus;
   bruttobelop: string;
   detaljer?: string;
 }
@@ -122,7 +123,7 @@ export interface HistoriskeMeldekortRad {
 export interface DetaljRad {
   meldekortid: number;
   kortType: string;
-  kortStatus: string;
+  kortStatus: KortStatus;
   bruttoBelop: string;
   mottattDato: any;
 }

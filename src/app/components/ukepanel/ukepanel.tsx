@@ -58,7 +58,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
     <EkspanderbartpanelBase
       tittel={
         <div className="uke__tittel">
-          <Innholdstittel>{`${ukeTekst()} ${
+          <Innholdstittel tag="h3">{`${ukeTekst()} ${
             props.faktiskUkeNummer
           }`}</Innholdstittel>
           <Ingress>{props.datoTittel}</Ingress>

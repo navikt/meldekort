@@ -3,16 +3,17 @@
   "status": "OK",
   "arsakskoder": [
     {
-      "kode": "FA01",
-      "tekst": "Mandag uke 1, krysset av både for arbeid og annet fravær enn sykdom "
+      "kode": "H01",
+      "tekst": "Arbeidstimer for en dag må være mellom 0 og 24."
     },
     {
-      "kode": "SF01",
-      "tekst": "Mandag uke 1, krysset av for både sykedag og annet fravær enn sykdom"
+      "kode": "V02",
+      "tekst": "Annet fravær på samme dag som arbeid eller sykdom er ulovlig når man mottar arbeidsavklaringspenger."
     },
     {
-      "kode": "FA10",
-      "tekst": "Onsdag uke 2, krysset av både for arbeid og annet fravær enn sykdom "
+      "kode": "K16",
+      "tekst": "Ditt meldekort er allerede levert.",
+      "params": [ "02.11.2022 17:53:43" ]
     }
   ],
   "meldekortdager": [

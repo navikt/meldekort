@@ -99,7 +99,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
   };
 
   return (
-    <Veilederpanel svg={<img alt="veileder ikon" src={veileder} />}>
+    <Veilederpanel svg={<img alt="" src={veileder} />}>
       <div className="send-meldekort-varsel">{visMeldingOmMeldekort()}</div>
     </Veilederpanel>
   );

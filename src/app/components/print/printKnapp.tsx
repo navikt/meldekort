@@ -93,11 +93,7 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
             })
           }
         >
-          <img
-            className="printLogo"
-            src={printLogo}
-            alt={this.tekst + ' logo'}
-          />
+          <img className="printLogo" src={printLogo} alt="" />
           {this.tekst}
         </Flatknapp>
         {prerenderInnhold || this.state.active ? (

@@ -7,13 +7,20 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Miljø (støtter q0 og q1)'
+        description: 'Miljø'
         required: true
-        default: 'q0'
+        default: 'q2'
+        type: choice
+        options:
+          - q1
+          - q2
       bump_patch:
-        description: 'Skriv "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
-        required: false
+        description: 'Velg "bump" her for å bygge release og øke patchversjon på snapshot. Kun for master branch.'
         default: ''
+        type: choice
+        options:
+          - ''
+          - bump
 
 env:
   REPONAME: ${{ github.event.repository.name }}
@@ -36,10 +43,10 @@ jobs:
 
       - name: Set default environment for push
         if: github.event_name == 'push' && github.ref == env.MAIN_BRANCH
-        run: echo "ENVIRONMENT=q0" >> $GITHUB_ENV
+        run: echo "ENVIRONMENT=q2" >> $GITHUB_ENV
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -48,36 +55,34 @@ jobs:
 
       - name: Read version from package.json
         id: packageVersion
-        uses: martinbeentjes/npm-get-version-action@master
+        uses: martinbeentjes/npm-get-version-action@main
 
+      # Setter timestamp, eks. -20220104111118
       - name: Set snapshot timestamp
-        id: snapshotTimestamp
         if: github.event.inputs.bump_patch != 'bump'
         run: |
-          echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
+          echo "TIMESTAMP=-$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
       # Version blir eksisterende versjon fra package.json uten -SNAPSHOT
       # For release:  eks 1.0.1
       # For snapshot: eks 1.0.1-20220104111118
       - name: Calculate release version
-        uses: slime-hatena/semantic-versioning-calculator-action@main
-        id: releaseVersion
-        with:
-          version: ${{ steps.packageVersion.outputs.current-version }}
-          increment_major: 'false'
-          increment_minor: 'false'
-          increment_patch: 'false'
-          prerelease: ${{ steps.snapshotTimestamp.outputs.timestamp }}
+        run: |
+          echo "RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.current-version }}${{ env.TIMESTAMP }}" | sed 's/-SNAPSHOT//g')" >> $GITHUB_ENV
 
       - name: Set vars
-        id: setVars
         run: |
-          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ steps.releaseVersion.outputs.version }}"
+          echo "IMAGE=ghcr.io/${{ github.repository }}/${{ env.REPONAME }}:${{ env.RELEASE_VERSION }}" >> $GITHUB_ENV
 
       - name: Set release version in package.json
         run: |
-          jq '.version="${{ steps.releaseVersion.outputs.version }}"' package.json > package.json.new
+          jq '.version="${{ env.RELEASE_VERSION }}"' package.json > package.json.new
           mv package.json.new package.json
+
+      - name: Authenticate with registry
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "@navikt:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
       - name: Install npm packages
         run: npm ci --legacy-peer-deps
@@ -91,10 +96,10 @@ jobs:
       - name: Build Docker image
         run: |
           npm run build
-          docker build -t ${{ steps.setVars.outputs.image }} .
+          docker build -t ${{ env.IMAGE }} .
 
       - name: Log in to the Container registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -102,17 +107,17 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push ${{ steps.setVars.outputs.image }}
+          docker push ${{ env.IMAGE }}
 
       - name: Deploy to dev
-        if: env.ENVIRONMENT == 'q0' || env.ENVIRONMENT == 'q1' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)
+        if: env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'q2' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           PRINT_PAYLOAD: true
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: ${{ env.NAIS_FILE }}
-          VAR: image=${{ steps.setVars.outputs.image }},appName=${{ env.APPNAME }}
+          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}
           VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
           WAIT: false
 
@@ -121,33 +126,27 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           path: .nais
-          filename: '${{ env.REPONAME }}-${{ steps.releaseVersion.outputs.version }}.zip'
+          filename: '${{ env.REPONAME }}-${{ env.RELEASE_VERSION }}.zip'
 
       - name: Create release
         if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
         uses: ncipollo/release-action@v1
         with:
-          tag: 'v${{ steps.releaseVersion.outputs.version }}'
-          artifacts: '${{ env.REPONAME }}-${{ steps.releaseVersion.outputs.version }}.zip'
+          tag: 'v${{ env.RELEASE_VERSION }}'
+          artifacts: '${{ env.REPONAME }}-${{ env.RELEASE_VERSION }}.zip'
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # Next version blir eksisterende versjon + 0.0.1, med postfix -SNAPSHOT
       - name: Calculate next version
         if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
-        uses: slime-hatena/semantic-versioning-calculator-action@main
-        id: nextReleaseVersion
-        with:
-          version: ${{ steps.packageVersion.outputs.current-version }}
-          increment_major: 'false'
-          increment_minor: 'false'
-          increment_patch: 'true'
-          prerelease: 'SNAPSHOT'
+        run: |
+          echo "NEXT_RELEASE_VERSION=$(echo "${{ steps.packageVersion.outputs.current-version }}" | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g' | sed 's/$/-SNAPSHOT/')" >> $GITHUB_ENV
 
       # Hvis det er ny versjon, oppdater package.json og utfør git commit/push
       - name: Set next version in package.json
         if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH
         run: |
-          jq '.version="${{ steps.nextReleaseVersion.outputs.version }}"' package.json > package.json.new
+          jq '.version="${{ env.NEXT_RELEASE_VERSION }}"' package.json > package.json.new
           mv package.json.new package.json
 
       - name: Commit bumped version
@@ -156,7 +155,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -m "Bump version fra Github Actions" -a
-          git tag -a ${{ env.REPONAME }}-${{ steps.nextReleaseVersion.outputs.version }} -m ${{ env.REPONAME }}-${{ steps.nextReleaseVersion.outputs.version }}
+          git tag -a ${{ env.REPONAME }}-${{ env.NEXT_RELEASE_VERSION }} -m ${{ env.REPONAME }}-${{ env.NEXT_RELEASE_VERSION }}
 
       - name: Push changes
         if: github.event.inputs.bump_patch == 'bump' && github.ref == env.MAIN_BRANCH

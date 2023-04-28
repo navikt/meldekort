@@ -28,15 +28,15 @@ import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortRedu
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
-import {HistoriskeMeldekortRad, KortStatus} from '../../types/meldekort';
+import { HistoriskeMeldekortRad, KortStatus } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
 import {
   selectFeilmelding,
   selectIngenTidligereMeldekort,
 } from '../../selectors/ui';
-import { WeblogicActions } from '../../actions/weblogic';
-import { WeblogicPing } from '../../types/weblogic';
-import WeblogicErNedeInfomelding from '../../components/feil/weblogicErNedeInfomelding';
+import { SkrivemodusActions } from '../../actions/skrivemodus';
+import { Skrivemodus } from '../../types/skrivemodus';
+import SkrivemodusInfomelding from '../../components/feil/skrivemodusInfomelding';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
 
@@ -44,14 +44,14 @@ interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
   ingenTidligereMeldekort: IngenTidligereMeldekort;
   baksystemFeilmelding: BaksystemFeilmelding;
-  weblogic: WeblogicPing;
+  skrivemodus: Skrivemodus;
   meny: MenyState;
 }
 
 interface MapDispatchToProps {
   hentHistoriskeMeldekort: () => void;
   resetInnsending: () => void;
-  pingWeblogic: () => void;
+  hentSkrivemodus: () => void;
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
@@ -65,7 +65,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.props.hentHistoriskeMeldekort();
-    this.props.pingWeblogic();
+    this.props.hentSkrivemodus();
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -86,11 +86,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
           meldekort.meldeperiode.til
         ),
         mottatt:
-          typeof meldekort.mottattDato === 'undefined' ||
-          meldekort.mottattDato === null
+          typeof meldekort.mottattDato === 'undefined'
             ? ''
             : formaterDato(meldekort.mottattDato),
-        status: mapKortStatusTilTekst(meldekort.kortStatus),
+        status: meldekort.kortStatus,
         bruttobelop: formaterBelop(meldekort.bruttoBelop),
         detaljer: hentIntl().formatMessage({ id: 'overskrift.detaljer' }),
       });
@@ -107,7 +106,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
         label: <FormattedMessage id="overskrift.periode" />,
         cell: function(row: any, column: any) {
           if (row.meldekort.kortStatus === KortStatus.UBEHA) {
-            return (row.periode)
+            return row.periode;
           }
           return (
             <Komponentlenke
@@ -137,7 +136,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
               className={finnRiktigEtikettKlasse(row.status)}
               type={'info'}
             >
-              {row.status}
+              {mapKortStatusTilTekst(row.status)}
             </EtikettBase>
           );
         },
@@ -184,8 +183,8 @@ class TidligereMeldekort extends React.Component<Props, State> {
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
     this.props.resetInnsending();
-    this.props.pingWeblogic();
-    if (this.props.weblogic.erWeblogicOppe) {
+    this.props.hentSkrivemodus();
+    if (this.props.skrivemodus.skrivemodus) {
       this.props.hentHistoriskeMeldekort();
     }
     const valgtMenyPunkt = this.props.meny.alleMenyPunkter.find(
@@ -227,10 +226,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        {this.props.weblogic.erWeblogicOppe ? (
+        {this.props.skrivemodus.skrivemodus ? (
           this.tekstOgContent()
         ) : (
-          <WeblogicErNedeInfomelding weblogic={this.props.weblogic} />
+          <SkrivemodusInfomelding skrivemodus={this.props.skrivemodus} />
         )}
       </main>
     );
@@ -242,7 +241,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     historiskeMeldekort: state.historiskeMeldekort,
     ingenTidligereMeldekort: selectIngenTidligereMeldekort(state),
     baksystemFeilmelding: selectFeilmelding(state),
-    weblogic: state.weblogic,
+    skrivemodus: state.skrivemodus,
     meny: state.meny,
   };
 };
@@ -252,7 +251,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     hentHistoriskeMeldekort: () =>
       dispatch(HistoriskeMeldekortActions.hentHistoriskeMeldekort.request()),
     resetInnsending: () => dispatch(InnsendingActions.resetInnsending()),
-    pingWeblogic: () => dispatch(WeblogicActions.pingWeblogic.request()),
+    hentSkrivemodus: () =>
+      dispatch(SkrivemodusActions.hentSkrivemodus.request()),
     settValgtMenyPunkt: (menypunkt: MenyPunkt) =>
       dispatch(MenyActions.settValgtMenyPunkt(menypunkt)),
   };

@@ -162,7 +162,7 @@ const state: RootState = {
   ui: null,
   meldekort: meldekort,
   // @ts-ignore
-  weblogic: null,
+  skrivemodus: null,
 };
 
 // aktivtMeldekort, innsending, person, meldekort

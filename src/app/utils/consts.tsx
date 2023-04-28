@@ -8,7 +8,7 @@ export const Konstanter = {
   sendMeldekortApiUri: 'person/meldekort',
   hentKorrigertMeldekortIdApiUri: 'meldekort/{id}/korrigering',
   hentInfomelding: 'meldekort/infomelding',
-  pingWeblogic: 'weblogic/ping',
+  hentSkrivemodus: 'skrivemodus',
   hentAlleTekster: 'tekst/hentAlle',
   metodeGet: 'GET',
   metodePost: 'POST',
@@ -17,7 +17,7 @@ export const Konstanter = {
   pas: 'PASSWORD',
   use: 'USERNAME',
   defaultLocale: 'nb',
-  defaultFromDate: new Date(),
+  defaultFromDate: new Date('1000-01-01'),
   cachedLocaleValidity: 1800000, // Milliseconds
 };
 

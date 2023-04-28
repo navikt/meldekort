@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import { Router } from '../../../types/router';
 import { Person, PersonInfo } from '../../../types/person';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import {
   formaterDato,
@@ -38,7 +38,7 @@ import {
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
+import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
 
 interface MapStateToProps {
   router: Router;
@@ -48,6 +48,8 @@ interface MapStateToProps {
   innsendingstype: Innsendingstyper | null;
   sendteMeldekort: MeldekortState;
   personInfo: PersonInfo;
+  loading: boolean;
+  locale: string;
 }
 
 interface PropsVerdier {
@@ -61,6 +63,7 @@ interface MapDispatchToProps {
   settInnsendingstype: (innsendingstype: Innsendingstyper | null) => void;
   leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) => void;
   hentPersonInfo: () => void;
+  settLocale: (locale: string, from: Date) => void;
 }
 
 type KvitteringsProps = RouteComponentProps &
@@ -69,21 +72,34 @@ type KvitteringsProps = RouteComponentProps &
 
 class Kvittering extends React.Component<KvitteringsProps, {}> {
   componentDidMount() {
-    this.props.hentPersonInfo();
-    scrollTilElement(undefined, 'auto');
-    let oppdatertSendteMeldekort = this.props.sendteMeldekort;
-    let { meldekortId, kortType } = this.props.aktivtMeldekort;
-    oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
-    this.props.leggTilInnsendtMeldekort(
-      oppdatertSendteMeldekort.sendteMeldekort
-    );
+    const {
+      hentPersonInfo,
+      sendteMeldekort,
+      aktivtMeldekort,
+      leggTilInnsendtMeldekort,
+      innsending,
+      innsendingstype,
+      settLocale,
+      locale,
+    } = this.props;
+    settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
-    const arbeidsssokerSvar = this.props.innsending?.meldekortdetaljer?.sporsmal
-      ?.arbeidssoker;
+    hentPersonInfo();
+    scrollTilElement(undefined, 'auto');
+    let oppdatertSendteMeldekort = sendteMeldekort;
+    let { meldekortId, kortType } = aktivtMeldekort;
+    oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
+    leggTilInnsendtMeldekort(oppdatertSendteMeldekort.sendteMeldekort);
+
+    const arbeidsssokerSvar =
+      innsending?.meldekortdetaljer?.sporsmal?.arbeidssoker;
     loggAktivitet('Viser kvittering', {
       arbeidssoker: arbeidsssokerSvar ? 'ja' : 'nei',
-      meldegruppe: this.props.aktivtMeldekort?.meldegruppe || 'UKJENT',
-      innsendingstype: this.props.innsendingstype || 'UKJENT',
+      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
+      innsendingstype: innsendingstype || 'UKJENT',
+    });
+    loggAktivitet('skjema fullført', {
+      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
     });
   }
 
@@ -150,8 +166,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       }
     }
     return {
-      knappTekstid: 'tilbake.dittNav',
-      nestePath: Environment().dittNavUrl,
+      knappTekstid: 'tilbake.minSide',
+      nestePath: Environment().minSideUrl,
       nesteAktivtMeldekort: undefined,
       nesteInnsendingstype: undefined,
     };
@@ -227,7 +243,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
         </AlertStripe>
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
-          <Innholdstittel>
+          <Innholdstittel tag="h2">
             <FormattedMessage id="overskrift.steg4" />
           </Innholdstittel>
           <Sprakvelger />
@@ -258,14 +274,32 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteInnsendingstype,
     } = this.returnerPropsVerdier();
 
-    const { personInfo, person } = this.props;
+    const { personInfo, person, loading, aktivtMeldekort } = this.props;
+    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+
+    if (loading) {
+      return (
+        <div className="meldekort-spinner">
+          <NavFrontendSpinner type={'XL'} />
+        </div>
+      );
+    }
+
+    if (
+      typeYtelse === TypeYtelse.AAP &&
+      nesteAktivtMeldekort == undefined &&
+      window['hj']
+    ) {
+      // @ts-ignore
+      window.hj('trigger', 'meldekortAAP');
+    }
 
     return personInfo.personId !== 0 ? (
       <main>
         {this.innhold(nesteInnsendingstype)}
         <section className="seksjon flex-innhold sentrert noPrint">
           <div className="knapper-container lang-knapper">
-            {nestePath === Environment().dittNavUrl ? (
+            {nestePath === Environment().minSideUrl ? (
               <a
                 className={'knapp navigasjonsknapp knapp--hoved'}
                 href={nestePath}
@@ -315,6 +349,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     person: state.person,
     sendteMeldekort: state.meldekort,
     personInfo: state.personInfo.personInfo,
+    loading: state.ui.loading,
+    locale: state.intl.locale,
   };
 };
 
@@ -325,6 +361,9 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
     leggTilInnsendtMeldekort: (sendteMeldekort: SendtMeldekort[]) =>
       dispatch(MeldekortActions.leggTilInnsendtMeldekort(sendteMeldekort)),
     hentPersonInfo: () => dispatch(PersonInfoActions.hentPersonInfo.request()),
+    settLocale: (locale: string, from: Date) => {
+      downloadMessagesAndDispatch(locale, from);
+    },
   };
 };
 

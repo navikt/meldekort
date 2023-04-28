@@ -1,6 +1,4 @@
 const path = require('path');
-const CracoLessPlugin = require('craco-less');
-// const NpmImportPlugin = require('less-plugin-npm-import');
 const BUILD_PATH = path.resolve(__dirname, './build');
 
 const removeCssHashPlugin = {
@@ -28,17 +26,7 @@ const removeCssHashPlugin = {
 };
 
 module.exports = {
-  plugins: [
-    {
-      plugin: CracoLessPlugin,
-      options: {
-        lessLoaderOptions: {
-          // loader: new NpmImportPlugin({ prefix: '~' })
-        },
-      },
-    },
-    { plugin: removeCssHashPlugin },
-  ],
+  plugins: [{ plugin: removeCssHashPlugin }],
   webpack: {
     configure: {
       output: {

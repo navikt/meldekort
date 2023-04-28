@@ -15,12 +15,7 @@ import {
 } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  FormattedHTMLMessage,
-  FormattedMessage,
-  InjectedIntlProps,
-  injectIntl,
-} from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import {
   downloadMessagesAndDispatch,
   hentIntl,
@@ -36,7 +31,7 @@ import {
   Meldekort,
   SendtMeldekort,
 } from '../../../types/meldekort';
-import { Redirect, RouteComponentProps } from 'react-router';
+import { Redirect } from 'react-router';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Sporsmal } from './sporsmal/sporsmalConfig';
 import { UiActions } from '../../../actions/ui';
@@ -66,10 +61,7 @@ interface MapDispatchToProps {
   settLocale: (locale: string, from: Date) => void;
 }
 
-type SporsmalssideProps = MapStateToProps &
-  MapDispatchToProps &
-  RouteComponentProps &
-  InjectedIntlProps;
+type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 
 const kategorier = [
   'arbeid',
@@ -347,7 +339,6 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
       oppdaterSvar,
     } = this.props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
-    this.forceUpdate();
 
     scrollTilElement(undefined, 'auto');
     hentInfomelding();
@@ -365,6 +356,9 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
       oppdaterSvar(nySporsmalsobjektState);
     }
     loggAktivitet('Viser spørsmål');
+    loggAktivitet('skjema startet', {
+      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
+    });
   }
 
   render() {
@@ -402,16 +396,13 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
           ) : null}
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel>
+          <Innholdstittel tag="h2">
             <FormattedMessage id="overskrift.steg1" />
           </Innholdstittel>
           <Sprakvelger />
         </section>
         <section className="seksjon">
-          <Veilederpanel
-            kompakt={true}
-            svg={<img alt="Veileder" src={veileder} />}
-          >
+          <Veilederpanel kompakt={true} svg={<img alt="" src={veileder} />}>
             <div className="item">
               <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
             </div>
@@ -523,6 +514,4 @@ const mapDispatcherToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default injectIntl(
-  connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside)
-);
+export default connect(mapStateToProps, mapDispatcherToProps)(Sporsmalsside);

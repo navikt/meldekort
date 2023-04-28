@@ -32,7 +32,7 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
       const begrunnelse: Begrunnelse = {
         valgtArsak: innsending.begrunnelse.valgtArsak,
         valgtArsakTekst: options[innsending.begrunnelse.valgtArsak],
-        erFeil: innsending.begrunnelse.valgtArsak === '',
+        erFeil: false,
       };
       store.dispatch(InnsendingActions.settBegrunnelse(begrunnelse));
 
