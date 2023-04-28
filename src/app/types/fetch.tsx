@@ -1,10 +1,33 @@
-import axios from 'axios';
-import Environment from '../utils/env';
+import axios, { AxiosRequestTransformer } from 'axios';
 
-axios.defaults.baseURL = window.location.origin;
-export const prefferedAxios = axios;
+const dateTransformer: AxiosRequestTransformer = data => {
+  if (data instanceof Date) {
+    // YYYY-MM-DD
+    return (
+      data.getFullYear() +
+      '-' +
+      (data.getMonth() + 1).toString().padStart(2, '0') +
+      '-' +
+      data.getDate()
+    );
+  }
+  if (Array.isArray(data)) {
+    return data.map(val => dateTransformer(val));
+  }
+  if (typeof data === 'object' && data !== null) {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, val]) => [key, dateTransformer(val)])
+    );
+  }
+  return data;
+};
 
-export const backendApi: string = Environment().apiUrl;
+export const prefferedAxios = axios.create({
+  transformRequest: axios.defaults.transformRequest
+    ? [dateTransformer].concat(axios.defaults.transformRequest)
+    : dateTransformer,
+  baseURL: window.location.origin,
+});
 
 export enum FetchStatus {
   UNFETCHED,
