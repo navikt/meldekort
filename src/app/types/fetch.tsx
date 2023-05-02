@@ -8,7 +8,10 @@ const dateTransformer: AxiosRequestTransformer = data => {
       '-' +
       (data.getMonth() + 1).toString().padStart(2, '0') +
       '-' +
-      data.getDate()
+      data
+        .getDate()
+        .toString()
+        .padStart(2, '0')
     );
   }
   if (Array.isArray(data)) {
