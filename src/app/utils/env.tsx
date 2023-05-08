@@ -2,7 +2,11 @@ import { erLocalhost, erMock } from '../mock/utils';
 import { Konstanter } from './consts';
 
 const Environment = () => {
-  if (window.location.hostname.indexOf('meldekort-frontend-q2') > -1) {
+  if (
+    window.location.hostname.indexOf(
+      'meldekort-frontend-q2.intern.dev.nav.no'
+    ) > -1
+  ) {
     return {
       minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl:
@@ -13,7 +17,11 @@ const Environment = () => {
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
     };
-  } else if (window.location.hostname.indexOf('meldekort-frontend-q1') > -1) {
+  } else if (
+    window.location.hostname.indexOf(
+      'meldekort-frontend-q1.intern.dev.nav.no'
+    ) > -1
+  ) {
     return {
       minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl:
