@@ -11,8 +11,8 @@ const Environment = () => {
       minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl:
         'https://meldekort-api-q2.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/logout',
+      loginUrl: 'https://meldekort-api-q2.intern.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q2.intern.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
@@ -26,8 +26,8 @@ const Environment = () => {
       minSideUrl: 'https://www.dev.nav.no/minside/',
       apiUrl:
         'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout',
+      loginUrl: 'https://meldekort-api-q1.intern.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q1.intern.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
