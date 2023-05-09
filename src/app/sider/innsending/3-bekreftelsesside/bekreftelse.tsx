@@ -174,7 +174,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           dag: dato,
           type: { typeFravaer: FravaerTypeEnum.ARBEIDS_FRAVAER },
           arbeidTimer: meldekortDag.arbeidetTimerSum,
-          meldekortperiodeDag: meldekortDag.dag,
+          dagIndeks: meldekortDag.dag,
         });
       }
 
@@ -182,14 +182,14 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         fravar.push({
           dag: dato,
           type: { typeFravaer: FravaerTypeEnum.SYKDOM },
-          meldekortperiodeDag: meldekortDag.dag,
+          dagIndeks: meldekortDag.dag,
         });
       }
       if (meldekortDag.kurs) {
         fravar.push({
           dag: dato,
           type: { typeFravaer: FravaerTypeEnum.KURS_UTDANNING },
-          meldekortperiodeDag: meldekortDag.dag,
+          dagIndeks: meldekortDag.dag,
         });
       }
 
@@ -197,7 +197,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         fravar.push({
           dag: dato,
           type: { typeFravaer: FravaerTypeEnum.ANNET_FRAVAER },
-          meldekortperiodeDag: meldekortDag.dag,
+          dagIndeks: meldekortDag.dag,
         });
       }
     });

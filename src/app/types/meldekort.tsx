@@ -65,7 +65,7 @@ export interface Fravaer {
   dag: Date;
   type: FravaerType;
   arbeidTimer?: number;
-  meldekortperiodeDag?: number;
+  dagIndeks?: number;
 }
 
 export interface Sporsmalsobjekt {
