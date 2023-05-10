@@ -62,10 +62,9 @@ export interface MeldekortdetaljerInnsending {
 }
 
 export interface Fravaer {
-  dag: Date;
+  dagIndeks: number;
   type: FravaerType;
   arbeidTimer?: number;
-  dagIndeks?: number;
 }
 
 export interface Sporsmalsobjekt {
