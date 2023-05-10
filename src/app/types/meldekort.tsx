@@ -65,6 +65,7 @@ export interface Fravaer {
   dag: Date;
   type: FravaerType;
   arbeidTimer?: number;
+  dagIndeks?: number;
 }
 
 export interface Sporsmalsobjekt {
