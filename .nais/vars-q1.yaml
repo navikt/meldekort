@@ -1,5 +1,5 @@
 dashEnv: -q1
 ingresses:
-  - "https://meldekort-frontend-q1.dev.nav.no"
-navDekoratorenUrl: "https://dekoratoren.dev.nav.no"
-externalUrl: "dekoratoren.dev.nav.no"
+  - "https://meldekort-frontend-q1.intern.dev.nav.no"
+navDekoratorenUrl: "https://dekoratoren.ekstern.dev.nav.no"
+externalUrl: "dekoratoren.ekstern.dev.nav.no"

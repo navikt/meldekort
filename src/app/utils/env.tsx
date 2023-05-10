@@ -2,35 +2,31 @@ import { erLocalhost, erMock } from '../mock/utils';
 import { Konstanter } from './consts';
 
 const Environment = () => {
-  if (
-    window.location.hostname.indexOf('meldekort-frontend-q2.dev.nav.no') > -1
-  ) {
+  if (window.location.hostname.indexOf('meldekort-frontend-q2') > -1) {
     return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
+      minSideUrl: 'https://www.intern.dev.nav.no/minside/',
       apiUrl:
-        'https://meldekort-api-q2.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q2.dev.nav.no/oauth2/logout',
+        'https://meldekort-api-q2.intern.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q2.intern.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q2.intern.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
     };
-  } else if (
-    window.location.hostname.indexOf('meldekort-frontend-q1.dev.nav.no') > -1
-  ) {
+  } else if (window.location.hostname.indexOf('meldekort-frontend-q1') > -1) {
     return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
+      minSideUrl: 'https://www.intern.dev.nav.no/minside/',
       apiUrl:
-        'https://meldekort-api-q1.dev.nav.no/meldekort/meldekort-api/api/',
-      loginUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/login',
-      logoutUrl: 'https://meldekort-api-q1.dev.nav.no/oauth2/logout',
+        'https://meldekort-api-q1.intern.dev.nav.no/meldekort/meldekort-api/api/',
+      loginUrl: 'https://meldekort-api-q1.intern.dev.nav.no/oauth2/login',
+      logoutUrl: 'https://meldekort-api-q1.intern.dev.nav.no/oauth2/logout',
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
     };
   } else if (erMock()) {
     return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
+      minSideUrl: 'https://www.intern.dev.nav.no/minside/',
       apiUrl: '',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
@@ -38,7 +34,7 @@ const Environment = () => {
     };
   } else if (erLocalhost()) {
     return {
-      minSideUrl: 'https://www.dev.nav.no/minside/',
+      minSideUrl: 'https://www.intern.dev.nav.no/minside/',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
       loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
       logoutUrl: 'https://loginservice.dev.nav.no/slo',
