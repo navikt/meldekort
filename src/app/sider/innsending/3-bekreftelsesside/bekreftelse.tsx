@@ -171,33 +171,29 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         meldekortDag.arbeidetTimerSum > 0
       ) {
         fravar.push({
-          dag: dato,
+          dagIndeks: meldekortDag.dag,
           type: { typeFravaer: FravaerTypeEnum.ARBEIDS_FRAVAER },
           arbeidTimer: meldekortDag.arbeidetTimerSum,
-          dagIndeks: meldekortDag.dag,
         });
       }
 
       if (meldekortDag.syk) {
         fravar.push({
-          dag: dato,
-          type: { typeFravaer: FravaerTypeEnum.SYKDOM },
           dagIndeks: meldekortDag.dag,
+          type: { typeFravaer: FravaerTypeEnum.SYKDOM },
         });
       }
       if (meldekortDag.kurs) {
         fravar.push({
-          dag: dato,
-          type: { typeFravaer: FravaerTypeEnum.KURS_UTDANNING },
           dagIndeks: meldekortDag.dag,
+          type: { typeFravaer: FravaerTypeEnum.KURS_UTDANNING },
         });
       }
 
       if (meldekortDag.annetFravaer) {
         fravar.push({
-          dag: dato,
-          type: { typeFravaer: FravaerTypeEnum.ANNET_FRAVAER },
           dagIndeks: meldekortDag.dag,
+          type: { typeFravaer: FravaerTypeEnum.ANNET_FRAVAER },
         });
       }
     });
