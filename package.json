@@ -75,7 +75,7 @@
     "prop-types": "^15.7.2",
     "ramda": "^0.29.0",
     "react": "^17.0.2",
-    "react-app-polyfill": "^1.0.1",
+    "react-app-polyfill": "^3.0.0",
     "react-aria-menubutton": "^7.0.3",
     "react-burger-menu": "^3.0.9",
     "react-collapse": "^5.1.1",
