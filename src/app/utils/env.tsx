@@ -28,16 +28,16 @@ const Environment = () => {
     return {
       minSideUrl: 'https://www.intern.dev.nav.no/minside/',
       apiUrl: '',
-      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice.dev.nav.no/slo',
+      loginUrl: 'https://loginservice.intern.dev.nav.no/login',
+      logoutUrl: 'https://loginservice.intern.dev.nav.no/slo',
       testEnv: true,
     };
   } else if (erLocalhost()) {
     return {
       minSideUrl: 'https://www.intern.dev.nav.no/minside/',
       apiUrl: 'http://localhost:8801/meldekort/meldekort-api/api/',
-      loginUrl: 'https://loginservice.dev.nav.no/login?level=Level3',
-      logoutUrl: 'https://loginservice.dev.nav.no/slo',
+      loginUrl: 'https://loginservice.intern.dev.nav.no/login',
+      logoutUrl: 'https://loginservice.intern.dev.nav.no/slo',
       testEnv: true,
     };
   }
