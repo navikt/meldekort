@@ -1,18 +1,16 @@
-FROM node:16-alpine as builder
-COPY . /source
+FROM ghcr.io/navikt/baseimages/node-express:16
 ENV NODE_ENV production
 
-WORKDIR /source
+WORKDIR /var
 
-CMD ["npm", "run", "server"]
+COPY build/ build/
+COPY server server/
+COPY public/ public/
+COPY node_modules/ node_modules/
 
 EXPOSE 8080
 
-FROM ghcr.io/navikt/pus-decorator/pus-decorator
-ENV APPLICATION_NAME=meldekort
-ENV APPRES_CMS_URL=https://appres.nav.no/
-ENV FOOTER_TYPE=WITH_ALPHABET
-ENV DISABLE_FRONTEND_LOGGER=true
-ENV DISABLE_UNLEASH=true
-ENV EXTRA_DECORATOR_PARAMS=&chatbot=true&feedback=false
-COPY --from=builder /source/build /app
+ENTRYPOINT ["node", "./server/server.js"]
+
+
+
