@@ -107,7 +107,6 @@
   },
   "scripts": {
     "build": "set CI=false && craco build",
-    "build:server": "tsc --project server/tsconfig.json",
     "eject": "craco eject",
     "start": "cross-env REACT_APP_MOCK=true craco start",
     "start:mock": "cross-env REACT_APP_MOCK_FULL=true npm run start",
