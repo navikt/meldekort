@@ -11,6 +11,3 @@ COPY node_modules/ node_modules/
 EXPOSE 8080
 
 ENTRYPOINT ["node", "./server/server.js"]
-
-
-
