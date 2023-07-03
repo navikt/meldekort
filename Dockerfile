@@ -1,4 +1,4 @@
-FROM ghcr.io/navikt/baseimages/node-express:16
+FROM node:16-alpine as builder
 ENV NODE_ENV production
 
 WORKDIR /var
