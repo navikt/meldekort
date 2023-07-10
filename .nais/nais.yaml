@@ -36,6 +36,8 @@ spec:
   envFrom:
     - secret: {{ appName }}{{ dashEnv }}
   env:
+    - name: DEKORATOR_MILJO
+      value: '{{ dekoratorMiljo }}'
     - name: DISABLE_SENSU_METRICS
       value: 'true'
   accessPolicy:
