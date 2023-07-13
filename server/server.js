@@ -19,15 +19,15 @@ app.use(compression());
 app.disable('x-powered-by');
 
 // Cache public-filer (som favicon) i én time
-app.use(`${basePath}`, express.static('public', { maxAge: '1h' }));
-
-console.log(`Dekoratormiljø: ${process.env.DEKORATOR_MILJO}`);
+app.use(basePath, express.static('public', { maxAge: '1h' }));
 
 app.use(basePath, express.static(buildPath, { index: false }));
 
 app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
   res.sendStatus(200)
 );
+
+app.use(logRequests);
 
 app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
   injectDecoratorServerSide({
@@ -46,8 +46,6 @@ app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
         .send('Det har oppstått en feil. Venligst prøv igjen senere.');
     });
 });
-
-app.use(logRequests);
 
 app.listen(port, () => {
   logger.info(`Server kjører på port ${port}`);
