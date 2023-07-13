@@ -1,5 +1,6 @@
 const express = require('express');
 const compression = require('compression');
+const promMid = require('express-prometheus-middleware');
 const {
   injectDecoratorServerSide,
 } = require('@navikt/nav-dekoratoren-moduler/ssr');
@@ -25,6 +26,16 @@ app.use(basePath, express.static(buildPath, { index: false }));
 
 app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
   res.sendStatus(200)
+);
+
+app.use(
+  promMid({
+    metricsPath: '/internal/metrics',
+    collectDefaultMetrics: true,
+    requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+    requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+    responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+  })
 );
 
 app.use(logRequests);
