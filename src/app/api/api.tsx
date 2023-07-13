@@ -15,6 +15,8 @@ import * as React from 'react';
 import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
 
 export const fetchGet = async (url: string) => {
+  console.info(`GET ${url}`);
+
   return prefferedAxios
     .get(Environment().apiUrl + url, {
       headers: {
@@ -28,6 +30,8 @@ export const fetchGet = async (url: string) => {
 };
 
 const fetchPost = async (url: string, data: any) => {
+  console.info(`POST ${url}`);
+
   return prefferedAxios
     .post(Environment().apiUrl + url, data, {
       headers: {
