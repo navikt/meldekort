@@ -5,10 +5,7 @@ const {
 } = require('@navikt/nav-dekoratoren-moduler/ssr');
 const { logger, logRequests } = require('./logger');
 const path = require('path');
-
-const client = require('prom-client');
-const collectDefaultMetrics = client.collectDefaultMetrics;
-collectDefaultMetrics();
+const promMid = require('express-prometheus-middleware');
 
 const port = process.env.PORT || 8080;
 const basePath = '/meldekort';
@@ -33,10 +30,13 @@ app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
   res.sendStatus(200)
 );
 
-app.get(`${basePath}/internal/metrics`, (_, res) => {
-  res.set('Content-Type', client.register.contentType);
-  res.send(client.register.metrics());
-});
+app.use(
+  promMid({
+    metricsPath: `${basePath}/internal/metrics`,
+    collectDefaultMetrics: true,
+    requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+  })
+);
 
 app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
   injectDecoratorServerSide({
