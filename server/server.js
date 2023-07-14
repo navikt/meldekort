@@ -8,9 +8,7 @@ const path = require('path');
 
 const client = require('prom-client');
 const collectDefaultMetrics = client.collectDefaultMetrics;
-const Registry = client.Registry;
-const register = new Registry();
-collectDefaultMetrics({ register });
+collectDefaultMetrics();
 
 const port = process.env.PORT || 8080;
 const basePath = '/meldekort';
