@@ -6,6 +6,12 @@ const {
 const { logger, logRequests } = require('./logger');
 const path = require('path');
 
+const client = require('prom-client');
+const collectDefaultMetrics = client.collectDefaultMetrics;
+const Registry = client.Registry;
+const register = new Registry();
+collectDefaultMetrics({ register });
+
 const port = process.env.PORT || 8080;
 const basePath = '/meldekort';
 const buildPath = path.resolve(__dirname, '../build');
@@ -28,6 +34,11 @@ app.use(basePath, express.static(buildPath, { index: false }));
 app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
   res.sendStatus(200)
 );
+
+app.get(`${basePath}/internal/metrics`, (_, res) => {
+  res.set('Content-Type', client.register.contentType);
+  res.send(client.register.metrics());
+});
 
 app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
   injectDecoratorServerSide({
