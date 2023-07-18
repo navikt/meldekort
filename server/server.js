@@ -25,6 +25,8 @@ app.use(`${basePath}`, express.static('public', { maxAge: '1h' }));
 console.log(`Dekoratormiljø: ${process.env.DEKORATOR_MILJO}`);
 
 app.use(basePath, express.static(buildPath, { index: false }));
+app.get(`${basePath}`, (req, res) => res.redirect('/'));
+app.get(`${basePath}/`, (req, res) => res.redirect('/'));
 
 app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
   res.sendStatus(200)
