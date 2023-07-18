@@ -5,6 +5,7 @@ const {
 } = require('@navikt/nav-dekoratoren-moduler/ssr');
 const { logger, logRequests } = require('./logger');
 const path = require('path');
+const promMid = require('express-prometheus-middleware');
 
 const port = process.env.PORT || 8080;
 const basePath = '/meldekort';
@@ -27,6 +28,14 @@ app.use(basePath, express.static(buildPath, { index: false }));
 
 app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
   res.sendStatus(200)
+);
+
+app.use(
+  promMid({
+    metricsPath: `${basePath}/internal/metrics`,
+    collectDefaultMetrics: true,
+    requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+  })
 );
 
 app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
