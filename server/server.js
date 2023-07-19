@@ -19,8 +19,8 @@ app.use(compression());
 // Sikkerhetsgreier
 app.disable('x-powered-by');
 
-app.get(`${basePath}`, (req, res) => res.redirect('/'));
-app.get(`${basePath}/`, (req, res) => res.redirect('/'));
+app.get(`${basePath}`, (req, res) => res.redirect('/send-meldekort'));
+app.get(`${basePath}/`, (req, res) => res.redirect('/send-meldekort'));
 
 // Cache public-filer (som favicon) i én time
 app.use(`${basePath}`, express.static('public', { maxAge: '1h' }));
