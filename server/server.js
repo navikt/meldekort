@@ -7,6 +7,8 @@ const { logger, logRequests } = require('./logger');
 const path = require('path');
 const promMid = require('express-prometheus-middleware');
 
+console.log(`Dekoratormiljø: ${process.env.DEKORATOR_MILJO}`);
+
 const port = process.env.PORT || 8080;
 const basePath = '/meldekort';
 const buildPath = path.resolve(__dirname, '../build');
@@ -19,17 +21,13 @@ app.use(compression());
 // Sikkerhetsgreier
 app.disable('x-powered-by');
 
+// basePath viser ingenting, derfor må vi redirect brukere til ${basePath}/send-meldekort
 app.get(`${basePath}`, (req, res) =>
-  res.redirect(`${basePath}/send-meldekort`)
-);
-app.get(`${basePath}/`, (req, res) =>
   res.redirect(`${basePath}/send-meldekort`)
 );
 
 // Cache public-filer (som favicon) i én time
-app.use(`${basePath}`, express.static('public', { maxAge: '1h' }));
-
-console.log(`Dekoratormiljø: ${process.env.DEKORATOR_MILJO}`);
+app.use(basePath, express.static('public', { maxAge: '1h' }));
 
 app.use(basePath, express.static(buildPath, { index: false }));
 
@@ -45,7 +43,7 @@ app.use(
   })
 );
 
-app.use(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
+app.get(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
   injectDecoratorServerSide({
     env: process.env.DEKORATOR_MILJO ?? 'dev',
     filePath: `${buildPath}/index.html`,
