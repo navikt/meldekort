@@ -145,7 +145,7 @@
     "yet-another-fetch-mock": "^2.4.1"
   },
   "optionalDependencies": {
-    "fsevents": "2.0.7"
+    "fsevents": "2.3.2"
   },
   "eslintConfig": {
     "rules": {
