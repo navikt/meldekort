@@ -12,6 +12,7 @@ const Environment = () => {
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
+      nyLoesningUrl: 'https://dagpenger.intern.dev.nav.no/rapportering',
     };
   } else if (window.location.hostname.indexOf('meldekort-frontend-q1') > -1) {
     return {
@@ -23,6 +24,7 @@ const Environment = () => {
       amplitudeUrl: 'amplitude.nav.no/collect',
       amplitudeKey: '9845ded64c69cd068651cd0d968e0796',
       testEnv: true,
+      nyLoesningUrl: 'https://dagpenger.intern.dev.nav.no/rapportering',
     };
   } else if (erMock()) {
     return {
@@ -31,6 +33,7 @@ const Environment = () => {
       loginUrl: 'https://login.ekstern.dev.nav.no/oauth2/login',
       logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
       testEnv: true,
+      nyLoesningUrl: 'https://dagpenger.intern.dev.nav.no/rapportering',
     };
   } else if (erLocalhost()) {
     return {
@@ -39,6 +42,7 @@ const Environment = () => {
       loginUrl: 'https://login.ekstern.dev.nav.no/oauth2/login',
       logoutUrl: 'https://login.ekstern.dev.nav.no/oauth2/logout',
       testEnv: true,
+      nyLoesningUrl: 'https://dagpenger.intern.dev.nav.no/rapportering',
     };
   }
   return {
@@ -49,6 +53,7 @@ const Environment = () => {
     amplitudeUrl: 'amplitude.nav.no/collect',
     amplitudeKey: '913768927b84cde5eac0d0d18c737561',
     testEnv: false,
+    nyLoesningUrl: 'https://dagpenger.nav.no/rapportering/',
   };
 };
 
