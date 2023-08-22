@@ -1,6 +1,6 @@
 {
   "name": "meldekort",
-  "version": "1.6.43-SNAPSHOT",
+  "version": "1.6.44-SNAPSHOT",
   "private": true,
   "homepage": "/meldekort",
   "dependencies": {
