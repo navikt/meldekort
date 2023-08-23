@@ -51,6 +51,7 @@ app.get(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
     feedback: false,
     chatbot: false,
     shareScreen: true,
+    logoutWarning: true,
   })
     .then(text => res.send(text))
     .catch(e => {
