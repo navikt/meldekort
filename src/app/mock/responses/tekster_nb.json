@@ -125,8 +125,6 @@
   "meldekortkontroll.feilkode.k16": "Ditt meldekort er allerede levert. Dato og tidspunkt for levering var {0}. Du kan ha opplevd treghet i systemet som har medført at du ikke fikk denne bekreftelsen første gangen. ",
   "meldekortkontroll.feilkode.k17": "Du får ikke levert meldekortet ditt nå på grunn av en teknisk feil hos oss. Vi forventer at dette er rettet innen kl. 18:30. Ta kontakt med NAV hvis du fortsatt opplever feil og ikke får levert meldekortet etter kl. 18:30. ",
   "meldekortkontroll.feilkode.tk01": "Har oppgitt å ikke være på tiltak, men fagsystemet har registrert tiltak. ",
-  "melding.loggInn": "Du er ikke logget inn. Vi viderefører deg til innloggingsiden når du lukker denne boksen. ",
-  "melding.loggInn.overskrift": "Du må logge inn ",
   "meny.toggle.apne": "Åpne meny ",
   "meny.toggle.lukk": "Lukk meny ",
   "naviger.avbryt": "Avbryt ",
