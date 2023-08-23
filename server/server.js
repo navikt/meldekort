@@ -46,12 +46,14 @@ app.use(
 app.get(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
   injectDecoratorServerSide({
     env: process.env.DEKORATOR_MILJO ?? 'dev',
-    filePath: `${buildPath}/index.html`,
-    simple: false,
-    feedback: false,
-    chatbot: false,
-    shareScreen: true,
-    logoutWarning: true,
+    params: {
+      filePath: `${buildPath}/index.html`,
+      simple: false,
+      feedback: false,
+      chatbot: false,
+      shareScreen: true,
+      logoutWarning: true,
+    },
   })
     .then(text => res.send(text))
     .catch(e => {
