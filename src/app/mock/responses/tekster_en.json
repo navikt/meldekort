@@ -125,8 +125,6 @@
   "meldekortkontroll.feilkode.k16": "Your employment status form has already been delivered. Date and time of delivery was {0}. You may have experienced slowness in the system which has caused that you did not receive this confirmation the first time. ",
   "meldekortkontroll.feilkode.k17": "You cannot send your employment status form now due to a technical error on our side. We expect this to be fixed by 18:30. Contact NAV if you still experience errors and can't send the employment status form after 18:30. ",
   "meldekortkontroll.feilkode.tk01": "Has stated not to be participating in employment schemes, but the system has registered employment schemes. ",
-  "melding.loggInn": "You are not logged inn. We will redirect you to the log in page when you close this box. ",
-  "melding.loggInn.overskrift": "You have to log in ",
   "meny.toggle.apne": "Open menu ",
   "meny.toggle.lukk": "Close menu ",
   "naviger.avbryt": "Cancel ",

@@ -42,5 +42,5 @@ spec:
     outbound:
       rules:
         - application: meldekort-api{{ dashEnv }}
-      external:
-        - host: '{{ externalUrl }}'
+        - application: nav-dekoratoren
+          namespace: personbruker
