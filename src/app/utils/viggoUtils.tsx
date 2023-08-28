@@ -5,7 +5,9 @@ import { Konstanter } from './consts';
 
 export const erViggo = () => {
   prefferedAxios
-    .get(Environment().apiUrl + Konstanter.erViggo)
+    .get(Environment().apiUrl + Konstanter.erViggo, {
+      withCredentials: true,
+    })
     .catch((reason: AxiosError) => {
       if (reason.response!.status === 307) {
         // Bruker er Viggo. Sende til den nye løsningen
