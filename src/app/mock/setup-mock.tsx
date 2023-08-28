@@ -70,4 +70,6 @@ export default () => {
   mock.onGet(urlEn).reply(200, {
     ...teksterJsonEn,
   });
+
+  mock.onGet(apiUrl + Konstanter.erViggo).reply(200, {});
 };
