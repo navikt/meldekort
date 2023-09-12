@@ -1,6 +1,6 @@
 {
   "name": "meldekort",
-  "version": "1.6.44-SNAPSHOT",
+  "version": "1.6.46-SNAPSHOT",
   "private": true,
   "homepage": "/meldekort",
   "dependencies": {
@@ -12,7 +12,7 @@
     "@redux-devtools/extension": "^3.2.5",
     "@types/history": "^4.7.11",
     "@types/node": "^10.12.60",
-    "@types/ramda": "^0.29.0",
+    "@types/ramda": "^0.29.3",
     "@types/react": "^17.0.56",
     "@types/react-aria-menubutton": "^6.2.2",
     "@types/react-collapse": "^5.0.1",
@@ -97,8 +97,8 @@
     "redux-observable": "^1.0.0",
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
-    "stylelint": "^14.16.1",
-    "stylelint-no-unsupported-browser-features": "^6.1.0",
+    "stylelint": "^15.10.3",
+    "stylelint-no-unsupported-browser-features": "^7.0.0",
     "ts-react-json-table": "^0.1.1",
     "tslint-config-prettier": "^1.15.0",
     "tslint-react-hooks": "^2.2.1",
@@ -145,7 +145,7 @@
     "yet-another-fetch-mock": "^2.4.1"
   },
   "optionalDependencies": {
-    "fsevents": "2.0.7"
+    "fsevents": "2.3.3"
   },
   "eslintConfig": {
     "rules": {
