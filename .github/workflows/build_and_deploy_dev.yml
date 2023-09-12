@@ -34,6 +34,9 @@ jobs:
   build:
     name: Build and deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - name: Check if correct branch
         if: github.event.inputs.bump_patch == 'bump' && github.ref != env.MAIN_BRANCH
