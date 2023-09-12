@@ -10,6 +10,7 @@ export const Konstanter = {
   hentInfomelding: 'meldekort/infomelding',
   hentSkrivemodus: 'skrivemodus',
   hentAlleTekster: 'tekst/hentAlle',
+  erViggo: 'viggo/erViggo',
   metodeGet: 'GET',
   metodePost: 'POST',
   forsteUke: 1,

@@ -31,6 +31,7 @@ import 'nav-frontend-typografi-style/dist/main.css';
 import 'nav-frontend-veileder-style/dist/main.css';
 import 'nav-frontend-veilederpanel-style/dist/main.css';
 import './index.css';
+import { erViggo } from './app/utils/viggoUtils';
 
 let locales: Locales = store.getState().locales;
 locales.forEach(locale => addLocaleData(locale.localeData));
@@ -63,6 +64,9 @@ const renderLoader = (element: any) => {
 
 // Først viser vi loader
 renderLoader(<NavFrontendSpinner type="XL" />);
+
+// Sjekk at denne personen skal sendes til den nye løsningen
+erViggo();
 
 // Nå kan vi prøve å hente tekster
 // Det er ikke noe vits i å vise appen uten tekstene
