@@ -12,7 +12,7 @@
     "@redux-devtools/extension": "^3.2.5",
     "@types/history": "^4.7.11",
     "@types/node": "^10.12.60",
-    "@types/ramda": "^0.29.3",
+    "@types/ramda": "^0.29.4",
     "@types/react": "^17.0.56",
     "@types/react-aria-menubutton": "^6.2.2",
     "@types/react-collapse": "^5.0.1",
