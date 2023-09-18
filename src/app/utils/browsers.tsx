@@ -7,7 +7,7 @@ export const OSName = browserObject.getOSName();
 
 const getMajorVersion = browserVersion
   ? parseInt(browserVersion.split('.')[0], 0)
-  : false;
+  : 0;
 
 // Safari
 export const isSafari = browserName === 'Safari';
