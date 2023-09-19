@@ -39,6 +39,7 @@ import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
+import { Location } from 'history';
 
 interface MapStateToProps {
   router: Router;
@@ -66,9 +67,16 @@ interface MapDispatchToProps {
   settLocale: (locale: string, from: Date) => void;
 }
 
+interface Props {
+  match: any;
+  history: any;
+  location: Location;
+}
+
 type KvitteringsProps = RouteComponentProps &
   MapDispatchToProps &
-  MapStateToProps;
+  MapStateToProps &
+  Props;
 
 class Kvittering extends React.Component<KvitteringsProps, {}> {
   componentDidMount() {
@@ -104,8 +112,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
   }
 
   returnerPropsVerdier = (): PropsVerdier => {
-    const { innsendingstype, person, router, sendteMeldekort } = this.props;
-    const urlParams = router.location.pathname.split('/');
+    const { innsendingstype, person, location, sendteMeldekort } = this.props;
+    const urlParams = location?.pathname.split('/');
     urlParams.pop();
     const nestePath = urlParams.join('/');
     const meldekort = meldekortSomKanSendes(

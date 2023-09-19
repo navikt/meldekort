@@ -18,6 +18,7 @@ import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
 import { RouterState } from 'connected-react-router';
 import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
 import { hentKorrigertIdAndDispatch } from '../../utils/korrigeringUtils';
+import { Location } from 'history';
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -36,9 +37,16 @@ interface MapDispatchToProps {
   settLocale: (locale: string, from: Date) => void;
 }
 
+interface Props {
+  match: any;
+  history: any;
+  location: Location;
+}
+
 type InnsendingRoutesProps = RouteComponentProps &
   MapStateToProps &
-  MapDispatchToProps;
+  MapDispatchToProps &
+  Props;
 
 class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
   settMeldekortIdBasertPaInnsendingstype = () => {
@@ -63,8 +71,8 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
   }
 
   render() {
-    const { match } = this.props;
-    const { pathname } = this.props.router.location;
+    const { match, location, innsending } = this.props;
+    const { pathname } = location;
     const currentPath = `${match.url}`;
 
     let noPrint =
@@ -73,7 +81,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
         ? 'noPrint'
         : '';
 
-    return this.props.innsending.innsendingstype === null ? (
+    return innsending.innsendingstype === null ? (
       <Redirect to={'/om-meldekort'} />
     ) : (
       <div className="sideinnhold">
@@ -83,24 +91,17 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
           <Route
             exact={true}
             path={currentPath + '/sporsmal'}
-            render={props => <Sporsmalsside {...props} />}
+            children={<Sporsmalsside />}
           />
-          <Route
-            path={currentPath + '/utfylling'}
-            render={(props: RouteComponentProps<any>) => (
-              <Utfylling {...props} />
-            )}
-          />
+          <Route path={currentPath + '/utfylling'} children={<Utfylling />} />
           <Route
             path={currentPath + '/bekreftelse'}
-            render={(props: RouteComponentProps<any>) => (
-              <Bekreftelse {...props} />
-            )}
+            children={<Bekreftelse />}
           />
           <Route
             path={currentPath + '/kvittering'}
-            render={(props: RouteComponentProps<any>) => (
-              <Kvittering {...props} />
+            children={({ match, history, location }) => (
+              <Kvittering match={match} history={history} location={location} />
             )}
           />
           <Redirect

@@ -76,6 +76,7 @@ class App extends React.Component<Props, AppState> {
       person,
       hentPerson,
       meny,
+      toggleMeny,
     } = this.props;
 
     if (personStatus.personStatus.id === '') {
@@ -92,7 +93,9 @@ class App extends React.Component<Props, AppState> {
         </div>
       );
     } else if (
-      erBrukerRegistrertIArena(personStatus.personStatus.statusArbeidsoker)
+      erBrukerRegistrertIArena(
+        personStatus?.personStatus.statusArbeidsoker || ''
+      )
     ) {
       if (
         person.meldeform === MeldeForm.IKKE_SATT &&
@@ -115,12 +118,12 @@ class App extends React.Component<Props, AppState> {
           />
           <div
             className={classNames('', { overlay: meny.erApen })}
-            onClick={() => meny.erApen && this.props.toggleMeny(!meny.erApen)}
+            onClick={() => meny.erApen && toggleMeny(!meny.erApen)}
           >
             <div className={browserSpecificStyling}>
               <ConnectedRouter history={history}>
                 <Switch>
-                  <Route path="/" component={MeldekortRoutes} />
+                  <Route path="/" children={MeldekortRoutes} />
                 </Switch>
               </ConnectedRouter>
             </div>

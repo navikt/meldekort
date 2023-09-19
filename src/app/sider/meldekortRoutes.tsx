@@ -8,48 +8,53 @@ import OmMeldekort from './omMeldekort/omMeldekort';
 import TidligereMeldekort from './tidligereMeldekort/tidligereMeldekort';
 import InnsendingRoutes from './innsending/innsendingRoutes';
 
-const MeldekortRoutes: React.FunctionComponent = props => {
+const MeldekortRoutes: React.FunctionComponent = () => {
   return (
     <Switch>
       <Route
         path="/send-meldekort/innsending"
-        render={renderProps => <InnsendingRoutes {...renderProps} />}
+        children={({ match, history, location }) => (
+          <InnsendingRoutes
+            match={match}
+            history={history}
+            location={location}
+          />
+        )}
       />
-      <Route
-        exact={true}
-        path="/send-meldekort"
-        render={() => <SendMeldekort />}
-      />
+      <Route exact={true} path="/send-meldekort" children={<SendMeldekort />} />
 
       <Route
         path="/etterregistrer-meldekort/innsending"
-        render={renderProps => <InnsendingRoutes {...renderProps} />}
+        children={({ match, history, location }) => (
+          <InnsendingRoutes
+            match={match}
+            history={history}
+            location={location}
+          />
+        )}
       />
       <Route
         path="/etterregistrer-meldekort"
-        render={() => <EtterregistrerMeldekort />}
+        children={<EtterregistrerMeldekort />}
       />
 
       <Route
         path="/tidligere-meldekort/detaljer/korriger"
-        render={renderProps => <InnsendingRoutes {...renderProps} />}
+        children={({ match, history, location }) => (
+          <InnsendingRoutes
+            match={match}
+            history={history}
+            location={location}
+          />
+        )}
       />
-      <Route
-        path="/tidligere-meldekort/detaljer"
-        render={renderProps => <Detaljer {...renderProps} />}
-      />
-      <Route
-        path="/tidligere-meldekort"
-        render={renderProps => <TidligereMeldekort {...renderProps} />}
-      />
+      <Route path="/tidligere-meldekort/detaljer" children={<Detaljer />} />
+      <Route path="/tidligere-meldekort" children={<TidligereMeldekort />} />
 
-      <Route
-        path="/ofte-stilte-sporsmal"
-        render={() => <OfteStilteSporsmal />}
-      />
-      <Route path="/om-meldekort" render={() => <OmMeldekort />} />
+      <Route path="/ofte-stilte-sporsmal" children={<OfteStilteSporsmal />} />
+      <Route path="/om-meldekort" children={<OmMeldekort />} />
 
-      <Route path="/404" component={() => <div />} />
+      <Route path="/404" children={<div />} />
       <Redirect exact={true} from="/" to="/send-meldekort" />
     </Switch>
   );
