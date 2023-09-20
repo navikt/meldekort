@@ -1,21 +1,14 @@
 import { AppEpic } from '../store/configureStore';
-import {
-  catchError,
-  filter,
-  map,
-  switchMap,
-  withLatestFrom,
-} from 'rxjs/operators';
-import { combineEpics } from 'redux-observable';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { combineEpics, ofType } from 'redux-observable';
 import { postMeldekort } from '../api/api';
 import { from, of } from 'rxjs';
 import { InnsendingActions } from '../actions/innsending';
-import { isActionOf } from 'typesafe-actions';
 import { MeldekortActions } from '../actions/meldekort';
 
 const kontrollerMeldekort: AppEpic = (action$, state$) =>
   action$.pipe(
-    filter(isActionOf([InnsendingActions.kontrollerMeldekort.request])),
+    ofType([InnsendingActions.kontrollerMeldekort.request]),
     withLatestFrom(state$),
     switchMap(([action, state]) =>
       from(postMeldekort(state)).pipe(
