@@ -55,7 +55,7 @@ const MeldekortRoutes: React.FunctionComponent = () => {
       <Route path="/om-meldekort" children={<OmMeldekort />} />
 
       <Route path="/404" children={<div />} />
-      <Redirect exact={true} from="/" to="/send-meldekort" />
+      <Route path="/" render={() => <Redirect to="/send-meldekort" />} />
     </Switch>
   );
 };

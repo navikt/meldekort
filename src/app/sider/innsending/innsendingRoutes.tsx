@@ -104,10 +104,9 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
               <Kvittering match={match} history={history} location={location} />
             )}
           />
-          <Redirect
-            exact={true}
-            from={currentPath}
-            to={currentPath + `/sporsmal`}
+          <Route
+            path={currentPath}
+            render={() => <Redirect to={currentPath + `/sporsmal`} />}
           />
         </Switch>
       </div>
