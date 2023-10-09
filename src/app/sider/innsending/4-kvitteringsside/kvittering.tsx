@@ -300,6 +300,9 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     ) {
       // @ts-ignore
       window.hj('trigger', 'meldekortAAP');
+    } else if (typeYtelse === TypeYtelse.TILTAKSPENGER && window['hj']) {
+      // @ts-ignore
+      window.hj('trigger', 'meldekortTP');
     }
 
     return personInfo.personId !== 0 ? (
