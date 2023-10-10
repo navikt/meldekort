@@ -1,14 +1,21 @@
 import { AppEpic } from '../store/configureStore';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  catchError,
+  filter,
+  map,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 import { from, of } from 'rxjs';
 import { fetchMeldekortdetaljer } from '../api/api';
-import { combineEpics, ofType } from 'redux-observable';
+import { combineEpics } from 'redux-observable';
 import { MeldekortActions } from '../actions/meldekort';
+import { isActionOf } from 'typesafe-actions';
 
 const hentMeldekortdetaljer: AppEpic = (action$, state$) =>
   action$.pipe(
-    ofType([MeldekortdetaljerActions.hentMeldekortdetaljer.request]),
+    filter(isActionOf(MeldekortdetaljerActions.hentMeldekortdetaljer.request)),
     withLatestFrom(state$),
     switchMap(([action, state]) =>
       from(fetchMeldekortdetaljer(state.aktivtMeldekort.meldekortId)).pipe(
