@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
@@ -40,6 +40,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
 import { Location } from 'history';
+import Panel from "nav-frontend-paneler";
 
 interface MapStateToProps {
   router: Router;
@@ -249,6 +250,10 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
         <AlertStripe type={'suksess'} className="alertSendt noPrint">
           <FormattedMessage id={'overskrift.meldekort.sendt'} />
         </AlertStripe>
+
+        <Panel border={true} className={"alertSendt"}>
+          <FormattedHTMLMessage id={"sendt.klagerettigheterInfo" + typeYtelse} />
+        </Panel>
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel tag="h2">
