@@ -243,7 +243,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
 
   innhold = (nesteInnsendingstype?: Innsendingstyper) => {
     const { innsendingstype, innsending, aktivtMeldekort } = this.props;
-    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+    const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
     return (
       <>
@@ -251,9 +251,11 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <FormattedMessage id={'overskrift.meldekort.sendt'} />
         </AlertStripe>
 
-        <Panel border={true} className={"alertSendt"}>
-          <FormattedHTMLMessage id={"sendt.klagerettigheterInfo" + typeYtelse} />
-        </Panel>
+        {typeYtelsePostfix === TypeYtelse.DAGPENGER &&
+          <Panel border={true} className={"alertSendt"}>
+            <FormattedHTMLMessage id={"sendt.klagerettigheterInfo" + typeYtelsePostfix} />
+          </Panel>
+        }
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel tag="h2">
@@ -266,7 +268,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={innsending.meldekortdetaljer}
-            typeYtelsePostfix={typeYtelse}
+            typeYtelsePostfix={typeYtelsePostfix}
           />
         </section>
         {innsendingstype === Innsendingstyper.INNSENDING &&
@@ -288,7 +290,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     } = this.returnerPropsVerdier();
 
     const { personInfo, person, loading, aktivtMeldekort } = this.props;
-    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+    const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
     if (loading) {
       return (
@@ -299,13 +301,13 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     }
 
     if (
-      typeYtelse === TypeYtelse.AAP &&
+      typeYtelsePostfix === TypeYtelse.AAP &&
       nesteAktivtMeldekort == undefined &&
       window['hj']
     ) {
       // @ts-ignore
       window.hj('trigger', 'meldekortAAP');
-    } else if (typeYtelse === TypeYtelse.TILTAKSPENGER && window['hj']) {
+    } else if (typeYtelsePostfix === TypeYtelse.TILTAKSPENGER && window['hj']) {
       // @ts-ignore
       window.hj('trigger', 'meldekortTP');
     }
