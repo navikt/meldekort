@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
@@ -40,6 +40,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
 import { Location } from 'history';
+import Panel from "nav-frontend-paneler";
 
 interface MapStateToProps {
   router: Router;
@@ -242,13 +243,19 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
 
   innhold = (nesteInnsendingstype?: Innsendingstyper) => {
     const { innsendingstype, innsending, aktivtMeldekort } = this.props;
-    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+    const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
     return (
       <>
         <AlertStripe type={'suksess'} className="alertSendt noPrint">
           <FormattedMessage id={'overskrift.meldekort.sendt'} />
         </AlertStripe>
+
+        {typeYtelsePostfix === TypeYtelse.DAGPENGER &&
+          <Panel border={true} className={"alertSendt"}>
+            <FormattedHTMLMessage id={"sendt.klagerettigheterInfo" + typeYtelsePostfix} />
+          </Panel>
+        }
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel tag="h2">
@@ -261,7 +268,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
           <Meldekortdetaljer
             aktivtMeldekort={this.props.aktivtMeldekort}
             meldekortdetaljer={innsending.meldekortdetaljer}
-            typeYtelsePostfix={typeYtelse}
+            typeYtelsePostfix={typeYtelsePostfix}
           />
         </section>
         {innsendingstype === Innsendingstyper.INNSENDING &&
@@ -283,7 +290,7 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     } = this.returnerPropsVerdier();
 
     const { personInfo, person, loading, aktivtMeldekort } = this.props;
-    const typeYtelse = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
+    const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
     if (loading) {
       return (
@@ -294,13 +301,13 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
     }
 
     if (
-      typeYtelse === TypeYtelse.AAP &&
+      typeYtelsePostfix === TypeYtelse.AAP &&
       nesteAktivtMeldekort == undefined &&
       window['hj']
     ) {
       // @ts-ignore
       window.hj('trigger', 'meldekortAAP');
-    } else if (typeYtelse === TypeYtelse.TILTAKSPENGER && window['hj']) {
+    } else if (typeYtelsePostfix === TypeYtelse.TILTAKSPENGER && window['hj']) {
       // @ts-ignore
       window.hj('trigger', 'meldekortTP');
     }
