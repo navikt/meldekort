@@ -14,7 +14,7 @@ import {
 } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { persistReducer, persistStore } from 'redux-persist';
-import createEncryptor from 'redux-persist-transform-encrypt';
+import { encryptTransform } from 'redux-persist-transform-encrypt';
 
 import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
 import historiskeMeldekortReducer, {
@@ -124,7 +124,7 @@ const hentNokkel = (): string => {
   return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
 };
 
-const encryptor = createEncryptor({
+const encryptor = encryptTransform({
   secretKey: hentNokkel(),
   onError: function(error: any) {
     console.log('Det skjedde en feil med kryptering!', error);
