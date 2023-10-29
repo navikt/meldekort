@@ -103,7 +103,7 @@
     "tslint-react-hooks": "^2.2.1",
     "typesafe-actions": "^3.0.0",
     "webpack": "^5.88.2",
-    "winston": "^3.10.0"
+    "winston": "^3.11.0"
   },
   "scripts": {
     "build": "set CI=false && craco build",
