@@ -23,7 +23,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.11",
     "amplitude-js": "8.21.9",
-    "axios": "^0.27.2",
+    "axios": "^1.6.1",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "be-pretty": "^1.1.1",
