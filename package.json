@@ -101,7 +101,7 @@
     "ts-react-json-table": "^0.1.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react-hooks": "^2.2.2",
-    "typesafe-actions": "^3.0.0",
+    "typesafe-actions": "^4.4.2",
     "webpack": "^5.89.0",
     "winston": "^3.11.0"
   },
