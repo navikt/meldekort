@@ -34,4 +34,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect(mapStateToProps, null)(SkrivemodusInfomelding);
+export default connect<{}, {}, MapStateToProps>(mapStateToProps, null)(SkrivemodusInfomelding);

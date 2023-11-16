@@ -87,4 +87,4 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   );
 };
 
-export default connect(mapStateToProps, null)(Meldekortdetaljer);
+export default connect<{}, {}, Props>(mapStateToProps, null)(Meldekortdetaljer);

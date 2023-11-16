@@ -134,4 +134,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect(mapStateToProps, null)(UkePanel);
+export default connect<{}, {}, Props>(mapStateToProps, null)(UkePanel);

@@ -3,11 +3,11 @@ import TidligereMeldekort from '../sider/tidligereMeldekort/tidligereMeldekort';
 import EtterregistrerMeldekort from '../sider/etterregistrerMeldekort/etterregistrerMeldekort';
 import OmMeldekort from '../sider/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from '../sider/ofteStilteSporsmal/ofteStilteSporsmal';
-import { ComponentClass } from 'react';
+import { ComponentClass, FunctionComponent } from 'react';
 
 export interface MenyPunkt {
   exact?: boolean;
-  component: ComponentClass;
+  component: ComponentClass | FunctionComponent;
   urlparam: string;
   tekstid: string;
   tittel: string;

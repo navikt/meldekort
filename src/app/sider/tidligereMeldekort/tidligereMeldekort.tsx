@@ -49,10 +49,10 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
-  hentHistoriskeMeldekort: () => void;
-  resetInnsending: () => void;
-  hentSkrivemodus: () => void;
-  settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
+  hentHistoriskeMeldekort(): void;
+  resetInnsending(): void;
+  hentSkrivemodus(): void;
+  settValgtMenyPunkt(menypunkt: MenyPunkt): void;
 }
 
 type State = {
@@ -65,7 +65,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.props.hentHistoriskeMeldekort();
-    this.props.hentSkrivemodus();
+    this.props.hentSkrivemodus()
     this.state = {
       windowSize: window.innerWidth,
     };
@@ -258,4 +258,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TidligereMeldekort);
+export default connect<MapStateToProps, MapDispatchToProps, {}>(mapStateToProps, mapDispatchToProps)(TidligereMeldekort);

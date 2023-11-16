@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ClassAttributes } from 'react';
-import { Ingress, Innholdstittel, Sidetittel } from 'nav-frontend-typografi';
+import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import NavLogo from '../../ikoner/nav-logo.svg';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
@@ -17,22 +17,6 @@ export interface Props extends ClassAttributes<any> {
   active?: boolean;
   erKvittering?: boolean;
 }
-
-export interface SideProps extends ClassAttributes<any> {
-  tittel?: string;
-}
-
-export const Side: React.FunctionComponent<SideProps> = ({
-  children,
-  tittel,
-}) => (
-  <div className="utskrift__side">
-    {tittel && (
-      <Sidetittel className="utskrift__sidetittel">{tittel}</Sidetittel>
-    )}
-    {children}
-  </div>
-);
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -79,7 +63,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
   );
 };
 
-export default connect(
+export default connect<{}, {}, Props>(
   mapStateToProps,
   null
 )(Utskrift);
