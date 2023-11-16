@@ -1,6 +1,6 @@
-import axios, { AxiosRequestTransformer } from 'axios';
+import axios from 'axios';
 
-const dateTransformer: AxiosRequestTransformer = data => {
+const dateTransformer = (data: any, headers: any): any => {
   if (data instanceof Date) {
     // YYYY-MM-DD
     return (
@@ -15,11 +15,11 @@ const dateTransformer: AxiosRequestTransformer = data => {
     );
   }
   if (Array.isArray(data)) {
-    return data.map(val => dateTransformer(val));
+    return data.map(val => dateTransformer(val, headers));
   }
   if (typeof data === 'object' && data !== null) {
     return Object.fromEntries(
-      Object.entries(data).map(([key, val]) => [key, dateTransformer(val)])
+      Object.entries(data).map(([key, val]) => [key, dateTransformer(val, headers)])
     );
   }
   return data;
@@ -31,35 +31,3 @@ export const prefferedAxios = axios.create({
     : dateTransformer,
   baseURL: window.location.origin,
 });
-
-export enum FetchStatus {
-  UNFETCHED,
-  IN_PROGRESS,
-  SUCCESS,
-  FAILURE,
-}
-
-export function hentDataFraKilde<T>(
-  fetchState: FetchState<T>,
-  emptyVerdi: any
-): T {
-  return fetchState && fetchState.status === FetchStatus.SUCCESS
-    ? fetchState.data
-    : emptyVerdi;
-}
-
-export type FetchState<T> =
-  | {
-      status: FetchStatus.UNFETCHED;
-    }
-  | {
-      status: FetchStatus.IN_PROGRESS;
-    }
-  | {
-      status: FetchStatus.SUCCESS;
-      data: T;
-    }
-  | {
-      status: FetchStatus.FAILURE;
-      error: unknown;
-    };
