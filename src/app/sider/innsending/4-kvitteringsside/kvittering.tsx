@@ -69,8 +69,6 @@ interface MapDispatchToProps {
 }
 
 interface Props {
-  match: any;
-  history: any;
   location: Location;
 }
 
@@ -79,7 +77,7 @@ type KvitteringsProps = RouteComponentProps &
   MapStateToProps &
   Props;
 
-class Kvittering extends React.Component<KvitteringsProps, {}> {
+class Kvittering extends React.Component<KvitteringsProps, object> {
   componentDidMount() {
     const {
       hentPersonInfo,
@@ -95,8 +93,8 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
 
     hentPersonInfo();
     scrollTilElement(undefined, 'auto');
-    let oppdatertSendteMeldekort = sendteMeldekort;
-    let { meldekortId, kortType } = aktivtMeldekort;
+    const oppdatertSendteMeldekort = sendteMeldekort;
+    const { meldekortId, kortType } = aktivtMeldekort;
     oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
     leggTilInnsendtMeldekort(oppdatertSendteMeldekort.sendteMeldekort);
 
@@ -305,9 +303,11 @@ class Kvittering extends React.Component<KvitteringsProps, {}> {
       nesteAktivtMeldekort == undefined &&
       window['hj']
     ) {
+      /* eslint-disable @typescript-eslint/ban-ts-comment */
       // @ts-ignore
       window.hj('trigger', 'meldekortAAP');
     } else if (typeYtelsePostfix === TypeYtelse.TILTAKSPENGER && window['hj']) {
+      /* eslint-disable @typescript-eslint/ban-ts-comment */
       // @ts-ignore
       window.hj('trigger', 'meldekortTP');
     }

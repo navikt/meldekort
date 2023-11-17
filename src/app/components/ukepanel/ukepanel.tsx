@@ -46,8 +46,8 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   };
 
   const sjekkSporsmal = (kategori: string): boolean => {
-    let sporsmalListe = hentSporsmal();
-    let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
+    const sporsmalListe = hentSporsmal();
+    const sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
     if (sporsmal.length !== 0) {
       return sporsmal[0].svar;
     }
@@ -134,4 +134,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect<{}, {}, Props>(mapStateToProps, null)(UkePanel);
+export default connect<object, object, Props>(mapStateToProps, null)(UkePanel);

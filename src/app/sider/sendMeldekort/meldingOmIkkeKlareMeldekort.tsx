@@ -19,7 +19,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
   person,
   innsendingsklareMeldekort,
 }: Props) {
-  let meldekortliste = innsendingsklareMeldekort;
+  const meldekortliste = innsendingsklareMeldekort;
 
   const hentIdTilNesteInnsendingsklareMeldekort = (
     meldekortListe: Meldekort[]

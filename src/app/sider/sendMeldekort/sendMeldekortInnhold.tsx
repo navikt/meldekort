@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Meldekort, MeldekortRad } from '../../types/meldekort';
+import { Meldekort, MeldekortKolonne, MeldekortRad } from '../../types/meldekort';
 import { FormattedHTMLMessage } from 'react-intl';
 import Tabell from '../../components/tabell/desktop/tabell';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -10,10 +10,7 @@ import { BaksystemFeilmelding } from '../../types/ui';
 
 interface Props {
   rows: MeldekortRad[];
-  columns: [
-    { key: 'periode'; label: 'Periode' },
-    { key: 'dato'; label: 'Dato' }
-  ];
+  columns: MeldekortKolonne[];
   router: Router;
   innsendingsklareMeldekort: Meldekort[];
   baksystemFeilmelding: BaksystemFeilmelding;

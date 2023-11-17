@@ -25,7 +25,7 @@ const fjernFeilmelding: AppEpic = action$ =>
         PersonStatusActions.hentPersonStatus.success,
       ])
     ),
-    concatMap(action => {
+    concatMap(() => {
       return [
         UiActions.visBaksystemFeilmelding({
           content: () => '',

@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 import * as React from 'react';
-import { FunctionComponentElement } from 'react';
+import { FunctionComponentElement, ReactElement } from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './app/app';
 import * as serviceWorker from './registerServiceWorker';
 import { IntlProvider, updateIntl } from 'react-intl-redux';
-import { Provider } from 'react-redux';
+import { Provider, ProviderProps } from 'react-redux';
 import { persistor, store } from './app/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Locales } from './app/reducers/localesReducer';
@@ -33,12 +33,12 @@ import 'nav-frontend-veilederpanel-style/dist/main.css';
 import './index.css';
 import { erViggo } from './app/utils/viggoUtils';
 
-let locales: Locales = store.getState().locales;
+const locales: Locales = store.getState().locales;
 locales.forEach(locale => addLocaleData(locale.localeData));
 
 const rootElement = document.getElementById('meldekort__root');
 
-const render = (element: FunctionComponentElement<any>) => {
+const render = (element: FunctionComponentElement<ProviderProps>) => {
   ReactDOM.render(element, rootElement);
 };
 
@@ -58,7 +58,7 @@ const renderApp = (Component: React.ComponentType, locale: string) => {
   );
 };
 
-const renderLoader = (element: any) => {
+const renderLoader = (element: ReactElement) => {
   render(<div className="loader">{element}</div>);
 };
 

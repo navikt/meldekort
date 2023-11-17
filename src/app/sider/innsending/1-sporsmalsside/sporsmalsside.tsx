@@ -71,7 +71,7 @@ const kategorier = [
   'registrert',
 ];
 
-class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
+class Sporsmalsside extends React.Component<SporsmalssideProps, object> {
   valider = (): boolean => {
     const {
       sporsmalsobjekter,
@@ -188,7 +188,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
           break;
       }
     });
-    let oppdatertUtfylteDager = this.props.innsending.utfylteDager.map(
+    const oppdatertUtfylteDager = this.props.innsending.utfylteDager.map(
       utfyltDag => {
         return {
           ...utfyltDag,
@@ -203,7 +203,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
   }
 
   hentSvarPaaSporsmal = (): SpmSvar[] => {
-    let sporsmalListe: SpmSvar[] = [];
+    const sporsmalListe: SpmSvar[] = [];
     this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
@@ -227,7 +227,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, {}> {
   };
 
   hentSporsmal = (): SpmSvar[] => {
-    let sporsmalListe: SpmSvar[] = [];
+    const sporsmalListe: SpmSvar[] = [];
 
     this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({

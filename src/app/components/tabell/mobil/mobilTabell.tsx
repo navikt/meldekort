@@ -2,27 +2,24 @@ import * as React from 'react';
 import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import EtikettBase from 'nav-frontend-etiketter';
 import Komponentlenke from '../../komponentlenke/komponentlenke';
-import { DetaljRad, HistoriskeMeldekortRad } from '../../../types/meldekort';
+import { DetaljRad, HistoriskeMeldekortRad, MeldekortKolonne } from '../../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../../utils/kortMapper';
 
 interface MobilTabellProps {
   rows?: HistoriskeMeldekortRad[];
   row?: DetaljRad;
-  columns: {
-    key: string;
-    label: JSX.Element;
-    cell?: any;
-  }[];
+  columns: MeldekortKolonne[];
   className?: string;
 }
 
 const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
   const returnerTabellRader = (
-    header: { key: string; label: JSX.Element; cell?: any },
+    header: MeldekortKolonne,
     rowData: HistoriskeMeldekortRad
   ) => {
-    let tableData: any = '';
-    for (let i in rowData) {
+    let tableData = null
+
+    for (const i in rowData) {
       if (i === header.key && header.key === 'status') {
         tableData = (
           <EtikettBase
@@ -57,12 +54,12 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
   };
 
   const returnerDetaljRad = (
-    header: { key: string; label: JSX.Element; cell?: any },
+    header: MeldekortKolonne,
     rowData: DetaljRad
   ) => {
-    let tableData: any = '';
+    let tableData = null
 
-    for (let i in rowData) {
+    for (const i in rowData) {
       if (i === header.key && header.key === 'kortStatus') {
         tableData = (
           <EtikettBase
@@ -85,7 +82,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
   };
   const visEnTabell = () => {
     let resultat = {};
-    if (typeof props.row !== undefined && props.row) {
+    if (props.row) {
       const test2: DetaljRad = props.row;
       resultat = props.columns.map(colHeader =>
         returnerDetaljRad(colHeader, test2)
@@ -96,8 +93,8 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
 
   const visFlereTabeller = () => {
     let tabeller;
-    if (props.rows && typeof props.rows !== undefined) {
-      tabeller = props.rows.map((allRowData: any) => (
+    if (props.rows) {
+      tabeller = props.rows.map((allRowData: HistoriskeMeldekortRad) => (
         <table key={allRowData.meldekort.meldekortId} className={'mobilTabell'}>
           <tbody>
             {props.columns.map(colHeader =>
@@ -112,7 +109,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
 
   return (
     <div className={'mobilTabell-container'}>
-      {typeof props.row !== undefined && props.row ? (
+      {props.row ? (
         <table key={props.row.meldekortid} className={'mobilTabell'}>
           <tbody>{visEnTabell()}</tbody>
         </table>

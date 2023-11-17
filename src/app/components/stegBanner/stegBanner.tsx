@@ -13,7 +13,7 @@ interface MapStateToProps {
 type StegBannerProps = MapStateToProps;
 
 const StegBanner: React.FunctionComponent<StegBannerProps> = props => {
-  let stegobjekter = [];
+  const stegobjekter = [];
   const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
   const pathParams = props.router.location.pathname.split('/');
   const aktivtSteg = routes.findIndex(

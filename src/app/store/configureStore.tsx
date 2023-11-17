@@ -6,6 +6,7 @@ import {
   combineReducers,
   compose,
   createStore,
+  Middleware
 } from 'redux';
 import {
   connectRouter,
@@ -55,12 +56,11 @@ import { Skrivemodus } from '../types/skrivemodus';
 import skrivemodusReducer from '../reducers/skrivemodusReducer';
 import skrivemodusEpics from '../epics/skrivemodusEpics';
 import { Konstanter } from '../utils/consts';
+import packageConfig from '../../../package.json';
 
 export const history = createBrowserHistory({
   basename: Konstanter.basePath,
 });
-
-const packageConfig = require('../../../package.json');
 
 const initialState = {};
 
@@ -100,15 +100,17 @@ const appReducer = combineReducers({
   skrivemodus: skrivemodusReducer,
 });
 
-const rootReducer = (state: any, action: any) => {
+// PayloadAction<MeldekortTypeKeys.API_KALL_FEILET, AxiosError>
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const rootReducer = (state: RootState, action: any ) => {
   if (action.type === MeldekortTypeKeys.API_KALL_FEILET) {
     if (
       action.payload.response &&
       action.payload.response.status !== undefined &&
       action.payload.response.status === 401
     ) {
-      const { intl } = state;
-      state = { intl };
+      // const { intl } = state;
+      // state = { intl };
       storage.removeItem('persist:meldekort:undefined');
     }
   }
@@ -116,9 +118,15 @@ const rootReducer = (state: any, action: any) => {
 };
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
-let middleware: any[] = [routerMiddleware(history), epicMiddleware];
+const middleware: Middleware[] = [routerMiddleware(history), epicMiddleware];
 const composeEnhancer: typeof compose =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
+  // @ts-ignore
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    /* eslint-disable @typescript-eslint/ban-ts-comment */
+    // @ts-ignore
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ as typeof compose
+    : compose;
 
 const hentNokkel = (): string => {
   return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
@@ -126,13 +134,16 @@ const hentNokkel = (): string => {
 
 const encryptor = encryptTransform({
   secretKey: hentNokkel(),
-  onError: function(error: any) {
+  onError: function(error: Error) {
     console.log('Det skjedde en feil med kryptering!', error);
     storage.removeItem('persist:meldekort:undefined');
   },
 });
 
 const persistConfig = {
+  // TODO: Why do we need redux_version?
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
+  // @ts-ignore
   key: `meldekort:${packageConfig.redux_version}`,
   storage,
   // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
@@ -148,7 +159,7 @@ const appliedMiddleware = applyMiddleware(
 
 const store = createStore(
   persistedReducer,
-  initialState as any,
+  initialState,
   composeEnhancer(appliedMiddleware)
 );
 

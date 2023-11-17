@@ -15,12 +15,8 @@ export enum MeldekortTypeKeys {
 }
 
 export const MeldekortActions = {
-  apiKallFeilet: createStandardAction(MeldekortTypeKeys.API_KALL_FEILET)<
-    AxiosError
-  >(),
-  leggTilInnsendtMeldekort: createStandardAction(
-    MeldekortTypeKeys.LEGG_TIL_INNSENDT_MELDEKORT
-  )<SendtMeldekort[]>(),
+  apiKallFeilet: createStandardAction(MeldekortTypeKeys.API_KALL_FEILET)<AxiosError>(),
+  leggTilInnsendtMeldekort: createStandardAction(MeldekortTypeKeys.LEGG_TIL_INNSENDT_MELDEKORT)<SendtMeldekort[]>(),
   hentInfomelding: createAsyncAction(
     MeldekortTypeKeys.HENT_INFOMELDING,
     MeldekortTypeKeys.HENT_INFOMELDING_OK,

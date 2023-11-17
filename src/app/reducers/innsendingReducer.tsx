@@ -48,7 +48,7 @@ const innsendingReducer = (
 ): InnsendingState => {
   switch (action.type) {
     case getType(InnsendingActions.oppdaterUtfylteDager): {
-      let rensetUtfylteDager = action.payload.map(utfyltDag => {
+      const rensetUtfylteDager = action.payload.map(utfyltDag => {
         if (utfyltDag.arbeidetTimer === '0') {
           return {
             ...utfyltDag,

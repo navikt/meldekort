@@ -37,7 +37,7 @@ type ArbeidsradProps = UkeProps &
   MapStateToProps &
   MapDispatchToProps;
 
-class Arbeidsrad extends React.Component<ArbeidsradProps, {}> {
+class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
   setTimer = (event: React.ChangeEvent<HTMLInputElement>, ukedag: number) => {
     const match = event.target.value.match(/^\d?\d{0,2}?([,.]?\d?)?$/);
     if (match !== null) {
@@ -77,9 +77,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, {}> {
   settFelter = () => {
     return hentUkedagerSomStringListe().map((dag, index) => {
       let feilLokal: boolean = false;
-      let ukedag = konverterUkedag(index);
-      let { utfylteDager } = this.props.innsending;
-      let utfyltDagIndex = this.finnIndex(ukedag);
+      const ukedag = konverterUkedag(index);
+      const { utfylteDager } = this.props.innsending;
+      const utfyltDagIndex = this.finnIndex(ukedag);
 
       if (typeof this.props.feilIDager !== 'undefined') {
         this.props.feilIDager.forEach(e =>
@@ -118,7 +118,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, {}> {
   };
 
   innhold = () => {
-    let {
+    const {
       tekstId,
       typeYtelsePostfix,
       forklaringId,

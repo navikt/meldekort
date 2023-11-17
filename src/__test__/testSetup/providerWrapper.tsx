@@ -5,10 +5,12 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import teksterJsonNb from '../../app/mock/responses/tekster_nb.json';
 import { Konstanter } from '../../app/utils/consts';
+import { Meldekort } from "../../app/types/meldekort";
+import { InnsendingState } from "../../app/types/innsending";
 
 interface Props {
   children: React.ReactNode;
-  initialState?: any;
+  initialState?: Meldekort | InnsendingState;
   initialStateName?: string;
 }
 
@@ -17,7 +19,7 @@ let intl: IntlState;
 const ProviderWrapper: React.FunctionComponent<Props> = props => {
   let testStore;
   if (props.initialState !== undefined) {
-    let { initialState, initialStateName } = props;
+    const { initialState, initialStateName } = props;
     const mockState = {
       [initialStateName!]: initialState,
       intl: intl,
@@ -43,6 +45,7 @@ const ProviderWrapper: React.FunctionComponent<Props> = props => {
 export const setLocalesBeforeAll = () => {
   beforeAll(async () => {
     store.dispatch(
+      // @ts-ignore
       updateIntl({
         locale: Konstanter.defaultLocale,
         messages: teksterJsonNb,

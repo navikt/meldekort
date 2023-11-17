@@ -17,7 +17,7 @@ import Environment from '../utils/env';
 export default () => {
   const apiUrl = Environment().apiUrl;
 
-  let mock = new MockAdapter(prefferedAxios);
+  const mock = new MockAdapter(prefferedAxios);
 
   console.log('### MOCK AKTIVERT ###');
 

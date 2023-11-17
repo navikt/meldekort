@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { finnRiktigEtikettKlasse } from '../../app/utils/statusEtikettUtil';
 import { KortStatus } from '../../app/types/meldekort';
 

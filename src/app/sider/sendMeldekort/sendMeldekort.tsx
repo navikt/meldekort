@@ -10,7 +10,7 @@ import { Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
-import { Meldekort, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
+import { Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
 import { PersonActions } from '../../actions/person';
 import { RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
@@ -53,7 +53,7 @@ function SendMeldekort({
   resetInnsending,
   settInnsendingstype,
 }: Props) {
-  const hentFeilmeldingEllerData = (rader: MeldekortRad[], kolonner: any) => {
+  const hentFeilmeldingEllerData = (rader: MeldekortRad[], kolonner: MeldekortKolonne[]) => {
     if (rader.length > 0) {
       if (rader.length < 5) {
         return (
@@ -111,7 +111,6 @@ function SendMeldekort({
     hentPerson();
 
     loggAktivitet('Viser send');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return !harKunEttMeldekort(innsendingsklareMeldekort) ? (

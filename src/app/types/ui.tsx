@@ -1,5 +1,5 @@
 export interface ModalKnapp {
-  action: Function;
+  action: () => void;
   label: string;
   type: 'standard' | 'hoved' | 'fare' | 'flat';
 }
@@ -7,7 +7,7 @@ export interface ModalKnapp {
 export interface IModal {
   content: () => React.ReactNode;
   knapper?: ModalKnapp[];
-  onRequestClose?: Function;
+  onRequestClose?: () => void;
   visModal: boolean;
 }
 

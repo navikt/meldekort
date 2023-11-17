@@ -20,7 +20,7 @@ import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import { DetaljRad, Meldekort } from '../../../types/meldekort';
+import { DetaljRad, Meldekort, MeldekortKolonne } from '../../../types/meldekort';
 import { formaterBelop } from '../../../utils/numberFormat';
 import { Innsendingstyper } from '../../../types/innsending';
 import PrintKnapp from '../../../components/print/printKnapp';
@@ -59,7 +59,7 @@ interface MapDispatchToProps {
 type Props = MapDispatchToProps & MapStateToProps;
 
 class Detaljer extends React.Component<Props, { windowSize: number }> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.props.hentSkrivemodus();
     this.state = {
@@ -91,7 +91,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   erSkrivemodus = (): boolean => {
-    let skrivemodus = this.props.skrivemodus.skrivemodus.valueOf();
+    const skrivemodus = this.props.skrivemodus.skrivemodus.valueOf();
     if (!skrivemodus) {
       this.sjekkAktivtMeldekortOgRedirect();
     }
@@ -124,7 +124,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   innhold = () => {
     const { meldekortdetaljer, aktivtMeldekort } = this.props;
     const rows = this.settTabellrader(aktivtMeldekort);
-    const columns = [
+    const columns: MeldekortKolonne[] = [
       {
         key: 'mottattDato',
         label: <FormattedMessage id="overskrift.mottatt" />,
@@ -132,7 +132,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       {
         key: 'kortStatus',
         label: <FormattedMessage id="overskrift.status" />,
-        cell: function(row: any, columnKey: any) {
+        cell: function(row: DetaljRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
               type={'info'}

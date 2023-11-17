@@ -3,14 +3,14 @@ export function formaterBelop(belop?: number): string {
     if (belop === 0) {
       return '';
     }
-    let desimaler = 2;
-    let desimalSeparator = ',';
-    let tusenSeparator = ' ';
-    let i = parseInt(
+    const desimaler = 2;
+    const desimalSeparator = ',';
+    const tusenSeparator = ' ';
+    const i = parseInt(
       Math.abs(Number(belop) || 0).toFixed(desimaler),
       10
     ).toString();
-    let j = i.length > 3 ? i.length % 3 : 0;
+    const j = i.length > 3 ? i.length % 3 : 0;
 
     return (
       'kr. ' +

@@ -34,8 +34,8 @@ export function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   } = innsending;
   const typeYtelsePostfix = finnTypeYtelsePostfix(aktivtMeldekort.meldegruppe);
 
-  let { til, fra } = aktivtMeldekort.meldeperiode;
-  let korrigering = innsendingstype === Innsendingstyper.KORRIGERING;
+  const { til, fra } = aktivtMeldekort.meldeperiode;
+  const korrigering = innsendingstype === Innsendingstyper.KORRIGERING;
 
   const sendteMeldekort = Array.of(...state.meldekort.sendteMeldekort);
   sendteMeldekort.push(aktivtMeldekort);
@@ -49,7 +49,7 @@ export function opprettSporsmalsobjekter(state: RootState): Sporsmalsobjekt[] {
   const meldekortdager = innsending.meldekortdetaljer.sporsmal.meldekortDager;
 
   // Oppretter et object for å samle alt vi trenger
-  let sporsmalsobjekter: Sporsmalsobjekt[] = new Array<Sporsmalsobjekt>();
+  const sporsmalsobjekter: Sporsmalsobjekt[] = new Array<Sporsmalsobjekt>();
 
   sporsmalsobjekter.push(
     header(korrigering, meldekortdetaljerInnsending, nesteDato)
@@ -142,7 +142,7 @@ function ansvar(): Sporsmalsobjekt {
 
 function korrigeringsBegrunnelse(
   begrunnelse: Begrunnelse,
-  typeYtelsePostfix: String
+  typeYtelsePostfix: string
 ): Sporsmalsobjekt {
   return {
     sporsmal: hentIntl().formatMessage({
@@ -161,7 +161,7 @@ function sporsmal(
   til: Date
 ): Sporsmalsobjekt[] {
   return innsending.sporsmalsobjekter.map(spm => {
-    let formatertDato =
+    const formatertDato =
       spm.kategori === 'registrert'
         ? hentNestePeriodeMedUkerOgDato(fra, til)
         : '';
@@ -239,7 +239,7 @@ function utfylling(
   };
 }
 
-function bekreftelse(typeYtelsePostfix: String): Sporsmalsobjekt {
+function bekreftelse(typeYtelsePostfix: string): Sporsmalsobjekt {
   return {
     sporsmal:
       hentIntl().formatMessage({

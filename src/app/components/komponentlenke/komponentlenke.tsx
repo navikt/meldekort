@@ -27,7 +27,7 @@ interface MapDispatcherToProps {
 
 type ReduxType = KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
-class Komponentlenke extends React.Component<ReduxType, {}> {
+class Komponentlenke extends React.Component<ReduxType, object> {
   clickHandler = () => {
     this.props.resettAktivtMeldekort();
     if (this.props.meldekort) {
@@ -48,7 +48,7 @@ class Komponentlenke extends React.Component<ReduxType, {}> {
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
-  let meldekort: Meldekort = {
+  const meldekort: Meldekort = {
     ...state.aktivtMeldekort,
   };
   return {

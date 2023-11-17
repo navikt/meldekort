@@ -62,7 +62,7 @@ type State = {
 type Props = MapDispatchToProps & MapStateToProps;
 
 class TidligereMeldekort extends React.Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.props.hentHistoriskeMeldekort();
     this.props.hentSkrivemodus()
@@ -72,7 +72,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   }
 
   hentRaderFraHistoriskeMeldekort = () => {
-    let radliste: HistoriskeMeldekortRad[] = [];
+    const radliste: HistoriskeMeldekortRad[] = [];
 
     this.props.historiskeMeldekort.historiskeMeldekort.forEach(meldekort => {
       radliste.push({
@@ -104,7 +104,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
       {
         key: 'periode',
         label: <FormattedMessage id="overskrift.periode" />,
-        cell: function(row: any, column: any) {
+        cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           if (row.meldekort.kortStatus === KortStatus.UBEHA) {
             return row.periode;
           }
@@ -130,7 +130,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
       {
         key: 'status',
         label: <FormattedMessage id="overskrift.status" />,
-        cell: function(row: any, columnKey: any) {
+        cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
               className={finnRiktigEtikettKlasse(row.status)}
@@ -258,4 +258,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
   };
 };
 
-export default connect<MapStateToProps, MapDispatchToProps, {}>(mapStateToProps, mapDispatchToProps)(TidligereMeldekort);
+export default connect<MapStateToProps, MapDispatchToProps, object>(mapStateToProps, mapDispatchToProps)(TidligereMeldekort);

@@ -40,17 +40,17 @@ export const hentDagliste = (
   medUtvidetInformasjon: boolean = true
 ): JSX.Element[] => {
   const dagListe = [];
-  let ukedager = hentUkedagerSomStringListe();
+  const ukedager = hentUkedagerSomStringListe();
 
   for (let i = 0; i < meldekortdager.length; i++) {
-    let meldekortDag = meldekortdager[i];
+    const meldekortDag = meldekortdager[i];
     const harAktivitet =
       meldekortDag.arbeidetTimerSum > 0 ||
       meldekortDag.kurs ||
       meldekortDag.annetFravaer ||
       meldekortDag.syk;
     if (harAktivitet) {
-      let ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
+      const ukedag = i <= 6 ? ukedager[i] : ukedager[i - 6];
       dagListe.push(
         <div className="dagliste" key={guid()}>
           <div className="dagliste__dager">

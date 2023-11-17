@@ -81,7 +81,7 @@ class Utfyllingsside extends React.Component<
   }
 
   hentSporsmal = (): SpmSvar[] => {
-    let sporsmalListe: SpmSvar[] = [];
+    const sporsmalListe: SpmSvar[] = [];
     this.props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
@@ -95,8 +95,8 @@ class Utfyllingsside extends React.Component<
   };
 
   sjekkSporsmal = (kategori: string): boolean => {
-    let sporsmalListe = this.hentSporsmal();
-    let sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
+    const sporsmalListe = this.hentSporsmal();
+    const sporsmal = sporsmalListe.filter(spm => spm.kategori === kategori);
     if (sporsmal.length !== 0) {
       return sporsmal[0].svar;
     }
@@ -104,11 +104,11 @@ class Utfyllingsside extends React.Component<
   };
 
   validerVertikal = (dager: UtfyltDag[]): boolean => {
-    let feil: FeilKolonne[] = [];
+    const feil: FeilKolonne[] = [];
     let feilKombinasjonSykArbeid = false;
     let feilKombinasjonFravaerSyk = false;
     let feilKombinasjonFravaerArbeid = false;
-    let { meldegruppe } = this.props.aktivtMeldekort;
+    const { meldegruppe } = this.props.aktivtMeldekort;
 
     if (meldegruppe === Meldegruppe.DAGP) {
       dager.forEach(dag => {
@@ -181,7 +181,7 @@ class Utfyllingsside extends React.Component<
   };
 
   validerAntallTimerForDag = (dager: UtfyltDag[]): boolean => {
-    let feil: FeilKolonne[] = [];
+    const feil: FeilKolonne[] = [];
     let feilIArbeidetTimer = false;
     let feilIArbeidetTimerHeleHalve = false;
 
@@ -224,10 +224,10 @@ class Utfyllingsside extends React.Component<
     let kurs = !this.sjekkSporsmal('aktivitetArbeid');
     let syk = !this.sjekkSporsmal('forhindret');
     let ferie = !this.sjekkSporsmal('ferieFravar');
-    let feilITimer = this.validerAntallTimerForDag(
+    const feilITimer = this.validerAntallTimerForDag(
       this.props.innsending.utfylteDager
     );
-    let feilIVertikal = this.validerVertikal(
+    const feilIVertikal = this.validerVertikal(
       this.props.innsending.utfylteDager
     );
 
@@ -258,7 +258,7 @@ class Utfyllingsside extends React.Component<
       feilIFerie: { feil: !ferie },
     }));
 
-    let resultat =
+    const resultat =
       arbeidet && kurs && syk && ferie && feilITimer && feilIVertikal;
     if (!resultat) {
       scrollTilElement('periodebanner');
@@ -267,7 +267,7 @@ class Utfyllingsside extends React.Component<
   };
 
   hentFeilmeldinger = () => {
-    let {
+    const {
       feilIArbeid,
       feilIKurs,
       feilISyk,
@@ -374,8 +374,8 @@ class Utfyllingsside extends React.Component<
   };
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort, innsending, loading } = this.props;
-    let { meldeperiode } = aktivtMeldekort;
+    const { aktivtMeldekort, sendteMeldekort, innsending, loading } = this.props;
+    const { meldeperiode } = aktivtMeldekort;
     const typeYtelsePostfix = finnTypeYtelsePostfix(
       aktivtMeldekort.meldegruppe
     );

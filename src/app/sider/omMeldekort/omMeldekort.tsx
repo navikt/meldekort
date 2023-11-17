@@ -27,10 +27,7 @@ interface MapDispatchToProps {
   settValgtMenyPunkt: (menypunkt: MenyPunkt) => void;
 }
 
-class OmMeldekort extends React.Component<
-  MapDispatchToProps & MapStateToProps,
-  {}
-> {
+class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, object> {
   componentDidMount() {
     scrollTilElement(undefined, 'auto');
     const { resetInnsending, meny, settValgtMenyPunkt } = this.props;

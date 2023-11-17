@@ -6,14 +6,14 @@ import { FormattedHTMLMessage } from 'react-intl';
 import Tabell from '../../components/tabell/desktop/tabell';
 import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
-import { Meldekort, MeldekortRad } from '../../types/meldekort';
+import { Meldekort, MeldekortKolonne, MeldekortRad } from '../../types/meldekort';
 import { Router } from '../../types/router';
 
 interface Props {
   router: Router;
   nesteAktivtMeldekort: Meldekort;
   rows: MeldekortRad[];
-  columns: any;
+  columns: MeldekortKolonne[];
 }
 
 function EtterregistreringInnhold({

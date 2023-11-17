@@ -15,7 +15,8 @@ const MeldekortRoutes: React.FunctionComponent = () => {
         path="/send-meldekort/innsending"
         children={({ match, history, location }) => (
           <InnsendingRoutes
-            match={match}
+            /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+            match={match!!}
             history={history}
             location={location}
           />
@@ -27,7 +28,8 @@ const MeldekortRoutes: React.FunctionComponent = () => {
         path="/etterregistrer-meldekort/innsending"
         children={({ match, history, location }) => (
           <InnsendingRoutes
-            match={match}
+            /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+            match={match!!}
             history={history}
             location={location}
           />
@@ -42,7 +44,8 @@ const MeldekortRoutes: React.FunctionComponent = () => {
         path="/tidligere-meldekort/detaljer/korriger"
         children={({ match, history, location }) => (
           <InnsendingRoutes
-            match={match}
+            /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+            match={match!!}
             history={history}
             location={location}
           />

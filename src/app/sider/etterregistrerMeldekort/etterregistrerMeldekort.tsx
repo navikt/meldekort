@@ -67,7 +67,6 @@ function EtterregistrerMeldekort({
     }
     hentPerson();
     loggAktivitet('Viser etterregistrere meldekort');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return person.meldeform === MeldeForm.IKKE_SATT ? (

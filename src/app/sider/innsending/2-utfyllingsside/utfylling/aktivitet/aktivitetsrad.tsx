@@ -36,7 +36,7 @@ type AktivitetsradProps = RadProps &
   MapStateToProps &
   MapDispatchToProps;
 
-class Aktivitetsrad extends React.Component<AktivitetsradProps, {}> {
+class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
   setVerdi = (ukedag: number) => {
     const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
       if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {
@@ -68,7 +68,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, {}> {
   };
 
   isChecked = (ukedag: number): boolean => {
-    let valgtDag = this.props.innsending.utfylteDager.filter(
+    const valgtDag = this.props.innsending.utfylteDager.filter(
       dag => dag.uke === this.props.ukeNummer && dag.dag === ukedag
     );
     let checked: boolean = false;
@@ -91,7 +91,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, {}> {
   settFelter = () => {
     return hentUkedagerSomStringListe().map((dag, index) => {
       let erFeil: boolean = false;
-      let ukedag = konverterUkedag(index);
+      const ukedag = konverterUkedag(index);
 
       if (typeof this.props.feilIDager !== 'undefined') {
         this.props.feilIDager.forEach(e =>
@@ -145,7 +145,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, {}> {
   };
 
   innhold = () => {
-    let { tekstId, typeYtelsePostfix, forklaringId } = this.props;
+    const { tekstId, typeYtelsePostfix, forklaringId } = this.props;
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
         <Undertittel tag="h4" className={'aktivitetsrad__tittel'}>

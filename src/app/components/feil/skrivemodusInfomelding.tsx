@@ -11,7 +11,7 @@ interface MapStateToProps {
 }
 
 const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props => {
-  let skrivemodus = props.skrivemodus;
+  const skrivemodus = props.skrivemodus;
 
   const hentSkrivemodusInfomelding = () => {
     if (skrivemodus.melding === null) {
@@ -34,4 +34,4 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
   };
 };
 
-export default connect<{}, {}, MapStateToProps>(mapStateToProps, null)(SkrivemodusInfomelding);
+export default connect<object, object, MapStateToProps>(mapStateToProps, null)(SkrivemodusInfomelding);

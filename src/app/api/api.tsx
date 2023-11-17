@@ -6,12 +6,11 @@ import { prefferedAxios } from '../types/fetch';
 import {
   Infomelding,
   Meldekort,
-  Meldekortdetaljer,
+  Meldekortdetaljer, MeldekortdetaljerInnsending,
   ValideringsResultat,
 } from '../types/meldekort';
 import { Skrivemodus } from '../types/skrivemodus';
 import { RootState } from '../store/configureStore';
-import * as React from 'react';
 import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
 
 export const fetchGet = async (url: string) => {
@@ -27,7 +26,7 @@ export const fetchGet = async (url: string) => {
     });
 };
 
-const fetchPost = async (url: string, data: any) => {
+const fetchPost = async (url: string, data: MeldekortdetaljerInnsending) => {
   return prefferedAxios
     .post(Environment().apiUrl + url, data, {
       headers: {
@@ -92,7 +91,7 @@ export function fetchSkrivemodus(): Promise<Skrivemodus> {
 }
 
 export function postMeldekort(state: RootState): Promise<ValideringsResultat> {
-  let meldekortdetaljer = {
+  const meldekortdetaljer = {
     ...state.innsending.meldekortdetaljerInnsending!,
     sporsmalsobjekter: opprettSporsmalsobjekter(state),
   };

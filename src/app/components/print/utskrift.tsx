@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ClassAttributes } from 'react';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import NavLogo from '../../ikoner/nav-logo.svg';
 import { RootState } from '../../store/configureStore';
@@ -13,7 +12,7 @@ import { isIE } from '../../utils/browsers';
  * Innhold som legges her er skult på skjerm, men vises på utskrift
  */
 
-export interface Props extends ClassAttributes<any> {
+export interface Props {
   active?: boolean;
   erKvittering?: boolean;
 }
@@ -63,7 +62,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
   );
 };
 
-export default connect<{}, {}, Props>(
+export default connect<object, object, Props>(
   mapStateToProps,
   null
 )(Utskrift);

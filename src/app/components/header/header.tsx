@@ -41,7 +41,7 @@ interface BannerProps {
 
 type HeaderProps = MapStateToProps & MapDispatchToProps & BannerProps;
 
-class Header extends React.Component<HeaderProps, {}> {
+class Header extends React.Component<HeaderProps, object> {
   componentDidUpdate(
     prevProps: Readonly<MapStateToProps & MapDispatchToProps & BannerProps>
   ): void {

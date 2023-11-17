@@ -29,7 +29,7 @@ interface Props {
 
 type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
 
-class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, {}> {
+class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, object> {
   sporsmalOnChange = (
     event: React.SyntheticEvent<EventTarget>,
     value?: string
@@ -55,7 +55,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, {}> {
     innsendingstype: Innsendingstyper | null
   ) => {
     let skalVareDisabled: boolean = false;
-    for (let key in sporsmalsobj) {
+    for (const key in sporsmalsobj) {
       if (
         sporsmalsobj[key] !== sporsmalsobj.kategori &&
         sporsmalsobj[key] !== sporsmalsobj.feil &&
@@ -76,7 +76,8 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, {}> {
         skalVareDisabled = true;
       }
     }
-    let { til, fra } = this.props.aktivtMeldekort.meldeperiode;
+
+    const { til, fra } = this.props.aktivtMeldekort.meldeperiode;
     return (
       <Sporsmal
         sporsmalsobjekt={sporsmalsobj}

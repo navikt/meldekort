@@ -1,6 +1,6 @@
 import {
   KortStatus,
-  Meldekort,
+  Meldekort, MeldekortKolonne,
   MeldekortRad,
   SendtMeldekort,
 } from '../types/meldekort';
@@ -71,12 +71,12 @@ export const hentInnsendingsklareMeldekort = (
 export const hentMeldekortRaderFraPerson = (
   innsendingsklareMeldekort: Meldekort[]
 ): MeldekortRad[] => {
-  let radliste: MeldekortRad[] = [];
+  const radliste: MeldekortRad[] = [];
 
   for (let i = 0; i < innsendingsklareMeldekort.length; i++) {
     if (harKortStatusOPPRellerSENDT(innsendingsklareMeldekort[i])) {
       if (innsendingsklareMeldekort[i].meldeperiode.kanKortSendes) {
-        let rad: MeldekortRad = {
+        const rad: MeldekortRad = {
           periode: hentUkePeriode(
             innsendingsklareMeldekort[i].meldeperiode.fra,
             innsendingsklareMeldekort[i].meldeperiode.til
@@ -172,7 +172,7 @@ export const returnerMeldekortListaMedFlereMeldekortIgjen = (
   };
 };
 
-export const hentPeriodeDatoKolonner = [
-  { key: 'periode', label: 'Periode' },
-  { key: 'dato', label: 'Dato' },
+export const hentPeriodeDatoKolonner: MeldekortKolonne[] = [
+  { key: 'periode', label: <span>Periode</span> },
+  { key: 'dato', label: <span>Dato</span> },
 ];

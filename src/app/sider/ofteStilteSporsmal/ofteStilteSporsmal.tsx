@@ -29,7 +29,7 @@ class OfteStilteSporsmal extends React.Component<
   MapDispatchToProps,
   SporsmalVisningState
 > {
-  constructor(props: any) {
+  constructor(props: MapDispatchToProps) {
     super(props);
     this.state = { valgtSporsmalId: 0 };
     this.handleClick = this.handleClick.bind(this);

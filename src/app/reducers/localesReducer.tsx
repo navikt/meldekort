@@ -36,7 +36,7 @@ const locales: Locales = [
   },
 ];
 
-const localesReducer = (state: Locales = locales, action: any): Locales => {
+const localesReducer = (state: Locales = locales): Locales => { // (state: Locales = locales, action: any)
   return state;
 };
 

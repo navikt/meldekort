@@ -3,7 +3,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { FormattedHTMLMessage } from 'react-intl';
 
-class Feilside extends React.Component<{}, {}> {
+class Feilside extends React.Component<object, object> {
   public render() {
     return (
       <main className="sideinnhold">

@@ -112,7 +112,7 @@ export interface FravaerType {
 
 export interface HistoriskeMeldekortRad {
   meldekort: Meldekort;
-  periode?: string;
+  periode: string;
   dato: string;
   mottatt: string;
   status: KortStatus;
@@ -125,7 +125,7 @@ export interface DetaljRad {
   kortType: string;
   kortStatus: KortStatus;
   bruttoBelop: string;
-  mottattDato: any;
+  mottattDato: string;
 }
 
 export interface Infomelding {
@@ -185,4 +185,10 @@ export enum FravaerTypeEnum {
 export interface MeldekortRad {
   periode: string;
   dato: string;
+}
+
+export interface MeldekortKolonne {
+  key: string;
+  label: JSX.Element;
+  cell?: ((row: DetaljRad | HistoriskeMeldekortRad) => string | JSX.Element) | string;
 }

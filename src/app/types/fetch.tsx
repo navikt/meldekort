@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const dateTransformer = (data: any, headers: any): any => {
   if (data instanceof Date) {
     // YYYY-MM-DD

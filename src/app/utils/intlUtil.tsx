@@ -26,7 +26,7 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
   downloadMessages(locale, from)
     .then((messages: object) => {
       // Vi må oppdatere teksten til den valgte begrunnelsen
-      let innsending = store.getState().innsending;
+      const innsending = store.getState().innsending;
       const optionsString = messages['korriger.begrunnelse.valg'];
       const options = JSON.parse(optionsString ? optionsString : '{}');
       const begrunnelse: Begrunnelse = {
@@ -70,7 +70,7 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   }
 
   try {
-    let data = await fetchGet(
+    const data = await fetchGet(
       Konstanter.hentAlleTekster +
         '?sprak=' +
         sprak +

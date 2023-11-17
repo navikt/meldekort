@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { formaterBelop } from '../../app/utils/numberFormat';
 
 it('formaterBelop', () => {

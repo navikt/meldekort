@@ -63,7 +63,7 @@ interface AppState {
 }
 
 class App extends React.Component<Props, AppState> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = { henterPersonInfo: false };
     this.props.hentPersonStatus();

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { hentUkedagerSomStringListe } from '../../app/utils/ukedager';
 import { setLocalesBeforeAll } from '../testSetup/providerWrapper';
 

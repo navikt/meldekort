@@ -35,7 +35,7 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
       <ul className="hovedmeny__wrapper">
         {menypunkter
           .filter((item: MenyPunkt) => item.urlparam)
-          .map((item: MenyPunkt, index: any) => (
+          .map((item: MenyPunkt) => ( // (item: MenyPunkt, index: any)
             <li key={item.tittel} className={'hovedmeny__item'}>
               <Lenke
                 onClick={() => onChange(item)}

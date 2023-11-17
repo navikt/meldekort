@@ -25,7 +25,6 @@ import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
-import { kalkulerDato } from '../../../utils/dates';
 import { Redirect } from 'react-router';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper';
@@ -86,8 +85,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
-    let { aktivtMeldekort, innsending } = this.props;
-    let mDet = {
+    const { aktivtMeldekort, innsending } = this.props;
+    const mDet = {
       meldekortdetaljer: {
         id: '',
         meldekortId: this.erInnsendingKorrigering()
@@ -140,8 +139,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   };
 
   konverterMeldekortdetaljerTilMeldekortdetaljerInnsending = (): MeldekortdetaljerInnsending => {
-    let { meldekortdetaljer } = this.state.meldekortdetaljer;
-    let { aktivtMeldekort } = this.props;
+    const { meldekortdetaljer } = this.state.meldekortdetaljer;
+    const { aktivtMeldekort } = this.props;
+
     return {
       meldekortId: meldekortdetaljer.meldekortId,
       kortType: meldekortdetaljer.kortType,
@@ -155,17 +155,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
       sesjonsId: 'IKKE I BRUK',
-      fravaersdager: this.hentFravaersdager(meldekortdetaljer, aktivtMeldekort),
+      fravaersdager: this.hentFravaersdager(meldekortdetaljer),
     };
   };
 
-  hentFravaersdager = (
-    meldekortdetaljer: MDetaljer,
-    meldekort: Meldekort
-  ): Fravaer[] => {
-    let fravar: Fravaer[] = [];
+  hentFravaersdager = (meldekortdetaljer: MDetaljer): Fravaer[] => {
+    const fravar: Fravaer[] = [];
     meldekortdetaljer.sporsmal.meldekortDager.forEach(meldekortDag => {
-      let dato = kalkulerDato(meldekort.meldeperiode.fra, meldekortDag.dag);
       if (
         typeof meldekortDag.arbeidetTimerSum !== 'undefined' &&
         meldekortDag.arbeidetTimerSum > 0
@@ -201,7 +197,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   };
 
   hentMeldekortDager = (): MeldekortDag[] => {
-    let meldekortdager: MeldekortDag[] = [];
+    const meldekortdager: MeldekortDag[] = [];
     let dagTeller = 0;
     this.props.innsending.utfylteDager.forEach(function(utfyltDag: UtfyltDag) {
       meldekortdager.push({
@@ -220,7 +216,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   };
 
   settChecked = () => {
-    let detaljer = this.state.meldekortdetaljer;
+    const detaljer = this.state.meldekortdetaljer;
     detaljer.meldekortdetaljer.sporsmal.signatur = !detaljer.meldekortdetaljer
       .sporsmal.signatur;
     if (detaljer.meldekortdetaljer.sporsmal.signatur) {
@@ -238,7 +234,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
   valider = (): boolean => {
     this.props.skjulBaksystemFeilmelding();
-    let sign = this.state.meldekortdetaljer.meldekortdetaljer.sporsmal.signatur;
+    const sign = this.state.meldekortdetaljer.meldekortdetaljer.sporsmal.signatur;
 
     if (!sign) {
       this.setState(prevState => ({
@@ -251,7 +247,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         ...prevState,
         senderMeldekort: true,
       }));
-      let mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
+      const mDetaljerInn = this.konverterMeldekortdetaljerTilMeldekortdetaljerInnsending();
       this.props.oppdaterMeldekortdetaljer(
         this.state.meldekortdetaljer.meldekortdetaljer
       );
@@ -262,7 +258,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   };
 
   hoppOverUtfylling = () => {
-    let { sporsmal } = this.props.innsending.meldekortdetaljer;
+    const { sporsmal } = this.props.innsending.meldekortdetaljer;
     return (
       !sporsmal.arbeidet &&
       !sporsmal.kurs &&
@@ -285,12 +281,12 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
   }
 
   render() {
-    let { aktivtMeldekort, sendteMeldekort, loading } = this.props;
-    let { meldegruppe } = this.props.aktivtMeldekort;
-    let { valideringsResultat } = this.props.innsending;
-    let { meldekortdetaljer } = this.state.meldekortdetaljer;
-    let { feilmelding } = this.state;
-    let typeYtelsePostfix = finnTypeYtelsePostfix(meldegruppe);
+    const { aktivtMeldekort, sendteMeldekort, loading } = this.props;
+    const { meldegruppe } = this.props.aktivtMeldekort;
+    const { valideringsResultat } = this.props.innsending;
+    const { meldekortdetaljer } = this.state.meldekortdetaljer;
+    const { feilmelding } = this.state;
+    const typeYtelsePostfix = finnTypeYtelsePostfix(meldegruppe);
 
     if (loading) {
       return (

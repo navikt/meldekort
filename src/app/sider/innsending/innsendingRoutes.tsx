@@ -38,8 +38,6 @@ interface MapDispatchToProps {
 }
 
 interface Props {
-  match: any;
-  history: any;
   location: Location;
 }
 
@@ -48,7 +46,7 @@ type InnsendingRoutesProps = RouteComponentProps &
   MapDispatchToProps &
   Props;
 
-class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
+class InnsendingRoutes extends React.Component<InnsendingRoutesProps, object> {
   settMeldekortIdBasertPaInnsendingstype = () => {
     const {
       hentKorrigertId,
@@ -75,7 +73,7 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
     const { pathname } = location;
     const currentPath = `${match.url}`;
 
-    let noPrint =
+    const noPrint =
       pathname === `/send-meldekort/innsending/kvittering` ||
       pathname === `/tidligere-meldekort/detaljer/korriger/kvittering`
         ? 'noPrint'
@@ -101,7 +99,8 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, {}> {
           <Route
             path={currentPath + '/kvittering'}
             children={({ match, history, location }) => (
-              <Kvittering match={match} history={history} location={location} />
+              /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+              <Kvittering match={match!!} history={history} location={location} />
             )}
           />
           <Route
