@@ -122,6 +122,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@types/amplitude-js": "^8.16.5",
     "@types/enzyme": "^3.10.16",
     "@types/jest": "^29.5.8",
@@ -129,7 +130,6 @@
     "@types/redux-mock-store": "^1.0.6",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "axios-mock-adapter": "^1.22.0",
-    "craco": "^0.0.3",
     "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
