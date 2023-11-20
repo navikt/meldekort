@@ -7,8 +7,6 @@ exports[`NavKnapp 1`] = `
   onClick={[Function]}
   type="submit"
 >
-  <span>
-    Neste
-  </span>
+  Neste
 </button>
 `;

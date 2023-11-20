@@ -32,9 +32,8 @@ import { Skrivemodus } from "../../app/types/skrivemodus";
 import { MeldekortdetaljerState } from "../../app/reducers/meldekortdetaljerReducer";
 import { PersonInfoState } from "../../app/reducers/personInfoReducer";
 import { IntlState } from "react-intl-redux";
-import { Locale, Locales } from "../../app/reducers/localesReducer";
+import { Locale } from "../../app/reducers/localesReducer";
 import NorskFlaggSVG from "../../app/components/sprakvelger/NorskFlaggSVG";
-import localeDataNB from "react-intl/locale-data/nb";
 import * as React from "react";
 
 const MELDEKORT_ID = 1234567;
@@ -49,10 +48,9 @@ const locale: Locale = {
   label: 'nb',
   tittel: 'Norsk',
   ikon: <NorskFlaggSVG />,
-  localeData: localeDataNB,
 }
 
-const locales: Locales = [locale]
+const locales: Locale[] = [locale]
 
 const intl: IntlState = {
   locale: 'nb',

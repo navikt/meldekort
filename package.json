@@ -15,7 +15,6 @@
     "@types/react-aria-menubutton": "^6.2.12",
     "@types/react-collapse": "^5.0.4",
     "@types/react-dom": "^17.0.23",
-    "@types/react-intl": "^2.3.18",
     "@types/react-intl-redux": "^0.1.19",
     "@types/react-redux": "^7.1.30",
     "@types/react-router": "^5.1.20",
@@ -81,7 +80,7 @@
     "react-burger-menu": "^3.0.9",
     "react-collapse": "^5.1.1",
     "react-dom": "^17.0.2",
-    "react-intl": "^2.9.0",
+    "react-intl": "^3.12.1",
     "react-intl-redux": "^2.3.0",
     "react-modal": "^3.16.1",
     "react-motion": "^0.5.2",
@@ -162,6 +161,9 @@
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!intl-messageformat|intl-messageformat-parser).+\\.js$"
     ]
   },
   "husky": {

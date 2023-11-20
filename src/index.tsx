@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import * as React from 'react';
-import { FunctionComponentElement, ReactElement } from 'react';
+import { ExoticComponent, FunctionComponentElement, ReactElement } from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './app/app';
 import * as serviceWorker from './registerServiceWorker';
@@ -8,9 +8,7 @@ import { IntlProvider, updateIntl } from 'react-intl-redux';
 import { Provider, ProviderProps } from 'react-redux';
 import { persistor, store } from './app/store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Locales } from './app/reducers/localesReducer';
 import { Konstanter } from './app/utils/consts';
-import { addLocaleData } from 'react-intl';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { downloadMessages } from './app/utils/intlUtil';
 
@@ -33,16 +31,13 @@ import 'nav-frontend-veilederpanel-style/dist/main.css';
 import './index.css';
 import { erViggo } from './app/utils/viggoUtils';
 
-const locales: Locales = store.getState().locales;
-locales.forEach(locale => addLocaleData(locale.localeData));
-
 const rootElement = document.getElementById('meldekort__root');
 
 const render = (element: FunctionComponentElement<ProviderProps>) => {
   ReactDOM.render(element, rootElement);
 };
 
-const renderApp = (Component: React.ComponentType, locale: string) => {
+const renderApp = (Component: ExoticComponent, locale: string) => {
   render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>

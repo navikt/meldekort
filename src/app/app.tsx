@@ -34,7 +34,7 @@ import {
   isOldIE,
   isOldSafari,
 } from './utils/browsers';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { WrappedComponentProps, injectIntl } from 'react-intl';
 
 if (erMock()) {
   setupMock();
@@ -56,7 +56,7 @@ interface MapDispatchToProps {
   toggleMeny: (erApen: boolean) => void;
 }
 
-type Props = MapStateToProps & MapDispatchToProps & InjectedIntlProps;
+type Props = MapStateToProps & MapDispatchToProps & WrappedComponentProps;
 
 interface AppState {
   henterPersonInfo: boolean;

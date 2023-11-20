@@ -25,7 +25,7 @@ interface BegrunnselseProps {
 type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
 const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
-  const optionsString = hentIntl().messages['korriger.begrunnelse.valg'];
+  const optionsString = hentIntl().messages['korriger.begrunnelse.valg'] as string;
   const options = JSON.parse(optionsString ? optionsString : '{}');
 
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

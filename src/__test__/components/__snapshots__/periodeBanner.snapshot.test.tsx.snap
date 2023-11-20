@@ -8,9 +8,7 @@ exports[`PeriodeBanner 1`] = `
   <p
     className="typo-ingress flex-innhold sentrert"
   >
-    <span>
-      Meldekort for perioden
-    </span>
+    Meldekort for perioden
   </p>
   <h1
     className="typo-innholdstittel flex-innhold sentrert"

@@ -1,4 +1,4 @@
-import { IntlProvider } from 'react-intl';
+import { createIntl } from 'react-intl';
 import { store } from '../store/configureStore';
 import { Konstanter } from './consts';
 import { fetchGet } from '../api/api';
@@ -111,12 +111,11 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
 
 export const hentIntl = () => {
   const intlState = store.getState().intl;
-  const intlProvider = new IntlProvider({
+
+  return createIntl({
     locale: intlState.locale,
-    messages: intlState.messages,
-  });
-  const { intl } = intlProvider.getChildContext();
-  return intl;
+    messages: intlState.messages
+  })
 };
 
 export const hentLocale = () => {

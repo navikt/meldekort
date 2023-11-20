@@ -28,7 +28,7 @@ import personReducer from '../reducers/personReducer';
 import personStatusReducer, {
   PersonStatusState,
 } from '../reducers/personStatusReducer';
-import { default as localesReducer, Locales } from '../reducers/localesReducer';
+import { default as localesReducer, Locale } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
 
 import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
@@ -65,7 +65,7 @@ export const history = createBrowserHistory({
 const initialState = {};
 
 export interface RootState {
-  locales: Locales;
+  locales: Locale[];
   intl: IntlState;
   router: RouterState;
   person: Person;
@@ -109,8 +109,6 @@ const rootReducer = (state: RootState, action: any ) => {
       action.payload.response.status !== undefined &&
       action.payload.response.status === 401
     ) {
-      // const { intl } = state;
-      // state = { intl };
       storage.removeItem('persist:meldekort:undefined');
     }
   }
