@@ -98,7 +98,7 @@
     "stylelint": "^15.11.0",
     "stylelint-no-unsupported-browser-features": "^7.0.0",
     "ts-react-json-table": "^0.1.2",
-    "typesafe-actions": "^4.4.2",
+    "typesafe-actions": "^5.1.0",
     "webpack": "^5.89.0",
     "winston": "^3.11.0"
   },

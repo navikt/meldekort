@@ -1,7 +1,7 @@
 import {
   ActionType,
   createAsyncAction,
-  createStandardAction,
+  createAction,
 } from 'typesafe-actions';
 import { AxiosError } from 'axios';
 import { Infomelding, SendtMeldekort } from '../types/meldekort';
@@ -15,8 +15,8 @@ export enum MeldekortTypeKeys {
 }
 
 export const MeldekortActions = {
-  apiKallFeilet: createStandardAction(MeldekortTypeKeys.API_KALL_FEILET)<AxiosError>(),
-  leggTilInnsendtMeldekort: createStandardAction(MeldekortTypeKeys.LEGG_TIL_INNSENDT_MELDEKORT)<SendtMeldekort[]>(),
+  apiKallFeilet: createAction(MeldekortTypeKeys.API_KALL_FEILET)<AxiosError>(),
+  leggTilInnsendtMeldekort: createAction(MeldekortTypeKeys.LEGG_TIL_INNSENDT_MELDEKORT)<SendtMeldekort[]>(),
   hentInfomelding: createAsyncAction(
     MeldekortTypeKeys.HENT_INFOMELDING,
     MeldekortTypeKeys.HENT_INFOMELDING_OK,

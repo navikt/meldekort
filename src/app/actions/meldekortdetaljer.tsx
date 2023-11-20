@@ -1,7 +1,7 @@
 import {
   ActionType,
   createAsyncAction,
-  createStandardAction,
+  createAction,
 } from 'typesafe-actions';
 import { AxiosError } from 'axios';
 import { Meldekortdetaljer } from '../types/meldekort';
@@ -19,7 +19,7 @@ export const MeldekortdetaljerActions = {
     MeldekortdetaljerTypeKeys.HENT_MELDEKORTDETALJER_OK,
     MeldekortdetaljerTypeKeys.HENT_MELDEKORTDETALJER_FEILET
   )<void, Meldekortdetaljer, AxiosError>(),
-  resettMeldekortdetaljer: createStandardAction(
+  resettMeldekortdetaljer: createAction(
     MeldekortdetaljerTypeKeys.RESETT_MELDEKORTDETALJER
   )<void>(),
 };

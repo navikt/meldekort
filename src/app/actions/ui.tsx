@@ -1,4 +1,4 @@
-import { ActionType, createStandardAction } from 'typesafe-actions';
+import { ActionType, createAction } from 'typesafe-actions';
 import {
   BaksystemFeilmelding,
   IModal,
@@ -16,18 +16,18 @@ export enum UiTypeKeys {
 }
 
 export const UiActions = {
-  skjulModal: createStandardAction(UiTypeKeys.SKJUL_MODAL)<void>(),
-  visModal: createStandardAction(UiTypeKeys.VIS_MODAL)<IModal>(),
-  skjulBaksystemFeilmelding: createStandardAction(
+  skjulModal: createAction(UiTypeKeys.SKJUL_MODAL)<void>(),
+  visModal: createAction(UiTypeKeys.VIS_MODAL)<IModal>(),
+  skjulBaksystemFeilmelding: createAction(
     UiTypeKeys.SKJUL_BAKSYSTEM_FEILMELDING
   )<void>(),
-  visBaksystemFeilmelding: createStandardAction(
+  visBaksystemFeilmelding: createAction(
     UiTypeKeys.VIS_BAKSYSTEM_FEILMELDING
   )<BaksystemFeilmelding>(),
-  sjekkTidligereMeldekort: createStandardAction(
+  sjekkTidligereMeldekort: createAction(
     UiTypeKeys.SJEKK_TIDLIGERE_MELDEKORT
   )<IngenTidligereMeldekort>(),
-  startLoading: createStandardAction(UiTypeKeys.START_LOADING)<void>(),
-  stopLoading: createStandardAction(UiTypeKeys.STOP_LOADING)<void>(),
+  startLoading: createAction(UiTypeKeys.START_LOADING)<void>(),
+  stopLoading: createAction(UiTypeKeys.STOP_LOADING)<void>(),
 };
 export type UiActionTypes = ActionType<typeof UiActions>;

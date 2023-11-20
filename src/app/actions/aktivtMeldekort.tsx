@@ -1,5 +1,5 @@
 import { Meldekort } from '../types/meldekort';
-import { ActionType, createStandardAction } from 'typesafe-actions';
+import { ActionType, createAction } from 'typesafe-actions';
 
 export enum AktivtMeldekortTypeKeys {
   LEGG_TIL_AKTIVT_MELDEKORT = 'LEGG_TIL_AKTIVT_MELDEKORT',
@@ -7,10 +7,10 @@ export enum AktivtMeldekortTypeKeys {
 }
 
 export const AktivtMeldekortActions = {
-  oppdaterAktivtMeldekort: createStandardAction(
+  oppdaterAktivtMeldekort: createAction(
     AktivtMeldekortTypeKeys.LEGG_TIL_AKTIVT_MELDEKORT
   )<Meldekort>(),
-  resettAktivtMeldekort: createStandardAction(
+  resettAktivtMeldekort: createAction(
     AktivtMeldekortTypeKeys.RESETT_AKTIVT_MELDEKORT
   )<void>(),
 };

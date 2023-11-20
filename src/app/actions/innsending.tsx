@@ -6,7 +6,7 @@ import {
 import {
   ActionType,
   createAsyncAction,
-  createStandardAction,
+  createAction,
 } from 'typesafe-actions';
 import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';
@@ -30,38 +30,38 @@ export const InnsendingActions = {
     InnsendingTypeKeys.KONTROLLER_MELDEKORT_FEILET
   )<MeldekortdetaljerInnsending, ValideringsResultat, AxiosError>(),
 
-  leggTilMeldekortId: createStandardAction(
+  leggTilMeldekortId: createAction(
     InnsendingTypeKeys.LEGG_TIL_MELDEKORTID
   )<number>(),
-  leggTilInnsendingstype: createStandardAction(
+  leggTilInnsendingstype: createAction(
     InnsendingTypeKeys.LEGG_TIL_INNSENDINGSTYPE
   )<Innsendingstyper | null>(),
 
-  oppdaterUtfylteDager: createStandardAction(InnsendingTypeKeys.OPPDATER_DAGER)<
+  oppdaterUtfylteDager: createAction(InnsendingTypeKeys.OPPDATER_DAGER)<
     UtfyltDag[]
   >(),
-  oppdaterSpm: createStandardAction(InnsendingTypeKeys.OPPDATER_SPM)<Spm[]>(),
-  oppdaterMeldekortdetaljer: createStandardAction(
+  oppdaterSpm: createAction(InnsendingTypeKeys.OPPDATER_SPM)<Spm[]>(),
+  oppdaterMeldekortdetaljer: createAction(
     InnsendingTypeKeys.OPPDATER_MELDEKORTDETALJER
   )<Meldekortdetaljer>(),
 
-  resetInnsending: createStandardAction(InnsendingTypeKeys.RESET_INNSENDING)<
+  resetInnsending: createAction(InnsendingTypeKeys.RESET_INNSENDING)<
     void
   >(),
-  resetSporsmalOgUtfylling: createStandardAction(
+  resetSporsmalOgUtfylling: createAction(
     InnsendingTypeKeys.RESET_SPORSMAL_OG_UTFYLLING
   )<void>(),
 
-  settBegrunnelse: createStandardAction(InnsendingTypeKeys.SETT_BEGRUNNELSE)<
+  settBegrunnelse: createAction(InnsendingTypeKeys.SETT_BEGRUNNELSE)<
     Begrunnelse
   >(),
-  settMeldekortdetaljerInnsending: createStandardAction(
+  settMeldekortdetaljerInnsending: createAction(
     InnsendingTypeKeys.SETT_MELDEKORTDETALJER_INNSENDING
   )<MeldekortdetaljerInnsending>(),
-  settValideringsresultat: createStandardAction(
+  settValideringsresultat: createAction(
     InnsendingTypeKeys.SETT_VALIDERINGSRESULTAT
   )<ValideringsResultat>(),
-  resetValideringsresultat: createStandardAction(
+  resetValideringsresultat: createAction(
     InnsendingTypeKeys.RESET_VALIDERINGSRESULTAT
   )<void>(),
 };
