@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import { FormattedHTMLMessage } from 'react-intl';
 import { browserName, browserVersion, OSName } from '../../utils/browsers';
 import { Nettlesere } from '../../utils/consts';
+import { formatMessage } from "../../utils/intlUtil";
 
 const GammelNettleserMelding: React.FunctionComponent = () => {
   const browser = browserName + ' v. ' + browserVersion;
@@ -54,10 +54,7 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
   return (
     <div className={'gammelNettleser'}>
       <AlertStripeAdvarsel>
-        <FormattedHTMLMessage
-          id="gammelNettleser.melding"
-          values={{ 0: browser }}
-        />
+        {formatMessage("gammelNettleser.melding", { 0: browser })}
         {lenker()}
       </AlertStripeAdvarsel>
     </div>

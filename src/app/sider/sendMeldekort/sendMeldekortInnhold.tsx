@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Meldekort, MeldekortKolonne, MeldekortRad } from '../../types/meldekort';
-import { FormattedHTMLMessage } from 'react-intl';
 import Tabell from '../../components/tabell/desktop/tabell';
 import { Normaltekst } from 'nav-frontend-typografi';
 import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
 import { Router } from '../../types/router';
 import { BaksystemFeilmelding } from '../../types/ui';
+import { formatMessage } from "../../utils/intlUtil";
 
 interface Props {
   rows: MeldekortRad[];
@@ -24,7 +24,7 @@ function InnsendingsTabell({
   return (
     <>
       <div className="item">
-        <FormattedHTMLMessage id="sendMeldekort.info.kanSende" />
+        {formatMessage("sendMeldekort.info.kanSende")}
       </div>
       <section className="seksjon">
         <div className="item">
@@ -34,13 +34,13 @@ function InnsendingsTabell({
       <section className="seksjon">
         <div className="box">
           <Normaltekst>
-            <FormattedHTMLMessage id="sendMeldekort.info.neste" />
+            {formatMessage("sendMeldekort.info.neste")}
           </Normaltekst>
           <Normaltekst>
-            <FormattedHTMLMessage id="sendMeldekort.info.eldstePerioden" />
+            {formatMessage("sendMeldekort.info.eldstePerioden")}
           </Normaltekst>
           <Normaltekst>
-            <FormattedHTMLMessage id="sendMeldekort.info.automatiskLedet" />
+            {formatMessage("sendMeldekort.info.automatiskLedet")}
           </Normaltekst>
         </div>
       </section>

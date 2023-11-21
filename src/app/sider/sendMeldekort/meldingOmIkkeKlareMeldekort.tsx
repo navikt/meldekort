@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Meldekort, MeldekortRad } from '../../types/meldekort';
 import { Person } from '../../types/person';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import { formaterDato, formaterUkeOgDatoPeriode } from '../../utils/dates';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import veileder from '../../ikoner/veileder.svg';
 import { harKortStatusOPPRellerSENDT } from '../../utils/meldekortUtils';
+import { formatMessage } from "../../utils/intlUtil";
 
 interface Props {
   rows: MeldekortRad[];
@@ -53,9 +53,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
     return [];
   };
 
-  const returnerVarselIngenMeldekortASende = (
-    <FormattedMessage id="sporsmal.ingenMeldekortASende" />
-  );
+  const returnerVarselIngenMeldekortASende = formatMessage("sporsmal.ingenMeldekortASende");
 
   const visMeldingOmMeldekort = () => {
     if (rows.length === 0 && meldekortliste !== undefined) {
@@ -75,8 +73,8 @@ function MeldingOmMeldekortSomIkkeErKlare({
         return (
           <>
             <Normaltekst>
-              <FormattedMessage id="overskrift.nesteMeldekort" />
-              <FormattedMessage id="sendMeldekort.info.innsendingStatus.kanSendes" />
+              {formatMessage("overskrift.nesteMeldekort")}
+              {formatMessage("sendMeldekort.info.innsendingStatus.kanSendes")}
               {formaterDato(
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.kortKanSendesFra
               )}
@@ -87,7 +85,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.til
               )}
             </Element>
-            <FormattedMessage id="sendMeldekort.info.ingenKlare" />
+            {formatMessage("sendMeldekort.info.ingenKlare")}
           </>
         );
       } else {

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
-import { hentIntl } from '../../../../utils/intlUtil';
+import { formatMessage, hentIntl } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
 
@@ -16,17 +15,17 @@ interface SporsmalProps {
 const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
   const legend = (
     <div className="typo-undertittel" style={{ marginBottom: '-2rem' }}>
-      <FormattedMessage id={props.sporsmalsobjekt.sporsmal} />
+      formatMessage(props.sporsmalsobjekt.sporsmal)
       {props.formatertDato ? <span> {props.formatertDato} ? </span> : null}{' '}
       {props.disabled ? (
-        <FormattedMessage id={'korrigering.registrert.merknad'} />
+        formatMessage("korrigering.registrert.merknad")
       ) : null}
     </div>
   );
 
   const description = (
     <UtvidetInformasjon>
-      <FormattedHTMLMessage id={props.sporsmalsobjekt.forklaring} />
+      {formatMessage(props.sporsmalsobjekt.forklaring)}
     </UtvidetInformasjon>
   );
 

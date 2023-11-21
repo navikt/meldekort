@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import checkMark from '../../../ikoner/check.svg';
 import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
+import { formatMessage } from "../../../utils/intlUtil";
 
 interface Props {
   sporsmalOgSvar: {
@@ -19,9 +19,9 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
 }) => {
   const hentTekstForSvar = (svar: boolean) => {
     if (svar) {
-      return <FormattedMessage id="diverse.ja" />;
+      return formatMessage("diverse.ja")
     }
-    return <FormattedMessage id="diverse.nei" />;
+    return formatMessage("diverse.nei")
   };
 
   return (
@@ -31,11 +31,11 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
           <section key={spm.sporsmal} className="sporsmalsgruppe">
             <div className="sporsmalstekst">
               <Undertittel tag="h3">
-                <FormattedMessage id={spm.sporsmal} />
+                {formatMessage(spm.sporsmal)}
                 {spm.formatertDato ? <span>{spm.formatertDato}?</span> : null}
               </Undertittel>
               <UtvidetInformasjon>
-                <FormattedHTMLMessage id={spm.forklaring} />
+                {formatMessage(spm.forklaring)}
               </UtvidetInformasjon>
             </div>
             <img alt="" src={checkMark} />

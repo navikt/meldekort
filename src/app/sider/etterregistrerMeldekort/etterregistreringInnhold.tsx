@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { hentIntl } from '../../utils/intlUtil';
+import { formatMessage, hentIntl } from '../../utils/intlUtil';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import { FormattedHTMLMessage } from 'react-intl';
 import Tabell from '../../components/tabell/desktop/tabell';
 import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
@@ -34,7 +33,7 @@ function EtterregistreringInnhold({
       </section>
       <section className="seksjon">
         <div className="item">
-          <FormattedHTMLMessage id="sendMeldekort.info.kanSende" />
+          {formatMessage("sendMeldekort.info.kanSende")}
         </div>
         <div className="item">
           <Tabell rows={rows} columns={columns} />

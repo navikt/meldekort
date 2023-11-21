@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { FormattedMessage } from 'react-intl';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import {
   hentDatoForAndreUke,
@@ -18,7 +17,7 @@ import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { Konstanter } from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
-import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatMessage, hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
   FravaerTypeEnum,
@@ -399,7 +398,7 @@ class Utfyllingsside extends React.Component<
           className="seksjon flex-innhold tittel-sprakvelger"
         >
           <Innholdstittel tag="h2">
-            <FormattedMessage id="overskrift.steg2" />
+            {formatMessage("overskrift.steg2")}
           </Innholdstittel>
           <Sprakvelger />
         </section>

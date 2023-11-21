@@ -21,8 +21,7 @@ import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyActions } from '../../actions/meny';
 import { MenyState } from '../../types/meny';
 
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { hentIntl } from '../../utils/intlUtil';
+import { formatMessage, hentIntl } from '../../utils/intlUtil';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { Innholdstittel } from 'nav-frontend-typografi';
@@ -91,7 +90,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
             : formaterDato(meldekort.mottattDato),
         status: meldekort.kortStatus,
         bruttobelop: formaterBelop(meldekort.bruttoBelop),
-        detaljer: hentIntl().formatMessage({ id: 'overskrift.detaljer' }),
+        detaljer: hentIntl().formatMessage({ id: "overskrift.detaljer" }),
       });
     });
     return radliste;
@@ -103,7 +102,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     const columns = [
       {
         key: 'periode',
-        label: <FormattedMessage id="overskrift.periode" />,
+        label: formatMessage("overskrift.periode"),
         cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           if (row.meldekort.kortStatus === KortStatus.UBEHA) {
             return row.periode;
@@ -119,17 +118,17 @@ class TidligereMeldekort extends React.Component<Props, State> {
       },
       {
         key: 'dato',
-        label: <FormattedMessage id="overskrift.dato" />,
+        label: formatMessage("overskrift.dato"),
         cell: 'dato',
       },
       {
         key: 'mottatt',
-        label: <FormattedMessage id="overskrift.mottatt" />,
+        label: formatMessage("overskrift.mottatt"),
         cell: 'mottatt',
       },
       {
         key: 'status',
-        label: <FormattedMessage id="overskrift.status" />,
+        label: formatMessage("overskrift.status"),
         cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
@@ -143,7 +142,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
       },
       {
         key: 'bruttobelop',
-        label: <FormattedMessage id="overskrift.bruttoBelop" />,
+        label: formatMessage("overskrift.bruttoBelop"),
         cell: 'bruttobelop',
       },
     ];
@@ -161,7 +160,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     if (!this.props.ingenTidligereMeldekort.harTidligereMeldekort) {
       return (
         <AlertStripe type={'advarsel'}>
-          <FormattedHTMLMessage id="tidligereMeldekort.harIngen" />
+          {formatMessage("tidligereMeldekort.harIngen")}
         </AlertStripe>
       );
     } else if (this.props.historiskeMeldekort.historiskeMeldekort.length > 0) {
@@ -201,10 +200,10 @@ class TidligereMeldekort extends React.Component<Props, State> {
     return (
       <div>
         <section className="seksjon">
-          <FormattedMessage id="tidligereMeldekort.forklaring" />
+          {formatMessage("tidligereMeldekort.forklaring")}
         </section>
         <section className="seksjon">
-          <FormattedMessage id="tidligereMeldekort.forklaring.korrigering" />
+          {formatMessage("tidligereMeldekort.forklaring.korrigering")}
         </section>
         <section className="seksjon">
           {this.props.baksystemFeilmelding.visFeilmelding ? (
@@ -222,7 +221,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
-            <FormattedMessage id="overskrift.tidligereMeldekort" />
+            {formatMessage("overskrift.tidligereMeldekort")}
           </Innholdstittel>
           <Sprakvelger />
         </section>

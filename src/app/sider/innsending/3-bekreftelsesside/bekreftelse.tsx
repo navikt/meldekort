@@ -4,7 +4,6 @@ import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortde
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import { connect } from 'react-redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../actions/innsending';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
@@ -21,7 +20,7 @@ import {
   MeldekortdetaljerInnsending,
   SendtMeldekort,
 } from '../../../types/meldekort';
-import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatMessage, hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
@@ -239,7 +238,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     if (!sign) {
       this.setState(prevState => ({
         ...prevState,
-        feilmelding: hentIntl().formatMessage({ id: 'utfylling.bekreft.feil' }),
+        feilmelding: hentIntl().formatMessage({ id: "utfylling.bekreft.feil" }),
       }));
       scrollTilElement('periodebanner');
     } else {
@@ -324,12 +323,10 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           <section className={'seksjon'}>
             <AlertStripe type={'advarsel'}>
               <span>
-                {`${hentIntl().formatMessage({
-                  id: 'overskrift.steg3.info.ikkeSendt',
-                })}
-                  ${hentIntl().formatMessage({
-                    id: 'overskrift.steg3.info.bekreftVerdier',
-                  })}`}
+                {`
+                ${formatMessage("overskrift.steg3.info.ikkeSendt")}
+                ${formatMessage("overskrift.steg3.info.bekreftVerdier")}
+                `}
               </span>
             </AlertStripe>
           </section>
@@ -342,7 +339,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           </div>
           <section className="seksjon flex-innhold tittel-sprakvelger">
             <Innholdstittel tag="h2">
-              <FormattedMessage id="overskrift.steg3" />
+              {formatMessage("overskrift.steg3")}
             </Innholdstittel>
             <Sprakvelger />
           </section>
@@ -359,9 +356,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             feil={feilmelding !== ''}
           >
             <Normaltekst>
-              <FormattedHTMLMessage
-                id={'utfylling.bekreft' + typeYtelsePostfix}
-              />
+              {formatMessage("utfylling.bekreft" + typeYtelsePostfix)}
             </Normaltekst>
           </BekreftCheckboksPanel>
           <section className="seksjon flex-innhold sentrert">

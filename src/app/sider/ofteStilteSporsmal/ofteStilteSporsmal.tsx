@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { hentIntl } from '../../utils/intlUtil';
+import { formatMessage, hentIntl } from '../../utils/intlUtil';
 
 import sporrende from '../../ikoner/sporrende.svg';
 import { InnsendingActions } from '../../actions/innsending';
@@ -86,7 +85,7 @@ class OfteStilteSporsmal extends React.Component<
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
-            <FormattedMessage id="overskrift.ofteStilteSporsmal" />
+            {formatMessage("overskrift.ofteStilteSporsmal")}
           </Innholdstittel>
           <Sprakvelger />
         </section>
@@ -102,7 +101,7 @@ class OfteStilteSporsmal extends React.Component<
                 tittel={this.hentFormatertOverskrift(sporsmal.overskriftId)}
                 apen={this.state.valgtSporsmalId === sporsmal.id}
               >
-                <FormattedHTMLMessage id={sporsmal.tekstId} />
+                {formatMessage(sporsmal.tekstId)}
               </EkspanderbartpanelBase>
             );
           })}

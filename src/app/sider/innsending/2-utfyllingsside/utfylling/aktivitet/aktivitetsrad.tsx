@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
 import {
   hentUkedager,
   hentUkedagerSomStringListe,
@@ -11,7 +10,7 @@ import { UtfyltDag } from '../utfyltDagConfig';
 import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { hentIntl } from '../../../../../utils/intlUtil';
+import { formatMessage } from '../../../../../utils/intlUtil';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
 import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
@@ -109,7 +108,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
           key={ukedag}
           label={
             <span className="vekk">
-              {dag} {hentIntl().formatMessage({ id: this.props.tekstId })}
+              {dag} {formatMessage(this.props.tekstId)}
             </span>
           }
           checked={this.isChecked(ukedag)}
@@ -149,10 +148,10 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
         <Undertittel tag="h4" className={'aktivitetsrad__tittel'}>
-          <FormattedHTMLMessage id={tekstId} />
+          {formatMessage(tekstId)}
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage id={forklaringId + typeYtelsePostfix} />
+          {formatMessage(forklaringId + typeYtelsePostfix)}
         </UtvidetInformasjon>
         <div className="ukedager--mobil">{hentUkedager()}</div>
         <div className="aktivitetsrad__inputfelter">{this.settFelter()}</div>

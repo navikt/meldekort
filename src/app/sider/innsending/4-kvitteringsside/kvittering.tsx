@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
@@ -18,7 +17,7 @@ import { connect } from 'react-redux';
 import { Router } from '../../../types/router';
 import { Person, PersonInfo } from '../../../types/person';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { downloadMessagesAndDispatch, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatMessage, hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import {
   formaterDato,
@@ -226,7 +225,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         {nesteDato && (
           <Ingress className="noPrint">
             <span>
-              {hentIntl().formatHTMLMessage(
+              {hentIntl().formatMessage(
                 { id: 'sendt.meldekortKanSendes' },
                 {
                   0: formaterDato(nesteDato),
@@ -246,18 +245,18 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     return (
       <>
         <AlertStripe type={'suksess'} className="alertSendt noPrint">
-          <FormattedMessage id={'overskrift.meldekort.sendt'} />
+          {formatMessage("overskrift.meldekort.sendt")}
         </AlertStripe>
 
         {typeYtelsePostfix === TypeYtelse.DAGPENGER &&
           <Panel border={true} className={"alertSendt"}>
-            <FormattedHTMLMessage id={"sendt.klagerettigheterInfo" + typeYtelsePostfix} />
+            {formatMessage("sendt.klagerettigheterInfo" + typeYtelsePostfix)}
           </Panel>
         }
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel tag="h2">
-            <FormattedMessage id="overskrift.steg4" />
+            {formatMessage("overskrift.steg4")}
           </Innholdstittel>
           <Sprakvelger />
         </section>
@@ -272,7 +271,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         {innsendingstype === Innsendingstyper.INNSENDING &&
           nesteInnsendingstype === Innsendingstyper.ETTERREGISTRERING && (
             <section className="seksjon etterregistrering_info">
-              <FormattedMessage id={'sendt.etterregistrering.info'} />
+              {formatMessage("sendt.etterregistrering.info")}
             </section>
           )}
       </>
@@ -322,7 +321,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
                 className={'knapp navigasjonsknapp knapp--hoved'}
                 href={nestePath}
               >
-                <FormattedMessage id={knappTekstid} />
+                {formatMessage(knappTekstid)}
               </a>
             ) : (
               <NavKnapp

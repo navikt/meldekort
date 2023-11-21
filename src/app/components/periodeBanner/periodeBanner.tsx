@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
-import { FormattedMessage } from 'react-intl';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { Meldekort } from '../../types/meldekort';
+import { hentIntl } from "../../utils/intlUtil";
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -27,7 +27,7 @@ const PeriodeBanner: React.FunctionComponent<Props> = props => {
       className={'seksjon periodeBanner ' + className}
     >
       <Ingress className="flex-innhold sentrert">
-        <FormattedMessage id="meldekort.for.perioden" />
+        {hentIntl().formatMessage({id: "meldekort.for.perioden"})}
       </Ingress>
       <Innholdstittel className="flex-innhold sentrert">
         {hentUkePeriode(meldeperiode.fra, meldeperiode.til)}

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import KnappBase from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { history, RootState } from '../../store/configureStore';
 import { Router } from '../../types/router';
 import { selectRouter } from '../../selectors/router';
@@ -13,6 +12,7 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { Sporsmal as Spm } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { UtfyltDag } from '../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { settSporsmalOgUtfyllingHvisKorrigering } from '../../utils/korrigeringUtils';
+import { hentIntl } from "../../utils/intlUtil";
 
 interface MapStateToProps {
   router: Router;
@@ -165,7 +165,7 @@ class NavKnapp extends React.Component<Props, object> {
             : this.props.disabled
         }
       >
-        <FormattedMessage id={this.props.tekstid} />
+        {hentIntl().formatMessage({id: this.props.tekstid})}
       </KnappBase>
     );
   }

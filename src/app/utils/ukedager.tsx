@@ -1,20 +1,6 @@
-import { FormattedMessage } from 'react-intl';
 import * as React from 'react';
 import { hentIntl } from './intlUtil';
-import { guid } from 'nav-frontend-js-utils';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
-
-export const hentUkedagerSomElementListe = (): JSX.Element[] => {
-  return [
-    <FormattedMessage key={guid()} id="ukedag.mandag" />,
-    <FormattedMessage key={guid()} id="ukedag.tirsdag" />,
-    <FormattedMessage key={guid()} id="ukedag.onsdag" />,
-    <FormattedMessage key={guid()} id="ukedag.torsdag" />,
-    <FormattedMessage key={guid()} id="ukedag.fredag" />,
-    <FormattedMessage key={guid()} id="ukedag.lordag" />,
-    <FormattedMessage key={guid()} id="ukedag.sondag" />,
-  ];
-};
 
 export const hentUkedagerSomStringListe = (): string[] => {
   const intl = hentIntl();

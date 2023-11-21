@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
-import { hentIntl } from '../../../utils/intlUtil';
+import { formatMessage, hentIntl } from '../../../utils/intlUtil';
 import { MeldekortDag } from '../../../types/meldekort';
 
 interface Props {
@@ -22,7 +21,7 @@ const Hjelpetekst: React.FunctionComponent<Props> = ({
               .toUpperCase()}
           </strong>
         </span>
-        <FormattedHTMLMessage id={forklaringTekstid + typeYtelsePostfix} />
+        {formatMessage(forklaringTekstid + typeYtelsePostfix)}
       </span>
     );
   };

@@ -7,7 +7,6 @@ import { BaksystemFeilmelding } from '../../types/ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import { InnsendingActions } from '../../actions/innsending';
 import { Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
@@ -27,6 +26,7 @@ import {
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
+import { formatMessage } from "../../utils/intlUtil";
 
 interface MapStateToProps {
   person: Person;
@@ -69,10 +69,10 @@ function SendMeldekort({
         return (
           <div className="send-meldekort-varsel">
             <Ingress>
-              <FormattedMessage id="sendMeldekort.info.forMangeMeldekort" />
+              {formatMessage("sendMeldekort.info.forMangeMeldekort")}
             </Ingress>
             <Normaltekst>
-              <FormattedMessage id="sendMeldekort.info.forMangeMeldekort.feilmelding" />
+              {formatMessage("sendMeldekort.info.forMangeMeldekort.feilmelding")}
             </Normaltekst>
           </div>
         );
@@ -118,7 +118,8 @@ function SendMeldekort({
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
           {' '}
-          <FormattedMessage id="overskrift.innsending" />{' '}
+          {formatMessage("overskrift.innsending")}
+          {' '}
         </Innholdstittel>
         <Sprakvelger />
       </section>

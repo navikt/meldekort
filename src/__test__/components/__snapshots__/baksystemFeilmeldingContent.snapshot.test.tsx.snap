@@ -3,14 +3,20 @@
 exports[`BaksystemFeilmeldingContent 1`] = `
 <div>
   <Undertittel>
-    <FormattedMessage
-      id="feilmelding.baksystem.overskrift"
-      values={Object {}}
+    <span
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "feilmelding.baksystem.overskrift",
+        }
+      }
     />
   </Undertittel>
-  <FormattedMessage
-    id="feilmelding.baksystem"
-    values={Object {}}
+  <span
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "feilmelding.baksystem",
+      }
+    }
   />
 </div>
 `;

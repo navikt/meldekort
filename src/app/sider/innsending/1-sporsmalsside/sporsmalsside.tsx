@@ -15,9 +15,9 @@ import {
 } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import {
   downloadMessagesAndDispatch,
+  formatMessage,
   hentIntl,
   hentLocale,
 } from '../../../utils/intlUtil';
@@ -397,17 +397,17 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, object> {
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel tag="h2">
-            <FormattedMessage id="overskrift.steg1" />
+            {formatMessage("overskrift.steg1")}
           </Innholdstittel>
           <Sprakvelger />
         </section>
         <section className="seksjon">
           <Veilederpanel kompakt={true} svg={<img alt="" src={veileder} />}>
             <div className="item">
-              <FormattedHTMLMessage id="sporsmal.lesVeiledning" />
+              {formatMessage("sporsmal.lesVeiledning")}
             </div>
             <div className="item">
-              <FormattedHTMLMessage id="sporsmal.ansvarForRiktigUtfylling" />
+              {formatMessage("sporsmal.ansvarForRiktigUtfylling")}
             </div>
           </Veilederpanel>
         </section>
@@ -430,7 +430,7 @@ class Sporsmalsside extends React.Component<SporsmalssideProps, object> {
           {innsending.innsendingstype === Innsendingstyper.INNSENDING ? (
             <div className="alertstripe_registrert">
               <AlertStripe type="advarsel">
-                <FormattedHTMLMessage id="sporsmal.registrertMerknad" />
+                {formatMessage("sporsmal.registrertMerknad")}
               </AlertStripe>
             </div>
           ) : null}

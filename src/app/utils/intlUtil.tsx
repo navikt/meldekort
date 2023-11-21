@@ -121,3 +121,20 @@ export const hentIntl = () => {
 export const hentLocale = () => {
   return store.getState().intl.locale;
 };
+
+// FormattedHTMLMessage & intl.formatHTMLMessage har blitt fjernet fra react-intl v4
+// FormattedMessage og intl.formatMessage viser ikke HTML
+export const formatMessage = (id: string | undefined, values?: object): JSX.Element => {
+  const text = hentIntl().formatMessage(
+    {
+      id: id
+    },
+    {
+      ...values
+    }
+  )
+
+  return (
+    <span dangerouslySetInnerHTML={{__html: text}} />
+  )
+}

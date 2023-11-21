@@ -1,10 +1,9 @@
 import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FormattedMessage } from 'react-intl';
 import { Skrivemodus } from '../../types/skrivemodus';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
-import { hentLocale } from '../../utils/intlUtil';
+import { formatMessage, hentLocale } from '../../utils/intlUtil';
 
 interface MapStateToProps {
   skrivemodus: Skrivemodus;
@@ -15,7 +14,7 @@ const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props =
 
   const hentSkrivemodusInfomelding = () => {
     if (skrivemodus.melding === null) {
-      return <FormattedMessage id={'skrivemodusInfomelding'} />;
+      return formatMessage("skrivemodusInfomelding")
     } else {
       return hentLocale() === 'nb'
         ? skrivemodus.melding.norsk

@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import * as React from 'react';
-import { ExoticComponent, FunctionComponentElement, ReactElement } from 'react';
+import { FunctionComponent, FunctionComponentElement, ReactElement } from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './app/app';
 import * as serviceWorker from './registerServiceWorker';
@@ -37,7 +37,7 @@ const render = (element: FunctionComponentElement<ProviderProps>) => {
   ReactDOM.render(element, rootElement);
 };
 
-const renderApp = (Component: ExoticComponent, locale: string) => {
+const renderApp = (Component: FunctionComponent, locale: string) => {
   render(
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<div />}>

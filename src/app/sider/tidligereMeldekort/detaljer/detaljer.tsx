@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
-import { FormattedMessage } from 'react-intl';
 import { RootState } from '../../../store/configureStore';
 import {
   mapKortStatusTilTekst,
@@ -33,7 +32,7 @@ import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortR
 import { Skrivemodus } from '../../../types/skrivemodus';
 import { SkrivemodusActions } from '../../../actions/skrivemodus';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { downloadMessagesAndDispatch } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatMessage } from '../../../utils/intlUtil';
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -127,11 +126,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     const columns: MeldekortKolonne[] = [
       {
         key: 'mottattDato',
-        label: <FormattedMessage id="overskrift.mottatt" />,
+        label: formatMessage("overskrift.mottatt"),
       },
       {
         key: 'kortStatus',
-        label: <FormattedMessage id="overskrift.status" />,
+        label: formatMessage("overskrift.status"),
         cell: function(row: DetaljRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
@@ -145,11 +144,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       },
       {
         key: 'bruttoBelop',
-        label: <FormattedMessage id="overskrift.bruttoBelop" />,
+        label: formatMessage("overskrift.bruttoBelop"),
       },
       {
         key: 'kortType',
-        label: <FormattedMessage id="overskrift.meldekorttype" />,
+        label: formatMessage("overskrift.meldekorttype"),
       },
     ];
     const { meldegruppe } = aktivtMeldekort;

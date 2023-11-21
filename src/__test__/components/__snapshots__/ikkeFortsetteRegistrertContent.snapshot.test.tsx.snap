@@ -5,9 +5,12 @@ exports[`ikkeFortsetteRegistrertContent 1`] = `
   className="modal-overskrift"
 >
   <Undertittel>
-    <FormattedMessage
-      id="sporsmal.bekreft"
-      values={Object {}}
+    <span
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "sporsmal.bekreft",
+        }
+      }
     />
   </Undertittel>
   <Veilederpanel
@@ -23,9 +26,12 @@ exports[`ikkeFortsetteRegistrertContent 1`] = `
       className="modal-tekst"
     >
       <Normaltekst>
-        <FormattedMessage
-          id="sporsmal.bekreftelse"
-          values={Object {}}
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "sporsmal.bekreftelse",
+            }
+          }
         />
       </Normaltekst>
     </div>

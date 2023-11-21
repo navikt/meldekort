@@ -5,13 +5,12 @@ import {
   hentUkedagerSomStringListe,
   konverterUkedag,
 } from '../../../../../utils/ukedager';
-import { FormattedHTMLMessage } from 'react-intl';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyltDagConfig';
 import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { hentIntl } from '../../../../../utils/intlUtil';
+import { formatMessage } from '../../../../../utils/intlUtil';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
 import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
@@ -95,7 +94,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
           key={ukedag}
           label={
             <span className="vekk">
-              {dag} {hentIntl().formatMessage({ id: this.props.tekstId })}
+              {dag} {formatMessage(this.props.tekstId)}
             </span>
           }
           bredde="XS"
@@ -134,10 +133,10 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
         }}
       >
         <Undertittel tag="h4" className={'arbeidsrad__tittel'}>
-          <FormattedHTMLMessage id={tekstId} />
+          {formatMessage(tekstId)}
         </Undertittel>
         <UtvidetInformasjon>
-          <FormattedHTMLMessage id={forklaringId + typeYtelsePostfix} />
+          {formatMessage(forklaringId + typeYtelsePostfix)}
         </UtvidetInformasjon>
         <div className="ukedager--mobil">{hentUkedager()}</div>
         <div className="arbeidsrad__inputfelter">{this.settFelter()}</div>
