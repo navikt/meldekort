@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import * as React from 'react';
 import { FunctionComponent, FunctionComponentElement, ReactElement } from 'react';
 import * as ReactDOM from 'react-dom';
