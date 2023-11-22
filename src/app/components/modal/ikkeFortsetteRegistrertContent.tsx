@@ -7,7 +7,7 @@ import { formatMessage } from "../../utils/intlUtil";
 export const ikkeFortsetteRegistrertContent = () => {
   return (
     <div className="modal-overskrift">
-      <Undertittel children={formatMessage("sporsmal.bekreft")} />
+      <Undertittel>{formatMessage("sporsmal.bekreft")}</Undertittel>
       <Veilederpanel fargetema="advarsel" svg={<img alt="" src={veileder} />}>
         <div className="modal-tekst">
           <Normaltekst>

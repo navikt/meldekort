@@ -43,8 +43,9 @@ const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({
                 className={'uimodal__actions-knapp'}
                 type={knapp.type}
                 onClick={() => knapp.action()}
-                children={knapp.label}
-              />
+              >
+                {knapp.label}
+              </KnappBase>
             );
           })}
       </div>
