@@ -4,6 +4,7 @@ import EtikettBase from 'nav-frontend-etiketter';
 import Komponentlenke from '../../komponentlenke/komponentlenke';
 import { DetaljRad, HistoriskeMeldekortRad, MeldekortKolonne } from '../../../types/meldekort';
 import { mapKortStatusTilTekst } from '../../../utils/kortMapper';
+import { Konstanter } from "../../../utils/consts";
 
 interface MobilTabellProps {
   rows?: HistoriskeMeldekortRad[];
@@ -37,7 +38,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
         tableData = (
           <Komponentlenke
             lenketekst={rowData.periode}
-            rute="/tidligere-meldekort/detaljer"
+            rute={Konstanter.basePath + "/tidligere-meldekort/detaljer"}
             meldekort={rowData.meldekort}
           />
         );

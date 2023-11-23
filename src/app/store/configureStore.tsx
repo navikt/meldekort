@@ -1,33 +1,14 @@
 import storage from 'redux-persist/lib/storage/session';
 
-import {
-  Action,
-  applyMiddleware,
-  combineReducers,
-  compose,
-  createStore,
-  Middleware
-} from 'redux';
-import {
-  connectRouter,
-  routerMiddleware,
-  RouterState,
-} from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { Action, applyMiddleware, combineReducers, compose, createStore, Middleware } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 
 import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
-import historiskeMeldekortReducer, {
-  HistoriskeMeldekortState,
-} from '../reducers/historiskeMeldekortReducer';
-import meldekortdetaljerReducer, {
-  MeldekortdetaljerState,
-} from '../reducers/meldekortdetaljerReducer';
+import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
+import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
 import personReducer from '../reducers/personReducer';
-import personStatusReducer, {
-  PersonStatusState,
-} from '../reducers/personStatusReducer';
+import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
 import { default as localesReducer, Locale } from '../reducers/localesReducer';
 import { intlReducer, IntlState } from 'react-intl-redux';
 
@@ -47,27 +28,19 @@ import menyReducer from '../reducers/menyReducer';
 import { MeldekortTypeKeys } from '../actions/meldekort';
 import meldekortReducer from '../reducers/meldekortReducer';
 import { Meldekort, MeldekortState } from '../types/meldekort';
-import personInfoReducer, {
-  PersonInfoState,
-} from '../reducers/personInfoReducer';
+import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
 import personInfoEpics from '../epics/personInfoEpics';
 import { hentEnvSetting } from '../utils/env';
 import { Skrivemodus } from '../types/skrivemodus';
 import skrivemodusReducer from '../reducers/skrivemodusReducer';
 import skrivemodusEpics from '../epics/skrivemodusEpics';
-import { Konstanter } from '../utils/consts';
 import packageConfig from '../../../package.json';
-
-export const history = createBrowserHistory({
-  basename: Konstanter.basePath,
-});
 
 const initialState = {};
 
 export interface RootState {
   locales: Locale[];
   intl: IntlState;
-  router: RouterState;
   person: Person;
   personStatus: PersonStatusState;
   personInfo: PersonInfoState;
@@ -86,7 +59,6 @@ export type AppEpic = Epic<Action, Action, RootState>;
 const appReducer = combineReducers({
   locales: localesReducer,
   intl: intlReducer,
-  router: connectRouter(history),
   person: personReducer,
   personStatus: personStatusReducer,
   personInfo: personInfoReducer,
@@ -116,7 +88,7 @@ const rootReducer = (state: RootState, action: any ) => {
 };
 
 const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
-const middleware: Middleware[] = [routerMiddleware(history), epicMiddleware];
+const middleware: Middleware[] = [epicMiddleware];
 const composeEnhancer: typeof compose =
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   // @ts-ignore
@@ -151,8 +123,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const appliedMiddleware = applyMiddleware(
-  ...middleware,
-  routerMiddleware(history)
+  ...middleware
 );
 
 const store = createStore(

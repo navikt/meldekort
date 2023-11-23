@@ -1,22 +1,20 @@
 import * as React from 'react';
 import { MenyPunkt } from '../../../utils/menyConfig';
-import { history, RootState } from '../../../store/configureStore';
-import { selectRouter } from '../../../selectors/router';
+import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
-import { Router } from '../../../types/router';
 import { hentIntl } from '../../../utils/intlUtil';
 import { MenyActions } from '../../../actions/meny';
 import { Dispatch } from 'redux';
 import classNames from 'classnames';
 import { Collapse } from 'react-collapse';
 import Lenke from 'nav-frontend-lenker';
+import { useNavigate } from "react-router";
 
 interface MobilMenyProps {
   menypunkter: MenyPunkt[];
 }
 
 interface MapStateToProps {
-  router: Router;
   erApen: boolean;
   valgtMenyPunkt: MenyPunkt;
 }
@@ -36,10 +34,11 @@ const MobilMeny: React.FunctionComponent<
     menypunkter,
     erApen,
   } = props;
+  const navigate = useNavigate();
 
   const onChange = (item: MenyPunkt) => {
     settValgtMenyPunkt(item);
-    history.push(item.urlparam);
+    navigate(item.urlparam, { replace: true })
   };
 
   return (
@@ -75,7 +74,6 @@ const MobilMeny: React.FunctionComponent<
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    router: selectRouter(state),
     erApen: state.meny.erApen,
     valgtMenyPunkt: state.meny.valgtMenyPunkt,
   };

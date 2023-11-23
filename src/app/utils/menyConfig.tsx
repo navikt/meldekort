@@ -4,6 +4,7 @@ import EtterregistrerMeldekort from '../sider/etterregistrerMeldekort/etterregis
 import OmMeldekort from '../sider/omMeldekort/omMeldekort';
 import OfteStilteSporsmal from '../sider/ofteStilteSporsmal/ofteStilteSporsmal';
 import { ComponentClass, FunctionComponent } from 'react';
+import { Konstanter } from "./consts";
 
 export interface MenyPunkt {
   exact?: boolean;
@@ -20,35 +21,35 @@ const menyConfig: MenyPunkt[] = [
     component: SendMeldekort,
     tittel: 'sendMeldekort',
     tekstid: 'naviger.send',
-    urlparam: '/send-meldekort',
+    urlparam: Konstanter.basePath + '/send-meldekort',
     disabled: false,
   },
   {
     component: TidligereMeldekort,
     tekstid: 'sekundarmeny.tidligere',
     tittel: 'tidligereMeldekort',
-    urlparam: '/tidligere-meldekort',
+    urlparam: Konstanter.basePath + '/tidligere-meldekort',
     disabled: false,
   },
   {
     component: EtterregistrerMeldekort,
     tekstid: 'sekundarmeny.etterregistrer',
     tittel: 'etterregistrering',
-    urlparam: '/etterregistrer-meldekort',
+    urlparam: Konstanter.basePath + '/etterregistrer-meldekort',
     disabled: true,
   },
   {
     component: OmMeldekort,
     tekstid: 'sekundarmeny.omMeldekort',
     tittel: 'omMeldekort',
-    urlparam: '/om-meldekort',
+    urlparam: Konstanter.basePath + '/om-meldekort',
     disabled: false,
   },
   {
     component: OfteStilteSporsmal,
     tekstid: 'sekundarmeny.faq',
     tittel: 'ofteStilteSporsmal',
-    urlparam: '/ofte-stilte-sporsmal',
+    urlparam: Konstanter.basePath + '/ofte-stilte-sporsmal',
     disabled: false,
   },
 ];

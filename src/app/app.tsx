@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router';
-import { ConnectedRouter } from 'connected-react-router';
-import { history, RootState } from './store/configureStore';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { RootState } from './store/configureStore';
 import Header from './components/header/header';
 import MeldekortRoutes from './sider/meldekortRoutes';
 import setupMock from './mock/setup-mock';
@@ -19,8 +18,6 @@ import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
 import { MenyState } from './types/meny';
 import { MenyPunkt } from './utils/menyConfig';
 import { MenyActions } from './actions/meny';
-import { Router } from './types/router';
-import { selectRouter } from './selectors/router';
 import { hentIntl } from './utils/intlUtil';
 import classNames from 'classnames';
 import { PersonActions } from './actions/person';
@@ -35,13 +32,13 @@ import {
   isOldSafari,
 } from './utils/browsers';
 import { WrappedComponentProps, injectIntl } from 'react-intl';
+import { Konstanter } from "./utils/consts";
 
 if (erMock()) {
   setupMock();
 }
 
 interface MapStateToProps {
-  router: Router;
   personStatus: PersonStatusState;
   baksystemFeilmelding: BaksystemFeilmelding;
   person: Person;
@@ -112,23 +109,20 @@ class App extends React.Component<Props, AppState> {
       });
 
       return (
-        <>
-          <Header
-            tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })}
-          />
+        <BrowserRouter>
+          <Header tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })} />
           <div
             className={classNames('', { overlay: meny.erApen })}
             onClick={() => meny.erApen && toggleMeny(!meny.erApen)}
           >
             <div className={browserSpecificStyling}>
-              <ConnectedRouter history={history}>
-                <Switch>
-                  <Route path="/" children={MeldekortRoutes} />
-                </Switch>
-              </ConnectedRouter>
+              <Routes>
+                <Route path={Konstanter.basePath + "/*"} element={<MeldekortRoutes />} />
+                <Route path="/" element={<Navigate to={Konstanter.basePath} replace />} />
+              </Routes>
             </div>
           </div>
-        </>
+        </BrowserRouter>
       );
     } else {
       return (
@@ -142,7 +136,7 @@ class App extends React.Component<Props, AppState> {
   componentDidMount() {
     const { meny, hentPersonStatus, settValgtMenyPunkt } = this.props;
     const valgtMenyPunkt = meny.alleMenyPunkter.find(
-      mp => mp.urlparam === window.location.pathname.slice(10)
+      (mp) => window.location.pathname.endsWith(mp.urlparam)
     );
     if (typeof valgtMenyPunkt !== 'undefined') {
       settValgtMenyPunkt(valgtMenyPunkt);
@@ -162,7 +156,6 @@ class App extends React.Component<Props, AppState> {
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    router: selectRouter(state),
     personStatus: state.personStatus,
     person: state.person,
     baksystemFeilmelding: selectFeilmelding(state),

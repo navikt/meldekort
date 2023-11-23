@@ -14,8 +14,6 @@ import {
 } from '../../../utils/kortMapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
-import { Router } from '../../../types/router';
-import { selectRouter } from '../../../selectors/router';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
@@ -32,13 +30,13 @@ import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortR
 import { Skrivemodus } from '../../../types/skrivemodus';
 import { SkrivemodusActions } from '../../../actions/skrivemodus';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { downloadMessagesAndDispatch, formatMessage } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage } from '../../../utils/intlUtil';
+import { Konstanter } from "../../../utils/consts";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
   meldekortdetaljer: MeldekortdetaljerState;
   aktivtMeldekort: Meldekort;
-  router: Router;
   person: Person;
   personInfo: PersonInfo;
   skrivemodus: Skrivemodus;
@@ -126,11 +124,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     const columns: MeldekortKolonne[] = [
       {
         key: 'mottattDato',
-        label: formatMessage("overskrift.mottatt"),
+        label: formatHtmlMessage("overskrift.mottatt"),
       },
       {
         key: 'kortStatus',
-        label: formatMessage("overskrift.status"),
+        label: formatHtmlMessage("overskrift.status"),
         cell: function(row: DetaljRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
@@ -144,11 +142,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       },
       {
         key: 'bruttoBelop',
-        label: formatMessage("overskrift.bruttoBelop"),
+        label: formatHtmlMessage("overskrift.bruttoBelop"),
       },
       {
         key: 'kortType',
-        label: formatMessage("overskrift.meldekorttype"),
+        label: formatHtmlMessage("overskrift.meldekorttype"),
       },
     ];
     const { meldegruppe } = aktivtMeldekort;
@@ -191,7 +189,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   };
 
   render() {
-    const { aktivtMeldekort, router, person, personInfo } = this.props;
+    const { aktivtMeldekort, person, personInfo } = this.props;
     const knappeKlasser = classNames('knapper-container', {
       'lang-knapper': aktivtMeldekort.korrigerbart,
     });
@@ -202,14 +200,14 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
           <div className={knappeKlasser}>
             <NavKnapp
               type={KnappTyper.HOVED}
-              nestePath={'/tidligere-meldekort'}
+              nestePath={ Konstanter.basePath + '/tidligere-meldekort'}
               tekstid={'naviger.forrige'}
               className={'navigasjonsknapp'}
             />
             {aktivtMeldekort.korrigerbart ? (
               <NavKnapp
                 type={KnappTyper.STANDARD}
-                nestePath={router.location.pathname + '/korriger'}
+                nestePath={'korriger'}
                 tekstid={'korriger.meldekort'}
                 className={'navigasjonsknapp'}
                 nesteAktivtMeldekort={aktivtMeldekort}
@@ -235,7 +233,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     historiskeMeldekort: state.historiskeMeldekort,
     meldekortdetaljer: state.meldekortdetaljer,
     aktivtMeldekort: state.aktivtMeldekort,
-    router: selectRouter(state),
     person: state.person,
     personInfo: state.personInfo.personInfo,
     skrivemodus: state.skrivemodus,

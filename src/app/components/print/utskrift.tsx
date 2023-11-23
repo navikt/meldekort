@@ -3,7 +3,7 @@ import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import NavLogo from '../../ikoner/nav-logo.svg';
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
-import { formatMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
 import classNames from 'classnames';
 import { isIE } from '../../utils/browsers';
 
@@ -48,7 +48,7 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
         ) : (
           <>
             <Ingress className="flex-innhold sentrert">
-              {formatMessage("meldekort.for")}
+              {formatHtmlMessage("meldekort.for")}
             </Ingress>
             <Innholdstittel className="flex-innhold sentrert">
               <span>{`${fornavn} ${etternavn} (${fodselsnr})`}</span>

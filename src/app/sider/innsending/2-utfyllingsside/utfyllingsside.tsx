@@ -17,7 +17,7 @@ import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { Konstanter } from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
-import { downloadMessagesAndDispatch, formatMessage, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
   FravaerTypeEnum,
@@ -30,7 +30,7 @@ import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../../actions/innsending';
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
-import { Redirect } from 'react-router';
+import { Navigate } from "react-router-dom";
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -398,7 +398,7 @@ class Utfyllingsside extends React.Component<
           className="seksjon flex-innhold tittel-sprakvelger"
         >
           <Innholdstittel tag="h2">
-            {formatMessage("overskrift.steg2")}
+            {formatHtmlMessage("overskrift.steg2")}
           </Innholdstittel>
           <Sprakvelger />
         </section>
@@ -431,20 +431,20 @@ class Utfyllingsside extends React.Component<
           <div className={'knapper-container'}>
             <NavKnapp
               type={KnappTyper.HOVED}
-              nestePath={'/bekreftelse'}
+              nestePath={'../bekreftelse'}
               tekstid={'naviger.neste'}
               className={'navigasjonsknapp'}
               validering={this.valider}
             />
             <NavKnapp
               type={KnappTyper.STANDARD}
-              nestePath={'/sporsmal'}
+              nestePath={'../sporsmal'}
               tekstid={'naviger.forrige'}
               className={'navigasjonsknapp'}
             />
             <NavKnapp
               type={KnappTyper.FLAT}
-              nestePath={'/om-meldekort'}
+              nestePath={ Konstanter.basePath + '/om-meldekort' }
               tekstid={'naviger.avbryt'}
               className={'navigasjonsknapp'}
             />
@@ -452,7 +452,7 @@ class Utfyllingsside extends React.Component<
         </section>
       </main>
     ) : (
-      <Redirect exact={true} to="/om-meldekort" />
+      <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
     );
   }
 }

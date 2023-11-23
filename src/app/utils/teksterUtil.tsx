@@ -14,6 +14,7 @@ export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {
 };
 
 export const finnesIntlId = (tekstid: string): string => {
+  // TODO: Throws exception, can't find ids
   if (hentIntl().formatMessage({ id: tekstid }) !== tekstid) {
     return tekstid;
   } else {

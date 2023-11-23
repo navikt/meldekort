@@ -6,7 +6,7 @@ import { formaterDato, formaterUkeOgDatoPeriode } from '../../utils/dates';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import veileder from '../../ikoner/veileder.svg';
 import { harKortStatusOPPRellerSENDT } from '../../utils/meldekortUtils';
-import { formatMessage } from "../../utils/intlUtil";
+import { formatHtmlMessage } from "../../utils/intlUtil";
 
 interface Props {
   rows: MeldekortRad[];
@@ -53,7 +53,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
     return [];
   };
 
-  const returnerVarselIngenMeldekortASende = formatMessage("sporsmal.ingenMeldekortASende");
+  const returnerVarselIngenMeldekortASende = formatHtmlMessage("sporsmal.ingenMeldekortASende");
 
   const visMeldingOmMeldekort = () => {
     if (rows.length === 0 && meldekortliste !== undefined) {
@@ -73,8 +73,8 @@ function MeldingOmMeldekortSomIkkeErKlare({
         return (
           <>
             <Normaltekst>
-              {formatMessage("overskrift.nesteMeldekort")}
-              {formatMessage("sendMeldekort.info.innsendingStatus.kanSendes")}
+              {formatHtmlMessage("overskrift.nesteMeldekort")}
+              {formatHtmlMessage("sendMeldekort.info.innsendingStatus.kanSendes")}
               {formaterDato(
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.kortKanSendesFra
               )}
@@ -85,7 +85,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.til
               )}
             </Element>
-            {formatMessage("sendMeldekort.info.ingenKlare")}
+            {formatHtmlMessage("sendMeldekort.info.ingenKlare")}
           </>
         );
       } else {

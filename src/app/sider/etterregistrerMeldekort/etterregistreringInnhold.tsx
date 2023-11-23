@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { formatMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Tabell from '../../components/tabell/desktop/tabell';
 import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortKolonne, MeldekortRad } from '../../types/meldekort';
-import { Router } from '../../types/router';
 
 interface Props {
-  router: Router;
   nesteAktivtMeldekort: Meldekort;
   rows: MeldekortRad[];
   columns: MeldekortKolonne[];
@@ -18,8 +16,7 @@ interface Props {
 function EtterregistreringInnhold({
   rows,
   columns,
-  nesteAktivtMeldekort,
-  router,
+  nesteAktivtMeldekort
 }: Props) {
   return (
     <main className="sideinnhold">
@@ -33,7 +30,7 @@ function EtterregistreringInnhold({
       </section>
       <section className="seksjon">
         <div className="item">
-          {formatMessage("sendMeldekort.info.kanSende")}
+          {formatHtmlMessage("sendMeldekort.info.kanSende")}
         </div>
         <div className="item">
           <Tabell rows={rows} columns={columns} />
@@ -43,7 +40,7 @@ function EtterregistreringInnhold({
       <section className="seksjon flex-innhold sentrert">
         <NavKnapp
           type={KnappTyper.HOVED}
-          nestePath={router.location.pathname + '/innsending'}
+          nestePath={'innsending'}
           tekstid={'naviger.neste'}
           nesteAktivtMeldekort={nesteAktivtMeldekort}
           nesteInnsendingstype={Innsendingstyper.ETTERREGISTRERING}

@@ -12,10 +12,8 @@ import { Innsendingstyper } from '../../types/innsending';
 import { Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
 import { PersonActions } from '../../actions/person';
 import { RootState } from '../../store/configureStore';
-import { Router } from '../../types/router';
 import { selectFeilmelding } from '../../selectors/ui';
-import { Redirect } from 'react-router';
-import { selectRouter } from '../../selectors/router';
+import { Navigate } from "react-router-dom";
 import { MeldeForm, Person } from '../../types/person';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import {
@@ -26,12 +24,11 @@ import {
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
-import { formatMessage } from "../../utils/intlUtil";
+import { formatHtmlMessage } from "../../utils/intlUtil";
 
 interface MapStateToProps {
   person: Person;
   baksystemFeilmelding: BaksystemFeilmelding;
-  router: Router;
   sendteMeldekort: SendtMeldekort[];
 }
 interface MapDispatchToProps {
@@ -46,7 +43,6 @@ type Props = MapDispatchToProps & MapStateToProps;
 function SendMeldekort({
   person,
   baksystemFeilmelding,
-  router,
   sendteMeldekort,
   hentPerson,
   leggTilAktivtMeldekort,
@@ -60,7 +56,6 @@ function SendMeldekort({
           <SendMeldekortInnhold
             rows={rader}
             columns={kolonner}
-            router={router}
             innsendingsklareMeldekort={innsendingsklareMeldekort}
             baksystemFeilmelding={baksystemFeilmelding}
           />
@@ -69,10 +64,10 @@ function SendMeldekort({
         return (
           <div className="send-meldekort-varsel">
             <Ingress>
-              {formatMessage("sendMeldekort.info.forMangeMeldekort")}
+              {formatHtmlMessage("sendMeldekort.info.forMangeMeldekort")}
             </Ingress>
             <Normaltekst>
-              {formatMessage("sendMeldekort.info.forMangeMeldekort.feilmelding")}
+              {formatHtmlMessage("sendMeldekort.info.forMangeMeldekort.feilmelding")}
             </Normaltekst>
           </div>
         );
@@ -118,7 +113,7 @@ function SendMeldekort({
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
           {' '}
-          {formatMessage("overskrift.innsending")}
+          {formatHtmlMessage("overskrift.innsending")}
           {' '}
         </Innholdstittel>
         <Sprakvelger />
@@ -136,18 +131,13 @@ function SendMeldekort({
       </section>
     </main>
   ) : (
-    <Redirect
-      exact={true}
-      from="/send-meldekort"
-      to="/send-meldekort/innsending"
-    />
+    <Navigate to="innsending" replace />
   );
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
     person: state.person,
-    router: selectRouter(state),
     baksystemFeilmelding: selectFeilmelding(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
   };

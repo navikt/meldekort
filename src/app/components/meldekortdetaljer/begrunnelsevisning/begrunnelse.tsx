@@ -2,7 +2,7 @@ import * as React from 'react';
 import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import checkMark from '../../../ikoner/check.svg';
-import { formatMessage } from "../../../utils/intlUtil";
+import { formatHtmlMessage } from "../../../utils/intlUtil";
 
 interface Props {
   begrunnelse: string;
@@ -16,10 +16,10 @@ const BegrunnelseVisning: React.FunctionComponent<Props> = props => {
         <section className="begrunnelse">
           <div className="sporsmalstekst">
             <Undertittel>
-              {formatMessage("korrigering.sporsmal.begrunnelse")}
+              {formatHtmlMessage("korrigering.sporsmal.begrunnelse")}
             </Undertittel>
             <UtvidetInformasjon>
-              {formatMessage("forklaring.sporsmal.begrunnelse")}
+              {formatHtmlMessage("forklaring.sporsmal.begrunnelse")}
             </UtvidetInformasjon>
           </div>
           <img className={'checkmark'} alt="" src={checkMark} />

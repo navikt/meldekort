@@ -5,8 +5,9 @@ import { Dispatch } from 'redux';
 import { hentIntl } from '../../../utils/intlUtil';
 import { MenyActions } from '../../../actions/meny';
 import { MenyPunkt } from '../../../utils/menyConfig';
-import { history, RootState } from '../../../store/configureStore';
+import { RootState } from '../../../store/configureStore';
 import Lenke from 'nav-frontend-lenker';
+import { useNavigate } from "react-router";
 
 interface MapStateToProps {
   valgtMenyPunkt: MenyPunkt;
@@ -24,10 +25,11 @@ type Props = HovedMenyProps & MapStateToProps & MapDispatchToProps;
 
 const HovedMeny: React.FunctionComponent<Props> = props => {
   const { menypunkter, settValgtMenyPunkt, valgtMenyPunkt } = props;
+  const navigate = useNavigate();
 
   const onChange = (item: MenyPunkt) => {
     settValgtMenyPunkt(item);
-    history.push(item.urlparam);
+    navigate(item.urlparam, { replace: true })
   };
 
   return (

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import { RouteComponentProps } from 'react-router-dom';
+import { Location, RouteProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
 import {
@@ -12,12 +12,10 @@ import {
 } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
 import { Dispatch } from 'redux';
-import { selectRouter } from '../../../selectors/router';
 import { connect } from 'react-redux';
-import { Router } from '../../../types/router';
 import { Person, PersonInfo } from '../../../types/person';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { downloadMessagesAndDispatch, formatMessage, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import {
   formaterDato,
@@ -38,11 +36,10 @@ import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
-import { Location } from 'history';
 import Panel from "nav-frontend-paneler";
+import { Konstanter } from "../../../utils/consts";
 
 interface MapStateToProps {
-  router: Router;
   person: Person;
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
@@ -71,7 +68,7 @@ interface Props {
   location: Location;
 }
 
-type KvitteringsProps = RouteComponentProps &
+type KvitteringsProps = RouteProps &
   MapDispatchToProps &
   MapStateToProps &
   Props;
@@ -245,18 +242,18 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     return (
       <>
         <AlertStripe type={'suksess'} className="alertSendt noPrint">
-          {formatMessage("overskrift.meldekort.sendt")}
+          {formatHtmlMessage("overskrift.meldekort.sendt")}
         </AlertStripe>
 
         {typeYtelsePostfix === TypeYtelse.DAGPENGER &&
           <Panel border={true} className={"alertSendt"}>
-            {formatMessage("sendt.klagerettigheterInfo" + typeYtelsePostfix)}
+            {formatHtmlMessage("sendt.klagerettigheterInfo" + typeYtelsePostfix)}
           </Panel>
         }
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Innholdstittel tag="h2">
-            {formatMessage("overskrift.steg4")}
+            {formatHtmlMessage("overskrift.steg4")}
           </Innholdstittel>
           <Sprakvelger />
         </section>
@@ -271,7 +268,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         {innsendingstype === Innsendingstyper.INNSENDING &&
           nesteInnsendingstype === Innsendingstyper.ETTERREGISTRERING && (
             <section className="seksjon etterregistrering_info">
-              {formatMessage("sendt.etterregistrering.info")}
+              {formatHtmlMessage("sendt.etterregistrering.info")}
             </section>
           )}
       </>
@@ -321,7 +318,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
                 className={'knapp navigasjonsknapp knapp--hoved'}
                 href={nestePath}
               >
-                {formatMessage(knappTekstid)}
+                {formatHtmlMessage(knappTekstid)}
               </a>
             ) : (
               <NavKnapp
@@ -335,7 +332,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
             )}
             <NavKnapp
               type={KnappTyper.STANDARD}
-              nestePath={'/tidligere-meldekort'}
+              nestePath={Konstanter.basePath + '/tidligere-meldekort'}
               tekstid={'sendt.linkTilTidligereMeldekort'}
               className={'navigasjonsknapp'}
             />
@@ -360,7 +357,6 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
     aktivtMeldekort: state.aktivtMeldekort,
-    router: selectRouter(state),
     innsending: state.innsending,
     innsendingstype: state.innsending.innsendingstype,
     person: state.person,

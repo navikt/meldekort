@@ -16,7 +16,7 @@ exports[`StegBanner 1`] = `
     defaultLocale="nb"
     locale="nb"
   >
-    <Connect(StegBanner) />
+    <StegBanner />
   </Connect(IntlProvider)>
 </Provider>
 `;

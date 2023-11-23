@@ -10,7 +10,7 @@ import { UtfyltDag } from '../utfyltDagConfig';
 import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { formatMessage } from '../../../../../utils/intlUtil';
+import { formatHtmlMessage } from '../../../../../utils/intlUtil';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
 import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
@@ -108,7 +108,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
           key={ukedag}
           label={
             <span className="vekk">
-              {dag} {formatMessage(this.props.tekstId)}
+              {dag} {formatHtmlMessage(this.props.tekstId)}
             </span>
           }
           checked={this.isChecked(ukedag)}
@@ -148,10 +148,10 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
         <Undertittel tag="h4" className={'aktivitetsrad__tittel'}>
-          {formatMessage(tekstId)}
+          {formatHtmlMessage(tekstId)}
         </Undertittel>
         <UtvidetInformasjon>
-          {formatMessage(forklaringId + typeYtelsePostfix)}
+          {formatHtmlMessage(forklaringId + typeYtelsePostfix)}
         </UtvidetInformasjon>
         <div className="ukedager--mobil">{hentUkedager()}</div>
         <div className="aktivitetsrad__inputfelter">{this.settFelter()}</div>

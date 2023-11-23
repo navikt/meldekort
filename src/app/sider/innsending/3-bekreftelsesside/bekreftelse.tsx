@@ -20,11 +20,11 @@ import {
   MeldekortdetaljerInnsending,
   SendtMeldekort,
 } from '../../../types/meldekort';
-import { downloadMessagesAndDispatch, formatMessage, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
-import { Redirect } from 'react-router';
+import { Navigate } from "react-router-dom";
 import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
 import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper';
 import { selectFeilmelding } from '../../../selectors/ui';
@@ -34,6 +34,7 @@ import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 import { loggAktivitet } from '../../../utils/amplitudeUtils';
 import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { Konstanter } from "../../../utils/consts";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -297,16 +298,14 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
 
     if (typeof valideringsResultat !== 'undefined') {
       return valideringsResultat.status === 'FEIL' ? (
-        <Redirect
-          exact={true}
-          from="send-meldekort/innsending/bekreft"
-          to="utfylling"
+        <Navigate
+          to="../utfylling"
+          replace
         />
       ) : (
-        <Redirect
-          exact={true}
-          from="send-meldekort/innsending/bekreft"
-          to="kvittering"
+        <Navigate
+          to="../kvittering"
+          replace
         />
       );
     } else {
@@ -323,10 +322,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           <section className={'seksjon'}>
             <AlertStripe type={'advarsel'}>
               <span>
-                {`
-                ${formatMessage("overskrift.steg3.info.ikkeSendt")}
-                ${formatMessage("overskrift.steg3.info.bekreftVerdier")}
-                `}
+                {formatHtmlMessage("overskrift.steg3.info.ikkeSendt")}
+                {formatHtmlMessage("overskrift.steg3.info.bekreftVerdier")}
               </span>
             </AlertStripe>
           </section>
@@ -339,7 +336,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           </div>
           <section className="seksjon flex-innhold tittel-sprakvelger">
             <Innholdstittel tag="h2">
-              {formatMessage("overskrift.steg3")}
+              {formatHtmlMessage("overskrift.steg3")}
             </Innholdstittel>
             <Sprakvelger />
           </section>
@@ -356,14 +353,14 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             feil={feilmelding !== ''}
           >
             <Normaltekst>
-              {formatMessage("utfylling.bekreft" + typeYtelsePostfix)}
+              {formatHtmlMessage("utfylling.bekreft" + typeYtelsePostfix)}
             </Normaltekst>
           </BekreftCheckboksPanel>
           <section className="seksjon flex-innhold sentrert">
             <div className={'knapper-container'}>
               <NavKnapp
                 type={KnappTyper.HOVED}
-                nestePath={'/innsending/kvittering'}
+                nestePath={'../kvittering'}
                 tekstid={'naviger.send'}
                 className={'navigasjonsknapp'}
                 validering={this.valider}
@@ -374,15 +371,15 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 type={KnappTyper.STANDARD}
                 nestePath={
                   this.hoppOverUtfylling()
-                    ? '/innsending/sporsmal'
-                    : '/innsending/utfylling'
+                    ? '../sporsmal'
+                    : '../utfylling'
                 }
                 tekstid={'naviger.forrige'}
                 className={'navigasjonsknapp'}
               />
               <NavKnapp
                 type={KnappTyper.FLAT}
-                nestePath={'/om-meldekort'}
+                nestePath={ Konstanter.basePath + '/om-meldekort' }
                 tekstid={'naviger.avbryt'}
                 className={'navigasjonsknapp'}
               />
@@ -390,7 +387,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           </section>
         </main>
       ) : (
-        <Redirect exact={true} to="/om-meldekort" />
+        <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
       );
     }
   }

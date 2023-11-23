@@ -123,17 +123,26 @@ export const hentLocale = () => {
   return store.getState().intl.locale;
 };
 
+// int.formatMessage kaster feil hvis det finnes HTML i tekst
+export const formatMessage = (id: string | undefined, values?: object): string => {
+  const definedId = id ? id : ''
+
+  let text = hentIntl().messages[id ? id : ''] as string
+  if (!text) text = definedId
+
+  if (values) {
+    for (const key in values) {
+      text = text.replace("{" + key + "}", values[key])
+    }
+  }
+
+  return text
+}
+
 // FormattedHTMLMessage & intl.formatHTMLMessage har blitt fjernet fra react-intl v4
 // FormattedMessage og intl.formatMessage viser ikke HTML
-export const formatMessage = (id: string | undefined, values?: object): JSX.Element => {
-  const text = hentIntl().formatMessage(
-    {
-      id: id
-    },
-    {
-      ...values
-    }
-  )
+export const formatHtmlMessage = (id: string | undefined, values?: object): JSX.Element => {
+  const text = formatMessage(id, values)
 
   return (
     <span dangerouslySetInnerHTML={{__html: text}} />

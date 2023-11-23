@@ -4,27 +4,24 @@ import Tabell from '../../components/tabell/desktop/tabell';
 import { Normaltekst } from 'nav-frontend-typografi';
 import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
 import { Innsendingstyper } from '../../types/innsending';
-import { Router } from '../../types/router';
 import { BaksystemFeilmelding } from '../../types/ui';
-import { formatMessage } from "../../utils/intlUtil";
+import { formatHtmlMessage } from "../../utils/intlUtil";
 
 interface Props {
   rows: MeldekortRad[];
   columns: MeldekortKolonne[];
-  router: Router;
   innsendingsklareMeldekort: Meldekort[];
   baksystemFeilmelding: BaksystemFeilmelding;
 }
 function InnsendingsTabell({
   rows,
   columns,
-  router,
   innsendingsklareMeldekort,
 }: Props) {
   return (
     <>
       <div className="item">
-        {formatMessage("sendMeldekort.info.kanSende")}
+        {formatHtmlMessage("sendMeldekort.info.kanSende")}
       </div>
       <section className="seksjon">
         <div className="item">
@@ -34,21 +31,21 @@ function InnsendingsTabell({
       <section className="seksjon">
         <div className="box">
           <Normaltekst>
-            {formatMessage("sendMeldekort.info.neste")}
+            {formatHtmlMessage("sendMeldekort.info.neste")}
           </Normaltekst>
           <Normaltekst>
-            {formatMessage("sendMeldekort.info.eldstePerioden")}
+            {formatHtmlMessage("sendMeldekort.info.eldstePerioden")}
           </Normaltekst>
           <Normaltekst>
-            {formatMessage("sendMeldekort.info.automatiskLedet")}
+            {formatHtmlMessage("sendMeldekort.info.automatiskLedet")}
           </Normaltekst>
         </div>
       </section>
       <section className="seksjon flex-innhold sentrert">
         <NavKnapp
           type={KnappTyper.HOVED}
-          nestePath={router.location.pathname + '/innsending'}
-          tekstid={'naviger.neste'}
+          nestePath={"innsending"}
+          tekstid={"naviger.neste"}
           nesteAktivtMeldekort={innsendingsklareMeldekort[0]}
           nesteInnsendingstype={Innsendingstyper.INNSENDING}
         />

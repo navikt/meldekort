@@ -4,13 +4,11 @@ import { RootState } from '../../store/configureStore';
 import { PersonActions } from '../../actions/person';
 import { InnsendingActions } from '../../actions/innsending';
 import { Dispatch } from 'redux';
-import { selectRouter } from '../../selectors/router';
 import { connect } from 'react-redux';
-import { Router } from '../../types/router';
 import { Meldekort, SendtMeldekort } from '../../types/meldekort';
 import { Innsendingstyper } from '../../types/innsending';
 import { MeldeForm, Person } from '../../types/person';
-import { Redirect } from 'react-router';
+import { Navigate } from "react-router-dom";
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import {
   hentInnsendingsklareMeldekort,
@@ -20,10 +18,10 @@ import {
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import EtterregistreringInnhold from './etterregistreringInnhold';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
+import { Konstanter } from "../../utils/consts";
 
 interface MapStateToProps {
   person: Person;
-  router: Router;
   sendteMeldekort: SendtMeldekort[];
 }
 interface MapDispatchToProps {
@@ -37,7 +35,6 @@ type Props = MapDispatchToProps & MapStateToProps;
 
 function EtterregistrerMeldekort({
   person,
-  router,
   sendteMeldekort,
   hentPerson,
   resetInnsending,
@@ -72,19 +69,17 @@ function EtterregistrerMeldekort({
   return person.meldeform === MeldeForm.IKKE_SATT ? (
     <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
   ) : rows.length === 0 ? (
-    <Redirect to={'/om-meldekort'} />
+    <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
   ) : !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <EtterregistreringInnhold
-      router={router}
       columns={columns}
       rows={rows}
       nesteAktivtMeldekort={innsendingsklareMeldekort[0]}
     />
   ) : (
-    <Redirect
-      exact={true}
-      from="/etterregistrer-meldekort"
-      to="/etterregistrer-meldekort/innsending"
+    <Navigate
+      to={ Konstanter.basePath + '/etterregistrer-meldekort/innsending' }
+      replace
     />
   );
 }
@@ -92,7 +87,6 @@ function EtterregistrerMeldekort({
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
     person: state.person,
-    router: selectRouter(state),
     sendteMeldekort: state.meldekort.sendteMeldekort,
   };
 };

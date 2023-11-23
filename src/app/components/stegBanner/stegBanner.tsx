@@ -1,21 +1,14 @@
 import * as React from 'react';
 import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
-import { RootState } from '../../store/configureStore';
-import { selectRouter } from '../../selectors/router';
-import { connect } from 'react-redux';
-import { Router } from '../../types/router';
 import { hentIntl } from '../../utils/intlUtil';
+import { useLocation } from "react-router-dom";
 
-interface MapStateToProps {
-  router: Router;
-}
+const StegBanner: React.FunctionComponent = () => {
+  const location = useLocation();
 
-type StegBannerProps = MapStateToProps;
-
-const StegBanner: React.FunctionComponent<StegBannerProps> = props => {
   const stegobjekter = [];
   const routes = ['sporsmal', 'utfylling', 'bekreftelse', 'kvittering'];
-  const pathParams = props.router.location.pathname.split('/');
+  const pathParams = location.pathname.split('/');
   const aktivtSteg = routes.findIndex(
     steg => steg === pathParams[pathParams.length - 1]
   );
@@ -41,10 +34,4 @@ const StegBanner: React.FunctionComponent<StegBannerProps> = props => {
   );
 };
 
-const mapStateToProps = (state: RootState): MapStateToProps => {
-  return {
-    router: selectRouter(state),
-  };
-};
-
-export default connect(mapStateToProps)(StegBanner);
+export default StegBanner;

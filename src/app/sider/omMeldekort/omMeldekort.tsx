@@ -6,18 +6,15 @@ import veileder from '../../ikoner/veileder.svg';
 import { InnsendingActions } from '../../actions/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { formatMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyState } from '../../types/meny';
-import { Router } from '../../types/router';
 import { RootState } from '../../store/configureStore';
-import { selectRouter } from '../../selectors/router';
 import { scrollTilElement } from '../../utils/scroll';
 import { loggAktivitet } from '../../utils/amplitudeUtils';
 
 interface MapStateToProps {
-  router: Router;
   meny: MenyState;
 }
 
@@ -32,7 +29,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
     const { resetInnsending, meny, settValgtMenyPunkt } = this.props;
     resetInnsending();
     const valgtMenyPunkt = meny.alleMenyPunkter.find(
-      mp => mp.urlparam === window.location.pathname.slice(10)
+      (mp) => window.location.pathname.endsWith(mp.urlparam)
     );
     if (typeof valgtMenyPunkt !== 'undefined') {
       settValgtMenyPunkt(valgtMenyPunkt);
@@ -45,7 +42,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
           <Innholdstittel>
-            {formatMessage("overskrift.genereltOmMeldekort")}
+            {formatHtmlMessage("overskrift.genereltOmMeldekort")}
           </Innholdstittel>
           <Sprakvelger />
         </section>
@@ -56,21 +53,21 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
         >
           <section className="seksjon">
             <Normaltekst>
-              {formatMessage("genereltOmMeldekort.velkommen")}
+              {formatHtmlMessage("genereltOmMeldekort.velkommen")}
             </Normaltekst>
             <Normaltekst>
-              {formatMessage("genereltOmMeldekort.velge")}
+              {formatHtmlMessage("genereltOmMeldekort.velge")}
             </Normaltekst>
             <ul>
               <li>
-                {formatMessage("genereltOmMeldekort.valg.sende")}
+                {formatHtmlMessage("genereltOmMeldekort.valg.sende")}
               </li>
               <li>
-                {formatMessage("genereltOmMeldekort.valg.tidligere")}
+                {formatHtmlMessage("genereltOmMeldekort.valg.tidligere")}
               </li>
             </ul>
             <Normaltekst>
-              {formatMessage(
+              {formatHtmlMessage(
                 "genereltOmMeldekort.om.meldekort",
                 {
                   0: 'https://www.nav.no',
@@ -83,7 +80,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
               )}
             </Normaltekst>
             <Normaltekst>
-              {formatMessage("genereltOmMeldekort.oss")}
+              {formatHtmlMessage("genereltOmMeldekort.oss")}
             </Normaltekst>
           </section>
         </Veilederpanel>
@@ -94,7 +91,6 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    router: selectRouter(state),
     meny: state.meny,
   };
 };

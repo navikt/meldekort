@@ -1,13 +1,13 @@
 import * as React from 'react';
 import 'nav-frontend-lenker-style';
-import { history, RootState } from '../../store/configureStore';
+import { RootState } from '../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { selectRouter } from '../../selectors/router';
-import { Router } from '../../types/router';
 import { Meldekort } from '../../types/meldekort';
 import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import Lenke from 'nav-frontend-lenker';
+import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 
 interface KomponentlenkeProps {
   lenketekst: string;
@@ -17,7 +17,6 @@ interface KomponentlenkeProps {
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
-  router: Router;
 }
 
 interface MapDispatcherToProps {
@@ -25,26 +24,26 @@ interface MapDispatcherToProps {
   leggTilAktivtMeldekort: (meldekort: Meldekort) => void;
 }
 
-type ReduxType = KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
+type Props = KomponentlenkeProps & MapDispatcherToProps & MapStateToProps;
 
-class Komponentlenke extends React.Component<ReduxType, object> {
-  clickHandler = () => {
-    this.props.resettAktivtMeldekort();
-    if (this.props.meldekort) {
-      this.props.leggTilAktivtMeldekort(this.props.meldekort);
+const Komponentlenke: React.FunctionComponent<Props> = props => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    props.resettAktivtMeldekort();
+    if (props.meldekort) {
+      props.leggTilAktivtMeldekort(props.meldekort);
     }
 
-    const pathname = this.props.router.location.pathname;
-    pathname !== this.props.rute && history.push(this.props.rute);
+    location.pathname !== props.rute && navigate(props.rute, { replace: true });
   };
 
-  render() {
-    return (
-      <Lenke href={'#'} onClick={this.clickHandler}>
-        {this.props.lenketekst}
-      </Lenke>
-    );
-  }
+  return (
+    <Lenke href={'#'} onClick={clickHandler}>
+      {props.lenketekst}
+    </Lenke>
+  );
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
@@ -52,8 +51,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     ...state.aktivtMeldekort,
   };
   return {
-    aktivtMeldekort: meldekort,
-    router: selectRouter(state),
+    aktivtMeldekort: meldekort
   };
 };
 

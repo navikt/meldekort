@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Detaljer from './tidligereMeldekort/detaljer/detaljer';
 import OfteStilteSporsmal from './ofteStilteSporsmal/ofteStilteSporsmal';
 import SendMeldekort from './sendMeldekort/sendMeldekort';
@@ -9,57 +9,26 @@ import TidligereMeldekort from './tidligereMeldekort/tidligereMeldekort';
 import InnsendingRoutes from './innsending/innsendingRoutes';
 
 const MeldekortRoutes: React.FunctionComponent = () => {
+  const location = useLocation();
+
   return (
-    <Switch>
-      <Route
-        path="/send-meldekort/innsending"
-        children={({ match, history, location }) => (
-          <InnsendingRoutes
-            /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
-            match={match!!}
-            history={history}
-            location={location}
-          />
-        )}
-      />
-      <Route exact={true} path="/send-meldekort" children={<SendMeldekort />} />
+    <Routes>
+      <Route path={"/send-meldekort/innsending/*"} element={<InnsendingRoutes location={location} />} />
+      <Route path={"/send-meldekort"} element={<SendMeldekort />} />
 
-      <Route
-        path="/etterregistrer-meldekort/innsending"
-        children={({ match, history, location }) => (
-          <InnsendingRoutes
-            /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
-            match={match!!}
-            history={history}
-            location={location}
-          />
-        )}
-      />
-      <Route
-        path="/etterregistrer-meldekort"
-        children={<EtterregistrerMeldekort />}
-      />
+      <Route path={"/etterregistrer-meldekort/innsending/*"} element={<InnsendingRoutes location={location} />} />
+      <Route path={"/etterregistrer-meldekort"} element={<EtterregistrerMeldekort />} />
 
-      <Route
-        path="/tidligere-meldekort/detaljer/korriger"
-        children={({ match, history, location }) => (
-          <InnsendingRoutes
-            /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
-            match={match!!}
-            history={history}
-            location={location}
-          />
-        )}
-      />
-      <Route path="/tidligere-meldekort/detaljer" children={<Detaljer />} />
-      <Route path="/tidligere-meldekort" children={<TidligereMeldekort />} />
+      <Route path={"/tidligere-meldekort/detaljer/korriger/*"} element={<InnsendingRoutes location={location} />} />
+      <Route path={"/tidligere-meldekort/detaljer"} element={<Detaljer />} />
+      <Route path={"/tidligere-meldekort"} element={<TidligereMeldekort />} />
 
-      <Route path="/ofte-stilte-sporsmal" children={<OfteStilteSporsmal />} />
-      <Route path="/om-meldekort" children={<OmMeldekort />} />
+      <Route path={"/ofte-stilte-sporsmal"} element={<OfteStilteSporsmal />} />
+      <Route path={"/om-meldekort"} element={<OmMeldekort />} />
 
-      <Route path="/404" children={<div />} />
-      <Route path="/" render={() => <Redirect to="/send-meldekort" />} />
-    </Switch>
+      <Route path="404" element={<div />} />
+      <Route path="/" element={<Navigate to="send-meldekort" replace />} />
+    </Routes>
   );
 };
 

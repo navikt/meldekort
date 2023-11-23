@@ -1,9 +1,7 @@
 import * as React from 'react';
 import KnappBase from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
-import { history, RootState } from '../../store/configureStore';
-import { Router } from '../../types/router';
-import { selectRouter } from '../../selectors/router';
+import { RootState } from '../../store/configureStore';
 import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
 import { Dispatch } from 'redux';
 import { InnsendingState, Innsendingstyper } from '../../types/innsending';
@@ -13,9 +11,10 @@ import { Sporsmal as Spm } from '../../sider/innsending/1-sporsmalsside/sporsmal
 import { UtfyltDag } from '../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { settSporsmalOgUtfyllingHvisKorrigering } from '../../utils/korrigeringUtils';
 import { hentIntl } from "../../utils/intlUtil";
+import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 
 interface MapStateToProps {
-  router: Router;
   innsendingstypeFraStore: Innsendingstyper | null;
   aktivtMeldekort: Meldekort;
   innsending: InnsendingState;
@@ -52,8 +51,11 @@ export enum KnappTyper {
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
 
-class NavKnapp extends React.Component<Props, object> {
-  harNestePathInnsending = (nestePathParams: string[]) => {
+const NavKnapp: React.FunctionComponent<Props> = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const harNestePathInnsending = (nestePathParams: string[]) => {
     return (
       nestePathParams[nestePathParams.length - 1] ===
         Innsendingstyper.INNSENDING ||
@@ -62,118 +64,91 @@ class NavKnapp extends React.Component<Props, object> {
     );
   };
 
-  returnerNestePathInnenforInnsending = (
-    params: string[],
-    nestePathParams: string[]
-  ) => {
-    const editedParams = params;
-    editedParams.pop();
-    editedParams.push(nestePathParams[nestePathParams.length - 1]);
-    return editedParams.join('/');
-  };
-
-  clickHandler = () => { // (event: React.SyntheticEvent<EventTarget>)
+  const clickHandler = () => { // (event: React.SyntheticEvent<EventTarget>)
     const {
       nesteAktivtMeldekort,
       innsendingstypeFraStore,
       nesteInnsendingstype,
       nestePath,
-      router,
       tekstid,
-    } = this.props;
+    } = props;
 
     if (tekstid === 'naviger.avbryt') {
-      this.props.resetInnsending();
-      history.push(nestePath);
+      props.resetInnsending();
+      navigate(nestePath)
     } else {
       if (
         nesteAktivtMeldekort !== undefined &&
         nesteInnsendingstype !== undefined
       ) {
-        this.props.resettAktivtMeldekort();
-        this.props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
+        props.resettAktivtMeldekort();
+        props.leggTilAktivtMeldekort(nesteAktivtMeldekort);
       }
 
       let validert: boolean = true;
-      if (typeof this.props.validering !== 'undefined') {
-        validert = this.props.validering();
+      if (typeof props.validering !== 'undefined') {
+        validert = props.validering();
       }
       if (validert) {
-        const path = router.location.pathname;
-        const params = path.split('/');
         const nestePathParams = nestePath.split('/');
-        const erPaKvittering = params[params.length - 1] === 'kvittering';
+        const erPaKvittering = location.pathname.endsWith('kvittering');
         const erPaInnsending = innsendingstypeFraStore !== null;
-        let nyPath: string = '';
 
-        if (erPaInnsending) {
-          if (!erPaKvittering) {
-            nyPath = this.returnerNestePathInnenforInnsending(
-              params,
-              nestePathParams
-            );
-          } else {
-            this.props.resetInnsending();
-            nyPath = nestePath;
-            if (
-              this.harNestePathInnsending(nestePathParams) &&
-              nesteInnsendingstype !== undefined &&
-              typeof nesteAktivtMeldekort !== 'undefined'
-            ) {
-              this.props.leggTilMeldekortId(nesteAktivtMeldekort.meldekortId);
-            }
+        if (erPaInnsending && erPaKvittering) {
+          props.resetInnsending();
+          if (
+            harNestePathInnsending(nestePathParams) &&
+            nesteInnsendingstype !== undefined &&
+            typeof nesteAktivtMeldekort !== 'undefined'
+          ) {
+            props.leggTilMeldekortId(nesteAktivtMeldekort.meldekortId);
           }
         }
         if (
-          this.harNestePathInnsending(nestePathParams) &&
+          harNestePathInnsending(nestePathParams) &&
           nesteInnsendingstype !== undefined
         ) {
           if (nesteInnsendingstype === Innsendingstyper.KORRIGERING) {
             const konverterteSporsmalOgDager = settSporsmalOgUtfyllingHvisKorrigering(
-              this.props.meldekortdetaljer,
-              this.props.innsending
+              props.meldekortdetaljer,
+              props.innsending
             );
-            this.props.oppdaterUtfylteDager(
+            props.oppdaterUtfylteDager(
               konverterteSporsmalOgDager.utfylteDager
             );
-            this.props.oppdaterSporsmalsobjekter(
+            props.oppdaterSporsmalsobjekter(
               konverterteSporsmalOgDager.sporsmalsobjekter
             );
           }
-          this.props.settInnsendingstype(nesteInnsendingstype);
+          props.settInnsendingstype(nesteInnsendingstype);
         }
-        if (!erPaInnsending) {
-          nyPath = nestePath;
-        }
-        history.push(nyPath);
+
+        navigate(nestePath, { replace: true })
       }
     }
   };
 
-  render() {
     return (
       <KnappBase
-        type={this.props.type}
-        onClick={this.clickHandler}
-        className={this.props.className}
+        type={props.type}
+        onClick={clickHandler}
+        className={props.className}
         spinner={
-          typeof this.props.spinner === 'undefined' ? false : this.props.spinner
+          typeof props.spinner === 'undefined' ? false : props.spinner
         }
         disabled={
-          typeof this.props.disabled === 'undefined'
+          typeof props.disabled === 'undefined'
             ? false
-            : this.props.disabled
+            : props.disabled
         }
       >
-        {hentIntl().formatMessage({id: this.props.tekstid})}
+        {hentIntl().formatMessage({id: props.tekstid})}
       </KnappBase>
     );
-  }
 }
 
 const mapStateToProps = (state: RootState): MapStateToProps => {
   return {
-    router: selectRouter(state),
     innsendingstypeFraStore: state.innsending.innsendingstype,
     aktivtMeldekort: state.aktivtMeldekort,
     innsending: state.innsending,

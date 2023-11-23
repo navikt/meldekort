@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { InnsendingActions } from '../../../../actions/innsending';
 import { Dispatch } from 'redux';
 import Select from 'nav-frontend-skjema/lib/select';
-import { formatMessage, hentIntl } from '../../../../utils/intlUtil';
+import { formatHtmlMessage, hentIntl } from '../../../../utils/intlUtil';
 import { Begrunnelse } from '../../../../types/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -46,10 +46,10 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
         label={
           <>
             <Undertittel>
-              {formatMessage("korrigering.sporsmal.begrunnelse")}
+              {formatHtmlMessage("korrigering.sporsmal.begrunnelse")}
             </Undertittel>
             <UtvidetInformasjon>
-              {formatMessage("forklaring.sporsmal.begrunnelse" + props.typeYtelsePostfix)}
+              {formatHtmlMessage("forklaring.sporsmal.begrunnelse" + props.typeYtelsePostfix)}
             </UtvidetInformasjon>
           </>
         }
@@ -57,19 +57,17 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
         value={valgtArsak}
       >
         <option value={''}>
-          {' '}
-          {formatMessage("begrunnelse.velgArsak")}
+          {hentIntl().formatMessage({ id: "begrunnelse.velgArsak" })}
         </option>
         {Object.keys(options).map(key => (
           <option value={key} key={options[key]}>
-            {' '}
-            {options[key]}{' '}
+            {options[key]}
           </option>
         ))}
       </Select>
       {props.erFeil && (
         <span className={'rodTekst'}>
-          {formatMessage("begrunnelse.required")}
+          {formatHtmlMessage("begrunnelse.required")}
         </span>
       )}
     </div>

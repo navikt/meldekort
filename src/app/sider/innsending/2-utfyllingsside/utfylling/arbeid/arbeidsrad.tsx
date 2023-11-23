@@ -10,7 +10,7 @@ import { UtfyltDag } from '../utfyltDagConfig';
 import { RootState } from '../../../../../store/configureStore';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { formatMessage } from '../../../../../utils/intlUtil';
+import { formatHtmlMessage } from '../../../../../utils/intlUtil';
 import { Undertittel } from 'nav-frontend-typografi';
 import { InnsendingActions } from '../../../../../actions/innsending';
 import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
@@ -94,7 +94,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
           key={ukedag}
           label={
             <span className="vekk">
-              {dag} {formatMessage(this.props.tekstId)}
+              {dag} {formatHtmlMessage(this.props.tekstId)}
             </span>
           }
           bredde="XS"
@@ -133,10 +133,10 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
         }}
       >
         <Undertittel tag="h4" className={'arbeidsrad__tittel'}>
-          {formatMessage(tekstId)}
+          {formatHtmlMessage(tekstId)}
         </Undertittel>
         <UtvidetInformasjon>
-          {formatMessage(forklaringId + typeYtelsePostfix)}
+          {formatHtmlMessage(forklaringId + typeYtelsePostfix)}
         </UtvidetInformasjon>
         <div className="ukedager--mobil">{hentUkedager()}</div>
         <div className="arbeidsrad__inputfelter">{this.settFelter()}</div>

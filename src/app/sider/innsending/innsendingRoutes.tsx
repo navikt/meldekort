@@ -10,21 +10,19 @@ import { Dispatch } from 'redux';
 import { InnsendingActions } from '../../actions/innsending';
 import { InnsendingState, Innsendingstyper } from '../../types/innsending';
 import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Location, Navigate, Route, RouteProps, Routes } from 'react-router-dom';
 import { RootState } from '../../store/configureStore';
 import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
 import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
 import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
-import { RouterState } from 'connected-react-router';
 import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
 import { hentKorrigertIdAndDispatch } from '../../utils/korrigeringUtils';
-import { Location } from 'history';
+import { Konstanter } from "../../utils/consts";
 
 interface MapStateToProps {
   innsending: InnsendingState;
   aktivtMeldekort: Meldekort;
   meldekortdetaljer: Meldekortdetaljer;
-  router: RouterState;
   locale: string;
 }
 
@@ -41,7 +39,7 @@ interface Props {
   location: Location;
 }
 
-type InnsendingRoutesProps = RouteComponentProps &
+type InnsendingRoutesProps = RouteProps &
   MapStateToProps &
   MapDispatchToProps &
   Props;
@@ -69,9 +67,8 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, object> {
   }
 
   render() {
-    const { match, location, innsending } = this.props;
+    const { location, innsending } = this.props;
     const { pathname } = location;
-    const currentPath = `${match.url}`;
 
     const noPrint =
       pathname === `/send-meldekort/innsending/kvittering` ||
@@ -80,34 +77,18 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, object> {
         : '';
 
     return innsending.innsendingstype === null ? (
-      <Redirect to={'/om-meldekort'} />
+      <Navigate to={Konstanter.basePath + '/om-meldekort'} replace />
     ) : (
       <div className="sideinnhold">
         <PeriodeBanner className={noPrint} />
         <StegBanner />
-        <Switch>
-          <Route
-            exact={true}
-            path={currentPath + '/sporsmal'}
-            children={<Sporsmalsside />}
-          />
-          <Route path={currentPath + '/utfylling'} children={<Utfylling />} />
-          <Route
-            path={currentPath + '/bekreftelse'}
-            children={<Bekreftelse />}
-          />
-          <Route
-            path={currentPath + '/kvittering'}
-            children={({ match, history, location }) => (
-              /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
-              <Kvittering match={match!!} history={history} location={location} />
-            )}
-          />
-          <Route
-            path={currentPath}
-            render={() => <Redirect to={currentPath + `/sporsmal`} />}
-          />
-        </Switch>
+        <Routes>
+          <Route  path={'sporsmal'} element={<Sporsmalsside />} />
+          <Route path={'utfylling'} element={<Utfylling />} />
+          <Route path={'bekreftelse'} element={<Bekreftelse />} />
+          <Route path={'kvittering'} element={<Kvittering location={location} />} />
+          <Route path={'/'} element={<Navigate to={`sporsmal`} replace />} />
+        </Routes>
       </div>
     );
   }
@@ -118,7 +99,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => {
     innsending: state.innsending,
     aktivtMeldekort: state.aktivtMeldekort,
     meldekortdetaljer: state.meldekortdetaljer.meldekortdetaljer,
-    router: state.router,
     locale: state.intl.locale,
   };
 };
