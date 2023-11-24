@@ -1,5 +1,5 @@
-import { opprettSporsmalsobjekter } from '../../app/api/sporsmalsobjekterUtil';
-import { RootState } from '../../app/store/configureStore';
+import { opprettSporsmalsobjekter } from "../../app/api/sporsmalsobjekterUtil";
+import { RootState } from "../../app/store/configureStore";
 import {
   KortStatus,
   KortType,
@@ -8,10 +8,10 @@ import {
   MeldekortDag,
   MeldekortState,
   Sporsmalsobjekt
-} from '../../app/types/meldekort';
-import { InnsendingState, Innsendingstyper } from '../../app/types/innsending';
-import { hentSporsmalConfig } from '../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { hentUtfyltDagConfig } from '../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
+} from "../../app/types/meldekort";
+import { InnsendingState, Innsendingstyper } from "../../app/types/innsending";
+import { hentSporsmalConfig } from "../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig";
+import { hentUtfyltDagConfig } from "../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig";
 import {
   formaterDato,
   hentDatoForAndreUke,
@@ -20,11 +20,11 @@ import {
   hentTid,
   hentUkenummerForDato,
   ukeTekst
-} from '../../app/utils/dates';
-import { formatMessage } from '../../app/utils/intlUtil';
-import { hentDagliste } from '../../app/components/meldekortdetaljer/ukevisning/dagliste';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { testPerson } from '../testSetup/testData';
+} from "../../app/utils/dates";
+import { formatMessage } from "../../app/utils/intlUtil";
+import { hentDagliste } from "../../app/components/meldekortdetaljer/ukevisning/dagliste";
+import { renderToStaticMarkup } from "react-dom/server";
+import { testPerson } from "../testSetup/testData";
 import { MenyState } from "../../app/types/meny";
 import { PersonStatusState } from "../../app/reducers/personStatusReducer";
 import SendMeldekort from "../../app/sider/sendMeldekort/sendMeldekort";
@@ -37,40 +37,40 @@ import NorskFlaggSVG from "../../app/components/sprakvelger/NorskFlaggSVG";
 import * as React from "react";
 
 const MELDEKORT_ID = 1234567;
-const FRA = new Date('2019-12-30T10:00:00Z');
-const TIL = new Date('2020-01-12T10:00:00Z');
-const KAN_SENDES_FRA = new Date('2020-01-13T10:00:00Z');
+const FRA = new Date("2019-12-30T10:00:00Z");
+const TIL = new Date("2020-01-12T10:00:00Z");
+const KAN_SENDES_FRA = new Date("2020-01-13T10:00:00Z");
 const MOTTATT_DATO = new Date();
 const MELDE_DATO = new Date();
 const LEST_DATO = new Date();
 
 const locale: Locale = {
-  label: 'nb',
-  tittel: 'Norsk',
+  label: "nb",
+  tittel: "Norsk",
   ikon: <NorskFlaggSVG />
 }
 
 const locales: Locale[] = [locale]
 
 const intl: IntlState = {
-  locale: 'nb',
+  locale: "nb",
   messages: {}
 }
 
 const personStatus: PersonStatusState = {
   personStatus: {
-    id: '',
-    statusArbeidsoker: 'venter_pa_data',
-    statusYtelse: '',
+    id: "",
+    statusArbeidsoker: "venter_pa_data",
+    statusYtelse: "",
   }
 }
 
 const meldekortdetaljer: MeldekortdetaljerState = {
   meldekortdetaljer: {
-    id: '',
+    id: "",
     meldekortId: 0,
-    meldeperiode: '',
-    arkivnokkel: '',
+    meldeperiode: "",
+    arkivnokkel: "",
     kortType: KortType.KORRIGERT_ELEKTRONISK,
     meldeDato: new Date(),
     lestDato: new Date(),
@@ -83,16 +83,16 @@ const meldekortdetaljer: MeldekortdetaljerState = {
       signatur: false,
       meldekortDager: [],
     },
-    begrunnelse: '',
+    begrunnelse: "",
   }
 }
 
 const personInfo: PersonInfoState = {
   personInfo: {
     personId: 0,
-    fodselsnr: '',
-    etternavn: '',
-    fornavn: '',
+    fodselsnr: "",
+    etternavn: "",
+    fornavn: "",
   }
 }
 
@@ -104,7 +104,7 @@ const aktivtMeldekort: Meldekort = {
     fra: FRA,
     kanKortSendes: true,
     kortKanSendesFra: KAN_SENDES_FRA,
-    periodeKode: '201901',
+    periodeKode: "201901",
   },
   meldegruppe: Meldegruppe.DAGP,
   kortStatus: KortStatus.OPPRE,
@@ -120,7 +120,7 @@ const nesteMeldekort: Meldekort = {
     fra: FRA,
     kanKortSendes: true,
     kortKanSendesFra: KAN_SENDES_FRA,
-    periodeKode: '201903',
+    periodeKode: "201903",
   },
   meldegruppe: Meldegruppe.DAGP,
   kortStatus: KortStatus.OPPRE,
@@ -143,17 +143,17 @@ const innsending: InnsendingState = {
   korrigertMeldekortId: 0,
   innsendingstype: Innsendingstyper.INNSENDING,
   begrunnelse: {
-    valgtArsak: '',
-    valgtArsakTekst: '',
+    valgtArsak: "",
+    valgtArsakTekst: "",
     erFeil: false,
   },
   sporsmalsobjekter: hentSporsmalConfig(),
   utfylteDager: hentUtfyltDagConfig(),
   meldekortdetaljer: {
-    id: '',
+    id: "",
     meldekortId: MELDEKORT_ID,
-    meldeperiode: '',
-    arkivnokkel: '',
+    meldeperiode: "",
+    arkivnokkel: "",
     kortType: KortType.KORRIGERT_ELEKTRONISK,
     meldeDato: new Date(MELDE_DATO),
     lestDato: new Date(LEST_DATO),
@@ -166,7 +166,7 @@ const innsending: InnsendingState = {
       signatur: false,
       meldekortDager: meldekortDager,
     },
-    begrunnelse: '',
+    begrunnelse: "",
   },
   meldekortdetaljerInnsending: {
     meldekortId: MELDEKORT_ID,
@@ -179,14 +179,14 @@ const innsending: InnsendingState = {
       fra: FRA,
       kanKortSendes: true,
       kortKanSendesFra: KAN_SENDES_FRA,
-      periodeKode: '201901',
+      periodeKode: "201901",
     },
     erArbeidssokerNestePeriode: false,
     fravaersdager: [],
     korrigerbart: true,
-    begrunnelse: '',
+    begrunnelse: "",
     signatur: true,
-    sesjonsId: 'bla',
+    sesjonsId: "bla",
     sporsmalsobjekter: [],
   },
   valideringsResultat: undefined
@@ -196,9 +196,9 @@ const meny: MenyState = {
   valgtMenyPunkt: {
     exact: true,
     component: SendMeldekort,
-    tittel: 'sendMeldekort',
-    tekstid: 'naviger.send',
-    urlparam: '/send-meldekort',
+    tittel: "sendMeldekort",
+    tekstid: "naviger.send",
+    urlparam: "/send-meldekort",
     disabled: false,
   },
   alleMenyPunkter: [],
@@ -208,8 +208,8 @@ const meny: MenyState = {
 const meldekort: MeldekortState = {
   sendteMeldekort: [],
   infomelding: {
-    norsk: '',
-    engelsk: '',
+    norsk: "",
+    engelsk: "",
   }
 };
 
@@ -241,27 +241,27 @@ const state: RootState = {
 
 // aktivtMeldekort, innsending, person, meldekort
 
-it('opprettSporsmalsobjekter for meldekort uten neste meldekort', () => {
+it("opprettSporsmalsobjekter for meldekort uten neste meldekort", () => {
   const result = opprettSporsmalsobjekter(state);
   checkResult(result);
 
   expect(result[0].advarsel).toBe(undefined);
   expect(result[0].forklaring).toBe(undefined);
-  expect(result[0].sporsmal).toBe('');
+  expect(result[0].sporsmal).toBe("");
   expect(result[0].svar).toBe(
     formatMessage(
-      'sendt.mottatt.pdfheader',
+      "sendt.mottatt.pdfheader",
       {
-        type: formatMessage('overskrift.meldekort').trim(),
-        period: 'Uke 1 - 2 (30.12.2019 - 12.01.2020)',
-        mottatt: formaterDato(MOTTATT_DATO) + ' ' + hentTid(MOTTATT_DATO),
-        kortKanSendesFra: '',
+        type: formatMessage("overskrift.meldekort").trim(),
+        period: "Uke 1 - 2 (30.12.2019 - 12.01.2020)",
+        mottatt: formaterDato(MOTTATT_DATO) + " " + hentTid(MOTTATT_DATO),
+        kortKanSendesFra: "",
       }
     )
   );
 });
 
-it('opprettSporsmalsobjekter for meldekort med neste meldekort', () => {
+it("opprettSporsmalsobjekter for meldekort med neste meldekort", () => {
   const newState = {...state};
   newState.person.meldekort.push(nesteMeldekort);
 
@@ -270,29 +270,29 @@ it('opprettSporsmalsobjekter for meldekort med neste meldekort', () => {
 
   expect(result[0].advarsel).toBe(undefined);
   expect(result[0].forklaring).toBe(undefined);
-  expect(result[0].sporsmal).toBe('');
+  expect(result[0].sporsmal).toBe("");
   expect(result[0].svar).toBe(
     formatMessage(
-      'sendt.mottatt.pdfheader',
+      "sendt.mottatt.pdfheader",
       {
-        type: formatMessage('overskrift.meldekort').trim(),
-        period: 'Uke 1 - 2 (30.12.2019 - 12.01.2020)',
-        mottatt: formaterDato(MOTTATT_DATO) + ' ' + hentTid(MOTTATT_DATO),
+        type: formatMessage("overskrift.meldekort").trim(),
+        period: "Uke 1 - 2 (30.12.2019 - 12.01.2020)",
+        mottatt: formaterDato(MOTTATT_DATO) + " " + hentTid(MOTTATT_DATO),
         kortKanSendesFra:
           formatMessage(
-            'sendt.mottatt.meldekortKanSendes',
+            "sendt.mottatt.meldekortKanSendes",
             {
               0: formaterDato(KAN_SENDES_FRA),
             }
-          ) + '<br/>',
+          ) + "<br/>",
       }
     )
   );
 });
 
-it('opprettSporsmalsobjekter for korrigert meldekort med neste meldekort', () => {
-  const arsak = '1';
-  const arsakTekst = 'Bla bla bla';
+it("opprettSporsmalsobjekter for korrigert meldekort med neste meldekort", () => {
+  const arsak = "1";
+  const arsakTekst = "Bla bla bla";
 
   const newState = {...state};
   newState.innsending.innsendingstype = Innsendingstyper.KORRIGERING;
@@ -307,22 +307,22 @@ it('opprettSporsmalsobjekter for korrigert meldekort med neste meldekort', () =>
 
   expect(result[0].advarsel).toBe(undefined);
   expect(result[0].forklaring).toBe(undefined);
-  expect(result[0].sporsmal).toBe('');
+  expect(result[0].sporsmal).toBe("");
   expect(result[0].svar).toBe(
     formatMessage(
-      'sendt.mottatt.pdfheader',
+      "sendt.mottatt.pdfheader",
       {
-        type: formatMessage('meldekort.type.korrigert').trim(),
-        period: 'Uke 1 - 2 (30.12.2019 - 12.01.2020)',
-        mottatt: formaterDato(MOTTATT_DATO) + ' ' + hentTid(MOTTATT_DATO),
-        kortKanSendesFra: '',
+        type: formatMessage("meldekort.type.korrigert").trim(),
+        period: "Uke 1 - 2 (30.12.2019 - 12.01.2020)",
+        mottatt: formaterDato(MOTTATT_DATO) + " " + hentTid(MOTTATT_DATO),
+        kortKanSendesFra: "",
       }
     )
   );
 
   expect(result[3].advarsel).toBe(undefined);
-  expect(result[3].forklaring).toBe(formatMessage('forklaring.sporsmal.begrunnelse'));
-  expect(result[3].sporsmal).toBe(formatMessage('korrigering.sporsmal.begrunnelse'));
+  expect(result[3].forklaring).toBe(formatMessage("forklaring.sporsmal.begrunnelse"));
+  expect(result[3].sporsmal).toBe(formatMessage("korrigering.sporsmal.begrunnelse"));
   expect(result[3].svar).toBe(arsakTekst);
 });
 
@@ -331,22 +331,22 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
 
   expect(result[1].advarsel).toBe(undefined);
   expect(result[1].forklaring).toBe(undefined);
-  expect(result[1].sporsmal).toBe(formatMessage('sporsmal.lesVeiledning'));
+  expect(result[1].sporsmal).toBe(formatMessage("sporsmal.lesVeiledning"));
   expect(result[1].svar).toBe(undefined);
 
   expect(result[2].advarsel).toBe(undefined);
   expect(result[2].forklaring).toBe(undefined);
-  expect(result[2].sporsmal).toBe(formatMessage('sporsmal.ansvarForRiktigUtfylling'));
+  expect(result[2].sporsmal).toBe(formatMessage("sporsmal.ansvarForRiktigUtfylling"));
   expect(result[2].svar).toBe(undefined);
 
   expect(result[3 + add].advarsel).toBe(undefined);
   expect(result[3 + add].forklaring).toBe(formatMessage(innsending.sporsmalsobjekter[0].forklaring));
   expect(result[3 + add].sporsmal).toBe(formatMessage(innsending.sporsmalsobjekter[0].sporsmal));
   expect(result[3 + add].svar).toBe(
-    '_ ' +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[0].ja) +
-    '<br>' +
-    '_ ' +
+    "<br>" +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[0].nei)
   );
 
@@ -354,10 +354,10 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
   expect(result[4 + add].forklaring).toBe(formatMessage(innsending.sporsmalsobjekter[1].forklaring));
   expect(result[4 + add].sporsmal).toBe(formatMessage(innsending.sporsmalsobjekter[1].sporsmal));
   expect(result[4 + add].svar).toBe(
-    '_ ' +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[1].ja) +
-    '<br>' +
-    '_ ' +
+    "<br>" +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[1].nei)
   );
 
@@ -365,10 +365,10 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
   expect(result[5 + add].forklaring).toBe(formatMessage(innsending.sporsmalsobjekter[2].forklaring));
   expect(result[5 + add].sporsmal).toBe(formatMessage(innsending.sporsmalsobjekter[2].sporsmal));
   expect(result[5 + add].svar).toBe(
-    '_ ' +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[2].ja) +
-    '<br>' +
-    '_ ' +
+    "<br>" +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[2].nei)
   );
 
@@ -376,10 +376,10 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
   expect(result[6 + add].forklaring).toBe(formatMessage(innsending.sporsmalsobjekter[3].forklaring));
   expect(result[6 + add].sporsmal).toBe(formatMessage(innsending.sporsmalsobjekter[3].sporsmal));
   expect(result[6 + add].svar).toBe(
-    '_ ' +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[3].ja) +
-    '<br>' +
-    '_ ' +
+    "<br>" +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[3].nei)
   );
 
@@ -389,10 +389,10 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
     formatMessage(innsending.sporsmalsobjekter[4].sporsmal) + hentNestePeriodeMedUkerOgDato(FRA, TIL)
   );
   expect(result[7 + add].svar).toBe(
-    '_ ' +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[4].ja) +
-    '<br>' +
-    '_ ' +
+    "<br>" +
+    "_ " +
     formatMessage(innsending.sporsmalsobjekter[4].nei)
   );
 
@@ -401,14 +401,14 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
   expect(result[8 + add].sporsmal).toBe(
     ukeTekst() +
     hentUkenummerForDato(FRA) +
-    ' (' +
+    " (" +
     hentDatoForForsteUke(FRA) +
-    ')'
+    ")"
   );
   expect(result[8 + add].svar).toBe(
-    hentDagliste(meldekortDager, '', false)
+    hentDagliste(meldekortDager, "", false)
       .map(element => renderToStaticMarkup(element))
-      .join('')
+      .join("")
   );
 
   expect(result[9 + add].advarsel).toBe(undefined);
@@ -416,58 +416,58 @@ const checkResult = (result: Sporsmalsobjekt[], add: number = 0) => {
   expect(result[9 + add].sporsmal).toBe(
     ukeTekst() +
     hentUkenummerForDato(TIL) +
-    ' (' +
+    " (" +
     hentDatoForAndreUke(TIL) +
-    ')'
+    ")"
   );
-  expect(result[9 + add].svar).toBe('');
+  expect(result[9 + add].svar).toBe("");
 
-  expect(result[10 + add].advarsel).toBe(formatMessage('sendt.advarsel'));
+  expect(result[10 + add].advarsel).toBe(formatMessage("sendt.advarsel"));
   expect(result[10 + add].forklaring).toBe(
-    '<b>' +
-    formatMessage('utfylling.arbeid') +
-    '</b><br/>' +
-    formatMessage('forklaring.utfylling.arbeid')
+    "<b>" +
+    formatMessage("utfylling.arbeid") +
+    "</b><br/>" +
+    formatMessage("forklaring.utfylling.arbeid")
   );
-  expect(result[10 + add].sporsmal).toBe('');
+  expect(result[10 + add].sporsmal).toBe("");
   expect(result[10 + add].svar).toBe(undefined);
 
-  expect(result[11 + add].advarsel).toBe('');
+  expect(result[11 + add].advarsel).toBe("");
   expect(result[11 + add].forklaring).toBe(
-    '<b>' +
-    formatMessage('utfylling.tiltak') +
-    '</b><br/>' +
-    formatMessage('forklaring.utfylling.tiltak')
+    "<b>" +
+    formatMessage("utfylling.tiltak") +
+    "</b><br/>" +
+    formatMessage("forklaring.utfylling.tiltak")
   );
-  expect(result[11 + add].sporsmal).toBe('');
+  expect(result[11 + add].sporsmal).toBe("");
   expect(result[11 + add].svar).toBe(undefined);
 
-  expect(result[12 + add].advarsel).toBe('');
+  expect(result[12 + add].advarsel).toBe("");
   expect(result[12 + add].forklaring).toBe(
-    '<b>' +
-    formatMessage('utfylling.syk') +
-    '</b><br/>' +
-    formatMessage('forklaring.utfylling.syk')
+    "<b>" +
+    formatMessage("utfylling.syk") +
+    "</b><br/>" +
+    formatMessage("forklaring.utfylling.syk")
   );
-  expect(result[12 + add].sporsmal).toBe('');
+  expect(result[12 + add].sporsmal).toBe("");
   expect(result[12 + add].svar).toBe(undefined);
 
-  expect(result[13 + add].advarsel).toBe('');
+  expect(result[13 + add].advarsel).toBe("");
   expect(result[13 + add].forklaring).toBe(
-    '<b>' +
-    formatMessage('utfylling.ferieFravar') +
-    '</b><br/>' +
-    formatMessage('forklaring.utfylling.ferieFravar')
+    "<b>" +
+    formatMessage("utfylling.ferieFravar") +
+    "</b><br/>" +
+    formatMessage("forklaring.utfylling.ferieFravar")
   );
-  expect(result[13 + add].sporsmal).toBe('');
+  expect(result[13 + add].sporsmal).toBe("");
   expect(result[13 + add].svar).toBe(undefined);
 
   expect(result[14 + add].advarsel).toBe(undefined);
   expect(result[14 + add].forklaring).toBe(undefined);
   expect(result[14 + add].sporsmal).toBe(
-    formatMessage('utfylling.bekreft') +
-    '<br><br>X ' +
-    formatMessage('utfylling.bekreftAnsvar')
+    formatMessage("utfylling.bekreft") +
+    "<br><br>X " +
+    formatMessage("utfylling.bekreftAnsvar")
   );
   expect(result[14 + add].svar).toBe(undefined);
 

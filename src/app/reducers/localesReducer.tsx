@@ -1,6 +1,6 @@
-import * as React from 'react';
-import NorskFlaggSVG from '../components/sprakvelger/NorskFlaggSVG';
-import EngelskFlaggSVG from '../components/sprakvelger/EngelskFlaggSVG';
+import * as React from "react";
+import NorskFlaggSVG from "../components/sprakvelger/NorskFlaggSVG";
+import EngelskFlaggSVG from "../components/sprakvelger/EngelskFlaggSVG";
 
 export interface Locale {
   label: string;
@@ -10,20 +10,20 @@ export interface Locale {
 
 const locales = [
   {
-    label: 'nb',
-    tittel: 'Norsk',
+    label: "nb",
+    tittel: "Norsk",
     ikon: <NorskFlaggSVG />,
   },
   /*
   {
-    label: 'nn',
-    tittel: 'Nynorsk',
+    label: "nn",
+    tittel: "Nynorsk",
     ikon: <NorskFlaggSVG />,
   },
   */
   {
-    label: 'en',
-    tittel: 'English',
+    label: "en",
+    tittel: "English",
     ikon: <EngelskFlaggSVG />,
   },
 ];

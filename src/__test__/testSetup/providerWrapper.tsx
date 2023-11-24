@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { store } from '../../app/store/configureStore';
-import { IntlProvider, IntlState, updateIntl } from 'react-intl-redux';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import teksterJsonNb from '../../app/mock/responses/tekster_nb.json';
-import { Konstanter } from '../../app/utils/consts';
+import * as React from "react";
+import { store } from "../../app/store/configureStore";
+import { IntlProvider, IntlState, updateIntl } from "react-intl-redux";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import teksterJsonNb from "../../app/mock/responses/tekster_nb.json";
+import { Konstanter } from "../../app/utils/consts";
 import { Meldekort } from "../../app/types/meldekort";
 import { InnsendingState } from "../../app/types/innsending";
 

@@ -1,24 +1,24 @@
-import Environment from '../utils/env';
-import { Konstanter } from '../utils/consts';
-import { erMock } from '../mock/utils';
-import { Person, PersonInfo, PersonStatus } from '../types/person';
-import { prefferedAxios } from '../types/fetch';
+import Environment from "../utils/env";
+import { Konstanter } from "../utils/consts";
+import { erMock } from "../mock/utils";
+import { Person, PersonInfo, PersonStatus } from "../types/person";
+import { prefferedAxios } from "../types/fetch";
 import {
   Infomelding,
   Meldekort,
   Meldekortdetaljer,
   MeldekortdetaljerInnsending,
   ValideringsResultat
-} from '../types/meldekort';
-import { Skrivemodus } from '../types/skrivemodus';
-import { RootState } from '../store/configureStore';
-import { opprettSporsmalsobjekter } from './sporsmalsobjekterUtil';
+} from "../types/meldekort";
+import { Skrivemodus } from "../types/skrivemodus";
+import { RootState } from "../store/configureStore";
+import { opprettSporsmalsobjekter } from "./sporsmalsobjekterUtil";
 
 export const fetchGet = async (url: string) => {
   return prefferedAxios
     .get(Environment().apiUrl + url, {
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
+        "Content-Type": "application/json;charset=UTF-8",
       },
       withCredentials: true,
     })
@@ -31,7 +31,7 @@ const fetchPost = async (url: string, data: MeldekortdetaljerInnsending) => {
   return prefferedAxios
     .post(Environment().apiUrl + url, data, {
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
+        "Content-Type": "application/json;charset=UTF-8",
       },
       withCredentials: true,
     })
@@ -44,10 +44,10 @@ const fetchPost = async (url: string, data: MeldekortdetaljerInnsending) => {
       // Dette må endres til en feilhåndtering på en riktig måte,
       // men dette kan vi ha nå siden vi tenkter å skrive om hele løsningen
       return {
-        status: 'FEIL',
+        status: "FEIL",
         arsakskoder: [
           {
-            kode: '00',
+            kode: "00",
             tekst: error,
           },
         ],
@@ -102,7 +102,7 @@ export function postMeldekort(state: RootState): Promise<ValideringsResultat> {
 
 function addIdToUrlIfNotMock(url: string, id: number): string {
   if (!erMock()) {
-    return url.replace('{id}', id.toString());
+    return url.replace("{id}", id.toString());
   }
   return url;
 }

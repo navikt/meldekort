@@ -1,5 +1,5 @@
-import * as React from 'react';
-import NavFrontendChevron from 'nav-frontend-chevron';
+import * as React from "react";
+import NavFrontendChevron from "nav-frontend-chevron";
 
 interface ToggleLenkeProps {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ const InfoToggler: React.FunctionComponent<ToggleLenkeProps> = (props) => {
       <span className="infoToggler__content">
         <span className="infoToggler__label">{children}</span>
         <span className="infoToggler__chevron">
-          <NavFrontendChevron type={apen ? 'opp' : 'ned'} />
+          <NavFrontendChevron type={apen ? "opp" : "ned"} />
         </span>
       </span>
     </button>

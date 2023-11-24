@@ -1,6 +1,6 @@
-import { PersonStatus } from '../types/person';
-import { PersonStatusActions, PersonStatusActionTypes } from '../actions/personStatus';
-import { getType } from 'typesafe-actions';
+import { PersonStatus } from "../types/person";
+import { PersonStatusActions, PersonStatusActionTypes } from "../actions/personStatus";
+import { getType } from "typesafe-actions";
 
 export interface PersonStatusState {
   personStatus: PersonStatus;
@@ -8,9 +8,9 @@ export interface PersonStatusState {
 
 const initialState: PersonStatusState = {
   personStatus: {
-    id: '',
-    statusArbeidsoker: 'venter_pa_data',
-    statusYtelse: '',
+    id: "",
+    statusArbeidsoker: "venter_pa_data",
+    statusYtelse: "",
   }
 };
 

@@ -1,15 +1,15 @@
-import * as React from 'react';
-import KnappBase from 'nav-frontend-knapper';
-import { connect } from 'react-redux';
-import { RootState } from '../../store/configureStore';
-import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
-import { Dispatch } from 'redux';
-import { InnsendingState, Innsendingstyper } from '../../types/innsending';
-import { InnsendingActions } from '../../actions/innsending';
-import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
-import { Sporsmal as Spm } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { UtfyltDag } from '../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
-import { settSporsmalOgUtfyllingHvisKorrigering } from '../../utils/korrigeringUtils';
+import * as React from "react";
+import KnappBase from "nav-frontend-knapper";
+import { connect } from "react-redux";
+import { RootState } from "../../store/configureStore";
+import { Meldekort, Meldekortdetaljer } from "../../types/meldekort";
+import { Dispatch } from "redux";
+import { InnsendingState, Innsendingstyper } from "../../types/innsending";
+import { InnsendingActions } from "../../actions/innsending";
+import { AktivtMeldekortActions } from "../../actions/aktivtMeldekort";
+import { Sporsmal as Spm } from "../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig";
+import { UtfyltDag } from "../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig";
+import { settSporsmalOgUtfyllingHvisKorrigering } from "../../utils/korrigeringUtils";
 import { formatMessage } from "../../utils/intlUtil";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
@@ -44,9 +44,9 @@ interface NavKnappProps {
 }
 
 export enum KnappTyper {
-  HOVED = 'hoved',
-  STANDARD = 'standard',
-  FLAT = 'flat'
+  HOVED = "hoved",
+  STANDARD = "standard",
+  FLAT = "flat"
 }
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
@@ -73,7 +73,7 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
       tekstid,
     } = props;
 
-    if (tekstid === 'naviger.avbryt') {
+    if (tekstid === "naviger.avbryt") {
       props.resetInnsending();
       navigate(nestePath)
     } else {
@@ -86,12 +86,12 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
       }
 
       let validert: boolean = true;
-      if (typeof props.validering !== 'undefined') {
+      if (typeof props.validering !== "undefined") {
         validert = props.validering();
       }
       if (validert) {
-        const nestePathParams = nestePath.split('/');
-        const erPaKvittering = location.pathname.endsWith('kvittering');
+        const nestePathParams = nestePath.split("/");
+        const erPaKvittering = location.pathname.endsWith("kvittering");
         const erPaInnsending = innsendingstypeFraStore !== null;
 
         if (erPaInnsending && erPaKvittering) {
@@ -99,7 +99,7 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
           if (
             harNestePathInnsending(nestePathParams) &&
             nesteInnsendingstype !== undefined &&
-            typeof nesteAktivtMeldekort !== 'undefined'
+            typeof nesteAktivtMeldekort !== "undefined"
           ) {
             props.leggTilMeldekortId(nesteAktivtMeldekort.meldekortId);
           }
@@ -134,10 +134,10 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
         onClick={clickHandler}
         className={props.className}
         spinner={
-          typeof props.spinner === 'undefined' ? false : props.spinner
+          typeof props.spinner === "undefined" ? false : props.spinner
         }
         disabled={
-          typeof props.disabled === 'undefined'
+          typeof props.disabled === "undefined"
             ? false
             : props.disabled
         }

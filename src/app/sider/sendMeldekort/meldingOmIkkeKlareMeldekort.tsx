@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Meldekort, MeldekortRad } from '../../types/meldekort';
-import { Person } from '../../types/person';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { formaterDato, formaterUkeOgDatoPeriode } from '../../utils/dates';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import veileder from '../../ikoner/veileder.svg';
-import { harKortStatusOPPRellerSENDT } from '../../utils/meldekortUtils';
+import * as React from "react";
+import { Meldekort, MeldekortRad } from "../../types/meldekort";
+import { Person } from "../../types/person";
+import { Element, Normaltekst } from "nav-frontend-typografi";
+import { formaterDato, formaterUkeOgDatoPeriode } from "../../utils/dates";
+import Veilederpanel from "nav-frontend-veilederpanel";
+import veileder from "../../ikoner/veileder.svg";
+import { harKortStatusOPPRellerSENDT } from "../../utils/meldekortUtils";
 import { formatHtmlMessage } from "../../utils/intlUtil";
 
 interface Props {

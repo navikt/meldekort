@@ -1,32 +1,32 @@
-import * as React from 'react';
-import { useEffect } from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
-import BegrunnelseVelger from './begrunnelse/begrunnelseVelger';
-import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import SporsmalsGruppe from './sporsmal/sporsmalsGruppe';
-import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import veileder from '../../../ikoner/veileder.svg';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
-import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage, hentLocale } from '../../../utils/intlUtil';
-import { RootState } from '../../../store/configureStore';
-import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
-import { IModal, ModalKnapp } from '../../../types/ui';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../../actions/innsending';
-import { Infomelding, Meldekort, SendtMeldekort } from '../../../types/meldekort';
+import * as React from "react";
+import { useEffect } from "react";
+import AlertStripe from "nav-frontend-alertstriper";
+import BegrunnelseVelger from "./begrunnelse/begrunnelseVelger";
+import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
+import SporsmalsGruppe from "./sporsmal/sporsmalsGruppe";
+import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
+import veileder from "../../../ikoner/veileder.svg";
+import Veilederpanel from "nav-frontend-veilederpanel";
+import { UtfyltDag } from "../2-utfyllingsside/utfylling/utfyltDagConfig";
+import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from "../../../types/innsending";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage, hentLocale } from "../../../utils/intlUtil";
+import { RootState } from "../../../store/configureStore";
+import { ikkeFortsetteRegistrertContent } from "../../../components/modal/ikkeFortsetteRegistrertContent";
+import { IModal, ModalKnapp } from "../../../types/ui";
+import { Innholdstittel } from "nav-frontend-typografi";
+import { InnsendingActions } from "../../../actions/innsending";
+import { Infomelding, Meldekort, SendtMeldekort } from "../../../types/meldekort";
 import { Navigate } from "react-router-dom";
-import { scrollTilElement } from '../../../utils/scroll';
-import { Sporsmal } from './sporsmal/sporsmalConfig';
-import { UiActions } from '../../../actions/ui';
-import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
-import { MeldekortActions } from '../../../actions/meldekort';
-import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import { scrollTilElement } from "../../../utils/scroll";
+import { Sporsmal } from "./sporsmal/sporsmalConfig";
+import { UiActions } from "../../../actions/ui";
+import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
+import { MeldekortActions } from "../../../actions/meldekort";
+import { loggAktivitet } from "../../../utils/amplitudeUtils";
+import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
+import NavFrontendSpinner from "nav-frontend-spinner";
 import { Konstanter } from "../../../utils/consts";
 import { useNavigate } from "react-router";
 
@@ -53,11 +53,11 @@ interface MapDispatchToProps {
 type SporsmalssideProps = MapStateToProps & MapDispatchToProps;
 
 const kategorier = [
-  'arbeid',
-  'aktivitetArbeid',
-  'forhindret',
-  'ferieFravar',
-  'registrert',
+  "arbeid",
+  "aktivitetArbeid",
+  "forhindret",
+  "ferieFravar",
+  "registrert",
 ];
 
 const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
@@ -74,7 +74,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
     const ferie = sjekkOmSporsmalErUtfylt(kategorier[3]);
     const registrert = sjekkOmSporsmalErUtfylt(kategorier[4]);
     const begrunnelseIkkeValgt =
-      begrunnelse.valgtArsak === '' &&
+      begrunnelse.valgtArsak === "" &&
       innsendingstype === Innsendingstyper.KORRIGERING;
     const nySporsmalsobjekterState = sporsmalsobjekter.map(sporsmalsobj => {
       switch (sporsmalsobj.kategori) {
@@ -132,7 +132,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
     const resultat =
       arbeidet && kurs && syk && ferie && registrert && !begrunnelseIkkeValgt;
     if (!resultat) {
-      scrollTilElement('feilmelding', 'auto', -120);
+      scrollTilElement("feilmelding", "auto", -120);
       return resultat;
     }
 
@@ -199,7 +199,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
         svar:
           sporsmalobj.checked === undefined
             ? false
-            : sporsmalobj.checked.endsWith('ja'),
+            : sporsmalobj.checked.endsWith("ja"),
       });
     });
     return sporsmalListe;
@@ -221,7 +221,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
     props.innsending.sporsmalsobjekter.forEach(sporsmalobj => {
       sporsmalListe.push({
         kategori: sporsmalobj.kategori,
-        svar: typeof sporsmalobj.checked !== 'undefined',
+        svar: typeof sporsmalobj.checked !== "undefined",
       });
     });
     return sporsmalListe;
@@ -259,25 +259,25 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       feilIBegrunnelse
     ) {
       return (
-        <AlertStripe type={'feil'}>
+        <AlertStripe type={"feil"}>
           <ul>
             {feilIBegrunnelse ? (
-              <li>{`${formatMessage('begrunnelse.required')}`}</li>
+              <li>{`${formatMessage("begrunnelse.required")}`}</li>
             ) : null}
             {feilIArbeid ? (
-              <li>{`${formatMessage('arbeidet.required')}`}</li>
+              <li>{`${formatMessage("arbeidet.required")}`}</li>
             ) : null}
             {feillIKurs ? (
-              <li>{`${formatMessage('kurs.required' + typeYtelsePostfix)}`}</li>
+              <li>{`${formatMessage("kurs.required" + typeYtelsePostfix)}`}</li>
             ) : null}
             {feilISyk ? (
-              <li>{`${formatMessage('syk.required' + typeYtelsePostfix)}`}</li>
+              <li>{`${formatMessage("syk.required" + typeYtelsePostfix)}`}</li>
             ) : null}
             {feilIFerie ? (
-              <li>{`${formatMessage('annetFravar.required' + typeYtelsePostfix)}`}</li>
+              <li>{`${formatMessage("annetFravar.required" + typeYtelsePostfix)}`}</li>
             ) : null}
             {feilIRegistrert ? (
-              <li>{`${formatMessage('fortsetteRegistrert.required')}`}</li>
+              <li>{`${formatMessage("fortsetteRegistrert.required")}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
@@ -312,17 +312,17 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       {
         action: () => {
           props.skjulModal();
-          navigate(hoppeOverUtfylling() ? '../bekreftelse' : '../utfylling', { replace: true })
+          navigate(hoppeOverUtfylling() ? "../bekreftelse" : "../utfylling", { replace: true })
         },
-        label: formatMessage('overskrift.bekreftOgFortsett'),
-        type: 'hoved',
+        label: formatMessage("overskrift.bekreftOgFortsett"),
+        type: "hoved",
       },
       {
         action: () => {
           props.skjulModal();
         },
-        label: formatMessage('sporsmal.tilbakeEndre'),
-        type: 'standard',
+        label: formatMessage("sporsmal.tilbakeEndre"),
+        type: "standard",
       },
     ];
   };
@@ -338,14 +338,14 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
     } = props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
-    scrollTilElement(undefined, 'auto');
+    scrollTilElement(undefined, "auto");
     hentInfomelding();
     resetSporsmalOgUtfyllingHvisAktivtMeldekortIdIkkeErLikInnsendingMeldekortId();
     if (innsending.innsendingstype === Innsendingstyper.ETTERREGISTRERING) {
       const nySporsmalsobjektState = innsending.sporsmalsobjekter.map(
         spmObj => {
           if (spmObj.kategori === kategorier[4]) {
-            return { ...spmObj, checked: kategorier[4] + '.ja' };
+            return { ...spmObj, checked: kategorier[4] + ".ja" };
           } else {
             return { ...spmObj };
           }
@@ -353,9 +353,9 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       );
       oppdaterSvar(nySporsmalsobjektState);
     }
-    loggAktivitet('Viser spørsmål');
-    loggAktivitet('skjema startet', {
-      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
+    loggAktivitet("Viser spørsmål");
+    loggAktivitet("skjema startet", {
+      meldegruppe: aktivtMeldekort.meldegruppe || "UKJENT",
     });
   },[])
 
@@ -370,7 +370,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={'XL'} />
+          <NavFrontendSpinner type={"XL"} />
         </div>
       );
     }
@@ -379,7 +379,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       aktivtMeldekort.meldegruppe
     );
     const brukermelding =
-      hentLocale() === 'nb' ? infomelding.norsk : infomelding.engelsk;
+      hentLocale() === "nb" ? infomelding.norsk : infomelding.engelsk;
 
     return erAktivtMeldekortGyldig(
       aktivtMeldekort,
@@ -389,7 +389,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       <main>
         <section className="seksjon">
           {brukermelding.length > 1 ? (
-            <AlertStripe type={'info'}>{brukermelding}</AlertStripe>
+            <AlertStripe type={"info"}>{brukermelding}</AlertStripe>
           ) : null}
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -433,27 +433,27 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           ) : null}
         </section>
         <section className="seksjon flex-innhold sentrert">
-          <div className={'knapper-container'}>
+          <div className={"knapper-container"}>
             <NavKnapp
               type={KnappTyper.HOVED}
               nestePath={
-                hoppeOverUtfylling() ? '../bekreftelse' : '../utfylling'
+                hoppeOverUtfylling() ? "../bekreftelse" : "../utfylling"
               }
-              tekstid={'naviger.neste'}
-              className={'navigasjonsknapp'}
+              tekstid={"naviger.neste"}
+              className={"navigasjonsknapp"}
               validering={valider}
             />
             <NavKnapp
               type={KnappTyper.FLAT}
-              nestePath={ Konstanter.basePath + '/om-meldekort' }
-              tekstid={'naviger.avbryt'}
-              className={'navigasjonsknapp'}
+              nestePath={ Konstanter.basePath + "/om-meldekort" }
+              tekstid={"naviger.avbryt"}
+              className={"navigasjonsknapp"}
             />
           </div>
         </section>
       </main>
     ) : (
-      <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
+      <Navigate to={ Konstanter.basePath + "/om-meldekort" } replace />
     );
 }
 

@@ -1,6 +1,6 @@
-import { KortStatus, KortType, Meldegruppe, Meldekort } from '../types/meldekort';
-import { AktivtMeldekortActions, AktivtMeldekortActionsTypes } from '../actions/aktivtMeldekort';
-import { getType } from 'typesafe-actions';
+import { KortStatus, KortType, Meldegruppe, Meldekort } from "../types/meldekort";
+import { AktivtMeldekortActions, AktivtMeldekortActionsTypes } from "../actions/aktivtMeldekort";
+import { getType } from "typesafe-actions";
 
 const initialState: Meldekort = {
   meldekortId: 0,
@@ -10,7 +10,7 @@ const initialState: Meldekort = {
     fra: new Date(),
     kortKanSendesFra: new Date(),
     kanKortSendes: false,
-    periodeKode: '',
+    periodeKode: "",
   },
   meldegruppe: Meldegruppe.ATTF,
   kortStatus: KortStatus.VENTE,

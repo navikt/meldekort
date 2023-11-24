@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { MeldekortKolonne } from "../../../types/meldekort";
 
 interface TabellProps {
@@ -10,10 +10,10 @@ interface TabellProps {
 const Tabell: React.FunctionComponent<TabellProps> = props => {
   // TODO: Update ts-react-json-table?
   /* eslint-disable @typescript-eslint/no-var-requires */
-  const JsonTable = require('ts-react-json-table');
+  const JsonTable = require("ts-react-json-table");
 
   return (
-    <div className={'tabell'}>
+    <div className={"tabell"}>
       <JsonTable
         rows={props.rows}
         columns={props.columns}

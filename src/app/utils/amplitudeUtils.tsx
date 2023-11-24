@@ -1,5 +1,5 @@
-import amplitude from 'amplitude-js';
-import Environment from './env';
+import amplitude from "amplitude-js";
+import Environment from "./env";
 
 let initialized = false;
 
@@ -28,7 +28,7 @@ initAmplitude();
 
 function amplitudeLogger(name: string, values?: object) {
   if (!initialized) {
-    console.log('Aktivitet uten initialisert amplitude:', name, values);
+    console.log("Aktivitet uten initialisert amplitude:", name, values);
     return;
   }
   amplitude.getInstance().logEvent(name, values);
@@ -45,5 +45,5 @@ export function loggAktivitet(
   data?: AmplitudeAktivitetsData
 ) {
   const eventData = { ...data, aktivitet: aktivitet };
-  amplitudeLogger('meldekort.aktivitet', eventData);
+  amplitudeLogger("meldekort.aktivitet", eventData);
 }

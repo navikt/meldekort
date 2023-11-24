@@ -1,12 +1,12 @@
-import * as React from 'react';
-import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { formatMessage } from '../../../utils/intlUtil';
-import { MenyActions } from '../../../actions/meny';
-import { MenyPunkt } from '../../../utils/menyConfig';
-import { RootState } from '../../../store/configureStore';
-import Lenke from 'nav-frontend-lenker';
+import * as React from "react";
+import classNames from "classnames";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { formatMessage } from "../../../utils/intlUtil";
+import { MenyActions } from "../../../actions/meny";
+import { MenyPunkt } from "../../../utils/menyConfig";
+import { RootState } from "../../../store/configureStore";
+import Lenke from "nav-frontend-lenker";
 import { useNavigate } from "react-router";
 
 interface MapStateToProps {
@@ -38,14 +38,14 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
         {menypunkter
           .filter((item: MenyPunkt) => item.urlparam)
           .map((item: MenyPunkt) => ( // (item: MenyPunkt, index: any)
-            <li key={item.tittel} className={'hovedmeny__item'}>
+            <li key={item.tittel} className={"hovedmeny__item"}>
               <Lenke
                 onClick={() => onChange(item)}
-                className={classNames('hovedmeny__menypunkt', {
+                className={classNames("hovedmeny__menypunkt", {
                   active: valgtMenyPunkt.tittel === item.tittel,
                 })}
-                href={'#'}
-                aria-labelledby={'tab hovedmeny__menypunkt'}
+                href={"#"}
+                aria-labelledby={"tab hovedmeny__menypunkt"}
               >
                 {formatMessage(item.tekstid)}
               </Lenke>

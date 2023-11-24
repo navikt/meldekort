@@ -1,6 +1,6 @@
-import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
-import { UiActions, UiActionTypes } from '../actions/ui';
-import { getType } from 'typesafe-actions';
+import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from "../types/ui";
+import { UiActions, UiActionTypes } from "../actions/ui";
+import { getType } from "typesafe-actions";
 
 export interface UIState {
   modal: IModal;
@@ -12,11 +12,11 @@ export interface UIState {
 
 const initialState: UIState = {
   modal: {
-    content: () => '',
+    content: () => "",
     visModal: false,
   },
   baksystemFeilmelding: {
-    content: () => '',
+    content: () => "",
     visFeilmelding: false,
   },
   ingenTidligereMeldekort: {

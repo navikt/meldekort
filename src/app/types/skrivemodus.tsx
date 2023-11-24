@@ -1,4 +1,4 @@
-import { Infomelding } from './meldekort';
+import { Infomelding } from "./meldekort";
 
 export interface Skrivemodus {
   skrivemodus: boolean;

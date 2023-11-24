@@ -1,4 +1,4 @@
-import { Meldekort } from './meldekort';
+import { Meldekort } from "./meldekort";
 
 // fetchMeldekort
 export interface Person {
@@ -33,11 +33,11 @@ export interface Meldeperiode {
 }
 
 export enum MeldeForm {
-  ELEKTRONISK = 'EMELD',
-  PAPIR = 'PAPIR',
-  MANUELL = 'MANU',
-  AUTO = 'AUTO',
-  IKKE_SATT = 'IKKE SATT'
+  ELEKTRONISK = "EMELD",
+  PAPIR = "PAPIR",
+  MANUELL = "MANU",
+  AUTO = "AUTO",
+  IKKE_SATT = "IKKE SATT"
 }
 
 export interface Fravaer {
@@ -47,8 +47,8 @@ export interface Fravaer {
 }
 
 export enum FravaerType {
-  KURS_UTDANNING = 'K',
-  SYKDOM = 'S',
-  ANNET_FRAVAER = 'X',
-  ARBEIDS_FRAVAER = 'F'
+  KURS_UTDANNING = "K",
+  SYKDOM = "S",
+  ANNET_FRAVAER = "X",
+  ARBEIDS_FRAVAER = "F"
 }

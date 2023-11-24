@@ -1,5 +1,5 @@
-import { RootState } from '../store/configureStore';
-import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
+import { RootState } from "../store/configureStore";
+import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from "../types/ui";
 
 export const selectModal = (state: RootState): IModal => {
   return state.ui.modal;

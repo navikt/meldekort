@@ -1,15 +1,15 @@
-import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../types/innsending';
-import * as React from 'react';
-import { useState } from 'react';
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
-import { ukeTekst } from '../../utils/dates';
-import { hentUkedager } from '../../utils/ukedager';
-import Aktivitetsrad from '../../sider/innsending/2-utfyllingsside/utfylling/aktivitet/aktivitetsrad';
-import Arbeidsrad from '../../sider/innsending/2-utfyllingsside/utfylling/arbeid/arbeidsrad';
-import { RootState } from '../../store/configureStore';
-import { connect } from 'react-redux';
-import { FravaerTypeEnum } from '../../types/meldekort';
+import { InnsendingState, SpmSvar, UtfyllingFeil } from "../../types/innsending";
+import * as React from "react";
+import { useState } from "react";
+import { EkspanderbartpanelBase } from "nav-frontend-ekspanderbartpanel";
+import { Ingress, Innholdstittel } from "nav-frontend-typografi";
+import { ukeTekst } from "../../utils/dates";
+import { hentUkedager } from "../../utils/ukedager";
+import Aktivitetsrad from "../../sider/innsending/2-utfyllingsside/utfylling/aktivitet/aktivitetsrad";
+import Arbeidsrad from "../../sider/innsending/2-utfyllingsside/utfylling/arbeid/arbeidsrad";
+import { RootState } from "../../store/configureStore";
+import { connect } from "react-redux";
+import { FravaerTypeEnum } from "../../types/meldekort";
 
 interface Props {
   ukenummer: number;
@@ -36,7 +36,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
         svar:
           sporsmalobj.checked === undefined
             ? false
-            : sporsmalobj.checked.endsWith('ja'),
+            : sporsmalobj.checked.endsWith("ja"),
       };
     });
   };
@@ -66,7 +66,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
     >
       <div className="uke__panel">
         <div className="ukedager--desktop">{hentUkedager()}</div>
-        {sjekkSporsmal('arbeid') ? (
+        {sjekkSporsmal("arbeid") ? (
           <Arbeidsrad
             ukeNummer={props.ukenummer}
             feil={props.utfyllingFeil.feilIArbeid.feil}
@@ -74,20 +74,20 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
               .concat(props.utfyllingFeil.feilIDagerVertikal)
               .filter(r => r.rad.includes(FravaerTypeEnum.ARBEIDS_FRAVAER))}
             typeYtelsePostfix={props.typeYtelsePostfix}
-            tekstId={'utfylling.arbeid'}
-            forklaringId={'forklaring.utfylling.arbeid'}
+            tekstId={"utfylling.arbeid"}
+            forklaringId={"forklaring.utfylling.arbeid"}
             bareArbeid={
-              !sjekkSporsmal('aktivitetArbeid') &&
-              !sjekkSporsmal('forhindret') &&
-              !sjekkSporsmal('ferieFravar')
+              !sjekkSporsmal("aktivitetArbeid") &&
+              !sjekkSporsmal("forhindret") &&
+              !sjekkSporsmal("ferieFravar")
             }
           />
         ) : null}
-        {sjekkSporsmal('aktivitetArbeid') ? (
+        {sjekkSporsmal("aktivitetArbeid") ? (
           <Aktivitetsrad
             ukeNummer={props.ukenummer}
             tekstId="utfylling.tiltak"
-            forklaringId={'forklaring.utfylling.tiltak'}
+            forklaringId={"forklaring.utfylling.tiltak"}
             typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilIKurs.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
@@ -95,11 +95,11 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
               .filter(r => r.rad.includes(FravaerTypeEnum.KURS_UTDANNING))}
           />
         ) : null}
-        {sjekkSporsmal('forhindret') ? (
+        {sjekkSporsmal("forhindret") ? (
           <Aktivitetsrad
             ukeNummer={props.ukenummer}
             tekstId="utfylling.syk"
-            forklaringId={'forklaring.utfylling.syk'}
+            forklaringId={"forklaring.utfylling.syk"}
             typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilISyk.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal
@@ -107,11 +107,11 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
               .filter(r => r.rad.includes(FravaerTypeEnum.SYKDOM))}
           />
         ) : null}
-        {sjekkSporsmal('ferieFravar') ? (
+        {sjekkSporsmal("ferieFravar") ? (
           <Aktivitetsrad
             ukeNummer={props.ukenummer}
             tekstId="utfylling.ferieFravar"
-            forklaringId={'forklaring.utfylling.ferieFravar'}
+            forklaringId={"forklaring.utfylling.ferieFravar"}
             typeYtelsePostfix={props.typeYtelsePostfix}
             feil={props.utfyllingFeil.feilIFerie.feil}
             feilIDager={props.utfyllingFeil.feilIDagerHorisontal

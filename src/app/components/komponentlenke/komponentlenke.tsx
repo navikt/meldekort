@@ -1,11 +1,11 @@
-import * as React from 'react';
-import 'nav-frontend-lenker-style';
-import { RootState } from '../../store/configureStore';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { Meldekort } from '../../types/meldekort';
-import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
-import Lenke from 'nav-frontend-lenker';
+import * as React from "react";
+import "nav-frontend-lenker-style";
+import { RootState } from "../../store/configureStore";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { Meldekort } from "../../types/meldekort";
+import { AktivtMeldekortActions } from "../../actions/aktivtMeldekort";
+import Lenke from "nav-frontend-lenker";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const Komponentlenke: React.FunctionComponent<Props> = props => {
   };
 
   return (
-    <Lenke href={'#'} onClick={clickHandler}>
+    <Lenke href={"#"} onClick={clickHandler}>
       {props.lenketekst}
     </Lenke>
   );

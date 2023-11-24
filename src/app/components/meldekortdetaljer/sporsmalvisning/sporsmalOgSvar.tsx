@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
-import checkMark from '../../../ikoner/check.svg';
-import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
+import * as React from "react";
+import { Undertittel } from "nav-frontend-typografi";
+import checkMark from "../../../ikoner/check.svg";
+import UtvidetInformasjon from "../../utvidetinformasjon/utvidetInformasjon";
 import { formatHtmlMessage } from "../../../utils/intlUtil";
 
 interface Props {

@@ -1,10 +1,10 @@
-import { formatMessage } from './intlUtil';
-import { Meldegruppe } from '../types/meldekort';
+import { formatMessage } from "./intlUtil";
+import { Meldegruppe } from "../types/meldekort";
 
 export enum TypeYtelse {
-  AAP = '-AAP',
-  DAGPENGER = '',
-  TILTAKSPENGER = '-TP'
+  AAP = "-AAP",
+  DAGPENGER = "",
+  TILTAKSPENGER = "-TP"
 }
 
 export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {
@@ -14,11 +14,11 @@ export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {
 };
 
 export const finnesIntlId = (tekstid: string): string => {
-  // TODO: Throws exception, can't find ids
+  // TODO: Throws exception, can"t find ids
   if (formatMessage(tekstid) !== tekstid) {
     return tekstid;
   } else {
     // Returnerer tekstid uten postfix
-    return tekstid.split('-')[0];
+    return tekstid.split("-")[0];
   }
 };

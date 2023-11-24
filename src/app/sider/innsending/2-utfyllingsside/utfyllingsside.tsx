@@ -1,25 +1,25 @@
-import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import { hentDatoForAndreUke, hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates';
-import { FeilKolonne, InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
-import { RootState } from '../../../store/configureStore';
-import { connect } from 'react-redux';
-import { Konstanter } from '../../../utils/consts';
-import { UtfyltDag } from './utfylling/utfyltDagConfig';
-import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { FravaerTypeEnum, Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
-import { scrollTilElement } from '../../../utils/scroll';
-import UkePanel from '../../../components/ukepanel/ukepanel';
-import { Dispatch } from 'redux';
-import { InnsendingActions } from '../../../actions/innsending';
-import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
+import * as React from "react";
+import { Innholdstittel } from "nav-frontend-typografi";
+import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
+import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
+import { hentDatoForAndreUke, hentDatoForForsteUke, hentUkenummerForDato } from "../../../utils/dates";
+import { FeilKolonne, InnsendingState, SpmSvar, UtfyllingFeil } from "../../../types/innsending";
+import { RootState } from "../../../store/configureStore";
+import { connect } from "react-redux";
+import { Konstanter } from "../../../utils/consts";
+import { UtfyltDag } from "./utfylling/utfyltDagConfig";
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from "../../../utils/intlUtil";
+import AlertStripe from "nav-frontend-alertstriper";
+import { FravaerTypeEnum, Meldegruppe, Meldekort, SendtMeldekort } from "../../../types/meldekort";
+import { scrollTilElement } from "../../../utils/scroll";
+import UkePanel from "../../../components/ukepanel/ukepanel";
+import { Dispatch } from "redux";
+import { InnsendingActions } from "../../../actions/innsending";
+import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
 import { Navigate } from "react-router-dom";
-import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import { loggAktivitet } from "../../../utils/amplitudeUtils";
+import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
+import NavFrontendSpinner from "nav-frontend-spinner";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -61,8 +61,8 @@ class Utfyllingsside extends React.Component<
     const { settLocale, locale, aktivtMeldekort } = this.props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
-    scrollTilElement(undefined, 'auto');
-    loggAktivitet('Viser utfylling');
+    scrollTilElement(undefined, "auto");
+    loggAktivitet("Viser utfylling");
   }
 
   hentSporsmal = (): SpmSvar[] => {
@@ -73,7 +73,7 @@ class Utfyllingsside extends React.Component<
         svar:
           sporsmalobj.checked === undefined
             ? false
-            : sporsmalobj.checked.endsWith('ja'),
+            : sporsmalobj.checked.endsWith("ja"),
       });
     });
     return sporsmalListe;
@@ -97,7 +97,7 @@ class Utfyllingsside extends React.Component<
 
     if (meldegruppe === Meldegruppe.DAGP) {
       dager.forEach(dag => {
-        if (typeof dag.arbeidetTimer !== 'undefined') {
+        if (typeof dag.arbeidetTimer !== "undefined") {
           if (Number(dag.arbeidetTimer) > 0 && dag.syk) {
             feil.push({
               uke: dag.uke,
@@ -120,7 +120,7 @@ class Utfyllingsside extends React.Component<
     }
     if (meldegruppe === Meldegruppe.ATTF) {
       dager.forEach(dag => {
-        if (typeof dag.arbeidetTimer !== 'undefined') {
+        if (typeof dag.arbeidetTimer !== "undefined") {
           if (Number(dag.arbeidetTimer) > 0 && dag.annetFravaer) {
             feil.push({
               uke: dag.uke,
@@ -171,7 +171,7 @@ class Utfyllingsside extends React.Component<
     let feilIArbeidetTimerHeleHalve = false;
 
     dager.forEach(dag => {
-      if (typeof dag.arbeidetTimer !== 'undefined') {
+      if (typeof dag.arbeidetTimer !== "undefined") {
         if ((Number(dag.arbeidetTimer) * 2) % 1 !== 0) {
           feil.push({
             uke: dag.uke,
@@ -205,10 +205,10 @@ class Utfyllingsside extends React.Component<
 
   valider = (): boolean => {
     this.props.resetValideringsresultat();
-    let arbeidet = !this.sjekkSporsmal('arbeid');
-    let kurs = !this.sjekkSporsmal('aktivitetArbeid');
-    let syk = !this.sjekkSporsmal('forhindret');
-    let ferie = !this.sjekkSporsmal('ferieFravar');
+    let arbeidet = !this.sjekkSporsmal("arbeid");
+    let kurs = !this.sjekkSporsmal("aktivitetArbeid");
+    let syk = !this.sjekkSporsmal("forhindret");
+    let ferie = !this.sjekkSporsmal("ferieFravar");
     const feilITimer = this.validerAntallTimerForDag(
       this.props.innsending.utfylteDager
     );
@@ -219,7 +219,7 @@ class Utfyllingsside extends React.Component<
     this.props.innsending.utfylteDager.forEach(dag => {
       if (
         !arbeidet &&
-        typeof dag.arbeidetTimer !== 'undefined' &&
+        typeof dag.arbeidetTimer !== "undefined" &&
         Number(dag.arbeidetTimer) > 0
       ) {
         arbeidet = true;
@@ -246,7 +246,7 @@ class Utfyllingsside extends React.Component<
     const resultat =
       arbeidet && kurs && syk && ferie && feilITimer && feilIVertikal;
     if (!resultat) {
-      scrollTilElement('periodebanner');
+      scrollTilElement("periodebanner");
     }
     return resultat;
   };
@@ -276,53 +276,53 @@ class Utfyllingsside extends React.Component<
       feilIArbeidetTimerHeleHalve
     ) {
       return (
-        <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
+        <AlertStripe className={"utfylling__feilmelding"} type={"feil"}>
           <ul>
             {feilIArbeid.feil ? (
-              <li>{`${formatMessage('utfylling.mangler.arbeid').trim()}`}</li>
+              <li>{`${formatMessage("utfylling.mangler.arbeid").trim()}`}</li>
             ) : null}
             {feilIKurs.feil ? (
-              <li>{`${formatMessage('utfylling.mangler.tiltak').trim()}`}</li>
+              <li>{`${formatMessage("utfylling.mangler.tiltak").trim()}`}</li>
             ) : null}
             {feilISyk.feil ? (
-              <li>{`${formatMessage('utfylling.mangler.syk').trim()}`}</li>
+              <li>{`${formatMessage("utfylling.mangler.syk").trim()}`}</li>
             ) : null}
             {feilIFerie.feil ? (
-              <li>{`${formatMessage('utfylling.mangler.ferieFravar').trim()}`}</li>
+              <li>{`${formatMessage("utfylling.mangler.ferieFravar").trim()}`}</li>
             ) : null}
             {feilIArbeidetTimerHeleHalve ? (
-              <li>{`${formatMessage('arbeidTimer.heleEllerHalveTallValidator')}`}</li>
+              <li>{`${formatMessage("arbeidTimer.heleEllerHalveTallValidator")}`}</li>
             ) : null}
             {feilIArbeidetTimer ? (
-              <li>{`${formatMessage('arbeidTimer.rangeValidator.range')}`}</li>
+              <li>{`${formatMessage("arbeidTimer.rangeValidator.range")}`}</li>
             ) : null}
             {feilKombinasjonSykArbeid ? (
-              <li>{`${formatMessage('arbeidTimer.kombinasjonSykArbeidValidator')}`}</li>
+              <li>{`${formatMessage("arbeidTimer.kombinasjonSykArbeidValidator")}`}</li>
             ) : null}
             {feilKombinasjonFravaerArbeid ? (
-              <li>{`${formatMessage('arbeidTimer.kombinasjonFravaerArbeidValidator')}`}</li>
+              <li>{`${formatMessage("arbeidTimer.kombinasjonFravaerArbeidValidator")}`}</li>
             ) : null}
             {feilKombinasjonFravaerSyk ? (
-              <li>{`${formatMessage('arbeidTimer.kombinasjonFravaerSykValidator')}`}</li>
+              <li>{`${formatMessage("arbeidTimer.kombinasjonFravaerSykValidator")}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
       );
-    } else if (typeof valideringsResultat !== 'undefined') {
-      if (valideringsResultat.status === 'FEIL') {
+    } else if (typeof valideringsResultat !== "undefined") {
+      if (valideringsResultat.status === "FEIL") {
         return (
-          <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
+          <AlertStripe className={"utfylling__feilmelding"} type={"feil"}>
             <ul>
               {valideringsResultat.arsakskoder.map(arsakskode => {
                 return (
                   <li key={arsakskode.kode}>
                     {formatMessage(
-                      'meldekortkontroll.feilkode.' + arsakskode.kode.toLowerCase(),
+                      "meldekortkontroll.feilkode." + arsakskode.kode.toLowerCase(),
                       {
                         0:
                           arsakskode.params && arsakskode.params.length > 0
                             ? arsakskode.params[0]
-                            : '',
+                            : "",
                       }
                     )}
                   </li>
@@ -346,7 +346,7 @@ class Utfyllingsside extends React.Component<
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={'XL'} />
+          <NavFrontendSpinner type={"XL"} />
         </div>
       );
     }
@@ -368,7 +368,7 @@ class Utfyllingsside extends React.Component<
         </section>
         <section className="seksjon">
           <div id="feilmelding">{this.hentFeilmeldinger()}</div>
-          <div className={'utfylling-container'}>
+          <div className={"utfylling-container"}>
             <UkePanel
               innsending={innsending}
               ukenummer={Konstanter.forsteUke}
@@ -392,31 +392,31 @@ class Utfyllingsside extends React.Component<
           </div>
         </section>
         <section className="seksjon flex-innhold sentrert">
-          <div className={'knapper-container'}>
+          <div className={"knapper-container"}>
             <NavKnapp
               type={KnappTyper.HOVED}
-              nestePath={'../bekreftelse'}
-              tekstid={'naviger.neste'}
-              className={'navigasjonsknapp'}
+              nestePath={"../bekreftelse"}
+              tekstid={"naviger.neste"}
+              className={"navigasjonsknapp"}
               validering={this.valider}
             />
             <NavKnapp
               type={KnappTyper.STANDARD}
-              nestePath={'../sporsmal'}
-              tekstid={'naviger.forrige'}
-              className={'navigasjonsknapp'}
+              nestePath={"../sporsmal"}
+              tekstid={"naviger.forrige"}
+              className={"navigasjonsknapp"}
             />
             <NavKnapp
               type={KnappTyper.FLAT}
-              nestePath={ Konstanter.basePath + '/om-meldekort' }
-              tekstid={'naviger.avbryt'}
-              className={'navigasjonsknapp'}
+              nestePath={ Konstanter.basePath + "/om-meldekort" }
+              tekstid={"naviger.avbryt"}
+              className={"navigasjonsknapp"}
             />
           </div>
         </section>
       </main>
     ) : (
-      <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
+      <Navigate to={ Konstanter.basePath + "/om-meldekort" } replace />
     );
   }
 }

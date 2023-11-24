@@ -1,7 +1,7 @@
 export interface ModalKnapp {
   action: () => void;
   label: string;
-  type: 'standard' | 'hoved' | 'fare' | 'flat';
+  type: "standard" | "hoved" | "fare" | "flat";
 }
 
 export interface IModal {

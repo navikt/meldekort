@@ -1,26 +1,26 @@
-import { InnsendingState } from '../types/innsending';
-import { InnsendingActions, InnsendingActionsTypes } from '../actions/innsending';
-import { getType } from 'typesafe-actions';
-import { hentSporsmalConfig } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { hentUtfyltDagConfig } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
-import { KortType } from '../types/meldekort';
+import { InnsendingState } from "../types/innsending";
+import { InnsendingActions, InnsendingActionsTypes } from "../actions/innsending";
+import { getType } from "typesafe-actions";
+import { hentSporsmalConfig } from "../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig";
+import { hentUtfyltDagConfig } from "../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig";
+import { KortType } from "../types/meldekort";
 
 const initialState: InnsendingState = {
   meldekortId: 0,
   korrigertMeldekortId: 0,
   innsendingstype: null,
   begrunnelse: {
-    valgtArsak: '',
-    valgtArsakTekst: '',
+    valgtArsak: "",
+    valgtArsakTekst: "",
     erFeil: false,
   },
   sporsmalsobjekter: hentSporsmalConfig(),
   utfylteDager: hentUtfyltDagConfig(),
   meldekortdetaljer: {
-    id: '',
+    id: "",
     meldekortId: 0,
-    meldeperiode: '',
-    arkivnokkel: '',
+    meldeperiode: "",
+    arkivnokkel: "",
     kortType: KortType.KORRIGERT_ELEKTRONISK,
     meldeDato: new Date(),
     lestDato: new Date(),
@@ -33,7 +33,7 @@ const initialState: InnsendingState = {
       signatur: false,
       meldekortDager: [],
     },
-    begrunnelse: '',
+    begrunnelse: "",
   },
   meldekortdetaljerInnsending: undefined,
   valideringsResultat: undefined
@@ -46,7 +46,7 @@ const innsendingReducer = (
   switch (action.type) {
     case getType(InnsendingActions.oppdaterUtfylteDager): {
       const rensetUtfylteDager = action.payload.map(utfyltDag => {
-        if (utfyltDag.arbeidetTimer === '0') {
+        if (utfyltDag.arbeidetTimer === "0") {
           return {
             ...utfyltDag,
             arbeidetTimer: undefined,

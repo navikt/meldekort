@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Sporsmal from './sporsmal';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
-import { InnsendingActions } from '../../../../actions/innsending';
-import { RootState } from '../../../../store/configureStore';
-import { Sporsmal as Spm } from './sporsmalConfig';
-import { hentNestePeriodeMedUkerOgDato } from '../../../../utils/dates';
-import { Meldekort } from '../../../../types/meldekort';
-import { finnesIntlId } from '../../../../utils/teksterUtil';
+import Sporsmal from "./sporsmal";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { InnsendingState, Innsendingstyper } from "../../../../types/innsending";
+import { InnsendingActions } from "../../../../actions/innsending";
+import { RootState } from "../../../../store/configureStore";
+import { Sporsmal as Spm } from "./sporsmalConfig";
+import { hentNestePeriodeMedUkerOgDato } from "../../../../utils/dates";
+import { Meldekort } from "../../../../types/meldekort";
+import { finnesIntlId } from "../../../../utils/teksterUtil";
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -33,8 +33,8 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, object> {
   ) => {
     const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter.map(
       sporsmalsobj => {
-        const val = value !== undefined ? value : '';
-        if (sporsmalsobj.kategori === val.split('.')[0]) {
+        const val = value !== undefined ? value : "";
+        if (sporsmalsobj.kategori === val.split(".")[0]) {
           return {
             ...sporsmalsobj,
             checked: value,
@@ -60,14 +60,14 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, object> {
         sporsmalsobj[key] !== sporsmalsobj.id
       ) {
         sporsmalsobj[key] = finnesIntlId(
-          sporsmalsobj[key].split('-')[0] + typeYtelsePostfix
+          sporsmalsobj[key].split("-")[0] + typeYtelsePostfix
         );
       } else if (sporsmalsobj[key] === sporsmalsobj.feil) {
         sporsmalsobj.feil.feilmeldingId = finnesIntlId(
           sporsmalsobj.feil.feilmeldingId
         );
       } else if (
-        sporsmalsobj[key] === 'registrert' &&
+        sporsmalsobj[key] === "registrert" &&
         innsendingstype !== Innsendingstyper.INNSENDING
       ) {
         skalVareDisabled = true;
@@ -83,7 +83,7 @@ class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, object> {
         disabled={skalVareDisabled}
         sporsmalOnChange={this.sporsmalOnChange}
         formatertDato={
-          sporsmalsobj.kategori === 'registrert'
+          sporsmalsobj.kategori === "registrert"
             ? hentNestePeriodeMedUkerOgDato(fra, til)
             : undefined
         }

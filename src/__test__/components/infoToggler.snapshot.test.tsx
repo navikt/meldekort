@@ -1,9 +1,9 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
-import ProviderWrapper from '../testSetup/providerWrapper';
-import InfoToggler from '../../app/components/utvidetinformasjon/infoToggler/infoToggler';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import ProviderWrapper from "../testSetup/providerWrapper";
+import InfoToggler from "../../app/components/utvidetinformasjon/infoToggler/infoToggler";
 
-it('InfoToggler', () => {
+it("InfoToggler", () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <InfoToggler

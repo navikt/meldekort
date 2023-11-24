@@ -1,11 +1,11 @@
-import { AppEpic } from '../store/configureStore';
-import { PersonActions } from '../actions/person';
-import { from, of } from 'rxjs';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
-import { fetchMeldekort } from '../api/api';
-import { combineEpics } from 'redux-observable';
-import { MeldekortActions } from '../actions/meldekort';
-import { isActionOf } from 'typesafe-actions';
+import { AppEpic } from "../store/configureStore";
+import { PersonActions } from "../actions/person";
+import { from, of } from "rxjs";
+import { catchError, filter, map, switchMap } from "rxjs/operators";
+import { fetchMeldekort } from "../api/api";
+import { combineEpics } from "redux-observable";
+import { MeldekortActions } from "../actions/meldekort";
+import { isActionOf } from "typesafe-actions";
 
 const hentPerson: AppEpic = action$ =>
   action$.pipe(

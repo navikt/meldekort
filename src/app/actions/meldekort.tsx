@@ -1,13 +1,13 @@
-import { ActionType, createAction, createAsyncAction } from 'typesafe-actions';
-import { AxiosError } from 'axios';
-import { Infomelding, SendtMeldekort } from '../types/meldekort';
+import { ActionType, createAction, createAsyncAction } from "typesafe-actions";
+import { AxiosError } from "axios";
+import { Infomelding, SendtMeldekort } from "../types/meldekort";
 
 export enum MeldekortTypeKeys {
-  API_KALL_FEILET = 'API_KALL_FEILET',
-  LEGG_TIL_INNSENDT_MELDEKORT = 'LEGG_TIL_INNSENDT_MELDEKORT',
-  HENT_INFOMELDING = 'HENT_INFOMELDING',
-  HENT_INFOMELDING_OK = 'HENT_INFOMELDING_OK',
-  HENT_INFOMELDING_FEILET = 'HENT_INFOMELDING_FEILET'
+  API_KALL_FEILET = "API_KALL_FEILET",
+  LEGG_TIL_INNSENDT_MELDEKORT = "LEGG_TIL_INNSENDT_MELDEKORT",
+  HENT_INFOMELDING = "HENT_INFOMELDING",
+  HENT_INFOMELDING_OK = "HENT_INFOMELDING_OK",
+  HENT_INFOMELDING_FEILET = "HENT_INFOMELDING_FEILET"
 }
 
 export const MeldekortActions = {

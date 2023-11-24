@@ -1,11 +1,11 @@
-import { formatMessage } from './intlUtil';
+import { formatMessage } from "./intlUtil";
 import moment from "moment";
 
 
-const datoFormat = 'DD.MM.YYYY';
+const datoFormat = "DD.MM.YYYY";
 
 export const hentTid = (dato: Date): string => {
-  return moment(dato).format('HH:mm');
+  return moment(dato).format("HH:mm");
 };
 
 // Henter ukenummer
@@ -20,7 +20,7 @@ export const formaterDato = (dato: Date): string => {
 
 // Formaterer dato til YYYY-MM-DD
 export const formaterDatoIso = (dato: Date): string => {
-  return moment(dato).format('YYYY-MM-DD');
+  return moment(dato).format("YYYY-MM-DD");
 };
 
 // Format: Uke 1-2
@@ -43,14 +43,14 @@ export const formaterUkeOgDatoPeriode = (fra: Date, til: Date): string => {
 // Gir dato for søndag (ukeslutt) i den første uken i perioden
 export const hentDatoForUkesluttIForsteUke = (periodeStart: Date): string => {
   return moment(periodeStart)
-    .add(6, 'days')
+    .add(6, "days")
     .format(datoFormat);
 };
 
 // Gir dato for ukestart (mandag) i den andre uken i perioden
 export const hentDatoForUkestartIAndreUke = (periodeSlutt: Date): string => {
   return moment(periodeSlutt)
-    .subtract(6, 'days')
+    .subtract(6, "days")
     .format(datoFormat);
 };
 
@@ -89,8 +89,8 @@ export const hentNestePeriodeMedUkerOgDato = (
   fraDato: Date,
   tilDato: Date
 ): string => {
-  const momentNesteFra = moment(fraDato).add(14, 'days');
-  const momentNesteTil = moment(tilDato).add(14, 'days');
+  const momentNesteFra = moment(fraDato).add(14, "days");
+  const momentNesteTil = moment(tilDato).add(14, "days");
 
   return `${momentNesteFra.isoWeek()}-${momentNesteTil.isoWeek()} (${momentNesteFra.format(
     datoFormat
@@ -98,7 +98,7 @@ export const hentNestePeriodeMedUkerOgDato = (
 };
 
 export const ukeTekst = (): string => {
-  return formatMessage('overskrift.uke');
+  return formatMessage("overskrift.uke");
 };
 
 export const kalkulerDato = (startDato: Date, plussDager: number): Date => {

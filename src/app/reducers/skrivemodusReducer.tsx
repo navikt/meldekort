@@ -1,6 +1,6 @@
-import { Skrivemodus } from '../types/skrivemodus';
-import { SkrivemodusActions, SkrivemodusActionTypes } from '../actions/skrivemodus';
-import { getType } from 'typesafe-actions';
+import { Skrivemodus } from "../types/skrivemodus";
+import { SkrivemodusActions, SkrivemodusActionTypes } from "../actions/skrivemodus";
+import { getType } from "typesafe-actions";
 
 const initialState: Skrivemodus = {
   skrivemodus: true,

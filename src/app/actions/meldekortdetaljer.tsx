@@ -1,12 +1,12 @@
-import { ActionType, createAction, createAsyncAction } from 'typesafe-actions';
-import { AxiosError } from 'axios';
-import { Meldekortdetaljer } from '../types/meldekort';
+import { ActionType, createAction, createAsyncAction } from "typesafe-actions";
+import { AxiosError } from "axios";
+import { Meldekortdetaljer } from "../types/meldekort";
 
 export enum MeldekortdetaljerTypeKeys {
-  HENT_MELDEKORTDETALJER = 'HENT_MELDEKORTDETALJER',
-  HENT_MELDEKORTDETALJER_OK = 'HENT_MELDEKORTDETALJER_OK',
-  HENT_MELDEKORTDETALJER_FEILET = 'HENT_MELDEKORTDETALJER_FEILET',
-  RESETT_MELDEKORTDETALJER = 'RESETT_MELDEKORTDETALJER'
+  HENT_MELDEKORTDETALJER = "HENT_MELDEKORTDETALJER",
+  HENT_MELDEKORTDETALJER_OK = "HENT_MELDEKORTDETALJER_OK",
+  HENT_MELDEKORTDETALJER_FEILET = "HENT_MELDEKORTDETALJER_FEILET",
+  RESETT_MELDEKORTDETALJER = "RESETT_MELDEKORTDETALJER"
 }
 
 export const MeldekortdetaljerActions = {

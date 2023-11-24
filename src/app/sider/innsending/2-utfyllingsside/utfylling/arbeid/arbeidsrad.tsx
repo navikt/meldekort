@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { Input } from 'nav-frontend-skjema';
-import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from '../../../../../utils/ukedager';
-import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
-import { UtfyltDag } from '../utfyltDagConfig';
-import { RootState } from '../../../../../store/configureStore';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { formatHtmlMessage } from '../../../../../utils/intlUtil';
-import { Undertittel } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../../../../actions/innsending';
-import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
+import * as React from "react";
+import { Input } from "nav-frontend-skjema";
+import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from "../../../../../utils/ukedager";
+import { FeilIDager, InnsendingState } from "../../../../../types/innsending";
+import { UtfyltDag } from "../utfyltDagConfig";
+import { RootState } from "../../../../../store/configureStore";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { formatHtmlMessage } from "../../../../../utils/intlUtil";
+import { Undertittel } from "nav-frontend-typografi";
+import { InnsendingActions } from "../../../../../actions/innsending";
+import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -37,16 +37,16 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
     const match = event.target.value.match(/^\d?\d{0,2}?([,.]?\d?)?$/);
     if (match !== null) {
       let nyVerdi = event.target.value;
-      if (match[0] === ',' || match[0] === '.') {
-        nyVerdi = '0.';
-      } else if (nyVerdi.includes(',')) {
-        nyVerdi = nyVerdi.replace(',', '.');
+      if (match[0] === "," || match[0] === ".") {
+        nyVerdi = "0.";
+      } else if (nyVerdi.includes(",")) {
+        nyVerdi = nyVerdi.replace(",", ".");
       }
       const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
         if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {
           return {
             ...dag,
-            arbeidetTimer: event.target.value === '' ? undefined : nyVerdi,
+            arbeidetTimer: event.target.value === "" ? undefined : nyVerdi,
           };
         }
         return { ...dag };
@@ -76,7 +76,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
       const { utfylteDager } = this.props.innsending;
       const utfyltDagIndex = this.finnIndex(ukedag);
 
-      if (typeof this.props.feilIDager !== 'undefined') {
+      if (typeof this.props.feilIDager !== "undefined") {
         this.props.feilIDager.forEach(e =>
           e.uke === this.props.ukeNummer && e.dag === ukedag
             ? (feilLokal = true)
@@ -95,17 +95,17 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
           }
           bredde="XS"
           step={0.5}
-          type={'text'}
+          type={"text"}
           value={
-            typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== 'undefined'
+            typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== "undefined"
               ? utfylteDager[utfyltDagIndex].arbeidetTimer
-              : ''
+              : ""
           }
           onChange={event => {
             this.setTimer(event, ukedag);
           }}
           feil={
-            typeof this.props.feilIDager !== 'undefined' ? feilLokal : false
+            typeof this.props.feilIDager !== "undefined" ? feilLokal : false
           }
         />
       );
@@ -124,11 +124,11 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
       <div
         className="arbeidsrad"
         style={{
-          backgroundColor: feil ? '#e79999' : '',
-          borderBottom: bareArbeid ? 'solid 1px #c6c2bf' : 'none',
+          backgroundColor: feil ? "#e79999" : "",
+          borderBottom: bareArbeid ? "solid 1px #c6c2bf" : "none",
         }}
       >
-        <Undertittel tag="h4" className={'arbeidsrad__tittel'}>
+        <Undertittel tag="h4" className={"arbeidsrad__tittel"}>
           {formatHtmlMessage(tekstId)}
         </Undertittel>
         <UtvidetInformasjon>

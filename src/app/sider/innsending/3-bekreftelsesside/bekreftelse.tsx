@@ -1,15 +1,15 @@
-import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
-import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import { connect } from 'react-redux';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../../actions/innsending';
-import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
-import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
-import { Person } from '../../../types/person';
-import { RootState } from '../../../store/configureStore';
+import * as React from "react";
+import AlertStripe from "nav-frontend-alertstriper";
+import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortdetaljer";
+import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
+import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
+import { connect } from "react-redux";
+import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
+import { InnsendingActions } from "../../../actions/innsending";
+import { InnsendingState, Innsendingstyper } from "../../../types/innsending";
+import { MeldekortdetaljerState } from "../../../reducers/meldekortdetaljerReducer";
+import { Person } from "../../../types/person";
+import { RootState } from "../../../store/configureStore";
 import {
   Fravaer,
   FravaerTypeEnum,
@@ -19,21 +19,21 @@ import {
   Meldekortdetaljer as MDetaljer,
   MeldekortdetaljerInnsending,
   SendtMeldekort
-} from '../../../types/meldekort';
-import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
-import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
-import { scrollTilElement } from '../../../utils/scroll';
-import { Dispatch } from 'redux';
+} from "../../../types/meldekort";
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from "../../../utils/intlUtil";
+import { BekreftCheckboksPanel } from "nav-frontend-skjema";
+import { scrollTilElement } from "../../../utils/scroll";
+import { Dispatch } from "redux";
 import { Navigate } from "react-router-dom";
-import { erAktivtMeldekortGyldig } from '../../../utils/meldekortUtils';
-import UIAlertstripeWrapper from '../../../components/feil/UIAlertstripeWrapper';
-import { selectFeilmelding } from '../../../selectors/ui';
-import { BaksystemFeilmelding } from '../../../types/ui';
-import { UiActions } from '../../../actions/ui';
-import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
-import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
+import UIAlertstripeWrapper from "../../../components/feil/UIAlertstripeWrapper";
+import { selectFeilmelding } from "../../../selectors/ui";
+import { BaksystemFeilmelding } from "../../../types/ui";
+import { UiActions } from "../../../actions/ui";
+import { UtfyltDag } from "../2-utfyllingsside/utfylling/utfyltDagConfig";
+import { loggAktivitet } from "../../../utils/amplitudeUtils";
+import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
+import NavFrontendSpinner from "nav-frontend-spinner";
 import { Konstanter } from "../../../utils/consts";
 
 interface MapStateToProps {
@@ -71,7 +71,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     super(props);
     this.state = {
       meldekortdetaljer: this.konverterInnsendingTilMeldekortdetaljer(),
-      feilmelding: '',
+      feilmelding: "",
       senderMeldekort: false,
     };
   }
@@ -80,20 +80,20 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     const { settLocale, locale, aktivtMeldekort } = this.props;
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
-    scrollTilElement(undefined, 'auto');
-    loggAktivitet('Viser bekreftelse');
+    scrollTilElement(undefined, "auto");
+    loggAktivitet("Viser bekreftelse");
   }
 
   konverterInnsendingTilMeldekortdetaljer = (): MeldekortdetaljerState => {
     const { aktivtMeldekort, innsending } = this.props;
     const mDet = {
       meldekortdetaljer: {
-        id: '',
+        id: "",
         meldekortId: this.erInnsendingKorrigering()
           ? innsending.korrigertMeldekortId
           : aktivtMeldekort.meldekortId,
         meldeperiode: aktivtMeldekort.meldeperiode.periodeKode,
-        arkivnokkel: '1-ELEKTRONISK',
+        arkivnokkel: "1-ELEKTRONISK",
         kortType: this.erInnsendingKorrigering()
           ? KortType.KORRIGERT_ELEKTRONISK
           : aktivtMeldekort.kortType,
@@ -101,28 +101,28 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         lestDato: new Date(),
         begrunnelse: this.erInnsendingKorrigering()
           ? innsending.begrunnelse.valgtArsakTekst
-          : '',
+          : "",
         sporsmal: {
           arbeidet:
             innsending.sporsmalsobjekter[0].checked === undefined
               ? false
-              : innsending.sporsmalsobjekter[0].checked.endsWith('ja'),
+              : innsending.sporsmalsobjekter[0].checked.endsWith("ja"),
           kurs:
             innsending.sporsmalsobjekter[1].checked === undefined
               ? false
-              : innsending.sporsmalsobjekter[1].checked.endsWith('ja'),
+              : innsending.sporsmalsobjekter[1].checked.endsWith("ja"),
           syk:
             innsending.sporsmalsobjekter[2].checked === undefined
               ? false
-              : innsending.sporsmalsobjekter[2].checked.endsWith('ja'),
+              : innsending.sporsmalsobjekter[2].checked.endsWith("ja"),
           annetFravaer:
             innsending.sporsmalsobjekter[3].checked === undefined
               ? false
-              : innsending.sporsmalsobjekter[3].checked.endsWith('ja'),
+              : innsending.sporsmalsobjekter[3].checked.endsWith("ja"),
           arbeidssoker:
             innsending.sporsmalsobjekter[4].checked === undefined
               ? false
-              : innsending.sporsmalsobjekter[4].checked.endsWith('ja'),
+              : innsending.sporsmalsobjekter[4].checked.endsWith("ja"),
           signatur: false,
           meldekortDager: this.hentMeldekortDager(),
         },
@@ -154,7 +154,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         this.props.innsending.innsendingstype !== Innsendingstyper.KORRIGERING,
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
-      sesjonsId: 'IKKE I BRUK',
+      sesjonsId: "IKKE I BRUK",
       fravaersdager: this.hentFravaersdager(meldekortdetaljer),
     };
   };
@@ -163,7 +163,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     const fravar: Fravaer[] = [];
     meldekortdetaljer.sporsmal.meldekortDager.forEach(meldekortDag => {
       if (
-        typeof meldekortDag.arbeidetTimerSum !== 'undefined' &&
+        typeof meldekortDag.arbeidetTimerSum !== "undefined" &&
         meldekortDag.arbeidetTimerSum > 0
       ) {
         fravar.push({
@@ -203,7 +203,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       meldekortdager.push({
         dag: dagTeller,
         arbeidetTimerSum:
-          typeof utfyltDag.arbeidetTimer === 'undefined'
+          typeof utfyltDag.arbeidetTimer === "undefined"
             ? 0
             : Number(utfyltDag.arbeidetTimer),
         syk: utfyltDag.syk,
@@ -222,7 +222,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     if (detaljer.meldekortdetaljer.sporsmal.signatur) {
       this.setState(prevState => ({
         ...prevState,
-        feilmelding: '',
+        feilmelding: "",
       }));
     }
 
@@ -241,7 +241,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
         ...prevState,
         feilmelding: formatMessage("utfylling.bekreft.feil"),
       }));
-      scrollTilElement('periodebanner');
+      scrollTilElement("periodebanner");
     } else {
       this.setState(prevState => ({
         ...prevState,
@@ -272,7 +272,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       this.props.baksystemFeilmelding.visFeilmelding &&
       this.state.senderMeldekort
     ) {
-      scrollTilElement(undefined, 'auto');
+      scrollTilElement(undefined, "auto");
       this.setState(prevState => ({
         ...prevState,
         senderMeldekort: false,
@@ -291,13 +291,13 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={'XL'} />
+          <NavFrontendSpinner type={"XL"} />
         </div>
       );
     }
 
-    if (typeof valideringsResultat !== 'undefined') {
-      return valideringsResultat.status === 'FEIL' ? (
+    if (typeof valideringsResultat !== "undefined") {
+      return valideringsResultat.status === "FEIL" ? (
         <Navigate
           to="../utfylling"
           replace
@@ -319,8 +319,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
           {this.props.baksystemFeilmelding.visFeilmelding ? (
             <UIAlertstripeWrapper />
           ) : null}
-          <section className={'seksjon'}>
-            <AlertStripe type={'advarsel'}>
+          <section className={"seksjon"}>
+            <AlertStripe type={"advarsel"}>
               <span>
                 {formatHtmlMessage("overskrift.steg3.info.ikkeSendt")}
                 {formatHtmlMessage("overskrift.steg3.info.bekreftVerdier")}
@@ -328,8 +328,8 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             </AlertStripe>
           </section>
           <div id="feilmelding">
-            {this.state.feilmelding === '' ? null : (
-              <AlertStripe type={'feil'} className={'utfylling__feilmelding'}>
+            {this.state.feilmelding === "" ? null : (
+              <AlertStripe type={"feil"} className={"utfylling__feilmelding"}>
                 {this.state.feilmelding}
               </AlertStripe>
             )}
@@ -346,23 +346,23 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             typeYtelsePostfix={typeYtelsePostfix}
           />
           <BekreftCheckboksPanel
-            className={'bekreftInfo'}
+            className={"bekreftInfo"}
             onChange={() => this.settChecked()}
             checked={meldekortdetaljer.sporsmal.signatur}
-            label={formatMessage('utfylling.bekreftAnsvar')}
-            feil={feilmelding !== ''}
+            label={formatMessage("utfylling.bekreftAnsvar")}
+            feil={feilmelding !== ""}
           >
             <Normaltekst>
               {formatHtmlMessage("utfylling.bekreft" + typeYtelsePostfix)}
             </Normaltekst>
           </BekreftCheckboksPanel>
           <section className="seksjon flex-innhold sentrert">
-            <div className={'knapper-container'}>
+            <div className={"knapper-container"}>
               <NavKnapp
                 type={KnappTyper.HOVED}
-                nestePath={'../kvittering'}
-                tekstid={'naviger.send'}
-                className={'navigasjonsknapp'}
+                nestePath={"../kvittering"}
+                tekstid={"naviger.send"}
+                className={"navigasjonsknapp"}
                 validering={this.valider}
                 spinner={this.state.senderMeldekort}
                 disabled={this.state.senderMeldekort}
@@ -371,23 +371,23 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
                 type={KnappTyper.STANDARD}
                 nestePath={
                   this.hoppOverUtfylling()
-                    ? '../sporsmal'
-                    : '../utfylling'
+                    ? "../sporsmal"
+                    : "../utfylling"
                 }
-                tekstid={'naviger.forrige'}
-                className={'navigasjonsknapp'}
+                tekstid={"naviger.forrige"}
+                className={"navigasjonsknapp"}
               />
               <NavKnapp
                 type={KnappTyper.FLAT}
-                nestePath={ Konstanter.basePath + '/om-meldekort' }
-                tekstid={'naviger.avbryt'}
-                className={'navigasjonsknapp'}
+                nestePath={ Konstanter.basePath + "/om-meldekort" }
+                tekstid={"naviger.avbryt"}
+                className={"navigasjonsknapp"}
               />
             </div>
           </section>
         </main>
       ) : (
-        <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
+        <Navigate to={ Konstanter.basePath + "/om-meldekort" } replace />
       );
     }
   }

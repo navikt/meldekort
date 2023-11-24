@@ -1,7 +1,7 @@
-import { MenyState } from '../types/meny';
-import menyConfig from '../utils/menyConfig';
-import { MenyActions, MenyActionTypes } from '../actions/meny';
-import { getType } from 'typesafe-actions';
+import { MenyState } from "../types/meny";
+import menyConfig from "../utils/menyConfig";
+import { MenyActions, MenyActionTypes } from "../actions/meny";
+import { getType } from "typesafe-actions";
 
 const initialState: MenyState = {
   valgtMenyPunkt: menyConfig[0],

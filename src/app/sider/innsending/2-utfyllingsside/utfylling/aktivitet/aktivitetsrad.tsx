@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from '../../../../../utils/ukedager';
-import { Checkbox } from 'nav-frontend-skjema';
-import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
-import { UtfyltDag } from '../utfyltDagConfig';
-import { RootState } from '../../../../../store/configureStore';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { formatHtmlMessage } from '../../../../../utils/intlUtil';
-import { Undertittel } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../../../../actions/innsending';
-import UtvidetInformasjon from '../../../../../components/utvidetinformasjon/utvidetInformasjon';
+import * as React from "react";
+import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from "../../../../../utils/ukedager";
+import { Checkbox } from "nav-frontend-skjema";
+import { FeilIDager, InnsendingState } from "../../../../../types/innsending";
+import { UtfyltDag } from "../utfyltDagConfig";
+import { RootState } from "../../../../../store/configureStore";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { formatHtmlMessage } from "../../../../../utils/intlUtil";
+import { Undertittel } from "nav-frontend-typografi";
+import { InnsendingActions } from "../../../../../actions/innsending";
+import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -36,17 +36,17 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
     const oppdaterteDager = this.props.innsending.utfylteDager.map(dag => {
       if (dag.uke === this.props.ukeNummer && dag.dag === ukedag) {
         switch (this.props.tekstId) {
-          case 'utfylling.tiltak':
+          case "utfylling.tiltak":
             return {
               ...dag,
               kurs: !dag.kurs,
             };
-          case 'utfylling.syk':
+          case "utfylling.syk":
             return {
               ...dag,
               syk: !dag.syk,
             };
-          case 'utfylling.ferieFravar':
+          case "utfylling.ferieFravar":
             return {
               ...dag,
               annetFravaer: !dag.annetFravaer,
@@ -68,13 +68,13 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
     );
     let checked: boolean = false;
     switch (this.props.tekstId) {
-      case 'utfylling.tiltak':
+      case "utfylling.tiltak":
         checked = valgtDag[0].kurs;
         break;
-      case 'utfylling.syk':
+      case "utfylling.syk":
         checked = valgtDag[0].syk;
         break;
-      case 'utfylling.ferieFravar':
+      case "utfylling.ferieFravar":
         checked = valgtDag[0].annetFravaer;
         break;
       default:
@@ -88,7 +88,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
       let erFeil: boolean = false;
       const ukedag = konverterUkedag(index);
 
-      if (typeof this.props.feilIDager !== 'undefined') {
+      if (typeof this.props.feilIDager !== "undefined") {
         this.props.feilIDager.forEach(e =>
           e.uke === this.props.ukeNummer && e.dag === ukedag
             ? (erFeil = true)
@@ -99,7 +99,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
       return (
         <Checkbox
           className={
-            erFeil ? 'aktivitet__checkbox_feil' : 'aktivitet__checkbox'
+            erFeil ? "aktivitet__checkbox_feil" : "aktivitet__checkbox"
           }
           key={ukedag}
           label={
@@ -111,7 +111,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
           onChange={() => {
             this.setVerdi(ukedag);
           }}
-          feil={typeof this.props.feilIDager !== 'undefined' ? erFeil : false}
+          feil={typeof this.props.feilIDager !== "undefined" ? erFeil : false}
         />
       );
     });
@@ -119,20 +119,20 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
 
   hentFarge = () => {
     switch (this.props.tekstId) {
-      case 'utfylling.tiltak':
+      case "utfylling.tiltak":
         return {
-          borderLeftColor: '#ffe9cc',
-          backgroundColor: this.props.feil ? '#e79999' : '',
+          borderLeftColor: "#ffe9cc",
+          backgroundColor: this.props.feil ? "#e79999" : "",
         };
-      case 'utfylling.syk':
+      case "utfylling.syk":
         return {
-          borderLeftColor: '#6ab889',
-          backgroundColor: this.props.feil ? '#e79999' : '',
+          borderLeftColor: "#6ab889",
+          backgroundColor: this.props.feil ? "#e79999" : "",
         };
-      case 'utfylling.ferieFravar':
+      case "utfylling.ferieFravar":
         return {
-          borderLeftColor: '#c1b5d0',
-          backgroundColor: this.props.feil ? '#e79999' : '',
+          borderLeftColor: "#c1b5d0",
+          backgroundColor: this.props.feil ? "#e79999" : "",
         };
       default:
         break;
@@ -143,7 +143,7 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
     const { tekstId, typeYtelsePostfix, forklaringId } = this.props;
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
-        <Undertittel tag="h4" className={'aktivitetsrad__tittel'}>
+        <Undertittel tag="h4" className={"aktivitetsrad__tittel"}>
           {formatHtmlMessage(tekstId)}
         </Undertittel>
         <UtvidetInformasjon>

@@ -1,9 +1,9 @@
-import React from 'react';
-import { KortStatus, Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from '../types/meldekort';
-import { Innsendingstyper } from '../types/innsending';
-import { hentDatoPeriode, hentUkePeriode } from './dates';
-import { isEmpty } from 'ramda';
-import { Person } from '../types/person';
+import React from "react";
+import { KortStatus, Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from "../types/meldekort";
+import { Innsendingstyper } from "../types/innsending";
+import { hentDatoPeriode, hentUkePeriode } from "./dates";
+import { isEmpty } from "ramda";
+import { Person } from "../types/person";
 
 export const erMeldekortSendtInnTidligere = (
   meldekort: Meldekort,
@@ -40,7 +40,7 @@ export const erAktivtMeldekortGyldig = (
 export const erBrukerRegistrertIArena = (
   arbeidssokerStatus: string
 ): boolean => {
-  return !(arbeidssokerStatus == null || arbeidssokerStatus === '');
+  return !(arbeidssokerStatus == null || arbeidssokerStatus === "");
 };
 
 export const harKortStatusOPPRellerSENDT = (meldekort: Meldekort) =>
@@ -51,7 +51,7 @@ export const hentInnsendingsklareMeldekort = (
   meldekort: Meldekort[],
   sendteMeldekort: SendtMeldekort[]
 ): Meldekort[] => {
-  if (typeof meldekort === 'undefined') {
+  if (typeof meldekort === "undefined") {
     return [];
   }
   return meldekort.filter(meldekortObj => {
@@ -169,6 +169,6 @@ export const returnerMeldekortListaMedFlereMeldekortIgjen = (
 };
 
 export const hentPeriodeDatoKolonner: MeldekortKolonne[] = [
-  { key: 'periode', label: <span>Periode</span> },
-  { key: 'dato', label: <span>Dato</span> },
+  { key: "periode", label: <span>Periode</span> },
+  { key: "dato", label: <span>Dato</span> },
 ];

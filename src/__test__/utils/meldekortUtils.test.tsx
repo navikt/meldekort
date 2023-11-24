@@ -2,12 +2,12 @@ import {
   erAktivtMeldekortGyldig,
   erBrukerRegistrertIArena,
   erMeldekortSendtInnTidligere
-} from '../../app/utils/meldekortUtils';
-import { mkTEST } from '../testSetup/testData';
-import { KortType } from '../../app/types/meldekort';
-import { Innsendingstyper } from '../../app/types/innsending';
+} from "../../app/utils/meldekortUtils";
+import { mkTEST } from "../testSetup/testData";
+import { KortType } from "../../app/types/meldekort";
+import { Innsendingstyper } from "../../app/types/innsending";
 
-it('erMeldekortSendtInnTidligere', () => {
+it("erMeldekortSendtInnTidligere", () => {
   expect(
     erMeldekortSendtInnTidligere(mkTEST, [
       { meldekortId: 0, kortType: KortType.ELEKTRONISK },
@@ -29,7 +29,7 @@ it('erMeldekortSendtInnTidligere', () => {
   ).toBe(false);
 });
 
-it('erAktivtMeldekortGyldig', () => {
+it("erAktivtMeldekortGyldig", () => {
   expect(
     erAktivtMeldekortGyldig(
       mkTEST,
@@ -60,8 +60,8 @@ it('erAktivtMeldekortGyldig', () => {
   ).toBe(false);
 });
 
-it('erBrukerRegistrertIArena', () => {
-  expect(erBrukerRegistrertIArena('ARBS')).toBe(true);
-  expect(erBrukerRegistrertIArena('')).toBe(false);
-  expect(erBrukerRegistrertIArena('test')).toBe(true);
+it("erBrukerRegistrertIArena", () => {
+  expect(erBrukerRegistrertIArena("ARBS")).toBe(true);
+  expect(erBrukerRegistrertIArena("")).toBe(false);
+  expect(erBrukerRegistrertIArena("test")).toBe(true);
 });

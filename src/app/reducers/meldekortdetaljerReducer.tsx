@@ -1,6 +1,6 @@
-import { KortType, Meldekortdetaljer } from '../types/meldekort';
-import { MeldekortdetaljerActions, MeldekortdetaljerActionTypes } from '../actions/meldekortdetaljer';
-import { getType } from 'typesafe-actions';
+import { KortType, Meldekortdetaljer } from "../types/meldekort";
+import { MeldekortdetaljerActions, MeldekortdetaljerActionTypes } from "../actions/meldekortdetaljer";
+import { getType } from "typesafe-actions";
 
 export interface MeldekortdetaljerState {
   meldekortdetaljer: Meldekortdetaljer;
@@ -8,10 +8,10 @@ export interface MeldekortdetaljerState {
 
 const initialState: MeldekortdetaljerState = {
   meldekortdetaljer: {
-    id: '',
+    id: "",
     meldekortId: 0,
-    meldeperiode: '',
-    arkivnokkel: '',
+    meldeperiode: "",
+    arkivnokkel: "",
     kortType: KortType.KORRIGERT_ELEKTRONISK,
     meldeDato: new Date(),
     lestDato: new Date(),
@@ -24,7 +24,7 @@ const initialState: MeldekortdetaljerState = {
       signatur: false,
       meldekortDager: [],
     },
-    begrunnelse: '',
+    begrunnelse: "",
   }
 };
 

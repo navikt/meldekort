@@ -1,23 +1,23 @@
-import * as React from 'react';
-import { useEffect } from 'react';
-import { RootState } from '../../store/configureStore';
-import { PersonActions } from '../../actions/person';
-import { InnsendingActions } from '../../actions/innsending';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { Meldekort, SendtMeldekort } from '../../types/meldekort';
-import { Innsendingstyper } from '../../types/innsending';
-import { MeldeForm, Person } from '../../types/person';
+import * as React from "react";
+import { useEffect } from "react";
+import { RootState } from "../../store/configureStore";
+import { PersonActions } from "../../actions/person";
+import { InnsendingActions } from "../../actions/innsending";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { Meldekort, SendtMeldekort } from "../../types/meldekort";
+import { Innsendingstyper } from "../../types/innsending";
+import { MeldeForm, Person } from "../../types/person";
 import { Navigate } from "react-router-dom";
-import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import { AktivtMeldekortActions } from "../../actions/aktivtMeldekort";
 import {
   hentInnsendingsklareMeldekort,
   hentMeldekortRaderFraPerson,
   hentPeriodeDatoKolonner
-} from '../../utils/meldekortUtils';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import EtterregistreringInnhold from './etterregistreringInnhold';
-import { loggAktivitet } from '../../utils/amplitudeUtils';
+} from "../../utils/meldekortUtils";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import EtterregistreringInnhold from "./etterregistreringInnhold";
+import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
 
 interface MapStateToProps {
@@ -63,13 +63,13 @@ function EtterregistrerMeldekort({
       resetInnsending();
     }
     hentPerson();
-    loggAktivitet('Viser etterregistrere meldekort');
+    loggAktivitet("Viser etterregistrere meldekort");
   }, []);
 
   return person.meldeform === MeldeForm.IKKE_SATT ? (
-    <NavFrontendSpinner type={'XL'} className={'spinforyourlife'} />
+    <NavFrontendSpinner type={"XL"} className={"spinforyourlife"} />
   ) : rows.length === 0 ? (
-    <Navigate to={ Konstanter.basePath + '/om-meldekort' } replace />
+    <Navigate to={ Konstanter.basePath + "/om-meldekort" } replace />
   ) : !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <EtterregistreringInnhold
       columns={columns}
@@ -78,7 +78,7 @@ function EtterregistrerMeldekort({
     />
   ) : (
     <Navigate
-      to={ Konstanter.basePath + '/etterregistrer-meldekort/innsending' }
+      to={ Konstanter.basePath + "/etterregistrer-meldekort/innsending" }
       replace
     />
   );

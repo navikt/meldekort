@@ -1,12 +1,12 @@
-import { MeldekortState } from '../types/meldekort';
-import { MeldekortActions, MeldekortActionTypes } from '../actions/meldekort';
-import { getType } from 'typesafe-actions';
+import { MeldekortState } from "../types/meldekort";
+import { MeldekortActions, MeldekortActionTypes } from "../actions/meldekort";
+import { getType } from "typesafe-actions";
 
 const initialState: MeldekortState = {
   sendteMeldekort: [],
   infomelding: {
-    norsk: '',
-    engelsk: '',
+    norsk: "",
+    engelsk: "",
   }
 };
 

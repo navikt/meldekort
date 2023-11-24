@@ -1,7 +1,7 @@
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import * as React from 'react';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import veileder from '../../ikoner/veileder.svg';
+import { Normaltekst, Undertittel } from "nav-frontend-typografi";
+import * as React from "react";
+import Veilederpanel from "nav-frontend-veilederpanel";
+import veileder from "../../ikoner/veileder.svg";
 import { formatHtmlMessage } from "../../utils/intlUtil";
 
 export const ikkeFortsetteRegistrertContent = () => {

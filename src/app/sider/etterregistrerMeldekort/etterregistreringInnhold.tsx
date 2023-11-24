@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import Tabell from '../../components/tabell/desktop/tabell';
-import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
-import { Innsendingstyper } from '../../types/innsending';
-import { Meldekort, MeldekortKolonne, MeldekortRad } from '../../types/meldekort';
+import * as React from "react";
+import { Innholdstittel } from "nav-frontend-typografi";
+import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
+import Sprakvelger from "../../components/sprakvelger/sprakvelger";
+import Tabell from "../../components/tabell/desktop/tabell";
+import NavKnapp, { KnappTyper } from "../../components/knapp/navKnapp";
+import { Innsendingstyper } from "../../types/innsending";
+import { Meldekort, MeldekortKolonne, MeldekortRad } from "../../types/meldekort";
 
 interface Props {
   nesteAktivtMeldekort: Meldekort;
@@ -22,7 +22,7 @@ function EtterregistreringInnhold({
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
-          {formatMessage('overskrift.etterregistrering.innsending')}
+          {formatMessage("overskrift.etterregistrering.innsending")}
         </Innholdstittel>
         <Sprakvelger />
       </section>
@@ -38,8 +38,8 @@ function EtterregistreringInnhold({
       <section className="seksjon flex-innhold sentrert">
         <NavKnapp
           type={KnappTyper.HOVED}
-          nestePath={'innsending'}
-          tekstid={'naviger.neste'}
+          nestePath={"innsending"}
+          tekstid={"naviger.neste"}
           nesteAktivtMeldekort={nesteAktivtMeldekort}
           nesteInnsendingstype={Innsendingstyper.ETTERREGISTRERING}
         />

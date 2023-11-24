@@ -1,4 +1,4 @@
-declare module '@navikt/nav-chatbot' {
+declare module "@navikt/nav-chatbot" {
   const content: any;
   export default content;
 }

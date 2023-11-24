@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { ClassAttributes } from 'react';
-import { createPortal } from 'react-dom';
+import * as React from "react";
+import { ClassAttributes } from "react";
+import { createPortal } from "react-dom";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 class DOMPortal extends React.Component<ClassAttributes<any>, object> {

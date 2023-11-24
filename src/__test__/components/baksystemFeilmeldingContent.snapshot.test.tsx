@@ -1,5 +1,5 @@
-import { baksystemFeilmeldingContent } from '../../app/components/feil/baksystemFeilmeldingContent';
+import { baksystemFeilmeldingContent } from "../../app/components/feil/baksystemFeilmeldingContent";
 
-it('BaksystemFeilmeldingContent', () => {
+it("BaksystemFeilmeldingContent", () => {
   expect(baksystemFeilmeldingContent()).toMatchSnapshot();
 });

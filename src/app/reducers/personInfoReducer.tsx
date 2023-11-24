@@ -1,6 +1,6 @@
-import { PersonInfo } from '../types/person';
-import { PersonInfoActions, PersonInfoActionTypes } from '../actions/personInfo';
-import { getType } from 'typesafe-actions';
+import { PersonInfo } from "../types/person";
+import { PersonInfoActions, PersonInfoActionTypes } from "../actions/personInfo";
+import { getType } from "typesafe-actions";
 
 export interface PersonInfoState {
   personInfo: PersonInfo;
@@ -9,9 +9,9 @@ export interface PersonInfoState {
 const initialState: PersonInfoState = {
   personInfo: {
     personId: 0,
-    fodselsnr: '',
-    etternavn: '',
-    fornavn: '',
+    fodselsnr: "",
+    etternavn: "",
+    fornavn: "",
   }
 };
 

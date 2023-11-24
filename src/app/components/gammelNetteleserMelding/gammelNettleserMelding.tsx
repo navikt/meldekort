@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import { browserName, browserVersion, OSName } from '../../utils/browsers';
-import { Nettlesere } from '../../utils/consts';
+import * as React from "react";
+import { AlertStripeAdvarsel } from "nav-frontend-alertstriper";
+import { browserName, browserVersion, OSName } from "../../utils/browsers";
+import { Nettlesere } from "../../utils/consts";
 import { formatHtmlMessage } from "../../utils/intlUtil";
 
 const GammelNettleserMelding: React.FunctionComponent = () => {
-  const browser = browserName + ' v. ' + browserVersion;
+  const browser = browserName + " v. " + browserVersion;
   const chrome = () => {
     return (
-      <a href={Nettlesere.chrome} target={'_blank'} rel={'noopener noreferrer'}>
+      <a href={Nettlesere.chrome} target={"_blank"} rel={"noopener noreferrer"}>
         Chrome
       </a>
     );
@@ -17,8 +17,8 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
     return (
       <a
         href={Nettlesere.firefox}
-        target={'_blank'}
-        rel={'noopener noreferrer'}
+        target={"_blank"}
+        rel={"noopener noreferrer"}
       >
         Firefox
       </a>
@@ -26,7 +26,7 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
   };
   const edge = () => {
     return (
-      <a href={Nettlesere.edge} target={'_blank'} rel={'noopener noreferrer'}>
+      <a href={Nettlesere.edge} target={"_blank"} rel={"noopener noreferrer"}>
         Microsoft Edge
       </a>
     );
@@ -34,25 +34,25 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
 
   const lenker = () => {
     switch (browserName) {
-      case 'Chrome':
+      case "Chrome":
         return chrome();
-      case 'Firefox':
+      case "Firefox":
         return firefox();
-      case 'Microsoft Edge':
-      case 'Internet Explorer':
+      case "Microsoft Edge":
+      case "Internet Explorer":
         return edge();
       default:
         return (
           <span>
             {chrome()}, {firefox()}
-            {OSName === 'Windows' ? <span>, {edge()}</span> : ''}
+            {OSName === "Windows" ? <span>, {edge()}</span> : ""}
           </span>
         );
     }
   };
 
   return (
-    <div className={'gammelNettleser'}>
+    <div className={"gammelNettleser"}>
       <AlertStripeAdvarsel>
         {formatHtmlMessage("gammelNettleser.melding", { 0: browser })}
         {lenker()}

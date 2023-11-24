@@ -1,14 +1,14 @@
-import React from 'react';
-import { createIntl } from 'react-intl';
-import { store } from '../store/configureStore';
-import { Konstanter } from './consts';
-import { fetchGet } from '../api/api';
-import Environment from './env';
-import { formaterDatoIso } from './dates';
-import { UiActions } from '../actions/ui';
-import { updateIntl } from 'react-intl-redux';
-import { InnsendingActions } from '../actions/innsending';
-import { Begrunnelse } from '../types/innsending';
+import React from "react";
+import { createIntl } from "react-intl";
+import { store } from "../store/configureStore";
+import { Konstanter } from "./consts";
+import { fetchGet } from "../api/api";
+import Environment from "./env";
+import { formaterDatoIso } from "./dates";
+import { UiActions } from "../actions/ui";
+import { updateIntl } from "react-intl-redux";
+import { InnsendingActions } from "../actions/innsending";
+import { Begrunnelse } from "../types/innsending";
 
 interface LocaleCache {
   label: string;
@@ -28,8 +28,8 @@ export const downloadMessagesAndDispatch = (locale: string, from: Date) => {
     .then((messages: object) => {
       // Vi må oppdatere teksten til den valgte begrunnelsen
       const innsending = store.getState().innsending;
-      const optionsString = messages['korriger.begrunnelse.valg'];
-      const options = JSON.parse(optionsString ? optionsString : '{}');
+      const optionsString = messages["korriger.begrunnelse.valg"];
+      const options = JSON.parse(optionsString ? optionsString : "{}");
       const begrunnelse: Begrunnelse = {
         valgtArsak: innsending.begrunnelse.valgtArsak,
         valgtArsakTekst: options[innsending.begrunnelse.valgtArsak],
@@ -73,9 +73,9 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
   try {
     const data = await fetchGet(
       Konstanter.hentAlleTekster +
-        '?sprak=' +
+        "?sprak=" +
         sprak +
-        '&fraDato=' +
+        "&fraDato=" +
         fraDatoFormatert
     );
 
@@ -97,13 +97,13 @@ export const downloadMessages = async (sprak: string, fraDato: Date) => {
 
     if (
       error instanceof Error &&
-      error.message === 'Request failed with status code 401'
+      error.message === "Request failed with status code 401"
     ) {
       // Bruker er ikke innlogget, sender ham til innogging
       window.location.assign(`${Environment().loginUrl}`);
       return {};
     } else {
-      throw 'Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.';
+      throw "Meldekortutfylling er ikke tilgjengelig, det kan skyldes vedlikehold eller teknisk feil. Prøv igjen senere.";
     }
   } finally {
     processing = false;
@@ -125,9 +125,9 @@ export const hentLocale = () => {
 
 // int.formatMessage kaster feil hvis det finnes HTML i tekst
 export const formatMessage = (id: string | undefined, values?: object): string => {
-  const definedId = id ? id : ''
+  const definedId = id ? id : ""
 
-  let text = hentIntl().messages[id ? id : ''] as string
+  let text = hentIntl().messages[id ? id : ""] as string
   if (!text) text = definedId
 
   if (values) {

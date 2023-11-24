@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Ingress from 'nav-frontend-typografi/lib/ingress';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
-import { hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
-import { RootState } from '../../store/configureStore';
-import { connect } from 'react-redux';
-import { Meldekort } from '../../types/meldekort';
+import * as React from "react";
+import Ingress from "nav-frontend-typografi/lib/ingress";
+import Innholdstittel from "nav-frontend-typografi/lib/innholdstittel";
+import Normaltekst from "nav-frontend-typografi/lib/normaltekst";
+import { hentDatoPeriode, hentUkePeriode } from "../../utils/dates";
+import { RootState } from "../../store/configureStore";
+import { connect } from "react-redux";
+import { Meldekort } from "../../types/meldekort";
 import { formatMessage } from "../../utils/intlUtil";
 
 interface MapStateToProps {
@@ -20,11 +20,11 @@ type Props = PeriodeBannerProps & MapStateToProps;
 
 const PeriodeBanner: React.FunctionComponent<Props> = props => {
   const { meldeperiode } = props.aktivtMeldekort;
-  const { className = '' } = props;
+  const { className = "" } = props;
   return (
     <section
       id="periodebanner"
-      className={'seksjon periodeBanner ' + className}
+      className={"seksjon periodeBanner " + className}
     >
       <Ingress className="flex-innhold sentrert">
         {formatMessage("meldekort.for.perioden")}

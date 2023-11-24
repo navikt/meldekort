@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Collapse } from 'react-collapse';
+import * as React from "react";
+import { Collapse } from "react-collapse";
 
 export interface OwnProps {
   /** Innholdet som skal vises */
@@ -7,7 +7,7 @@ export interface OwnProps {
   /** Overstyre state for om den skal vises eller ikke */
   erApen?: boolean;
   /** Default off */
-  ariaLive?: 'assertive' | 'polite' | 'off';
+  ariaLive?: "assertive" | "polite" | "off";
   /** Om skjul/vis skal animeres. Default true */
   animert?: boolean;
 }
@@ -16,12 +16,12 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
   children,
   animert = true,
   erApen = false,
-  ariaLive = 'off'
+  ariaLive = "off"
 }) => {
   const content = (
     <div aria-live={ariaLive}>
       {erApen ? (
-        <div className={'ekspanderbart__tekst'}>{children}</div>
+        <div className={"ekspanderbart__tekst"}>{children}</div>
       ) : (
         <div />
       )}
@@ -36,8 +36,8 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
       isOpened={erApen}
       theme={{
         collapse: erApen
-          ? 'ekspanderbartInnhold ekspanderbartInnhold--apen'
-          : 'ekspanderbartInnhold',
+          ? "ekspanderbartInnhold ekspanderbartInnhold--apen"
+          : "ekspanderbartInnhold",
       }}
     >
       {content}

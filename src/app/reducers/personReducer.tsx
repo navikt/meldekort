@@ -1,14 +1,14 @@
-import { MeldeForm, Person } from '../types/person';
-import { getType } from 'typesafe-actions';
-import { PersonActions, PersonActionTypes } from '../actions/person';
+import { MeldeForm, Person } from "../types/person";
+import { getType } from "typesafe-actions";
+import { PersonActions, PersonActionTypes } from "../actions/person";
 
 const initialState: Person = {
-  maalformkode: '',
+  maalformkode: "",
   meldeform: MeldeForm.IKKE_SATT,
   meldekort: [],
   etterregistrerteMeldekort: [],
   fravaer: [],
-  id: '',
+  id: "",
   antallGjenstaaendeFeriedager: 0
 };
 

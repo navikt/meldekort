@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
+import * as React from "react";
+import { Innholdstittel } from "nav-frontend-typografi";
+import Sprakvelger from "../../components/sprakvelger/sprakvelger";
+import { EkspanderbartpanelBase } from "nav-frontend-ekspanderbartpanel";
+import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
 
-import sporrende from '../../ikoner/sporrende.svg';
-import { InnsendingActions } from '../../actions/innsending';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { loggAktivitet } from '../../utils/amplitudeUtils';
+import sporrende from "../../ikoner/sporrende.svg";
+import { InnsendingActions } from "../../actions/innsending";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { loggAktivitet } from "../../utils/amplitudeUtils";
 
 interface SporsmalProps {
   overskriftId: string;
@@ -37,28 +37,28 @@ class OfteStilteSporsmal extends React.Component<
   sporsmal = (): SporsmalProps[] => {
     return [
       {
-        overskriftId: 'oss.sende.overskrift',
-        tekstId: 'oss.sende.tekst',
+        overskriftId: "oss.sende.overskrift",
+        tekstId: "oss.sende.tekst",
         id: 1,
       },
       {
-        overskriftId: 'oss.frist.overskrift',
-        tekstId: 'oss.frist.tekst',
+        overskriftId: "oss.frist.overskrift",
+        tekstId: "oss.frist.tekst",
         id: 2,
       },
       {
-        overskriftId: 'oss.korrigere.overskrift',
-        tekstId: 'oss.korrigere.tekst',
+        overskriftId: "oss.korrigere.overskrift",
+        tekstId: "oss.korrigere.tekst",
         id: 3,
       },
       {
-        overskriftId: 'oss.pengene.overskrift',
-        tekstId: 'oss.pengene.tekst',
+        overskriftId: "oss.pengene.overskrift",
+        tekstId: "oss.pengene.tekst",
         id: 4,
       },
       {
-        overskriftId: 'oss.utbetalt.overskrift',
-        tekstId: 'oss.utbetalt.tekst',
+        overskriftId: "oss.utbetalt.overskrift",
+        tekstId: "oss.utbetalt.tekst",
         id: 5,
       },
     ];
@@ -77,7 +77,7 @@ class OfteStilteSporsmal extends React.Component<
 
   componentDidMount() {
     this.props.resetInnsending();
-    loggAktivitet('Viser ofte stilte spørsmål');
+    loggAktivitet("Viser ofte stilte spørsmål");
   }
 
   render() {

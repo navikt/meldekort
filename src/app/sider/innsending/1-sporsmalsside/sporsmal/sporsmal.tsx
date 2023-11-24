@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { RadioPanelGruppe } from 'nav-frontend-skjema';
-import { formatHtmlMessage, formatMessage } from '../../../../utils/intlUtil';
-import { Sporsmal as Spm } from './sporsmalConfig';
-import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
+import * as React from "react";
+import { RadioPanelGruppe } from "nav-frontend-skjema";
+import { formatHtmlMessage, formatMessage } from "../../../../utils/intlUtil";
+import { Sporsmal as Spm } from "./sporsmalConfig";
+import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface SporsmalProps {
   sporsmalsobjekt: Spm;
@@ -14,9 +14,9 @@ interface SporsmalProps {
 
 const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
   const legend = (
-    <div className="typo-undertittel" style={{ marginBottom: '-2rem' }}>
+    <div className="typo-undertittel" style={{ marginBottom: "-2rem" }}>
       {formatHtmlMessage(props.sporsmalsobjekt.sporsmal)}
-      {props.formatertDato ? <span> {props.formatertDato} ? </span> : null}{' '}
+      {props.formatertDato ? <span> {props.formatertDato} ? </span> : null}{" "}
       {props.disabled ? (formatHtmlMessage("korrigering.registrert.merknad")) : null}
     </div>
   );
@@ -36,12 +36,12 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
         radios={[
           {
             label: formatMessage(props.sporsmalsobjekt.ja),
-            value: props.sporsmalsobjekt.kategori + '.ja',
+            value: props.sporsmalsobjekt.kategori + ".ja",
             disabled: props.disabled,
           },
           {
             label: formatMessage(props.sporsmalsobjekt.nei),
-            value: props.sporsmalsobjekt.kategori + '.nei',
+            value: props.sporsmalsobjekt.kategori + ".nei",
             disabled: props.disabled,
           },
         ]}

@@ -1,22 +1,22 @@
-import * as React from 'react';
-import Bekreftelse from './3-bekreftelsesside/bekreftelse';
-import Kvittering from './4-kvitteringsside/kvittering';
-import PeriodeBanner from '../../components/periodeBanner/periodeBanner';
-import Sporsmalsside from './1-sporsmalsside/sporsmalsside';
-import StegBanner from '../../components/stegBanner/stegBanner';
-import Utfylling from './2-utfyllingsside/utfyllingsside';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { InnsendingActions } from '../../actions/innsending';
-import { InnsendingState, Innsendingstyper } from '../../types/innsending';
-import { Meldekort, Meldekortdetaljer } from '../../types/meldekort';
-import { Location, Navigate, Route, RouteProps, Routes } from 'react-router-dom';
-import { RootState } from '../../store/configureStore';
-import { Sporsmal as Spm } from './1-sporsmalsside/sporsmal/sporsmalConfig';
-import { MeldekortdetaljerActions } from '../../actions/meldekortdetaljer';
-import { UtfyltDag } from './2-utfyllingsside/utfylling/utfyltDagConfig';
-import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
-import { hentKorrigertIdAndDispatch } from '../../utils/korrigeringUtils';
+import * as React from "react";
+import Bekreftelse from "./3-bekreftelsesside/bekreftelse";
+import Kvittering from "./4-kvitteringsside/kvittering";
+import PeriodeBanner from "../../components/periodeBanner/periodeBanner";
+import Sporsmalsside from "./1-sporsmalsside/sporsmalsside";
+import StegBanner from "../../components/stegBanner/stegBanner";
+import Utfylling from "./2-utfyllingsside/utfyllingsside";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { InnsendingActions } from "../../actions/innsending";
+import { InnsendingState, Innsendingstyper } from "../../types/innsending";
+import { Meldekort, Meldekortdetaljer } from "../../types/meldekort";
+import { Location, Navigate, Route, RouteProps, Routes } from "react-router-dom";
+import { RootState } from "../../store/configureStore";
+import { Sporsmal as Spm } from "./1-sporsmalsside/sporsmal/sporsmalConfig";
+import { MeldekortdetaljerActions } from "../../actions/meldekortdetaljer";
+import { UtfyltDag } from "./2-utfyllingsside/utfylling/utfyltDagConfig";
+import { downloadMessagesAndDispatch } from "../../utils/intlUtil";
+import { hentKorrigertIdAndDispatch } from "../../utils/korrigeringUtils";
 import { Konstanter } from "../../utils/consts";
 
 interface MapStateToProps {
@@ -73,21 +73,21 @@ class InnsendingRoutes extends React.Component<InnsendingRoutesProps, object> {
     const noPrint =
       pathname === `/send-meldekort/innsending/kvittering` ||
       pathname === `/tidligere-meldekort/detaljer/korriger/kvittering`
-        ? 'noPrint'
-        : '';
+        ? "noPrint"
+        : "";
 
     return innsending.innsendingstype === null ? (
-      <Navigate to={Konstanter.basePath + '/om-meldekort'} replace />
+      <Navigate to={Konstanter.basePath + "/om-meldekort"} replace />
     ) : (
       <div className="sideinnhold">
         <PeriodeBanner className={noPrint} />
         <StegBanner />
         <Routes>
-          <Route  path={'sporsmal'} element={<Sporsmalsside />} />
-          <Route path={'utfylling'} element={<Utfylling />} />
-          <Route path={'bekreftelse'} element={<Bekreftelse />} />
-          <Route path={'kvittering'} element={<Kvittering location={location} />} />
-          <Route path={'/'} element={<Navigate to={`sporsmal`} replace />} />
+          <Route  path={"sporsmal"} element={<Sporsmalsside />} />
+          <Route path={"utfylling"} element={<Utfylling />} />
+          <Route path={"bekreftelse"} element={<Bekreftelse />} />
+          <Route path={"kvittering"} element={<Kvittering location={location} />} />
+          <Route path={"/"} element={<Navigate to={`sporsmal`} replace />} />
         </Routes>
       </div>
     );

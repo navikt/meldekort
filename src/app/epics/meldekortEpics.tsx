@@ -1,16 +1,16 @@
-import { AppEpic } from '../store/configureStore';
-import { combineEpics } from 'redux-observable';
-import { from, of } from 'rxjs';
-import { catchError, concatMap, filter, map, switchMap } from 'rxjs/operators';
-import { HistoriskeMeldekortActions } from '../actions/historiskeMeldekort';
-import { InnsendingActions } from '../actions/innsending';
-import { MeldekortActions } from '../actions/meldekort';
-import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
-import { PersonActions } from '../actions/person';
-import { PersonStatusActions } from '../actions/personStatus';
-import { UiActions } from '../actions/ui';
-import { fetchInfomelding } from '../api/api';
-import { isActionOf } from 'typesafe-actions';
+import { AppEpic } from "../store/configureStore";
+import { combineEpics } from "redux-observable";
+import { from, of } from "rxjs";
+import { catchError, concatMap, filter, map, switchMap } from "rxjs/operators";
+import { HistoriskeMeldekortActions } from "../actions/historiskeMeldekort";
+import { InnsendingActions } from "../actions/innsending";
+import { MeldekortActions } from "../actions/meldekort";
+import { MeldekortdetaljerActions } from "../actions/meldekortdetaljer";
+import { PersonActions } from "../actions/person";
+import { PersonStatusActions } from "../actions/personStatus";
+import { UiActions } from "../actions/ui";
+import { fetchInfomelding } from "../api/api";
+import { isActionOf } from "typesafe-actions";
 
 // Lista i isActionOf må inneholde alle actions som skal fjerne feilmelding.
 const fjernFeilmelding: AppEpic = action$ =>
@@ -28,7 +28,7 @@ const fjernFeilmelding: AppEpic = action$ =>
     concatMap(() => {
       return [
         UiActions.visBaksystemFeilmelding({
-          content: () => '',
+          content: () => "",
           visFeilmelding: false,
         }),
       ];

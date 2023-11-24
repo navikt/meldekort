@@ -1,29 +1,29 @@
-import * as React from 'react';
-import { useEffect } from 'react';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
-import { BaksystemFeilmelding } from '../../types/ui';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Ingress, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../actions/innsending';
-import { Innsendingstyper } from '../../types/innsending';
-import { Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from '../../types/meldekort';
-import { PersonActions } from '../../actions/person';
-import { RootState } from '../../store/configureStore';
-import { selectFeilmelding } from '../../selectors/ui';
+import * as React from "react";
+import { useEffect } from "react";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import Sprakvelger from "../../components/sprakvelger/sprakvelger";
+import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
+import { BaksystemFeilmelding } from "../../types/ui";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { Ingress, Innholdstittel, Normaltekst } from "nav-frontend-typografi";
+import { InnsendingActions } from "../../actions/innsending";
+import { Innsendingstyper } from "../../types/innsending";
+import { Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from "../../types/meldekort";
+import { PersonActions } from "../../actions/person";
+import { RootState } from "../../store/configureStore";
+import { selectFeilmelding } from "../../selectors/ui";
 import { Navigate } from "react-router-dom";
-import { MeldeForm, Person } from '../../types/person';
-import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
+import { MeldeForm, Person } from "../../types/person";
+import { AktivtMeldekortActions } from "../../actions/aktivtMeldekort";
 import {
   hentInnsendingsklareMeldekort,
   hentMeldekortRaderFraPerson,
   hentPeriodeDatoKolonner
-} from '../../utils/meldekortUtils';
-import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
-import SendMeldekortInnhold from './sendMeldekortInnhold';
-import { loggAktivitet } from '../../utils/amplitudeUtils';
+} from "../../utils/meldekortUtils";
+import MeldingOmMeldekortSomIkkeErKlare from "./meldingOmIkkeKlareMeldekort";
+import SendMeldekortInnhold from "./sendMeldekortInnhold";
+import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { formatHtmlMessage } from "../../utils/intlUtil";
 
 interface MapStateToProps {
@@ -105,16 +105,16 @@ function SendMeldekort({
     }
     hentPerson();
 
-    loggAktivitet('Viser send');
+    loggAktivitet("Viser send");
   }, []);
 
   return !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
-          {' '}
+          {" "}
           {formatHtmlMessage("overskrift.innsending")}
-          {' '}
+          {" "}
         </Innholdstittel>
         <Sprakvelger />
       </section>

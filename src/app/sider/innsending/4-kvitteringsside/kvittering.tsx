@@ -1,33 +1,33 @@
-import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
-import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import { Location, RouteProps } from 'react-router-dom';
-import { RootState } from '../../../store/configureStore';
-import { InnsendingActions } from '../../../actions/innsending';
-import { Meldekort, MeldekortState, SendtMeldekort } from '../../../types/meldekort';
-import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { Person, PersonInfo } from '../../../types/person';
-import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
-import Ingress from 'nav-frontend-typografi/lib/ingress';
-import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
-import Environment from '../../../utils/env';
-import PrintKnapp from '../../../components/print/printKnapp';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { scrollTilElement } from '../../../utils/scroll';
-import { MeldekortActions } from '../../../actions/meldekort';
+import * as React from "react";
+import { Innholdstittel } from "nav-frontend-typografi";
+import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
+import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
+import { Location, RouteProps } from "react-router-dom";
+import { RootState } from "../../../store/configureStore";
+import { InnsendingActions } from "../../../actions/innsending";
+import { Meldekort, MeldekortState, SendtMeldekort } from "../../../types/meldekort";
+import { InnsendingState, Innsendingstyper } from "../../../types/innsending";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { Person, PersonInfo } from "../../../types/person";
+import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortdetaljer";
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from "../../../utils/intlUtil";
+import Ingress from "nav-frontend-typografi/lib/ingress";
+import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from "../../../utils/dates";
+import Environment from "../../../utils/env";
+import PrintKnapp from "../../../components/print/printKnapp";
+import AlertStripe from "nav-frontend-alertstriper";
+import { scrollTilElement } from "../../../utils/scroll";
+import { MeldekortActions } from "../../../actions/meldekort";
 import {
   meldekortSomKanSendes,
   nesteMeldekortKanSendes,
   returnerMeldekortListaMedFlereMeldekortIgjen
-} from '../../../utils/meldekortUtils';
-import { PersonInfoActions } from '../../../actions/personInfo';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import { loggAktivitet } from '../../../utils/amplitudeUtils';
-import { finnTypeYtelsePostfix, TypeYtelse } from '../../../utils/teksterUtil';
+} from "../../../utils/meldekortUtils";
+import { PersonInfoActions } from "../../../actions/personInfo";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import { loggAktivitet } from "../../../utils/amplitudeUtils";
+import { finnTypeYtelsePostfix, TypeYtelse } from "../../../utils/teksterUtil";
 import Panel from "nav-frontend-paneler";
 import { Konstanter } from "../../../utils/consts";
 
@@ -80,7 +80,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     settLocale(locale, aktivtMeldekort.meldeperiode.fra);
 
     hentPersonInfo();
-    scrollTilElement(undefined, 'auto');
+    scrollTilElement(undefined, "auto");
     const oppdatertSendteMeldekort = sendteMeldekort;
     const { meldekortId, kortType } = aktivtMeldekort;
     oppdatertSendteMeldekort.sendteMeldekort.push({ meldekortId, kortType });
@@ -88,21 +88,21 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
 
     const arbeidsssokerSvar =
       innsending?.meldekortdetaljer?.sporsmal?.arbeidssoker;
-    loggAktivitet('Viser kvittering', {
-      arbeidssoker: arbeidsssokerSvar ? 'ja' : 'nei',
-      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
-      innsendingstype: innsendingstype || 'UKJENT',
+    loggAktivitet("Viser kvittering", {
+      arbeidssoker: arbeidsssokerSvar ? "ja" : "nei",
+      meldegruppe: aktivtMeldekort.meldegruppe || "UKJENT",
+      innsendingstype: innsendingstype || "UKJENT",
     });
-    loggAktivitet('skjema fullført', {
-      meldegruppe: aktivtMeldekort.meldegruppe || 'UKJENT',
+    loggAktivitet("skjema fullført", {
+      meldegruppe: aktivtMeldekort.meldegruppe || "UKJENT",
     });
   }
 
   returnerPropsVerdier = (): PropsVerdier => {
     const { innsendingstype, person, location, sendteMeldekort } = this.props;
-    const urlParams = location?.pathname.split('/');
+    const urlParams = location?.pathname.split("/");
     urlParams.pop();
-    const nestePath = urlParams.join('/');
+    const nestePath = urlParams.join("/");
     const meldekort = meldekortSomKanSendes(
       person.meldekort,
       sendteMeldekort.sendteMeldekort
@@ -130,14 +130,14 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     if (innsendingstype === Innsendingstyper.INNSENDING) {
       if (harBrukerFlereMeldekort) {
         return {
-          knappTekstid: 'overskrift.nesteMeldekort',
+          knappTekstid: "overskrift.nesteMeldekort",
           nestePath: nestePath,
           nesteAktivtMeldekort: paramsForMeldekort.nesteAktivtMeldekort,
           nesteInnsendingstype: paramsForMeldekort.nesteInnsendingstype,
         };
       } else if (harBrukerFlereEtterregistrerteMeldekort) {
         return {
-          knappTekstid: 'overskrift.etterregistrertMeldekort',
+          knappTekstid: "overskrift.etterregistrertMeldekort",
           nestePath: nestePath,
           nesteAktivtMeldekort: paramsForEtterregistrerte.nesteAktivtMeldekort,
           nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype,
@@ -146,14 +146,14 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     } else if (innsendingstype === Innsendingstyper.ETTERREGISTRERING) {
       if (harBrukerFlereEtterregistrerteMeldekort) {
         return {
-          knappTekstid: 'overskrift.etterregistrertMeldekort',
+          knappTekstid: "overskrift.etterregistrertMeldekort",
           nestePath: nestePath,
           nesteAktivtMeldekort: paramsForEtterregistrerte.nesteAktivtMeldekort,
           nesteInnsendingstype: paramsForEtterregistrerte.nesteInnsendingstype,
         };
       } else if (harBrukerFlereMeldekort) {
         return {
-          knappTekstid: 'overskrift.nesteMeldekort',
+          knappTekstid: "overskrift.nesteMeldekort",
           nestePath: nestePath,
           nesteAktivtMeldekort: paramsForMeldekort.nesteAktivtMeldekort,
           nesteInnsendingstype: paramsForMeldekort.nesteInnsendingstype,
@@ -161,7 +161,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
       }
     }
     return {
-      knappTekstid: 'tilbake.minSide',
+      knappTekstid: "tilbake.minSide",
       nestePath: Environment().minSideUrl,
       nesteAktivtMeldekort: undefined,
       nesteInnsendingstype: undefined,
@@ -176,7 +176,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
       meldekortdetaljerInnsending!.meldeperiode.til
     );
     const meldekortErMottatt = formatMessage(
-      'sendt.mottatt.label',
+      "sendt.mottatt.label",
       {
         0: formaterDato(meldekortdetaljerInnsending!.mottattDato),
         1: hentTid(meldekortdetaljerInnsending!.mottattDato),
@@ -193,18 +193,18 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
       <div className="oppsummeringsTekster">
         <Ingress>
           <span>
-            {formatMessage('meldekort.for') +
+            {formatMessage("meldekort.for") +
               personInfo.fornavn +
-              ' ' +
+              " " +
               personInfo.etternavn +
-              ' (' +
+              " (" +
               personInfo.fodselsnr +
-              ')'}
+              ")"}
           </span>
         </Ingress>
         <Ingress>
           <span>
-            {formatMessage('meldekort.for.perioden') + ukeOgPeriode}
+            {formatMessage("meldekort.for.perioden") + ukeOgPeriode}
           </span>
         </Ingress>
         <Ingress>
@@ -214,7 +214,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
           <Ingress className="noPrint">
             <span>
               {formatMessage(
-                'sendt.meldekortKanSendes',
+                "sendt.meldekortKanSendes",
                 {
                   0: formaterDato(nesteDato),
                 }
@@ -232,7 +232,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
 
     return (
       <>
-        <AlertStripe type={'suksess'} className="alertSendt noPrint">
+        <AlertStripe type={"suksess"} className="alertSendt noPrint">
           {formatHtmlMessage("overskrift.meldekort.sendt")}
         </AlertStripe>
 
@@ -280,7 +280,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={'XL'} />
+          <NavFrontendSpinner type={"XL"} />
         </div>
       );
     }
@@ -288,15 +288,15 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     if (
       typeYtelsePostfix === TypeYtelse.AAP &&
       nesteAktivtMeldekort == undefined &&
-      window['hj']
+      window["hj"]
     ) {
       /* eslint-disable @typescript-eslint/ban-ts-comment */
       // @ts-ignore
-      window.hj('trigger', 'meldekortAAP');
-    } else if (typeYtelsePostfix === TypeYtelse.TILTAKSPENGER && window['hj']) {
+      window.hj("trigger", "meldekortAAP");
+    } else if (typeYtelsePostfix === TypeYtelse.TILTAKSPENGER && window["hj"]) {
       /* eslint-disable @typescript-eslint/ban-ts-comment */
       // @ts-ignore
-      window.hj('trigger', 'meldekortTP');
+      window.hj("trigger", "meldekortTP");
     }
 
     return personInfo.personId !== 0 ? (
@@ -306,7 +306,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
           <div className="knapper-container lang-knapper">
             {nestePath === Environment().minSideUrl ? (
               <a
-                className={'knapp navigasjonsknapp knapp--hoved'}
+                className={"knapp navigasjonsknapp knapp--hoved"}
                 href={nestePath}
               >
                 {formatHtmlMessage(knappTekstid)}
@@ -314,7 +314,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
             ) : (
               <NavKnapp
                 type={KnappTyper.HOVED}
-                className={'navigasjonsknapp'}
+                className={"navigasjonsknapp"}
                 tekstid={knappTekstid}
                 nestePath={nestePath}
                 nesteAktivtMeldekort={nesteAktivtMeldekort}
@@ -323,9 +323,9 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
             )}
             <NavKnapp
               type={KnappTyper.STANDARD}
-              nestePath={Konstanter.basePath + '/tidligere-meldekort'}
-              tekstid={'sendt.linkTilTidligereMeldekort'}
-              className={'navigasjonsknapp'}
+              nestePath={Konstanter.basePath + "/tidligere-meldekort"}
+              tekstid={"sendt.linkTilTidligereMeldekort"}
+              className={"navigasjonsknapp"}
             />
             <PrintKnapp
               person={person}

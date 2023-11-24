@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { RootState } from '../../../store/configureStore';
-import { Dispatch } from 'redux';
-import { MenyActions } from '../../../actions/meny';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
+import * as React from "react";
+import { RootState } from "../../../store/configureStore";
+import { Dispatch } from "redux";
+import { MenyActions } from "../../../actions/meny";
+import { connect } from "react-redux";
+import classNames from "classnames";
 
 interface MapDispatchToProps {
   toggleMeny: (erApen: boolean) => void;
@@ -18,18 +18,18 @@ const MobilMenyToggle: React.FunctionComponent<
 > = props => {
   return (
     <nav
-      className={'mobilmenyToggle'}
+      className={"mobilmenyToggle"}
       onClick={() => props.toggleMeny(!props.erApen)}
     >
       <div
-        className={classNames('mobilmenyToggle__burgericon', {
+        className={classNames("mobilmenyToggle__burgericon", {
           open: props.erApen,
         })}
       >
-        <span className={'line'} />
-        <span className={'line'} />
-        <span className={'line'} />
-        <span className={'line'} />
+        <span className={"line"} />
+        <span className={"line"} />
+        <span className={"line"} />
+        <span className={"line"} />
       </div>
     </nav>
   );

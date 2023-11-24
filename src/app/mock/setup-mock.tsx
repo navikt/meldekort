@@ -1,25 +1,25 @@
-import { prefferedAxios } from '../types/fetch';
-import { Konstanter } from '../utils/consts';
-import person from './responses/person.json';
-import historiskeMeldekort from './responses/historiskemeldekort.json';
-import meldekortdetaljer from './responses/meldekortdetaljer.json';
-import personstatus from './responses/personstatus.json';
-import korrigertid from './responses/korrigertid.json';
-import valideringsresultat from './responses/valideringsresultat.json';
-import personinfo from './responses/personinfo.json';
-import infomelding from './responses/infomelding.json';
-import skrivemodusJson from './responses/skrivemodus.json';
-import teksterJsonNb from './responses/tekster_nb.json';
-import teksterJsonEn from './responses/tekster_en.json';
-import MockAdapter from 'axios-mock-adapter';
-import Environment from '../utils/env';
+import { prefferedAxios } from "../types/fetch";
+import { Konstanter } from "../utils/consts";
+import person from "./responses/person.json";
+import historiskeMeldekort from "./responses/historiskemeldekort.json";
+import meldekortdetaljer from "./responses/meldekortdetaljer.json";
+import personstatus from "./responses/personstatus.json";
+import korrigertid from "./responses/korrigertid.json";
+import valideringsresultat from "./responses/valideringsresultat.json";
+import personinfo from "./responses/personinfo.json";
+import infomelding from "./responses/infomelding.json";
+import skrivemodusJson from "./responses/skrivemodus.json";
+import teksterJsonNb from "./responses/tekster_nb.json";
+import teksterJsonEn from "./responses/tekster_en.json";
+import MockAdapter from "axios-mock-adapter";
+import Environment from "../utils/env";
 
 export default () => {
   const apiUrl = Environment().apiUrl;
 
   const mock = new MockAdapter(prefferedAxios);
 
-  console.log('### MOCK AKTIVERT ###');
+  console.log("### MOCK AKTIVERT ###");
 
   mock.onGet(apiUrl + Konstanter.hentMeldekortApiUri).reply(200, {
     ...person,

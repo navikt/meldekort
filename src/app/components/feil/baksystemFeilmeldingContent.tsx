@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import * as React from "react";
+import { Undertittel } from "nav-frontend-typografi";
 import { formatHtmlMessage } from "../../utils/intlUtil";
 
 export const baksystemFeilmeldingContent = () => {

@@ -1,36 +1,36 @@
-import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
-import EtikettBase from 'nav-frontend-etiketter';
-import Komponentlenke from '../../components/komponentlenke/komponentlenke';
-import MobilTabell from '../../components/tabell/mobil/mobilTabell';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import Tabell from '../../components/tabell/desktop/tabell';
-import UIAlertstripeWrapper from '../../components/feil/UIAlertstripeWrapper';
-import { BaksystemFeilmelding, IngenTidligereMeldekort } from '../../types/ui';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { finnRiktigEtikettKlasse } from '../../utils/statusEtikettUtil';
-import { formaterBelop } from '../../utils/numberFormat';
-import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
-import { MenyPunkt } from '../../utils/menyConfig';
-import { MenyActions } from '../../actions/meny';
-import { MenyState } from '../../types/meny';
+import * as React from "react";
+import AlertStripe from "nav-frontend-alertstriper";
+import EtikettBase from "nav-frontend-etiketter";
+import Komponentlenke from "../../components/komponentlenke/komponentlenke";
+import MobilTabell from "../../components/tabell/mobil/mobilTabell";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import Sprakvelger from "../../components/sprakvelger/sprakvelger";
+import Tabell from "../../components/tabell/desktop/tabell";
+import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
+import { BaksystemFeilmelding, IngenTidligereMeldekort } from "../../types/ui";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { finnRiktigEtikettKlasse } from "../../utils/statusEtikettUtil";
+import { formaterBelop } from "../../utils/numberFormat";
+import { formaterDato, hentDatoPeriode, hentUkePeriode } from "../../utils/dates";
+import { MenyPunkt } from "../../utils/menyConfig";
+import { MenyActions } from "../../actions/meny";
+import { MenyState } from "../../types/meny";
 
-import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
-import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
-import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { InnsendingActions } from '../../actions/innsending';
-import { mapKortStatusTilTekst } from '../../utils/kortMapper';
-import { HistoriskeMeldekortRad, KortStatus } from '../../types/meldekort';
-import { RootState } from '../../store/configureStore';
-import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';
-import { SkrivemodusActions } from '../../actions/skrivemodus';
-import { Skrivemodus } from '../../types/skrivemodus';
-import SkrivemodusInfomelding from '../../components/feil/skrivemodusInfomelding';
-import { scrollTilElement } from '../../utils/scroll';
-import { loggAktivitet } from '../../utils/amplitudeUtils';
+import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
+import { HistoriskeMeldekortActions } from "../../actions/historiskeMeldekort";
+import { HistoriskeMeldekortState } from "../../reducers/historiskeMeldekortReducer";
+import { Innholdstittel } from "nav-frontend-typografi";
+import { InnsendingActions } from "../../actions/innsending";
+import { mapKortStatusTilTekst } from "../../utils/kortMapper";
+import { HistoriskeMeldekortRad, KortStatus } from "../../types/meldekort";
+import { RootState } from "../../store/configureStore";
+import { selectFeilmelding, selectIngenTidligereMeldekort } from "../../selectors/ui";
+import { SkrivemodusActions } from "../../actions/skrivemodus";
+import { Skrivemodus } from "../../types/skrivemodus";
+import SkrivemodusInfomelding from "../../components/feil/skrivemodusInfomelding";
+import { scrollTilElement } from "../../utils/scroll";
+import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
 
 interface MapStateToProps {
@@ -79,8 +79,8 @@ class TidligereMeldekort extends React.Component<Props, State> {
           meldekort.meldeperiode.til
         ),
         mottatt:
-          typeof meldekort.mottattDato === 'undefined'
-            ? ''
+          typeof meldekort.mottattDato === "undefined"
+            ? ""
             : formaterDato(meldekort.mottattDato),
         status: meldekort.kortStatus,
         bruttobelop: formaterBelop(meldekort.bruttoBelop),
@@ -95,7 +95,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
 
     const columns = [
       {
-        key: 'periode',
+        key: "periode",
         label: formatHtmlMessage("overskrift.periode"),
         cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           if (row.meldekort.kortStatus === KortStatus.UBEHA) {
@@ -111,23 +111,23 @@ class TidligereMeldekort extends React.Component<Props, State> {
         },
       },
       {
-        key: 'dato',
+        key: "dato",
         label: formatHtmlMessage("overskrift.dato"),
-        cell: 'dato',
+        cell: "dato",
       },
       {
-        key: 'mottatt',
+        key: "mottatt",
         label: formatHtmlMessage("overskrift.mottatt"),
-        cell: 'mottatt',
+        cell: "mottatt",
       },
       {
-        key: 'status',
+        key: "status",
         label: formatHtmlMessage("overskrift.status"),
         cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
               className={finnRiktigEtikettKlasse(row.status)}
-              type={'info'}
+              type={"info"}
             >
               {mapKortStatusTilTekst(row.status)}
             </EtikettBase>
@@ -135,9 +135,9 @@ class TidligereMeldekort extends React.Component<Props, State> {
         },
       },
       {
-        key: 'bruttobelop',
+        key: "bruttobelop",
         label: formatHtmlMessage("overskrift.bruttoBelop"),
-        cell: 'bruttobelop',
+        cell: "bruttobelop",
       },
     ];
 
@@ -153,7 +153,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
   content = () => {
     if (!this.props.ingenTidligereMeldekort.harTidligereMeldekort) {
       return (
-        <AlertStripe type={'advarsel'}>
+        <AlertStripe type={"advarsel"}>
           {formatHtmlMessage("tidligereMeldekort.harIngen")}
         </AlertStripe>
       );
@@ -174,7 +174,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     });
 
   componentDidMount() {
-    scrollTilElement(undefined, 'auto');
+    scrollTilElement(undefined, "auto");
     this.props.resetInnsending();
     this.props.hentSkrivemodus();
     if (this.props.skrivemodus.skrivemodus) {
@@ -183,11 +183,11 @@ class TidligereMeldekort extends React.Component<Props, State> {
     const valgtMenyPunkt = this.props.meny.alleMenyPunkter.find(
       (mp) => window.location.pathname.endsWith(mp.urlparam)
     );
-    if (typeof valgtMenyPunkt !== 'undefined') {
+    if (typeof valgtMenyPunkt !== "undefined") {
       this.props.settValgtMenyPunkt(valgtMenyPunkt);
     }
-    window.addEventListener('resize', this.handleWindowSize);
-    loggAktivitet('Viser tidligere meldekort');
+    window.addEventListener("resize", this.handleWindowSize);
+    loggAktivitet("Viser tidligere meldekort");
   }
 
   tekstOgContent = () => {

@@ -1,26 +1,26 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
-import ProviderWrapper from '../testSetup/providerWrapper';
-import Utskrift from '../../app/components/print/utskrift';
-import { MeldeForm, Person, PersonInfo } from '../../app/types/person';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import ProviderWrapper from "../testSetup/providerWrapper";
+import Utskrift from "../../app/components/print/utskrift";
+import { MeldeForm, Person, PersonInfo } from "../../app/types/person";
 
 const person: Person = {
-  maalformkode: '',
+  maalformkode: "",
   meldeform: MeldeForm.ELEKTRONISK,
   meldekort: [],
   etterregistrerteMeldekort: [],
   fravaer: [],
-  id: '',
+  id: "",
   antallGjenstaaendeFeriedager: 0
 };
 
 const personInfo: PersonInfo = {
   personId: 0,
-  fodselsnr: '',
-  etternavn: '',
-  fornavn: ''
+  fodselsnr: "",
+  etternavn: "",
+  fornavn: ""
 };
-it('Utskrift', () => {
+it("Utskrift", () => {
   const tree = renderer.create(
     <ProviderWrapper>
       <Utskrift person={person} personInfo={personInfo} />

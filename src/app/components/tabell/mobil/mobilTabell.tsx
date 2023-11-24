@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
-import EtikettBase from 'nav-frontend-etiketter';
-import Komponentlenke from '../../komponentlenke/komponentlenke';
-import { DetaljRad, HistoriskeMeldekortRad, MeldekortKolonne } from '../../../types/meldekort';
-import { mapKortStatusTilTekst } from '../../../utils/kortMapper';
+import * as React from "react";
+import { finnRiktigEtikettKlasse } from "../../../utils/statusEtikettUtil";
+import EtikettBase from "nav-frontend-etiketter";
+import Komponentlenke from "../../komponentlenke/komponentlenke";
+import { DetaljRad, HistoriskeMeldekortRad, MeldekortKolonne } from "../../../types/meldekort";
+import { mapKortStatusTilTekst } from "../../../utils/kortMapper";
 import { Konstanter } from "../../../utils/consts";
 
 interface MobilTabellProps {
@@ -21,10 +21,10 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     let tableData = null
 
     for (const i in rowData) {
-      if (i === header.key && header.key === 'status') {
+      if (i === header.key && header.key === "status") {
         tableData = (
           <EtikettBase
-            type={'info'}
+            type={"info"}
             className={finnRiktigEtikettKlasse(rowData[i])}
           >
             {mapKortStatusTilTekst(rowData[i])}
@@ -32,7 +32,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
         );
       } else if (
         i === header.key &&
-        header.key === 'periode' &&
+        header.key === "periode" &&
         rowData.periode
       ) {
         tableData = (
@@ -47,7 +47,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
       }
     }
     return (
-      <tr key={header.key} className={'tabellRad'}>
+      <tr key={header.key} className={"tabellRad"}>
         <th> {header.label} </th>
         <td> {tableData} </td>
       </tr>
@@ -61,10 +61,10 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     let tableData = null
 
     for (const i in rowData) {
-      if (i === header.key && header.key === 'kortStatus') {
+      if (i === header.key && header.key === "kortStatus") {
         tableData = (
           <EtikettBase
-            type={'info'}
+            type={"info"}
             className={finnRiktigEtikettKlasse(rowData[i])}
           >
             {mapKortStatusTilTekst(rowData[i])}
@@ -75,7 +75,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
       }
     }
     return (
-      <tr key={header.key} className={'tabellRad'}>
+      <tr key={header.key} className={"tabellRad"}>
         <th> {header.label} </th>
         <td> {tableData} </td>
       </tr>
@@ -96,7 +96,7 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     let tabeller;
     if (props.rows) {
       tabeller = props.rows.map((allRowData: HistoriskeMeldekortRad) => (
-        <table key={allRowData.meldekort.meldekortId} className={'mobilTabell'}>
+        <table key={allRowData.meldekort.meldekortId} className={"mobilTabell"}>
           <tbody>
             {props.columns.map(colHeader =>
               returnerTabellRader(colHeader, allRowData)
@@ -109,9 +109,9 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
   };
 
   return (
-    <div className={'mobilTabell-container'}>
+    <div className={"mobilTabell-container"}>
       {props.row ? (
-        <table key={props.row.meldekortid} className={'mobilTabell'}>
+        <table key={props.row.meldekortid} className={"mobilTabell"}>
           <tbody>{visEnTabell()}</tbody>
         </table>
       ) : (

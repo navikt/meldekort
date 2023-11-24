@@ -1,5 +1,5 @@
-import { ikkeFortsetteRegistrertContent } from '../../app/components/modal/ikkeFortsetteRegistrertContent';
+import { ikkeFortsetteRegistrertContent } from "../../app/components/modal/ikkeFortsetteRegistrertContent";
 
-it('ikkeFortsetteRegistrertContent', () => {
+it("ikkeFortsetteRegistrertContent", () => {
   expect(ikkeFortsetteRegistrertContent()).toMatchSnapshot();
 });

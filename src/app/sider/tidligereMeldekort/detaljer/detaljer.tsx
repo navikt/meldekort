@@ -1,33 +1,33 @@
-import * as React from 'react';
-import EtikettBase from 'nav-frontend-etiketter';
-import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import PeriodeBanner from '../../../components/periodeBanner/periodeBanner';
-import Tabell from '../../../components/tabell/desktop/tabell';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
-import { formaterDato } from '../../../utils/dates';
-import { RootState } from '../../../store/configureStore';
-import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/kortMapper';
-import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
-import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
-import utklippstavle from '../../../ikoner/utklippstavle.svg';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import { DetaljRad, Meldekort, MeldekortKolonne } from '../../../types/meldekort';
-import { formaterBelop } from '../../../utils/numberFormat';
-import { Innsendingstyper } from '../../../types/innsending';
-import PrintKnapp from '../../../components/print/printKnapp';
-import MobilTabell from '../../../components/tabell/mobil/mobilTabell';
-import { PersonInfoActions } from '../../../actions/personInfo';
-import { Person, PersonInfo } from '../../../types/person';
-import classNames from 'classnames';
-import { AktivtMeldekortActions } from '../../../actions/aktivtMeldekort';
-import { HistoriskeMeldekortState } from '../../../reducers/historiskeMeldekortReducer';
-import { Skrivemodus } from '../../../types/skrivemodus';
-import { SkrivemodusActions } from '../../../actions/skrivemodus';
-import { finnTypeYtelsePostfix } from '../../../utils/teksterUtil';
-import { downloadMessagesAndDispatch, formatHtmlMessage } from '../../../utils/intlUtil';
+import * as React from "react";
+import EtikettBase from "nav-frontend-etiketter";
+import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortdetaljer";
+import PeriodeBanner from "../../../components/periodeBanner/periodeBanner";
+import Tabell from "../../../components/tabell/desktop/tabell";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { finnRiktigEtikettKlasse } from "../../../utils/statusEtikettUtil";
+import { formaterDato } from "../../../utils/dates";
+import { RootState } from "../../../store/configureStore";
+import { mapKortStatusTilTekst, mapKortTypeTilTekst } from "../../../utils/kortMapper";
+import { MeldekortdetaljerActions } from "../../../actions/meldekortdetaljer";
+import { MeldekortdetaljerState } from "../../../reducers/meldekortdetaljerReducer";
+import utklippstavle from "../../../ikoner/utklippstavle.svg";
+import NavFrontendSpinner from "nav-frontend-spinner";
+import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
+import { DetaljRad, Meldekort, MeldekortKolonne } from "../../../types/meldekort";
+import { formaterBelop } from "../../../utils/numberFormat";
+import { Innsendingstyper } from "../../../types/innsending";
+import PrintKnapp from "../../../components/print/printKnapp";
+import MobilTabell from "../../../components/tabell/mobil/mobilTabell";
+import { PersonInfoActions } from "../../../actions/personInfo";
+import { Person, PersonInfo } from "../../../types/person";
+import classNames from "classnames";
+import { AktivtMeldekortActions } from "../../../actions/aktivtMeldekort";
+import { HistoriskeMeldekortState } from "../../../reducers/historiskeMeldekortReducer";
+import { Skrivemodus } from "../../../types/skrivemodus";
+import { SkrivemodusActions } from "../../../actions/skrivemodus";
+import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
+import { downloadMessagesAndDispatch, formatHtmlMessage } from "../../../utils/intlUtil";
 import { Konstanter } from "../../../utils/consts";
 
 interface MapStateToProps {
@@ -103,7 +103,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     } = this.props;
     resettMeldekortdetaljer();
     this.sjekkAktivtMeldekortOgRedirect();
-    window.addEventListener('resize', this.handleWindowSize);
+    window.addEventListener("resize", this.handleWindowSize);
     if (personInfo.personId === 0) {
       hentPersonInfo();
     }
@@ -120,16 +120,16 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
     const rows = this.settTabellrader(aktivtMeldekort);
     const columns: MeldekortKolonne[] = [
       {
-        key: 'mottattDato',
+        key: "mottattDato",
         label: formatHtmlMessage("overskrift.mottatt"),
       },
       {
-        key: 'kortStatus',
+        key: "kortStatus",
         label: formatHtmlMessage("overskrift.status"),
         cell: function(row: DetaljRad) { // (row: any, columnKey: any)
           return (
             <EtikettBase
-              type={'info'}
+              type={"info"}
               className={finnRiktigEtikettKlasse(row.kortStatus)}
             >
               {mapKortStatusTilTekst(row.kortStatus)}
@@ -138,11 +138,11 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         },
       },
       {
-        key: 'bruttoBelop',
+        key: "bruttoBelop",
         label: formatHtmlMessage("overskrift.bruttoBelop"),
       },
       {
-        key: 'kortType',
+        key: "kortType",
         label: formatHtmlMessage("overskrift.meldekorttype"),
       },
     ];
@@ -150,7 +150,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
     const erDesktop = this.state.windowSize > 768;
 
-    const mobilTabellStyle = classNames('noPrint', { ikkeVis: erDesktop });
+    const mobilTabellStyle = classNames("noPrint", { ikkeVis: erDesktop });
     const vanligTabellStyle = classNames({ ikkeVisMenPrint: !erDesktop });
 
     return (
@@ -168,7 +168,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
           </div>
         </section>
         <section className="seksjon">
-          {meldekortdetaljer.meldekortdetaljer.id !== '' &&
+          {meldekortdetaljer.meldekortdetaljer.id !== "" &&
           !this.props.loading ? (
             <Meldekortdetaljer
               aktivtMeldekort={aktivtMeldekort}
@@ -177,7 +177,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
             />
           ) : (
             <div className="meldekort-spinner">
-              <NavFrontendSpinner type={'XL'} />
+              <NavFrontendSpinner type={"XL"} />
             </div>
           )}
         </section>
@@ -187,8 +187,8 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
 
   render() {
     const { aktivtMeldekort, person, personInfo } = this.props;
-    const knappeKlasser = classNames('knapper-container', {
-      'lang-knapper': aktivtMeldekort.korrigerbart,
+    const knappeKlasser = classNames("knapper-container", {
+      "lang-knapper": aktivtMeldekort.korrigerbart,
     });
     return (
       <div className="sideinnhold innhold-detaljer">
@@ -197,16 +197,16 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
           <div className={knappeKlasser}>
             <NavKnapp
               type={KnappTyper.HOVED}
-              nestePath={ Konstanter.basePath + '/tidligere-meldekort'}
-              tekstid={'naviger.forrige'}
-              className={'navigasjonsknapp'}
+              nestePath={ Konstanter.basePath + "/tidligere-meldekort"}
+              tekstid={"naviger.forrige"}
+              className={"navigasjonsknapp"}
             />
             {aktivtMeldekort.korrigerbart ? (
               <NavKnapp
                 type={KnappTyper.STANDARD}
-                nestePath={'korriger'}
-                tekstid={'korriger.meldekort'}
-                className={'navigasjonsknapp'}
+                nestePath={"korriger"}
+                tekstid={"korriger.meldekort"}
+                className={"navigasjonsknapp"}
                 nesteAktivtMeldekort={aktivtMeldekort}
                 nesteInnsendingstype={Innsendingstyper.KORRIGERING}
                 validering={this.erSkrivemodus}

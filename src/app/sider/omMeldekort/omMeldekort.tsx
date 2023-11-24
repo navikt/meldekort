@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import Sprakvelger from '../../components/sprakvelger/sprakvelger';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import veileder from '../../ikoner/veileder.svg';
-import { InnsendingActions } from '../../actions/innsending';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
-import { MenyActions } from '../../actions/meny';
-import { MenyPunkt } from '../../utils/menyConfig';
-import { MenyState } from '../../types/meny';
-import { RootState } from '../../store/configureStore';
-import { scrollTilElement } from '../../utils/scroll';
-import { loggAktivitet } from '../../utils/amplitudeUtils';
+import * as React from "react";
+import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
+import Sprakvelger from "../../components/sprakvelger/sprakvelger";
+import Veilederpanel from "nav-frontend-veilederpanel";
+import veileder from "../../ikoner/veileder.svg";
+import { InnsendingActions } from "../../actions/innsending";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
+import { MenyActions } from "../../actions/meny";
+import { MenyPunkt } from "../../utils/menyConfig";
+import { MenyState } from "../../types/meny";
+import { RootState } from "../../store/configureStore";
+import { scrollTilElement } from "../../utils/scroll";
+import { loggAktivitet } from "../../utils/amplitudeUtils";
 
 interface MapStateToProps {
   meny: MenyState;
@@ -25,16 +25,16 @@ interface MapDispatchToProps {
 
 class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, object> {
   componentDidMount() {
-    scrollTilElement(undefined, 'auto');
+    scrollTilElement(undefined, "auto");
     const { resetInnsending, meny, settValgtMenyPunkt } = this.props;
     resetInnsending();
     const valgtMenyPunkt = meny.alleMenyPunkter.find(
       (mp) => window.location.pathname.endsWith(mp.urlparam)
     );
-    if (typeof valgtMenyPunkt !== 'undefined') {
+    if (typeof valgtMenyPunkt !== "undefined") {
       settValgtMenyPunkt(valgtMenyPunkt);
     }
-    loggAktivitet('Viser om meldekort');
+    loggAktivitet("Viser om meldekort");
   }
 
   render() {
@@ -47,7 +47,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
           <Sprakvelger />
         </section>
         <Veilederpanel
-          type={'plakat'}
+          type={"plakat"}
           kompakt={true}
           svg={<img alt="" src={veileder} />}
         >
@@ -70,8 +70,8 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
               {formatHtmlMessage(
                 "genereltOmMeldekort.om.meldekort",
                 {
-                  0: 'https://www.nav.no',
-                  1: formatMessage('genereltOmMeldekort.informasjonOmMeldekortLink').trim(),
+                  0: "https://www.nav.no",
+                  1: formatMessage("genereltOmMeldekort.informasjonOmMeldekortLink").trim(),
                 }
               )}
             </Normaltekst>

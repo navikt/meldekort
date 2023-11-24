@@ -1,11 +1,11 @@
-import { ActionType, createAsyncAction } from 'typesafe-actions';
-import { Skrivemodus } from '../types/skrivemodus';
-import { AxiosError } from 'axios';
+import { ActionType, createAsyncAction } from "typesafe-actions";
+import { Skrivemodus } from "../types/skrivemodus";
+import { AxiosError } from "axios";
 
 export enum SkrivemodusTypeKeys {
-  SKRIVEMODUS = 'SKRIVEMODUS',
-  SKRIVEMODUS_OK = 'SKRIVEMODUS_OK',
-  SKRIVEMODUS_FEILET = 'SKRIVEMODUS_FEILET'
+  SKRIVEMODUS = "SKRIVEMODUS",
+  SKRIVEMODUS_OK = "SKRIVEMODUS_OK",
+  SKRIVEMODUS_FEILET = "SKRIVEMODUS_FEILET"
 }
 
 export const SkrivemodusActions = {

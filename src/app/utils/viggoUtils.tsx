@@ -1,7 +1,7 @@
-import Environment from './env';
-import { prefferedAxios } from '../types/fetch';
-import { AxiosError } from 'axios';
-import { Konstanter } from './consts';
+import Environment from "./env";
+import { prefferedAxios } from "../types/fetch";
+import { AxiosError } from "axios";
+import { Konstanter } from "./consts";
 
 export const erViggo = () => {
   prefferedAxios

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { RootState } from '../../store/configureStore';
-import { Button, Menu, MenuItem, Wrapper } from 'react-aria-menubutton';
-import { connect } from 'react-redux';
-import NedChevron from 'nav-frontend-chevron/lib/ned-chevron';
-import { Locale } from '../../reducers/localesReducer';
-import { Konstanter } from '../../utils/consts';
-import { downloadMessagesAndDispatch } from '../../utils/intlUtil';
+import * as React from "react";
+import { RootState } from "../../store/configureStore";
+import { Button, Menu, MenuItem, Wrapper } from "react-aria-menubutton";
+import { connect } from "react-redux";
+import NedChevron from "nav-frontend-chevron/lib/ned-chevron";
+import { Locale } from "../../reducers/localesReducer";
+import { Konstanter } from "../../utils/consts";
+import { downloadMessagesAndDispatch } from "../../utils/intlUtil";
 
 const mapStateToProps = ({ intl, locales, aktivtMeldekort }: RootState) => {
   return {

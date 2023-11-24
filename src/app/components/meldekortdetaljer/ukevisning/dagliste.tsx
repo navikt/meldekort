@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { MeldekortDag } from '../../../types/meldekort';
-import { guid } from 'nav-frontend-js-utils';
-import { formatMessage } from '../../../utils/intlUtil';
-import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
-import Hjelpetekst from './hjelpetekst';
-import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
+import * as React from "react";
+import { MeldekortDag } from "../../../types/meldekort";
+import { guid } from "nav-frontend-js-utils";
+import { formatMessage } from "../../../utils/intlUtil";
+import UtvidetInformasjon from "../../utvidetinformasjon/utvidetInformasjon";
+import Hjelpetekst from "./hjelpetekst";
+import { hentUkedagerSomStringListe } from "../../../utils/ukedager";
 
 const sjekkOmDetFinnesFlereElementer = (
   element: string,
   meldekortDag: MeldekortDag
 ) => {
   switch (element) {
-    case 'arbeid':
+    case "arbeid":
       return meldekortDag.kurs || meldekortDag.syk || meldekortDag.annetFravaer;
-    case 'kurs':
+    case "kurs":
       return meldekortDag.syk || meldekortDag.annetFravaer;
-    case 'syk':
+    case "syk":
       return meldekortDag.annetFravaer;
     default:
       return false;
@@ -28,7 +28,7 @@ const returnerAktivitetTekst = (
   tekstid: string
 ) => {
   return `${formatMessage(tekstid).trim()}${
-    sjekkOmDetFinnesFlereElementer(aktivitet, meldekortDag) ? ', ' : ''
+    sjekkOmDetFinnesFlereElementer(aktivitet, meldekortDag) ? ", " : ""
   }`;
 };
 
@@ -52,32 +52,32 @@ export const hentDagliste = (
       dagListe.push(
         <div className="dagliste" key={guid()}>
           <div className="dagliste__dager">
-            <strong className={'ukedag'}>{ukedag}:&nbsp;</strong>
-            <span className={'aktiviteter'}>
+            <strong className={"ukedag"}>{ukedag}:&nbsp;</strong>
+            <span className={"aktiviteter"}>
               {meldekortDag.arbeidetTimerSum > 0
-                ? `${formatMessage('utfylling.arbeid')}
+                ? `${formatMessage("utfylling.arbeid")}
                                 ${meldekortDag.arbeidetTimerSum}
-                                ${formatMessage('overskrift.timer').trim()}${
-                    sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag)
-                      ? ', '
-                      : ''
+                                ${formatMessage("overskrift.timer").trim()}${
+                    sjekkOmDetFinnesFlereElementer("arbeid", meldekortDag)
+                      ? ", "
+                      : ""
                   }`
                 : null}
               {meldekortDag.kurs
                 ? returnerAktivitetTekst(
                     meldekortDag,
-                    'kurs',
-                    'utfylling.tiltak'
+                    "kurs",
+                    "utfylling.tiltak"
                   )
                 : null}
               {meldekortDag.syk
-                ? returnerAktivitetTekst(meldekortDag, 'syk', 'utfylling.syk')
+                ? returnerAktivitetTekst(meldekortDag, "syk", "utfylling.syk")
                 : null}
               {meldekortDag.annetFravaer
                 ? returnerAktivitetTekst(
                     meldekortDag,
-                    '',
-                    'utfylling.ferieFravar'
+                    "",
+                    "utfylling.ferieFravar"
                   )
                 : null}
             </span>

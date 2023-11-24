@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Detaljer from './tidligereMeldekort/detaljer/detaljer';
-import OfteStilteSporsmal from './ofteStilteSporsmal/ofteStilteSporsmal';
-import SendMeldekort from './sendMeldekort/sendMeldekort';
-import EtterregistrerMeldekort from './etterregistrerMeldekort/etterregistrerMeldekort';
-import OmMeldekort from './omMeldekort/omMeldekort';
-import TidligereMeldekort from './tidligereMeldekort/tidligereMeldekort';
-import InnsendingRoutes from './innsending/innsendingRoutes';
+import * as React from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import Detaljer from "./tidligereMeldekort/detaljer/detaljer";
+import OfteStilteSporsmal from "./ofteStilteSporsmal/ofteStilteSporsmal";
+import SendMeldekort from "./sendMeldekort/sendMeldekort";
+import EtterregistrerMeldekort from "./etterregistrerMeldekort/etterregistrerMeldekort";
+import OmMeldekort from "./omMeldekort/omMeldekort";
+import TidligereMeldekort from "./tidligereMeldekort/tidligereMeldekort";
+import InnsendingRoutes from "./innsending/innsendingRoutes";
 
 const MeldekortRoutes: React.FunctionComponent = () => {
   const location = useLocation();

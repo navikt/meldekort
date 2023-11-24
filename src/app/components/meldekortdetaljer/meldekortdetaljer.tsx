@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { MeldekortdetaljerState } from '../../reducers/meldekortdetaljerReducer';
-import { hentNestePeriodeMedUkerOgDato } from '../../utils/dates';
-import { RootState } from '../../store/configureStore';
-import { connect } from 'react-redux';
-import BegrunnelseVisning from './begrunnelsevisning/begrunnelse';
-import SporsmalOgSvarVisning from './sporsmalvisning/sporsmalOgSvar';
-import Ukeliste from './ukevisning/ukeliste';
-import { hentSporsmalConfig } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { finnesIntlId } from '../../utils/teksterUtil';
+import * as React from "react";
+import { MeldekortdetaljerState } from "../../reducers/meldekortdetaljerReducer";
+import { hentNestePeriodeMedUkerOgDato } from "../../utils/dates";
+import { RootState } from "../../store/configureStore";
+import { connect } from "react-redux";
+import BegrunnelseVisning from "./begrunnelsevisning/begrunnelse";
+import SporsmalOgSvarVisning from "./sporsmalvisning/sporsmalOgSvar";
+import Ukeliste from "./ukevisning/ukeliste";
+import { hentSporsmalConfig } from "../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig";
+import { finnesIntlId } from "../../utils/teksterUtil";
 
 interface localProps {
   typeYtelsePostfix: string;
@@ -50,7 +50,7 @@ const Meldekortdetaljer: React.FunctionComponent<Props> = ({
         forklaring: finnesIntlId(sporsmalsObj.forklaring + typeYtelsePostfix),
         svar: hentSvar(sporsmalsObj.id),
         formatertDato:
-          sporsmalsObj.kategori === 'registrert' ? formatertDato : undefined,
+          sporsmalsObj.kategori === "registrert" ? formatertDato : undefined,
       };
     });
   };

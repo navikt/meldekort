@@ -1,40 +1,40 @@
-import storage from 'redux-persist/lib/storage/session';
+import storage from "redux-persist/lib/storage/session";
 
-import { Action, applyMiddleware, combineReducers, compose, createStore, Middleware } from 'redux';
-import { persistReducer, persistStore } from 'redux-persist';
-import { encryptTransform } from 'redux-persist-transform-encrypt';
+import { Action, applyMiddleware, combineReducers, compose, createStore, Middleware } from "redux";
+import { persistReducer, persistStore } from "redux-persist";
+import { encryptTransform } from "redux-persist-transform-encrypt";
 
-import aktivtMeldekortReducer from '../reducers/aktivtMeldekortReducer';
-import historiskeMeldekortReducer, { HistoriskeMeldekortState } from '../reducers/historiskeMeldekortReducer';
-import meldekortdetaljerReducer, { MeldekortdetaljerState } from '../reducers/meldekortdetaljerReducer';
-import personReducer from '../reducers/personReducer';
-import personStatusReducer, { PersonStatusState } from '../reducers/personStatusReducer';
-import { default as localesReducer, Locale } from '../reducers/localesReducer';
-import { intlReducer, IntlState } from 'react-intl-redux';
+import aktivtMeldekortReducer from "../reducers/aktivtMeldekortReducer";
+import historiskeMeldekortReducer, { HistoriskeMeldekortState } from "../reducers/historiskeMeldekortReducer";
+import meldekortdetaljerReducer, { MeldekortdetaljerState } from "../reducers/meldekortdetaljerReducer";
+import personReducer from "../reducers/personReducer";
+import personStatusReducer, { PersonStatusState } from "../reducers/personStatusReducer";
+import { default as localesReducer, Locale } from "../reducers/localesReducer";
+import { intlReducer, IntlState } from "react-intl-redux";
 
-import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
-import historiskeMeldekortEpics from '../epics/historiskeMeldekortEpics';
-import meldekortdetaljerEpics from '../epics/meldekortdetaljerEpics';
-import personEpics from '../epics/personEpics';
-import personStatusEpics from '../epics/personStatusEpics';
-import innsendingReducer from '../reducers/innsendingReducer';
-import { InnsendingState } from '../types/innsending';
-import innsendingEpics from '../epics/innsendingEpics';
-import uiReducer, { UIState } from '../reducers/uiReducer';
-import meldekortEpics from '../epics/meldekortEpics';
-import { Person } from '../types/person';
-import { MenyState } from '../types/meny';
-import menyReducer from '../reducers/menyReducer';
-import { MeldekortTypeKeys } from '../actions/meldekort';
-import meldekortReducer from '../reducers/meldekortReducer';
-import { Meldekort, MeldekortState } from '../types/meldekort';
-import personInfoReducer, { PersonInfoState } from '../reducers/personInfoReducer';
-import personInfoEpics from '../epics/personInfoEpics';
-import { hentEnvSetting } from '../utils/env';
-import { Skrivemodus } from '../types/skrivemodus';
-import skrivemodusReducer from '../reducers/skrivemodusReducer';
-import skrivemodusEpics from '../epics/skrivemodusEpics';
-import packageConfig from '../../../package.json';
+import { combineEpics, createEpicMiddleware, Epic } from "redux-observable";
+import historiskeMeldekortEpics from "../epics/historiskeMeldekortEpics";
+import meldekortdetaljerEpics from "../epics/meldekortdetaljerEpics";
+import personEpics from "../epics/personEpics";
+import personStatusEpics from "../epics/personStatusEpics";
+import innsendingReducer from "../reducers/innsendingReducer";
+import { InnsendingState } from "../types/innsending";
+import innsendingEpics from "../epics/innsendingEpics";
+import uiReducer, { UIState } from "../reducers/uiReducer";
+import meldekortEpics from "../epics/meldekortEpics";
+import { Person } from "../types/person";
+import { MenyState } from "../types/meny";
+import menyReducer from "../reducers/menyReducer";
+import { MeldekortTypeKeys } from "../actions/meldekort";
+import meldekortReducer from "../reducers/meldekortReducer";
+import { Meldekort, MeldekortState } from "../types/meldekort";
+import personInfoReducer, { PersonInfoState } from "../reducers/personInfoReducer";
+import personInfoEpics from "../epics/personInfoEpics";
+import { hentEnvSetting } from "../utils/env";
+import { Skrivemodus } from "../types/skrivemodus";
+import skrivemodusReducer from "../reducers/skrivemodusReducer";
+import skrivemodusEpics from "../epics/skrivemodusEpics";
+import packageConfig from "../../../package.json";
 
 const initialState = {};
 
@@ -81,7 +81,7 @@ const rootReducer = (state: RootState, action: any ) => {
       action.payload.response.status !== undefined &&
       action.payload.response.status === 401
     ) {
-      storage.removeItem('persist:meldekort:undefined');
+      storage.removeItem("persist:meldekort:undefined");
     }
   }
   return appReducer(state, action);
@@ -92,21 +92,21 @@ const middleware: Middleware[] = [epicMiddleware];
 const composeEnhancer: typeof compose =
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   // @ts-ignore
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     /* eslint-disable @typescript-eslint/ban-ts-comment */
     // @ts-ignore
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ as typeof compose
     : compose;
 
 const hentNokkel = (): string => {
-  return btoa(hentEnvSetting('MELDEKORTSESSIONSTORAGE'));
+  return btoa(hentEnvSetting("MELDEKORTSESSIONSTORAGE"));
 };
 
 const encryptor = encryptTransform({
   secretKey: hentNokkel(),
   onError: function(error: Error) {
-    console.log('Det skjedde en feil med kryptering!', error);
-    storage.removeItem('persist:meldekort:undefined');
+    console.log("Det skjedde en feil med kryptering!", error);
+    storage.removeItem("persist:meldekort:undefined");
   }
 });
 
@@ -117,7 +117,7 @@ const persistConfig = {
   key: `meldekort:${packageConfig.redux_version}`,
   storage,
   // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
-  blacklist: ['locales', 'ui', 'personInfo'],
+  blacklist: ["locales", "ui", "personInfo"],
   transforms: [encryptor]
 };
 

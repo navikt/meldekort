@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { MenyPunkt } from '../../../utils/menyConfig';
-import { RootState } from '../../../store/configureStore';
-import { connect } from 'react-redux';
-import { formatMessage } from '../../../utils/intlUtil';
-import { MenyActions } from '../../../actions/meny';
-import { Dispatch } from 'redux';
-import classNames from 'classnames';
-import { Collapse } from 'react-collapse';
-import Lenke from 'nav-frontend-lenker';
+import * as React from "react";
+import { MenyPunkt } from "../../../utils/menyConfig";
+import { RootState } from "../../../store/configureStore";
+import { connect } from "react-redux";
+import { formatMessage } from "../../../utils/intlUtil";
+import { MenyActions } from "../../../actions/meny";
+import { Dispatch } from "redux";
+import classNames from "classnames";
+import { Collapse } from "react-collapse";
+import Lenke from "nav-frontend-lenker";
 import { useNavigate } from "react-router";
 
 interface MobilMenyProps {
@@ -42,21 +42,21 @@ const MobilMeny: React.FunctionComponent<
   };
 
   return (
-    <nav className={classNames('mobilmeny')}>
+    <nav className={classNames("mobilmeny")}>
       <Collapse isOpened={props.erApen}>
-        <ul className={classNames('mobilmeny__navlist', { open: erApen })}>
+        <ul className={classNames("mobilmeny__navlist", { open: erApen })}>
           {menypunkter.map(menypunkt => (
             <li
-              className={'mobilmeny__item'}
+              className={"mobilmeny__item"}
               onClick={() => onChange(menypunkt)}
               key={menypunkt.tittel}
-              aria-labelledby={'navlink'}
+              aria-labelledby={"navlink"}
             >
               <Lenke
-                className={classNames('mobilmeny__lenke', {
+                className={classNames("mobilmeny__lenke", {
                   active: valgtMenyPunkt.tittel === menypunkt.tittel,
                 })}
-                href={'#'}
+                href={"#"}
               >
                 {formatMessage(menypunkt.tekstid)}
               </Lenke>
@@ -65,7 +65,7 @@ const MobilMeny: React.FunctionComponent<
         </ul>
       </Collapse>
       <div
-        className={classNames('overlay', { on: erApen })}
+        className={classNames("overlay", { on: erApen })}
         onClick={() => toggleMeny(false)}
       />
     </nav>

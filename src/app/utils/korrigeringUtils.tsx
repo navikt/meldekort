@@ -1,17 +1,17 @@
-import { MeldekortDag, Meldekortdetaljer, Sporsmal } from '../types/meldekort';
-import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
-import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
-import { InnsendingState } from '../types/innsending';
-import { store } from '../store/configureStore';
-import { UiActions } from '../actions/ui';
-import { InnsendingActions } from '../actions/innsending';
-import { fetchKorrigertId } from '../api/api';
+import { MeldekortDag, Meldekortdetaljer, Sporsmal } from "../types/meldekort";
+import { UtfyltDag } from "../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig";
+import { Sporsmal as Spm } from "../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig";
+import { InnsendingState } from "../types/innsending";
+import { store } from "../store/configureStore";
+import { UiActions } from "../actions/ui";
+import { InnsendingActions } from "../actions/innsending";
+import { fetchKorrigertId } from "../api/api";
 
 const settCheckedBasertPaBoolean = (
   kategoritekst: string,
   sporsmalValg: boolean
 ) => {
-  return sporsmalValg ? kategoritekst + '.ja' : kategoritekst + '.nei';
+  return sporsmalValg ? kategoritekst + ".ja" : kategoritekst + ".nei";
 };
 
 const konverterMeldekortdetaljerMeldekortDagerTilInnsendingUtfylteDager = (
@@ -33,11 +33,11 @@ const returnerListeMedMeldekortdetaljerSporsmal = (
   mkdetaljerSporsmal: Sporsmal
 ) => {
   return [
-    { kategori: 'arbeid', checked: mkdetaljerSporsmal.arbeidet },
-    { kategori: 'aktivitetArbeid', checked: mkdetaljerSporsmal.kurs },
-    { kategori: 'forhindret', checked: mkdetaljerSporsmal.syk },
-    { kategori: 'ferieFravar', checked: mkdetaljerSporsmal.annetFravaer },
-    { kategori: 'registrert', checked: mkdetaljerSporsmal.arbeidssoker },
+    { kategori: "arbeid", checked: mkdetaljerSporsmal.arbeidet },
+    { kategori: "aktivitetArbeid", checked: mkdetaljerSporsmal.kurs },
+    { kategori: "forhindret", checked: mkdetaljerSporsmal.syk },
+    { kategori: "ferieFravar", checked: mkdetaljerSporsmal.annetFravaer },
+    { kategori: "registrert", checked: mkdetaljerSporsmal.arbeidssoker },
   ];
 };
 

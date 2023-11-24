@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { InnsendingActions } from '../../../../actions/innsending';
-import { Dispatch } from 'redux';
-import Select from 'nav-frontend-skjema/lib/select';
-import { formatHtmlMessage, formatMessage, hentIntl } from '../../../../utils/intlUtil';
-import { Begrunnelse } from '../../../../types/innsending';
-import { RootState } from '../../../../store/configureStore';
-import { Undertittel } from 'nav-frontend-typografi';
-import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
+import * as React from "react";
+import { connect } from "react-redux";
+import { InnsendingActions } from "../../../../actions/innsending";
+import { Dispatch } from "redux";
+import Select from "nav-frontend-skjema/lib/select";
+import { formatHtmlMessage, formatMessage, hentIntl } from "../../../../utils/intlUtil";
+import { Begrunnelse } from "../../../../types/innsending";
+import { RootState } from "../../../../store/configureStore";
+import { Undertittel } from "nav-frontend-typografi";
+import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
 
 interface MapStateToProps {
   begrunnelse: Begrunnelse;
@@ -25,23 +25,23 @@ interface BegrunnselseProps {
 type Props = MapDispatchToProps & MapStateToProps & BegrunnselseProps;
 
 const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
-  const optionsString = hentIntl().messages['korriger.begrunnelse.valg'] as string;
-  const options = JSON.parse(optionsString ? optionsString : '{}');
+  const optionsString = hentIntl().messages["korriger.begrunnelse.valg"] as string;
+  const options = JSON.parse(optionsString ? optionsString : "{}");
 
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     props.settBegrunnelse({
       valgtArsak: event.target.value,
       valgtArsakTekst: options[event.target.value],
-      erFeil: event.target.value === '',
+      erFeil: event.target.value === "",
     });
   };
 
-  const begrunnelseClass = props.erFeil ? 'feilmelding' : '';
+  const begrunnelseClass = props.erFeil ? "feilmelding" : "";
 
   const { valgtArsak } = props.begrunnelse;
 
   return (
-    <div className={'seksjon begrunnelse ' + begrunnelseClass}>
+    <div className={"seksjon begrunnelse " + begrunnelseClass}>
       <Select
         label={
           <>
@@ -56,7 +56,7 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
         onChange={handleOnChange}
         value={valgtArsak}
       >
-        <option value={''}>
+        <option value={""}>
           {formatMessage("begrunnelse.velgArsak")}
         </option>
         {Object.keys(options).map(key => (
@@ -66,7 +66,7 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
         ))}
       </Select>
       {props.erFeil && (
-        <span className={'rodTekst'}>
+        <span className={"rodTekst"}>
           {formatHtmlMessage("begrunnelse.required")}
         </span>
       )}

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { formatMessage } from '../../utils/intlUtil';
-import { Flatknapp } from 'nav-frontend-knapper';
-import printLogo from '../../ikoner/print.svg';
-import DOMPortal from './DOMPortal';
-import Utskrift from './utskrift';
-import { Person, PersonInfo } from '../../types/person';
+import * as React from "react";
+import { formatMessage } from "../../utils/intlUtil";
+import { Flatknapp } from "nav-frontend-knapper";
+import printLogo from "../../ikoner/print.svg";
+import DOMPortal from "./DOMPortal";
+import Utskrift from "./utskrift";
+import { Person, PersonInfo } from "../../types/person";
 
 export interface PrintKnappProps {
   innholdRenderer: () => React.ReactNode;
@@ -22,15 +22,15 @@ export interface State {
 
 function updateDocumentClass(active: boolean) {
   if (active) {
-    document.documentElement.classList.add('js-utskriftsmodus');
+    document.documentElement.classList.add("js-utskriftsmodus");
   } else {
-    document.documentElement.classList.remove('js-utskriftsmodus');
+    document.documentElement.classList.remove("js-utskriftsmodus");
   }
 }
 
 class PrintKnapp extends React.Component<PrintKnappProps, State> {
   printTimeoutId: number;
-  tekst = formatMessage('overskrift.skrivUt');
+  tekst = formatMessage("overskrift.skrivUt");
 
   constructor(props: PrintKnappProps) {
     super(props);
@@ -84,7 +84,7 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
     } = this.props;
 
     return (
-      <div className={'navigasjonsknapp'}>
+      <div className={"navigasjonsknapp"}>
         <Flatknapp
           htmlType="button"
           onClick={() =>

@@ -1,17 +1,17 @@
-const express = require('express');
-const compression = require('compression');
+const express = require("express");
+const compression = require("compression");
 const {
   injectDecoratorServerSide
-} = require('@navikt/nav-dekoratoren-moduler/ssr');
-const { logger, logRequests } = require('./logger');
-const path = require('path');
-const promMid = require('express-prometheus-middleware');
+} = require("@navikt/nav-dekoratoren-moduler/ssr");
+const { logger, logRequests } = require("./logger");
+const path = require("path");
+const promMid = require("express-prometheus-middleware");
 
 console.log(`Dekoratormiljø: ${process.env.DEKORATOR_MILJO}`);
 
 const port = process.env.PORT || 8080;
-const basePath = '/meldekort';
-const buildPath = path.resolve(__dirname, '../build');
+const basePath = "/meldekort";
+const buildPath = path.resolve(__dirname, "../build");
 
 const app = express();
 
@@ -19,7 +19,7 @@ const app = express();
 app.use(compression());
 
 // Sikkerhetsgreier
-app.disable('x-powered-by');
+app.disable("x-powered-by");
 
 // basePath viser ingenting, derfor må vi redirect brukere til ${basePath}/send-meldekort
 app.get(`${basePath}`, (req, res) =>
@@ -27,7 +27,7 @@ app.get(`${basePath}`, (req, res) =>
 );
 
 // Cache public-filer (som favicon) i én time
-app.use(basePath, express.static('public', { maxAge: '1h' }));
+app.use(basePath, express.static("public", { maxAge: "1h" }));
 
 app.use(basePath, express.static(buildPath, { index: false }));
 
@@ -45,7 +45,7 @@ app.use(
 
 app.get(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
   injectDecoratorServerSide({
-    env: process.env.DEKORATOR_MILJO ?? 'dev',
+    env: process.env.DEKORATOR_MILJO ?? "dev",
     filePath: `${buildPath}/index.html`,
     params: {
       simple: false,
@@ -60,7 +60,7 @@ app.get(/^(?!.*\/(internal|static)\/).*$/, (req, res) => {
       console.error(`Failed to get decorator: ${e}`);
       res
         .status(500)
-        .send('Det har oppstått en feil. Venligst prøv igjen senere.');
+        .send("Det har oppstått en feil. Venligst prøv igjen senere.");
     });
 });
 

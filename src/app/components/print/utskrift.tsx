@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
-import NavLogo from '../../ikoner/nav-logo.svg';
-import { RootState } from '../../store/configureStore';
-import { connect } from 'react-redux';
-import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
-import classNames from 'classnames';
-import { isIE } from '../../utils/browsers';
+import * as React from "react";
+import { Ingress, Innholdstittel } from "nav-frontend-typografi";
+import NavLogo from "../../ikoner/nav-logo.svg";
+import { RootState } from "../../store/configureStore";
+import { connect } from "react-redux";
+import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
+import classNames from "classnames";
+import { isIE } from "../../utils/browsers";
 
 /**
  * Innhold som legges her er skult på skjerm, men vises på utskrift
@@ -31,8 +31,8 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
   }
 
   const { fornavn, etternavn, fodselsnr } = props.personInfo;
-  const printTekst = formatMessage('overskrift.meldekort.sendt');
-  const stylingMedIE = classNames('utskrift', {
+  const printTekst = formatMessage("overskrift.meldekort.sendt");
+  const stylingMedIE = classNames("utskrift", {
     browserSpecificStyling: isIE,
   });
   return (

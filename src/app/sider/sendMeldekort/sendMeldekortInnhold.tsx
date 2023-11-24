@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Meldekort, MeldekortKolonne, MeldekortRad } from '../../types/meldekort';
-import Tabell from '../../components/tabell/desktop/tabell';
-import { Normaltekst } from 'nav-frontend-typografi';
-import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
-import { Innsendingstyper } from '../../types/innsending';
-import { BaksystemFeilmelding } from '../../types/ui';
+import * as React from "react";
+import { Meldekort, MeldekortKolonne, MeldekortRad } from "../../types/meldekort";
+import Tabell from "../../components/tabell/desktop/tabell";
+import { Normaltekst } from "nav-frontend-typografi";
+import NavKnapp, { KnappTyper } from "../../components/knapp/navKnapp";
+import { Innsendingstyper } from "../../types/innsending";
+import { BaksystemFeilmelding } from "../../types/ui";
 import { formatHtmlMessage } from "../../utils/intlUtil";
 
 interface Props {

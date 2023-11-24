@@ -1,9 +1,9 @@
-import * as React from 'react';
-import classNames from 'classnames';
-import { guid } from 'nav-frontend-js-utils';
-import { formatMessage } from '../../utils/intlUtil';
-import InfoToggler from './infoToggler/infoToggler';
-import EkspanderbartInnhold from '../ekspanderbartInnhold/ekspanderbartInnhold';
+import * as React from "react";
+import classNames from "classnames";
+import { guid } from "nav-frontend-js-utils";
+import { formatMessage } from "../../utils/intlUtil";
+import InfoToggler from "./infoToggler/infoToggler";
+import EkspanderbartInnhold from "../ekspanderbartInnhold/ekspanderbartInnhold";
 
 interface Props {
   children: React.ReactNode;
@@ -28,12 +28,12 @@ class UtvidetInformasjon extends React.Component<Props, State> {
   }
 
   render() {
-    const cls = classNames('noPrint utvidetInformasjon', {
-      'utvidetInformasjon--apen': this.state.apen,
+    const cls = classNames("noPrint utvidetInformasjon", {
+      "utvidetInformasjon--apen": this.state.apen,
     });
     const {
-      apenLabelId = 'veiledning.les',
-      lukkLabelId = 'veiledning.lukk',
+      apenLabelId = "veiledning.les",
+      lukkLabelId = "veiledning.lukk",
     } = this.props;
 
     return (

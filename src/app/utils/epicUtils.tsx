@@ -1,4 +1,4 @@
-import { from } from 'rxjs';
+import { from } from "rxjs";
 
 /**
  * Use async functions with rxjs, with less parenthesis soup.
