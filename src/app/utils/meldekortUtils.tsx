@@ -1,10 +1,5 @@
-import React  from 'react';
-import {
-  KortStatus,
-  Meldekort, MeldekortKolonne,
-  MeldekortRad,
-  SendtMeldekort
-} from '../types/meldekort';
+import React from 'react';
+import { KortStatus, Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from '../types/meldekort';
 import { Innsendingstyper } from '../types/innsending';
 import { hentDatoPeriode, hentUkePeriode } from './dates';
 import { isEmpty } from 'ramda';

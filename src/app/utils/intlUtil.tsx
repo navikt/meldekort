@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { createIntl } from 'react-intl';
 import { store } from '../store/configureStore';
 import { Konstanter } from './consts';

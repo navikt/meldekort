@@ -1,8 +1,4 @@
-import {
-  ActionType,
-  createAsyncAction,
-  createAction
-} from 'typesafe-actions';
+import { ActionType, createAction, createAsyncAction } from 'typesafe-actions';
 import { AxiosError } from 'axios';
 import { Meldekortdetaljer } from '../types/meldekort';
 

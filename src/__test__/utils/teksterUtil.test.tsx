@@ -1,8 +1,4 @@
-import {
-  finnesIntlId,
-  finnTypeYtelsePostfix,
-  TypeYtelse
-} from '../../app/utils/teksterUtil';
+import { finnesIntlId, finnTypeYtelsePostfix, TypeYtelse } from '../../app/utils/teksterUtil';
 import { Meldegruppe } from '../../app/types/meldekort';
 import { setLocalesBeforeAll } from '../testSetup/providerWrapper';
 

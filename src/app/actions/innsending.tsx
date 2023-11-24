@@ -1,21 +1,9 @@
-import {
-  Begrunnelse,
-  Innsendingstyper,
-  InnsendingTypeKeys
-} from '../types/innsending';
-import {
-  ActionType,
-  createAsyncAction,
-  createAction
-} from 'typesafe-actions';
+import { Begrunnelse, Innsendingstyper, InnsendingTypeKeys } from '../types/innsending';
+import { ActionType, createAction, createAsyncAction } from 'typesafe-actions';
 import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';
 import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
-import {
-  Meldekortdetaljer,
-  MeldekortdetaljerInnsending,
-  ValideringsResultat
-} from '../types/meldekort';
+import { Meldekortdetaljer, MeldekortdetaljerInnsending, ValideringsResultat } from '../types/meldekort';
 
 export const InnsendingActions = {
   hentKorrigertId: createAsyncAction(

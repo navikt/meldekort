@@ -1,9 +1,5 @@
 import { ActionType, createAction } from 'typesafe-actions';
-import {
-  BaksystemFeilmelding,
-  IModal,
-  IngenTidligereMeldekort
-} from '../types/ui';
+import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
 
 export enum UiTypeKeys {
   SKJUL_MODAL = 'SKJUL_MODAL',

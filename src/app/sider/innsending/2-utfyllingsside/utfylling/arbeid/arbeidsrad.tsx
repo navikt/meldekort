@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import {
-  hentUkedager,
-  hentUkedagerSomStringListe,
-  konverterUkedag
-} from '../../../../../utils/ukedager';
+import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from '../../../../../utils/ukedager';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyltDagConfig';
 import { RootState } from '../../../../../store/configureStore';

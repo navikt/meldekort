@@ -1,8 +1,4 @@
-import {
-  BaksystemFeilmelding,
-  IModal,
-  IngenTidligereMeldekort
-} from '../types/ui';
+import { BaksystemFeilmelding, IModal, IngenTidligereMeldekort } from '../types/ui';
 import { UiActions, UiActionTypes } from '../actions/ui';
 import { getType } from 'typesafe-actions';
 

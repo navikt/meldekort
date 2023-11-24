@@ -1,9 +1,5 @@
 import * as React from 'react';
-import {
-  hentUkedager,
-  hentUkedagerSomStringListe,
-  konverterUkedag
-} from '../../../../../utils/ukedager';
+import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from '../../../../../utils/ukedager';
 import { Checkbox } from 'nav-frontend-skjema';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyltDagConfig';

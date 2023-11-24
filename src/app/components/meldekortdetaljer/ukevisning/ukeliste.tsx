@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  hentNummerOgDatoForAndreUke,
-  hentNummerOgDatoForForsteUke
-} from '../../../utils/dates';
+import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from '../../../utils/dates';
 import { hentDagliste } from './dagliste';
 import { Meldekort, MeldekortDag } from '../../../types/meldekort';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';

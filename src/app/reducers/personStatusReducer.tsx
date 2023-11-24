@@ -1,8 +1,5 @@
 import { PersonStatus } from '../types/person';
-import {
-  PersonStatusActions,
-  PersonStatusActionTypes
-} from '../actions/personStatus';
+import { PersonStatusActions, PersonStatusActionTypes } from '../actions/personStatus';
 import { getType } from 'typesafe-actions';
 
 export interface PersonStatusState {

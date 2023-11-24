@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef } from 'react';
 import HovedMeny from '../meny/desktop/hovedmeny';
 import MobilMeny from '../meny/mobil/mobilMeny';
 import { connect } from 'react-redux';
@@ -12,17 +13,9 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import MobilMenyToggle from '../meny/mobil/mobilmenyToggle';
 import { isEmpty } from 'ramda';
 import classNames from 'classnames';
-import {
-  isIE,
-  isOldChrome,
-  isOldEdge,
-  isOldFirefox,
-  isOldIE,
-  isOldSafari
-} from '../../utils/browsers';
+import { isIE, isOldChrome, isOldEdge, isOldFirefox, isOldIE, isOldSafari } from '../../utils/browsers';
 import GammelNettleserMelding from '../gammelNetteleserMelding/gammelNettleserMelding';
 import { useLocation } from "react-router-dom";
-import { useEffect, useRef } from "react";
 
 interface MapStateToProps {
   meny: MenyState;

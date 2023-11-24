@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import ProviderWrapper from '../testSetup/providerWrapper';
 import Tabell from '../../app/components/tabell/desktop/tabell';
-import { FormattedMessage } from "react-intl";
 
 it('Tabell', () => {
   const rader = [{k: 1}, {k: 2}, {k: 3}]

@@ -1,8 +1,5 @@
 import { PersonInfo } from '../types/person';
-import {
-  PersonInfoActions,
-  PersonInfoActionTypes
-} from '../actions/personInfo';
+import { PersonInfoActions, PersonInfoActionTypes } from '../actions/personInfo';
 import { getType } from 'typesafe-actions';
 
 export interface PersonInfoState {

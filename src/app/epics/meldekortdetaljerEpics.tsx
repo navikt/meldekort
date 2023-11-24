@@ -1,11 +1,5 @@
 import { AppEpic } from '../store/configureStore';
-import {
-  catchError,
-  filter,
-  map,
-  switchMap,
-  withLatestFrom
-} from 'rxjs/operators';
+import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 import { from, of } from 'rxjs';
 import { fetchMeldekortdetaljer } from '../api/api';

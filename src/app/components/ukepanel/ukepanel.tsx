@@ -1,9 +1,6 @@
-import {
-  InnsendingState,
-  SpmSvar,
-  UtfyllingFeil
-} from '../../types/innsending';
+import { InnsendingState, SpmSvar, UtfyllingFeil } from '../../types/innsending';
 import * as React from 'react';
+import { useState } from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Innholdstittel } from 'nav-frontend-typografi';
 import { ukeTekst } from '../../utils/dates';
@@ -13,7 +10,6 @@ import Arbeidsrad from '../../sider/innsending/2-utfyllingsside/utfylling/arbeid
 import { RootState } from '../../store/configureStore';
 import { connect } from 'react-redux';
 import { FravaerTypeEnum } from '../../types/meldekort';
-import { useState } from 'react';
 
 interface Props {
   ukenummer: number;

@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import Sprakvelger from '../../app/components/sprakvelger/sprakvelger';
-import ProviderWrapper, {
-  setLocalesBeforeAll
-} from '../testSetup/providerWrapper';
+import ProviderWrapper, { setLocalesBeforeAll } from '../testSetup/providerWrapper';
 
 setLocalesBeforeAll();
 

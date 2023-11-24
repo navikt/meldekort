@@ -1,9 +1,6 @@
 import { Meldekort } from '../types/meldekort';
 import { getType } from 'typesafe-actions';
-import {
-  HistoriskeMeldekortActions,
-  HistoriskeMeldekortActionTypes
-} from '../actions/historiskeMeldekort';
+import { HistoriskeMeldekortActions, HistoriskeMeldekortActionTypes } from '../actions/historiskeMeldekort';
 
 export interface HistoriskeMeldekortState {
   historiskeMeldekort: Meldekort[];

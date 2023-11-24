@@ -3,10 +3,7 @@ import * as React from 'react';
 import Sporsmal from './sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  InnsendingState,
-  Innsendingstyper
-} from '../../../../types/innsending';
+import { InnsendingState, Innsendingstyper } from '../../../../types/innsending';
 import { InnsendingActions } from '../../../../actions/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Sporsmal as Spm } from './sporsmalConfig';

@@ -1,19 +1,8 @@
 import { MenyPunkt } from '../../app/utils/menyConfig';
 import SendMeldekort from '../../app/sider/sendMeldekort/sendMeldekort';
 import TidligereMeldekort from '../../app/sider/tidligereMeldekort/tidligereMeldekort';
-import {
-  KortStatus,
-  KortType,
-  Meldegruppe,
-  Meldekort,
-  MeldekortDag,
-  Meldeperiode
-} from '../../app/types/meldekort';
-import {
-  Feilmelding,
-  InnsendingState,
-  UtfyllingFeil
-} from '../../app/types/innsending';
+import { KortStatus, KortType, Meldegruppe, Meldekort, MeldekortDag, Meldeperiode } from '../../app/types/meldekort';
+import { Feilmelding, InnsendingState, UtfyllingFeil } from '../../app/types/innsending';
 import { hentSporsmalConfig } from '../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { MeldeForm, Person, PersonInfo } from '../../app/types/person';

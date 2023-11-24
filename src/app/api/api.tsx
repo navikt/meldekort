@@ -6,7 +6,8 @@ import { prefferedAxios } from '../types/fetch';
 import {
   Infomelding,
   Meldekort,
-  Meldekortdetaljer, MeldekortdetaljerInnsending,
+  Meldekortdetaljer,
+  MeldekortdetaljerInnsending,
   ValideringsResultat
 } from '../types/meldekort';
 import { Skrivemodus } from '../types/skrivemodus';

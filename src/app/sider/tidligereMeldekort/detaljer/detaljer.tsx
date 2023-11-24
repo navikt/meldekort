@@ -8,10 +8,7 @@ import { Dispatch } from 'redux';
 import { finnRiktigEtikettKlasse } from '../../../utils/statusEtikettUtil';
 import { formaterDato } from '../../../utils/dates';
 import { RootState } from '../../../store/configureStore';
-import {
-  mapKortStatusTilTekst,
-  mapKortTypeTilTekst
-} from '../../../utils/kortMapper';
+import { mapKortStatusTilTekst, mapKortTypeTilTekst } from '../../../utils/kortMapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';
 import utklippstavle from '../../../ikoner/utklippstavle.svg';
