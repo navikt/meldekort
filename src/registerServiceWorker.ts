@@ -36,7 +36,7 @@ export default function register() {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
+        // This is running on localhost. Let's check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
 
         // Add some additional logging to localhost, pointing developers to the
@@ -67,12 +67,12 @@ function registerValidSW(swUrl: string) {
               if (navigator.serviceWorker.controller) {
                 // At this point, the old content will have been purged and
                 // the fresh content will have been added to the cache.
-                // It"s the perfect time to display a "New content is
+                // It's the perfect time to display a "New content is
                 // available; please refresh." message in your web app.
                 console.log("New content is available; please refresh.");
               } else {
                 // At this point, everything has been precached.
-                // It"s the perfect time to display a
+                // It's the perfect time to display a
                 // "Content is cached for offline use." message.
                 console.log("Content is cached for offline use.");
               }
@@ -87,7 +87,7 @@ function registerValidSW(swUrl: string) {
 }
 
 function checkValidServiceWorker(swUrl: string) {
-  // Check if the service worker can be found. If it can"t reload the page.
+  // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
     .then(response => {
       // Ensure service worker exists, and that we really are getting a JS file.
