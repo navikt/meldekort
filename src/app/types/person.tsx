@@ -37,7 +37,7 @@ export enum MeldeForm {
   PAPIR = 'PAPIR',
   MANUELL = 'MANU',
   AUTO = 'AUTO',
-  IKKE_SATT = 'IKKE SATT',
+  IKKE_SATT = 'IKKE SATT'
 }
 
 export interface Fravaer {
@@ -50,5 +50,5 @@ export enum FravaerType {
   KURS_UTDANNING = 'K',
   SYKDOM = 'S',
   ANNET_FRAVAER = 'X',
-  ARBEIDS_FRAVAER = 'F',
+  ARBEIDS_FRAVAER = 'F'
 }

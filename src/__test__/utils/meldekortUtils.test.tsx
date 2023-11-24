@@ -1,7 +1,7 @@
 import {
   erAktivtMeldekortGyldig,
   erBrukerRegistrertIArena,
-  erMeldekortSendtInnTidligere,
+  erMeldekortSendtInnTidligere
 } from '../../app/utils/meldekortUtils';
 import { mkTEST } from '../testSetup/testData';
 import { KortType } from '../../app/types/meldekort';

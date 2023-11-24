@@ -5,23 +5,15 @@ import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
 import { Location, RouteProps } from 'react-router-dom';
 import { RootState } from '../../../store/configureStore';
 import { InnsendingActions } from '../../../actions/innsending';
-import {
-  Meldekort,
-  MeldekortState,
-  SendtMeldekort,
-} from '../../../types/meldekort';
+import { Meldekort, MeldekortState, SendtMeldekort } from '../../../types/meldekort';
 import { InnsendingState, Innsendingstyper } from '../../../types/innsending';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Person, PersonInfo } from '../../../types/person';
 import Meldekortdetaljer from '../../../components/meldekortdetaljer/meldekortdetaljer';
-import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
-import {
-  formaterDato,
-  formaterUkeOgDatoPeriode,
-  hentTid,
-} from '../../../utils/dates';
+import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from '../../../utils/dates';
 import Environment from '../../../utils/env';
 import PrintKnapp from '../../../components/print/printKnapp';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -30,7 +22,7 @@ import { MeldekortActions } from '../../../actions/meldekort';
 import {
   meldekortSomKanSendes,
   nesteMeldekortKanSendes,
-  returnerMeldekortListaMedFlereMeldekortIgjen,
+  returnerMeldekortListaMedFlereMeldekortIgjen
 } from '../../../utils/meldekortUtils';
 import { PersonInfoActions } from '../../../actions/personInfo';
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -183,8 +175,8 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
       meldekortdetaljerInnsending!.meldeperiode.fra,
       meldekortdetaljerInnsending!.meldeperiode.til
     );
-    const meldekortErMottatt = hentIntl().formatMessage(
-      { id: 'sendt.mottatt.label' },
+    const meldekortErMottatt = formatMessage(
+      'sendt.mottatt.label',
       {
         0: formaterDato(meldekortdetaljerInnsending!.mottattDato),
         1: hentTid(meldekortdetaljerInnsending!.mottattDato),
@@ -201,7 +193,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
       <div className="oppsummeringsTekster">
         <Ingress>
           <span>
-            {hentIntl().formatMessage({ id: 'meldekort.for' }) +
+            {formatMessage('meldekort.for') +
               personInfo.fornavn +
               ' ' +
               personInfo.etternavn +
@@ -212,8 +204,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         </Ingress>
         <Ingress>
           <span>
-            {hentIntl().formatMessage({ id: 'meldekort.for.perioden' }) +
-              ukeOgPeriode}
+            {formatMessage('meldekort.for.perioden') + ukeOgPeriode}
           </span>
         </Ingress>
         <Ingress>
@@ -222,8 +213,8 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         {nesteDato && (
           <Ingress className="noPrint">
             <span>
-              {hentIntl().formatMessage(
-                { id: 'sendt.meldekortKanSendes' },
+              {formatMessage(
+                'sendt.meldekortKanSendes',
                 {
                   0: formaterDato(nesteDato),
                 }

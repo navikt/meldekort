@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
 
 import sporrende from '../../ikoner/sporrende.svg';
 import { InnsendingActions } from '../../actions/innsending';
@@ -72,7 +72,7 @@ class OfteStilteSporsmal extends React.Component<
   };
 
   hentFormatertOverskrift = (id: string): string => {
-    return hentIntl().formatMessage({ id: id });
+    return formatMessage(id);
   };
 
   componentDidMount() {

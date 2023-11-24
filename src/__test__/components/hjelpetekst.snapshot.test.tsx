@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import ProviderWrapper, {
-  setLocalesBeforeAll,
+  setLocalesBeforeAll
 } from '../testSetup/providerWrapper';
 import Hjelpetekst from '../../app/components/meldekortdetaljer/ukevisning/hjelpetekst';
 import { mkDagTEST } from '../testSetup/testData';

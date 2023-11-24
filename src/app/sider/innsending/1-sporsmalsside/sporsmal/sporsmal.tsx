@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
-import { formatHtmlMessage, hentIntl } from '../../../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage } from '../../../../utils/intlUtil';
 import { Sporsmal as Spm } from './sporsmalConfig';
 import UtvidetInformasjon from '../../../../components/utvidetinformasjon/utvidetInformasjon';
 
@@ -35,12 +35,12 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
         description={description}
         radios={[
           {
-            label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.ja }),
+            label: formatMessage(props.sporsmalsobjekt.ja),
             value: props.sporsmalsobjekt.kategori + '.ja',
             disabled: props.disabled,
           },
           {
-            label: hentIntl().formatMessage({ id: props.sporsmalsobjekt.nei }),
+            label: formatMessage(props.sporsmalsobjekt.nei),
             value: props.sporsmalsobjekt.kategori + '.nei',
             disabled: props.disabled,
           },

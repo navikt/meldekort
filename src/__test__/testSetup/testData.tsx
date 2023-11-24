@@ -7,12 +7,12 @@ import {
   Meldegruppe,
   Meldekort,
   MeldekortDag,
-  Meldeperiode,
+  Meldeperiode
 } from '../../app/types/meldekort';
 import {
   Feilmelding,
   InnsendingState,
-  UtfyllingFeil,
+  UtfyllingFeil
 } from '../../app/types/innsending';
 import { hentSporsmalConfig } from '../../app/sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { hentUtfyltDagConfig } from '../../app/sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
@@ -41,7 +41,7 @@ export const mkDagTEST: MeldekortDag = {
   arbeidetTimerSum: 7.5,
   syk: false,
   annetFravaer: true,
-  kurs: false,
+  kurs: false
 };
 
 const dateString = '2019-01-01T10:00:00Z';
@@ -63,7 +63,7 @@ export const mkDetaljerTEST = {
     signatur: false,
     meldekortDager: [],
   },
-  begrunnelse: '',
+  begrunnelse: ''
 };
 
 export const sporsmalOgSvarTest = [
@@ -88,7 +88,7 @@ const meldeperiodeTEST: Meldeperiode = {
   fra: new Date(dateString),
   kanKortSendes: true,
   kortKanSendesFra: new Date(dateString),
-  periodeKode: '201901',
+  periodeKode: '201901'
 };
 
 export const mkTEST: Meldekort = {
@@ -99,7 +99,7 @@ export const mkTEST: Meldekort = {
   kortStatus: KortStatus.OPPRE,
   bruttoBelop: 0,
   mottattDato: new Date(dateString),
-  korrigerbart: true,
+  korrigerbart: true
 };
 
 export const mkDagerTEST: MeldekortDag[] = [
@@ -114,7 +114,7 @@ export const mkDagerTEST: MeldekortDag[] = [
 
 const feilmelding: Feilmelding = {
   feil: true,
-  feilmelding: 'Test',
+  feilmelding: 'Test'
 };
 
 export const utfyllingFeilTEST: UtfyllingFeil = {
@@ -128,7 +128,7 @@ export const utfyllingFeilTEST: UtfyllingFeil = {
   feilIArbeidetTimerHeleHalve: true,
   feilIArbeidetTimer: true,
   feilIDagerHorisontal: [{ uke: 1, dag: 1, rad: 'A' }],
-  feilIDagerVertikal: [{ uke: 1, dag: 2, rad: 'S' }],
+  feilIDagerVertikal: [{ uke: 1, dag: 2, rad: 'S' }]
 };
 
 export const innsendingTEST: InnsendingState = {
@@ -162,7 +162,7 @@ export const innsendingTEST: InnsendingState = {
     begrunnelse: '',
   },
   meldekortdetaljerInnsending: undefined,
-  valideringsResultat: undefined,
+  valideringsResultat: undefined
 };
 
 export const testPerson: Person = {
@@ -172,12 +172,12 @@ export const testPerson: Person = {
   etterregistrerteMeldekort: [],
   fravaer: [],
   id: '',
-  antallGjenstaaendeFeriedager: 0,
+  antallGjenstaaendeFeriedager: 0
 };
 
 export const testPersoninfo: PersonInfo = {
   personId: 123456,
   fodselsnr: '01020312345',
   etternavn: 'Test',
-  fornavn: 'Testesen',
+  fornavn: 'Testesen'
 };

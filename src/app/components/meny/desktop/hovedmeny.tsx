@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { hentIntl } from '../../../utils/intlUtil';
+import { formatMessage } from '../../../utils/intlUtil';
 import { MenyActions } from '../../../actions/meny';
 import { MenyPunkt } from '../../../utils/menyConfig';
 import { RootState } from '../../../store/configureStore';
@@ -47,7 +47,7 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
                 href={'#'}
                 aria-labelledby={'tab hovedmeny__menypunkt'}
               >
-                {hentIntl().formatMessage({ id: item.tekstid })}
+                {formatMessage(item.tekstid)}
               </Lenke>
             </li>
           ))}

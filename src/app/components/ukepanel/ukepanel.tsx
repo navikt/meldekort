@@ -1,7 +1,7 @@
 import {
   InnsendingState,
   SpmSvar,
-  UtfyllingFeil,
+  UtfyllingFeil
 } from '../../types/innsending';
 import * as React from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';

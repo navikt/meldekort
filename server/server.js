@@ -1,7 +1,7 @@
 const express = require('express');
 const compression = require('compression');
 const {
-  injectDecoratorServerSide,
+  injectDecoratorServerSide
 } = require('@navikt/nav-dekoratoren-moduler/ssr');
 const { logger, logRequests } = require('./logger');
 const path = require('path');

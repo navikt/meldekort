@@ -2,7 +2,7 @@ import { Meldekort } from '../types/meldekort';
 import { getType } from 'typesafe-actions';
 import {
   HistoriskeMeldekortActions,
-  HistoriskeMeldekortActionTypes,
+  HistoriskeMeldekortActionTypes
 } from '../actions/historiskeMeldekort';
 
 export interface HistoriskeMeldekortState {
@@ -12,7 +12,7 @@ export interface HistoriskeMeldekortState {
 
 const initalState: HistoriskeMeldekortState = {
   historiskeMeldekort: [],
-  ingenTidligereMeldekort: false,
+  ingenTidligereMeldekort: false
 };
 
 const historiskeMeldekortReducer = (

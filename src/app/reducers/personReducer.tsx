@@ -9,7 +9,7 @@ const initialState: Person = {
   etterregistrerteMeldekort: [],
   fravaer: [],
   id: '',
-  antallGjenstaaendeFeriedager: 0,
+  antallGjenstaaendeFeriedager: 0
 };
 
 const personReducer = (

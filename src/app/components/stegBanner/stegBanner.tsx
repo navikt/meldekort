@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
-import { hentIntl } from '../../utils/intlUtil';
+import { formatMessage } from '../../utils/intlUtil';
 import { useLocation } from "react-router-dom";
 
 const StegBanner: React.FunctionComponent = () => {
@@ -16,7 +16,7 @@ const StegBanner: React.FunctionComponent = () => {
   for (let i = 1; i < 5; i++) {
     const stegobj = Object.assign({
       index: i,
-      label: hentIntl().formatMessage({ id: 'overskrift.steg' + i }),
+      label: formatMessage('overskrift.steg' + i),
     });
     stegobjekter.push(stegobj);
   }

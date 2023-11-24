@@ -18,20 +18,13 @@ import UIAlertstripeWrapper from './components/feil/UIAlertstripeWrapper';
 import { MenyState } from './types/meny';
 import { MenyPunkt } from './utils/menyConfig';
 import { MenyActions } from './actions/meny';
-import { hentIntl } from './utils/intlUtil';
+import { formatMessage } from './utils/intlUtil';
 import classNames from 'classnames';
 import { PersonActions } from './actions/person';
 import { erBrukerRegistrertIArena } from './utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import {
-  isIE,
-  isOldChrome,
-  isOldEdge,
-  isOldFirefox,
-  isOldIE,
-  isOldSafari,
-} from './utils/browsers';
-import { WrappedComponentProps, injectIntl } from 'react-intl';
+import { isIE, isOldChrome, isOldEdge, isOldFirefox, isOldIE, isOldSafari } from './utils/browsers';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Konstanter } from "./utils/consts";
 
 if (erMock()) {
@@ -110,7 +103,7 @@ class App extends React.Component<Props, AppState> {
 
       return (
         <BrowserRouter>
-          <Header tittel={hentIntl().formatMessage({ id: 'overskrift.meldekort' })} />
+          <Header tittel={formatMessage('overskrift.meldekort')} />
           <div
             className={classNames('', { overlay: meny.erApen })}
             onClick={() => meny.erApen && toggleMeny(!meny.erApen)}

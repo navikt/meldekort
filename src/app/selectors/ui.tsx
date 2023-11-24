@@ -2,7 +2,7 @@ import { RootState } from '../store/configureStore';
 import {
   BaksystemFeilmelding,
   IModal,
-  IngenTidligereMeldekort,
+  IngenTidligereMeldekort
 } from '../types/ui';
 
 export const selectModal = (state: RootState): IModal => {

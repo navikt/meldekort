@@ -12,16 +12,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { finnRiktigEtikettKlasse } from '../../utils/statusEtikettUtil';
 import { formaterBelop } from '../../utils/numberFormat';
-import {
-  formaterDato,
-  hentDatoPeriode,
-  hentUkePeriode,
-} from '../../utils/dates';
+import { formaterDato, hentDatoPeriode, hentUkePeriode } from '../../utils/dates';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyActions } from '../../actions/meny';
 import { MenyState } from '../../types/meny';
 
-import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
 import { HistoriskeMeldekortActions } from '../../actions/historiskeMeldekort';
 import { HistoriskeMeldekortState } from '../../reducers/historiskeMeldekortReducer';
 import { Innholdstittel } from 'nav-frontend-typografi';
@@ -29,10 +25,7 @@ import { InnsendingActions } from '../../actions/innsending';
 import { mapKortStatusTilTekst } from '../../utils/kortMapper';
 import { HistoriskeMeldekortRad, KortStatus } from '../../types/meldekort';
 import { RootState } from '../../store/configureStore';
-import {
-  selectFeilmelding,
-  selectIngenTidligereMeldekort,
-} from '../../selectors/ui';
+import { selectFeilmelding, selectIngenTidligereMeldekort } from '../../selectors/ui';
 import { SkrivemodusActions } from '../../actions/skrivemodus';
 import { Skrivemodus } from '../../types/skrivemodus';
 import SkrivemodusInfomelding from '../../components/feil/skrivemodusInfomelding';
@@ -91,7 +84,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
             : formaterDato(meldekort.mottattDato),
         status: meldekort.kortStatus,
         bruttobelop: formaterBelop(meldekort.bruttoBelop),
-        detaljer: hentIntl().formatMessage({ id: "overskrift.detaljer" }),
+        detaljer: formatMessage("overskrift.detaljer"),
       });
     });
     return radliste;

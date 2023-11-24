@@ -3,7 +3,7 @@ import { Input } from 'nav-frontend-skjema';
 import {
   hentUkedager,
   hentUkedagerSomStringListe,
-  konverterUkedag,
+  konverterUkedag
 } from '../../../../../utils/ukedager';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';
 import { UtfyltDag } from '../utfyltDagConfig';

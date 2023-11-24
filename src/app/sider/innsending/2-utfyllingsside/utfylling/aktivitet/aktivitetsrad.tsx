@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   hentUkedager,
   hentUkedagerSomStringListe,
-  konverterUkedag,
+  konverterUkedag
 } from '../../../../../utils/ukedager';
 import { Checkbox } from 'nav-frontend-skjema';
 import { FeilIDager, InnsendingState } from '../../../../../types/innsending';

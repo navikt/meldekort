@@ -1,7 +1,7 @@
 import { PersonStatus } from '../types/person';
 import {
   PersonStatusActions,
-  PersonStatusActionTypes,
+  PersonStatusActionTypes
 } from '../actions/personStatus';
 import { getType } from 'typesafe-actions';
 
@@ -14,7 +14,7 @@ const initialState: PersonStatusState = {
     id: '',
     statusArbeidsoker: 'venter_pa_data',
     statusYtelse: '',
-  },
+  }
 };
 
 const personStatusReducer = (

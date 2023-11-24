@@ -11,14 +11,14 @@ const person: Person = {
   etterregistrerteMeldekort: [],
   fravaer: [],
   id: '',
-  antallGjenstaaendeFeriedager: 0,
+  antallGjenstaaendeFeriedager: 0
 };
 
 const personInfo: PersonInfo = {
   personId: 0,
   fodselsnr: '',
   etternavn: '',
-  fornavn: '',
+  fornavn: ''
 };
 it('Utskrift', () => {
   const tree = renderer.create(

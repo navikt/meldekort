@@ -7,7 +7,7 @@ import {
   Infomelding,
   Meldekort,
   Meldekortdetaljer, MeldekortdetaljerInnsending,
-  ValideringsResultat,
+  ValideringsResultat
 } from '../types/meldekort';
 import { Skrivemodus } from '../types/skrivemodus';
 import { RootState } from '../store/configureStore';

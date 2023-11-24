@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 export enum SkrivemodusTypeKeys {
   SKRIVEMODUS = 'SKRIVEMODUS',
   SKRIVEMODUS_OK = 'SKRIVEMODUS_OK',
-  SKRIVEMODUS_FEILET = 'SKRIVEMODUS_FEILET',
+  SKRIVEMODUS_FEILET = 'SKRIVEMODUS_FEILET'
 }
 
 export const SkrivemodusActions = {
@@ -13,7 +13,7 @@ export const SkrivemodusActions = {
     SkrivemodusTypeKeys.SKRIVEMODUS,
     SkrivemodusTypeKeys.SKRIVEMODUS_OK,
     SkrivemodusTypeKeys.SKRIVEMODUS_FEILET
-  )<void, Skrivemodus, AxiosError>(),
+  )<void, Skrivemodus, AxiosError>()
 };
 
 export type SkrivemodusActionTypes = ActionType<typeof SkrivemodusActions>;

@@ -1,42 +1,40 @@
 import { KortStatus, KortType } from '../types/meldekort';
-import { hentIntl } from './intlUtil';
+import { formatMessage } from './intlUtil';
 
 export const mapKortStatusTilTekst = (status: KortStatus) => {
-  const intl = hentIntl();
-
   switch (status) {
     case KortStatus.OPPRE:
-      return intl.formatMessage({ id: 'meldekort.status.oppr' });
+      return formatMessage('meldekort.status.oppr');
     case KortStatus.SENDT:
-      return intl.formatMessage({ id: 'meldekort.status.sendt' });
+      return formatMessage('meldekort.status.sendt');
     case KortStatus.SLETT:
-      return intl.formatMessage({ id: 'meldekort.status.slett' });
+      return formatMessage('meldekort.status.slett');
     case KortStatus.REGIS:
-      return intl.formatMessage({ id: 'meldekort.status.regis' });
+      return formatMessage('meldekort.status.regis');
     case KortStatus.FMOPP:
-      return intl.formatMessage({ id: 'meldekort.status.fmopp' });
+      return formatMessage('meldekort.status.fmopp');
     case KortStatus.FUOPP:
-      return intl.formatMessage({ id: 'meldekort.status.fuopp' });
+      return formatMessage('meldekort.status.fuopp');
     case KortStatus.KLAR:
-      return intl.formatMessage({ id: 'meldekort.status.klar' });
+      return formatMessage('meldekort.status.klar');
     case KortStatus.KAND:
-      return intl.formatMessage({ id: 'meldekort.status.klar' });
+      return formatMessage('meldekort.status.klar');
     case KortStatus.IKKE:
-      return intl.formatMessage({ id: 'meldekort.status.ikke' });
+      return formatMessage('meldekort.status.ikke');
     case KortStatus.OVERM:
-      return intl.formatMessage({ id: 'meldekort.status.overm' });
+      return formatMessage('meldekort.status.overm');
     case KortStatus.NYKTR:
-      return intl.formatMessage({ id: 'meldekort.status.nyktr' });
+      return formatMessage('meldekort.status.nyktr');
     case KortStatus.FERDI:
-      return intl.formatMessage({ id: 'meldekort.status.ferdi' });
+      return formatMessage('meldekort.status.ferdi');
     case KortStatus.FEIL:
-      return intl.formatMessage({ id: 'meldekort.status.feil' });
+      return formatMessage('meldekort.status.feil');
     case KortStatus.OPPF:
-      return intl.formatMessage({ id: 'meldekort.status.oppf' });
+      return formatMessage('meldekort.status.oppf');
     case KortStatus.VENTE:
-      return intl.formatMessage({ id: 'meldekort.status.vente' });
+      return formatMessage('meldekort.status.vente');
     case KortStatus.UBEHA:
-      return intl.formatMessage({ id: 'meldekort.status.ubeha' });
+      return formatMessage('meldekort.status.ubeha');
 
     default:
       return 'Feil i status';
@@ -44,26 +42,25 @@ export const mapKortStatusTilTekst = (status: KortStatus) => {
 };
 
 export const mapKortTypeTilTekst = (type: KortType) => {
-  const intl = hentIntl();
   switch (type) {
     case KortType.RETUR:
-      return intl.formatMessage({ id: 'meldekort.type.retur' });
+      return formatMessage('meldekort.type.retur');
     case KortType.ORDINAER:
-      return intl.formatMessage({ id: 'meldekort.type.ordinar' });
+      return formatMessage('meldekort.type.ordinar');
     case KortType.ERSTATNING:
-      return intl.formatMessage({ id: 'meldekort.type.erstatning' });
+      return formatMessage('meldekort.type.erstatning');
     case KortType.ELEKTRONISK:
-      return intl.formatMessage({ id: 'meldekort.type.elektronisk' });
+      return formatMessage('meldekort.type.elektronisk');
     case KortType.AAP:
-      return intl.formatMessage({ id: 'meldekort.type-AAP' });
+      return formatMessage('meldekort.type-AAP');
     case KortType.ORDINAER_MANUELL:
-      return intl.formatMessage({ id: 'meldekort.type.ordinarManuell' });
+      return formatMessage('meldekort.type.ordinarManuell');
     case KortType.MASKINELT_OPPDATERT:
-      return intl.formatMessage({ id: 'meldekort.type.maskineltOppdatert' });
+      return formatMessage('meldekort.type.maskineltOppdatert');
     case KortType.MANUELL_ARENA:
-      return intl.formatMessage({ id: 'meldekort.type.manuellArena' });
+      return formatMessage('meldekort.type.manuellArena');
     case KortType.KORRIGERT_ELEKTRONISK:
-      return intl.formatMessage({ id: 'meldekort.type.korrigertElektronisk' });
+      return formatMessage('meldekort.type.korrigertElektronisk');
 
     default:
       return 'Feil i korttype';

@@ -13,7 +13,7 @@ import {
   hentUkenummerForDato,
   ukeTekst
 } from "../utils/dates";
-import { formatMessage, hentIntl } from "../utils/intlUtil";
+import { formatMessage } from "../utils/intlUtil";
 import { hentDagliste } from "../components/meldekortdetaljer/ukevisning/dagliste";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -92,12 +92,8 @@ function header(
       "sendt.mottatt.pdfheader",
       {
         type: korrigering
-          ? hentIntl()
-              .formatMessage({ id: "meldekort.type.korrigert" })
-              .trim()
-          : hentIntl()
-              .formatMessage({ id: "overskrift.meldekort" })
-              .trim(),
+          ? formatMessage("meldekort.type.korrigert").trim()
+          : formatMessage("overskrift.meldekort").trim(),
         period: formaterUkeOgDatoPeriode(
           meldekortdetaljerInnsending!.meldeperiode.fra,
           meldekortdetaljerInnsending!.meldeperiode.til
@@ -118,17 +114,13 @@ function header(
 
 function veiledning(): Sporsmalsobjekt {
   return {
-    sporsmal: hentIntl().formatMessage({
-      id: "sporsmal.lesVeiledning",
-    }),
+    sporsmal: formatMessage("sporsmal.lesVeiledning"),
   };
 }
 
 function ansvar(): Sporsmalsobjekt {
   return {
-    sporsmal: hentIntl().formatMessage({
-      id: "sporsmal.ansvarForRiktigUtfylling",
-    }),
+    sporsmal: formatMessage("sporsmal.ansvarForRiktigUtfylling"),
   };
 }
 
@@ -137,12 +129,8 @@ function korrigeringsBegrunnelse(
   typeYtelsePostfix: string
 ): Sporsmalsobjekt {
   return {
-    sporsmal: hentIntl().formatMessage({
-      id: "korrigering.sporsmal.begrunnelse",
-    }),
-    forklaring: hentIntl().formatMessage({
-      id: "forklaring.sporsmal.begrunnelse" + typeYtelsePostfix,
-    }),
+    sporsmal: formatMessage("korrigering.sporsmal.begrunnelse"),
+    forklaring: formatMessage("forklaring.sporsmal.begrunnelse" + typeYtelsePostfix),
     svar: begrunnelse.valgtArsakTekst,
   };
 }
@@ -159,16 +147,14 @@ function sporsmal(
         : "";
 
     return {
-      sporsmal: hentIntl().formatMessage({ id: spm.sporsmal }) + formatertDato,
-      forklaring: hentIntl().formatMessage({
-        id: spm.forklaring,
-      }),
+      sporsmal: formatMessage(spm.sporsmal) + formatertDato,
+      forklaring: formatMessage(spm.forklaring),
       svar:
         (spm.checked?.endsWith("ja") ? "X " : "_ ") +
-        hentIntl().formatMessage({ id: spm.ja }) +
+        formatMessage(spm.ja) +
         "<br>" +
         (spm.checked?.endsWith("nei") ? "X " : "_ ") +
-        hentIntl().formatMessage({ id: spm.nei }),
+        formatMessage(spm.nei),
     };
   });
 }
@@ -216,30 +202,22 @@ function utfylling(
 ): Sporsmalsobjekt {
   return {
     advarsel: medAdvarsel
-      ? hentIntl().formatMessage({ id: "sendt.advarsel" })
+      ? formatMessage("sendt.advarsel")
       : "",
     sporsmal: "",
     forklaring:
       "<b>" +
-      hentIntl().formatMessage({
-        id: id,
-      }) +
+      formatMessage(id) +
       "</b><br/>" +
-      hentIntl().formatMessage({
-        id: "forklaring." + id + typeYtelsePostfix,
-      }),
+      formatMessage("forklaring." + id + typeYtelsePostfix),
   };
 }
 
 function bekreftelse(typeYtelsePostfix: string): Sporsmalsobjekt {
   return {
     sporsmal:
-      hentIntl().formatMessage({
-        id: "utfylling.bekreft" + typeYtelsePostfix,
-      }) +
+      formatMessage("utfylling.bekreft" + typeYtelsePostfix) +
       "<br><br>X " +
-      hentIntl().formatMessage({
-        id: "utfylling.bekreftAnsvar",
-      }),
+      formatMessage("utfylling.bekreftAnsvar"),
   };
 }

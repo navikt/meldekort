@@ -22,7 +22,7 @@ const removeCssHashPlugin = {
       }
     });
     return webpackConfig;
-  },
+  }
 };
 
 module.exports = {
@@ -35,5 +35,5 @@ module.exports = {
         chunkFilename: 'static/js/[name].chunk.js',
       },
     },
-  },
+  }
 };

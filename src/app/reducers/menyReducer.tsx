@@ -6,7 +6,7 @@ import { getType } from 'typesafe-actions';
 const initialState: MenyState = {
   valgtMenyPunkt: menyConfig[0],
   alleMenyPunkter: menyConfig,
-  erApen: true,
+  erApen: true
 };
 
 const menyReducer = (

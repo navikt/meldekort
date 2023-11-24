@@ -20,7 +20,7 @@ type UIModalWrapperProps = MapStateToProps & MapDispatchToProps;
 
 const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({
   modal,
-  skjulModal,
+  skjulModal
 }) => {
   Modal.setAppElement('#meldekort__root');
   return (

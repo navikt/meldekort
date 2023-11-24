@@ -69,7 +69,7 @@ const appReducer = combineReducers({
   meny: menyReducer,
   ui: uiReducer,
   meldekort: meldekortReducer,
-  skrivemodus: skrivemodusReducer,
+  skrivemodus: skrivemodusReducer
 });
 
 // PayloadAction<MeldekortTypeKeys.API_KALL_FEILET, AxiosError>
@@ -107,7 +107,7 @@ const encryptor = encryptTransform({
   onError: function(error: Error) {
     console.log('Det skjedde en feil med kryptering!', error);
     storage.removeItem('persist:meldekort:undefined');
-  },
+  }
 });
 
 const persistConfig = {
@@ -118,7 +118,7 @@ const persistConfig = {
   storage,
   // Hvis du ønsker at noe ikke skal persistes, legg det i blacklist.
   blacklist: ['locales', 'ui', 'personInfo'],
-  transforms: [encryptor],
+  transforms: [encryptor]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

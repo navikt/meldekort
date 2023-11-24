@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 export enum PersonStatusTypeKeys {
   HENT_PERSON_STATUS = 'HENT_PERSON_STATUS',
   HENT_PERSON_STATUS_OK = 'HENT_PERSON_STATUS_OK',
-  HENT_PERSON_STATUS_FEILET = 'HENT_PERSON_STATUS_FEILET',
+  HENT_PERSON_STATUS_FEILET = 'HENT_PERSON_STATUS_FEILET'
 }
 
 export const PersonStatusActions = {
@@ -13,7 +13,7 @@ export const PersonStatusActions = {
     PersonStatusTypeKeys.HENT_PERSON_STATUS,
     PersonStatusTypeKeys.HENT_PERSON_STATUS_OK,
     PersonStatusTypeKeys.HENT_PERSON_STATUS_FEILET
-  )<void, PersonStatus, AxiosError>(),
+  )<void, PersonStatus, AxiosError>()
 };
 
 export type PersonStatusActionTypes = ActionType<typeof PersonStatusActions>;

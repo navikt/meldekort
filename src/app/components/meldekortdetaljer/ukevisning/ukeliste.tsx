@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   hentNummerOgDatoForAndreUke,
-  hentNummerOgDatoForForsteUke,
+  hentNummerOgDatoForForsteUke
 } from '../../../utils/dates';
 import { hentDagliste } from './dagliste';
 import { Meldekort, MeldekortDag } from '../../../types/meldekort';
@@ -18,7 +18,7 @@ const Ukeliste: React.FunctionComponent<Props> = ({
   ukeNr,
   typeYtelsePostfix,
   meldekortDager,
-  aktivtMeldekort,
+  aktivtMeldekort
 }) => {
   const dagListe = hentDagliste(meldekortDager, typeYtelsePostfix);
 

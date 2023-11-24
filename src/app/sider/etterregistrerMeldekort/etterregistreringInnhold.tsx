@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
 import Sprakvelger from '../../components/sprakvelger/sprakvelger';
 import Tabell from '../../components/tabell/desktop/tabell';
 import NavKnapp, { KnappTyper } from '../../components/knapp/navKnapp';
@@ -22,9 +22,7 @@ function EtterregistreringInnhold({
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
         <Innholdstittel>
-          {hentIntl().formatMessage({
-            id: 'overskrift.etterregistrering.innsending',
-          })}
+          {formatMessage('overskrift.etterregistrering.innsending')}
         </Innholdstittel>
         <Sprakvelger />
       </section>

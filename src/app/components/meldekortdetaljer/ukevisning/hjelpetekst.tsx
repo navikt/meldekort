@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
 import { MeldekortDag } from '../../../types/meldekort';
 
 interface Props {
@@ -9,16 +9,14 @@ interface Props {
 
 const Hjelpetekst: React.FunctionComponent<Props> = ({
   meldekortDag,
-  typeYtelsePostfix,
+  typeYtelsePostfix
 }) => {
   const hentTekst = (utfyllingTekstid: string, forklaringTekstid: string) => {
     return (
       <span>
         <span className={'overskrift-hjelpetekst'}>
           <strong>
-            {hentIntl()
-              .formatMessage({ id: utfyllingTekstid })
-              .toUpperCase()}
+            {formatMessage(utfyllingTekstid).toUpperCase()}
           </strong>
         </span>
         {formatHtmlMessage(forklaringTekstid + typeYtelsePostfix)}

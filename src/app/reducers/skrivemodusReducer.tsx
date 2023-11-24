@@ -1,13 +1,13 @@
 import { Skrivemodus } from '../types/skrivemodus';
 import {
   SkrivemodusActions,
-  SkrivemodusActionTypes,
+  SkrivemodusActionTypes
 } from '../actions/skrivemodus';
 import { getType } from 'typesafe-actions';
 
 const initialState: Skrivemodus = {
   skrivemodus: true,
-  melding: null,
+  melding: null
 };
 
 const skrivemodusReducer = (

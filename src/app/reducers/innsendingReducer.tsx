@@ -1,7 +1,7 @@
 import { InnsendingState } from '../types/innsending';
 import {
   InnsendingActions,
-  InnsendingActionsTypes,
+  InnsendingActionsTypes
 } from '../actions/innsending';
 import { getType } from 'typesafe-actions';
 import { hentSporsmalConfig } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
@@ -39,7 +39,7 @@ const initialState: InnsendingState = {
     begrunnelse: '',
   },
   meldekortdetaljerInnsending: undefined,
-  valideringsResultat: undefined,
+  valideringsResultat: undefined
 };
 
 const innsendingReducer = (

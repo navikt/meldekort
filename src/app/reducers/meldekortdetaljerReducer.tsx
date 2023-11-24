@@ -1,7 +1,7 @@
 import { KortType, Meldekortdetaljer } from '../types/meldekort';
 import {
   MeldekortdetaljerActions,
-  MeldekortdetaljerActionTypes,
+  MeldekortdetaljerActionTypes
 } from '../actions/meldekortdetaljer';
 import { getType } from 'typesafe-actions';
 
@@ -28,7 +28,7 @@ const initialState: MeldekortdetaljerState = {
       meldekortDager: [],
     },
     begrunnelse: '',
-  },
+  }
 };
 
 const meldekortdetaljerReducer = (

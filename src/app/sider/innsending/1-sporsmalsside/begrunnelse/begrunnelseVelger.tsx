@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { InnsendingActions } from '../../../../actions/innsending';
 import { Dispatch } from 'redux';
 import Select from 'nav-frontend-skjema/lib/select';
-import { formatHtmlMessage, hentIntl } from '../../../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage, hentIntl } from '../../../../utils/intlUtil';
 import { Begrunnelse } from '../../../../types/innsending';
 import { RootState } from '../../../../store/configureStore';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -57,7 +57,7 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
         value={valgtArsak}
       >
         <option value={''}>
-          {hentIntl().formatMessage({ id: "begrunnelse.velgArsak" })}
+          {formatMessage("begrunnelse.velgArsak")}
         </option>
         {Object.keys(options).map(key => (
           <option value={key} key={options[key]}>

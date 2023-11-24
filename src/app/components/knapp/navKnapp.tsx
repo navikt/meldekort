@@ -10,7 +10,7 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import { Sporsmal as Spm } from '../../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { UtfyltDag } from '../../sider/innsending/2-utfyllingsside/utfylling/utfyltDagConfig';
 import { settSporsmalOgUtfyllingHvisKorrigering } from '../../utils/korrigeringUtils';
-import { hentIntl } from "../../utils/intlUtil";
+import { formatMessage } from "../../utils/intlUtil";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 
@@ -46,7 +46,7 @@ interface NavKnappProps {
 export enum KnappTyper {
   HOVED = 'hoved',
   STANDARD = 'standard',
-  FLAT = 'flat',
+  FLAT = 'flat'
 }
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
@@ -142,7 +142,7 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
             : props.disabled
         }
       >
-        {hentIntl().formatMessage({id: props.tekstid})}
+        {formatMessage(props.tekstid)}
       </KnappBase>
     );
 }

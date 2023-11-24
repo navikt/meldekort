@@ -25,5 +25,5 @@ export const Konstanter = {
 export const Nettlesere = {
   chrome: 'https://www.chrome.com',
   firefox: 'https://www.firefox.com',
-  edge: 'https://www.microsoft.com/nb-no/windows/microsoft-edge',
+  edge: 'https://www.microsoft.com/nb-no/windows/microsoft-edge'
 };

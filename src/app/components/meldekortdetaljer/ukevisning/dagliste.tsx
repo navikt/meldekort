@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MeldekortDag } from '../../../types/meldekort';
 import { guid } from 'nav-frontend-js-utils';
-import { hentIntl } from '../../../utils/intlUtil';
+import { formatMessage } from '../../../utils/intlUtil';
 import UtvidetInformasjon from '../../utvidetinformasjon/utvidetInformasjon';
 import Hjelpetekst from './hjelpetekst';
 import { hentUkedagerSomStringListe } from '../../../utils/ukedager';
@@ -27,9 +27,7 @@ const returnerAktivitetTekst = (
   aktivitet: string,
   tekstid: string
 ) => {
-  return `${hentIntl()
-    .formatMessage({ id: tekstid })
-    .trim()}${
+  return `${formatMessage(tekstid).trim()}${
     sjekkOmDetFinnesFlereElementer(aktivitet, meldekortDag) ? ', ' : ''
   }`;
 };
@@ -57,11 +55,9 @@ export const hentDagliste = (
             <strong className={'ukedag'}>{ukedag}:&nbsp;</strong>
             <span className={'aktiviteter'}>
               {meldekortDag.arbeidetTimerSum > 0
-                ? `${hentIntl().formatMessage({ id: 'utfylling.arbeid' })}
+                ? `${formatMessage('utfylling.arbeid')}
                                 ${meldekortDag.arbeidetTimerSum}
-                                ${hentIntl()
-                                  .formatMessage({ id: 'overskrift.timer' })
-                                  .trim()}${
+                                ${formatMessage('overskrift.timer').trim()}${
                     sjekkOmDetFinnesFlereElementer('arbeid', meldekortDag)
                       ? ', '
                       : ''

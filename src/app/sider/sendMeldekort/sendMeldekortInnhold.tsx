@@ -16,7 +16,7 @@ interface Props {
 function InnsendingsTabell({
   rows,
   columns,
-  innsendingsklareMeldekort,
+  innsendingsklareMeldekort
 }: Props) {
   return (
     <>

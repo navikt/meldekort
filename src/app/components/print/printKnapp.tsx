@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { hentIntl } from '../../utils/intlUtil';
+import { formatMessage } from '../../utils/intlUtil';
 import { Flatknapp } from 'nav-frontend-knapper';
 import printLogo from '../../ikoner/print.svg';
 import DOMPortal from './DOMPortal';
@@ -30,7 +30,7 @@ function updateDocumentClass(active: boolean) {
 
 class PrintKnapp extends React.Component<PrintKnappProps, State> {
   printTimeoutId: number;
-  tekst = hentIntl().formatMessage({ id: 'overskrift.skrivUt' });
+  tekst = formatMessage('overskrift.skrivUt');
 
   constructor(props: PrintKnappProps) {
     super(props);

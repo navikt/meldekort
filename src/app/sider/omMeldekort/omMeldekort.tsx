@@ -6,7 +6,7 @@ import veileder from '../../ikoner/veileder.svg';
 import { InnsendingActions } from '../../actions/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { formatHtmlMessage, hentIntl } from '../../utils/intlUtil';
+import { formatHtmlMessage, formatMessage } from '../../utils/intlUtil';
 import { MenyActions } from '../../actions/meny';
 import { MenyPunkt } from '../../utils/menyConfig';
 import { MenyState } from '../../types/meny';
@@ -71,11 +71,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
                 "genereltOmMeldekort.om.meldekort",
                 {
                   0: 'https://www.nav.no',
-                  1: hentIntl()
-                    .formatMessage({
-                      id: 'genereltOmMeldekort.informasjonOmMeldekortLink',
-                    })
-                    .trim(),
+                  1: formatMessage('genereltOmMeldekort.informasjonOmMeldekortLink').trim(),
                 }
               )}
             </Normaltekst>

@@ -19,7 +19,7 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import {
   hentInnsendingsklareMeldekort,
   hentMeldekortRaderFraPerson,
-  hentPeriodeDatoKolonner,
+  hentPeriodeDatoKolonner
 } from '../../utils/meldekortUtils';
 import MeldingOmMeldekortSomIkkeErKlare from './meldingOmIkkeKlareMeldekort';
 import SendMeldekortInnhold from './sendMeldekortInnhold';
@@ -47,7 +47,7 @@ function SendMeldekort({
   hentPerson,
   leggTilAktivtMeldekort,
   resetInnsending,
-  settInnsendingstype,
+  settInnsendingstype
 }: Props) {
   const hentFeilmeldingEllerData = (rader: MeldekortRad[], kolonner: MeldekortKolonne[]) => {
     if (rader.length > 0) {

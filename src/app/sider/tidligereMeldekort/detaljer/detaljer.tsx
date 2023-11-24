@@ -10,7 +10,7 @@ import { formaterDato } from '../../../utils/dates';
 import { RootState } from '../../../store/configureStore';
 import {
   mapKortStatusTilTekst,
-  mapKortTypeTilTekst,
+  mapKortTypeTilTekst
 } from '../../../utils/kortMapper';
 import { MeldekortdetaljerActions } from '../../../actions/meldekortdetaljer';
 import { MeldekortdetaljerState } from '../../../reducers/meldekortdetaljerReducer';

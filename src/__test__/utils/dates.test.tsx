@@ -12,7 +12,7 @@ import {
   hentUkenummerForDato,
   hentUkePeriode,
   kalkulerDato,
-  ukeTekst,
+  ukeTekst
 } from '../../app/utils/dates';
 import { setLocalesBeforeAll } from '../testSetup/providerWrapper';
 

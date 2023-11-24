@@ -18,9 +18,9 @@ import {
   MeldekortDag,
   Meldekortdetaljer as MDetaljer,
   MeldekortdetaljerInnsending,
-  SendtMeldekort,
+  SendtMeldekort
 } from '../../../types/meldekort';
-import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { scrollTilElement } from '../../../utils/scroll';
 import { Dispatch } from 'redux';
@@ -239,7 +239,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     if (!sign) {
       this.setState(prevState => ({
         ...prevState,
-        feilmelding: hentIntl().formatMessage({ id: "utfylling.bekreft.feil" }),
+        feilmelding: formatMessage("utfylling.bekreft.feil"),
       }));
       scrollTilElement('periodebanner');
     } else {
@@ -349,7 +349,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             className={'bekreftInfo'}
             onChange={() => this.settChecked()}
             checked={meldekortdetaljer.sporsmal.signatur}
-            label={hentIntl().formatMessage({ id: 'utfylling.bekreftAnsvar' })}
+            label={formatMessage('utfylling.bekreftAnsvar')}
             feil={feilmelding !== ''}
           >
             <Normaltekst>

@@ -2,7 +2,7 @@ import { ActionType, createAction } from 'typesafe-actions';
 import {
   BaksystemFeilmelding,
   IModal,
-  IngenTidligereMeldekort,
+  IngenTidligereMeldekort
 } from '../types/ui';
 
 export enum UiTypeKeys {
@@ -12,7 +12,7 @@ export enum UiTypeKeys {
   VIS_BAKSYSTEM_FEILMELDING = 'VIS_BAKSYSTEM_FEILMELDING',
   SJEKK_TIDLIGERE_MELDEKORT = 'SJEKK_TIDLIGERE_MELDEKORT',
   START_LOADING = 'START_LOADING',
-  STOP_LOADING = 'STOP_LOADING',
+  STOP_LOADING = 'STOP_LOADING'
 }
 
 export const UiActions = {
@@ -28,6 +28,6 @@ export const UiActions = {
     UiTypeKeys.SJEKK_TIDLIGERE_MELDEKORT
   )<IngenTidligereMeldekort>(),
   startLoading: createAction(UiTypeKeys.START_LOADING)<void>(),
-  stopLoading: createAction(UiTypeKeys.STOP_LOADING)<void>(),
+  stopLoading: createAction(UiTypeKeys.STOP_LOADING)<void>()
 };
 export type UiActionTypes = ActionType<typeof UiActions>;

@@ -1,12 +1,12 @@
 import {
   Begrunnelse,
   Innsendingstyper,
-  InnsendingTypeKeys,
+  InnsendingTypeKeys
 } from '../types/innsending';
 import {
   ActionType,
   createAsyncAction,
-  createAction,
+  createAction
 } from 'typesafe-actions';
 import { Sporsmal as Spm } from '../sider/innsending/1-sporsmalsside/sporsmal/sporsmalConfig';
 import { AxiosError } from 'axios';
@@ -14,7 +14,7 @@ import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfylt
 import {
   Meldekortdetaljer,
   MeldekortdetaljerInnsending,
-  ValideringsResultat,
+  ValideringsResultat
 } from '../types/meldekort';
 
 export const InnsendingActions = {
@@ -63,7 +63,7 @@ export const InnsendingActions = {
   )<ValideringsResultat>(),
   resetValideringsresultat: createAction(
     InnsendingTypeKeys.RESET_VALIDERINGSRESULTAT
-  )<void>(),
+  )<void>()
 };
 
 export type InnsendingActionsTypes = ActionType<typeof InnsendingActions>;

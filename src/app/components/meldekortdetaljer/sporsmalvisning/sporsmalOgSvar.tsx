@@ -15,7 +15,7 @@ interface Props {
 }
 
 const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
-  sporsmalOgSvar,
+  sporsmalOgSvar
 }) => {
   const hentTekstForSvar = (svar: boolean) => {
     if (svar) {

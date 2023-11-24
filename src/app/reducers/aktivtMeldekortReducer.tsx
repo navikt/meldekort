@@ -2,11 +2,11 @@ import {
   KortStatus,
   KortType,
   Meldegruppe,
-  Meldekort,
+  Meldekort
 } from '../types/meldekort';
 import {
   AktivtMeldekortActions,
-  AktivtMeldekortActionsTypes,
+  AktivtMeldekortActionsTypes
 } from '../actions/aktivtMeldekort';
 import { getType } from 'typesafe-actions';
 
@@ -24,7 +24,7 @@ const initialState: Meldekort = {
   kortStatus: KortStatus.VENTE,
   bruttoBelop: 0,
   mottattDato: new Date(),
-  korrigerbart: false,
+  korrigerbart: false
 };
 
 const aktivtMeldekortReducer = (

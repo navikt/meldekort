@@ -4,7 +4,7 @@ import {
   filter,
   map,
   switchMap,
-  withLatestFrom,
+  withLatestFrom
 } from 'rxjs/operators';
 import { combineEpics } from 'redux-observable';
 import { postMeldekort } from '../api/api';

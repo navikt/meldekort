@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { guid } from 'nav-frontend-js-utils';
-import { hentIntl } from '../../utils/intlUtil';
+import { formatMessage } from '../../utils/intlUtil';
 import InfoToggler from './infoToggler/infoToggler';
 import EkspanderbartInnhold from '../ekspanderbartInnhold/ekspanderbartInnhold';
 
@@ -44,8 +44,8 @@ class UtvidetInformasjon extends React.Component<Props, State> {
             apen={this.state.apen}
           >
             {this.state.apen
-              ? hentIntl().formatMessage({ id: lukkLabelId })
-              : hentIntl().formatMessage({ id: apenLabelId })}
+              ? formatMessage(lukkLabelId)
+              : formatMessage(apenLabelId)}
           </InfoToggler>
         </div>
         <div className="utvidetInformasjon__innhold" id={this.id}>

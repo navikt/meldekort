@@ -26,7 +26,7 @@ type Props = MeldekortdetaljerState &
 const Meldekortdetaljer: React.FunctionComponent<Props> = ({
   aktivtMeldekort,
   typeYtelsePostfix,
-  meldekortdetaljer,
+  meldekortdetaljer
 }) => {
   const config = hentSporsmalConfig();
   const meldekortdager = meldekortdetaljer.sporsmal.meldekortDager;

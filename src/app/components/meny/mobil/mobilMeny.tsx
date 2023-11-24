@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MenyPunkt } from '../../../utils/menyConfig';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
-import { hentIntl } from '../../../utils/intlUtil';
+import { formatMessage } from '../../../utils/intlUtil';
 import { MenyActions } from '../../../actions/meny';
 import { Dispatch } from 'redux';
 import classNames from 'classnames';
@@ -58,7 +58,7 @@ const MobilMeny: React.FunctionComponent<
                 })}
                 href={'#'}
               >
-                {hentIntl().formatMessage({ id: menypunkt.tekstid })}
+                {formatMessage(menypunkt.tekstid)}
               </Lenke>
             </li>
           ))}

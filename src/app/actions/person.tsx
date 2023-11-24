@@ -5,7 +5,7 @@ import { Person } from '../types/person';
 export enum PersonTypeKeys {
   HENT_PERSON = 'HENT_PERSON',
   HENT_PERSON_OK = 'HENT_PERSON_OK',
-  HENT_PERSON_FEILET = 'HENT_PERSON_FEILET',
+  HENT_PERSON_FEILET = 'HENT_PERSON_FEILET'
 }
 
 export const PersonActions = {
@@ -13,7 +13,7 @@ export const PersonActions = {
     PersonTypeKeys.HENT_PERSON,
     PersonTypeKeys.HENT_PERSON_OK,
     PersonTypeKeys.HENT_PERSON_FEILET
-  )<void, Person, AxiosError>(),
+  )<void, Person, AxiosError>()
 };
 
 export type PersonActionTypes = ActionType<typeof PersonActions>;

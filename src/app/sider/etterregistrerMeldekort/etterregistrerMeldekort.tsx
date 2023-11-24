@@ -13,7 +13,7 @@ import { AktivtMeldekortActions } from '../../actions/aktivtMeldekort';
 import {
   hentInnsendingsklareMeldekort,
   hentMeldekortRaderFraPerson,
-  hentPeriodeDatoKolonner,
+  hentPeriodeDatoKolonner
 } from '../../utils/meldekortUtils';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import EtterregistreringInnhold from './etterregistreringInnhold';
@@ -39,7 +39,7 @@ function EtterregistrerMeldekort({
   hentPerson,
   resetInnsending,
   settInnsendingstype,
-  leggTilAktivtMeldekort,
+  leggTilAktivtMeldekort
 }: Props) {
   const harKunEttMeldekort = (meldekort: Meldekort[]) => {
     if (meldekort.length === 1) {

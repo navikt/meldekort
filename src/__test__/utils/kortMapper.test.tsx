@@ -1,6 +1,6 @@
 import {
   mapKortStatusTilTekst,
-  mapKortTypeTilTekst,
+  mapKortTypeTilTekst
 } from '../../app/utils/kortMapper';
 import { KortStatus, KortType } from '../../app/types/meldekort';
 import { setLocalesBeforeAll } from '../testSetup/providerWrapper';

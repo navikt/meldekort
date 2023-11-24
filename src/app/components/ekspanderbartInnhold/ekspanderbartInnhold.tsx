@@ -16,7 +16,7 @@ const EkspanderbartInnhold: React.FunctionComponent<OwnProps> = ({
   children,
   animert = true,
   erApen = false,
-  ariaLive = 'off',
+  ariaLive = 'off'
 }) => {
   const content = (
     <div aria-live={ariaLive}>

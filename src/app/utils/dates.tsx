@@ -1,4 +1,4 @@
-import { hentIntl } from './intlUtil';
+import { formatMessage } from './intlUtil';
 import moment from "moment";
 
 
@@ -98,7 +98,7 @@ export const hentNestePeriodeMedUkerOgDato = (
 };
 
 export const ukeTekst = (): string => {
-  return hentIntl().formatMessage({ id: 'overskrift.uke' });
+  return formatMessage('overskrift.uke');
 };
 
 export const kalkulerDato = (startDato: Date, plussDager: number): Date => {

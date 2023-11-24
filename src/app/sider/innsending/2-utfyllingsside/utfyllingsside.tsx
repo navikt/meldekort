@@ -2,29 +2,15 @@ import * as React from 'react';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import Sprakvelger from '../../../components/sprakvelger/sprakvelger';
 import NavKnapp, { KnappTyper } from '../../../components/knapp/navKnapp';
-import {
-  hentDatoForAndreUke,
-  hentDatoForForsteUke,
-  hentUkenummerForDato,
-} from '../../../utils/dates';
-import {
-  FeilKolonne,
-  InnsendingState,
-  SpmSvar,
-  UtfyllingFeil,
-} from '../../../types/innsending';
+import { hentDatoForAndreUke, hentDatoForForsteUke, hentUkenummerForDato } from '../../../utils/dates';
+import { FeilKolonne, InnsendingState, SpmSvar, UtfyllingFeil } from '../../../types/innsending';
 import { RootState } from '../../../store/configureStore';
 import { connect } from 'react-redux';
 import { Konstanter } from '../../../utils/consts';
 import { UtfyltDag } from './utfylling/utfyltDagConfig';
-import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from '../../../utils/intlUtil';
 import AlertStripe from 'nav-frontend-alertstriper';
-import {
-  FravaerTypeEnum,
-  Meldegruppe,
-  Meldekort,
-  SendtMeldekort,
-} from '../../../types/meldekort';
+import { FravaerTypeEnum, Meldegruppe, Meldekort, SendtMeldekort } from '../../../types/meldekort';
 import { scrollTilElement } from '../../../utils/scroll';
 import UkePanel from '../../../components/ukepanel/ukepanel';
 import { Dispatch } from 'redux';
@@ -293,49 +279,31 @@ class Utfyllingsside extends React.Component<
         <AlertStripe className={'utfylling__feilmelding'} type={'feil'}>
           <ul>
             {feilIArbeid.feil ? (
-              <li>{`${hentIntl()
-                .formatMessage({ id: 'utfylling.mangler.arbeid' })
-                .trim()}`}</li>
+              <li>{`${formatMessage('utfylling.mangler.arbeid').trim()}`}</li>
             ) : null}
             {feilIKurs.feil ? (
-              <li>{`${hentIntl()
-                .formatMessage({ id: 'utfylling.mangler.tiltak' })
-                .trim()}`}</li>
+              <li>{`${formatMessage('utfylling.mangler.tiltak').trim()}`}</li>
             ) : null}
             {feilISyk.feil ? (
-              <li>{`${hentIntl()
-                .formatMessage({ id: 'utfylling.mangler.syk' })
-                .trim()}`}</li>
+              <li>{`${formatMessage('utfylling.mangler.syk').trim()}`}</li>
             ) : null}
             {feilIFerie.feil ? (
-              <li>{`${hentIntl()
-                .formatMessage({ id: 'utfylling.mangler.ferieFravar' })
-                .trim()}`}</li>
+              <li>{`${formatMessage('utfylling.mangler.ferieFravar').trim()}`}</li>
             ) : null}
             {feilIArbeidetTimerHeleHalve ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.heleEllerHalveTallValidator',
-              })}`}</li>
+              <li>{`${formatMessage('arbeidTimer.heleEllerHalveTallValidator')}`}</li>
             ) : null}
             {feilIArbeidetTimer ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.rangeValidator.range',
-              })}`}</li>
+              <li>{`${formatMessage('arbeidTimer.rangeValidator.range')}`}</li>
             ) : null}
             {feilKombinasjonSykArbeid ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonSykArbeidValidator',
-              })}`}</li>
+              <li>{`${formatMessage('arbeidTimer.kombinasjonSykArbeidValidator')}`}</li>
             ) : null}
             {feilKombinasjonFravaerArbeid ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonFravaerArbeidValidator',
-              })}`}</li>
+              <li>{`${formatMessage('arbeidTimer.kombinasjonFravaerArbeidValidator')}`}</li>
             ) : null}
             {feilKombinasjonFravaerSyk ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidTimer.kombinasjonFravaerSykValidator',
-              })}`}</li>
+              <li>{`${formatMessage('arbeidTimer.kombinasjonFravaerSykValidator')}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
@@ -348,12 +316,8 @@ class Utfyllingsside extends React.Component<
               {valideringsResultat.arsakskoder.map(arsakskode => {
                 return (
                   <li key={arsakskode.kode}>
-                    {hentIntl().formatMessage(
-                      {
-                        id:
-                          'meldekortkontroll.feilkode.' +
-                          arsakskode.kode.toLowerCase(),
-                      },
+                    {formatMessage(
+                      'meldekortkontroll.feilkode.' + arsakskode.kode.toLowerCase(),
                       {
                         0:
                           arsakskode.params && arsakskode.params.length > 0

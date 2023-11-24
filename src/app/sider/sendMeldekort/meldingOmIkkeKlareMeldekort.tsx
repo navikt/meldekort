@@ -17,7 +17,7 @@ interface Props {
 function MeldingOmMeldekortSomIkkeErKlare({
   rows,
   person,
-  innsendingsklareMeldekort,
+  innsendingsklareMeldekort
 }: Props) {
   const meldekortliste = innsendingsklareMeldekort;
 

@@ -4,7 +4,7 @@ import {
   filter,
   map,
   switchMap,
-  withLatestFrom,
+  withLatestFrom
 } from 'rxjs/operators';
 import { MeldekortdetaljerActions } from '../actions/meldekortdetaljer';
 import { from, of } from 'rxjs';

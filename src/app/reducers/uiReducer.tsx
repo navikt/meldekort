@@ -1,7 +1,7 @@
 import {
   BaksystemFeilmelding,
   IModal,
-  IngenTidligereMeldekort,
+  IngenTidligereMeldekort
 } from '../types/ui';
 import { UiActions, UiActionTypes } from '../actions/ui';
 import { getType } from 'typesafe-actions';
@@ -27,7 +27,7 @@ const initialState: UIState = {
     harTidligereMeldekort: true,
   },
   loading: false,
-  numberOfLoading: 0,
+  numberOfLoading: 0
 };
 
 const uiReducer = (

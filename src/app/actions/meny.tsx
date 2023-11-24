@@ -9,7 +9,7 @@ export const MenyActions = {
   settAktiveMenyPunkter: createAction(
     MenyTypeKeys.SETT_AKTIVE_MENYPUNKTER
   )<MenyPunkt[]>(),
-  toggleMeny: createAction(MenyTypeKeys.TOGGLE_MENY)<boolean>(),
+  toggleMeny: createAction(MenyTypeKeys.TOGGLE_MENY)<boolean>()
 };
 
 export type MenyActionTypes = ActionType<typeof MenyActions>;

@@ -3,7 +3,7 @@ import { UtfyltDag } from '../sider/innsending/2-utfyllingsside/utfylling/utfylt
 import {
   Meldekortdetaljer,
   MeldekortdetaljerInnsending,
-  ValideringsResultat,
+  ValideringsResultat
 } from './meldekort';
 
 export interface InnsendingState {
@@ -38,7 +38,7 @@ export interface Begrunnelse {
 export enum Innsendingstyper {
   INNSENDING = 'innsending',
   ETTERREGISTRERING = 'etterregistrering',
-  KORRIGERING = 'korriger',
+  KORRIGERING = 'korriger'
 }
 
 export enum InnsendingTypeKeys {
@@ -63,7 +63,7 @@ export enum InnsendingTypeKeys {
 
   KONTROLLER_MELDEKORT = 'KONTROLLER_MELDEKORT',
   KONTROLLER_MELDEKORT_OK = 'KONTROLLER_MELDEKORT_OK',
-  KONTROLLER_MELDEKORT_FEILET = 'KONTROLLER_MELDEKORT_FEILET',
+  KONTROLLER_MELDEKORT_FEILET = 'KONTROLLER_MELDEKORT_FEILET'
 }
 
 export interface Feilmelding {

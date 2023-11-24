@@ -3,7 +3,7 @@ import {
   KortStatus,
   Meldekort, MeldekortKolonne,
   MeldekortRad,
-  SendtMeldekort,
+  SendtMeldekort
 } from '../types/meldekort';
 import { Innsendingstyper } from '../types/innsending';
 import { hentDatoPeriode, hentUkePeriode } from './dates';

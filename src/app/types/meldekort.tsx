@@ -144,7 +144,7 @@ export enum KortType {
   ORDINAER_MANUELL = 'ORDINAER_MANUELL',
   MASKINELT_OPPDATERT = 'MASKINELT_OPPDATERT',
   MANUELL_ARENA = 'MANUELL_ARENA',
-  KORRIGERT_ELEKTRONISK = 'KORRIGERT_ELEKTRONISK',
+  KORRIGERT_ELEKTRONISK = 'KORRIGERT_ELEKTRONISK'
 }
 
 export enum Meldegruppe {
@@ -153,7 +153,7 @@ export enum Meldegruppe {
   INDIV = 'INDIV',
   ARBS = 'ARBS',
   FY = 'FY',
-  NULL = 'NULL',
+  NULL = 'NULL'
 }
 
 export enum KortStatus {
@@ -172,14 +172,14 @@ export enum KortStatus {
   FEIL = 'FEIL',
   VENTE = 'VENTE',
   OPPF = 'OPPF',
-  UBEHA = 'UBEHA',
+  UBEHA = 'UBEHA'
 }
 
 export enum FravaerTypeEnum {
   KURS_UTDANNING = 'K',
   SYKDOM = 'S',
   ANNET_FRAVAER = 'X',
-  ARBEIDS_FRAVAER = 'A',
+  ARBEIDS_FRAVAER = 'A'
 }
 
 export interface MeldekortRad {

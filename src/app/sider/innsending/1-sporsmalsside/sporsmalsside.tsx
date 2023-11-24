@@ -11,7 +11,7 @@ import { UtfyltDag } from '../2-utfyllingsside/utfylling/utfyltDagConfig';
 import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from '../../../types/innsending';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { downloadMessagesAndDispatch, formatHtmlMessage, hentIntl, hentLocale } from '../../../utils/intlUtil';
+import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage, hentLocale } from '../../../utils/intlUtil';
 import { RootState } from '../../../store/configureStore';
 import { ikkeFortsetteRegistrertContent } from '../../../components/modal/ikkeFortsetteRegistrertContent';
 import { IModal, ModalKnapp } from '../../../types/ui';
@@ -262,34 +262,22 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
         <AlertStripe type={'feil'}>
           <ul>
             {feilIBegrunnelse ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'begrunnelse.required',
-              })}`}</li>
+              <li>{`${formatMessage('begrunnelse.required')}`}</li>
             ) : null}
             {feilIArbeid ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'arbeidet.required',
-              })}`}</li>
+              <li>{`${formatMessage('arbeidet.required')}`}</li>
             ) : null}
             {feillIKurs ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'kurs.required' + typeYtelsePostfix,
-              })}`}</li>
+              <li>{`${formatMessage('kurs.required' + typeYtelsePostfix)}`}</li>
             ) : null}
             {feilISyk ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'syk.required' + typeYtelsePostfix,
-              })}`}</li>
+              <li>{`${formatMessage('syk.required' + typeYtelsePostfix)}`}</li>
             ) : null}
             {feilIFerie ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'annetFravar.required' + typeYtelsePostfix,
-              })}`}</li>
+              <li>{`${formatMessage('annetFravar.required' + typeYtelsePostfix)}`}</li>
             ) : null}
             {feilIRegistrert ? (
-              <li>{`${hentIntl().formatMessage({
-                id: 'fortsetteRegistrert.required',
-              })}`}</li>
+              <li>{`${formatMessage('fortsetteRegistrert.required')}`}</li>
             ) : null}
           </ul>
         </AlertStripe>
@@ -326,14 +314,14 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           props.skjulModal();
           navigate(hoppeOverUtfylling() ? '../bekreftelse' : '../utfylling', { replace: true })
         },
-        label: hentIntl().formatMessage({ id: 'overskrift.bekreftOgFortsett' }),
+        label: formatMessage('overskrift.bekreftOgFortsett'),
         type: 'hoved',
       },
       {
         action: () => {
           props.skjulModal();
         },
-        label: hentIntl().formatMessage({ id: 'sporsmal.tilbakeEndre' }),
+        label: formatMessage('sporsmal.tilbakeEndre'),
         type: 'standard',
       },
     ];

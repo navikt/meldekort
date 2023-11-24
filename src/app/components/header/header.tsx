@@ -18,7 +18,7 @@ import {
   isOldEdge,
   isOldFirefox,
   isOldIE,
-  isOldSafari,
+  isOldSafari
 } from '../../utils/browsers';
 import GammelNettleserMelding from '../gammelNetteleserMelding/gammelNettleserMelding';
 import { useLocation } from "react-router-dom";

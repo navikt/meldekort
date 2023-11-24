@@ -7,7 +7,7 @@ const initialState: MeldekortState = {
   infomelding: {
     norsk: '',
     engelsk: '',
-  },
+  }
 };
 
 const meldekortReducer = (

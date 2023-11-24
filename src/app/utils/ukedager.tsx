@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { hentIntl } from './intlUtil';
+import { formatMessage } from './intlUtil';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 
 export const hentUkedagerSomStringListe = (): string[] => {
-  const intl = hentIntl();
   return [
-    intl.formatMessage({ id: 'ukedag.mandag' }).trim(),
-    intl.formatMessage({ id: 'ukedag.tirsdag' }).trim(),
-    intl.formatMessage({ id: 'ukedag.onsdag' }).trim(),
-    intl.formatMessage({ id: 'ukedag.torsdag' }).trim(),
-    intl.formatMessage({ id: 'ukedag.fredag' }).trim(),
-    intl.formatMessage({ id: 'ukedag.lordag' }).trim(),
-    intl.formatMessage({ id: 'ukedag.sondag' }).trim(),
+    formatMessage('ukedag.mandag').trim(),
+    formatMessage('ukedag.tirsdag').trim(),
+    formatMessage('ukedag.onsdag').trim(),
+    formatMessage('ukedag.torsdag').trim(),
+    formatMessage('ukedag.fredag').trim(),
+    formatMessage('ukedag.lordag').trim(),
+    formatMessage('ukedag.sondag').trim(),
   ];
 };
 

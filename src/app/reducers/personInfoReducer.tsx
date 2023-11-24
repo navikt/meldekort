@@ -1,7 +1,7 @@
 import { PersonInfo } from '../types/person';
 import {
   PersonInfoActions,
-  PersonInfoActionTypes,
+  PersonInfoActionTypes
 } from '../actions/personInfo';
 import { getType } from 'typesafe-actions';
 
@@ -15,7 +15,7 @@ const initialState: PersonInfoState = {
     fodselsnr: '',
     etternavn: '',
     fornavn: '',
-  },
+  }
 };
 
 const personInfoReducer = (

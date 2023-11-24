@@ -30,5 +30,5 @@ export const prefferedAxios = axios.create({
   transformRequest: axios.defaults.transformRequest
     ? [dateTransformer].concat(axios.defaults.transformRequest)
     : dateTransformer,
-  baseURL: window.location.origin,
+  baseURL: window.location.origin
 });
