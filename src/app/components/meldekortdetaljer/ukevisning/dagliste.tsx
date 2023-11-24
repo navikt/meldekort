@@ -36,7 +36,7 @@ export const hentDagliste = (
   meldekortdager: MeldekortDag[],
   typeYtelsePostfix: string,
   medUtvidetInformasjon: boolean = true
-): JSX.Element[] => {
+): React.ReactElement[] => {
   const dagListe = [];
   const ukedager = hentUkedagerSomStringListe();
 

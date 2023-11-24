@@ -5,7 +5,7 @@ import EngelskFlaggSVG from "../components/sprakvelger/EngelskFlaggSVG";
 export interface Locale {
   label: string;
   tittel: string;
-  ikon: JSX.Element;
+  ikon: React.ReactElement;
 }
 
 const locales = [

@@ -141,7 +141,7 @@ export const formatMessage = (id: string | undefined, values?: object): string =
 
 // FormattedHTMLMessage & intl.formatHTMLMessage har blitt fjernet fra react-intl v4
 // FormattedMessage og intl.formatMessage viser ikke HTML
-export const formatHtmlMessage = (id: string | undefined, values?: object): JSX.Element => {
+export const formatHtmlMessage = (id: string | undefined, values?: object): React.ReactElement => {
   const text = formatMessage(id, values)
 
   return (

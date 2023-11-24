@@ -51,7 +51,7 @@ const renderMenuItem = (locale: Locale, valgtSprak: string) => {
 const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
   const { currentLocale, locales, aktivtMeldekort, settLocale } = props;
 
-  const handleSelection = (value: JSX.Element[]) => {
+  const handleSelection = (value: React.ReactElement[]) => {
     const newLocale: string = value[1].key
       ? value[1].key.toString()
       : Konstanter.defaultLocale;
@@ -67,7 +67,7 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
     <div className="languageToggle">
       <Wrapper
         className="languageToggle__wrapper"
-        onSelection={(value: JSX.Element[]) => handleSelection(value)}
+        onSelection={(value: React.ReactElement[]) => handleSelection(value)}
       >
         <Button className="languageToggle__button">
           <div className="languageToggle__button__flag">

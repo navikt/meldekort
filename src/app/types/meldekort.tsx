@@ -189,6 +189,6 @@ export interface MeldekortRad {
 
 export interface MeldekortKolonne {
   key: string;
-  label: JSX.Element;
-  cell?: ((row: DetaljRad | HistoriskeMeldekortRad) => string | JSX.Element) | string;
+  label: React.ReactElement;
+  cell?: ((row: DetaljRad | HistoriskeMeldekortRad) => string | React.ReactElement) | string;
 }
