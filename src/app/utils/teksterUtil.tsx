@@ -1,4 +1,4 @@
-import { formatMessage } from "./intlUtil";
+import { hentIntl } from "./intlUtil";
 import { Meldegruppe } from "../types/meldekort";
 
 export enum TypeYtelse {
@@ -14,8 +14,7 @@ export const finnTypeYtelsePostfix = (meldegruppe: Meldegruppe): string => {
 };
 
 export const finnesIntlId = (tekstid: string): string => {
-  // TODO: Throws exception, can"t find ids
-  if (formatMessage(tekstid) !== tekstid) {
+  if (hentIntl().messages[tekstid]) {
     return tekstid;
   } else {
     // Returnerer tekstid uten postfix
