@@ -1,10 +1,10 @@
 import * as React from "react";
-import { finnRiktigEtikettKlasse } from "../../../utils/statusEtikettUtil";
-import EtikettBase from "nav-frontend-etiketter";
+import { finnRiktigTagVariant } from "../../../utils/statusEtikettUtil";
 import Komponentlenke from "../../komponentlenke/komponentlenke";
 import { DetaljRad, HistoriskeMeldekortRad, MeldekortKolonne } from "../../../types/meldekort";
 import { mapKortStatusTilTekst } from "../../../utils/kortMapper";
 import { Konstanter } from "../../../utils/consts";
+import { Tag } from "@navikt/ds-react";
 
 interface MobilTabellProps {
   rows?: HistoriskeMeldekortRad[];
@@ -23,12 +23,9 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     for (const i in rowData) {
       if (i === header.key && header.key === "status") {
         tableData = (
-          <EtikettBase
-            type={"info"}
-            className={finnRiktigEtikettKlasse(rowData[i])}
-          >
+          <Tag variant={finnRiktigTagVariant(rowData[i])}>
             {mapKortStatusTilTekst(rowData[i])}
-          </EtikettBase>
+          </Tag>
         );
       } else if (
         i === header.key &&
@@ -63,12 +60,9 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     for (const i in rowData) {
       if (i === header.key && header.key === "kortStatus") {
         tableData = (
-          <EtikettBase
-            type={"info"}
-            className={finnRiktigEtikettKlasse(rowData[i])}
-          >
+          <Tag variant={finnRiktigTagVariant(rowData[i])}>
             {mapKortStatusTilTekst(rowData[i])}
-          </EtikettBase>
+          </Tag>
         );
       } else if (i === header.key) {
         tableData = rowData[i];

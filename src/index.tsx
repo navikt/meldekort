@@ -14,7 +14,6 @@ import { erViggo } from "./app/utils/viggoUtils";
 import "nav-frontend-core/dist/main.css";
 import "nav-frontend-chevron-style/dist/main.css";
 import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
-import "nav-frontend-etiketter-style/dist/main.css";
 import "nav-frontend-knapper-style/dist/main.css";
 import "nav-frontend-lenker-style/dist/main.css";
 import "nav-frontend-lukknapp-style/dist/main.css";

@@ -1,25 +1,18 @@
 import { KortStatus } from "../types/meldekort";
 
-export const finnRiktigEtikettKlasse = (status: KortStatus): string => {
-  let className: string;
-
-  switch (status) {
+export const finnRiktigTagVariant = (status: KortStatus): "success" | "info" | "warning" | "error" => {
+   switch (status) {
     case KortStatus.KLAR:
-      className = "__fokusert";
-      break;
+      return "warning";
     case KortStatus.REGIS:
     case KortStatus.NYKTR:
     case KortStatus.UBEHA:
-      className = "__informativ";
-      break;
+      return "info";
     case KortStatus.FERDI:
     case KortStatus.IKKE:
     case KortStatus.OVERM:
-      className = "__positiv";
-      break;
+      return "success";
     default:
-      className = "__fremhevet";
+      return "error";
   }
-
-  return "etikettbase" + className;
 };

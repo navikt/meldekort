@@ -1,11 +1,10 @@
 import * as React from "react";
-import EtikettBase from "nav-frontend-etiketter";
 import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortdetaljer";
 import PeriodeBanner from "../../../components/periodeBanner/periodeBanner";
 import Tabell from "../../../components/tabell/desktop/tabell";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { finnRiktigEtikettKlasse } from "../../../utils/statusEtikettUtil";
+import { finnRiktigTagVariant } from "../../../utils/statusEtikettUtil";
 import { formaterDato } from "../../../utils/dates";
 import { RootState } from "../../../store/configureStore";
 import { mapKortStatusTilTekst, mapKortTypeTilTekst } from "../../../utils/kortMapper";
@@ -28,7 +27,7 @@ import { SkrivemodusActions } from "../../../actions/skrivemodus";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import { downloadMessagesAndDispatch, formatHtmlMessage } from "../../../utils/intlUtil";
 import { Konstanter } from "../../../utils/consts";
-import { Loader } from "@navikt/ds-react";
+import { Loader, Tag } from "@navikt/ds-react";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -128,12 +127,9 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         label: formatHtmlMessage("overskrift.status"),
         cell: function(row: DetaljRad) { // (row: any, columnKey: any)
           return (
-            <EtikettBase
-              type={"info"}
-              className={finnRiktigEtikettKlasse(row.kortStatus)}
-            >
+            <Tag variant={finnRiktigTagVariant(row.kortStatus)}>
               {mapKortStatusTilTekst(row.kortStatus)}
-            </EtikettBase>
+            </Tag>
           );
         },
       },

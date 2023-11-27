@@ -1,39 +1,41 @@
-import { finnRiktigEtikettKlasse } from "../../app/utils/statusEtikettUtil";
+import { finnRiktigTagVariant } from "../../app/utils/statusEtikettUtil";
 import { KortStatus } from "../../app/types/meldekort";
 
 it("finnRiktigEtikettKlasse", () => {
-  expect(finnRiktigEtikettKlasse(KortStatus.KLAR)).toBe(
-    "etikettbase__fokusert"
+  expect(finnRiktigTagVariant(KortStatus.KLAR)).toBe(
+    "warning"
   );
 
-  expect(finnRiktigEtikettKlasse(KortStatus.REGIS)).toBe(
-    "etikettbase__informativ"
+  expect(finnRiktigTagVariant(KortStatus.REGIS)).toBe(
+    "info"
   );
-  expect(finnRiktigEtikettKlasse(KortStatus.NYKTR)).toBe(
-    "etikettbase__informativ"
+  expect(finnRiktigTagVariant(KortStatus.NYKTR)).toBe(
+    "info"
   );
-  expect(finnRiktigEtikettKlasse(KortStatus.UBEHA)).toBe(
-    "etikettbase__informativ"
-  );
-
-  expect(finnRiktigEtikettKlasse(KortStatus.FERDI)).toBe(
-    "etikettbase__positiv"
-  );
-  expect(finnRiktigEtikettKlasse(KortStatus.IKKE)).toBe("etikettbase__positiv");
-  expect(finnRiktigEtikettKlasse(KortStatus.OVERM)).toBe(
-    "etikettbase__positiv"
+  expect(finnRiktigTagVariant(KortStatus.UBEHA)).toBe(
+    "info"
   );
 
-  expect(finnRiktigEtikettKlasse(KortStatus.FEIL)).toBe(
-    "etikettbase__fremhevet"
+  expect(finnRiktigTagVariant(KortStatus.FERDI)).toBe(
+    "success"
   );
-  expect(finnRiktigEtikettKlasse(KortStatus.VENTE)).toBe(
-    "etikettbase__fremhevet"
+  expect(finnRiktigTagVariant(KortStatus.IKKE)).toBe(
+    "success"
   );
-  expect(finnRiktigEtikettKlasse(KortStatus.FMOPP)).toBe(
-    "etikettbase__fremhevet"
+  expect(finnRiktigTagVariant(KortStatus.OVERM)).toBe(
+    "success"
   );
-  expect(finnRiktigEtikettKlasse(KortStatus.FUOPP)).toBe(
-    "etikettbase__fremhevet"
+
+  expect(finnRiktigTagVariant(KortStatus.FEIL)).toBe(
+    "error"
+  );
+  expect(finnRiktigTagVariant(KortStatus.VENTE)).toBe(
+    "error"
+  );
+  expect(finnRiktigTagVariant(KortStatus.FMOPP)).toBe(
+    "error"
+  );
+  expect(finnRiktigTagVariant(KortStatus.FUOPP)).toBe(
+    "error"
   );
 });

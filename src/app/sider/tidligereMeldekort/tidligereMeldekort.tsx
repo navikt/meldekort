@@ -1,5 +1,4 @@
 import * as React from "react";
-import EtikettBase from "nav-frontend-etiketter";
 import Komponentlenke from "../../components/komponentlenke/komponentlenke";
 import MobilTabell from "../../components/tabell/mobil/mobilTabell";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
@@ -8,7 +7,7 @@ import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
 import { BaksystemFeilmelding, IngenTidligereMeldekort } from "../../types/ui";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { finnRiktigEtikettKlasse } from "../../utils/statusEtikettUtil";
+import { finnRiktigTagVariant } from "../../utils/statusEtikettUtil";
 import { formaterBelop } from "../../utils/numberFormat";
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from "../../utils/dates";
 import { MenyPunkt } from "../../utils/menyConfig";
@@ -30,7 +29,7 @@ import SkrivemodusInfomelding from "../../components/feil/skrivemodusInfomelding
 import { scrollTilElement } from "../../utils/scroll";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
-import { Alert, Loader } from "@navikt/ds-react";
+import { Alert, Loader, Tag } from "@navikt/ds-react";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -124,12 +123,9 @@ class TidligereMeldekort extends React.Component<Props, State> {
         label: formatHtmlMessage("overskrift.status"),
         cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           return (
-            <EtikettBase
-              className={finnRiktigEtikettKlasse(row.status)}
-              type={"info"}
-            >
+            <Tag variant={finnRiktigTagVariant(row.status)}>
               {mapKortStatusTilTekst(row.status)}
-            </EtikettBase>
+            </Tag>
           );
         },
       },
