@@ -19,49 +19,38 @@ exports[`Feilside 1`] = `
     className="seksjon flex-innhold sentrert"
   >
     <div
-      className="alertstripe alertstripe--feil"
+      className="navds-alert navds-alert--error navds-alert--medium"
     >
-      <span
-        className="alertstripe__ikon"
+      <svg
+        aria-labelledby="title-"
+        className="navds-alert__icon"
+        fill="none"
+        focusable={false}
+        height="1em"
+        role="img"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <span
-          className="sr-only"
+        <title
+          id="title-"
         >
-          feil
-        </span>
-        <svg
-          aria-label="feil-ikon"
-          focusable="false"
-          height="1.5em"
-          kind="feil-sirkel-fyll"
-          role="img"
-          viewBox="0 0 24 24"
-          width="1.5em"
-        >
-          <g
-            fill="none"
-            fillRule="evenodd"
-          >
-            <path
-              d="M11.999 0C5.395 0 .013 5.372 0 11.976a11.923 11.923 0 0 0 3.498 8.493A11.925 11.925 0 0 0 11.977 24H12c6.603 0 11.986-5.373 12-11.978C24.013 5.406 18.64.012 11.999 0z"
-              fill="#A13A28"
-              fillRule="nonzero"
-            />
-            <path
-              d="M12 10.651l3.372-3.372a.954.954 0 1 1 1.349 1.35L13.349 12l3.372 3.372a.954.954 0 1 1-1.35 1.349L12 13.349 8.628 16.72a.954.954 0 1 1-1.349-1.35L10.651 12 7.28 8.628A.954.954 0 1 1 8.63 7.28L12 10.651z"
-              fill="#FFF"
-              fillRule="nonzero"
-            />
-          </g>
-        </svg>
-      </span>
+          Feil
+        </title>
+        <path
+          clipRule="evenodd"
+          d="M7.742 2.47a.75.75 0 0 1 .53-.22h7.456a.75.75 0 0 1 .53.22l5.272 5.272c.141.14.22.331.22.53v7.456a.75.75 0 0 1-.22.53l-5.272 5.272a.75.75 0 0 1-.53.22H8.272a.75.75 0 0 1-.53-.22L2.47 16.258a.75.75 0 0 1-.22-.53V8.272a.75.75 0 0 1 .22-.53L7.742 2.47Zm1.288 5.5a.75.75 0 0 0-1.06 1.06L10.94 12l-2.97 2.97a.75.75 0 1 0 1.06 1.06L12 13.06l2.97 2.97a.75.75 0 1 0 1.06-1.06L13.06 12l2.97-2.97a.75.75 0 0 0-1.06-1.06L12 10.94 9.03 7.97Z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </svg>
       <div
-        className="typo-normal alertstripe__tekst"
+        className="navds-alert__wrapper navds-body-long navds-body-long--medium"
       >
         <span
           dangerouslySetInnerHTML={
             Object {
-              "__html": "For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Logg på nav.no og velg \\\"Registrer deg som arbeidssøker\\\", hvis du vil registrere deg. ",
+              "__html": "For å være registrert som arbeidssøker eller for å få dagpenger, AAP og tiltakspenger, må du sende meldekort hver 14. dag. Logg på nav.no og velg \\"Registrer deg som arbeidssøker\\", hvis du vil registrere deg. ",
             }
           }
         />

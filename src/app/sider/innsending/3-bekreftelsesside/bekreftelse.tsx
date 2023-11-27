@@ -1,5 +1,4 @@
 import * as React from "react";
-import AlertStripe from "nav-frontend-alertstriper";
 import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortdetaljer";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
@@ -35,6 +34,7 @@ import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import { Konstanter } from "../../../utils/consts";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -150,12 +150,12 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
       mottattDato: new Date(),
       meldeperiode: aktivtMeldekort.meldeperiode,
       erArbeidssokerNestePeriode: meldekortdetaljer.sporsmal.arbeidssoker,
+      fravaersdager: this.hentFravaersdager(meldekortdetaljer),
       korrigerbart:
         this.props.innsending.innsendingstype !== Innsendingstyper.KORRIGERING,
       begrunnelse: meldekortdetaljer.begrunnelse,
       signatur: meldekortdetaljer.sporsmal.signatur,
-      sesjonsId: "IKKE I BRUK",
-      fravaersdager: this.hentFravaersdager(meldekortdetaljer),
+      sesjonsId: "IKKE I BRUK"
     };
   };
 
@@ -320,18 +320,18 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             <UIAlertstripeWrapper />
           ) : null}
           <section className={"seksjon"}>
-            <AlertStripe type={"advarsel"}>
+            <Alert variant="warning">
               <span>
                 {formatHtmlMessage("overskrift.steg3.info.ikkeSendt")}
                 {formatHtmlMessage("overskrift.steg3.info.bekreftVerdier")}
               </span>
-            </AlertStripe>
+            </Alert>
           </section>
           <div id="feilmelding">
             {this.state.feilmelding === "" ? null : (
-              <AlertStripe type={"feil"} className={"utfylling__feilmelding"}>
+              <Alert variant="error" className={"utfylling__feilmelding"}>
                 {this.state.feilmelding}
-              </AlertStripe>
+              </Alert>
             )}
           </div>
           <section className="seksjon flex-innhold tittel-sprakvelger">

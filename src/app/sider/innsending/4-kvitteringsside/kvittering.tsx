@@ -16,7 +16,6 @@ import Ingress from "nav-frontend-typografi/lib/ingress";
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from "../../../utils/dates";
 import Environment from "../../../utils/env";
 import PrintKnapp from "../../../components/print/printKnapp";
-import AlertStripe from "nav-frontend-alertstriper";
 import { scrollTilElement } from "../../../utils/scroll";
 import { MeldekortActions } from "../../../actions/meldekort";
 import {
@@ -30,6 +29,7 @@ import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix, TypeYtelse } from "../../../utils/teksterUtil";
 import Panel from "nav-frontend-paneler";
 import { Konstanter } from "../../../utils/consts";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -232,9 +232,9 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
 
     return (
       <>
-        <AlertStripe type={"suksess"} className="alertSendt noPrint">
+        <Alert variant="success" className="alertSendt noPrint">
           {formatHtmlMessage("overskrift.meldekort.sendt")}
-        </AlertStripe>
+        </Alert>
 
         {typeYtelsePostfix === TypeYtelse.DAGPENGER &&
           <Panel border={true} className={"alertSendt"}>

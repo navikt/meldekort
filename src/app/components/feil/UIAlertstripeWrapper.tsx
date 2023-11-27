@@ -1,11 +1,11 @@
 import * as React from "react";
 import { BaksystemFeilmelding } from "../../types/ui";
-import AlertStripe from "nav-frontend-alertstriper";
 import { RootState } from "../../store/configureStore";
 import { selectFeilmelding } from "../../selectors/ui";
 import { Dispatch } from "redux";
 import { UiActions } from "../../actions/ui";
 import { connect } from "react-redux";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   baksystemFeilmelding: BaksystemFeilmelding;
@@ -21,9 +21,9 @@ const UIAlertstripeWrapper: React.FunctionComponent<UIAlertstripeWrapperProps> =
   return (
     <div className={"alertstripe_wrapper"}>
       {baksystemFeilmelding.visFeilmelding ? (
-        <AlertStripe type="feil">
+        <Alert variant="error">
           <div>{baksystemFeilmelding.content()}</div>
-        </AlertStripe>
+        </Alert>
       ) : null}
     </div>
   );

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useEffect } from "react";
-import AlertStripe from "nav-frontend-alertstriper";
 import BegrunnelseVelger from "./begrunnelse/begrunnelseVelger";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import SporsmalsGruppe from "./sporsmal/sporsmalsGruppe";
@@ -29,6 +28,7 @@ import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import { Konstanter } from "../../../utils/consts";
 import { useNavigate } from "react-router";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -259,7 +259,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       feilIBegrunnelse
     ) {
       return (
-        <AlertStripe type={"feil"}>
+        <Alert variant="error">
           <ul>
             {feilIBegrunnelse ? (
               <li>{`${formatMessage("begrunnelse.required")}`}</li>
@@ -280,7 +280,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
               <li>{`${formatMessage("fortsetteRegistrert.required")}`}</li>
             ) : null}
           </ul>
-        </AlertStripe>
+        </Alert>
       );
     }
   };
@@ -389,7 +389,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       <main>
         <section className="seksjon">
           {brukermelding.length > 1 ? (
-            <AlertStripe type={"info"}>{brukermelding}</AlertStripe>
+            <Alert variant="info">{brukermelding}</Alert>
           ) : null}
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
@@ -426,9 +426,9 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           />
           {innsending.innsendingstype === Innsendingstyper.INNSENDING ? (
             <div className="alertstripe_registrert">
-              <AlertStripe type="advarsel">
+              <Alert variant="warning">
                 {formatHtmlMessage("sporsmal.registrertMerknad")}
-              </AlertStripe>
+              </Alert>
             </div>
           ) : null}
         </section>

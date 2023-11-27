@@ -1,9 +1,9 @@
 import React from "react";
-import AlertStripe from "nav-frontend-alertstriper";
 import { Skrivemodus } from "../../types/skrivemodus";
 import { RootState } from "../../store/configureStore";
 import { connect } from "react-redux";
 import { formatHtmlMessage, hentLocale } from "../../utils/intlUtil";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   skrivemodus: Skrivemodus;
@@ -23,7 +23,7 @@ const SkrivemodusInfomelding: React.FunctionComponent<MapStateToProps> = props =
   };
 
   return (
-    <AlertStripe type={"info"}>{hentSkrivemodusInfomelding()}</AlertStripe>
+    <Alert variant="info">{hentSkrivemodusInfomelding()}</Alert>
   );
 };
 

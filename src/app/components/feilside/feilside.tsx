@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Innholdstittel } from "nav-frontend-typografi";
-import AlertStripe from "nav-frontend-alertstriper";
 import { formatHtmlMessage } from "../../utils/intlUtil";
+import { Alert } from "@navikt/ds-react";
 
 class Feilside extends React.Component<object, object> {
   public render() {
@@ -11,9 +11,9 @@ class Feilside extends React.Component<object, object> {
           {formatHtmlMessage("ikke.tilgang.overskrift")}
         </Innholdstittel>
         <section className="seksjon flex-innhold sentrert">
-          <AlertStripe type="feil">
+          <Alert variant="error">
             {formatHtmlMessage("ikke.tilgang.tekst")}
-          </AlertStripe>
+          </Alert>
         </section>
       </main>
     );

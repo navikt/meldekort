@@ -1,5 +1,4 @@
 import * as React from "react";
-import AlertStripe from "nav-frontend-alertstriper";
 import EtikettBase from "nav-frontend-etiketter";
 import Komponentlenke from "../../components/komponentlenke/komponentlenke";
 import MobilTabell from "../../components/tabell/mobil/mobilTabell";
@@ -32,6 +31,7 @@ import SkrivemodusInfomelding from "../../components/feil/skrivemodusInfomelding
 import { scrollTilElement } from "../../utils/scroll";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -153,9 +153,9 @@ class TidligereMeldekort extends React.Component<Props, State> {
   content = () => {
     if (!this.props.ingenTidligereMeldekort.harTidligereMeldekort) {
       return (
-        <AlertStripe type={"advarsel"}>
+        <Alert variant="warning">
           {formatHtmlMessage("tidligereMeldekort.harIngen")}
-        </AlertStripe>
+        </Alert>
       );
     } else if (this.props.historiskeMeldekort.historiskeMeldekort.length > 0) {
       return this.hentTabell();

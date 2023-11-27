@@ -1,8 +1,8 @@
 import * as React from "react";
-import { AlertStripeAdvarsel } from "nav-frontend-alertstriper";
 import { browserName, browserVersion, OSName } from "../../utils/browsers";
 import { Nettlesere } from "../../utils/consts";
 import { formatHtmlMessage } from "../../utils/intlUtil";
+import { Alert } from "@navikt/ds-react";
 
 const GammelNettleserMelding: React.FunctionComponent = () => {
   const browser = browserName + " v. " + browserVersion;
@@ -53,10 +53,10 @@ const GammelNettleserMelding: React.FunctionComponent = () => {
 
   return (
     <div className={"gammelNettleser"}>
-      <AlertStripeAdvarsel>
+      <Alert variant="error">
         {formatHtmlMessage("gammelNettleser.melding", { 0: browser })}
         {lenker()}
-      </AlertStripeAdvarsel>
+      </Alert>
     </div>
   );
 };

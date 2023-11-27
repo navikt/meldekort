@@ -10,9 +10,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Konstanter } from "./app/utils/consts";
 import NavFrontendSpinner from "nav-frontend-spinner";
 import { downloadMessages } from "./app/utils/intlUtil";
+import { erViggo } from "./app/utils/viggoUtils";
 
 import "nav-frontend-core/dist/main.css";
-import "nav-frontend-alertstriper-style/dist/main.css";
 import "nav-frontend-chevron-style/dist/main.css";
 import "nav-frontend-ekspanderbartpanel-style/dist/main.css";
 import "nav-frontend-etiketter-style/dist/main.css";
@@ -28,7 +28,7 @@ import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veileder-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "./index.css";
-import { erViggo } from "./app/utils/viggoUtils";
+import "@navikt/ds-css";
 
 const rootElement = document.getElementById("meldekort__root");
 

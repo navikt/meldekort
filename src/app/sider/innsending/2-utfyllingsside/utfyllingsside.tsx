@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import { Konstanter } from "../../../utils/consts";
 import { UtfyltDag } from "./utfylling/utfyltDagConfig";
 import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from "../../../utils/intlUtil";
-import AlertStripe from "nav-frontend-alertstriper";
 import { FravaerTypeEnum, Meldegruppe, Meldekort, SendtMeldekort } from "../../../types/meldekort";
 import { scrollTilElement } from "../../../utils/scroll";
 import UkePanel from "../../../components/ukepanel/ukepanel";
@@ -20,6 +19,7 @@ import { Navigate } from "react-router-dom";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import NavFrontendSpinner from "nav-frontend-spinner";
+import { Alert } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -276,7 +276,7 @@ class Utfyllingsside extends React.Component<
       feilIArbeidetTimerHeleHalve
     ) {
       return (
-        <AlertStripe className={"utfylling__feilmelding"} type={"feil"}>
+        <Alert variant="error" className={"utfylling__feilmelding"}>
           <ul>
             {feilIArbeid.feil ? (
               <li>{`${formatMessage("utfylling.mangler.arbeid").trim()}`}</li>
@@ -306,12 +306,12 @@ class Utfyllingsside extends React.Component<
               <li>{`${formatMessage("arbeidTimer.kombinasjonFravaerSykValidator")}`}</li>
             ) : null}
           </ul>
-        </AlertStripe>
+        </Alert>
       );
     } else if (typeof valideringsResultat !== "undefined") {
       if (valideringsResultat.status === "FEIL") {
         return (
-          <AlertStripe className={"utfylling__feilmelding"} type={"feil"}>
+          <Alert variant="error" className={"utfylling__feilmelding"}>
             <ul>
               {valideringsResultat.arsakskoder.map(arsakskode => {
                 return (
@@ -329,7 +329,7 @@ class Utfyllingsside extends React.Component<
                 );
               })}
             </ul>
-          </AlertStripe>
+          </Alert>
         );
       }
     }
