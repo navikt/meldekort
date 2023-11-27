@@ -21,7 +21,6 @@ import "nav-frontend-lukknapp-style/dist/main.css";
 import "nav-frontend-modal-style/dist/main.css";
 import "nav-frontend-paneler-style/dist/main.css";
 import "nav-frontend-skjema-style/dist/main.css";
-import "nav-frontend-stegindikator-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veileder-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
