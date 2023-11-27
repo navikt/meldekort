@@ -25,10 +25,9 @@ import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
 import { MeldekortActions } from "../../../actions/meldekort";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import { Konstanter } from "../../../utils/consts";
 import { useNavigate } from "react-router";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -370,7 +369,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={"XL"} />
+          <Loader size="xlarge" />
         </div>
       );
     }

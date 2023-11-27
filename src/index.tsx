@@ -8,7 +8,6 @@ import { Provider, ProviderProps } from "react-redux";
 import { persistor, store } from "./app/store/configureStore";
 import { PersistGate } from "redux-persist/integration/react";
 import { Konstanter } from "./app/utils/consts";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import { downloadMessages } from "./app/utils/intlUtil";
 import { erViggo } from "./app/utils/viggoUtils";
 
@@ -22,13 +21,13 @@ import "nav-frontend-lukknapp-style/dist/main.css";
 import "nav-frontend-modal-style/dist/main.css";
 import "nav-frontend-paneler-style/dist/main.css";
 import "nav-frontend-skjema-style/dist/main.css";
-import "nav-frontend-spinner-style/dist/main.css";
 import "nav-frontend-stegindikator-style/dist/main.css";
 import "nav-frontend-typografi-style/dist/main.css";
 import "nav-frontend-veileder-style/dist/main.css";
 import "nav-frontend-veilederpanel-style/dist/main.css";
 import "./index.css";
 import "@navikt/ds-css";
+import { Loader } from "@navikt/ds-react";
 
 const rootElement = document.getElementById("meldekort__root");
 
@@ -57,7 +56,7 @@ const renderLoader = (element: ReactElement) => {
 };
 
 // Først viser vi loader
-renderLoader(<NavFrontendSpinner type="XL" />);
+renderLoader(<Loader size="xlarge" />);
 
 // Sjekk at denne personen skal sendes til den nye løsningen
 erViggo();

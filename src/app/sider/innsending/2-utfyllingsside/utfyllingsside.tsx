@@ -18,8 +18,7 @@ import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
 import { Navigate } from "react-router-dom";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
-import NavFrontendSpinner from "nav-frontend-spinner";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -346,7 +345,7 @@ class Utfyllingsside extends React.Component<
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={"XL"} />
+          <Loader size="xlarge" />
         </div>
       );
     }

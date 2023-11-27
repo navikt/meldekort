@@ -12,7 +12,6 @@ import { mapKortStatusTilTekst, mapKortTypeTilTekst } from "../../../utils/kortM
 import { MeldekortdetaljerActions } from "../../../actions/meldekortdetaljer";
 import { MeldekortdetaljerState } from "../../../reducers/meldekortdetaljerReducer";
 import utklippstavle from "../../../ikoner/utklippstavle.svg";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import { DetaljRad, Meldekort, MeldekortKolonne } from "../../../types/meldekort";
 import { formaterBelop } from "../../../utils/numberFormat";
@@ -29,6 +28,7 @@ import { SkrivemodusActions } from "../../../actions/skrivemodus";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import { downloadMessagesAndDispatch, formatHtmlMessage } from "../../../utils/intlUtil";
 import { Konstanter } from "../../../utils/consts";
+import { Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -177,7 +177,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
             />
           ) : (
             <div className="meldekort-spinner">
-              <NavFrontendSpinner type={"XL"} />
+              <Loader size="xlarge" />
             </div>
           )}
         </section>

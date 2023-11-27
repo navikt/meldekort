@@ -2,7 +2,6 @@ import * as React from "react";
 import EtikettBase from "nav-frontend-etiketter";
 import Komponentlenke from "../../components/komponentlenke/komponentlenke";
 import MobilTabell from "../../components/tabell/mobil/mobilTabell";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
 import Tabell from "../../components/tabell/desktop/tabell";
 import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
@@ -31,7 +30,7 @@ import SkrivemodusInfomelding from "../../components/feil/skrivemodusInfomelding
 import { scrollTilElement } from "../../utils/scroll";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -162,7 +161,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     } else {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type="XL" />
+          <Loader size="xlarge" />
         </div>
       );
     }

@@ -32,9 +32,8 @@ import { UiActions } from "../../../actions/ui";
 import { UtfyltDag } from "../2-utfyllingsside/utfylling/utfyltDagConfig";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import { Konstanter } from "../../../utils/consts";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -291,7 +290,7 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={"XL"} />
+          <Loader size="xlarge" />
         </div>
       );
     }

@@ -24,12 +24,11 @@ import {
   returnerMeldekortListaMedFlereMeldekortIgjen
 } from "../../../utils/meldekortUtils";
 import { PersonInfoActions } from "../../../actions/personInfo";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix, TypeYtelse } from "../../../utils/teksterUtil";
 import Panel from "nav-frontend-paneler";
 import { Konstanter } from "../../../utils/consts";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -280,7 +279,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
     if (loading) {
       return (
         <div className="meldekort-spinner">
-          <NavFrontendSpinner type={"XL"} />
+          <Loader size="xlarge" />
         </div>
       );
     }
@@ -339,7 +338,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
       </main>
     ) : (
       <div className="meldekort-spinner">
-        <NavFrontendSpinner type="XL" />
+        <Loader size="xlarge" />
       </div>
     );
   }

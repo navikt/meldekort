@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useEffect } from "react";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
 import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
 import { BaksystemFeilmelding } from "../../types/ui";
@@ -25,6 +24,7 @@ import MeldingOmMeldekortSomIkkeErKlare from "./meldingOmIkkeKlareMeldekort";
 import SendMeldekortInnhold from "./sendMeldekortInnhold";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { formatHtmlMessage } from "../../utils/intlUtil";
+import { Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -123,7 +123,7 @@ function SendMeldekort({
           <UIAlertstripeWrapper />
         ) : person.meldeform === MeldeForm.IKKE_SATT ? (
           <div className="meldekort-spinner">
-            <NavFrontendSpinner type="XL" />
+            <Loader size="xlarge" />
           </div>
         ) : (
           hentFeilmeldingEllerData(rows, columns)

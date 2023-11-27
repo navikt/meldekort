@@ -15,10 +15,10 @@ import {
   hentMeldekortRaderFraPerson,
   hentPeriodeDatoKolonner
 } from "../../utils/meldekortUtils";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import EtterregistreringInnhold from "./etterregistreringInnhold";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
+import { Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -67,7 +67,7 @@ function EtterregistrerMeldekort({
   }, []);
 
   return person.meldeform === MeldeForm.IKKE_SATT ? (
-    <NavFrontendSpinner type={"XL"} className={"spinforyourlife"} />
+    <Loader size="xlarge" />
   ) : rows.length === 0 ? (
     <Navigate to={ Konstanter.basePath + "/om-meldekort" } replace />
   ) : !harKunEttMeldekort(innsendingsklareMeldekort) ? (

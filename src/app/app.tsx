@@ -22,10 +22,10 @@ import { formatMessage } from "./utils/intlUtil";
 import classNames from "classnames";
 import { PersonActions } from "./actions/person";
 import { erBrukerRegistrertIArena } from "./utils/meldekortUtils";
-import NavFrontendSpinner from "nav-frontend-spinner";
 import { isIE, isOldChrome, isOldEdge, isOldFirefox, isOldIE, isOldSafari } from "./utils/browsers";
 import { injectIntl, WrappedComponentProps } from "react-intl";
 import { Konstanter } from "./utils/consts";
+import { Loader } from "@navikt/ds-react";
 
 if (erMock()) {
   setupMock();
@@ -76,7 +76,7 @@ class App extends React.Component<Props, AppState> {
             <UIAlertstripeWrapper />
           ) : personStatus.personStatus.statusArbeidsoker ===
             "venter_pa_data" ? (
-            <NavFrontendSpinner type={"XL"} className={"spinforyourlife"} />
+            <Loader size="xlarge" />
           ) : (
             <Feilside />
           )}
