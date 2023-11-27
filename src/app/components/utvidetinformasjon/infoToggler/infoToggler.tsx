@@ -1,5 +1,5 @@
 import * as React from "react";
-import NavFrontendChevron from "nav-frontend-chevron";
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 interface ToggleLenkeProps {
   children: React.ReactNode;
@@ -22,7 +22,11 @@ const InfoToggler: React.FunctionComponent<ToggleLenkeProps> = (props) => {
       <span className="infoToggler__content">
         <span className="infoToggler__label">{children}</span>
         <span className="infoToggler__chevron">
-          <NavFrontendChevron type={apen ? "opp" : "ned"} />
+          {
+            apen
+            ? <ChevronUpIcon title="a11y-title" style={{marginBottom: "-0.2rem"}} />
+            : <ChevronDownIcon title="a11y-title" style={{marginBottom: "-0.2rem"}} />
+          }
         </span>
       </span>
     </button>
