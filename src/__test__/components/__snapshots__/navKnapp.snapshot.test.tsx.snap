@@ -2,11 +2,19 @@
 
 exports[`NavKnapp 1`] = `
 <button
-  className="knapp knapp--hoved"
-  disabled={false}
+  className="navds-button navds-button--primary navds-button--medium"
   onClick={[Function]}
-  type="submit"
+  onKeyUp={[Function]}
+  style={
+    Object {
+      "width": undefined,
+    }
+  }
 >
-  Neste
+  <span
+    className="navds-label"
+  >
+    Neste
+  </span>
 </button>
 `;

@@ -5,8 +5,8 @@ import { selectModal } from "../../selectors/ui";
 import { Dispatch } from "redux";
 import { UiActions } from "../../actions/ui";
 import { connect } from "react-redux";
-import KnappBase from "nav-frontend-knapper";
 import Modal from "nav-frontend-modal";
+import { Button } from "@navikt/ds-react";
 
 interface MapStateToProps {
   modal: IModal;
@@ -38,14 +38,14 @@ const UIModalWrapper: React.FunctionComponent<UIModalWrapperProps> = ({
         {modal.knapper &&
           modal.knapper.map((knapp: ModalKnapp) => {
             return (
-              <KnappBase
+              <Button
                 key={knapp.label}
                 className={"uimodal__actions-knapp"}
-                type={knapp.type}
+                variant={knapp.type}
                 onClick={() => knapp.action()}
               >
                 {knapp.label}
-              </KnappBase>
+              </Button>
             );
           })}
       </div>

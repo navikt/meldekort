@@ -1,5 +1,4 @@
 import * as React from "react";
-import KnappBase from "nav-frontend-knapper";
 import { connect } from "react-redux";
 import { RootState } from "../../store/configureStore";
 import { Meldekort, Meldekortdetaljer } from "../../types/meldekort";
@@ -13,6 +12,7 @@ import { settSporsmalOgUtfyllingHvisKorrigering } from "../../utils/korrigeringU
 import { formatMessage } from "../../utils/intlUtil";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
+import { Button } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsendingstypeFraStore: Innsendingstyper | null;
@@ -44,9 +44,9 @@ interface NavKnappProps {
 }
 
 export enum KnappTyper {
-  HOVED = "hoved",
-  STANDARD = "standard",
-  FLAT = "flat"
+  HOVED = "primary",
+  STANDARD = "secondary",
+  FLAT = "tertiary"
 }
 
 type Props = MapStateToProps & MapDispatchToProps & NavKnappProps;
@@ -129,11 +129,11 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
   };
 
     return (
-      <KnappBase
-        type={props.type}
+      <Button
+        variant={props.type}
         onClick={clickHandler}
         className={props.className}
-        spinner={
+        loading={
           typeof props.spinner === "undefined" ? false : props.spinner
         }
         disabled={
@@ -143,7 +143,7 @@ const NavKnapp: React.FunctionComponent<Props> = (props) => {
         }
       >
         {formatMessage(props.tekstid)}
-      </KnappBase>
+      </Button>
     );
 }
 

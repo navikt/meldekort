@@ -5,17 +5,25 @@ exports[`PrintKnapp 1`] = `
   className="navigasjonsknapp"
 >
   <button
-    className="knapp knapp--flat"
-    disabled={false}
+    className="navds-button navds-button--secondary navds-button--medium"
     onClick={[Function]}
-    type="button"
+    onKeyUp={[Function]}
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
   >
-    <img
-      alt=""
-      className="printLogo"
-      src="print.svg"
-    />
-    Skriv ut
+    <span
+      className="navds-label"
+    >
+      <img
+        alt=""
+        className="printLogo"
+        src="print.svg"
+      />
+      Skriv ut
+    </span>
   </button>
 </div>
 `;

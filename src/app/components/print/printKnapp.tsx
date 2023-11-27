@@ -1,10 +1,10 @@
 import * as React from "react";
 import { formatMessage } from "../../utils/intlUtil";
-import { Flatknapp } from "nav-frontend-knapper";
 import printLogo from "../../ikoner/print.svg";
 import DOMPortal from "./DOMPortal";
 import Utskrift from "./utskrift";
 import { Person, PersonInfo } from "../../types/person";
+import { Button } from "@navikt/ds-react";
 
 export interface PrintKnappProps {
   innholdRenderer: () => React.ReactNode;
@@ -85,8 +85,7 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
 
     return (
       <div className={"navigasjonsknapp"}>
-        <Flatknapp
-          htmlType="button"
+        <Button variant="secondary"
           onClick={() =>
             this.setState({
               active: !this.state.active,
@@ -95,7 +94,7 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
         >
           <img className="printLogo" src={printLogo} alt="" />
           {this.tekst}
-        </Flatknapp>
+        </Button>
         {prerenderInnhold || this.state.active ? (
           <DOMPortal>
             <Utskrift

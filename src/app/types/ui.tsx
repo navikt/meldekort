@@ -1,7 +1,9 @@
+import { KnappTyper } from "../components/knapp/navKnapp";
+
 export interface ModalKnapp {
   action: () => void;
   label: string;
-  type: "standard" | "hoved" | "fare" | "flat";
+  type: KnappTyper;
 }
 
 export interface IModal {

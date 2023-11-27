@@ -314,14 +314,14 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           navigate(hoppeOverUtfylling() ? "../bekreftelse" : "../utfylling", { replace: true })
         },
         label: formatMessage("overskrift.bekreftOgFortsett"),
-        type: "hoved",
+        type: KnappTyper.HOVED,
       },
       {
         action: () => {
           props.skjulModal();
         },
         label: formatMessage("sporsmal.tilbakeEndre"),
-        type: "standard",
+        type: KnappTyper.STANDARD,
       },
     ];
   };

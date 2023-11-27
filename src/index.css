@@ -1086,12 +1086,10 @@ body .sentrert-tekst {
   bottom: 1rem;
 }
 
-.uimodal__actions-knapp {
-  margin-left: 1rem;
-}
-
 .uimodal .uimodal__actions-knapp {
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal-overskrift h2 {
