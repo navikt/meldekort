@@ -26,9 +26,8 @@ import {
 import { PersonInfoActions } from "../../../actions/personInfo";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix, TypeYtelse } from "../../../utils/teksterUtil";
-import Panel from "nav-frontend-paneler";
 import { Konstanter } from "../../../utils/consts";
-import { Alert, Loader } from "@navikt/ds-react";
+import { Alert, Loader, Panel } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -236,7 +235,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         </Alert>
 
         {typeYtelsePostfix === TypeYtelse.DAGPENGER &&
-          <Panel border={true} className={"alertSendt"}>
+          <Panel border className={"alertSendt"}>
             {formatHtmlMessage("sendt.klagerettigheterInfo" + typeYtelsePostfix)}
           </Panel>
         }
