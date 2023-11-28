@@ -5,7 +5,7 @@ const {
 } = require("@navikt/nav-dekoratoren-moduler/ssr");
 const { logger, logRequests } = require("./logger");
 const path = require("path");
-const promMid = require("express-prometheus-middleware");
+const promBundle = require("express-prom-bundle");
 
 console.log(`Dekoratormiljø: ${process.env.DEKORATOR_MILJO}`);
 
@@ -36,10 +36,9 @@ app.get(`${basePath}/internal/isAlive|isReady`, (_, res) =>
 );
 
 app.use(
-  promMid({
+  promBundle({
     metricsPath: `${basePath}/internal/metrics`,
-    collectDefaultMetrics: true,
-    requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+    buckets: [0.1, 0.5, 1, 1.5],
   })
 );
 
