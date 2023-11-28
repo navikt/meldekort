@@ -1,10 +1,10 @@
 import * as React from "react";
 import { formatMessage } from "../../utils/intlUtil";
-import printLogo from "../../ikoner/print.svg";
 import DOMPortal from "./DOMPortal";
 import Utskrift from "./utskrift";
 import { Person, PersonInfo } from "../../types/person";
 import { Button } from "@navikt/ds-react";
+import { PrinterSmallIcon } from "@navikt/aksel-icons";
 
 export interface PrintKnappProps {
   innholdRenderer: () => React.ReactNode;
@@ -92,7 +92,7 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
             })
           }
         >
-          <img className="printLogo" src={printLogo} alt="" />
+          <PrinterSmallIcon className="printLogo" />
           {this.tekst}
         </Button>
         {prerenderInnhold || this.state.active ? (

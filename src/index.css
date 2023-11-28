@@ -1263,9 +1263,9 @@ body .sentrert-tekst {
 }
 
 #meldekort__root .printLogo {
-  height: 20px;
+  font-size: 1.5rem;
   margin-right: 0.5rem;
-  padding-bottom: 0.2rem;
+  margin-bottom: -0.3rem;
 }
 
 @media print {
