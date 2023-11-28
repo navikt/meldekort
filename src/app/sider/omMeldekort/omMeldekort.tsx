@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
-import Veilederpanel from "nav-frontend-veilederpanel";
-import veileder from "../../ikoner/veileder.svg";
 import { InnsendingActions } from "../../actions/innsending";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -13,6 +11,7 @@ import { MenyState } from "../../types/meny";
 import { RootState } from "../../store/configureStore";
 import { scrollTilElement } from "../../utils/scroll";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
+import { GuidePanel } from "@navikt/ds-react";
 
 interface MapStateToProps {
   meny: MenyState;
@@ -46,11 +45,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
           </Innholdstittel>
           <Sprakvelger />
         </section>
-        <Veilederpanel
-          type={"plakat"}
-          kompakt={true}
-          svg={<img alt="" src={veileder} />}
-        >
+        <GuidePanel poster>
           <section className="seksjon">
             <Normaltekst>
               {formatHtmlMessage("genereltOmMeldekort.velkommen")}
@@ -79,7 +74,7 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
               {formatHtmlMessage("genereltOmMeldekort.oss")}
             </Normaltekst>
           </section>
-        </Veilederpanel>
+        </GuidePanel>
       </main>
     );
   }

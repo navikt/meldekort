@@ -4,8 +4,6 @@ import BegrunnelseVelger from "./begrunnelse/begrunnelseVelger";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import SporsmalsGruppe from "./sporsmal/sporsmalsGruppe";
 import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
-import veileder from "../../../ikoner/veileder.svg";
-import Veilederpanel from "nav-frontend-veilederpanel";
 import { UtfyltDag } from "../2-utfyllingsside/utfylling/utfyltDagConfig";
 import { Begrunnelse, InnsendingState, Innsendingstyper, SpmSvar } from "../../../types/innsending";
 import { connect } from "react-redux";
@@ -27,7 +25,7 @@ import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import { Konstanter } from "../../../utils/consts";
 import { useNavigate } from "react-router";
-import { Alert, Loader } from "@navikt/ds-react";
+import { Alert, GuidePanel, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -398,14 +396,14 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           <Sprakvelger />
         </section>
         <section className="seksjon">
-          <Veilederpanel kompakt={true} svg={<img alt="" src={veileder} />}>
+          <GuidePanel>
             <div className="item">
               {formatHtmlMessage("sporsmal.lesVeiledning")}
             </div>
             <div className="item">
               {formatHtmlMessage("sporsmal.ansvarForRiktigUtfylling")}
             </div>
-          </Veilederpanel>
+          </GuidePanel>
         </section>
         <section id="feilmelding" className="seksjon">
           {hentFeilmeldinger(typeYtelsePostfix)}

@@ -3,10 +3,9 @@ import { Meldekort, MeldekortRad } from "../../types/meldekort";
 import { Person } from "../../types/person";
 import { Element, Normaltekst } from "nav-frontend-typografi";
 import { formaterDato, formaterUkeOgDatoPeriode } from "../../utils/dates";
-import Veilederpanel from "nav-frontend-veilederpanel";
-import veileder from "../../ikoner/veileder.svg";
 import { harKortStatusOPPRellerSENDT } from "../../utils/meldekortUtils";
 import { formatHtmlMessage } from "../../utils/intlUtil";
+import { GuidePanel } from "@navikt/ds-react";
 
 interface Props {
   rows: MeldekortRad[];
@@ -97,9 +96,9 @@ function MeldingOmMeldekortSomIkkeErKlare({
   };
 
   return (
-    <Veilederpanel svg={<img alt="" src={veileder} />}>
+    <GuidePanel>
       <div className="send-meldekort-varsel">{visMeldingOmMeldekort()}</div>
-    </Veilederpanel>
+    </GuidePanel>
   );
 }
 

@@ -13,14 +13,8 @@ exports[`ikkeFortsetteRegistrertContent 1`] = `
       }
     />
   </Undertittel>
-  <Veilederpanel
-    fargetema="advarsel"
-    svg={
-      <img
-        alt=""
-        src="veileder.svg"
-      />
-    }
+  <ForwardRef
+    variant="warning"
   >
     <div
       className="modal-tekst"
@@ -35,6 +29,6 @@ exports[`ikkeFortsetteRegistrertContent 1`] = `
         />
       </Normaltekst>
     </div>
-  </Veilederpanel>
+  </ForwardRef>
 </div>
 `;
