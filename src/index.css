@@ -1455,6 +1455,11 @@ body .sentrert-tekst {
   background: white;
 }
 
+.navds-fieldset__legend {
+  margin: 0;
+  padding-bottom: 1.5rem;
+}
+
 .infoToggler {
   position: relative;
   border: none !important;
@@ -1499,11 +1504,6 @@ body .sentrert-tekst {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.utvidetInformasjon p {
-  margin: 0;
-  padding-bottom: 1rem;
 }
 
 .utvidetInformasjon__innhold,
@@ -1802,6 +1802,8 @@ body .sentrert-tekst {
 
 .utfylling-container .ekspanderbartPanel {
   margin-bottom: 2rem;
+  border: solid 1px black;
+  box-shadow: none;
 }
 
 .utfylling-container .uke__panel {

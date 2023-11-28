@@ -12,8 +12,8 @@ import { downloadMessages } from "./app/utils/intlUtil";
 import { erViggo } from "./app/utils/viggoUtils";
 import { Loader } from "@navikt/ds-react";
 
-import "./index.css";
 import "@navikt/ds-css";
+import "./index.css";
 
 const rootElement = document.getElementById("meldekort__root");
 

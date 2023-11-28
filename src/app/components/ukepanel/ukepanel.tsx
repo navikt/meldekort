@@ -47,7 +47,7 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
 
   return (
     <Accordion>
-      <Accordion.Item defaultOpen>
+      <Accordion.Item defaultOpen className="ekspanderbartPanel">
         <Accordion.Header>
             <Heading size="large" level="3">{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Heading>
             <BodyShort>{props.datoTittel}</BodyShort>

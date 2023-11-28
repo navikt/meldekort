@@ -200,7 +200,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         </BodyLong>
         <BodyLong size="large">
           <span>
-            {formatMessage("meldekort.for.perioden") + ukeOgPeriode}
+            {formatMessage("meldekort.for.perioden") + " " + ukeOgPeriode}
           </span>
         </BodyLong>
         <BodyLong size="large">

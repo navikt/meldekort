@@ -22,7 +22,7 @@ export const konverterUkedag = (index: number): number => {
 export const hentUkedager = () => {
   return hentUkedagerSomStringListe().map((dag, index) => {
     return (
-      <BodyLong size="large" key={dag + index}>
+      <BodyLong size="large" className="typo-ingress" key={dag + index}>
         <abbr key={"ukedager-" + dag} title={dag}>
           {dag.toUpperCase()[0]}
         </abbr>

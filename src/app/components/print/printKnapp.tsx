@@ -4,7 +4,7 @@ import DOMPortal from "./DOMPortal";
 import Utskrift from "./utskrift";
 import { Person, PersonInfo } from "../../types/person";
 import { Button } from "@navikt/ds-react";
-import { PrinterSmallIcon } from "@navikt/aksel-icons";
+import { PrinterSmallFillIcon } from "@navikt/aksel-icons";
 
 export interface PrintKnappProps {
   innholdRenderer: () => React.ReactNode;
@@ -85,14 +85,14 @@ class PrintKnapp extends React.Component<PrintKnappProps, State> {
 
     return (
       <div className={"navigasjonsknapp"}>
-        <Button variant="secondary"
+        <Button variant="tertiary"
           onClick={() =>
             this.setState({
               active: !this.state.active,
             })
           }
         >
-          <PrinterSmallIcon className="printLogo" />
+          <PrinterSmallFillIcon className="printLogo" />
           {this.tekst}
         </Button>
         {prerenderInnhold || this.state.active ? (
