@@ -10,11 +10,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Konstanter } from "./app/utils/consts";
 import { downloadMessages } from "./app/utils/intlUtil";
 import { erViggo } from "./app/utils/viggoUtils";
+import { Loader } from "@navikt/ds-react";
 
-import "nav-frontend-core/dist/main.css";
 import "./index.css";
 import "@navikt/ds-css";
-import { Loader } from "@navikt/ds-react";
 
 const rootElement = document.getElementById("meldekort__root");
 

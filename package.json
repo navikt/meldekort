@@ -27,7 +27,6 @@
     "express-prometheus-middleware": "^1.2.0",
     "lodash.throttle": "^4.1.1",
     "moment": "^2.29.4",
-    "nav-frontend-core": "^6.0.1",
     "nav-frontend-js-utils": "^1.0.20",
     "prom-client": "^15.0.0",
     "prop-types": "^15.8.1",
