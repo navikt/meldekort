@@ -11,6 +11,7 @@ import { PersonStatusActions } from "./actions/personStatus";
 import { PersonStatusState } from "./reducers/personStatusReducer";
 import { connect } from "react-redux";
 import Feilside from "./components/feilside/feilside";
+import UIModalWrapper from "./components/modal/UIModalWrapper";
 import { BaksystemFeilmelding } from "./types/ui";
 import { selectFeilmelding } from "./selectors/ui";
 import UIAlertstripeWrapper from "./components/feil/UIAlertstripeWrapper";
@@ -139,6 +140,7 @@ class App extends React.Component<Props, AppState> {
   public render() {
     return (
       <>
+        <UIModalWrapper />
         {this.settInnhold()}
       </>
     );

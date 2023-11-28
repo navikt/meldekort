@@ -12,6 +12,7 @@ export interface UIState {
 
 const initialState: UIState = {
   modal: {
+    header: () => "",
     content: () => "",
     visModal: false,
   },

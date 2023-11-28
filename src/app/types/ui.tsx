@@ -7,6 +7,7 @@ export interface ModalKnapp {
 }
 
 export interface IModal {
+  header: () => string;
   content: () => React.ReactNode;
   knapper?: ModalKnapp[];
   onRequestClose?: () => void;

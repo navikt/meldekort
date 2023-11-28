@@ -138,6 +138,7 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
       !fortsetteRegistrert()
     ) {
       props.visModal({
+        header: () => formatMessage("sporsmal.bekreft"),
         content: () => ikkeFortsetteRegistrertContent(),
         knapper: ikkeFortsetteRegistrertKnapper(),
         visModal: true,
