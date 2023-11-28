@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Input } from "nav-frontend-skjema";
 import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from "../../../../../utils/ukedager";
 import { FeilIDager, InnsendingState } from "../../../../../types/innsending";
 import { UtfyltDag } from "../utfyltDagConfig";
@@ -10,6 +9,7 @@ import { formatHtmlMessage } from "../../../../../utils/intlUtil";
 import { Undertittel } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../../../../actions/innsending";
 import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
+import { TextField } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -85,16 +85,14 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
       }
 
       return (
-        <Input
-          className="arbeid__inputfelt"
+        <TextField
           key={ukedag}
           label={
             <span className="vekk">
               {dag} {formatHtmlMessage(this.props.tekstId)}
             </span>
           }
-          bredde="XS"
-          step={0.5}
+          style={{height: "2.7rem", width: "2.7rem"}}
           type={"text"}
           value={
             typeof utfylteDager[utfyltDagIndex].arbeidetTimer !== "undefined"
@@ -104,7 +102,7 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
           onChange={event => {
             this.setTimer(event, ukedag);
           }}
-          feil={
+          error={
             typeof this.props.feilIDager !== "undefined" ? feilLokal : false
           }
         />

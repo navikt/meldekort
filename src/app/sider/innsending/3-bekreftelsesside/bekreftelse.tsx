@@ -20,7 +20,6 @@ import {
   SendtMeldekort
 } from "../../../types/meldekort";
 import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from "../../../utils/intlUtil";
-import { BekreftCheckboksPanel } from "nav-frontend-skjema";
 import { scrollTilElement } from "../../../utils/scroll";
 import { Dispatch } from "redux";
 import { Navigate } from "react-router-dom";
@@ -33,7 +32,7 @@ import { UtfyltDag } from "../2-utfyllingsside/utfylling/utfyltDagConfig";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import { Konstanter } from "../../../utils/consts";
-import { Alert, Loader } from "@navikt/ds-react";
+import { Alert, ConfirmationPanel, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -344,17 +343,17 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             meldekortdetaljer={meldekortdetaljer}
             typeYtelsePostfix={typeYtelsePostfix}
           />
-          <BekreftCheckboksPanel
+          <ConfirmationPanel
             className={"bekreftInfo"}
             onChange={() => this.settChecked()}
             checked={meldekortdetaljer.sporsmal.signatur}
             label={formatMessage("utfylling.bekreftAnsvar")}
-            feil={feilmelding !== ""}
+            error={feilmelding !== ""}
           >
             <Normaltekst>
               {formatHtmlMessage("utfylling.bekreft" + typeYtelsePostfix)}
             </Normaltekst>
-          </BekreftCheckboksPanel>
+          </ConfirmationPanel>
           <section className="seksjon flex-innhold sentrert">
             <div className={"knapper-container"}>
               <NavKnapp

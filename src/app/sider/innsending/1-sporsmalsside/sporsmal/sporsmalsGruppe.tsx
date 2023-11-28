@@ -28,13 +28,11 @@ type SporsmalsGruppeProps = Props & MapStateToProps & MapDispatchToProps;
 
 class SporsmalsGruppe extends React.Component<SporsmalsGruppeProps, object> {
   sporsmalOnChange = (
-    event: React.SyntheticEvent<EventTarget>,
-    value?: string
+    value: string
   ) => {
     const nySporsmalsobjekterState = this.props.innsending.sporsmalsobjekter.map(
       sporsmalsobj => {
-        const val = value !== undefined ? value : "";
-        if (sporsmalsobj.kategori === val.split(".")[0]) {
+        if (sporsmalsobj.kategori === value.split(".")[0]) {
           return {
             ...sporsmalsobj,
             checked: value,

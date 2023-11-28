@@ -2,7 +2,7 @@
 
 exports[`Komponentlenke 1`] = `
 <a
-  className="lenke"
+  className="navds-link navds-link--action"
   href="#"
   onClick={[Function]}
 >

@@ -6,8 +6,8 @@ import { formatMessage } from "../../../utils/intlUtil";
 import { MenyActions } from "../../../actions/meny";
 import { MenyPunkt } from "../../../utils/menyConfig";
 import { RootState } from "../../../store/configureStore";
-import Lenke from "nav-frontend-lenker";
 import { useNavigate } from "react-router";
+import { Link } from "@navikt/ds-react";
 
 interface MapStateToProps {
   valgtMenyPunkt: MenyPunkt;
@@ -39,7 +39,7 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
           .filter((item: MenyPunkt) => item.urlparam)
           .map((item: MenyPunkt) => ( // (item: MenyPunkt, index: any)
             <li key={item.tittel} className={"hovedmeny__item"}>
-              <Lenke
+              <Link
                 onClick={() => onChange(item)}
                 className={classNames("hovedmeny__menypunkt", {
                   active: valgtMenyPunkt.tittel === item.tittel,
@@ -48,7 +48,7 @@ const HovedMeny: React.FunctionComponent<Props> = props => {
                 aria-labelledby={"tab hovedmeny__menypunkt"}
               >
                 {formatMessage(item.tekstid)}
-              </Lenke>
+              </Link>
             </li>
           ))}
       </ul>

@@ -83,7 +83,7 @@ const Sprakvelger: React.FunctionComponent<MergedProps> = props => {
             }
           </div>
           <div>
-            <ChevronDownIcon title="a11y-title" style={{marginBottom: "-0.2rem"}} />
+            <ChevronDownIcon className="languageToggle__button__chevron" />
           </div>
         </Button>
         <Menu className="languageToggle__menu">

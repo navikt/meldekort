@@ -1,13 +1,13 @@
 import * as React from "react";
-import { RadioPanelGruppe } from "nav-frontend-skjema";
 import { formatHtmlMessage, formatMessage } from "../../../../utils/intlUtil";
 import { Sporsmal as Spm } from "./sporsmalConfig";
 import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
+import { Radio, RadioGroup } from "@navikt/ds-react";
 
 interface SporsmalProps {
   sporsmalsobjekt: Spm;
   checked: string | undefined;
-  sporsmalOnChange: (event: React.SyntheticEvent<EventTarget>) => void;
+  sporsmalOnChange: (value: string) => void;
   formatertDato?: string;
   disabled: boolean;
 }
@@ -29,26 +29,18 @@ const Sporsmal: React.FunctionComponent<SporsmalProps> = props => {
 
   return (
     <section className="seksjon sporsmal">
-      <RadioPanelGruppe
+      <RadioGroup
         name={props.sporsmalsobjekt.kategori}
         legend={legend}
         description={description}
-        radios={[
-          {
-            label: formatMessage(props.sporsmalsobjekt.ja),
-            value: props.sporsmalsobjekt.kategori + ".ja",
-            disabled: props.disabled,
-          },
-          {
-            label: formatMessage(props.sporsmalsobjekt.nei),
-            value: props.sporsmalsobjekt.kategori + ".nei",
-            disabled: props.disabled,
-          },
-        ]}
-        checked={props.checked}
+        disabled={props.disabled}
         onChange={props.sporsmalOnChange}
-        feil={props.sporsmalsobjekt.feil.erFeil}
-      />
+        error={props.sporsmalsobjekt.feil.erFeil}
+        value={props.checked || ''}
+      >
+        <Radio value={props.sporsmalsobjekt.kategori + ".ja"}>{formatMessage(props.sporsmalsobjekt.ja)}</Radio>
+        <Radio value={props.sporsmalsobjekt.kategori + ".nei"}>{formatMessage(props.sporsmalsobjekt.nei)}</Radio>
+      </RadioGroup>
     </section>
   );
 };

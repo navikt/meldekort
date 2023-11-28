@@ -7,8 +7,8 @@ import { MenyActions } from "../../../actions/meny";
 import { Dispatch } from "redux";
 import classNames from "classnames";
 import { Collapse } from "react-collapse";
-import Lenke from "nav-frontend-lenker";
 import { useNavigate } from "react-router";
+import { Link } from "@navikt/ds-react";
 
 interface MobilMenyProps {
   menypunkter: MenyPunkt[];
@@ -52,14 +52,14 @@ const MobilMeny: React.FunctionComponent<
               key={menypunkt.tittel}
               aria-labelledby={"navlink"}
             >
-              <Lenke
+              <Link
                 className={classNames("mobilmeny__lenke", {
                   active: valgtMenyPunkt.tittel === menypunkt.tittel,
                 })}
                 href={"#"}
               >
                 {formatMessage(menypunkt.tekstid)}
-              </Lenke>
+              </Link>
             </li>
           ))}
         </ul>

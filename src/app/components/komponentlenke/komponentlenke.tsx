@@ -1,13 +1,12 @@
 import * as React from "react";
-import "nav-frontend-lenker-style";
 import { RootState } from "../../store/configureStore";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Meldekort } from "../../types/meldekort";
 import { AktivtMeldekortActions } from "../../actions/aktivtMeldekort";
-import Lenke from "nav-frontend-lenker";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
+import { Link } from "@navikt/ds-react";
 
 interface KomponentlenkeProps {
   lenketekst: string;
@@ -40,9 +39,9 @@ const Komponentlenke: React.FunctionComponent<Props> = props => {
   };
 
   return (
-    <Lenke href={"#"} onClick={clickHandler}>
+    <Link href={"#"} onClick={clickHandler}>
       {props.lenketekst}
-    </Lenke>
+    </Link>
   );
 }
 

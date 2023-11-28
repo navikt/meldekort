@@ -12,7 +12,7 @@ exports[`HovedMeny 1`] = `
     >
       <a
         aria-labelledby="tab hovedmeny__menypunkt"
-        className="lenke hovedmeny__menypunkt active"
+        className="navds-link hovedmeny__menypunkt active navds-link--action"
         href="#"
         onClick={[Function]}
       >
@@ -24,7 +24,7 @@ exports[`HovedMeny 1`] = `
     >
       <a
         aria-labelledby="tab hovedmeny__menypunkt"
-        className="lenke hovedmeny__menypunkt"
+        className="navds-link hovedmeny__menypunkt navds-link--action"
         href="#"
         onClick={[Function]}
       >

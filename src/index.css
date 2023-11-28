@@ -809,6 +809,8 @@ body .sentrert-tekst {
 .meldekortHeader .hovedmeny .active:focus {
   color: #fff;
   border-bottom: 4px solid white;
+  background-color: #00347d;
+  box-shadow: 0 0 0 2px #00347d;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -1340,6 +1342,13 @@ body .sentrert-tekst {
 .languageToggle__button__language {
   text-align: left;
   width: 65%;
+  margin-top: -0.15rem;
+}
+
+.languageToggle__button__chevron {
+  font-size: 2rem;
+  margin-top: -2.5rem;
+  margin-bottom: -0.5rem;
 }
 
 .languageToggle__menu {

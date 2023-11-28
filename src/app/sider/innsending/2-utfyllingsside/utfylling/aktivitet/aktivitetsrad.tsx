@@ -1,6 +1,5 @@
 import * as React from "react";
 import { hentUkedager, hentUkedagerSomStringListe, konverterUkedag } from "../../../../../utils/ukedager";
-import { Checkbox } from "nav-frontend-skjema";
 import { FeilIDager, InnsendingState } from "../../../../../types/innsending";
 import { UtfyltDag } from "../utfyltDagConfig";
 import { RootState } from "../../../../../store/configureStore";
@@ -10,6 +9,7 @@ import { formatHtmlMessage } from "../../../../../utils/intlUtil";
 import { Undertittel } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../../../../actions/innsending";
 import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
+import { Checkbox } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -102,17 +102,16 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
             erFeil ? "aktivitet__checkbox_feil" : "aktivitet__checkbox"
           }
           key={ukedag}
-          label={
-            <span className="vekk">
-              {dag} {formatHtmlMessage(this.props.tekstId)}
-            </span>
-          }
           checked={this.isChecked(ukedag)}
           onChange={() => {
             this.setVerdi(ukedag);
           }}
-          feil={typeof this.props.feilIDager !== "undefined" ? erFeil : false}
-        />
+          error={typeof this.props.feilIDager !== "undefined" ? erFeil : false}
+        >
+          <span className="vekk">
+            {dag} {formatHtmlMessage(this.props.tekstId)}
+          </span>
+        </Checkbox>
       );
     });
   };

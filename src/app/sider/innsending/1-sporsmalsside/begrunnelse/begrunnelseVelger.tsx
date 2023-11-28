@@ -2,12 +2,12 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { InnsendingActions } from "../../../../actions/innsending";
 import { Dispatch } from "redux";
-import Select from "nav-frontend-skjema/lib/select";
 import { formatHtmlMessage, formatMessage, hentIntl } from "../../../../utils/intlUtil";
 import { Begrunnelse } from "../../../../types/innsending";
 import { RootState } from "../../../../store/configureStore";
 import { Undertittel } from "nav-frontend-typografi";
 import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
+import { Select } from "@navikt/ds-react";
 
 interface MapStateToProps {
   begrunnelse: Begrunnelse;
@@ -65,11 +65,6 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
           </option>
         ))}
       </Select>
-      {props.erFeil && (
-        <span className={"rodTekst"}>
-          {formatHtmlMessage("begrunnelse.required")}
-        </span>
-      )}
     </div>
   );
 };
