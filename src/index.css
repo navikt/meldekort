@@ -1811,10 +1811,6 @@ body .sentrert-tekst {
   grid-template-rows: minmax(auto, 1fr);
 }
 
-.utfylling-container .uke__tittel {
-  padding-left: 1rem;
-}
-
 .utfylling-container .ukedager--desktop {
   grid-column-start: 2;
   grid-column-end: 3;

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Innholdstittel } from "nav-frontend-typografi";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
-import { EkspanderbartpanelBase } from "nav-frontend-ekspanderbartpanel";
 import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
 
 import sporrende from "../../ikoner/sporrende.svg";
@@ -9,6 +8,7 @@ import { InnsendingActions } from "../../actions/innsending";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
+import { Accordion } from "@navikt/ds-react";
 
 interface SporsmalProps {
   overskriftId: string;
@@ -31,7 +31,6 @@ class OfteStilteSporsmal extends React.Component<
   constructor(props: MapDispatchToProps) {
     super(props);
     this.state = { valgtSporsmalId: 0 };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   sporsmal = (): SporsmalProps[] => {
@@ -64,13 +63,6 @@ class OfteStilteSporsmal extends React.Component<
     ];
   };
 
-  handleClick = (sporsmalId: number) => {
-    this.setState({
-      valgtSporsmalId:
-        this.state.valgtSporsmalId === sporsmalId ? 0 : sporsmalId,
-    });
-  };
-
   hentFormatertOverskrift = (id: string): string => {
     return formatMessage(id);
   };
@@ -92,19 +84,20 @@ class OfteStilteSporsmal extends React.Component<
 
         <img className="oss-ikon" alt="" src={sporrende} />
         <section className="oss-seksjon seksjon">
-          {this.sporsmal().map(sporsmal => {
-            return (
-              <EkspanderbartpanelBase
-                key={sporsmal.id}
-                onClick={() => this.handleClick(sporsmal.id)}
-                border={true}
-                tittel={this.hentFormatertOverskrift(sporsmal.overskriftId)}
-                apen={this.state.valgtSporsmalId === sporsmal.id}
-              >
-                {formatHtmlMessage(sporsmal.tekstId)}
-              </EkspanderbartpanelBase>
-            );
-          })}
+          <Accordion>
+            {this.sporsmal().map(sporsmal => {
+              return (
+                  <Accordion.Item key={sporsmal.id}>
+                    <Accordion.Header>
+                      {this.hentFormatertOverskrift(sporsmal.overskriftId)}
+                    </Accordion.Header>
+                    <Accordion.Content>
+                      {formatHtmlMessage(sporsmal.tekstId)}
+                    </Accordion.Content>
+                  </Accordion.Item>
+              );
+            })}
+          </Accordion>
         </section>
       </main>
     );

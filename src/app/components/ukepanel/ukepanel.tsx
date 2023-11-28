@@ -1,7 +1,5 @@
 import { InnsendingState, SpmSvar, UtfyllingFeil } from "../../types/innsending";
 import * as React from "react";
-import { useState } from "react";
-import { EkspanderbartpanelBase } from "nav-frontend-ekspanderbartpanel";
 import { Ingress, Innholdstittel } from "nav-frontend-typografi";
 import { ukeTekst } from "../../utils/dates";
 import { hentUkedager } from "../../utils/ukedager";
@@ -10,6 +8,7 @@ import Arbeidsrad from "../../sider/innsending/2-utfyllingsside/utfylling/arbeid
 import { RootState } from "../../store/configureStore";
 import { connect } from "react-redux";
 import { FravaerTypeEnum } from "../../types/meldekort";
+import { Accordion } from "@navikt/ds-react";
 
 interface Props {
   ukenummer: number;
@@ -26,9 +25,6 @@ interface MapStateToProps {
 type UkePanelProps = Props & MapStateToProps;
 
 const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
-  const [apen, setApen] = useState(true);
-  const toggle = (previous: boolean) => !previous;
-
   const hentSporsmal = (): SpmSvar[] => {
     return props.innsending.sporsmalsobjekter.map(sporsmalobj => {
       return {
@@ -51,76 +47,72 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
   };
 
   return (
-    <EkspanderbartpanelBase
-      tittel={
-        <div className="uke__tittel">
-          <Innholdstittel tag="h3">{`${ukeTekst()} ${
-            props.faktiskUkeNummer
-          }`}</Innholdstittel>
-          <Ingress>{props.datoTittel}</Ingress>
-        </div>
-      }
-      border={true}
-      apen={apen}
-      onClick={() => setApen(toggle)}
-    >
-      <div className="uke__panel">
-        <div className="ukedager--desktop">{hentUkedager()}</div>
-        {sjekkSporsmal("arbeid") ? (
-          <Arbeidsrad
-            ukeNummer={props.ukenummer}
-            feil={props.utfyllingFeil.feilIArbeid.feil}
-            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
-              .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes(FravaerTypeEnum.ARBEIDS_FRAVAER))}
-            typeYtelsePostfix={props.typeYtelsePostfix}
-            tekstId={"utfylling.arbeid"}
-            forklaringId={"forklaring.utfylling.arbeid"}
-            bareArbeid={
-              !sjekkSporsmal("aktivitetArbeid") &&
-              !sjekkSporsmal("forhindret") &&
-              !sjekkSporsmal("ferieFravar")
-            }
-          />
-        ) : null}
-        {sjekkSporsmal("aktivitetArbeid") ? (
-          <Aktivitetsrad
-            ukeNummer={props.ukenummer}
-            tekstId="utfylling.tiltak"
-            forklaringId={"forklaring.utfylling.tiltak"}
-            typeYtelsePostfix={props.typeYtelsePostfix}
-            feil={props.utfyllingFeil.feilIKurs.feil}
-            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
-              .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes(FravaerTypeEnum.KURS_UTDANNING))}
-          />
-        ) : null}
-        {sjekkSporsmal("forhindret") ? (
-          <Aktivitetsrad
-            ukeNummer={props.ukenummer}
-            tekstId="utfylling.syk"
-            forklaringId={"forklaring.utfylling.syk"}
-            typeYtelsePostfix={props.typeYtelsePostfix}
-            feil={props.utfyllingFeil.feilISyk.feil}
-            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
-              .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes(FravaerTypeEnum.SYKDOM))}
-          />
-        ) : null}
-        {sjekkSporsmal("ferieFravar") ? (
-          <Aktivitetsrad
-            ukeNummer={props.ukenummer}
-            tekstId="utfylling.ferieFravar"
-            forklaringId={"forklaring.utfylling.ferieFravar"}
-            typeYtelsePostfix={props.typeYtelsePostfix}
-            feil={props.utfyllingFeil.feilIFerie.feil}
-            feilIDager={props.utfyllingFeil.feilIDagerHorisontal
-              .concat(props.utfyllingFeil.feilIDagerVertikal)
-              .filter(r => r.rad.includes(FravaerTypeEnum.ANNET_FRAVAER))}
-          />
-        ) : null}
-      </div>
-    </EkspanderbartpanelBase>
+    <Accordion>
+      <Accordion.Item defaultOpen>
+        <Accordion.Header>
+            <Innholdstittel tag="h3">{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Innholdstittel>
+            <Ingress>{props.datoTittel}</Ingress>
+        </Accordion.Header>
+        <Accordion.Content>
+          <div className="uke__panel">
+            <div className="ukedager--desktop">{hentUkedager()}</div>
+            {sjekkSporsmal("arbeid") ? (
+              <Arbeidsrad
+                ukeNummer={props.ukenummer}
+                feil={props.utfyllingFeil.feilIArbeid.feil}
+                feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+                  .concat(props.utfyllingFeil.feilIDagerVertikal)
+                  .filter(r => r.rad.includes(FravaerTypeEnum.ARBEIDS_FRAVAER))}
+                typeYtelsePostfix={props.typeYtelsePostfix}
+                tekstId={"utfylling.arbeid"}
+                forklaringId={"forklaring.utfylling.arbeid"}
+                bareArbeid={
+                  !sjekkSporsmal("aktivitetArbeid") &&
+                  !sjekkSporsmal("forhindret") &&
+                  !sjekkSporsmal("ferieFravar")
+                }
+              />
+            ) : null}
+            {sjekkSporsmal("aktivitetArbeid") ? (
+              <Aktivitetsrad
+                ukeNummer={props.ukenummer}
+                tekstId="utfylling.tiltak"
+                forklaringId={"forklaring.utfylling.tiltak"}
+                typeYtelsePostfix={props.typeYtelsePostfix}
+                feil={props.utfyllingFeil.feilIKurs.feil}
+                feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+                  .concat(props.utfyllingFeil.feilIDagerVertikal)
+                  .filter(r => r.rad.includes(FravaerTypeEnum.KURS_UTDANNING))}
+              />
+            ) : null}
+            {sjekkSporsmal("forhindret") ? (
+              <Aktivitetsrad
+                ukeNummer={props.ukenummer}
+                tekstId="utfylling.syk"
+                forklaringId={"forklaring.utfylling.syk"}
+                typeYtelsePostfix={props.typeYtelsePostfix}
+                feil={props.utfyllingFeil.feilISyk.feil}
+                feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+                  .concat(props.utfyllingFeil.feilIDagerVertikal)
+                  .filter(r => r.rad.includes(FravaerTypeEnum.SYKDOM))}
+              />
+            ) : null}
+            {sjekkSporsmal("ferieFravar") ? (
+              <Aktivitetsrad
+                ukeNummer={props.ukenummer}
+                tekstId="utfylling.ferieFravar"
+                forklaringId={"forklaring.utfylling.ferieFravar"}
+                typeYtelsePostfix={props.typeYtelsePostfix}
+                feil={props.utfyllingFeil.feilIFerie.feil}
+                feilIDager={props.utfyllingFeil.feilIDagerHorisontal
+                  .concat(props.utfyllingFeil.feilIDagerVertikal)
+                  .filter(r => r.rad.includes(FravaerTypeEnum.ANNET_FRAVAER))}
+              />
+            ) : null}
+          </div>
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion>
   );
 };
 
