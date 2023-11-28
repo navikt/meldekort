@@ -1073,27 +1073,6 @@ body .sentrert-tekst {
   }
 }
 
-.uimodal {
-  width: 40rem;
-  min-height: 15rem;
-  position: relative;
-}
-
-.uimodal__content {
-  margin-top: 1rem;
-}
-
-.uimodal__actions {
-  position: absolute;
-  bottom: 1rem;
-}
-
-.uimodal .uimodal__actions-knapp {
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-}
-
 .modal-overskrift h2 {
   margin-bottom: 1rem;
 }
