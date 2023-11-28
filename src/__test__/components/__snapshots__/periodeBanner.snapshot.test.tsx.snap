@@ -6,17 +6,17 @@ exports[`PeriodeBanner 1`] = `
   id="periodebanner"
 >
   <p
-    className="typo-ingress flex-innhold sentrert"
+    className="flex-innhold sentrert navds-body-long navds-body-long--large"
   >
     Meldekort for perioden
   </p>
   <h1
-    className="typo-innholdstittel flex-innhold sentrert"
+    className="flex-innhold sentrert navds-heading navds-heading--large"
   >
     Uke 1 - 1
   </h1>
   <p
-    className="typo-normal flex-innhold sentrert"
+    className="flex-innhold sentrert navds-body-short navds-body-short--medium"
   >
     01.01.2019 - 01.01.2019
   </p>

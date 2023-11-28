@@ -1,8 +1,8 @@
 import * as React from "react";
 import UtvidetInformasjon from "../../utvidetinformasjon/utvidetInformasjon";
-import Undertittel from "nav-frontend-typografi/lib/undertittel";
 import checkMark from "../../../ikoner/check.svg";
 import { formatHtmlMessage } from "../../../utils/intlUtil";
+import { Heading } from "@navikt/ds-react";
 
 interface Props {
   begrunnelse: string;
@@ -15,9 +15,9 @@ const BegrunnelseVisning: React.FunctionComponent<Props> = props => {
       return (
         <section className="begrunnelse">
           <div className="sporsmalstekst">
-            <Undertittel>
+            <Heading size="small">
               {formatHtmlMessage("korrigering.sporsmal.begrunnelse")}
-            </Undertittel>
+            </Heading>
             <UtvidetInformasjon>
               {formatHtmlMessage("forklaring.sporsmal.begrunnelse")}
             </UtvidetInformasjon>

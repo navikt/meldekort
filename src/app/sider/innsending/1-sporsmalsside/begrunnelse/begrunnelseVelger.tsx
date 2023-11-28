@@ -5,9 +5,8 @@ import { Dispatch } from "redux";
 import { formatHtmlMessage, formatMessage, hentIntl } from "../../../../utils/intlUtil";
 import { Begrunnelse } from "../../../../types/innsending";
 import { RootState } from "../../../../store/configureStore";
-import { Undertittel } from "nav-frontend-typografi";
 import UtvidetInformasjon from "../../../../components/utvidetinformasjon/utvidetInformasjon";
-import { Select } from "@navikt/ds-react";
+import { Heading, Select } from "@navikt/ds-react";
 
 interface MapStateToProps {
   begrunnelse: Begrunnelse;
@@ -45,9 +44,9 @@ const BegrunnelseVelger: React.FunctionComponent<Props> = props => {
       <Select
         label={
           <>
-            <Undertittel>
+            <Heading size="small">
               {formatHtmlMessage("korrigering.sporsmal.begrunnelse")}
-            </Undertittel>
+            </Heading>
             <UtvidetInformasjon>
               {formatHtmlMessage("forklaring.sporsmal.begrunnelse" + props.typeYtelsePostfix)}
             </UtvidetInformasjon>

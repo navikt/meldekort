@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Innholdstittel } from "nav-frontend-typografi";
 import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
 import Tabell from "../../components/tabell/desktop/tabell";
 import NavKnapp, { KnappTyper } from "../../components/knapp/navKnapp";
 import { Innsendingstyper } from "../../types/innsending";
 import { Meldekort, MeldekortKolonne, MeldekortRad } from "../../types/meldekort";
+import { Heading } from "@navikt/ds-react";
 
 interface Props {
   nesteAktivtMeldekort: Meldekort;
@@ -21,9 +21,9 @@ function EtterregistreringInnhold({
   return (
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
-        <Innholdstittel>
+        <Heading size="large">
           {formatMessage("overskrift.etterregistrering.innsending")}
-        </Innholdstittel>
+        </Heading>
         <Sprakvelger />
       </section>
       <section className="seksjon">

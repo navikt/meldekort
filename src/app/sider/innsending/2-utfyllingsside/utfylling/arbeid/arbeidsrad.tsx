@@ -6,10 +6,9 @@ import { RootState } from "../../../../../store/configureStore";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { formatHtmlMessage } from "../../../../../utils/intlUtil";
-import { Undertittel } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../../../../actions/innsending";
 import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
-import { TextField } from "@navikt/ds-react";
+import { Heading, TextField } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -126,9 +125,9 @@ class Arbeidsrad extends React.Component<ArbeidsradProps, object> {
           borderBottom: bareArbeid ? "solid 1px #c6c2bf" : "none",
         }}
       >
-        <Undertittel tag="h4" className={"arbeidsrad__tittel"}>
+        <Heading size="small" level="4" className={"arbeidsrad__tittel"}>
           {formatHtmlMessage(tekstId)}
-        </Undertittel>
+        </Heading>
         <UtvidetInformasjon>
           {formatHtmlMessage(forklaringId + typeYtelsePostfix)}
         </UtvidetInformasjon>

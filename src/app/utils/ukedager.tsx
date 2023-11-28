@@ -1,6 +1,6 @@
 import * as React from "react";
 import { formatMessage } from "./intlUtil";
-import Ingress from "nav-frontend-typografi/lib/ingress";
+import { BodyLong } from "@navikt/ds-react";
 
 export const hentUkedagerSomStringListe = (): string[] => {
   return [
@@ -22,11 +22,11 @@ export const konverterUkedag = (index: number): number => {
 export const hentUkedager = () => {
   return hentUkedagerSomStringListe().map((dag, index) => {
     return (
-      <Ingress key={dag + index}>
+      <BodyLong size="large" key={dag + index}>
         <abbr key={"ukedager-" + dag} title={dag}>
           {dag.toUpperCase()[0]}
         </abbr>
-      </Ingress>
+      </BodyLong>
     );
   });
 };

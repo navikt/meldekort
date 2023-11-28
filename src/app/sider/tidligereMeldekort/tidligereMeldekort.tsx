@@ -17,7 +17,6 @@ import { MenyState } from "../../types/meny";
 import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
 import { HistoriskeMeldekortActions } from "../../actions/historiskeMeldekort";
 import { HistoriskeMeldekortState } from "../../reducers/historiskeMeldekortReducer";
-import { Innholdstittel } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../actions/innsending";
 import { mapKortStatusTilTekst } from "../../utils/kortMapper";
 import { HistoriskeMeldekortRad, KortStatus } from "../../types/meldekort";
@@ -29,7 +28,7 @@ import SkrivemodusInfomelding from "../../components/feil/skrivemodusInfomelding
 import { scrollTilElement } from "../../utils/scroll";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { Konstanter } from "../../utils/consts";
-import { Alert, Loader, Tag } from "@navikt/ds-react";
+import { Alert, Heading, Loader, Tag } from "@navikt/ds-react";
 
 interface MapStateToProps {
   historiskeMeldekort: HistoriskeMeldekortState;
@@ -209,9 +208,9 @@ class TidligereMeldekort extends React.Component<Props, State> {
     return (
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel>
+          <Heading size="large">
             {formatHtmlMessage("overskrift.tidligereMeldekort")}
-          </Innholdstittel>
+          </Heading>
           <Sprakvelger />
         </section>
         {this.props.skrivemodus.skrivemodus ? (

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Ingress, Innholdstittel } from "nav-frontend-typografi";
 import NavLogo from "../../ikoner/nav-logo.svg";
 import { RootState } from "../../store/configureStore";
 import { connect } from "react-redux";
 import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
 import classNames from "classnames";
 import { isIE } from "../../utils/browsers";
+import { BodyLong, Heading } from "@navikt/ds-react";
 
 /**
  * Innhold som legges her er skult på skjerm, men vises på utskrift
@@ -40,17 +40,17 @@ const Utskrift: React.FunctionComponent<UtskriftProps> = props => {
       <div className="utskrift__hode">
         <img src={NavLogo} alt="" width="90" height="56" />
         {props.erKvittering ? (
-          <Innholdstittel className="flex-innhold sentrert">
+          <Heading size="large" className="flex-innhold sentrert">
             {printTekst}
-          </Innholdstittel>
+          </Heading>
         ) : (
           <>
-            <Ingress className="flex-innhold sentrert">
+            <BodyLong size="large" className="flex-innhold sentrert">
               {formatHtmlMessage("meldekort.for")}
-            </Ingress>
-            <Innholdstittel className="flex-innhold sentrert">
+            </BodyLong>
+            <Heading size="large" className="flex-innhold sentrert">
               <span>{`${fornavn} ${etternavn} (${fodselsnr})`}</span>
-            </Innholdstittel>
+            </Heading>
           </>
         )}
       </div>

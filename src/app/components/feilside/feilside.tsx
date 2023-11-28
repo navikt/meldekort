@@ -1,15 +1,14 @@
 import * as React from "react";
-import { Innholdstittel } from "nav-frontend-typografi";
 import { formatHtmlMessage } from "../../utils/intlUtil";
-import { Alert } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
 
 class Feilside extends React.Component<object, object> {
   public render() {
     return (
       <main className="sideinnhold">
-        <Innholdstittel className="seksjon flex-innhold sentrert">
+        <Heading size="large" className="seksjon flex-innhold sentrert">
           {formatHtmlMessage("ikke.tilgang.overskrift")}
-        </Innholdstittel>
+        </Heading>
         <section className="seksjon flex-innhold sentrert">
           <Alert variant="error">
             {formatHtmlMessage("ikke.tilgang.tekst")}

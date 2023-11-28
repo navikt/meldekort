@@ -1,11 +1,13 @@
 import * as React from "react";
-import { Undertittel } from "nav-frontend-typografi";
 import { formatHtmlMessage } from "../../utils/intlUtil";
+import { Heading } from "@navikt/ds-react";
 
 export const baksystemFeilmeldingContent = () => {
   return (
     <div>
-      <Undertittel children={formatHtmlMessage("feilmelding.baksystem.overskrift")} />
+      <Heading size="small">
+        {formatHtmlMessage("feilmelding.baksystem.overskrift")}
+      </Heading>
       {formatHtmlMessage("feilmelding.baksystem")}
     </div>
   );

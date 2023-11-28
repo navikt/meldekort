@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Innholdstittel } from "nav-frontend-typografi";
 import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import { Location, RouteProps } from "react-router-dom";
@@ -12,7 +11,6 @@ import { connect } from "react-redux";
 import { Person, PersonInfo } from "../../../types/person";
 import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortdetaljer";
 import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage } from "../../../utils/intlUtil";
-import Ingress from "nav-frontend-typografi/lib/ingress";
 import { formaterDato, formaterUkeOgDatoPeriode, hentTid } from "../../../utils/dates";
 import Environment from "../../../utils/env";
 import PrintKnapp from "../../../components/print/printKnapp";
@@ -27,7 +25,7 @@ import { PersonInfoActions } from "../../../actions/personInfo";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix, TypeYtelse } from "../../../utils/teksterUtil";
 import { Konstanter } from "../../../utils/consts";
-import { Alert, Loader, Panel } from "@navikt/ds-react";
+import { Alert, BodyLong, Heading, Loader, Panel } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -189,7 +187,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
 
     return (
       <div className="oppsummeringsTekster">
-        <Ingress>
+        <BodyLong size="large">
           <span>
             {formatMessage("meldekort.for") +
               personInfo.fornavn +
@@ -199,17 +197,17 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
               personInfo.fodselsnr +
               ")"}
           </span>
-        </Ingress>
-        <Ingress>
+        </BodyLong>
+        <BodyLong size="large">
           <span>
             {formatMessage("meldekort.for.perioden") + ukeOgPeriode}
           </span>
-        </Ingress>
-        <Ingress>
+        </BodyLong>
+        <BodyLong size="large">
           <span>{meldekortErMottatt}</span>
-        </Ingress>
+        </BodyLong>
         {nesteDato && (
-          <Ingress className="noPrint">
+          <BodyLong size="large" className="noPrint">
             <span>
               {formatMessage(
                 "sendt.meldekortKanSendes",
@@ -218,7 +216,7 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
                 }
               )}
             </span>
-          </Ingress>
+          </BodyLong>
         )}
       </div>
     );
@@ -241,9 +239,9 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
         }
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
-          <Innholdstittel tag="h2">
+          <Heading size="large" level="2">
             {formatHtmlMessage("overskrift.steg4")}
-          </Innholdstittel>
+          </Heading>
           <Sprakvelger />
         </section>
         <section className="seksjon">{this.visOppsummeringsTekster()}</section>

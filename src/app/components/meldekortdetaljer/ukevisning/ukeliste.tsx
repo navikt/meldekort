@@ -2,7 +2,7 @@ import * as React from "react";
 import { hentNummerOgDatoForAndreUke, hentNummerOgDatoForForsteUke } from "../../../utils/dates";
 import { hentDagliste } from "./dagliste";
 import { Meldekort, MeldekortDag } from "../../../types/meldekort";
-import Undertittel from "nav-frontend-typografi/lib/undertittel";
+import { Heading } from "@navikt/ds-react";
 
 interface Props {
   aktivtMeldekort: Meldekort;
@@ -22,11 +22,11 @@ const Ukeliste: React.FunctionComponent<Props> = ({
   if (dagListe.length > 0) {
     return (
       <div className="uke">
-        <Undertittel className="uketittel">
+        <Heading size="small" className="uketittel">
           {ukeNr === 1
             ? hentNummerOgDatoForForsteUke(aktivtMeldekort.meldeperiode.fra)
             : hentNummerOgDatoForAndreUke(aktivtMeldekort.meldeperiode.til)}
-        </Undertittel>
+        </Heading>
         <hr className="detaljerborder noPrint" />
         <>{dagListe}</>
       </div>

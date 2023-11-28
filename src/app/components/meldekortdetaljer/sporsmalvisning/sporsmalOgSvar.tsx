@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Undertittel } from "nav-frontend-typografi";
 import checkMark from "../../../ikoner/check.svg";
 import UtvidetInformasjon from "../../utvidetinformasjon/utvidetInformasjon";
 import { formatHtmlMessage } from "../../../utils/intlUtil";
+import { Heading } from "@navikt/ds-react";
 
 interface Props {
   sporsmalOgSvar: {
@@ -30,10 +30,10 @@ const SporsmalOgSvarVisning: React.FunctionComponent<Props> = ({
         return (
           <section key={spm.sporsmal} className="sporsmalsgruppe">
             <div className="sporsmalstekst">
-              <Undertittel tag="h3">
+              <Heading size="small" level="3">
                 {formatHtmlMessage(spm.sporsmal)}
                 {spm.formatertDato ? <span>{spm.formatertDato}?</span> : null}
-              </Undertittel>
+              </Heading>
               <UtvidetInformasjon>
                 {formatHtmlMessage(spm.forklaring)}
               </UtvidetInformasjon>

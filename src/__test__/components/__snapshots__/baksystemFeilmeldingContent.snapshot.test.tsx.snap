@@ -2,7 +2,9 @@
 
 exports[`BaksystemFeilmeldingContent 1`] = `
 <div>
-  <Undertittel>
+  <ForwardRef
+    size="small"
+  >
     <span
       dangerouslySetInnerHTML={
         Object {
@@ -10,7 +12,7 @@ exports[`BaksystemFeilmeldingContent 1`] = `
         }
       }
     />
-  </Undertittel>
+  </ForwardRef>
   <span
     dangerouslySetInnerHTML={
       Object {

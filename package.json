@@ -29,8 +29,6 @@
     "moment": "^2.29.4",
     "nav-frontend-core": "^6.0.1",
     "nav-frontend-js-utils": "^1.0.20",
-    "nav-frontend-typografi": "^4.0.2",
-    "nav-frontend-typografi-style": "^2.0.2",
     "prom-client": "^15.0.0",
     "prop-types": "^15.8.1",
     "ramda": "^0.29.1",

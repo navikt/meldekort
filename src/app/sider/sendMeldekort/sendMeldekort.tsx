@@ -5,7 +5,6 @@ import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
 import { BaksystemFeilmelding } from "../../types/ui";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { Ingress, Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../actions/innsending";
 import { Innsendingstyper } from "../../types/innsending";
 import { Meldekort, MeldekortKolonne, MeldekortRad, SendtMeldekort } from "../../types/meldekort";
@@ -24,7 +23,7 @@ import MeldingOmMeldekortSomIkkeErKlare from "./meldingOmIkkeKlareMeldekort";
 import SendMeldekortInnhold from "./sendMeldekortInnhold";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
 import { formatHtmlMessage } from "../../utils/intlUtil";
-import { Loader } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Heading, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   person: Person;
@@ -63,12 +62,12 @@ function SendMeldekort({
       } else {
         return (
           <div className="send-meldekort-varsel">
-            <Ingress>
+            <BodyLong size="large">
               {formatHtmlMessage("sendMeldekort.info.forMangeMeldekort")}
-            </Ingress>
-            <Normaltekst>
+            </BodyLong>
+            <BodyShort>
               {formatHtmlMessage("sendMeldekort.info.forMangeMeldekort.feilmelding")}
-            </Normaltekst>
+            </BodyShort>
           </div>
         );
       }
@@ -111,11 +110,11 @@ function SendMeldekort({
   return !harKunEttMeldekort(innsendingsklareMeldekort) ? (
     <main className="sideinnhold">
       <section className="seksjon flex-innhold tittel-sprakvelger">
-        <Innholdstittel>
+        <Heading size="large">
           {" "}
           {formatHtmlMessage("overskrift.innsending")}
           {" "}
-        </Innholdstittel>
+        </Heading>
         <Sprakvelger />
       </section>
       <section className="seksjon">

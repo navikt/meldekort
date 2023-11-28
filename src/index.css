@@ -1603,7 +1603,7 @@ body .sentrert-tekst {
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: minmax(auto, auto);
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: -1.5rem;
   grid-row-start: 1;
   grid-row-end: 2;
 }

@@ -3,7 +3,6 @@ import Meldekortdetaljer from "../../../components/meldekortdetaljer/meldekortde
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
 import { connect } from "react-redux";
-import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../../actions/innsending";
 import { InnsendingState, Innsendingstyper } from "../../../types/innsending";
 import { MeldekortdetaljerState } from "../../../reducers/meldekortdetaljerReducer";
@@ -32,7 +31,7 @@ import { UtfyltDag } from "../2-utfyllingsside/utfylling/utfyltDagConfig";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import { Konstanter } from "../../../utils/consts";
-import { Alert, ConfirmationPanel, Loader } from "@navikt/ds-react";
+import { Alert, BodyShort, ConfirmationPanel, Heading, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -333,9 +332,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             )}
           </div>
           <section className="seksjon flex-innhold tittel-sprakvelger">
-            <Innholdstittel tag="h2">
+            <Heading size="large" level="2">
               {formatHtmlMessage("overskrift.steg3")}
-            </Innholdstittel>
+            </Heading>
             <Sprakvelger />
           </section>
           <Meldekortdetaljer
@@ -350,9 +349,9 @@ class Bekreftelse extends React.Component<BekreftelseProps, DetaljerOgFeil> {
             label={formatMessage("utfylling.bekreftAnsvar")}
             error={feilmelding !== ""}
           >
-            <Normaltekst>
+            <BodyShort>
               {formatHtmlMessage("utfylling.bekreft" + typeYtelsePostfix)}
-            </Normaltekst>
+            </BodyShort>
           </ConfirmationPanel>
           <section className="seksjon flex-innhold sentrert">
             <div className={"knapper-container"}>

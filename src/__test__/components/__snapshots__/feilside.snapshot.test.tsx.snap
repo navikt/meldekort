@@ -5,7 +5,7 @@ exports[`Feilside 1`] = `
   className="sideinnhold"
 >
   <h1
-    className="typo-innholdstittel seksjon flex-innhold sentrert"
+    className="seksjon flex-innhold sentrert navds-heading navds-heading--large"
   >
     <span
       dangerouslySetInnerHTML={

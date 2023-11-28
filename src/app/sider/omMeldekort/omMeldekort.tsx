@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
 import { InnsendingActions } from "../../actions/innsending";
 import { connect } from "react-redux";
@@ -11,7 +10,7 @@ import { MenyState } from "../../types/meny";
 import { RootState } from "../../store/configureStore";
 import { scrollTilElement } from "../../utils/scroll";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
-import { GuidePanel } from "@navikt/ds-react";
+import { BodyLong, GuidePanel, Heading } from "@navikt/ds-react";
 
 interface MapStateToProps {
   meny: MenyState;
@@ -40,28 +39,28 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
     return (
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel>
+          <Heading size="large">
             {formatHtmlMessage("overskrift.genereltOmMeldekort")}
-          </Innholdstittel>
+          </Heading>
           <Sprakvelger />
         </section>
         <GuidePanel poster>
           <section className="seksjon">
-            <Normaltekst>
+            <BodyLong>
               {formatHtmlMessage("genereltOmMeldekort.velkommen")}
-            </Normaltekst>
-            <Normaltekst>
+            </BodyLong>
+            <BodyLong>
               {formatHtmlMessage("genereltOmMeldekort.velge")}
-            </Normaltekst>
-            <ul>
-              <li>
-                {formatHtmlMessage("genereltOmMeldekort.valg.sende")}
-              </li>
-              <li>
-                {formatHtmlMessage("genereltOmMeldekort.valg.tidligere")}
-              </li>
-            </ul>
-            <Normaltekst>
+              <ul>
+                <li>
+                  {formatHtmlMessage("genereltOmMeldekort.valg.sende")}
+                </li>
+                <li>
+                  {formatHtmlMessage("genereltOmMeldekort.valg.tidligere")}
+                </li>
+              </ul>
+            </BodyLong>
+            <BodyLong>
               {formatHtmlMessage(
                 "genereltOmMeldekort.om.meldekort",
                 {
@@ -69,10 +68,10 @@ class OmMeldekort extends React.Component<MapDispatchToProps & MapStateToProps, 
                   1: formatMessage("genereltOmMeldekort.informasjonOmMeldekortLink").trim(),
                 }
               )}
-            </Normaltekst>
-            <Normaltekst>
+            </BodyLong>
+            <BodyLong>
               {formatHtmlMessage("genereltOmMeldekort.oss")}
-            </Normaltekst>
+            </BodyLong>
           </section>
         </GuidePanel>
       </main>

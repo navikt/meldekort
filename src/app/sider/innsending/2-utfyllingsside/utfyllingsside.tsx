@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Innholdstittel } from "nav-frontend-typografi";
 import Sprakvelger from "../../../components/sprakvelger/sprakvelger";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
 import { hentDatoForAndreUke, hentDatoForForsteUke, hentUkenummerForDato } from "../../../utils/dates";
@@ -18,7 +17,7 @@ import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
 import { Navigate } from "react-router-dom";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
-import { Alert, Loader } from "@navikt/ds-react";
+import { Alert, Heading, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -360,9 +359,9 @@ class Utfyllingsside extends React.Component<
           id="tittel"
           className="seksjon flex-innhold tittel-sprakvelger"
         >
-          <Innholdstittel tag="h2">
+          <Heading size="large" level="2">
             {formatHtmlMessage("overskrift.steg2")}
-          </Innholdstittel>
+          </Heading>
           <Sprakvelger />
         </section>
         <section className="seksjon">

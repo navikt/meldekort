@@ -6,10 +6,9 @@ import { RootState } from "../../../../../store/configureStore";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { formatHtmlMessage } from "../../../../../utils/intlUtil";
-import { Undertittel } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../../../../actions/innsending";
 import UtvidetInformasjon from "../../../../../components/utvidetinformasjon/utvidetInformasjon";
-import { Checkbox } from "@navikt/ds-react";
+import { Checkbox, Heading } from "@navikt/ds-react";
 
 interface MapStateToProps {
   innsending: InnsendingState;
@@ -142,9 +141,9 @@ class Aktivitetsrad extends React.Component<AktivitetsradProps, object> {
     const { tekstId, typeYtelsePostfix, forklaringId } = this.props;
     return (
       <div className="aktivitetsrad" style={this.hentFarge()}>
-        <Undertittel tag="h4" className={"aktivitetsrad__tittel"}>
+        <Heading size="small" level="4" className={"aktivitetsrad__tittel"}>
           {formatHtmlMessage(tekstId)}
-        </Undertittel>
+        </Heading>
         <UtvidetInformasjon>
           {formatHtmlMessage(forklaringId + typeYtelsePostfix)}
         </UtvidetInformasjon>

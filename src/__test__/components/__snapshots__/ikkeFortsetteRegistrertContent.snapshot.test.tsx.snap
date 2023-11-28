@@ -10,7 +10,7 @@ exports[`ikkeFortsetteRegistrertContent 1`] = `
     <div
       className="modal-tekst"
     >
-      <Normaltekst>
+      <ForwardRef>
         <span
           dangerouslySetInnerHTML={
             Object {
@@ -18,7 +18,7 @@ exports[`ikkeFortsetteRegistrertContent 1`] = `
             }
           }
         />
-      </Normaltekst>
+      </ForwardRef>
     </div>
   </ForwardRef>
 </div>

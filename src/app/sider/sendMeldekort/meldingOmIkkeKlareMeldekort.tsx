@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Meldekort, MeldekortRad } from "../../types/meldekort";
 import { Person } from "../../types/person";
-import { Element, Normaltekst } from "nav-frontend-typografi";
 import { formaterDato, formaterUkeOgDatoPeriode } from "../../utils/dates";
 import { harKortStatusOPPRellerSENDT } from "../../utils/meldekortUtils";
 import { formatHtmlMessage } from "../../utils/intlUtil";
-import { GuidePanel } from "@navikt/ds-react";
+import { BodyShort, GuidePanel, Label } from "@navikt/ds-react";
 
 interface Props {
   rows: MeldekortRad[];
@@ -71,19 +70,19 @@ function MeldingOmMeldekortSomIkkeErKlare({
       ) {
         return (
           <>
-            <Normaltekst>
+            <BodyShort>
               {formatHtmlMessage("overskrift.nesteMeldekort")}
               {formatHtmlMessage("sendMeldekort.info.innsendingStatus.kanSendes")}
               {formaterDato(
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.kortKanSendesFra
               )}
-            </Normaltekst>
-            <Element>
+            </BodyShort>
+            <Label>
               {formaterUkeOgDatoPeriode(
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.fra,
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.til
               )}
-            </Element>
+            </Label>
             {formatHtmlMessage("sendMeldekort.info.ingenKlare")}
           </>
         );

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Innholdstittel } from "nav-frontend-typografi";
 import Sprakvelger from "../../components/sprakvelger/sprakvelger";
 import { formatHtmlMessage, formatMessage } from "../../utils/intlUtil";
 
@@ -8,7 +7,7 @@ import { InnsendingActions } from "../../actions/innsending";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { loggAktivitet } from "../../utils/amplitudeUtils";
-import { Accordion } from "@navikt/ds-react";
+import { Accordion, Heading } from "@navikt/ds-react";
 
 interface SporsmalProps {
   overskriftId: string;
@@ -76,9 +75,9 @@ class OfteStilteSporsmal extends React.Component<
     return (
       <main className="sideinnhold">
         <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel>
+          <Heading size="large">
             {formatHtmlMessage("overskrift.ofteStilteSporsmal")}
-          </Innholdstittel>
+          </Heading>
           <Sprakvelger />
         </section>
 

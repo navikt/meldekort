@@ -9,13 +9,13 @@ import { MenyActions } from "../../actions/meny";
 import { MenyPunkt } from "../../utils/menyConfig";
 import { MenyState } from "../../types/meny";
 import { RootState } from "../../store/configureStore";
-import { Sidetittel } from "nav-frontend-typografi";
 import MobilMenyToggle from "../meny/mobil/mobilmenyToggle";
 import { isEmpty } from "ramda";
 import classNames from "classnames";
 import { isIE, isOldChrome, isOldEdge, isOldFirefox, isOldIE, isOldSafari } from "../../utils/browsers";
 import GammelNettleserMelding from "../gammelNetteleserMelding/gammelNettleserMelding";
 import { useLocation } from "react-router-dom";
+import { Heading } from "@navikt/ds-react";
 
 interface MapStateToProps {
   meny: MenyState;
@@ -90,7 +90,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
         <div className="banner__container">
           <div className="banner__content">
             <div className={"banner__title"}>
-              <Sidetittel>{tittel}</Sidetittel>
+              <Heading size="xlarge">{tittel}</Heading>
             </div>
             <MobilMenyToggle />
           </div>

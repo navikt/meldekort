@@ -12,7 +12,6 @@ import { downloadMessagesAndDispatch, formatHtmlMessage, formatMessage, hentLoca
 import { RootState } from "../../../store/configureStore";
 import { ikkeFortsetteRegistrertContent } from "../../../components/modal/ikkeFortsetteRegistrertContent";
 import { IModal, ModalKnapp } from "../../../types/ui";
-import { Innholdstittel } from "nav-frontend-typografi";
 import { InnsendingActions } from "../../../actions/innsending";
 import { Infomelding, Meldekort, SendtMeldekort } from "../../../types/meldekort";
 import { Navigate } from "react-router-dom";
@@ -25,7 +24,7 @@ import { loggAktivitet } from "../../../utils/amplitudeUtils";
 import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
 import { Konstanter } from "../../../utils/consts";
 import { useNavigate } from "react-router";
-import { Alert, GuidePanel, Loader } from "@navikt/ds-react";
+import { Alert, GuidePanel, Heading, Loader } from "@navikt/ds-react";
 
 interface MapStateToProps {
   aktivtMeldekort: Meldekort;
@@ -391,9 +390,9 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           ) : null}
         </section>
         <section className="seksjon flex-innhold tittel-sprakvelger">
-          <Innholdstittel tag="h2">
+          <Heading size="large" level="2">
             {formatHtmlMessage("overskrift.steg1")}
-          </Innholdstittel>
+          </Heading>
           <Sprakvelger />
         </section>
         <section className="seksjon">

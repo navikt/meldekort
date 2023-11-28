@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Meldekort, MeldekortKolonne, MeldekortRad } from "../../types/meldekort";
 import Tabell from "../../components/tabell/desktop/tabell";
-import { Normaltekst } from "nav-frontend-typografi";
 import NavKnapp, { KnappTyper } from "../../components/knapp/navKnapp";
 import { Innsendingstyper } from "../../types/innsending";
 import { BaksystemFeilmelding } from "../../types/ui";
 import { formatHtmlMessage } from "../../utils/intlUtil";
+import { BodyShort } from "@navikt/ds-react";
 
 interface Props {
   rows: MeldekortRad[];
@@ -30,15 +30,15 @@ function InnsendingsTabell({
       </section>
       <section className="seksjon">
         <div className="box">
-          <Normaltekst>
+          <BodyShort>
             {formatHtmlMessage("sendMeldekort.info.neste")}
-          </Normaltekst>
-          <Normaltekst>
+          </BodyShort>
+          <BodyShort>
             {formatHtmlMessage("sendMeldekort.info.eldstePerioden")}
-          </Normaltekst>
-          <Normaltekst>
+          </BodyShort>
+          <BodyShort>
             {formatHtmlMessage("sendMeldekort.info.automatiskLedet")}
-          </Normaltekst>
+          </BodyShort>
         </div>
       </section>
       <section className="seksjon flex-innhold sentrert">

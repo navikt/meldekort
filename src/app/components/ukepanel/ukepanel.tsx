@@ -1,6 +1,5 @@
 import { InnsendingState, SpmSvar, UtfyllingFeil } from "../../types/innsending";
 import * as React from "react";
-import { Ingress, Innholdstittel } from "nav-frontend-typografi";
 import { ukeTekst } from "../../utils/dates";
 import { hentUkedager } from "../../utils/ukedager";
 import Aktivitetsrad from "../../sider/innsending/2-utfyllingsside/utfylling/aktivitet/aktivitetsrad";
@@ -8,7 +7,7 @@ import Arbeidsrad from "../../sider/innsending/2-utfyllingsside/utfylling/arbeid
 import { RootState } from "../../store/configureStore";
 import { connect } from "react-redux";
 import { FravaerTypeEnum } from "../../types/meldekort";
-import { Accordion } from "@navikt/ds-react";
+import { Accordion, BodyShort, Heading } from "@navikt/ds-react";
 
 interface Props {
   ukenummer: number;
@@ -50,8 +49,8 @@ const UkePanel: React.FunctionComponent<UkePanelProps> = props => {
     <Accordion>
       <Accordion.Item defaultOpen>
         <Accordion.Header>
-            <Innholdstittel tag="h3">{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Innholdstittel>
-            <Ingress>{props.datoTittel}</Ingress>
+            <Heading size="large" level="3">{`${ukeTekst()} ${props.faktiskUkeNummer}`}</Heading>
+            <BodyShort>{props.datoTittel}</BodyShort>
         </Accordion.Header>
         <Accordion.Content>
           <div className="uke__panel">
