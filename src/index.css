@@ -147,6 +147,7 @@ body
   grid-row-start: 1;
   grid-row-end: 2;
   justify-self: end;
+  padding-top: 0.7rem;
 }
 
 body
