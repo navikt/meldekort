@@ -16,7 +16,7 @@
     "korrigerbart": true
   },
   {
-    "meldekortId": 1111111111,
+    "meldekortId": 1111111112,
     "kortType": "ELEKTRONISK",
     "meldeperiode": {
       "fra": "2018-12-17T12:00:00+01:00",
@@ -31,7 +31,7 @@
     "korrigerbart": true
   },
   {
-    "meldekortId": 1111111111,
+    "meldekortId": 1111111113,
     "kortType": "ELEKTRONISK",
     "meldeperiode": {
       "fra": "2018-12-31T12:00:00+01:00",
@@ -47,7 +47,7 @@
     "korrigerbart": false
   },
   {
-    "meldekortId": 1111111111,
+    "meldekortId": 1111111114,
     "kortType": "KORRIGERT_ELEKTRONISK",
     "meldeperiode": {
       "fra": "2018-12-31T12:00:00+01:00",
