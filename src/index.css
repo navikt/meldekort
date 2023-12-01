@@ -353,6 +353,7 @@ body .sentrert-tekst {
     .knapper-container.lang-knapper
     .navigasjonsknapp {
     min-width: 140px;
+    text-align: center;
   }
 
   body
@@ -955,6 +956,8 @@ body .sentrert-tekst {
 
 .mobilmeny__lenke:focus {
   color: white;
+  background-color: #00347d;
+  box-shadow: 0 0 0 2px #00347d;
 }
 
 .mobilmeny__lenke:focus:after {
