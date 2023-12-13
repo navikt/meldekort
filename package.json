@@ -9,7 +9,7 @@
     "@navikt/ds-react": "^5.11.2",
     "@navikt/nav-dekoratoren-moduler": "^2.1.4",
     "@redux-devtools/core": "^3.14.0",
-    "@redux-devtools/extension": "^3.2.6",
+    "@redux-devtools/extension": "^3.3.0",
     "amplitude-js": "^8.21.9",
     "axios": "^1.6.2",
     "bowser": "^2.11.0",
