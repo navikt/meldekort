@@ -58,7 +58,7 @@ jobs:
 
       - name: Deploy release to dev or prod
         if: env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'q2' || env.ENVIRONMENT == 'p'
-        uses: nais/deploy/actions/deploy@v1
+        uses: nais/deploy/actions/deploy@v2
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           PRINT_PAYLOAD: true

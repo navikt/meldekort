@@ -114,7 +114,7 @@ jobs:
 
       - name: Deploy to dev
         if: env.ENVIRONMENT == 'q1' || env.ENVIRONMENT == 'q2' || (github.event_name == 'push' && github.ref == env.MAIN_BRANCH)
-        uses: nais/deploy/actions/deploy@v1
+        uses: nais/deploy/actions/deploy@v2
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           PRINT_PAYLOAD: true
