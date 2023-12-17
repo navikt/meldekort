@@ -20,7 +20,7 @@
     "lodash.throttle": "^4.1.1",
     "moment": "^2.29.4",
     "nav-frontend-js-utils": "^1.0.20",
-    "prom-client": "^15.0.0",
+    "prom-client": "^15.1.0",
     "prop-types": "^15.8.1",
     "ramda": "^0.29.1",
     "react": "^17.0.2",
