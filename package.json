@@ -18,7 +18,7 @@
     "express": "^4.18.2",
     "express-prom-bundle": "^6.6.0",
     "lodash.throttle": "^4.1.1",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "nav-frontend-js-utils": "^1.0.20",
     "prom-client": "^15.1.0",
     "prop-types": "^15.8.1",
