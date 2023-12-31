@@ -64,7 +64,7 @@
     "@types/jest": "^29.5.11",
     "@types/ramda": "^0.29.9",
     "@types/react": "^17.0.71",
-    "@types/react-aria-menubutton": "^6.2.13",
+    "@types/react-aria-menubutton": "^6.2.14",
     "@types/react-collapse": "^5.0.4",
     "@types/react-dom": "^17.0.25",
     "@types/react-intl-redux": "^0.1.19",
