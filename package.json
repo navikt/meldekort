@@ -11,7 +11,7 @@
     "@redux-devtools/core": "^4.0.0",
     "@redux-devtools/extension": "^3.3.0",
     "amplitude-js": "^8.21.9",
-    "axios": "^1.6.2",
+    "axios": "^1.6.5",
     "bowser": "^2.11.0",
     "classnames": "^2.3.2",
     "compression": "^1.7.4",
