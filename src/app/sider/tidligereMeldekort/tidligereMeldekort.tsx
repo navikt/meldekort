@@ -7,8 +7,7 @@ import UIAlertstripeWrapper from "../../components/feil/UIAlertstripeWrapper";
 import { BaksystemFeilmelding, IngenTidligereMeldekort } from "../../types/ui";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { finnRiktigTagVariant } from "../../utils/statusEtikettUtil";
-import { formaterBelop } from "../../utils/numberFormat";
+import { finnRiktigBeloepVariant, finnRiktigTagVariant } from "../../utils/statusEtikettUtil";
 import { formaterDato, hentDatoPeriode, hentUkePeriode } from "../../utils/dates";
 import { MenyPunkt } from "../../utils/menyConfig";
 import { MenyActions } from "../../actions/meny";
@@ -80,7 +79,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
             ? ""
             : formaterDato(meldekort.mottattDato),
         status: meldekort.kortStatus,
-        bruttobelop: formaterBelop(meldekort.bruttoBelop),
+        bruttobelop: finnRiktigBeloepVariant(meldekort.kortStatus, meldekort.bruttoBelop),
         detaljer: formatMessage("overskrift.detaljer"),
       });
     });
