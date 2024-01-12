@@ -4,7 +4,7 @@ import PeriodeBanner from "../../../components/periodeBanner/periodeBanner";
 import Tabell from "../../../components/tabell/desktop/tabell";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { finnRiktigBeloepVariant, finnRiktigTagVariant } from "../../../utils/statusEtikettUtil";
+import { finnRiktigTagVariant } from "../../../utils/statusEtikettUtil";
 import { formaterDato } from "../../../utils/dates";
 import { RootState } from "../../../store/configureStore";
 import { mapKortStatusTilTekst, mapKortTypeTilTekst } from "../../../utils/kortMapper";
@@ -12,7 +12,8 @@ import { MeldekortdetaljerActions } from "../../../actions/meldekortdetaljer";
 import { MeldekortdetaljerState } from "../../../reducers/meldekortdetaljerReducer";
 import utklippstavle from "../../../ikoner/utklippstavle.svg";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
-import { DetaljRad, Meldekort, MeldekortKolonne } from "../../../types/meldekort";
+import { DetaljRad, KortStatus, Meldekort, MeldekortKolonne } from "../../../types/meldekort";
+import { formaterBelop } from "../../../utils/numberFormat";
 import { Innsendingstyper } from "../../../types/innsending";
 import PrintKnapp from "../../../components/print/printKnapp";
 import MobilTabell from "../../../components/tabell/mobil/mobilTabell";
@@ -64,7 +65,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
       meldekortid: meldekort.meldekortId,
       mottattDato: formaterDato(meldekort.mottattDato),
       kortStatus: meldekort.kortStatus,
-      bruttoBelop: finnRiktigBeloepVariant(meldekort.kortStatus, meldekort.bruttoBelop),
+      bruttoBelop: (meldekort.kortStatus === KortStatus.FERDI) ? formaterBelop(meldekort.bruttoBelop) : "",
       kortType: mapKortTypeTilTekst(meldekort.kortType),
     };
   };
