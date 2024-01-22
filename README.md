@@ -20,9 +20,6 @@ språk og gyldighetstid på nytt i løpet av 30 minutter.
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjekt rettes til:
 
-* Igor Shuliakov, igor.shuliakov@nav.no
-* Audun Persson, audun.persson@nav.no
-* Petter Hannevold, petter.hannevold@nav.no
 * Mona Kjeldsrud, mona.kjeldsrud@nav.no
 
 ## For NAV-ansatte
