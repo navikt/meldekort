@@ -19,7 +19,7 @@ import { HistoriskeMeldekortActions } from "../../actions/historiskeMeldekort";
 import { HistoriskeMeldekortState } from "../../reducers/historiskeMeldekortReducer";
 import { InnsendingActions } from "../../actions/innsending";
 import { mapKortStatusTilTekst } from "../../utils/kortMapper";
-import { HistoriskeMeldekortRad, KortStatus } from "../../types/meldekort";
+import { HistoriskeMeldekortRad, KortStatus, KortType } from "../../types/meldekort";
 import { RootState } from "../../store/configureStore";
 import { selectFeilmelding, selectIngenTidligereMeldekort } from "../../selectors/ui";
 import { SkrivemodusActions } from "../../actions/skrivemodus";
@@ -65,6 +65,8 @@ class TidligereMeldekort extends React.Component<Props, State> {
     const radliste: HistoriskeMeldekortRad[] = [];
 
     this.props.historiskeMeldekort.historiskeMeldekort.forEach(meldekort => {
+      const visBruttoBelop = meldekort.kortStatus === KortStatus.FERDI && meldekort.kortType !== KortType.KORRIGERT_ELEKTRONISK
+
       radliste.push({
         meldekort: meldekort,
         periode: hentUkePeriode(
@@ -80,7 +82,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
             ? ""
             : formaterDato(meldekort.mottattDato),
         status: meldekort.kortStatus,
-        bruttobelop: (meldekort.kortStatus === KortStatus.FERDI) ? formaterBelop(meldekort.bruttoBelop) : "",
+        bruttobelop: visBruttoBelop ? formaterBelop(meldekort.bruttoBelop) : "",
         detaljer: formatMessage("overskrift.detaljer"),
       });
     });
