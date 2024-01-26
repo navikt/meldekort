@@ -232,11 +232,9 @@ class Kvittering extends React.Component<KvitteringsProps, object> {
           {formatHtmlMessage("overskrift.meldekort.sendt")}
         </Alert>
 
-        {(typeYtelsePostfix === TypeYtelse.DAGPENGER || typeYtelsePostfix === TypeYtelse.AAP) &&
-          <Panel border className={"alertSendt"}>
-            {formatHtmlMessage("sendt.klagerettigheterInfo" + typeYtelsePostfix)}
-          </Panel>
-        }
+        <Panel border className={"alertSendt"}>
+          {formatHtmlMessage("sendt.klagerettigheterInfo" + typeYtelsePostfix)}
+        </Panel>
 
         <section className="seksjon flex-innhold tittel-sprakvelger noPrint">
           <Heading size="large" level="2">

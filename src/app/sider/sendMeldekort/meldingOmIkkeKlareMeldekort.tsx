@@ -83,7 +83,7 @@ function MeldingOmMeldekortSomIkkeErKlare({
                 meldekortSomIkkeKanSendesEnda[0].meldeperiode.til
               )}
             </Label>
-            {formatHtmlMessage("sendMeldekort.info.ingenKlare")}
+            <BodyShort>{formatHtmlMessage("sendMeldekort.info.ingenKlare")}</BodyShort>
           </>
         );
       } else {
