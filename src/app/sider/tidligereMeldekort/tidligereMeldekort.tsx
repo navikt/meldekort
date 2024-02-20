@@ -19,7 +19,7 @@ import { HistoriskeMeldekortActions } from "../../actions/historiskeMeldekort";
 import { HistoriskeMeldekortState } from "../../reducers/historiskeMeldekortReducer";
 import { InnsendingActions } from "../../actions/innsending";
 import { mapKortStatusTilTekst } from "../../utils/kortMapper";
-import { HistoriskeMeldekortRad, KortStatus, KortType } from "../../types/meldekort";
+import { HistoriskeMeldekortRad, KortStatus } from "../../types/meldekort";
 import { RootState } from "../../store/configureStore";
 import { selectFeilmelding, selectIngenTidligereMeldekort } from "../../selectors/ui";
 import { SkrivemodusActions } from "../../actions/skrivemodus";
@@ -65,7 +65,7 @@ class TidligereMeldekort extends React.Component<Props, State> {
     const radliste: HistoriskeMeldekortRad[] = [];
 
     this.props.historiskeMeldekort.historiskeMeldekort.forEach(meldekort => {
-      const visBruttoBelop = meldekort.kortStatus === KortStatus.FERDI && meldekort.kortType !== KortType.KORRIGERT_ELEKTRONISK
+      const visBruttoBelop = meldekort.kortStatus === KortStatus.FERDI
 
       radliste.push({
         meldekort: meldekort,
@@ -124,8 +124,8 @@ class TidligereMeldekort extends React.Component<Props, State> {
         label: formatHtmlMessage("overskrift.status"),
         cell: function(row: HistoriskeMeldekortRad) { // (row: any, columnKey: any)
           return (
-            <Tag variant={finnRiktigTagVariant(row.status)}>
-              {mapKortStatusTilTekst(row.status)}
+            <Tag variant={finnRiktigTagVariant(row.status, row.meldekort.kortType)}>
+              {mapKortStatusTilTekst(row.status, row.meldekort.kortType)}
             </Tag>
           );
         },

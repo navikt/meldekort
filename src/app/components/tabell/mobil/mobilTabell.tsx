@@ -1,7 +1,7 @@
 import * as React from "react";
 import { finnRiktigTagVariant } from "../../../utils/statusEtikettUtil";
 import Komponentlenke from "../../komponentlenke/komponentlenke";
-import { DetaljRad, HistoriskeMeldekortRad, MeldekortKolonne } from "../../../types/meldekort";
+import { DetaljRad, HistoriskeMeldekortRad, KortType, MeldekortKolonne } from "../../../types/meldekort";
 import { mapKortStatusTilTekst } from "../../../utils/kortMapper";
 import { Konstanter } from "../../../utils/consts";
 import { Tag } from "@navikt/ds-react";
@@ -23,8 +23,8 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     for (const i in rowData) {
       if (i === header.key && header.key === "status") {
         tableData = (
-          <Tag variant={finnRiktigTagVariant(rowData[i])}>
-            {mapKortStatusTilTekst(rowData[i])}
+          <Tag variant={finnRiktigTagVariant(rowData[i], rowData.meldekort.kortType)}>
+            {mapKortStatusTilTekst(rowData[i], rowData.meldekort.kortType)}
           </Tag>
         );
       } else if (
@@ -60,8 +60,8 @@ const MobilTabell: React.FunctionComponent<MobilTabellProps> = props => {
     for (const i in rowData) {
       if (i === header.key && header.key === "kortStatus") {
         tableData = (
-          <Tag variant={finnRiktigTagVariant(rowData[i])}>
-            {mapKortStatusTilTekst(rowData[i])}
+          <Tag variant={finnRiktigTagVariant(rowData[i], KortType[rowData.kortType])}>
+            {mapKortStatusTilTekst(rowData[i], KortType[rowData.kortType])}
           </Tag>
         );
       } else if (i === header.key) {

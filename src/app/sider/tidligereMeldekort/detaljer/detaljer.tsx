@@ -12,7 +12,7 @@ import { MeldekortdetaljerActions } from "../../../actions/meldekortdetaljer";
 import { MeldekortdetaljerState } from "../../../reducers/meldekortdetaljerReducer";
 import utklippstavle from "../../../ikoner/utklippstavle.svg";
 import NavKnapp, { KnappTyper } from "../../../components/knapp/navKnapp";
-import { DetaljRad, KortStatus, KortType, Meldekort, MeldekortKolonne } from "../../../types/meldekort";
+import { DetaljRad, KortStatus, Meldekort, MeldekortKolonne } from "../../../types/meldekort";
 import { formaterBelop } from "../../../utils/numberFormat";
 import { Innsendingstyper } from "../../../types/innsending";
 import PrintKnapp from "../../../components/print/printKnapp";
@@ -61,7 +61,7 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
   }
 
   settTabellrader = (meldekort: Meldekort): DetaljRad => {
-    const visBruttoBelop = meldekort.kortStatus === KortStatus.FERDI && meldekort.kortType !== KortType.KORRIGERT_ELEKTRONISK
+    const visBruttoBelop = meldekort.kortStatus === KortStatus.FERDI
 
     return {
       meldekortid: meldekort.meldekortId,
@@ -129,8 +129,8 @@ class Detaljer extends React.Component<Props, { windowSize: number }> {
         label: formatHtmlMessage("overskrift.status"),
         cell: function(row: DetaljRad) { // (row: any, columnKey: any)
           return (
-            <Tag variant={finnRiktigTagVariant(row.kortStatus)}>
-              {mapKortStatusTilTekst(row.kortStatus)}
+            <Tag variant={finnRiktigTagVariant(row.kortStatus, aktivtMeldekort.kortType)}>
+              {mapKortStatusTilTekst(row.kortStatus, aktivtMeldekort.kortType)}
             </Tag>
           );
         },

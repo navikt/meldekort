@@ -1,7 +1,9 @@
 import { KortStatus, KortType } from "../types/meldekort";
 import { formatMessage } from "./intlUtil";
 
-export const mapKortStatusTilTekst = (status: KortStatus) => {
+export const mapKortStatusTilTekst = (status: KortStatus, kortType: KortType) => {
+  if (kortType === KortType.KORRIGERT_ELEKTRONISK) return formatMessage("meldekort.type.korrigert");
+
   switch (status) {
     case KortStatus.OPPRE:
       return formatMessage("meldekort.status.oppr");

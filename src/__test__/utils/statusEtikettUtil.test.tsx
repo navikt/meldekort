@@ -1,41 +1,45 @@
 import { finnRiktigTagVariant } from "../../app/utils/statusEtikettUtil";
-import { KortStatus } from "../../app/types/meldekort";
+import { KortStatus, KortType } from "../../app/types/meldekort";
 
 it("finnRiktigEtikettKlasse", () => {
-  expect(finnRiktigTagVariant(KortStatus.KLAR)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.KLAR, KortType.AAP)).toBe(
     "warning"
   );
 
-  expect(finnRiktigTagVariant(KortStatus.REGIS)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.REGIS, KortType.AAP)).toBe(
     "info"
   );
-  expect(finnRiktigTagVariant(KortStatus.NYKTR)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.NYKTR, KortType.AAP)).toBe(
     "info"
   );
-  expect(finnRiktigTagVariant(KortStatus.UBEHA)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.UBEHA, KortType.AAP)).toBe(
     "info"
   );
 
-  expect(finnRiktigTagVariant(KortStatus.FERDI)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.FERDI, KortType.AAP)).toBe(
     "success"
   );
-  expect(finnRiktigTagVariant(KortStatus.IKKE)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.IKKE, KortType.AAP)).toBe(
     "success"
   );
-  expect(finnRiktigTagVariant(KortStatus.OVERM)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.OVERM, KortType.AAP)).toBe(
     "success"
   );
 
-  expect(finnRiktigTagVariant(KortStatus.FEIL)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.FEIL, KortType.AAP)).toBe(
     "error"
   );
-  expect(finnRiktigTagVariant(KortStatus.VENTE)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.VENTE, KortType.AAP)).toBe(
     "error"
   );
-  expect(finnRiktigTagVariant(KortStatus.FMOPP)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.FMOPP, KortType.AAP)).toBe(
     "error"
   );
-  expect(finnRiktigTagVariant(KortStatus.FUOPP)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.FUOPP, KortType.AAP)).toBe(
     "error"
+  );
+
+  expect(finnRiktigTagVariant(KortStatus.FUOPP, KortType.KORRIGERT_ELEKTRONISK)).toBe(
+    "alt3"
   );
 });

@@ -9,17 +9,18 @@ const behandling = "Under behandling ";
 setLocalesBeforeAll();
 
 it("mapKortStatusTilTekst", () => {
-  expect(mapKortStatusTilTekst(KortStatus.FEIL)).toBe(feilet);
-  expect(mapKortStatusTilTekst(KortStatus.FERDI)).toBe(ferdig);
-  expect(mapKortStatusTilTekst(KortStatus.FMOPP)).toBe(feilet);
-  expect(mapKortStatusTilTekst(KortStatus.FUOPP)).toBe(feilet);
-  expect(mapKortStatusTilTekst(KortStatus.IKKE)).toBe(ferdig);
-  expect(mapKortStatusTilTekst(KortStatus.KLAR)).toBe("Klar til behandling ");
-  expect(mapKortStatusTilTekst(KortStatus.NYKTR)).toBe(behandling);
-  expect(mapKortStatusTilTekst(KortStatus.OVERM)).toBe(ferdig);
-  expect(mapKortStatusTilTekst(KortStatus.REGIS)).toBe(behandling);
-  expect(mapKortStatusTilTekst(KortStatus.UBEHA)).toBe(behandling);
-  expect(mapKortStatusTilTekst(KortStatus.VENTE)).toBe(feilet);
+  expect(mapKortStatusTilTekst(KortStatus.FEIL, KortType.AAP)).toBe(feilet);
+  expect(mapKortStatusTilTekst(KortStatus.FERDI, KortType.AAP)).toBe(ferdig);
+  expect(mapKortStatusTilTekst(KortStatus.FMOPP, KortType.AAP)).toBe(feilet);
+  expect(mapKortStatusTilTekst(KortStatus.FUOPP, KortType.AAP)).toBe(feilet);
+  expect(mapKortStatusTilTekst(KortStatus.IKKE, KortType.AAP)).toBe(ferdig);
+  expect(mapKortStatusTilTekst(KortStatus.KLAR, KortType.AAP)).toBe("Klar til behandling ");
+  expect(mapKortStatusTilTekst(KortStatus.NYKTR, KortType.AAP)).toBe(behandling);
+  expect(mapKortStatusTilTekst(KortStatus.OVERM, KortType.AAP)).toBe(ferdig);
+  expect(mapKortStatusTilTekst(KortStatus.REGIS, KortType.AAP)).toBe(behandling);
+  expect(mapKortStatusTilTekst(KortStatus.UBEHA, KortType.AAP)).toBe(behandling);
+  expect(mapKortStatusTilTekst(KortStatus.VENTE, KortType.AAP)).toBe(feilet);
+  expect(mapKortStatusTilTekst(KortStatus.VENTE, KortType.KORRIGERT_ELEKTRONISK)).toBe("Korrigert meldekort ");
 });
 
 it("mapKortTypeTilTekst", () => {
