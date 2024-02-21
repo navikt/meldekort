@@ -21,7 +21,7 @@ import { UiActions } from "../../../actions/ui";
 import { erAktivtMeldekortGyldig } from "../../../utils/meldekortUtils";
 import { MeldekortActions } from "../../../actions/meldekort";
 import { loggAktivitet } from "../../../utils/amplitudeUtils";
-import { finnTypeYtelsePostfix } from "../../../utils/teksterUtil";
+import { finnTypeYtelsePostfix, TypeYtelse } from "../../../utils/teksterUtil";
 import { Konstanter } from "../../../utils/consts";
 import { useNavigate } from "react-router";
 import { Alert, GuidePanel, Heading, Loader } from "@navikt/ds-react";
@@ -395,8 +395,15 @@ const Sporsmalsside: React.FunctionComponent<SporsmalssideProps> = (props) => {
           </Heading>
           <Sprakvelger />
         </section>
+        {innsending.innsendingstype === Innsendingstyper.ETTERREGISTRERING && typeYtelsePostfix === TypeYtelse.AAP &&
+            <section className="seksjon">
+                <Alert variant="info">
+                  {formatHtmlMessage("etterregistrering.sporsmal.omVedtak")}
+                </Alert>
+            </section>
+        }
         <section className="seksjon">
-          <GuidePanel>
+          <GuidePanel poster>
             <div className="item">
               {formatHtmlMessage("sporsmal.lesVeiledning")}
             </div>
