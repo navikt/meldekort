@@ -1,5 +1,4 @@
 dashEnv: ""
 ingresses:
-  - "https://meldekort-frontend.nav.no"
-  - "https://www.nav.no/meldekort"
+  - "https://meldekort-frontend-old.nav.no"
 dekoratorMiljo: "prod"
