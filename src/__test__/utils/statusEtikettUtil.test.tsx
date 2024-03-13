@@ -39,7 +39,11 @@ it("finnRiktigEtikettKlasse", () => {
     "error"
   );
 
-  expect(finnRiktigTagVariant(KortStatus.FUOPP, KortType.KORRIGERT_ELEKTRONISK)).toBe(
+  expect(finnRiktigTagVariant(KortStatus.IKKE, KortType.KORRIGERT_ELEKTRONISK)).toBe(
     "alt3"
+  );
+
+  expect(finnRiktigTagVariant(KortStatus.FERDI, KortType.KORRIGERT_ELEKTRONISK)).toBe(
+    "success"
   );
 });
