@@ -14,7 +14,7 @@ on:
 
 env:
   REPONAME: ${{ github.event.repository.name }}
-  APPNAME: ${{ github.event.repository.name }}-frontend
+  APPNAME: ${{ github.event.repository.name }}-frontend-old
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   NAIS_FILE: .nais/nais.yaml
   MAIN_BRANCH: refs/heads/master
