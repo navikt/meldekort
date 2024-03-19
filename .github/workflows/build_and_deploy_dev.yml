@@ -120,7 +120,7 @@ jobs:
           PRINT_PAYLOAD: true
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: ${{ env.NAIS_FILE }}
-          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}-old
+          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}
           VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
           WAIT: false
 
