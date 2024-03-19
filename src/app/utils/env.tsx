@@ -2,7 +2,7 @@ import { erLocalhost, erMock } from "../mock/utils";
 import { Konstanter } from "./consts";
 
 const Environment = () => {
-  if (window.location.hostname.indexOf("meldekort-frontend-q2") > -1) {
+  if (window.location.hostname.indexOf("meldekort-frontend-old-q2") > -1) {
     return {
       minSideUrl: "https://www.intern.dev.nav.no/minside/",
       apiUrl:
@@ -14,7 +14,7 @@ const Environment = () => {
       testEnv: true,
       nyLoesningUrl: "https://dagpenger.intern.dev.nav.no/rapportering",
     };
-  } else if (window.location.hostname.indexOf("meldekort-frontend-q1") > -1) {
+  } else if (window.location.hostname.indexOf("meldekort-frontend-old-q1") > -1) {
     return {
       minSideUrl: "https://www.intern.dev.nav.no/minside/",
       apiUrl:
