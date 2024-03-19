@@ -24,7 +24,7 @@ on:
 
 env:
   REPONAME: ${{ github.event.repository.name }}
-  APPNAME: ${{ github.event.repository.name }}-frontend-old
+  APPNAME: ${{ github.event.repository.name }}-frontend
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   CLUSTER: dev-gcp
   NAIS_FILE: .nais/nais.yaml
@@ -120,7 +120,7 @@ jobs:
           PRINT_PAYLOAD: true
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: ${{ env.NAIS_FILE }}
-          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}
+          VAR: image=${{ env.IMAGE }},appName=${{ env.APPNAME }}-old
           VARS: .nais/vars-${{ env.ENVIRONMENT }}.yaml
           WAIT: false
 
