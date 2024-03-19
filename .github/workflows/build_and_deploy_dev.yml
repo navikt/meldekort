@@ -24,7 +24,7 @@ on:
 
 env:
   REPONAME: ${{ github.event.repository.name }}
-  APPNAME: ${{ github.event.repository.name }}-frontend
+  APPNAME: ${{ github.event.repository.name }}-frontend-old
   ENVIRONMENT: ${{ github.event.inputs.environment }}
   CLUSTER: dev-gcp
   NAIS_FILE: .nais/nais.yaml
