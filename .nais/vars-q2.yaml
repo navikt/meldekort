@@ -1,4 +1,4 @@
 dashEnv: -q2
 ingresses:
-  - "https://meldekort-frontend-q2.intern.dev.nav.no"
+  - "https://meldekort-frontend-old-q2.intern.dev.nav.no"
 dekoratorMiljo: "dev"
