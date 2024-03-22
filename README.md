@@ -1,3 +1,6 @@
+# DEPRECATED
+Se https://github.com/navikt/meldekort-frontend
+
 # Meldekort
 Meldekort er et webgrensesnitt for brukere til å fylle ut og sende inn meldekort til NAV.
 Meldekort tilbyr påloggende arbeidssøkere å se sin meldekorthistorikk, samt å fylle ut og sende inn meldekort.
@@ -20,7 +23,10 @@ språk og gyldighetstid på nytt i løpet av 30 minutter.
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjekt rettes til:
 
-* Mona Kjeldsrud, mona.kjeldsrud@nav.no
+* Igor Shuliakov, igor.shuliakov@nav.no
+* Thor Håkon Bredesen, thor.hakon.bredesen@nav.no
+* Nattaphong Klinjan, nattaphong.klinjan@nav.no
+* Abdifatah Bashi, abdifatah.bashi@nav.no
 
 ## For NAV-ansatte
 Interne henvendelser kan sendes via Slack i kanalen #team-meldeplikt / #meldekort
