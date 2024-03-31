@@ -40,7 +40,7 @@
     "rxjs": "^7.8.1",
     "ts-react-json-table": "^0.1.2",
     "typesafe-actions": "^5.1.0",
-    "winston": "^3.12.0"
+    "winston": "^3.13.0"
   },
   "scripts": {
     "build": "set CI=false && craco build",
